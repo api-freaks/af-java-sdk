@@ -57,8 +57,8 @@ Instantiate and use the client with the following:
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.GeolocationLookupRequest;
-import types.GeolocationLookupResponse;
+import com.apifreaks.sdk.requests.GeolocationLookupRequest;
+import com.apifreaks.sdk.types.GeolocationLookupResponse;
 
 public class Main {
     public static void main(String[] args) {
@@ -82,7 +82,7 @@ This SDK allows you to configure the API base URL.
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import core.Environment;
+import com.apifreaks.sdk.core.Environment;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder()
         .environment(Environment.DEFAULT)
@@ -103,9 +103,9 @@ When the API returns a non-success status code, the SDK throws `ApifreaksApiApiE
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import core.ApifreaksApiApiException;
-import requests.GeolocationLookupRequest;
-import types.GeolocationLookupResponse;
+import com.apifreaks.sdk.core.ApifreaksApiApiException;
+import com.apifreaks.sdk.requests.GeolocationLookupRequest;
+import com.apifreaks.sdk.types.GeolocationLookupResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 
@@ -129,7 +129,7 @@ try {
 The SDK exports request models as Java builder classes under the `requests` package.
 
 ```java
-import requests.GeolocationLookupRequest;
+import com.apifreaks.sdk.requests.GeolocationLookupRequest;
 
 GeolocationLookupRequest request = GeolocationLookupRequest.builder()
         .apiKey("your_api_key")
@@ -140,7 +140,7 @@ GeolocationLookupRequest request = GeolocationLookupRequest.builder()
 Response models are available under the `types` package.
 
 ```java
-import types.GeolocationLookupResponse;
+import com.apifreaks.sdk.types.GeolocationLookupResponse;
 ```
 
 ## Async Client
@@ -150,8 +150,8 @@ The SDK also includes an async client.
 ```java
 import com.apifreaks.sdk.AsyncApifreaksApiClient;
 import java.util.concurrent.CompletableFuture;
-import requests.GeolocationLookupRequest;
-import types.GeolocationLookupResponse;
+import com.apifreaks.sdk.requests.GeolocationLookupRequest;
+import com.apifreaks.sdk.types.GeolocationLookupResponse;
 
 AsyncApifreaksApiClient client = AsyncApifreaksApiClient.builder().build();
 
@@ -188,7 +188,7 @@ ApifreaksApiClient client = ApifreaksApiClient.builder()
 You can also set a per-request timeout with `RequestOptions`:
 
 ```java
-import core.RequestOptions;
+import com.apifreaks.sdk.core.RequestOptions;
 
 GeolocationLookupResponse response = client.geolocationLookup(
         request,
@@ -211,7 +211,7 @@ ApifreaksApiClient client = ApifreaksApiClient.builder()
 You can also add headers to a single request using `RequestOptions`:
 
 ```java
-import core.RequestOptions;
+import com.apifreaks.sdk.core.RequestOptions;
 
 GeolocationLookupResponse response = client.geolocationLookup(
         request,
@@ -226,7 +226,7 @@ GeolocationLookupResponse response = client.geolocationLookup(
 You can add custom query parameters to requests using `RequestOptions`.
 
 ```java
-import core.RequestOptions;
+import com.apifreaks.sdk.core.RequestOptions;
 
 GeolocationLookupResponse response = client.geolocationLookup(
         request,

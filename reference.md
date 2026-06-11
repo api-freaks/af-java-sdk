@@ -20,8 +20,8 @@ Get detailed geolocation data for an IP address including country, city, timezon
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.GeolocationLookupRequest;
-import types.GeolocationLookupResponse;
+import com.apifreaks.sdk.requests.GeolocationLookupRequest;
+import com.apifreaks.sdk.types.GeolocationLookupResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 GeolocationLookupRequest request = GeolocationLookupRequest.builder()
@@ -122,9 +122,9 @@ Retrieve detailed geolocation data for multiple IP addresses in a single request
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.BulkGeolocationLookupRequest;
+import com.apifreaks.sdk.requests.BulkGeolocationLookupRequest;
 import java.util.List;
-import types.BulkGeolocationLookupResponseItem;
+import com.apifreaks.sdk.types.BulkGeolocationLookupResponseItem;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 BulkGeolocationLookupRequest request = BulkGeolocationLookupRequest.builder()
@@ -226,8 +226,8 @@ Get comprehensive security information for a given IP address. Detects VPNs, pro
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.IpSecurityLookupRequest;
-import types.IpSecurityLookupResponse;
+import com.apifreaks.sdk.requests.IpSecurityLookupRequest;
+import com.apifreaks.sdk.types.IpSecurityLookupResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 IpSecurityLookupRequest request = IpSecurityLookupRequest.builder()
@@ -312,9 +312,9 @@ The Bulk IP Security Lookup API allows you to retrieve security details for up t
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.BulkIpSecurityLookupRequest;
+import com.apifreaks.sdk.requests.BulkIpSecurityLookupRequest;
 import java.util.List;
-import types.BulkIpSecurityLookupResponseItem;
+import com.apifreaks.sdk.types.BulkIpSecurityLookupResponseItem;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 BulkIpSecurityLookupRequest request = BulkIpSecurityLookupRequest.builder()
@@ -400,9 +400,9 @@ Convert a given address or place name into geographic coordinates (latitude and 
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.GeocoderSearchRequest;
+import com.apifreaks.sdk.requests.GeocoderSearchRequest;
 import java.util.List;
-import types.GeocoderSearchResponseItem;
+import com.apifreaks.sdk.types.GeocoderSearchResponseItem;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 GeocoderSearchRequest request = GeocoderSearchRequest.builder()
@@ -520,8 +520,8 @@ Convert geographic coordinates (latitude and longitude) into a human-readable ad
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.GeocoderReverseRequest;
-import types.GeocoderReverseResponse;
+import com.apifreaks.sdk.requests.GeocoderReverseRequest;
+import com.apifreaks.sdk.types.GeocoderReverseResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 GeocoderReverseRequest request = GeocoderReverseRequest.builder()
@@ -608,8 +608,8 @@ Retrieve current WHOIS information for a domain name. This endpoint provides det
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.DomainWhoisLookupRequest;
-import types.DomainWhoisLookupResponse;
+import com.apifreaks.sdk.requests.DomainWhoisLookupRequest;
+import com.apifreaks.sdk.types.DomainWhoisLookupResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 DomainWhoisLookupRequest request = DomainWhoisLookupRequest.builder()
@@ -679,8 +679,8 @@ Retrieve WHOIS information for <code>100 Domains per Request</code>.
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.BulkDomainWhoisLookupRequest;
-import types.BulkDomainWhoisLookupResponse;
+import com.apifreaks.sdk.requests.BulkDomainWhoisLookupRequest;
+import com.apifreaks.sdk.types.BulkDomainWhoisLookupResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 BulkDomainWhoisLookupRequest request = BulkDomainWhoisLookupRequest.builder()
@@ -750,8 +750,8 @@ Returns WHOIS registration details for a specified IP address (IPv4 or IPv6).
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.IpWhoisLookupRequest;
-import types.IpWhoisLookupResponse;
+import com.apifreaks.sdk.requests.IpWhoisLookupRequest;
+import com.apifreaks.sdk.types.IpWhoisLookupResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 IpWhoisLookupRequest request = IpWhoisLookupRequest.builder()
@@ -821,8 +821,8 @@ Returns WHOIS registration details for a specified ASN, with or without the 'as'
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.AsnWhoisLookupRequest;
-import types.AsnWhoisLookupResponse;
+import com.apifreaks.sdk.requests.AsnWhoisLookupRequest;
+import com.apifreaks.sdk.types.AsnWhoisLookupResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 AsnWhoisLookupRequest request = AsnWhoisLookupRequest.builder()
@@ -892,8 +892,8 @@ Retrieve historical WHOIS records for a domain name. This endpoint provides a ti
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.DomainWhoisHistoryRequest;
-import types.DomainWhoisHistoryResponse;
+import com.apifreaks.sdk.requests.DomainWhoisHistoryRequest;
+import com.apifreaks.sdk.types.DomainWhoisHistoryResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 DomainWhoisHistoryRequest request = DomainWhoisHistoryRequest.builder()
@@ -963,8 +963,8 @@ Performs a reverse WHOIS search using one or more search parameters like keyword
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.DomainWhoisReverseRequest;
-import types.DomainWhoisReverseResponse;
+import com.apifreaks.sdk.requests.DomainWhoisReverseRequest;
+import com.apifreaks.sdk.types.DomainWhoisReverseResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 DomainWhoisReverseRequest request = DomainWhoisReverseRequest.builder()
@@ -1081,8 +1081,8 @@ Retrieve real-time DNS records for any hostname. Supports multiple record types 
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.DomainDnsLookupRequest;
-import types.DomainDnsLookupResponse;
+import com.apifreaks.sdk.requests.DomainDnsLookupRequest;
+import com.apifreaks.sdk.types.DomainDnsLookupResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 DomainDnsLookupRequest request = DomainDnsLookupRequest.builder()
@@ -1167,8 +1167,8 @@ Perform DNS lookups for multiple hostnames in a single request. Supports up to <
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.BulkDomainDnsLookupRequest;
-import types.BulkDomainDnsLookupResponse;
+import com.apifreaks.sdk.requests.BulkDomainDnsLookupRequest;
+import com.apifreaks.sdk.types.BulkDomainDnsLookupResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 BulkDomainDnsLookupRequest request = BulkDomainDnsLookupRequest.builder()
@@ -1246,8 +1246,8 @@ Retrieve historical DNS records for any hostname. Access unique historical data 
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.DomainDnsHistoryRequest;
-import types.DomainDnsHistoryResponse;
+import com.apifreaks.sdk.requests.DomainDnsHistoryRequest;
+import com.apifreaks.sdk.types.DomainDnsHistoryResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 DomainDnsHistoryRequest request = DomainDnsHistoryRequest.builder()
@@ -1333,8 +1333,8 @@ Retrieve all the hostnames associated with any particular A, AAAA, MX, NS, SOA, 
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.DomainDnsReverseRequest;
-import types.DomainDnsReverseResponse;
+import com.apifreaks.sdk.requests.DomainDnsReverseRequest;
+import com.apifreaks.sdk.types.DomainDnsReverseResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 DomainDnsReverseRequest request = DomainDnsReverseRequest.builder()
@@ -1429,8 +1429,8 @@ Execute a series of web scraping instructions on a target URL. Supports various 
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.WebScrapeRequest;
-import types.WebScrapeResponse;
+import com.apifreaks.sdk.requests.WebScrapeRequest;
+import com.apifreaks.sdk.types.WebScrapeResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 WebScrapeRequest request = WebScrapeRequest.builder()
@@ -1565,8 +1565,8 @@ Validates a single email address and returns result.
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.EmailValidateRequest;
-import types.EmailValidateResponse;
+import com.apifreaks.sdk.requests.EmailValidateRequest;
+import com.apifreaks.sdk.types.EmailValidateResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 EmailValidateRequest request = EmailValidateRequest.builder()
@@ -1652,8 +1652,8 @@ Validates a bulk of email addresses and returns result for each. Maximum <code>1
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.BulkEmailValidateRequest;
-import types.BulkEmailValidateResponse;
+import com.apifreaks.sdk.requests.BulkEmailValidateRequest;
+import com.apifreaks.sdk.types.BulkEmailValidateResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 BulkEmailValidateRequest request = BulkEmailValidateRequest.builder()
@@ -1723,8 +1723,8 @@ Validates a single phone number and returns detailed metadata including carrier,
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PhoneValidateRequest;
-import types.PhoneValidateResponse;
+import com.apifreaks.sdk.requests.PhoneValidateRequest;
+import com.apifreaks.sdk.types.PhoneValidateResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PhoneValidateRequest request = PhoneValidateRequest.builder()
@@ -1810,9 +1810,9 @@ Validates up to 100 phone numbers in a single request. Each number is processed 
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.BulkPhoneValidateRequest;
+import com.apifreaks.sdk.requests.BulkPhoneValidateRequest;
 import java.util.List;
-import types.BulkPhoneValidateResponseItem;
+import com.apifreaks.sdk.types.BulkPhoneValidateResponseItem;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 BulkPhoneValidateRequest request = BulkPhoneValidateRequest.builder()
@@ -1882,8 +1882,8 @@ Retrieve comprehensive SSL certificate information without the certificate chain
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.DomainSslLookupRequest;
-import types.DomainSslLookupResponse;
+import com.apifreaks.sdk.requests.DomainSslLookupRequest;
+import com.apifreaks.sdk.types.DomainSslLookupResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 DomainSslLookupRequest request = DomainSslLookupRequest.builder()
@@ -1961,8 +1961,8 @@ Retrieve the complete SSL certificate chain from root Certificate Authority (CA)
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.DomainSslChainLookupRequest;
-import types.DomainSslChainLookupResponse;
+import com.apifreaks.sdk.requests.DomainSslChainLookupRequest;
+import com.apifreaks.sdk.types.DomainSslChainLookupResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 DomainSslChainLookupRequest request = DomainSslChainLookupRequest.builder()
@@ -2040,8 +2040,8 @@ The Domain Search API is designed to simplify the process of finding available d
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.DomainAvailabilityCheckRequest;
-import types.DomainAvailabilityCheckResponse;
+import com.apifreaks.sdk.requests.DomainAvailabilityCheckRequest;
+import com.apifreaks.sdk.types.DomainAvailabilityCheckResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 DomainAvailabilityCheckRequest request = DomainAvailabilityCheckRequest.builder()
@@ -2119,8 +2119,8 @@ Perform Bulk Domain Availability checks using a list of domains. Supports upto <
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.BulkDomainAvailabilityCheckRequest;
-import types.BulkDomainAvailabilityCheckResponse;
+import com.apifreaks.sdk.requests.BulkDomainAvailabilityCheckRequest;
+import com.apifreaks.sdk.types.BulkDomainAvailabilityCheckResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 BulkDomainAvailabilityCheckRequest request = BulkDomainAvailabilityCheckRequest.builder()
@@ -2198,8 +2198,8 @@ The Domain Search API is designed to simplify the process of finding available d
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.DomainAvailabilitySuggestionsRequest;
-import types.DomainAvailabilitySuggestionsResponse;
+import com.apifreaks.sdk.requests.DomainAvailabilitySuggestionsRequest;
+import com.apifreaks.sdk.types.DomainAvailabilitySuggestionsResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 DomainAvailabilitySuggestionsRequest request = DomainAvailabilitySuggestionsRequest.builder()
@@ -2285,8 +2285,8 @@ The Subdomain Lookup API is designed to retrieve subdomains related to the given
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.SubdomainsLookupRequest;
-import types.SubdomainsLookupResponse;
+import com.apifreaks.sdk.requests.SubdomainsLookupRequest;
+import com.apifreaks.sdk.types.SubdomainsLookupResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 SubdomainsLookupRequest request = SubdomainsLookupRequest.builder()
@@ -2391,8 +2391,8 @@ import java.io.File;
 import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfMergeRequest;
-import types.PdfMergeResponse;
+import com.apifreaks.sdk.requests.PdfMergeRequest;
+import com.apifreaks.sdk.types.PdfMergeResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfMergeRequest request = PdfMergeRequest.builder()
@@ -2512,8 +2512,8 @@ import java.io.File;
 import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfRemovePagesRequest;
-import types.PdfRemovePagesResponse;
+import com.apifreaks.sdk.requests.PdfRemovePagesRequest;
+import com.apifreaks.sdk.types.PdfRemovePagesResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfRemovePagesRequest request = PdfRemovePagesRequest.builder()
@@ -2642,8 +2642,8 @@ import java.io.File;
 import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfSplitRequest;
-import types.PdfSplitResponse;
+import com.apifreaks.sdk.requests.PdfSplitRequest;
+import com.apifreaks.sdk.types.PdfSplitResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfSplitRequest request = PdfSplitRequest.builder()
@@ -2771,8 +2771,8 @@ import java.io.File;
 import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfRotateRequest;
-import types.PdfRotateResponse;
+import com.apifreaks.sdk.requests.PdfRotateRequest;
+import com.apifreaks.sdk.types.PdfRotateResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfRotateRequest request = PdfRotateRequest.builder()
@@ -2909,8 +2909,8 @@ import java.io.File;
 import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfCompressRequest;
-import types.PdfCompressResponse;
+import com.apifreaks.sdk.requests.PdfCompressRequest;
+import com.apifreaks.sdk.types.PdfCompressResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfCompressRequest request = PdfCompressRequest.builder()
@@ -3039,8 +3039,8 @@ import java.io.File;
 import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfExtractPagesRequest;
-import types.PdfExtractPagesResponse;
+import com.apifreaks.sdk.requests.PdfExtractPagesRequest;
+import com.apifreaks.sdk.types.PdfExtractPagesResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfExtractPagesRequest request = PdfExtractPagesRequest.builder()
@@ -3177,8 +3177,8 @@ import java.io.File;
 import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfLinearizeRequest;
-import types.PdfLinearizeResponse;
+import com.apifreaks.sdk.requests.PdfLinearizeRequest;
+import com.apifreaks.sdk.types.PdfLinearizeResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfLinearizeRequest request = PdfLinearizeRequest.builder()
@@ -3298,8 +3298,8 @@ import java.io.File;
 import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfEncryptRequest;
-import types.PdfEncryptResponse;
+import com.apifreaks.sdk.requests.PdfEncryptRequest;
+import com.apifreaks.sdk.types.PdfEncryptResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfEncryptRequest request = PdfEncryptRequest.builder()
@@ -3444,8 +3444,8 @@ import java.io.File;
 import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfDecryptRequest;
-import types.PdfDecryptResponse;
+import com.apifreaks.sdk.requests.PdfDecryptRequest;
+import com.apifreaks.sdk.types.PdfDecryptResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfDecryptRequest request = PdfDecryptRequest.builder()
@@ -3574,8 +3574,8 @@ import java.io.File;
 import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfRestrictRequest;
-import types.PdfRestrictResponse;
+import com.apifreaks.sdk.requests.PdfRestrictRequest;
+import com.apifreaks.sdk.types.PdfRestrictResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfRestrictRequest request = PdfRestrictRequest.builder()
@@ -3728,8 +3728,8 @@ import java.io.File;
 import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfUnrestrictRequest;
-import types.PdfUnrestrictResponse;
+import com.apifreaks.sdk.requests.PdfUnrestrictRequest;
+import com.apifreaks.sdk.types.PdfUnrestrictResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfUnrestrictRequest request = PdfUnrestrictRequest.builder()
@@ -3874,8 +3874,8 @@ import java.io.File;
 import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfConvertToPngRequest;
-import types.PdfConvertToPngResponse;
+import com.apifreaks.sdk.requests.PdfConvertToPngRequest;
+import com.apifreaks.sdk.types.PdfConvertToPngResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfConvertToPngRequest request = PdfConvertToPngRequest.builder()
@@ -4027,8 +4027,8 @@ import java.io.File;
 import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfConvertToJpgRequest;
-import types.PdfConvertToJpgResponse;
+import com.apifreaks.sdk.requests.PdfConvertToJpgRequest;
+import com.apifreaks.sdk.types.PdfConvertToJpgResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfConvertToJpgRequest request = PdfConvertToJpgRequest.builder()
@@ -4188,8 +4188,8 @@ import java.io.File;
 import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfConvertToTiffRequest;
-import types.PdfConvertToTiffResponse;
+import com.apifreaks.sdk.requests.PdfConvertToTiffRequest;
+import com.apifreaks.sdk.types.PdfConvertToTiffResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfConvertToTiffRequest request = PdfConvertToTiffRequest.builder()
@@ -4341,8 +4341,8 @@ import java.io.File;
 import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfConvertToBmpRequest;
-import types.PdfConvertToBmpResponse;
+import com.apifreaks.sdk.requests.PdfConvertToBmpRequest;
+import com.apifreaks.sdk.types.PdfConvertToBmpResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfConvertToBmpRequest request = PdfConvertToBmpRequest.builder()
@@ -4494,8 +4494,8 @@ import java.io.File;
 import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfConvertToGifRequest;
-import types.PdfConvertToGifResponse;
+import com.apifreaks.sdk.requests.PdfConvertToGifRequest;
+import com.apifreaks.sdk.types.PdfConvertToGifResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfConvertToGifRequest request = PdfConvertToGifRequest.builder()
@@ -4647,8 +4647,8 @@ import java.io.File;
 import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfUploadResourcesRequest;
-import types.PdfUploadResourcesResponse;
+import com.apifreaks.sdk.requests.PdfUploadResourcesRequest;
+import com.apifreaks.sdk.types.PdfUploadResourcesResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfUploadResourcesRequest request = PdfUploadResourcesRequest.builder()
@@ -4717,8 +4717,8 @@ This API uploads PDF files to the API Freaks server in binary format.
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfUploadBinaryRequest;
-import types.PdfUploadBinaryResponse;
+import com.apifreaks.sdk.requests.PdfUploadBinaryRequest;
+import com.apifreaks.sdk.types.PdfUploadBinaryResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfUploadBinaryRequest request = PdfUploadBinaryRequest.builder()
@@ -4797,7 +4797,7 @@ This API downloads PDF files or ZIP archives from the server using their unique 
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfDownloadResourceRequest;
+import com.apifreaks.sdk.requests.PdfDownloadResourceRequest;
 import java.io.InputStream;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
@@ -4868,8 +4868,8 @@ This API checks the status of a previously initiated PDF processing task using i
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfGetTaskStatusRequest;
-import types.PdfGetTaskStatusResponse;
+import com.apifreaks.sdk.requests.PdfGetTaskStatusRequest;
+import com.apifreaks.sdk.types.PdfGetTaskStatusResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfGetTaskStatusRequest request = PdfGetTaskStatusRequest.builder()
@@ -4939,8 +4939,8 @@ This API checks the status of a PDF file using its unique file ID, providing inf
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfGetFileStatusRequest;
-import types.PdfGetFileStatusResponse;
+import com.apifreaks.sdk.requests.PdfGetFileStatusRequest;
+import com.apifreaks.sdk.types.PdfGetFileStatusResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfGetFileStatusRequest request = PdfGetFileStatusRequest.builder()
@@ -5010,8 +5010,8 @@ This API retrieves a list of all PDF files uploaded and generated by a specific 
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfListFilesRequest;
-import types.PdfListFilesResponse;
+import com.apifreaks.sdk.requests.PdfListFilesRequest;
+import com.apifreaks.sdk.types.PdfListFilesResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfListFilesRequest request = PdfListFilesRequest.builder()
@@ -5072,8 +5072,8 @@ This API deletes a PDF file using its unique file ID.
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.PdfDeleteFileRequest;
-import types.PdfDeleteFileResponse;
+import com.apifreaks.sdk.requests.PdfDeleteFileRequest;
+import com.apifreaks.sdk.types.PdfDeleteFileResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfDeleteFileRequest request = PdfDeleteFileRequest.builder()
@@ -5143,7 +5143,7 @@ Capture full-page screenshots and videos of websites with advanced options like 
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.ScreenshotCaptureRequest;
+import com.apifreaks.sdk.requests.ScreenshotCaptureRequest;
 import java.io.InputStream;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
@@ -5750,8 +5750,8 @@ Our Bulk Screenshot API allows you to capture screenshots of multiple webpages s
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.BulkScreenshotCaptureRequest;
-import types.BulkScreenshotCaptureResponse;
+import com.apifreaks.sdk.requests.BulkScreenshotCaptureRequest;
+import com.apifreaks.sdk.types.BulkScreenshotCaptureResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 BulkScreenshotCaptureRequest request = BulkScreenshotCaptureRequest.builder()
@@ -5821,8 +5821,8 @@ Get live forex rates for all world currencies with customizable update frequency
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.CurrencyLatestRatesRequest;
-import types.CurrencyLatestRatesResponse;
+import com.apifreaks.sdk.requests.CurrencyLatestRatesRequest;
+import com.apifreaks.sdk.types.CurrencyLatestRatesResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CurrencyLatestRatesRequest request = CurrencyLatestRatesRequest.builder()
@@ -5907,8 +5907,8 @@ Get historical exchange rates for any specific date
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.CurrencyHistoricalRatesRequest;
-import types.CurrencyHistoricalRatesResponse;
+import com.apifreaks.sdk.requests.CurrencyHistoricalRatesRequest;
+import com.apifreaks.sdk.types.CurrencyHistoricalRatesResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CurrencyHistoricalRatesRequest request = CurrencyHistoricalRatesRequest.builder()
@@ -5994,8 +5994,8 @@ Convert amount between currencies using the latest exchange rates
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.CurrencyConvertLatestRequest;
-import types.CurrencyConvertLatestResponse;
+import com.apifreaks.sdk.requests.CurrencyConvertLatestRequest;
+import com.apifreaks.sdk.types.CurrencyConvertLatestResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CurrencyConvertLatestRequest request = CurrencyConvertLatestRequest.builder()
@@ -6090,8 +6090,8 @@ Convert amount between currencies using historical rates
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.CurrencyConvertHistoricalRequest;
-import types.CurrencyConvertHistoricalResponse;
+import com.apifreaks.sdk.requests.CurrencyConvertHistoricalRequest;
+import com.apifreaks.sdk.types.CurrencyConvertHistoricalResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CurrencyConvertHistoricalRequest request = CurrencyConvertHistoricalRequest.builder()
@@ -6187,8 +6187,8 @@ Get exchange rates for a time range
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.CurrencyTimeSeriesRequest;
-import types.CurrencyTimeSeriesResponse;
+import com.apifreaks.sdk.requests.CurrencyTimeSeriesRequest;
+import com.apifreaks.sdk.types.CurrencyTimeSeriesResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CurrencyTimeSeriesRequest request = CurrencyTimeSeriesRequest.builder()
@@ -6282,8 +6282,8 @@ Get currency fluctuation data for a time period
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.CurrencyFluctuationRequest;
-import types.CurrencyFluctuationResponse;
+import com.apifreaks.sdk.requests.CurrencyFluctuationRequest;
+import com.apifreaks.sdk.types.CurrencyFluctuationResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CurrencyFluctuationRequest request = CurrencyFluctuationRequest.builder()
@@ -6377,8 +6377,8 @@ Convert amount using user's location
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.CurrencyConvertByIpRequest;
-import types.CurrencyConvertByIpResponse;
+import com.apifreaks.sdk.requests.CurrencyConvertByIpRequest;
+import com.apifreaks.sdk.types.CurrencyConvertByIpResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CurrencyConvertByIpRequest request = CurrencyConvertByIpRequest.builder()
@@ -6472,8 +6472,8 @@ Get list of all supported currencies with their metadata
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.CurrencySupportedRequest;
-import types.CurrencySupportedResponse;
+import com.apifreaks.sdk.requests.CurrencySupportedRequest;
+import com.apifreaks.sdk.types.CurrencySupportedResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CurrencySupportedRequest request = CurrencySupportedRequest.builder()
@@ -6534,8 +6534,8 @@ Get currency symbols and codes
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.CurrencySymbolsRequest;
-import types.CurrencySymbolsResponse;
+import com.apifreaks.sdk.requests.CurrencySymbolsRequest;
+import com.apifreaks.sdk.types.CurrencySymbolsResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CurrencySymbolsRequest request = CurrencySymbolsRequest.builder()
@@ -6596,8 +6596,8 @@ Get information about historical data availability and limits
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.CurrencyHistoricalLimitsRequest;
-import types.CurrencyHistoricalLimitsResponse;
+import com.apifreaks.sdk.requests.CurrencyHistoricalLimitsRequest;
+import com.apifreaks.sdk.types.CurrencyHistoricalLimitsResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CurrencyHistoricalLimitsRequest request = CurrencyHistoricalLimitsRequest.builder()
@@ -6658,8 +6658,8 @@ Get live commodity rates with customizable update frequency
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.CommodityLatestRatesRequest;
-import types.CommodityLatestRatesResponse;
+import com.apifreaks.sdk.requests.CommodityLatestRatesRequest;
+import com.apifreaks.sdk.types.CommodityLatestRatesResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CommodityLatestRatesRequest request = CommodityLatestRatesRequest.builder()
@@ -6745,8 +6745,8 @@ Get historical commodity rates for a specific date
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.CommodityHistoricalRatesRequest;
-import types.CommodityHistoricalRatesResponse;
+import com.apifreaks.sdk.requests.CommodityHistoricalRatesRequest;
+import com.apifreaks.sdk.types.CommodityHistoricalRatesResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CommodityHistoricalRatesRequest request = CommodityHistoricalRatesRequest.builder()
@@ -6824,8 +6824,8 @@ Get commodity price fluctuation data for a time period
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.CommodityFluctuationRequest;
-import types.CommodityFluctuationResponse;
+import com.apifreaks.sdk.requests.CommodityFluctuationRequest;
+import com.apifreaks.sdk.types.CommodityFluctuationResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CommodityFluctuationRequest request = CommodityFluctuationRequest.builder()
@@ -6912,8 +6912,8 @@ Get commodity rates for a time range
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.CommodityTimeSeriesRequest;
-import types.CommodityTimeSeriesResponse;
+import com.apifreaks.sdk.requests.CommodityTimeSeriesRequest;
+import com.apifreaks.sdk.types.CommodityTimeSeriesResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CommodityTimeSeriesRequest request = CommodityTimeSeriesRequest.builder()
@@ -7000,8 +7000,8 @@ Get list of supported commodities
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.CommoditySymbolsRequest;
-import types.CommoditySymbolsResponse;
+import com.apifreaks.sdk.requests.CommoditySymbolsRequest;
+import com.apifreaks.sdk.types.CommoditySymbolsResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CommoditySymbolsRequest request = CommoditySymbolsRequest.builder()
@@ -7062,8 +7062,8 @@ Retrieves a list of supported countries.
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.VatSupportedCountriesRequest;
-import types.VatSupportedCountriesResponse;
+import com.apifreaks.sdk.requests.VatSupportedCountriesRequest;
+import com.apifreaks.sdk.types.VatSupportedCountriesResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 VatSupportedCountriesRequest request = VatSupportedCountriesRequest.builder()
@@ -7132,9 +7132,9 @@ Fetches VAT rate based on the specified or originating IP address.
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.VatRateByIpRequest;
+import com.apifreaks.sdk.requests.VatRateByIpRequest;
 import java.util.List;
-import types.VatRateByIpResponseItem;
+import com.apifreaks.sdk.types.VatRateByIpResponseItem;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 VatRateByIpRequest request = VatRateByIpRequest.builder()
@@ -7203,9 +7203,9 @@ Fetches VAT rates for a single country or state provided via query parameters.
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.VatRateByCountryRequest;
+import com.apifreaks.sdk.requests.VatRateByCountryRequest;
 import java.util.List;
-import types.VatRateByCountryResponseItem;
+import com.apifreaks.sdk.types.VatRateByCountryResponseItem;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 VatRateByCountryRequest request = VatRateByCountryRequest.builder()
@@ -7283,8 +7283,8 @@ Retrieves VAT details for multiple countries or country-state combinations in a 
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.BulkVatRateByCountryRequest;
-import types.BulkVatRateByCountryResponse;
+import com.apifreaks.sdk.requests.BulkVatRateByCountryRequest;
+import com.apifreaks.sdk.types.BulkVatRateByCountryResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 BulkVatRateByCountryRequest request = BulkVatRateByCountryRequest.builder()
@@ -7354,8 +7354,8 @@ Validates an EU or UK VAT number and returns registration status details.
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.VatValidateRequest;
-import types.VatValidateResponse;
+import com.apifreaks.sdk.requests.VatValidateRequest;
+import com.apifreaks.sdk.types.VatValidateResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 VatValidateRequest request = VatValidateRequest.builder()
@@ -7433,8 +7433,8 @@ Checks an IBAN for structural validity, checksum accuracy, and bank metadata.
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.IbanValidateRequest;
-import types.IbanValidateResponse;
+import com.apifreaks.sdk.requests.IbanValidateRequest;
+import com.apifreaks.sdk.types.IbanValidateResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 IbanValidateRequest request = IbanValidateRequest.builder()
@@ -7504,7 +7504,7 @@ Fetches SWIFT codes for a given country, bank, and city.
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.SwiftCodeFindRequest;
+import com.apifreaks.sdk.requests.SwiftCodeFindRequest;
 import java.util.List;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
@@ -7590,8 +7590,8 @@ Fetches detailed information about a SWIFT code.
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.SwiftCodeLookupRequest;
-import types.SwiftCodeLookupResponse;
+import com.apifreaks.sdk.requests.SwiftCodeLookupRequest;
+import com.apifreaks.sdk.types.SwiftCodeLookupResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 SwiftCodeLookupRequest request = SwiftCodeLookupRequest.builder()
@@ -7661,8 +7661,8 @@ Validates a bulk of ZIP/postal codes and returns result for each. Maximum <code>
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.BulkZipcodeLookupRequest;
-import types.BulkZipcodeLookupResponse;
+import com.apifreaks.sdk.requests.BulkZipcodeLookupRequest;
+import com.apifreaks.sdk.types.BulkZipcodeLookupResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 BulkZipcodeLookupRequest request = BulkZipcodeLookupRequest.builder()
@@ -7740,8 +7740,8 @@ Get distance between postal codes. Maximum <code>100</code> postal codes per req
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.ZipcodeDistanceRequest;
-import types.ZipcodeDistanceResponse;
+import com.apifreaks.sdk.requests.ZipcodeDistanceRequest;
+import com.apifreaks.sdk.types.ZipcodeDistanceResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 ZipcodeDistanceRequest request = ZipcodeDistanceRequest.builder()
@@ -7852,8 +7852,8 @@ Get matching ZIP/postal code pairs within a specified distance. Maximum <code>10
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.ZipcodeDistanceMatchRequest;
-import types.ZipcodeDistanceMatchResponse;
+import com.apifreaks.sdk.requests.ZipcodeDistanceMatchRequest;
+import com.apifreaks.sdk.types.ZipcodeDistanceMatchResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 ZipcodeDistanceMatchRequest request = ZipcodeDistanceMatchRequest.builder()
@@ -7948,8 +7948,8 @@ Get current weather data including temperature, humidity, precipitation, wind co
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.CurrentWeatherRequest;
-import types.CurrentWeatherResponse;
+import com.apifreaks.sdk.requests.CurrentWeatherRequest;
+import com.apifreaks.sdk.types.CurrentWeatherResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CurrentWeatherRequest request = CurrentWeatherRequest.builder()
@@ -8050,8 +8050,8 @@ Retrieve current weather conditions for up to <code>50 locations</code> in a sin
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.BulkCurrentWeatherRequest;
-import types.BulkCurrentWeatherResponse;
+import com.apifreaks.sdk.requests.BulkCurrentWeatherRequest;
+import com.apifreaks.sdk.types.BulkCurrentWeatherResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 BulkCurrentWeatherRequest request = BulkCurrentWeatherRequest.builder()
@@ -8129,8 +8129,8 @@ Access comprehensive weather forecasts with customizable precision - choose from
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.WeatherForecastRequest;
-import types.WeatherForecastResponse;
+import com.apifreaks.sdk.requests.WeatherForecastRequest;
+import com.apifreaks.sdk.types.WeatherForecastResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 WeatherForecastRequest request = WeatherForecastRequest.builder()
@@ -8263,8 +8263,8 @@ Access past weather conditions for specific dates with records going back to 194
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.HistoricalWeatherRequest;
-import types.HistoricalWeatherResponse;
+import com.apifreaks.sdk.requests.HistoricalWeatherRequest;
+import com.apifreaks.sdk.types.HistoricalWeatherResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 HistoricalWeatherRequest request = HistoricalWeatherRequest.builder()
@@ -8382,8 +8382,8 @@ Pull historical weather information for date ranges up to 90 days (daily data) o
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.WeatherTimeSeriesRequest;
-import types.WeatherTimeSeriesResponse;
+import com.apifreaks.sdk.requests.WeatherTimeSeriesRequest;
+import com.apifreaks.sdk.types.WeatherTimeSeriesResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 WeatherTimeSeriesRequest request = WeatherTimeSeriesRequest.builder()
@@ -8510,8 +8510,8 @@ Provides hourly forecasts of marine conditions including wave heights, wave dire
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.MarineWeatherRequest;
-import types.MarineWeatherResponse;
+import com.apifreaks.sdk.requests.MarineWeatherRequest;
+import com.apifreaks.sdk.types.MarineWeatherResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 MarineWeatherRequest request = MarineWeatherRequest.builder()
@@ -8636,8 +8636,8 @@ Monitor and predict air quality conditions using European and US AQI standards. 
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.AirQualityRequest;
-import types.AirQualityResponse;
+import com.apifreaks.sdk.requests.AirQualityRequest;
+import com.apifreaks.sdk.types.AirQualityResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 AirQualityRequest request = AirQualityRequest.builder()
@@ -8762,8 +8762,8 @@ Provides flood forecast data for a given location, including river discharge met
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.FloodForecastRequest;
-import types.FloodForecastResponse;
+import com.apifreaks.sdk.requests.FloodForecastRequest;
+import com.apifreaks.sdk.types.FloodForecastResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 FloodForecastRequest request = FloodForecastRequest.builder()
@@ -8890,8 +8890,8 @@ Retrieve countries, optionally filtered by region or subregion.
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.GetCountriesRequest;
-import types.GetCountriesResponse;
+import com.apifreaks.sdk.requests.GetCountriesRequest;
+import com.apifreaks.sdk.types.GetCountriesResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 GetCountriesRequest request = GetCountriesRequest.builder()
@@ -8968,8 +8968,8 @@ Retrieve administrative units based on ISO 3166-1 alpha-2 country code.
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.GetAdminLevelsRequest;
-import types.GetAdminLevelsResponse;
+import com.apifreaks.sdk.requests.GetAdminLevelsRequest;
+import com.apifreaks.sdk.types.GetAdminLevelsResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 GetAdminLevelsRequest request = GetAdminLevelsRequest.builder()
@@ -9039,8 +9039,8 @@ Retrieve administrative divisions for a given country using ISO 3166-1 alpha-2 c
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.GetAdminUnitsRequest;
-import types.GetAdminUnitsResponse;
+import com.apifreaks.sdk.requests.GetAdminUnitsRequest;
+import com.apifreaks.sdk.types.GetAdminUnitsResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 GetAdminUnitsRequest request = GetAdminUnitsRequest.builder()
@@ -9118,8 +9118,8 @@ Retrieve detailed administrative unit information by country and optionally filt
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.GetAdminUnitDetailsRequest;
-import types.GetAdminUnitDetailsResponse;
+import com.apifreaks.sdk.requests.GetAdminUnitDetailsRequest;
+import com.apifreaks.sdk.types.GetAdminUnitDetailsResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 GetAdminUnitDetailsRequest request = GetAdminUnitDetailsRequest.builder()
@@ -9198,8 +9198,8 @@ Retrieve a list of cities within a country, optionally filtered by an administra
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.GetCitiesRequest;
-import types.GetCitiesResponse;
+import com.apifreaks.sdk.requests.GetCitiesRequest;
+import com.apifreaks.sdk.types.GetCitiesResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 GetCitiesRequest request = GetCitiesRequest.builder()
@@ -9277,9 +9277,9 @@ Get list of all supported flags with their metadata
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.GetSupportedFlagsRequest;
+import com.apifreaks.sdk.requests.GetSupportedFlagsRequest;
 import java.util.List;
-import types.GetSupportedFlagsResponseItem;
+import com.apifreaks.sdk.types.GetSupportedFlagsResponseItem;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 GetSupportedFlagsRequest request = GetSupportedFlagsRequest.builder()
@@ -9332,7 +9332,7 @@ Retrieve the flag for a specific country
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.GetFlagsRequest;
+import com.apifreaks.sdk.requests.GetFlagsRequest;
 import java.io.InputStream;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
@@ -9429,8 +9429,8 @@ Retrieve current time, date, and timezone-related information by specifying a ti
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.TimezoneLookupRequest;
-import types.TimezoneLookupResponse;
+import com.apifreaks.sdk.requests.TimezoneLookupRequest;
+import com.apifreaks.sdk.types.TimezoneLookupResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 TimezoneLookupRequest request = TimezoneLookupRequest.builder()
@@ -9563,8 +9563,8 @@ Converts a given time from one timezone to another using various input types lik
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.TimezoneConvertRequest;
-import types.TimezoneConvertResponse;
+import com.apifreaks.sdk.requests.TimezoneConvertRequest;
+import com.apifreaks.sdk.types.TimezoneConvertResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 TimezoneConvertRequest request = TimezoneConvertRequest.builder()
@@ -9745,8 +9745,8 @@ Parse User Agent string to get detailed browser, device, and operating system in
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.UserAgentLookupRequest;
-import types.UserAgentLookupResponse;
+import com.apifreaks.sdk.requests.UserAgentLookupRequest;
+import com.apifreaks.sdk.types.UserAgentLookupResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 UserAgentLookupRequest request = UserAgentLookupRequest.builder()
@@ -9807,9 +9807,9 @@ Parse up to <code>50,000 User-Agent strings</code> at once in a single request.
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.BulkUserAgentLookupRequest;
+import com.apifreaks.sdk.requests.BulkUserAgentLookupRequest;
 import java.util.List;
-import types.BulkUserAgentLookupResponseItem;
+import com.apifreaks.sdk.types.BulkUserAgentLookupResponseItem;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 BulkUserAgentLookupRequest request = BulkUserAgentLookupRequest.builder()
@@ -9879,8 +9879,8 @@ Perform Optical Character Recognition (OCR) on images, PDFs, or ZIP archives. Su
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.OcrPredictRequest;
-import types.OcrPredictResponse;
+import com.apifreaks.sdk.requests.OcrPredictRequest;
+import com.apifreaks.sdk.types.OcrPredictResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 OcrPredictRequest request = OcrPredictRequest.builder()
@@ -10015,8 +10015,8 @@ Analyze text for grammar errors and return the exact words flagged as grammatica
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.GrammarDetectRequest;
-import types.GrammarDetectResponse;
+import com.apifreaks.sdk.requests.GrammarDetectRequest;
+import com.apifreaks.sdk.types.GrammarDetectResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 GrammarDetectRequest request = GrammarDetectRequest.builder()
@@ -10078,8 +10078,8 @@ Submit text with grammatical issues and receive a clean grammar-corrected result
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.GrammarCorrectRequest;
-import types.GrammarCorrectResponse;
+import com.apifreaks.sdk.requests.GrammarCorrectRequest;
+import com.apifreaks.sdk.types.GrammarCorrectResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 GrammarCorrectRequest request = GrammarCorrectRequest.builder()
@@ -10141,8 +10141,8 @@ Analyze text and return weak, vague, or filler words with zero-based word positi
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.WeakWordsDetectRequest;
-import types.WeakWordsDetectResponse;
+import com.apifreaks.sdk.requests.WeakWordsDetectRequest;
+import com.apifreaks.sdk.types.WeakWordsDetectResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 WeakWordsDetectRequest request = WeakWordsDetectRequest.builder()
@@ -10204,8 +10204,8 @@ Analyze text readability using industry-standard formulas including Flesch Readi
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.ReadabilityScoreRequest;
-import types.ReadabilityScoreResponse;
+import com.apifreaks.sdk.requests.ReadabilityScoreRequest;
+import com.apifreaks.sdk.types.ReadabilityScoreResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 ReadabilityScoreRequest request = ReadabilityScoreRequest.builder()
@@ -10283,8 +10283,8 @@ Retrieve sunrise and sunset times, current position of the moon, and other relat
 
 ```java
 import com.apifreaks.sdk.ApifreaksApiClient;
-import requests.AstronomyLookupRequest;
-import types.AstronomyLookupResponse;
+import com.apifreaks.sdk.requests.AstronomyLookupRequest;
+import com.apifreaks.sdk.types.AstronomyLookupResponse;
 
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 AstronomyLookupRequest request = AstronomyLookupRequest.builder()
@@ -10387,3 +10387,4 @@ AstronomyLookupResponse response = client.astronomyLookup(request);
 </dd>
 </dl>
 </details>
+
