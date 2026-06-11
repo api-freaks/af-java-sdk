@@ -1,4 +1,4 @@
-# Apifreaks Java Library
+# Apifreaks Java SDK
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=Apifreaks%2FJava)
 [![Maven Central](https://img.shields.io/maven-central/v/com.apifreaks/sdk.svg)](https://central.sonatype.com/artifact/com.apifreaks/sdk)
