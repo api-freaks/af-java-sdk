@@ -21,9 +21,12 @@ jobs:
           server-id: central
           server-username: MAVEN_CENTRAL_USERNAME
           server-password: MAVEN_CENTRAL_PASSWORD
-          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg-passphrase: MAVEN_GPG_PASSPHRASE
           cache: maven
+
+      - name: Import GPG key
+        run: echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
 
       - name: Set version from the git tag
         run: |
@@ -32,7 +35,9 @@ jobs:
           mvn -B versions:set -DnewVersion="$VERSION" -DgenerateBackupPoms=false
 
       - name: Build, sign and publish
-        run: mvn -B --no-transfer-progress clean deploy
+        run: >
+          mvn -B --no-transfer-progress clean deploy
+          -Dgpg.passphrase="$MAVEN_GPG_PASSPHRASE"
         env:
           MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
