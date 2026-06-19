@@ -10,9 +10,13 @@ import java.lang.Object;
 import java.lang.String;
 
 public final class BulkEmailValidateResponseEmailValidationResponsesItemValidEmail {
-  public static final BulkEmailValidateResponseEmailValidationResponsesItemValidEmail INVALID = new BulkEmailValidateResponseEmailValidationResponsesItemValidEmail(Value.INVALID, "invalid");
+  public static final BulkEmailValidateResponseEmailValidationResponsesItemValidEmail INVALID = new BulkEmailValidateResponseEmailValidationResponsesItemValidEmail(Value.INVALID, "Invalid");
+
+  public static final BulkEmailValidateResponseEmailValidationResponsesItemValidEmail RISKY = new BulkEmailValidateResponseEmailValidationResponsesItemValidEmail(Value.RISKY, "Risky");
 
   public static final BulkEmailValidateResponseEmailValidationResponsesItemValidEmail VALID = new BulkEmailValidateResponseEmailValidationResponsesItemValidEmail(Value.VALID, "valid");
+
+  public static final BulkEmailValidateResponseEmailValidationResponsesItemValidEmail UNKNOWN = new BulkEmailValidateResponseEmailValidationResponsesItemValidEmail(Value.UNKNOWN, "Unknown");
 
   private final Value value;
 
@@ -35,7 +39,7 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItemValidEma
 
   @java.lang.Override
   public boolean equals(Object other) {
-    return (this == other) 
+    return (this == other)
       || (other instanceof BulkEmailValidateResponseEmailValidationResponsesItemValidEmail && this.string.equals(((BulkEmailValidateResponseEmailValidationResponsesItemValidEmail) other).string));
   }
 
@@ -48,6 +52,8 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItemValidEma
     switch (value) {
       case INVALID:
         return visitor.visitInvalid();
+      case RISKY:
+        return visitor.visitRisky();
       case VALID:
         return visitor.visitValid();
       case UNKNOWN:
@@ -62,10 +68,14 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItemValidEma
   public static BulkEmailValidateResponseEmailValidationResponsesItemValidEmail valueOf(
       String value) {
     switch (value) {
-      case "invalid":
+      case "Invalid":
         return INVALID;
+      case "Risky":
+        return RISKY;
       case "valid":
         return VALID;
+      case "Unknown":
+        return UNKNOWN;
       default:
         return new BulkEmailValidateResponseEmailValidationResponsesItemValidEmail(Value.UNKNOWN, value);
     }
@@ -76,6 +86,8 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItemValidEma
 
     INVALID,
 
+    RISKY,
+
     UNKNOWN
   }
 
@@ -83,6 +95,8 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItemValidEma
     T visitValid();
 
     T visitInvalid();
+
+    T visitRisky();
 
     T visitUnknown(String unknownType);
   }

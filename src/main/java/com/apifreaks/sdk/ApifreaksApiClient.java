@@ -922,7 +922,7 @@ public class ApifreaksApiClient {
   /**
    * This API uploads multiple PDF files to the API Freaks server and generates their unique file IDs.
    */
-  public PdfUploadResourcesResponse pdfUploadResources(Optional<File> file,
+  public PdfUploadResourcesResponse pdfUploadResources(File file,
       PdfUploadResourcesRequest request) {
     return this.rawClient.pdfUploadResources(file, request).body();
   }
@@ -930,7 +930,7 @@ public class ApifreaksApiClient {
   /**
    * This API uploads multiple PDF files to the API Freaks server and generates their unique file IDs.
    */
-  public PdfUploadResourcesResponse pdfUploadResources(Optional<File> file,
+  public PdfUploadResourcesResponse pdfUploadResources(File file,
       PdfUploadResourcesRequest request, RequestOptions requestOptions) {
     return this.rawClient.pdfUploadResources(file, request, requestOptions).body();
   }

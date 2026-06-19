@@ -30,8 +30,6 @@ public final class ZipcodeSearchByRadiusResponseResultsItem {
 
   private final Optional<String> region;
 
-  private final Optional<String> regionCode;
-
   private final Optional<String> city;
 
   private final Optional<String> district;
@@ -41,11 +39,10 @@ public final class ZipcodeSearchByRadiusResponseResultsItem {
   private final Map<String, Object> additionalProperties;
 
   private ZipcodeSearchByRadiusResponseResultsItem(Optional<String> code, Optional<String> region,
-      Optional<String> regionCode, Optional<String> city, Optional<String> district,
+      Optional<String> city, Optional<String> district,
       Optional<Float> distance, Map<String, Object> additionalProperties) {
     this.code = code;
     this.region = region;
-    this.regionCode = regionCode;
     this.city = city;
     this.district = district;
     this.distance = distance;
@@ -60,11 +57,6 @@ public final class ZipcodeSearchByRadiusResponseResultsItem {
   @JsonProperty("region")
   public Optional<String> getRegion() {
     return region;
-  }
-
-  @JsonProperty("region_code")
-  public Optional<String> getRegionCode() {
-    return regionCode;
   }
 
   @JsonProperty("city")
@@ -94,12 +86,12 @@ public final class ZipcodeSearchByRadiusResponseResultsItem {
   }
 
   private boolean equalTo(ZipcodeSearchByRadiusResponseResultsItem other) {
-    return code.equals(other.code) && region.equals(other.region) && regionCode.equals(other.regionCode) && city.equals(other.city) && district.equals(other.district) && distance.equals(other.distance);
+    return code.equals(other.code) && region.equals(other.region) && city.equals(other.city) && district.equals(other.district) && distance.equals(other.distance);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.code, this.region, this.regionCode, this.city, this.district, this.distance);
+    return Objects.hash(this.code, this.region, this.city, this.district, this.distance);
   }
 
   @java.lang.Override
@@ -119,8 +111,6 @@ public final class ZipcodeSearchByRadiusResponseResultsItem {
 
     private Optional<String> region = Optional.empty();
 
-    private Optional<String> regionCode = Optional.empty();
-
     private Optional<String> city = Optional.empty();
 
     private Optional<String> district = Optional.empty();
@@ -136,7 +126,6 @@ public final class ZipcodeSearchByRadiusResponseResultsItem {
     public Builder from(ZipcodeSearchByRadiusResponseResultsItem other) {
       code(other.getCode());
       region(other.getRegion());
-      regionCode(other.getRegionCode());
       city(other.getCity());
       district(other.getDistrict());
       distance(other.getDistance());
@@ -168,20 +157,6 @@ public final class ZipcodeSearchByRadiusResponseResultsItem {
 
     public Builder region(String region) {
       this.region = Optional.ofNullable(region);
-      return this;
-    }
-
-    @JsonSetter(
-        value = "region_code",
-        nulls = Nulls.SKIP
-    )
-    public Builder regionCode(Optional<String> regionCode) {
-      this.regionCode = regionCode;
-      return this;
-    }
-
-    public Builder regionCode(String regionCode) {
-      this.regionCode = Optional.ofNullable(regionCode);
       return this;
     }
 
@@ -228,7 +203,7 @@ public final class ZipcodeSearchByRadiusResponseResultsItem {
     }
 
     public ZipcodeSearchByRadiusResponseResultsItem build() {
-      return new ZipcodeSearchByRadiusResponseResultsItem(code, region, regionCode, city, district, distance, additionalProperties);
+      return new ZipcodeSearchByRadiusResponseResultsItem(code, region, city, district, distance, additionalProperties);
     }
 
     public Builder additionalProperty(String key, Object value) {

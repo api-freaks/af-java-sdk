@@ -48,17 +48,17 @@ public final class DomainWhoisReverseResponse {
     this.additionalProperties = additionalProperties;
   }
 
-  @JsonProperty("totalResult")
+  @JsonProperty("total_Result")
   public Optional<Integer> getTotalResult() {
     return totalResult;
   }
 
-  @JsonProperty("totalPages")
+  @JsonProperty("total_Pages")
   public Optional<Integer> getTotalPages() {
     return totalPages;
   }
 
-  @JsonProperty("currentPage")
+  @JsonProperty("current_Page")
   public Optional<Integer> getCurrentPage() {
     return currentPage;
   }
@@ -125,7 +125,7 @@ public final class DomainWhoisReverseResponse {
     }
 
     @JsonSetter(
-        value = "totalResult",
+        value = "total_Result",
         nulls = Nulls.SKIP
     )
     public Builder totalResult(Optional<Integer> totalResult) {
@@ -139,7 +139,7 @@ public final class DomainWhoisReverseResponse {
     }
 
     @JsonSetter(
-        value = "totalPages",
+        value = "total_Pages",
         nulls = Nulls.SKIP
     )
     public Builder totalPages(Optional<Integer> totalPages) {
@@ -153,7 +153,7 @@ public final class DomainWhoisReverseResponse {
     }
 
     @JsonSetter(
-        value = "currentPage",
+        value = "current_Page",
         nulls = Nulls.SKIP
     )
     public Builder currentPage(Optional<Integer> currentPage) {

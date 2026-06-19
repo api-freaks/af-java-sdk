@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
@@ -19,7 +18,6 @@ import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
@@ -31,9 +29,9 @@ public final class VatValidateResponse {
 
   private final String vatNumber;
 
-  private final Optional<String> requesterCountryCode;
+  private final String requesterCountryCode;
 
-  private final Optional<String> requesterVatNumber;
+  private final String requesterVatNumber;
 
   private final OffsetDateTime requestedAt;
 
@@ -44,7 +42,7 @@ public final class VatValidateResponse {
   private final Map<String, Object> additionalProperties;
 
   private VatValidateResponse(String countryCode, String vatNumber,
-      Optional<String> requesterCountryCode, Optional<String> requesterVatNumber,
+      String requesterCountryCode, String requesterVatNumber,
       OffsetDateTime requestedAt, VatValidateResponseValidation validation,
       VatValidateResponseCompany company, Map<String, Object> additionalProperties) {
     this.countryCode = countryCode;
@@ -68,12 +66,12 @@ public final class VatValidateResponse {
   }
 
   @JsonProperty("requester_country_code")
-  public Optional<String> getRequesterCountryCode() {
+  public String getRequesterCountryCode() {
     return requesterCountryCode;
   }
 
   @JsonProperty("requester_vat_number")
-  public Optional<String> getRequesterVatNumber() {
+  public String getRequesterVatNumber() {
     return requesterVatNumber;
   }
 
@@ -128,7 +126,15 @@ public final class VatValidateResponse {
   }
 
   public interface VatNumberStage {
-    RequestedAtStage vatNumber(@NotNull String vatNumber);
+    RequesterCountryCodeStage vatNumber(@NotNull String vatNumber);
+  }
+
+  public interface RequesterCountryCodeStage {
+    RequesterVatNumberStage requesterCountryCode(@NotNull String requesterCountryCode);
+  }
+
+  public interface RequesterVatNumberStage {
+    RequestedAtStage requesterVatNumber(@NotNull String requesterVatNumber);
   }
 
   public interface RequestedAtStage {
@@ -149,33 +155,25 @@ public final class VatValidateResponse {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
-
-    _FinalStage requesterCountryCode(Optional<String> requesterCountryCode);
-
-    _FinalStage requesterCountryCode(String requesterCountryCode);
-
-    _FinalStage requesterVatNumber(Optional<String> requesterVatNumber);
-
-    _FinalStage requesterVatNumber(String requesterVatNumber);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements CountryCodeStage, VatNumberStage, RequestedAtStage, ValidationStage, CompanyStage, _FinalStage {
+  public static final class Builder implements CountryCodeStage, VatNumberStage, RequesterCountryCodeStage, RequesterVatNumberStage, RequestedAtStage, ValidationStage, CompanyStage, _FinalStage {
     private String countryCode;
 
     private String vatNumber;
+
+    private String requesterCountryCode;
+
+    private String requesterVatNumber;
 
     private OffsetDateTime requestedAt;
 
     private VatValidateResponseValidation validation;
 
     private VatValidateResponseCompany company;
-
-    private Optional<String> requesterVatNumber = Optional.empty();
-
-    private Optional<String> requesterCountryCode = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -204,8 +202,22 @@ public final class VatValidateResponse {
 
     @java.lang.Override
     @JsonSetter("vat_number")
-    public RequestedAtStage vatNumber(@NotNull String vatNumber) {
+    public RequesterCountryCodeStage vatNumber(@NotNull String vatNumber) {
       this.vatNumber = Objects.requireNonNull(vatNumber, "vatNumber must not be null");
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter("requester_country_code")
+    public RequesterVatNumberStage requesterCountryCode(@NotNull String requesterCountryCode) {
+      this.requesterCountryCode = Objects.requireNonNull(requesterCountryCode, "requesterCountryCode must not be null");
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter("requester_vat_number")
+    public RequestedAtStage requesterVatNumber(@NotNull String requesterVatNumber) {
+      this.requesterVatNumber = Objects.requireNonNull(requesterVatNumber, "requesterVatNumber must not be null");
       return this;
     }
 
@@ -227,38 +239,6 @@ public final class VatValidateResponse {
     @JsonSetter("company")
     public _FinalStage company(@NotNull VatValidateResponseCompany company) {
       this.company = Objects.requireNonNull(company, "company must not be null");
-      return this;
-    }
-
-    @java.lang.Override
-    public _FinalStage requesterVatNumber(String requesterVatNumber) {
-      this.requesterVatNumber = Optional.ofNullable(requesterVatNumber);
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter(
-        value = "requester_vat_number",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage requesterVatNumber(Optional<String> requesterVatNumber) {
-      this.requesterVatNumber = requesterVatNumber;
-      return this;
-    }
-
-    @java.lang.Override
-    public _FinalStage requesterCountryCode(String requesterCountryCode) {
-      this.requesterCountryCode = Optional.ofNullable(requesterCountryCode);
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter(
-        value = "requester_country_code",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage requesterCountryCode(Optional<String> requesterCountryCode) {
-      this.requesterCountryCode = requesterCountryCode;
       return this;
     }
 

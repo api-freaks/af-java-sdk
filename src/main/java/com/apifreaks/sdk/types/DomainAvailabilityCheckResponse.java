@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Boolean;
@@ -19,46 +18,34 @@ import java.lang.String;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
+import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
     builder = DomainAvailabilityCheckResponse.Builder.class
 )
 public final class DomainAvailabilityCheckResponse {
-  private final Optional<String> domain;
+  private final String domain;
 
-  private final Optional<Boolean> domainAvailability;
-
-  private final Optional<String> message;
+  private final Boolean domainAvailability;
 
   private final Map<String, Object> additionalProperties;
 
-  private DomainAvailabilityCheckResponse(Optional<String> domain,
-      Optional<Boolean> domainAvailability, Optional<String> message,
+  private DomainAvailabilityCheckResponse(String domain, Boolean domainAvailability,
       Map<String, Object> additionalProperties) {
     this.domain = domain;
     this.domainAvailability = domainAvailability;
-    this.message = message;
     this.additionalProperties = additionalProperties;
   }
 
   @JsonProperty("domain")
-  public Optional<String> getDomain() {
+  public String getDomain() {
     return domain;
   }
 
   @JsonProperty("domainAvailability")
-  public Optional<Boolean> getDomainAvailability() {
+  public Boolean getDomainAvailability() {
     return domainAvailability;
-  }
-
-  /**
-   * @return Extra details if the domain is not registered.
-   */
-  @JsonProperty("message")
-  public Optional<String> getMessage() {
-    return message;
   }
 
   @java.lang.Override
@@ -73,12 +60,12 @@ public final class DomainAvailabilityCheckResponse {
   }
 
   private boolean equalTo(DomainAvailabilityCheckResponse other) {
-    return domain.equals(other.domain) && domainAvailability.equals(other.domainAvailability) && message.equals(other.message);
+    return domain.equals(other.domain) && domainAvailability.equals(other.domainAvailability);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.domain, this.domainAvailability, this.message);
+    return Objects.hash(this.domain, this.domainAvailability);
   }
 
   @java.lang.Override
@@ -86,19 +73,35 @@ public final class DomainAvailabilityCheckResponse {
     return ObjectMappers.stringify(this);
   }
 
-  public static Builder builder() {
+  public static DomainStage builder() {
     return new Builder();
+  }
+
+  public interface DomainStage {
+    DomainAvailabilityStage domain(@NotNull String domain);
+
+    Builder from(DomainAvailabilityCheckResponse other);
+  }
+
+  public interface DomainAvailabilityStage {
+    _FinalStage domainAvailability(@NotNull Boolean domainAvailability);
+  }
+
+  public interface _FinalStage {
+    DomainAvailabilityCheckResponse build();
+
+    _FinalStage additionalProperty(String key, Object value);
+
+    _FinalStage additionalProperties(Map<String, Object> additionalProperties);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder {
-    private Optional<String> domain = Optional.empty();
+  public static final class Builder implements DomainStage, DomainAvailabilityStage, _FinalStage {
+    private String domain;
 
-    private Optional<Boolean> domainAvailability = Optional.empty();
-
-    private Optional<String> message = Optional.empty();
+    private Boolean domainAvailability;
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -106,67 +109,39 @@ public final class DomainAvailabilityCheckResponse {
     private Builder() {
     }
 
+    @java.lang.Override
     public Builder from(DomainAvailabilityCheckResponse other) {
       domain(other.getDomain());
       domainAvailability(other.getDomainAvailability());
-      message(other.getMessage());
       return this;
     }
 
-    @JsonSetter(
-        value = "domain",
-        nulls = Nulls.SKIP
-    )
-    public Builder domain(Optional<String> domain) {
-      this.domain = domain;
+    @java.lang.Override
+    @JsonSetter("domain")
+    public DomainAvailabilityStage domain(@NotNull String domain) {
+      this.domain = Objects.requireNonNull(domain, "domain must not be null");
       return this;
     }
 
-    public Builder domain(String domain) {
-      this.domain = Optional.ofNullable(domain);
+    @java.lang.Override
+    @JsonSetter("domainAvailability")
+    public _FinalStage domainAvailability(@NotNull Boolean domainAvailability) {
+      this.domainAvailability = Objects.requireNonNull(domainAvailability, "domainAvailability must not be null");
       return this;
     }
 
-    @JsonSetter(
-        value = "domainAvailability",
-        nulls = Nulls.SKIP
-    )
-    public Builder domainAvailability(Optional<Boolean> domainAvailability) {
-      this.domainAvailability = domainAvailability;
-      return this;
-    }
-
-    public Builder domainAvailability(Boolean domainAvailability) {
-      this.domainAvailability = Optional.ofNullable(domainAvailability);
-      return this;
-    }
-
-    /**
-     * <p>Extra details if the domain is not registered.</p>
-     */
-    @JsonSetter(
-        value = "message",
-        nulls = Nulls.SKIP
-    )
-    public Builder message(Optional<String> message) {
-      this.message = message;
-      return this;
-    }
-
-    public Builder message(String message) {
-      this.message = Optional.ofNullable(message);
-      return this;
-    }
-
+    @java.lang.Override
     public DomainAvailabilityCheckResponse build() {
-      return new DomainAvailabilityCheckResponse(domain, domainAvailability, message, additionalProperties);
+      return new DomainAvailabilityCheckResponse(domain, domainAvailability, additionalProperties);
     }
 
+    @java.lang.Override
     public Builder additionalProperty(String key, Object value) {
       this.additionalProperties.put(key, value);
       return this;
     }
 
+    @java.lang.Override
     public Builder additionalProperties(Map<String, Object> additionalProperties) {
       this.additionalProperties.putAll(additionalProperties);
       return this;

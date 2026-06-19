@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.apifreaks.sdk.core.ObjectMappers;
+import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.Object;
 import java.lang.String;
@@ -39,17 +40,20 @@ public final class DomainAvailabilitySuggestionsRequest {
 
   private final Optional<Integer> count;
 
+  private final Optional<Boolean> sug;
+
   private final Map<String, Object> additionalProperties;
 
   private DomainAvailabilitySuggestionsRequest(String apiKey,
       Optional<DomainAvailabilitySuggestionsRequestFormat> format, String domain,
       Optional<DomainAvailabilitySuggestionsRequestSource> source, Optional<Integer> count,
-      Map<String, Object> additionalProperties) {
+      Optional<Boolean> sug, Map<String, Object> additionalProperties) {
     this.apiKey = apiKey;
     this.format = format;
     this.domain = domain;
     this.source = source;
     this.count = count;
+    this.sug = sug;
     this.additionalProperties = additionalProperties;
   }
 
@@ -93,6 +97,14 @@ public final class DomainAvailabilitySuggestionsRequest {
     return count;
   }
 
+  /**
+   * @return Whether to return domain suggestions
+   */
+  @JsonProperty("sug")
+  public Optional<Boolean> getSug() {
+    return sug;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -105,12 +117,12 @@ public final class DomainAvailabilitySuggestionsRequest {
   }
 
   private boolean equalTo(DomainAvailabilitySuggestionsRequest other) {
-    return apiKey.equals(other.apiKey) && format.equals(other.format) && domain.equals(other.domain) && source.equals(other.source) && count.equals(other.count);
+    return apiKey.equals(other.apiKey) && format.equals(other.format) && domain.equals(other.domain) && source.equals(other.source) && count.equals(other.count) && sug.equals(other.sug);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.apiKey, this.format, this.domain, this.source, this.count);
+    return Objects.hash(this.apiKey, this.format, this.domain, this.source, this.count, this.sug);
   }
 
   @java.lang.Override
@@ -165,6 +177,13 @@ public final class DomainAvailabilitySuggestionsRequest {
     _FinalStage count(Optional<Integer> count);
 
     _FinalStage count(Integer count);
+
+    /**
+     * <p>Whether to return domain suggestions</p>
+     */
+    _FinalStage sug(Optional<Boolean> sug);
+
+    _FinalStage sug(Boolean sug);
   }
 
   @JsonIgnoreProperties(
@@ -176,6 +195,8 @@ public final class DomainAvailabilitySuggestionsRequest {
     private String domain;
 
     private Optional<Integer> count = Optional.empty();
+
+    private Optional<Boolean> sug = Optional.empty();
 
     private Optional<DomainAvailabilitySuggestionsRequestSource> source = Optional.empty();
 
@@ -194,6 +215,7 @@ public final class DomainAvailabilitySuggestionsRequest {
       domain(other.getDomain());
       source(other.getSource());
       count(other.getCount());
+      sug(other.getSug());
       return this;
     }
 
@@ -245,6 +267,29 @@ public final class DomainAvailabilitySuggestionsRequest {
     }
 
     /**
+     * <p>Whether to return domain suggestions</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage sug(Boolean sug) {
+      this.sug = Optional.ofNullable(sug);
+      return this;
+    }
+
+    /**
+     * <p>Whether to return domain suggestions</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "sug",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage sug(Optional<Boolean> sug) {
+      this.sug = sug;
+      return this;
+    }
+
+    /**
      * <p>Specify the data source for domain availability checks. Use &quot;dns&quot; for DNS-based lookups or &quot;whois&quot; for WHOIS-based lookups. By default, &quot;dns&quot; is used.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -292,7 +337,7 @@ public final class DomainAvailabilitySuggestionsRequest {
 
     @java.lang.Override
     public DomainAvailabilitySuggestionsRequest build() {
-      return new DomainAvailabilitySuggestionsRequest(apiKey, format, domain, source, count, additionalProperties);
+      return new DomainAvailabilitySuggestionsRequest(apiKey, format, domain, source, count, sug, additionalProperties);
     }
 
     @java.lang.Override

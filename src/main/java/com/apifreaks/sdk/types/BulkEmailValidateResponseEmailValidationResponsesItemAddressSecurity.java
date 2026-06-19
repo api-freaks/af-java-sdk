@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
     builder = BulkEmailValidateResponseEmailValidationResponsesItemAddressSecurity.Builder.class
 )
 public final class BulkEmailValidateResponseEmailValidationResponsesItemAddressSecurity {
-  private final double threatScore;
+  private final int threatScore;
 
   private final boolean isTor;
 
@@ -48,7 +48,7 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItemAddressS
 
   private final Map<String, Object> additionalProperties;
 
-  private BulkEmailValidateResponseEmailValidationResponsesItemAddressSecurity(double threatScore,
+  private BulkEmailValidateResponseEmailValidationResponsesItemAddressSecurity(int threatScore,
       boolean isTor, boolean isProxy, String proxyType, String proxyProvider, boolean isAnonymous,
       boolean isKnownAttacker, boolean isSpam, boolean isBot, boolean isCloudProvider,
       String cloudProvider, Map<String, Object> additionalProperties) {
@@ -67,7 +67,7 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItemAddressS
   }
 
   @JsonProperty("threat_score")
-  public double getThreatScore() {
+  public int getThreatScore() {
     return threatScore;
   }
 
@@ -152,7 +152,7 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItemAddressS
   }
 
   public interface ThreatScoreStage {
-    IsTorStage threatScore(double threatScore);
+    IsTorStage threatScore(int threatScore);
 
     Builder from(BulkEmailValidateResponseEmailValidationResponsesItemAddressSecurity other);
   }
@@ -209,7 +209,7 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItemAddressS
       ignoreUnknown = true
   )
   public static final class Builder implements ThreatScoreStage, IsTorStage, IsProxyStage, ProxyTypeStage, ProxyProviderStage, IsAnonymousStage, IsKnownAttackerStage, IsSpamStage, IsBotStage, IsCloudProviderStage, CloudProviderStage, _FinalStage {
-    private double threatScore;
+    private int threatScore;
 
     private boolean isTor;
 
@@ -256,7 +256,7 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItemAddressS
 
     @java.lang.Override
     @JsonSetter("threat_score")
-    public IsTorStage threatScore(double threatScore) {
+    public IsTorStage threatScore(int threatScore) {
       this.threatScore = threatScore;
       return this;
     }

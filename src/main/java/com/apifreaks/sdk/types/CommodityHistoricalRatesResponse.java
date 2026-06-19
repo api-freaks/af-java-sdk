@@ -20,8 +20,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
-import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
@@ -30,25 +28,22 @@ import org.jetbrains.annotations.NotNull;
 public final class CommodityHistoricalRatesResponse {
   private final boolean success;
 
-  private final Optional<Double> timestamp;
+  private final double timestamp;
 
-  private final Optional<Map<String, CommodityHistoricalRatesResponseMetadataValue>> metadata;
+  private final Map<String, Double> rates;
 
-  private final String date;
-
-  private final Map<String, CommodityHistoricalRatesResponseRatesValue> rates;
+  private final Map<String, CommodityHistoricalRatesResponseMetadataValue> metadata;
 
   private final Map<String, Object> additionalProperties;
 
-  private CommodityHistoricalRatesResponse(boolean success, Optional<Double> timestamp,
-      Optional<Map<String, CommodityHistoricalRatesResponseMetadataValue>> metadata, String date,
-      Map<String, CommodityHistoricalRatesResponseRatesValue> rates,
+  private CommodityHistoricalRatesResponse(boolean success, double timestamp,
+      Map<String, Double> rates,
+      Map<String, CommodityHistoricalRatesResponseMetadataValue> metadata,
       Map<String, Object> additionalProperties) {
     this.success = success;
     this.timestamp = timestamp;
-    this.metadata = metadata;
-    this.date = date;
     this.rates = rates;
+    this.metadata = metadata;
     this.additionalProperties = additionalProperties;
   }
 
@@ -64,32 +59,24 @@ public final class CommodityHistoricalRatesResponse {
    * @return Unix timestamp indicating when the response was generated.
    */
   @JsonProperty("timestamp")
-  public Optional<Double> getTimestamp() {
+  public double getTimestamp() {
     return timestamp;
-  }
-
-  /**
-   * @return Map containing detailed information for all the requested commodities keyed by commodity symbol.
-   */
-  @JsonProperty("metadata")
-  public Optional<Map<String, CommodityHistoricalRatesResponseMetadataValue>> getMetadata() {
-    return metadata;
-  }
-
-  /**
-   * @return Date for which the user requested the commodity price. Format: YYYY-MM-DD.
-   */
-  @JsonProperty("date")
-  public String getDate() {
-    return date;
   }
 
   /**
    * @return Map containing rate data for each available requested commodity symbol, keyed by symbol.
    */
   @JsonProperty("rates")
-  public Map<String, CommodityHistoricalRatesResponseRatesValue> getRates() {
+  public Map<String, Double> getRates() {
     return rates;
+  }
+
+  /**
+   * @return Map containing detailed information for all the requested commodities keyed by commodity symbol.
+   */
+  @JsonProperty("metadata")
+  public Map<String, CommodityHistoricalRatesResponseMetadataValue> getMetadata() {
+    return metadata;
   }
 
   @java.lang.Override
@@ -104,12 +91,12 @@ public final class CommodityHistoricalRatesResponse {
   }
 
   private boolean equalTo(CommodityHistoricalRatesResponse other) {
-    return success == other.success && timestamp.equals(other.timestamp) && metadata.equals(other.metadata) && date.equals(other.date) && rates.equals(other.rates);
+    return success == other.success && timestamp == other.timestamp && rates.equals(other.rates) && metadata.equals(other.metadata);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.success, this.timestamp, this.metadata, this.date, this.rates);
+    return Objects.hash(this.success, this.timestamp, this.rates, this.metadata);
   }
 
   @java.lang.Override
@@ -125,16 +112,16 @@ public final class CommodityHistoricalRatesResponse {
     /**
      * <p>API request success indicator. &quot;true&quot; for successful requests.</p>
      */
-    DateStage success(boolean success);
+    TimestampStage success(boolean success);
 
     Builder from(CommodityHistoricalRatesResponse other);
   }
 
-  public interface DateStage {
+  public interface TimestampStage {
     /**
-     * <p>Date for which the user requested the commodity price. Format: YYYY-MM-DD.</p>
+     * <p>Unix timestamp indicating when the response was generated.</p>
      */
-    _FinalStage date(@NotNull String date);
+    _FinalStage timestamp(double timestamp);
   }
 
   public interface _FinalStage {
@@ -145,43 +132,36 @@ public final class CommodityHistoricalRatesResponse {
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
 
     /**
-     * <p>Unix timestamp indicating when the response was generated.</p>
+     * <p>Map containing rate data for each available requested commodity symbol, keyed by symbol.</p>
      */
-    _FinalStage timestamp(Optional<Double> timestamp);
+    _FinalStage rates(Map<String, Double> rates);
 
-    _FinalStage timestamp(Double timestamp);
+    _FinalStage putAllRates(Map<String, Double> rates);
+
+    _FinalStage rates(String key, Double value);
 
     /**
      * <p>Map containing detailed information for all the requested commodities keyed by commodity symbol.</p>
      */
-    _FinalStage metadata(
-        Optional<Map<String, CommodityHistoricalRatesResponseMetadataValue>> metadata);
-
     _FinalStage metadata(Map<String, CommodityHistoricalRatesResponseMetadataValue> metadata);
 
-    /**
-     * <p>Map containing rate data for each available requested commodity symbol, keyed by symbol.</p>
-     */
-    _FinalStage rates(Map<String, CommodityHistoricalRatesResponseRatesValue> rates);
+    _FinalStage putAllMetadata(
+        Map<String, CommodityHistoricalRatesResponseMetadataValue> metadata);
 
-    _FinalStage putAllRates(Map<String, CommodityHistoricalRatesResponseRatesValue> rates);
-
-    _FinalStage rates(String key, CommodityHistoricalRatesResponseRatesValue value);
+    _FinalStage metadata(String key, CommodityHistoricalRatesResponseMetadataValue value);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements SuccessStage, DateStage, _FinalStage {
+  public static final class Builder implements SuccessStage, TimestampStage, _FinalStage {
     private boolean success;
 
-    private String date;
+    private double timestamp;
 
-    private Map<String, CommodityHistoricalRatesResponseRatesValue> rates = new LinkedHashMap<>();
+    private Map<String, CommodityHistoricalRatesResponseMetadataValue> metadata = new LinkedHashMap<>();
 
-    private Optional<Map<String, CommodityHistoricalRatesResponseMetadataValue>> metadata = Optional.empty();
-
-    private Optional<Double> timestamp = Optional.empty();
+    private Map<String, Double> rates = new LinkedHashMap<>();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -193,9 +173,8 @@ public final class CommodityHistoricalRatesResponse {
     public Builder from(CommodityHistoricalRatesResponse other) {
       success(other.getSuccess());
       timestamp(other.getTimestamp());
-      metadata(other.getMetadata());
-      date(other.getDate());
       rates(other.getRates());
+      metadata(other.getMetadata());
       return this;
     }
 
@@ -206,20 +185,60 @@ public final class CommodityHistoricalRatesResponse {
      */
     @java.lang.Override
     @JsonSetter("success")
-    public DateStage success(boolean success) {
+    public TimestampStage success(boolean success) {
       this.success = success;
       return this;
     }
 
     /**
-     * <p>Date for which the user requested the commodity price. Format: YYYY-MM-DD.</p>
-     * <p>Date for which the user requested the commodity price. Format: YYYY-MM-DD.</p>
+     * <p>Unix timestamp indicating when the response was generated.</p>
+     * <p>Unix timestamp indicating when the response was generated.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    @JsonSetter("date")
-    public _FinalStage date(@NotNull String date) {
-      this.date = Objects.requireNonNull(date, "date must not be null");
+    @JsonSetter("timestamp")
+    public _FinalStage timestamp(double timestamp) {
+      this.timestamp = timestamp;
+      return this;
+    }
+
+    /**
+     * <p>Map containing detailed information for all the requested commodities keyed by commodity symbol.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage metadata(String key, CommodityHistoricalRatesResponseMetadataValue value) {
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * <p>Map containing detailed information for all the requested commodities keyed by commodity symbol.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage putAllMetadata(
+        Map<String, CommodityHistoricalRatesResponseMetadataValue> metadata) {
+      if (metadata != null) {
+        this.metadata.putAll(metadata);
+      }
+      return this;
+    }
+
+    /**
+     * <p>Map containing detailed information for all the requested commodities keyed by commodity symbol.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "metadata",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage metadata(
+        Map<String, CommodityHistoricalRatesResponseMetadataValue> metadata) {
+      this.metadata.clear();
+      if (metadata != null) {
+        this.metadata.putAll(metadata);
+      }
       return this;
     }
 
@@ -228,7 +247,7 @@ public final class CommodityHistoricalRatesResponse {
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage rates(String key, CommodityHistoricalRatesResponseRatesValue value) {
+    public _FinalStage rates(String key, Double value) {
       this.rates.put(key, value);
       return this;
     }
@@ -238,7 +257,7 @@ public final class CommodityHistoricalRatesResponse {
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage putAllRates(Map<String, CommodityHistoricalRatesResponseRatesValue> rates) {
+    public _FinalStage putAllRates(Map<String, Double> rates) {
       if (rates != null) {
         this.rates.putAll(rates);
       }
@@ -253,7 +272,7 @@ public final class CommodityHistoricalRatesResponse {
         value = "rates",
         nulls = Nulls.SKIP
     )
-    public _FinalStage rates(Map<String, CommodityHistoricalRatesResponseRatesValue> rates) {
+    public _FinalStage rates(Map<String, Double> rates) {
       this.rates.clear();
       if (rates != null) {
         this.rates.putAll(rates);
@@ -261,57 +280,9 @@ public final class CommodityHistoricalRatesResponse {
       return this;
     }
 
-    /**
-     * <p>Map containing detailed information for all the requested commodities keyed by commodity symbol.</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    public _FinalStage metadata(
-        Map<String, CommodityHistoricalRatesResponseMetadataValue> metadata) {
-      this.metadata = Optional.ofNullable(metadata);
-      return this;
-    }
-
-    /**
-     * <p>Map containing detailed information for all the requested commodities keyed by commodity symbol.</p>
-     */
-    @java.lang.Override
-    @JsonSetter(
-        value = "metadata",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage metadata(
-        Optional<Map<String, CommodityHistoricalRatesResponseMetadataValue>> metadata) {
-      this.metadata = metadata;
-      return this;
-    }
-
-    /**
-     * <p>Unix timestamp indicating when the response was generated.</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    public _FinalStage timestamp(Double timestamp) {
-      this.timestamp = Optional.ofNullable(timestamp);
-      return this;
-    }
-
-    /**
-     * <p>Unix timestamp indicating when the response was generated.</p>
-     */
-    @java.lang.Override
-    @JsonSetter(
-        value = "timestamp",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage timestamp(Optional<Double> timestamp) {
-      this.timestamp = timestamp;
-      return this;
-    }
-
     @java.lang.Override
     public CommodityHistoricalRatesResponse build() {
-      return new CommodityHistoricalRatesResponse(success, timestamp, metadata, date, rates, additionalProperties);
+      return new CommodityHistoricalRatesResponse(success, timestamp, rates, metadata, additionalProperties);
     }
 
     @java.lang.Override

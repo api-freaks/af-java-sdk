@@ -15,30 +15,30 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
     builder = DomainAvailabilitySuggestionsResponse.Builder.class
 )
 public final class DomainAvailabilitySuggestionsResponse {
-  private final Optional<List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem>> domainAvailableResponse;
+  private final List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem> domainAvailableResponse;
 
   private final Map<String, Object> additionalProperties;
 
   private DomainAvailabilitySuggestionsResponse(
-      Optional<List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem>> domainAvailableResponse,
+      List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem> domainAvailableResponse,
       Map<String, Object> additionalProperties) {
     this.domainAvailableResponse = domainAvailableResponse;
     this.additionalProperties = additionalProperties;
   }
 
   @JsonProperty("domain_available_response")
-  public Optional<List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem>> getDomainAvailableResponse(
+  public List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem> getDomainAvailableResponse(
       ) {
     return domainAvailableResponse;
   }
@@ -76,7 +76,7 @@ public final class DomainAvailabilitySuggestionsResponse {
       ignoreUnknown = true
   )
   public static final class Builder {
-    private Optional<List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem>> domainAvailableResponse = Optional.empty();
+    private List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem> domainAvailableResponse = new ArrayList<>();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -94,14 +94,21 @@ public final class DomainAvailabilitySuggestionsResponse {
         nulls = Nulls.SKIP
     )
     public Builder domainAvailableResponse(
-        Optional<List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem>> domainAvailableResponse) {
-      this.domainAvailableResponse = domainAvailableResponse;
+        List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem> domainAvailableResponse) {
+      this.domainAvailableResponse.clear();
+      this.domainAvailableResponse.addAll(domainAvailableResponse);
       return this;
     }
 
-    public Builder domainAvailableResponse(
+    public Builder addDomainAvailableResponse(
+        DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem domainAvailableResponse) {
+      this.domainAvailableResponse.add(domainAvailableResponse);
+      return this;
+    }
+
+    public Builder addAllDomainAvailableResponse(
         List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem> domainAvailableResponse) {
-      this.domainAvailableResponse = Optional.ofNullable(domainAvailableResponse);
+      this.domainAvailableResponse.addAll(domainAvailableResponse);
       return this;
     }
 

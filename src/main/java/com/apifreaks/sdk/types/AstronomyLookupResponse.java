@@ -28,13 +28,14 @@ import org.jetbrains.annotations.NotNull;
 public final class AstronomyLookupResponse {
   private final Optional<String> ip;
 
-  private final AstronomyLookupResponseLocation location;
+  private final Optional<AstronomyLookupResponseLocation> location;
 
   private final AstronomyLookupResponseAstronomy astronomy;
 
   private final Map<String, Object> additionalProperties;
 
-  private AstronomyLookupResponse(Optional<String> ip, AstronomyLookupResponseLocation location,
+  private AstronomyLookupResponse(Optional<String> ip,
+      Optional<AstronomyLookupResponseLocation> location,
       AstronomyLookupResponseAstronomy astronomy, Map<String, Object> additionalProperties) {
     this.ip = ip;
     this.location = location;
@@ -48,7 +49,7 @@ public final class AstronomyLookupResponse {
   }
 
   @JsonProperty("location")
-  public AstronomyLookupResponseLocation getLocation() {
+  public Optional<AstronomyLookupResponseLocation> getLocation() {
     return location;
   }
 
@@ -82,18 +83,14 @@ public final class AstronomyLookupResponse {
     return ObjectMappers.stringify(this);
   }
 
-  public static LocationStage builder() {
+  public static AstronomyStage builder() {
     return new Builder();
-  }
-
-  public interface LocationStage {
-    AstronomyStage location(@NotNull AstronomyLookupResponseLocation location);
-
-    Builder from(AstronomyLookupResponse other);
   }
 
   public interface AstronomyStage {
     _FinalStage astronomy(@NotNull AstronomyLookupResponseAstronomy astronomy);
+
+    Builder from(AstronomyLookupResponse other);
   }
 
   public interface _FinalStage {
@@ -106,15 +103,19 @@ public final class AstronomyLookupResponse {
     _FinalStage ip(Optional<String> ip);
 
     _FinalStage ip(String ip);
+
+    _FinalStage location(Optional<AstronomyLookupResponseLocation> location);
+
+    _FinalStage location(AstronomyLookupResponseLocation location);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements LocationStage, AstronomyStage, _FinalStage {
-    private AstronomyLookupResponseLocation location;
-
+  public static final class Builder implements AstronomyStage, _FinalStage {
     private AstronomyLookupResponseAstronomy astronomy;
+
+    private Optional<AstronomyLookupResponseLocation> location = Optional.empty();
 
     private Optional<String> ip = Optional.empty();
 
@@ -133,16 +134,25 @@ public final class AstronomyLookupResponse {
     }
 
     @java.lang.Override
-    @JsonSetter("location")
-    public AstronomyStage location(@NotNull AstronomyLookupResponseLocation location) {
-      this.location = Objects.requireNonNull(location, "location must not be null");
+    @JsonSetter("astronomy")
+    public _FinalStage astronomy(@NotNull AstronomyLookupResponseAstronomy astronomy) {
+      this.astronomy = Objects.requireNonNull(astronomy, "astronomy must not be null");
       return this;
     }
 
     @java.lang.Override
-    @JsonSetter("astronomy")
-    public _FinalStage astronomy(@NotNull AstronomyLookupResponseAstronomy astronomy) {
-      this.astronomy = Objects.requireNonNull(astronomy, "astronomy must not be null");
+    public _FinalStage location(AstronomyLookupResponseLocation location) {
+      this.location = Optional.ofNullable(location);
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter(
+        value = "location",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage location(Optional<AstronomyLookupResponseLocation> location) {
+      this.location = location;
       return this;
     }
 

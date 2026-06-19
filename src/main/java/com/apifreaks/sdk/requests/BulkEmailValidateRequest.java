@@ -16,7 +16,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -105,9 +104,16 @@ public final class BulkEmailValidateRequest {
     /**
      * <p>Your API key</p>
      */
-    _FinalStage apiKey(@NotNull String apiKey);
+    EmailDataStage apiKey(@NotNull String apiKey);
 
     Builder from(BulkEmailValidateRequest other);
+  }
+
+  public interface EmailDataStage {
+    /**
+     * <p>Array of email objects for bulk validation</p>
+     */
+    _FinalStage emailData(@NotNull List<BulkEmailValidateRequestEmailDataItem> emailData);
   }
 
   public interface _FinalStage {
@@ -123,24 +129,15 @@ public final class BulkEmailValidateRequest {
     _FinalStage format(Optional<BulkEmailValidateRequestFormat> format);
 
     _FinalStage format(BulkEmailValidateRequestFormat format);
-
-    /**
-     * <p>Array of email objects for bulk validation</p>
-     */
-    _FinalStage emailData(List<BulkEmailValidateRequestEmailDataItem> emailData);
-
-    _FinalStage addEmailData(BulkEmailValidateRequestEmailDataItem emailData);
-
-    _FinalStage addAllEmailData(List<BulkEmailValidateRequestEmailDataItem> emailData);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements ApiKeyStage, _FinalStage {
+  public static final class Builder implements ApiKeyStage, EmailDataStage, _FinalStage {
     private String apiKey;
 
-    private List<BulkEmailValidateRequestEmailDataItem> emailData = new ArrayList<>();
+    private List<BulkEmailValidateRequestEmailDataItem> emailData;
 
     private Optional<BulkEmailValidateRequestFormat> format = Optional.empty();
 
@@ -165,46 +162,20 @@ public final class BulkEmailValidateRequest {
      */
     @java.lang.Override
     @JsonSetter("apiKey")
-    public _FinalStage apiKey(@NotNull String apiKey) {
+    public EmailDataStage apiKey(@NotNull String apiKey) {
       this.apiKey = Objects.requireNonNull(apiKey, "apiKey must not be null");
       return this;
     }
 
     /**
      * <p>Array of email objects for bulk validation</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    public _FinalStage addAllEmailData(List<BulkEmailValidateRequestEmailDataItem> emailData) {
-      if (emailData != null) {
-        this.emailData.addAll(emailData);
-      }
-      return this;
-    }
-
-    /**
      * <p>Array of email objects for bulk validation</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage addEmailData(BulkEmailValidateRequestEmailDataItem emailData) {
-      this.emailData.add(emailData);
-      return this;
-    }
-
-    /**
-     * <p>Array of email objects for bulk validation</p>
-     */
-    @java.lang.Override
-    @JsonSetter(
-        value = "emailData",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage emailData(List<BulkEmailValidateRequestEmailDataItem> emailData) {
-      this.emailData.clear();
-      if (emailData != null) {
-        this.emailData.addAll(emailData);
-      }
+    @JsonSetter("emailData")
+    public _FinalStage emailData(@NotNull List<BulkEmailValidateRequestEmailDataItem> emailData) {
+      this.emailData = Objects.requireNonNull(emailData, "emailData must not be null");
       return this;
     }
 

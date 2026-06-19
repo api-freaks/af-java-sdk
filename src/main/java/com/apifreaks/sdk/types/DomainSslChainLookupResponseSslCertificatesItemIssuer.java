@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 public final class DomainSslChainLookupResponseSslCertificatesItemIssuer {
   private final String commonName;
 
-  private final Optional<String> organization;
+  private final String organization;
 
   private final Optional<String> organizationalUnit;
 
@@ -36,7 +36,7 @@ public final class DomainSslChainLookupResponseSslCertificatesItemIssuer {
 
   private final Optional<String> state;
 
-  private final Optional<String> country;
+  private final String country;
 
   private final Optional<String> incCountry;
 
@@ -53,8 +53,8 @@ public final class DomainSslChainLookupResponseSslCertificatesItemIssuer {
   private final Map<String, Object> additionalProperties;
 
   private DomainSslChainLookupResponseSslCertificatesItemIssuer(String commonName,
-      Optional<String> organization, Optional<String> organizationalUnit, Optional<String> locality,
-      Optional<String> state, Optional<String> country, Optional<String> incCountry,
+      String organization, Optional<String> organizationalUnit, Optional<String> locality,
+      Optional<String> state, String country, Optional<String> incCountry,
       Optional<String> incState, Optional<String> businessCategory, Optional<String> street,
       Optional<String> postalCode, Optional<String> serialNumber,
       Map<String, Object> additionalProperties) {
@@ -79,7 +79,7 @@ public final class DomainSslChainLookupResponseSslCertificatesItemIssuer {
   }
 
   @JsonProperty("organization")
-  public Optional<String> getOrganization() {
+  public String getOrganization() {
     return organization;
   }
 
@@ -99,7 +99,7 @@ public final class DomainSslChainLookupResponseSslCertificatesItemIssuer {
   }
 
   @JsonProperty("country")
-  public Optional<String> getCountry() {
+  public String getCountry() {
     return country;
   }
 
@@ -163,9 +163,17 @@ public final class DomainSslChainLookupResponseSslCertificatesItemIssuer {
   }
 
   public interface CommonNameStage {
-    _FinalStage commonName(@NotNull String commonName);
+    OrganizationStage commonName(@NotNull String commonName);
 
     Builder from(DomainSslChainLookupResponseSslCertificatesItemIssuer other);
+  }
+
+  public interface OrganizationStage {
+    CountryStage organization(@NotNull String organization);
+  }
+
+  public interface CountryStage {
+    _FinalStage country(@NotNull String country);
   }
 
   public interface _FinalStage {
@@ -174,10 +182,6 @@ public final class DomainSslChainLookupResponseSslCertificatesItemIssuer {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
-
-    _FinalStage organization(Optional<String> organization);
-
-    _FinalStage organization(String organization);
 
     _FinalStage organizationalUnit(Optional<String> organizationalUnit);
 
@@ -190,10 +194,6 @@ public final class DomainSslChainLookupResponseSslCertificatesItemIssuer {
     _FinalStage state(Optional<String> state);
 
     _FinalStage state(String state);
-
-    _FinalStage country(Optional<String> country);
-
-    _FinalStage country(String country);
 
     _FinalStage incCountry(Optional<String> incCountry);
 
@@ -223,8 +223,12 @@ public final class DomainSslChainLookupResponseSslCertificatesItemIssuer {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements CommonNameStage, _FinalStage {
+  public static final class Builder implements CommonNameStage, OrganizationStage, CountryStage, _FinalStage {
     private String commonName;
+
+    private String organization;
+
+    private String country;
 
     private Optional<String> serialNumber = Optional.empty();
 
@@ -238,15 +242,11 @@ public final class DomainSslChainLookupResponseSslCertificatesItemIssuer {
 
     private Optional<String> incCountry = Optional.empty();
 
-    private Optional<String> country = Optional.empty();
-
     private Optional<String> state = Optional.empty();
 
     private Optional<String> locality = Optional.empty();
 
     private Optional<String> organizationalUnit = Optional.empty();
-
-    private Optional<String> organization = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -273,8 +273,22 @@ public final class DomainSslChainLookupResponseSslCertificatesItemIssuer {
 
     @java.lang.Override
     @JsonSetter("commonName")
-    public _FinalStage commonName(@NotNull String commonName) {
+    public OrganizationStage commonName(@NotNull String commonName) {
       this.commonName = Objects.requireNonNull(commonName, "commonName must not be null");
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter("organization")
+    public CountryStage organization(@NotNull String organization) {
+      this.organization = Objects.requireNonNull(organization, "organization must not be null");
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter("country")
+    public _FinalStage country(@NotNull String country) {
+      this.country = Objects.requireNonNull(country, "country must not be null");
       return this;
     }
 
@@ -375,22 +389,6 @@ public final class DomainSslChainLookupResponseSslCertificatesItemIssuer {
     }
 
     @java.lang.Override
-    public _FinalStage country(String country) {
-      this.country = Optional.ofNullable(country);
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter(
-        value = "country",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage country(Optional<String> country) {
-      this.country = country;
-      return this;
-    }
-
-    @java.lang.Override
     public _FinalStage state(String state) {
       this.state = Optional.ofNullable(state);
       return this;
@@ -435,22 +433,6 @@ public final class DomainSslChainLookupResponseSslCertificatesItemIssuer {
     )
     public _FinalStage organizationalUnit(Optional<String> organizationalUnit) {
       this.organizationalUnit = organizationalUnit;
-      return this;
-    }
-
-    @java.lang.Override
-    public _FinalStage organization(String organization) {
-      this.organization = Optional.ofNullable(organization);
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter(
-        value = "organization",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage organization(Optional<String> organization) {
-      this.organization = organization;
       return this;
     }
 

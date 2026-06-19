@@ -17,7 +17,6 @@ import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +30,7 @@ import com.apifreaks.sdk.types.BulkDomainDnsLookupRequestFormat;
     builder = BulkDomainDnsLookupRequest.Builder.class
 )
 public final class BulkDomainDnsLookupRequest {
-  private final Optional<List<String>> type;
+  private final List<String> type;
 
   private final String apiKey;
 
@@ -39,15 +38,18 @@ public final class BulkDomainDnsLookupRequest {
 
   private final List<String> domainNames;
 
+  private final Optional<List<String>> ipAddresses;
+
   private final Map<String, Object> additionalProperties;
 
-  private BulkDomainDnsLookupRequest(Optional<List<String>> type, String apiKey,
+  private BulkDomainDnsLookupRequest(List<String> type, String apiKey,
       Optional<BulkDomainDnsLookupRequestFormat> format, List<String> domainNames,
-      Map<String, Object> additionalProperties) {
+      Optional<List<String>> ipAddresses, Map<String, Object> additionalProperties) {
     this.type = type;
     this.apiKey = apiKey;
     this.format = format;
     this.domainNames = domainNames;
+    this.ipAddresses = ipAddresses;
     this.additionalProperties = additionalProperties;
   }
 
@@ -56,7 +58,7 @@ public final class BulkDomainDnsLookupRequest {
    * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all
    */
   @JsonIgnore
-  public Optional<List<String>> getType() {
+  public List<String> getType() {
     return type;
   }
 
@@ -84,6 +86,11 @@ public final class BulkDomainDnsLookupRequest {
     return domainNames;
   }
 
+  @JsonProperty("ipAddresses")
+  public Optional<List<String>> getIpAddresses() {
+    return ipAddresses;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -96,12 +103,12 @@ public final class BulkDomainDnsLookupRequest {
   }
 
   private boolean equalTo(BulkDomainDnsLookupRequest other) {
-    return type.equals(other.type) && apiKey.equals(other.apiKey) && format.equals(other.format) && domainNames.equals(other.domainNames);
+    return type.equals(other.type) && apiKey.equals(other.apiKey) && format.equals(other.format) && domainNames.equals(other.domainNames) && ipAddresses.equals(other.ipAddresses);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.type, this.apiKey, this.format, this.domainNames);
+    return Objects.hash(this.type, this.apiKey, this.format, this.domainNames, this.ipAddresses);
   }
 
   @java.lang.Override
@@ -117,9 +124,17 @@ public final class BulkDomainDnsLookupRequest {
     /**
      * <p>Your API key</p>
      */
-    _FinalStage apiKey(@NotNull String apiKey);
+    TypeStage apiKey(@NotNull String apiKey);
 
     Builder from(BulkDomainDnsLookupRequest other);
+  }
+
+  public interface TypeStage {
+    /**
+     * <p>A comma-separated list of DNS record types for lookup.
+     * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all</p>
+     */
+    _FinalStage type(@NotNull List<String> type);
   }
 
   public interface _FinalStage {
@@ -128,16 +143,6 @@ public final class BulkDomainDnsLookupRequest {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
-
-    /**
-     * <p>A comma-separated list of DNS record types for lookup.
-     * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all</p>
-     */
-    _FinalStage type(Optional<List<String>> type);
-
-    _FinalStage type(List<String> type);
-
-    _FinalStage type(String type);
 
     /**
      * <p>Format of the response.</p>
@@ -154,19 +159,25 @@ public final class BulkDomainDnsLookupRequest {
     _FinalStage addDomainNames(String domainNames);
 
     _FinalStage addAllDomainNames(List<String> domainNames);
+
+    _FinalStage ipAddresses(Optional<List<String>> ipAddresses);
+
+    _FinalStage ipAddresses(List<String> ipAddresses);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements ApiKeyStage, _FinalStage {
+  public static final class Builder implements ApiKeyStage, TypeStage, _FinalStage {
     private String apiKey;
+
+    private List<String> type;
 
     private List<String> domainNames = new ArrayList<>();
 
-    private Optional<BulkDomainDnsLookupRequestFormat> format = Optional.empty();
+    private Optional<List<String>> ipAddresses = Optional.empty();
 
-    private Optional<List<String>> type = Optional.empty();
+    private Optional<BulkDomainDnsLookupRequestFormat> format = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -180,6 +191,7 @@ public final class BulkDomainDnsLookupRequest {
       apiKey(other.getApiKey());
       format(other.getFormat());
       domainNames(other.getDomainNames());
+      ipAddresses(other.getIpAddresses());
       return this;
     }
 
@@ -190,7 +202,7 @@ public final class BulkDomainDnsLookupRequest {
      */
     @java.lang.Override
     @JsonSetter("apiKey")
-    public _FinalStage apiKey(@NotNull String apiKey) {
+    public TypeStage apiKey(@NotNull String apiKey) {
       this.apiKey = Objects.requireNonNull(apiKey, "apiKey must not be null");
       return this;
     }
@@ -256,40 +268,39 @@ public final class BulkDomainDnsLookupRequest {
       return this;
     }
 
-    @java.lang.Override
-    public _FinalStage type(String type) {
-      this.type = Optional.of(Collections.singletonList(type));
-      return this;
-    }
-
     /**
+     * <p>A comma-separated list of DNS record types for lookup.
+     * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all</p>
      * <p>A comma-separated list of DNS record types for lookup.
      * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage type(List<String> type) {
-      this.type = Optional.ofNullable(type);
+    @JsonSetter("type")
+    public _FinalStage type(@NotNull List<String> type) {
+      this.type = Objects.requireNonNull(type, "type must not be null");
       return this;
     }
 
-    /**
-     * <p>A comma-separated list of DNS record types for lookup.
-     * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all</p>
-     */
+    @java.lang.Override
+    public _FinalStage ipAddresses(List<String> ipAddresses) {
+      this.ipAddresses = Optional.ofNullable(ipAddresses);
+      return this;
+    }
+
     @java.lang.Override
     @JsonSetter(
-        value = "type",
+        value = "ipAddresses",
         nulls = Nulls.SKIP
     )
-    public _FinalStage type(Optional<List<String>> type) {
-      this.type = type;
+    public _FinalStage ipAddresses(Optional<List<String>> ipAddresses) {
+      this.ipAddresses = ipAddresses;
       return this;
     }
 
     @java.lang.Override
     public BulkDomainDnsLookupRequest build() {
-      return new BulkDomainDnsLookupRequest(type, apiKey, format, domainNames, additionalProperties);
+      return new BulkDomainDnsLookupRequest(type, apiKey, format, domainNames, ipAddresses, additionalProperties);
     }
 
     @java.lang.Override

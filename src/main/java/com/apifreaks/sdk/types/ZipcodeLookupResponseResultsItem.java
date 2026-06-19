@@ -32,8 +32,6 @@ public final class ZipcodeLookupResponseResultsItem {
 
   private final Optional<String> region;
 
-  private final Optional<String> regionCode;
-
   private final Optional<String> city;
 
   private final Optional<String> locality;
@@ -45,13 +43,12 @@ public final class ZipcodeLookupResponseResultsItem {
   private final Map<String, Object> additionalProperties;
 
   private ZipcodeLookupResponseResultsItem(Optional<String> code, Optional<String> countryCode,
-      Optional<String> region, Optional<String> regionCode, Optional<String> city,
+      Optional<String> region, Optional<String> city,
       Optional<String> locality, Optional<Double> latitude, Optional<Double> longitude,
       Map<String, Object> additionalProperties) {
     this.code = code;
     this.countryCode = countryCode;
     this.region = region;
-    this.regionCode = regionCode;
     this.city = city;
     this.locality = locality;
     this.latitude = latitude;
@@ -72,11 +69,6 @@ public final class ZipcodeLookupResponseResultsItem {
   @JsonProperty("region")
   public Optional<String> getRegion() {
     return region;
-  }
-
-  @JsonProperty("region_code")
-  public Optional<String> getRegionCode() {
-    return regionCode;
   }
 
   @JsonProperty("city")
@@ -111,12 +103,12 @@ public final class ZipcodeLookupResponseResultsItem {
   }
 
   private boolean equalTo(ZipcodeLookupResponseResultsItem other) {
-    return code.equals(other.code) && countryCode.equals(other.countryCode) && region.equals(other.region) && regionCode.equals(other.regionCode) && city.equals(other.city) && locality.equals(other.locality) && latitude.equals(other.latitude) && longitude.equals(other.longitude);
+    return code.equals(other.code) && countryCode.equals(other.countryCode) && region.equals(other.region) && city.equals(other.city) && locality.equals(other.locality) && latitude.equals(other.latitude) && longitude.equals(other.longitude);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.code, this.countryCode, this.region, this.regionCode, this.city, this.locality, this.latitude, this.longitude);
+    return Objects.hash(this.code, this.countryCode, this.region, this.city, this.locality, this.latitude, this.longitude);
   }
 
   @java.lang.Override
@@ -138,8 +130,6 @@ public final class ZipcodeLookupResponseResultsItem {
 
     private Optional<String> region = Optional.empty();
 
-    private Optional<String> regionCode = Optional.empty();
-
     private Optional<String> city = Optional.empty();
 
     private Optional<String> locality = Optional.empty();
@@ -158,7 +148,6 @@ public final class ZipcodeLookupResponseResultsItem {
       code(other.getCode());
       countryCode(other.getCountryCode());
       region(other.getRegion());
-      regionCode(other.getRegionCode());
       city(other.getCity());
       locality(other.getLocality());
       latitude(other.getLatitude());
@@ -205,20 +194,6 @@ public final class ZipcodeLookupResponseResultsItem {
 
     public Builder region(String region) {
       this.region = Optional.ofNullable(region);
-      return this;
-    }
-
-    @JsonSetter(
-        value = "region_code",
-        nulls = Nulls.SKIP
-    )
-    public Builder regionCode(Optional<String> regionCode) {
-      this.regionCode = regionCode;
-      return this;
-    }
-
-    public Builder regionCode(String regionCode) {
-      this.regionCode = Optional.ofNullable(regionCode);
       return this;
     }
 
@@ -279,7 +254,7 @@ public final class ZipcodeLookupResponseResultsItem {
     }
 
     public ZipcodeLookupResponseResultsItem build() {
-      return new ZipcodeLookupResponseResultsItem(code, countryCode, region, regionCode, city, locality, latitude, longitude, additionalProperties);
+      return new ZipcodeLookupResponseResultsItem(code, countryCode, region, city, locality, latitude, longitude, additionalProperties);
     }
 
     public Builder additionalProperty(String key, Object value) {

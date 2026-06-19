@@ -31,12 +31,15 @@ public final class UserAgentLookupRequest {
 
   private final Optional<UserAgentLookupRequestFormat> format;
 
+  private final String userAgent;
+
   private final Map<String, Object> additionalProperties;
 
   private UserAgentLookupRequest(String apiKey, Optional<UserAgentLookupRequestFormat> format,
-      Map<String, Object> additionalProperties) {
+      String userAgent, Map<String, Object> additionalProperties) {
     this.apiKey = apiKey;
     this.format = format;
+    this.userAgent = userAgent;
     this.additionalProperties = additionalProperties;
   }
 
@@ -56,6 +59,14 @@ public final class UserAgentLookupRequest {
     return format;
   }
 
+  /**
+   * @return The User-Agent string to parse
+   */
+  @JsonProperty("user_agent")
+  public String getUserAgent() {
+    return userAgent;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -68,12 +79,12 @@ public final class UserAgentLookupRequest {
   }
 
   private boolean equalTo(UserAgentLookupRequest other) {
-    return apiKey.equals(other.apiKey) && format.equals(other.format);
+    return apiKey.equals(other.apiKey) && format.equals(other.format) && userAgent.equals(other.userAgent);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.apiKey, this.format);
+    return Objects.hash(this.apiKey, this.format, this.userAgent);
   }
 
   @java.lang.Override
@@ -89,9 +100,16 @@ public final class UserAgentLookupRequest {
     /**
      * <p>Your API key</p>
      */
-    _FinalStage apiKey(@NotNull String apiKey);
+    UserAgentStage apiKey(@NotNull String apiKey);
 
     Builder from(UserAgentLookupRequest other);
+  }
+
+  public interface UserAgentStage {
+    /**
+     * <p>The User-Agent string to parse</p>
+     */
+    _FinalStage userAgent(@NotNull String userAgent);
   }
 
   public interface _FinalStage {
@@ -112,8 +130,10 @@ public final class UserAgentLookupRequest {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements ApiKeyStage, _FinalStage {
+  public static final class Builder implements ApiKeyStage, UserAgentStage, _FinalStage {
     private String apiKey;
+
+    private String userAgent;
 
     private Optional<UserAgentLookupRequestFormat> format = Optional.empty();
 
@@ -127,6 +147,7 @@ public final class UserAgentLookupRequest {
     public Builder from(UserAgentLookupRequest other) {
       apiKey(other.getApiKey());
       format(other.getFormat());
+      userAgent(other.getUserAgent());
       return this;
     }
 
@@ -137,8 +158,20 @@ public final class UserAgentLookupRequest {
      */
     @java.lang.Override
     @JsonSetter("apiKey")
-    public _FinalStage apiKey(@NotNull String apiKey) {
+    public UserAgentStage apiKey(@NotNull String apiKey) {
       this.apiKey = Objects.requireNonNull(apiKey, "apiKey must not be null");
+      return this;
+    }
+
+    /**
+     * <p>The User-Agent string to parse</p>
+     * <p>The User-Agent string to parse</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    @JsonSetter("user_agent")
+    public _FinalStage userAgent(@NotNull String userAgent) {
+      this.userAgent = Objects.requireNonNull(userAgent, "userAgent must not be null");
       return this;
     }
 
@@ -167,7 +200,7 @@ public final class UserAgentLookupRequest {
 
     @java.lang.Override
     public UserAgentLookupRequest build() {
-      return new UserAgentLookupRequest(apiKey, format, additionalProperties);
+      return new UserAgentLookupRequest(apiKey, format, userAgent, additionalProperties);
     }
 
     @java.lang.Override

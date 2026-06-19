@@ -10,50 +10,53 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.apifreaks.sdk.core.ObjectMappers;
+import java.lang.Double;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import org.jetbrains.annotations.NotNull;
+import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
     builder = TimezoneLookupResponseAirportDetails.Builder.class
 )
 public final class TimezoneLookupResponseAirportDetails {
-  private final String type;
+  private final Optional<String> type;
 
-  private final String name;
+  private final Optional<String> name;
 
-  private final String longitude;
+  private final Optional<Double> longitude;
 
-  private final String latitude;
+  private final Optional<Double> latitude;
 
-  private final double elevationFt;
+  private final Optional<Double> elevationFt;
 
-  private final String continentCode;
+  private final Optional<String> continentCode;
 
-  private final String countryCode;
+  private final Optional<String> countryCode;
 
-  private final String stateCode;
+  private final Optional<String> stateCode;
 
-  private final String city;
+  private final Optional<String> city;
 
-  private final String iataCode;
+  private final Optional<String> iataCode;
 
-  private final String icaoCode;
+  private final Optional<String> icaoCode;
 
-  private final String faaCode;
+  private final Optional<String> faaCode;
 
   private final Map<String, Object> additionalProperties;
 
-  private TimezoneLookupResponseAirportDetails(String type, String name, String longitude,
-      String latitude, double elevationFt, String continentCode, String countryCode,
-      String stateCode, String city, String iataCode, String icaoCode, String faaCode,
-      Map<String, Object> additionalProperties) {
+  private TimezoneLookupResponseAirportDetails(Optional<String> type, Optional<String> name,
+      Optional<Double> longitude, Optional<Double> latitude, Optional<Double> elevationFt,
+      Optional<String> continentCode, Optional<String> countryCode, Optional<String> stateCode,
+      Optional<String> city, Optional<String> iataCode, Optional<String> icaoCode,
+      Optional<String> faaCode, Map<String, Object> additionalProperties) {
     this.type = type;
     this.name = name;
     this.longitude = longitude;
@@ -70,62 +73,62 @@ public final class TimezoneLookupResponseAirportDetails {
   }
 
   @JsonProperty("type")
-  public String getType() {
+  public Optional<String> getType() {
     return type;
   }
 
   @JsonProperty("name")
-  public String getName() {
+  public Optional<String> getName() {
     return name;
   }
 
   @JsonProperty("longitude")
-  public String getLongitude() {
+  public Optional<Double> getLongitude() {
     return longitude;
   }
 
   @JsonProperty("latitude")
-  public String getLatitude() {
+  public Optional<Double> getLatitude() {
     return latitude;
   }
 
   @JsonProperty("elevation_ft")
-  public double getElevationFt() {
+  public Optional<Double> getElevationFt() {
     return elevationFt;
   }
 
   @JsonProperty("continent_code")
-  public String getContinentCode() {
+  public Optional<String> getContinentCode() {
     return continentCode;
   }
 
   @JsonProperty("country_code")
-  public String getCountryCode() {
+  public Optional<String> getCountryCode() {
     return countryCode;
   }
 
   @JsonProperty("state_code")
-  public String getStateCode() {
+  public Optional<String> getStateCode() {
     return stateCode;
   }
 
   @JsonProperty("city")
-  public String getCity() {
+  public Optional<String> getCity() {
     return city;
   }
 
   @JsonProperty("iata_code")
-  public String getIataCode() {
+  public Optional<String> getIataCode() {
     return iataCode;
   }
 
   @JsonProperty("icao_code")
-  public String getIcaoCode() {
+  public Optional<String> getIcaoCode() {
     return icaoCode;
   }
 
   @JsonProperty("faa_code")
-  public String getFaaCode() {
+  public Optional<String> getFaaCode() {
     return faaCode;
   }
 
@@ -141,7 +144,7 @@ public final class TimezoneLookupResponseAirportDetails {
   }
 
   private boolean equalTo(TimezoneLookupResponseAirportDetails other) {
-    return type.equals(other.type) && name.equals(other.name) && longitude.equals(other.longitude) && latitude.equals(other.latitude) && elevationFt == other.elevationFt && continentCode.equals(other.continentCode) && countryCode.equals(other.countryCode) && stateCode.equals(other.stateCode) && city.equals(other.city) && iataCode.equals(other.iataCode) && icaoCode.equals(other.icaoCode) && faaCode.equals(other.faaCode);
+    return type.equals(other.type) && name.equals(other.name) && longitude.equals(other.longitude) && latitude.equals(other.latitude) && elevationFt.equals(other.elevationFt) && continentCode.equals(other.continentCode) && countryCode.equals(other.countryCode) && stateCode.equals(other.stateCode) && city.equals(other.city) && iataCode.equals(other.iataCode) && icaoCode.equals(other.icaoCode) && faaCode.equals(other.faaCode);
   }
 
   @java.lang.Override
@@ -154,95 +157,37 @@ public final class TimezoneLookupResponseAirportDetails {
     return ObjectMappers.stringify(this);
   }
 
-  public static TypeStage builder() {
+  public static Builder builder() {
     return new Builder();
-  }
-
-  public interface TypeStage {
-    NameStage type(@NotNull String type);
-
-    Builder from(TimezoneLookupResponseAirportDetails other);
-  }
-
-  public interface NameStage {
-    LongitudeStage name(@NotNull String name);
-  }
-
-  public interface LongitudeStage {
-    LatitudeStage longitude(@NotNull String longitude);
-  }
-
-  public interface LatitudeStage {
-    ElevationFtStage latitude(@NotNull String latitude);
-  }
-
-  public interface ElevationFtStage {
-    ContinentCodeStage elevationFt(double elevationFt);
-  }
-
-  public interface ContinentCodeStage {
-    CountryCodeStage continentCode(@NotNull String continentCode);
-  }
-
-  public interface CountryCodeStage {
-    StateCodeStage countryCode(@NotNull String countryCode);
-  }
-
-  public interface StateCodeStage {
-    CityStage stateCode(@NotNull String stateCode);
-  }
-
-  public interface CityStage {
-    IataCodeStage city(@NotNull String city);
-  }
-
-  public interface IataCodeStage {
-    IcaoCodeStage iataCode(@NotNull String iataCode);
-  }
-
-  public interface IcaoCodeStage {
-    FaaCodeStage icaoCode(@NotNull String icaoCode);
-  }
-
-  public interface FaaCodeStage {
-    _FinalStage faaCode(@NotNull String faaCode);
-  }
-
-  public interface _FinalStage {
-    TimezoneLookupResponseAirportDetails build();
-
-    _FinalStage additionalProperty(String key, Object value);
-
-    _FinalStage additionalProperties(Map<String, Object> additionalProperties);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements TypeStage, NameStage, LongitudeStage, LatitudeStage, ElevationFtStage, ContinentCodeStage, CountryCodeStage, StateCodeStage, CityStage, IataCodeStage, IcaoCodeStage, FaaCodeStage, _FinalStage {
-    private String type;
+  public static final class Builder {
+    private Optional<String> type = Optional.empty();
 
-    private String name;
+    private Optional<String> name = Optional.empty();
 
-    private String longitude;
+    private Optional<Double> longitude = Optional.empty();
 
-    private String latitude;
+    private Optional<Double> latitude = Optional.empty();
 
-    private double elevationFt;
+    private Optional<Double> elevationFt = Optional.empty();
 
-    private String continentCode;
+    private Optional<String> continentCode = Optional.empty();
 
-    private String countryCode;
+    private Optional<String> countryCode = Optional.empty();
 
-    private String stateCode;
+    private Optional<String> stateCode = Optional.empty();
 
-    private String city;
+    private Optional<String> city = Optional.empty();
 
-    private String iataCode;
+    private Optional<String> iataCode = Optional.empty();
 
-    private String icaoCode;
+    private Optional<String> icaoCode = Optional.empty();
 
-    private String faaCode;
+    private Optional<String> faaCode = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -250,7 +195,6 @@ public final class TimezoneLookupResponseAirportDetails {
     private Builder() {
     }
 
-    @java.lang.Override
     public Builder from(TimezoneLookupResponseAirportDetails other) {
       type(other.getType());
       name(other.getName());
@@ -267,102 +211,183 @@ public final class TimezoneLookupResponseAirportDetails {
       return this;
     }
 
-    @java.lang.Override
-    @JsonSetter("type")
-    public NameStage type(@NotNull String type) {
-      this.type = Objects.requireNonNull(type, "type must not be null");
+    @JsonSetter(
+        value = "type",
+        nulls = Nulls.SKIP
+    )
+    public Builder type(Optional<String> type) {
+      this.type = type;
       return this;
     }
 
-    @java.lang.Override
-    @JsonSetter("name")
-    public LongitudeStage name(@NotNull String name) {
-      this.name = Objects.requireNonNull(name, "name must not be null");
+    public Builder type(String type) {
+      this.type = Optional.ofNullable(type);
       return this;
     }
 
-    @java.lang.Override
-    @JsonSetter("longitude")
-    public LatitudeStage longitude(@NotNull String longitude) {
-      this.longitude = Objects.requireNonNull(longitude, "longitude must not be null");
+    @JsonSetter(
+        value = "name",
+        nulls = Nulls.SKIP
+    )
+    public Builder name(Optional<String> name) {
+      this.name = name;
       return this;
     }
 
-    @java.lang.Override
-    @JsonSetter("latitude")
-    public ElevationFtStage latitude(@NotNull String latitude) {
-      this.latitude = Objects.requireNonNull(latitude, "latitude must not be null");
+    public Builder name(String name) {
+      this.name = Optional.ofNullable(name);
       return this;
     }
 
-    @java.lang.Override
-    @JsonSetter("elevation_ft")
-    public ContinentCodeStage elevationFt(double elevationFt) {
+    @JsonSetter(
+        value = "longitude",
+        nulls = Nulls.SKIP
+    )
+    public Builder longitude(Optional<Double> longitude) {
+      this.longitude = longitude;
+      return this;
+    }
+
+    public Builder longitude(Double longitude) {
+      this.longitude = Optional.ofNullable(longitude);
+      return this;
+    }
+
+    @JsonSetter(
+        value = "latitude",
+        nulls = Nulls.SKIP
+    )
+    public Builder latitude(Optional<Double> latitude) {
+      this.latitude = latitude;
+      return this;
+    }
+
+    public Builder latitude(Double latitude) {
+      this.latitude = Optional.ofNullable(latitude);
+      return this;
+    }
+
+    @JsonSetter(
+        value = "elevation_ft",
+        nulls = Nulls.SKIP
+    )
+    public Builder elevationFt(Optional<Double> elevationFt) {
       this.elevationFt = elevationFt;
       return this;
     }
 
-    @java.lang.Override
-    @JsonSetter("continent_code")
-    public CountryCodeStage continentCode(@NotNull String continentCode) {
-      this.continentCode = Objects.requireNonNull(continentCode, "continentCode must not be null");
+    public Builder elevationFt(Double elevationFt) {
+      this.elevationFt = Optional.ofNullable(elevationFt);
       return this;
     }
 
-    @java.lang.Override
-    @JsonSetter("country_code")
-    public StateCodeStage countryCode(@NotNull String countryCode) {
-      this.countryCode = Objects.requireNonNull(countryCode, "countryCode must not be null");
+    @JsonSetter(
+        value = "continent_code",
+        nulls = Nulls.SKIP
+    )
+    public Builder continentCode(Optional<String> continentCode) {
+      this.continentCode = continentCode;
       return this;
     }
 
-    @java.lang.Override
-    @JsonSetter("state_code")
-    public CityStage stateCode(@NotNull String stateCode) {
-      this.stateCode = Objects.requireNonNull(stateCode, "stateCode must not be null");
+    public Builder continentCode(String continentCode) {
+      this.continentCode = Optional.ofNullable(continentCode);
       return this;
     }
 
-    @java.lang.Override
-    @JsonSetter("city")
-    public IataCodeStage city(@NotNull String city) {
-      this.city = Objects.requireNonNull(city, "city must not be null");
+    @JsonSetter(
+        value = "country_code",
+        nulls = Nulls.SKIP
+    )
+    public Builder countryCode(Optional<String> countryCode) {
+      this.countryCode = countryCode;
       return this;
     }
 
-    @java.lang.Override
-    @JsonSetter("iata_code")
-    public IcaoCodeStage iataCode(@NotNull String iataCode) {
-      this.iataCode = Objects.requireNonNull(iataCode, "iataCode must not be null");
+    public Builder countryCode(String countryCode) {
+      this.countryCode = Optional.ofNullable(countryCode);
       return this;
     }
 
-    @java.lang.Override
-    @JsonSetter("icao_code")
-    public FaaCodeStage icaoCode(@NotNull String icaoCode) {
-      this.icaoCode = Objects.requireNonNull(icaoCode, "icaoCode must not be null");
+    @JsonSetter(
+        value = "state_code",
+        nulls = Nulls.SKIP
+    )
+    public Builder stateCode(Optional<String> stateCode) {
+      this.stateCode = stateCode;
       return this;
     }
 
-    @java.lang.Override
-    @JsonSetter("faa_code")
-    public _FinalStage faaCode(@NotNull String faaCode) {
-      this.faaCode = Objects.requireNonNull(faaCode, "faaCode must not be null");
+    public Builder stateCode(String stateCode) {
+      this.stateCode = Optional.ofNullable(stateCode);
       return this;
     }
 
-    @java.lang.Override
+    @JsonSetter(
+        value = "city",
+        nulls = Nulls.SKIP
+    )
+    public Builder city(Optional<String> city) {
+      this.city = city;
+      return this;
+    }
+
+    public Builder city(String city) {
+      this.city = Optional.ofNullable(city);
+      return this;
+    }
+
+    @JsonSetter(
+        value = "iata_code",
+        nulls = Nulls.SKIP
+    )
+    public Builder iataCode(Optional<String> iataCode) {
+      this.iataCode = iataCode;
+      return this;
+    }
+
+    public Builder iataCode(String iataCode) {
+      this.iataCode = Optional.ofNullable(iataCode);
+      return this;
+    }
+
+    @JsonSetter(
+        value = "icao_code",
+        nulls = Nulls.SKIP
+    )
+    public Builder icaoCode(Optional<String> icaoCode) {
+      this.icaoCode = icaoCode;
+      return this;
+    }
+
+    public Builder icaoCode(String icaoCode) {
+      this.icaoCode = Optional.ofNullable(icaoCode);
+      return this;
+    }
+
+    @JsonSetter(
+        value = "faa_code",
+        nulls = Nulls.SKIP
+    )
+    public Builder faaCode(Optional<String> faaCode) {
+      this.faaCode = faaCode;
+      return this;
+    }
+
+    public Builder faaCode(String faaCode) {
+      this.faaCode = Optional.ofNullable(faaCode);
+      return this;
+    }
+
     public TimezoneLookupResponseAirportDetails build() {
       return new TimezoneLookupResponseAirportDetails(type, name, longitude, latitude, elevationFt, continentCode, countryCode, stateCode, city, iataCode, icaoCode, faaCode, additionalProperties);
     }
 
-    @java.lang.Override
     public Builder additionalProperty(String key, Object value) {
       this.additionalProperties.put(key, value);
       return this;
     }
 
-    @java.lang.Override
     public Builder additionalProperties(Map<String, Object> additionalProperties) {
       this.additionalProperties.putAll(additionalProperties);
       return this;

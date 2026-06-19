@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
@@ -30,23 +29,24 @@ public final class TimezoneLookupResponse {
 
   private final Optional<TimezoneLookupResponseLocation> location;
 
-  private final TimezoneLookupResponseTimeZone timeZone;
+  private final Optional<TimezoneLookupResponseTimeZone> timeZone;
 
-  private final Optional<TimezoneLookupResponseAirportDetails> airportDetails;
+  private final Optional<TimezoneLookupResponseAirportDetails> airportDetail;
 
   private final Optional<TimezoneLookupResponseLoCodeDetails> loCodeDetails;
 
   private final Map<String, Object> additionalProperties;
 
   private TimezoneLookupResponse(Optional<String> ip,
-      Optional<TimezoneLookupResponseLocation> location, TimezoneLookupResponseTimeZone timeZone,
-      Optional<TimezoneLookupResponseAirportDetails> airportDetails,
+      Optional<TimezoneLookupResponseLocation> location,
+      Optional<TimezoneLookupResponseTimeZone> timeZone,
+      Optional<TimezoneLookupResponseAirportDetails> airportDetail,
       Optional<TimezoneLookupResponseLoCodeDetails> loCodeDetails,
       Map<String, Object> additionalProperties) {
     this.ip = ip;
     this.location = location;
     this.timeZone = timeZone;
-    this.airportDetails = airportDetails;
+    this.airportDetail = airportDetail;
     this.loCodeDetails = loCodeDetails;
     this.additionalProperties = additionalProperties;
   }
@@ -62,13 +62,13 @@ public final class TimezoneLookupResponse {
   }
 
   @JsonProperty("time_zone")
-  public TimezoneLookupResponseTimeZone getTimeZone() {
+  public Optional<TimezoneLookupResponseTimeZone> getTimeZone() {
     return timeZone;
   }
 
-  @JsonProperty("airport_details")
-  public Optional<TimezoneLookupResponseAirportDetails> getAirportDetails() {
-    return airportDetails;
+  @JsonProperty("airport_detail")
+  public Optional<TimezoneLookupResponseAirportDetails> getAirportDetail() {
+    return airportDetail;
   }
 
   @JsonProperty("lo_code_details")
@@ -88,12 +88,12 @@ public final class TimezoneLookupResponse {
   }
 
   private boolean equalTo(TimezoneLookupResponse other) {
-    return ip.equals(other.ip) && location.equals(other.location) && timeZone.equals(other.timeZone) && airportDetails.equals(other.airportDetails) && loCodeDetails.equals(other.loCodeDetails);
+    return ip.equals(other.ip) && location.equals(other.location) && timeZone.equals(other.timeZone) && airportDetail.equals(other.airportDetail) && loCodeDetails.equals(other.loCodeDetails);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.ip, this.location, this.timeZone, this.airportDetails, this.loCodeDetails);
+    return Objects.hash(this.ip, this.location, this.timeZone, this.airportDetail, this.loCodeDetails);
   }
 
   @java.lang.Override
@@ -101,53 +101,23 @@ public final class TimezoneLookupResponse {
     return ObjectMappers.stringify(this);
   }
 
-  public static TimeZoneStage builder() {
+  public static Builder builder() {
     return new Builder();
-  }
-
-  public interface TimeZoneStage {
-    _FinalStage timeZone(@NotNull TimezoneLookupResponseTimeZone timeZone);
-
-    Builder from(TimezoneLookupResponse other);
-  }
-
-  public interface _FinalStage {
-    TimezoneLookupResponse build();
-
-    _FinalStage additionalProperty(String key, Object value);
-
-    _FinalStage additionalProperties(Map<String, Object> additionalProperties);
-
-    _FinalStage ip(Optional<String> ip);
-
-    _FinalStage ip(String ip);
-
-    _FinalStage location(Optional<TimezoneLookupResponseLocation> location);
-
-    _FinalStage location(TimezoneLookupResponseLocation location);
-
-    _FinalStage airportDetails(Optional<TimezoneLookupResponseAirportDetails> airportDetails);
-
-    _FinalStage airportDetails(TimezoneLookupResponseAirportDetails airportDetails);
-
-    _FinalStage loCodeDetails(Optional<TimezoneLookupResponseLoCodeDetails> loCodeDetails);
-
-    _FinalStage loCodeDetails(TimezoneLookupResponseLoCodeDetails loCodeDetails);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements TimeZoneStage, _FinalStage {
-    private TimezoneLookupResponseTimeZone timeZone;
-
-    private Optional<TimezoneLookupResponseLoCodeDetails> loCodeDetails = Optional.empty();
-
-    private Optional<TimezoneLookupResponseAirportDetails> airportDetails = Optional.empty();
+  public static final class Builder {
+    private Optional<String> ip = Optional.empty();
 
     private Optional<TimezoneLookupResponseLocation> location = Optional.empty();
 
-    private Optional<String> ip = Optional.empty();
+    private Optional<TimezoneLookupResponseTimeZone> timeZone = Optional.empty();
+
+    private Optional<TimezoneLookupResponseAirportDetails> airportDetail = Optional.empty();
+
+    private Optional<TimezoneLookupResponseLoCodeDetails> loCodeDetails = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -155,100 +125,94 @@ public final class TimezoneLookupResponse {
     private Builder() {
     }
 
-    @java.lang.Override
     public Builder from(TimezoneLookupResponse other) {
       ip(other.getIp());
       location(other.getLocation());
       timeZone(other.getTimeZone());
-      airportDetails(other.getAirportDetails());
+      airportDetail(other.getAirportDetail());
       loCodeDetails(other.getLoCodeDetails());
       return this;
     }
 
-    @java.lang.Override
-    @JsonSetter("time_zone")
-    public _FinalStage timeZone(@NotNull TimezoneLookupResponseTimeZone timeZone) {
-      this.timeZone = Objects.requireNonNull(timeZone, "timeZone must not be null");
-      return this;
-    }
-
-    @java.lang.Override
-    public _FinalStage loCodeDetails(TimezoneLookupResponseLoCodeDetails loCodeDetails) {
-      this.loCodeDetails = Optional.ofNullable(loCodeDetails);
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter(
-        value = "lo_code_details",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage loCodeDetails(Optional<TimezoneLookupResponseLoCodeDetails> loCodeDetails) {
-      this.loCodeDetails = loCodeDetails;
-      return this;
-    }
-
-    @java.lang.Override
-    public _FinalStage airportDetails(TimezoneLookupResponseAirportDetails airportDetails) {
-      this.airportDetails = Optional.ofNullable(airportDetails);
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter(
-        value = "airport_details",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage airportDetails(
-        Optional<TimezoneLookupResponseAirportDetails> airportDetails) {
-      this.airportDetails = airportDetails;
-      return this;
-    }
-
-    @java.lang.Override
-    public _FinalStage location(TimezoneLookupResponseLocation location) {
-      this.location = Optional.ofNullable(location);
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter(
-        value = "location",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage location(Optional<TimezoneLookupResponseLocation> location) {
-      this.location = location;
-      return this;
-    }
-
-    @java.lang.Override
-    public _FinalStage ip(String ip) {
-      this.ip = Optional.ofNullable(ip);
-      return this;
-    }
-
-    @java.lang.Override
     @JsonSetter(
         value = "ip",
         nulls = Nulls.SKIP
     )
-    public _FinalStage ip(Optional<String> ip) {
+    public Builder ip(Optional<String> ip) {
       this.ip = ip;
       return this;
     }
 
-    @java.lang.Override
-    public TimezoneLookupResponse build() {
-      return new TimezoneLookupResponse(ip, location, timeZone, airportDetails, loCodeDetails, additionalProperties);
+    public Builder ip(String ip) {
+      this.ip = Optional.ofNullable(ip);
+      return this;
     }
 
-    @java.lang.Override
+    @JsonSetter(
+        value = "location",
+        nulls = Nulls.SKIP
+    )
+    public Builder location(Optional<TimezoneLookupResponseLocation> location) {
+      this.location = location;
+      return this;
+    }
+
+    public Builder location(TimezoneLookupResponseLocation location) {
+      this.location = Optional.ofNullable(location);
+      return this;
+    }
+
+    @JsonSetter(
+        value = "time_zone",
+        nulls = Nulls.SKIP
+    )
+    public Builder timeZone(Optional<TimezoneLookupResponseTimeZone> timeZone) {
+      this.timeZone = timeZone;
+      return this;
+    }
+
+    public Builder timeZone(TimezoneLookupResponseTimeZone timeZone) {
+      this.timeZone = Optional.ofNullable(timeZone);
+      return this;
+    }
+
+    @JsonSetter(
+        value = "airport_detail",
+        nulls = Nulls.SKIP
+    )
+    public Builder airportDetail(Optional<TimezoneLookupResponseAirportDetails> airportDetail) {
+      this.airportDetail = airportDetail;
+      return this;
+    }
+
+    public Builder airportDetail(TimezoneLookupResponseAirportDetails airportDetail) {
+      this.airportDetail = Optional.ofNullable(airportDetail);
+      return this;
+    }
+
+    @JsonSetter(
+        value = "lo_code_details",
+        nulls = Nulls.SKIP
+    )
+    public Builder loCodeDetails(Optional<TimezoneLookupResponseLoCodeDetails> loCodeDetails) {
+      this.loCodeDetails = loCodeDetails;
+      return this;
+    }
+
+    public Builder loCodeDetails(TimezoneLookupResponseLoCodeDetails loCodeDetails) {
+      this.loCodeDetails = Optional.ofNullable(loCodeDetails);
+      return this;
+    }
+
+    public TimezoneLookupResponse build() {
+      return new TimezoneLookupResponse(ip, location, timeZone, airportDetail, loCodeDetails, additionalProperties);
+    }
+
     public Builder additionalProperty(String key, Object value) {
       this.additionalProperties.put(key, value);
       return this;
     }
 
-    @java.lang.Override
     public Builder additionalProperties(Map<String, Object> additionalProperties) {
       this.additionalProperties.putAll(additionalProperties);
       return this;

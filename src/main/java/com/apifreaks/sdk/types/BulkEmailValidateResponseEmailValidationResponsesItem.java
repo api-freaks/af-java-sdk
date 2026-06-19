@@ -44,7 +44,7 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItem {
 
   private final BulkEmailValidateResponseEmailValidationResponsesItemDns dns;
 
-  private final Optional<String> ip;
+  private final Optional<String> ipAddress;
 
   private final Optional<BulkEmailValidateResponseEmailValidationResponsesItemAddress> address;
 
@@ -55,7 +55,7 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItem {
       BulkEmailValidateResponseEmailValidationResponsesItemValidEmail validEmail,
       boolean validSyntax, BulkEmailValidateResponseEmailValidationResponsesItemDomain domain,
       BulkEmailValidateResponseEmailValidationResponsesItemAccount account,
-      BulkEmailValidateResponseEmailValidationResponsesItemDns dns, Optional<String> ip,
+      BulkEmailValidateResponseEmailValidationResponsesItemDns dns, Optional<String> ipAddress,
       Optional<BulkEmailValidateResponseEmailValidationResponsesItemAddress> address,
       Map<String, Object> additionalProperties) {
     this.success = success;
@@ -67,7 +67,7 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItem {
     this.domain = domain;
     this.account = account;
     this.dns = dns;
-    this.ip = ip;
+    this.ipAddress = ipAddress;
     this.address = address;
     this.additionalProperties = additionalProperties;
   }
@@ -117,9 +117,9 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItem {
     return dns;
   }
 
-  @JsonProperty("ip")
-  public Optional<String> getIp() {
-    return ip;
+  @JsonProperty("ipAddress")
+  public Optional<String> getIpAddress() {
+    return ipAddress;
   }
 
   @JsonProperty("address")
@@ -139,12 +139,12 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItem {
   }
 
   private boolean equalTo(BulkEmailValidateResponseEmailValidationResponsesItem other) {
-    return success == other.success && email.equals(other.email) && name.equals(other.name) && reason.equals(other.reason) && validEmail.equals(other.validEmail) && validSyntax == other.validSyntax && domain.equals(other.domain) && account.equals(other.account) && dns.equals(other.dns) && ip.equals(other.ip) && address.equals(other.address);
+    return success == other.success && email.equals(other.email) && name.equals(other.name) && reason.equals(other.reason) && validEmail.equals(other.validEmail) && validSyntax == other.validSyntax && domain.equals(other.domain) && account.equals(other.account) && dns.equals(other.dns) && ipAddress.equals(other.ipAddress) && address.equals(other.address);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.success, this.email, this.name, this.reason, this.validEmail, this.validSyntax, this.domain, this.account, this.dns, this.ip, this.address);
+    return Objects.hash(this.success, this.email, this.name, this.reason, this.validEmail, this.validSyntax, this.domain, this.account, this.dns, this.ipAddress, this.address);
   }
 
   @java.lang.Override
@@ -203,9 +203,9 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItem {
 
     _FinalStage reason(String reason);
 
-    _FinalStage ip(Optional<String> ip);
+    _FinalStage ipAddress(Optional<String> ipAddress);
 
-    _FinalStage ip(String ip);
+    _FinalStage ipAddress(String ipAddress);
 
     _FinalStage address(
         Optional<BulkEmailValidateResponseEmailValidationResponsesItemAddress> address);
@@ -233,7 +233,7 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItem {
 
     private Optional<BulkEmailValidateResponseEmailValidationResponsesItemAddress> address = Optional.empty();
 
-    private Optional<String> ip = Optional.empty();
+    private Optional<String> ipAddress = Optional.empty();
 
     private Optional<String> reason = Optional.empty();
 
@@ -256,7 +256,7 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItem {
       domain(other.getDomain());
       account(other.getAccount());
       dns(other.getDns());
-      ip(other.getIp());
+      ipAddress(other.getIpAddress());
       address(other.getAddress());
       return this;
     }
@@ -332,18 +332,18 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItem {
     }
 
     @java.lang.Override
-    public _FinalStage ip(String ip) {
-      this.ip = Optional.ofNullable(ip);
+    public _FinalStage ipAddress(String ipAddress) {
+      this.ipAddress = Optional.ofNullable(ipAddress);
       return this;
     }
 
     @java.lang.Override
     @JsonSetter(
-        value = "ip",
+        value = "ipAddress",
         nulls = Nulls.SKIP
     )
-    public _FinalStage ip(Optional<String> ip) {
-      this.ip = ip;
+    public _FinalStage ipAddress(Optional<String> ipAddress) {
+      this.ipAddress = ipAddress;
       return this;
     }
 
@@ -381,7 +381,7 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItem {
 
     @java.lang.Override
     public BulkEmailValidateResponseEmailValidationResponsesItem build() {
-      return new BulkEmailValidateResponseEmailValidationResponsesItem(success, email, name, reason, validEmail, validSyntax, domain, account, dns, ip, address, additionalProperties);
+      return new BulkEmailValidateResponseEmailValidationResponsesItem(success, email, name, reason, validEmail, validSyntax, domain, account, dns, ipAddress, address, additionalProperties);
     }
 
     @java.lang.Override

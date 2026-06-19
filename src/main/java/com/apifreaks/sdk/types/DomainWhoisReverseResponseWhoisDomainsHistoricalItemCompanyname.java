@@ -94,7 +94,7 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemCompanyna
     return email;
   }
 
-  @JsonProperty("companyname")
+  @JsonProperty("company_name")
   public Optional<String> getCompanyname() {
     return companyname;
   }
@@ -231,7 +231,7 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemCompanyna
 
     @java.lang.Override
     @JsonSetter(
-        value = "companyname",
+        value = "company_name",
         nulls = Nulls.SKIP
     )
     public _FinalStage companyname(Optional<String> companyname) {

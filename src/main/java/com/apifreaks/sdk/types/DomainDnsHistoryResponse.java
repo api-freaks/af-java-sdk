@@ -13,33 +13,31 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.apifreaks.sdk.core.ObjectMappers;
-import java.lang.Integer;
 import java.lang.Object;
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
     builder = DomainDnsHistoryResponse.Builder.class
 )
 public final class DomainDnsHistoryResponse {
-  private final Optional<Integer> totalRecords;
+  private final int totalRecords;
 
-  private final Optional<Integer> totalPages;
+  private final int totalPages;
 
-  private final Optional<Integer> currentPage;
+  private final int currentPage;
 
-  private final Optional<List<DomainDnsHistoryResponseHistoricalDnsRecordsItem>> historicalDnsRecords;
+  private final List<DomainDnsHistoryResponseHistoricalDnsRecordsItem> historicalDnsRecords;
 
   private final Map<String, Object> additionalProperties;
 
-  private DomainDnsHistoryResponse(Optional<Integer> totalRecords, Optional<Integer> totalPages,
-      Optional<Integer> currentPage,
-      Optional<List<DomainDnsHistoryResponseHistoricalDnsRecordsItem>> historicalDnsRecords,
+  private DomainDnsHistoryResponse(int totalRecords, int totalPages, int currentPage,
+      List<DomainDnsHistoryResponseHistoricalDnsRecordsItem> historicalDnsRecords,
       Map<String, Object> additionalProperties) {
     this.totalRecords = totalRecords;
     this.totalPages = totalPages;
@@ -49,23 +47,22 @@ public final class DomainDnsHistoryResponse {
   }
 
   @JsonProperty("totalRecords")
-  public Optional<Integer> getTotalRecords() {
+  public int getTotalRecords() {
     return totalRecords;
   }
 
   @JsonProperty("totalPages")
-  public Optional<Integer> getTotalPages() {
+  public int getTotalPages() {
     return totalPages;
   }
 
   @JsonProperty("currentPage")
-  public Optional<Integer> getCurrentPage() {
+  public int getCurrentPage() {
     return currentPage;
   }
 
   @JsonProperty("historicalDnsRecords")
-  public Optional<List<DomainDnsHistoryResponseHistoricalDnsRecordsItem>> getHistoricalDnsRecords(
-      ) {
+  public List<DomainDnsHistoryResponseHistoricalDnsRecordsItem> getHistoricalDnsRecords() {
     return historicalDnsRecords;
   }
 
@@ -81,7 +78,7 @@ public final class DomainDnsHistoryResponse {
   }
 
   private boolean equalTo(DomainDnsHistoryResponse other) {
-    return totalRecords.equals(other.totalRecords) && totalPages.equals(other.totalPages) && currentPage.equals(other.currentPage) && historicalDnsRecords.equals(other.historicalDnsRecords);
+    return totalRecords == other.totalRecords && totalPages == other.totalPages && currentPage == other.currentPage && historicalDnsRecords.equals(other.historicalDnsRecords);
   }
 
   @java.lang.Override
@@ -94,21 +91,52 @@ public final class DomainDnsHistoryResponse {
     return ObjectMappers.stringify(this);
   }
 
-  public static Builder builder() {
+  public static TotalRecordsStage builder() {
     return new Builder();
+  }
+
+  public interface TotalRecordsStage {
+    TotalPagesStage totalRecords(int totalRecords);
+
+    Builder from(DomainDnsHistoryResponse other);
+  }
+
+  public interface TotalPagesStage {
+    CurrentPageStage totalPages(int totalPages);
+  }
+
+  public interface CurrentPageStage {
+    _FinalStage currentPage(int currentPage);
+  }
+
+  public interface _FinalStage {
+    DomainDnsHistoryResponse build();
+
+    _FinalStage historicalDnsRecords(
+        List<DomainDnsHistoryResponseHistoricalDnsRecordsItem> historicalDnsRecords);
+
+    _FinalStage addHistoricalDnsRecords(
+        DomainDnsHistoryResponseHistoricalDnsRecordsItem historicalDnsRecords);
+
+    _FinalStage addAllHistoricalDnsRecords(
+        List<DomainDnsHistoryResponseHistoricalDnsRecordsItem> historicalDnsRecords);
+
+    _FinalStage additionalProperty(String key, Object value);
+
+    _FinalStage additionalProperties(Map<String, Object> additionalProperties);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder {
-    private Optional<Integer> totalRecords = Optional.empty();
+  public static final class Builder implements TotalRecordsStage, TotalPagesStage, CurrentPageStage, _FinalStage {
+    private int totalRecords;
 
-    private Optional<Integer> totalPages = Optional.empty();
+    private int totalPages;
 
-    private Optional<Integer> currentPage = Optional.empty();
+    private int currentPage;
 
-    private Optional<List<DomainDnsHistoryResponseHistoricalDnsRecordsItem>> historicalDnsRecords = Optional.empty();
+    private List<DomainDnsHistoryResponseHistoricalDnsRecordsItem> historicalDnsRecords = new ArrayList<>();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -116,6 +144,7 @@ public final class DomainDnsHistoryResponse {
     private Builder() {
     }
 
+    @java.lang.Override
     public Builder from(DomainDnsHistoryResponse other) {
       totalRecords(other.getTotalRecords());
       totalPages(other.getTotalPages());
@@ -124,73 +153,69 @@ public final class DomainDnsHistoryResponse {
       return this;
     }
 
-    @JsonSetter(
-        value = "totalRecords",
-        nulls = Nulls.SKIP
-    )
-    public Builder totalRecords(Optional<Integer> totalRecords) {
+    @java.lang.Override
+    @JsonSetter("totalRecords")
+    public TotalPagesStage totalRecords(int totalRecords) {
       this.totalRecords = totalRecords;
       return this;
     }
 
-    public Builder totalRecords(Integer totalRecords) {
-      this.totalRecords = Optional.ofNullable(totalRecords);
-      return this;
-    }
-
-    @JsonSetter(
-        value = "totalPages",
-        nulls = Nulls.SKIP
-    )
-    public Builder totalPages(Optional<Integer> totalPages) {
+    @java.lang.Override
+    @JsonSetter("totalPages")
+    public CurrentPageStage totalPages(int totalPages) {
       this.totalPages = totalPages;
       return this;
     }
 
-    public Builder totalPages(Integer totalPages) {
-      this.totalPages = Optional.ofNullable(totalPages);
-      return this;
-    }
-
-    @JsonSetter(
-        value = "currentPage",
-        nulls = Nulls.SKIP
-    )
-    public Builder currentPage(Optional<Integer> currentPage) {
+    @java.lang.Override
+    @JsonSetter("currentPage")
+    public _FinalStage currentPage(int currentPage) {
       this.currentPage = currentPage;
       return this;
     }
 
-    public Builder currentPage(Integer currentPage) {
-      this.currentPage = Optional.ofNullable(currentPage);
+    @java.lang.Override
+    public _FinalStage addAllHistoricalDnsRecords(
+        List<DomainDnsHistoryResponseHistoricalDnsRecordsItem> historicalDnsRecords) {
+      if (historicalDnsRecords != null) {
+        this.historicalDnsRecords.addAll(historicalDnsRecords);
+      }
       return this;
     }
 
+    @java.lang.Override
+    public _FinalStage addHistoricalDnsRecords(
+        DomainDnsHistoryResponseHistoricalDnsRecordsItem historicalDnsRecords) {
+      this.historicalDnsRecords.add(historicalDnsRecords);
+      return this;
+    }
+
+    @java.lang.Override
     @JsonSetter(
         value = "historicalDnsRecords",
         nulls = Nulls.SKIP
     )
-    public Builder historicalDnsRecords(
-        Optional<List<DomainDnsHistoryResponseHistoricalDnsRecordsItem>> historicalDnsRecords) {
-      this.historicalDnsRecords = historicalDnsRecords;
-      return this;
-    }
-
-    public Builder historicalDnsRecords(
+    public _FinalStage historicalDnsRecords(
         List<DomainDnsHistoryResponseHistoricalDnsRecordsItem> historicalDnsRecords) {
-      this.historicalDnsRecords = Optional.ofNullable(historicalDnsRecords);
+      this.historicalDnsRecords.clear();
+      if (historicalDnsRecords != null) {
+        this.historicalDnsRecords.addAll(historicalDnsRecords);
+      }
       return this;
     }
 
+    @java.lang.Override
     public DomainDnsHistoryResponse build() {
       return new DomainDnsHistoryResponse(totalRecords, totalPages, currentPage, historicalDnsRecords, additionalProperties);
     }
 
+    @java.lang.Override
     public Builder additionalProperty(String key, Object value) {
       this.additionalProperties.put(key, value);
       return this;
     }
 
+    @java.lang.Override
     public Builder additionalProperties(Map<String, Object> additionalProperties) {
       this.additionalProperties.putAll(additionalProperties);
       return this;

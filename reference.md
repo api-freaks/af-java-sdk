@@ -1087,6 +1087,7 @@ import com.apifreaks.sdk.types.DomainDnsLookupResponse;
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 DomainDnsLookupRequest request = DomainDnsLookupRequest.builder()
         .apiKey("apiKey")
+        .type(java.util.List.of("all"))
         .build();
 DomainDnsLookupResponse response = client.domainDnsLookup(request);
 ```
@@ -1102,7 +1103,7 @@ DomainDnsLookupResponse response = client.domainDnsLookup(request);
 <dl>
 <dd>
 
-**type:** `Optional&lt;List<String&gt;&gt;` — A comma-separated list of DNS record types for lookup. Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all. When ipAddress is provided, type must be &quot;all&quot;. _(optional)_
+**type:** `List&lt;String&gt;` — A comma-separated list of DNS record types for lookup. Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all. When ipAddress is provided, type must be &quot;all&quot;. _(required)_
     
 </dd>
 </dl>
@@ -1173,6 +1174,7 @@ import com.apifreaks.sdk.types.BulkDomainDnsLookupResponse;
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 BulkDomainDnsLookupRequest request = BulkDomainDnsLookupRequest.builder()
         .apiKey("apiKey")
+        .type(java.util.List.of("all"))
         .domainNames(java.util.List.of("example.com"))
         .build();
 BulkDomainDnsLookupResponse response = client.bulkDomainDnsLookup(request);
@@ -1189,7 +1191,7 @@ BulkDomainDnsLookupResponse response = client.bulkDomainDnsLookup(request);
 <dl>
 <dd>
 
-**type:** `Optional&lt;List<String&gt;&gt;` — No description provided. _(optional)_
+**type:** `List&lt;String&gt;` — No description provided. _(required)_
     
 </dd>
 </dl>
@@ -1214,6 +1216,14 @@ BulkDomainDnsLookupResponse response = client.bulkDomainDnsLookup(request);
 <dd>
 
 **domainNames:** `List<String&gt;` — List of hostnames to lookup DNS records for _(required)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ipAddresses:** `Optional&lt;List<String&gt;&gt;` — A comma-separated list of IP addresses for reverse DNS lookup _(optional)_
     
 </dd>
 </dl>
@@ -1253,6 +1263,7 @@ ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 DomainDnsHistoryRequest request = DomainDnsHistoryRequest.builder()
         .apiKey("apiKey")
         .hostName("example.com")
+        .type(java.util.List.of("all"))
         .build();
 DomainDnsHistoryResponse response = client.domainDnsHistory(request);
 ```
@@ -1268,7 +1279,7 @@ DomainDnsHistoryResponse response = client.domainDnsHistory(request);
 <dl>
 <dd>
 
-**type:** `Optional&lt;List<String&gt;&gt;` — A comma-separated list of DNS record types for lookup. Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all _(optional)_
+**type:** `List&lt;String&gt;` — A comma-separated list of DNS record types for lookup. Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all _(required)_
     
 </dd>
 </dl>
@@ -2253,6 +2264,14 @@ DomainAvailabilitySuggestionsResponse response = client.domainAvailabilitySugges
 <dd>
 
 **count:** `Optional&lt;Integer&gt;` — Number of suggestions to retrieve. _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sug:** `Optional&lt;Boolean&gt;` — Whether to return domain suggestions _(optional)_
     
 </dd>
 </dl>
@@ -4644,7 +4663,6 @@ This API uploads multiple PDF files to the API Freaks server and generates their
 
 ```java
 import java.io.File;
-import java.util.Optional;
 
 import com.apifreaks.sdk.ApifreaksApiClient;
 import com.apifreaks.sdk.requests.PdfUploadResourcesRequest;
@@ -4654,7 +4672,7 @@ ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 PdfUploadResourcesRequest request = PdfUploadResourcesRequest.builder()
         .apiKey("apiKey")
         .build();
-PdfUploadResourcesResponse response = client.pdfUploadResources(Optional.of(new File("input.pdf")), request);
+PdfUploadResourcesResponse response = client.pdfUploadResources(new File("input.pdf"), request);
 ```
 
 </dd>
@@ -4668,7 +4686,7 @@ PdfUploadResourcesResponse response = client.pdfUploadResources(Optional.of(new 
 <dl>
 <dd>
 
-**file:** `Optional<File>` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`.
+**file:** `File` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`. _(required)_
     
 </dd>
 </dl>
@@ -6049,7 +6067,7 @@ CurrencyConvertLatestResponse response = client.currencyConvertLatest(request);
 <dl>
 <dd>
 
-**amount:** `Optional&lt;Double&gt;` — Amount to convert _(optional)_
+**amount:** `Optional&lt;String&gt;` — Amount to convert _(optional)_
     
 </dd>
 </dl>
@@ -6146,7 +6164,7 @@ CurrencyConvertHistoricalResponse response = client.currencyConvertHistorical(re
 <dl>
 <dd>
 
-**amount:** `Optional&lt;Double&gt;` — The Amount to be converted _(optional)_
+**amount:** `Optional&lt;String&gt;` — The Amount to be converted _(optional)_
     
 </dd>
 </dl>
@@ -6439,7 +6457,7 @@ CurrencyConvertByIpResponse response = client.currencyConvertByIp(request);
 <dl>
 <dd>
 
-**amount:** `Optional&lt;Double&gt;` — Amount to convert _(optional)_
+**amount:** `Optional&lt;String&gt;` — Amount to convert _(optional)_
     
 </dd>
 </dl>
@@ -6665,6 +6683,7 @@ ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CommodityLatestRatesRequest request = CommodityLatestRatesRequest.builder()
         .apiKey("apiKey")
         .updates(null)
+        .symbols(java.util.List.of("XAU"))
         .build();
 CommodityLatestRatesResponse response = client.commodityLatestRates(request);
 ```
@@ -6680,7 +6699,7 @@ CommodityLatestRatesResponse response = client.commodityLatestRates(request);
 <dl>
 <dd>
 
-**symbols:** `Optional&lt;List<String&gt;&gt;` — Comma separated list of desired commodities symbols (e.g. XAU,XAG,WTI,BRENT) Required _(optional)_
+**symbols:** `List&lt;String&gt;` — Comma separated list of desired commodities symbols (e.g. XAU,XAG,WTI,BRENT) _(required)_
     
 </dd>
 </dl>
@@ -6752,6 +6771,7 @@ ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 CommodityHistoricalRatesRequest request = CommodityHistoricalRatesRequest.builder()
         .apiKey("apiKey")
         .date("2024-01-01")
+        .symbols(java.util.List.of("XAU"))
         .build();
 CommodityHistoricalRatesResponse response = client.commodityHistoricalRates(request);
 ```
@@ -6767,7 +6787,7 @@ CommodityHistoricalRatesResponse response = client.commodityHistoricalRates(requ
 <dl>
 <dd>
 
-**symbols:** `Optional&lt;List<String&gt;&gt;` — Comma-separated list of commodity symbols _(optional)_
+**symbols:** `List&lt;String&gt;` — Comma-separated list of commodity symbols _(required)_
     
 </dd>
 </dl>
@@ -6832,6 +6852,7 @@ CommodityFluctuationRequest request = CommodityFluctuationRequest.builder()
         .apiKey("apiKey")
         .startDate("startDate")
         .endDate("endDate")
+        .symbols(java.util.List.of("XAU"))
         .build();
 CommodityFluctuationResponse response = client.commodityFluctuation(request);
 ```
@@ -6847,7 +6868,7 @@ CommodityFluctuationResponse response = client.commodityFluctuation(request);
 <dl>
 <dd>
 
-**symbols:** `Optional&lt;List<String&gt;&gt;` — Comma-separated list of commodity symbols _(optional)_
+**symbols:** `List&lt;String&gt;` — Comma-separated list of commodity symbols _(required)_
     
 </dd>
 </dl>
@@ -6920,6 +6941,7 @@ CommodityTimeSeriesRequest request = CommodityTimeSeriesRequest.builder()
         .apiKey("apiKey")
         .startDate("startDate")
         .endDate("endDate")
+        .symbols(java.util.List.of("XAU"))
         .build();
 CommodityTimeSeriesResponse response = client.commodityTimeSeries(request);
 ```
@@ -6935,7 +6957,7 @@ CommodityTimeSeriesResponse response = client.commodityTimeSeries(request);
 <dl>
 <dd>
 
-**symbols:** `Optional&lt;List<String&gt;&gt;` — Comma-separated list of commodity symbols _(optional)_
+**symbols:** `List&lt;String&gt;` — Comma-separated list of commodity symbols _(required)_
     
 </dd>
 </dl>
@@ -9751,6 +9773,7 @@ import com.apifreaks.sdk.types.UserAgentLookupResponse;
 ApifreaksApiClient client = ApifreaksApiClient.builder().build();
 UserAgentLookupRequest request = UserAgentLookupRequest.builder()
         .apiKey("apiKey")
+        .userAgent("Mozilla/5.0")
         .build();
 UserAgentLookupResponse response = client.userAgentLookup(request);
 ```
@@ -9775,6 +9798,14 @@ UserAgentLookupResponse response = client.userAgentLookup(request);
 <dd>
 
 **format:** `Optional&lt;UserAgentLookupRequestFormat&gt;` — Format of the response _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_agent:** `String` — The User-Agent string to parse, sent as the User-Agent header _(required)_
     
 </dd>
 </dl>

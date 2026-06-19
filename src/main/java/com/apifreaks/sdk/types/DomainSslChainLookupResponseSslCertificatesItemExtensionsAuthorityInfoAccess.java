@@ -15,37 +15,38 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
     builder = DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess.Builder.class
 )
 public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess {
-  private final List<String> issuers;
+  private final Optional<List<String>> issuers;
 
-  private final List<String> ocsp;
+  private final Optional<List<String>> ocsp;
 
   private final Map<String, Object> additionalProperties;
 
   private DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess(
-      List<String> issuers, List<String> ocsp, Map<String, Object> additionalProperties) {
+      Optional<List<String>> issuers, Optional<List<String>> ocsp,
+      Map<String, Object> additionalProperties) {
     this.issuers = issuers;
     this.ocsp = ocsp;
     this.additionalProperties = additionalProperties;
   }
 
   @JsonProperty("issuers")
-  public List<String> getIssuers() {
+  public Optional<List<String>> getIssuers() {
     return issuers;
   }
 
   @JsonProperty("ocsp")
-  public List<String> getOcsp() {
+  public Optional<List<String>> getOcsp() {
     return ocsp;
   }
 
@@ -83,9 +84,9 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsAuth
       ignoreUnknown = true
   )
   public static final class Builder {
-    private List<String> issuers = new ArrayList<>();
+    private Optional<List<String>> issuers = Optional.empty();
 
-    private List<String> ocsp = new ArrayList<>();
+    private Optional<List<String>> ocsp = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -104,23 +105,13 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsAuth
         value = "issuers",
         nulls = Nulls.SKIP
     )
+    public Builder issuers(Optional<List<String>> issuers) {
+      this.issuers = issuers;
+      return this;
+    }
+
     public Builder issuers(List<String> issuers) {
-      this.issuers.clear();
-      if (issuers != null) {
-        this.issuers.addAll(issuers);
-      }
-      return this;
-    }
-
-    public Builder addIssuers(String issuers) {
-      this.issuers.add(issuers);
-      return this;
-    }
-
-    public Builder addAllIssuers(List<String> issuers) {
-      if (issuers != null) {
-        this.issuers.addAll(issuers);
-      }
+      this.issuers = Optional.ofNullable(issuers);
       return this;
     }
 
@@ -128,23 +119,13 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsAuth
         value = "ocsp",
         nulls = Nulls.SKIP
     )
+    public Builder ocsp(Optional<List<String>> ocsp) {
+      this.ocsp = ocsp;
+      return this;
+    }
+
     public Builder ocsp(List<String> ocsp) {
-      this.ocsp.clear();
-      if (ocsp != null) {
-        this.ocsp.addAll(ocsp);
-      }
-      return this;
-    }
-
-    public Builder addOcsp(String ocsp) {
-      this.ocsp.add(ocsp);
-      return this;
-    }
-
-    public Builder addAllOcsp(List<String> ocsp) {
-      if (ocsp != null) {
-        this.ocsp.addAll(ocsp);
-      }
+      this.ocsp = Optional.ofNullable(ocsp);
       return this;
     }
 

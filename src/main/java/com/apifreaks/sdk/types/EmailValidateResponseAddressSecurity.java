@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
     builder = EmailValidateResponseAddressSecurity.Builder.class
 )
 public final class EmailValidateResponseAddressSecurity {
-  private final double threatScore;
+  private final int threatScore;
 
   private final boolean isTor;
 
@@ -48,7 +48,7 @@ public final class EmailValidateResponseAddressSecurity {
 
   private final Map<String, Object> additionalProperties;
 
-  private EmailValidateResponseAddressSecurity(double threatScore, boolean isTor, boolean isProxy,
+  private EmailValidateResponseAddressSecurity(int threatScore, boolean isTor, boolean isProxy,
       String proxyType, String proxyProvider, boolean isAnonymous, boolean isKnownAttacker,
       boolean isSpam, boolean isBot, boolean isCloudProvider, String cloudProvider,
       Map<String, Object> additionalProperties) {
@@ -67,7 +67,7 @@ public final class EmailValidateResponseAddressSecurity {
   }
 
   @JsonProperty("threat_score")
-  public double getThreatScore() {
+  public int getThreatScore() {
     return threatScore;
   }
 
@@ -151,7 +151,7 @@ public final class EmailValidateResponseAddressSecurity {
   }
 
   public interface ThreatScoreStage {
-    IsTorStage threatScore(double threatScore);
+    IsTorStage threatScore(int threatScore);
 
     Builder from(EmailValidateResponseAddressSecurity other);
   }
@@ -208,7 +208,7 @@ public final class EmailValidateResponseAddressSecurity {
       ignoreUnknown = true
   )
   public static final class Builder implements ThreatScoreStage, IsTorStage, IsProxyStage, ProxyTypeStage, ProxyProviderStage, IsAnonymousStage, IsKnownAttackerStage, IsSpamStage, IsBotStage, IsCloudProviderStage, CloudProviderStage, _FinalStage {
-    private double threatScore;
+    private int threatScore;
 
     private boolean isTor;
 
@@ -254,7 +254,7 @@ public final class EmailValidateResponseAddressSecurity {
 
     @java.lang.Override
     @JsonSetter("threat_score")
-    public IsTorStage threatScore(double threatScore) {
+    public IsTorStage threatScore(int threatScore) {
       this.threatScore = threatScore;
       return this;
     }

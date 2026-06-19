@@ -1224,9 +1224,7 @@ public class RawApifreaksApiClient {
                               if (request.getIpAddress().isPresent()) {
                                 QueryStringMapper.addQueryParameter(httpUrl, "ipAddress", request.getIpAddress().get(), false);
                               }
-                              if (request.getType().isPresent()) {
-                                QueryStringMapper.addQueryParameter(httpUrl, "type", request.getType().get(), true);
-                              }
+                              QueryStringMapper.addQueryParameter(httpUrl, "type", request.getType(), true);
                               if (requestOptions != null) {
                                 requestOptions.getQueryParameters().forEach((_key, _value) -> {
                                   httpUrl.addQueryParameter(_key, _value);
@@ -1296,9 +1294,7 @@ public class RawApifreaksApiClient {
                                 if (request.getFormat().isPresent()) {
                                   QueryStringMapper.addQueryParameter(httpUrl, "format", request.getFormat().get(), false);
                                 }
-                                if (request.getType().isPresent()) {
-                                  QueryStringMapper.addQueryParameter(httpUrl, "type", request.getType().get(), true);
-                                }
+                                QueryStringMapper.addQueryParameter(httpUrl, "type", request.getType(), true);
                                 if (requestOptions != null) {
                                   requestOptions.getQueryParameters().forEach((_key, _value) -> {
                                     httpUrl.addQueryParameter(_key, _value);
@@ -1380,9 +1376,7 @@ public class RawApifreaksApiClient {
                                   if (request.getPage().isPresent()) {
                                     QueryStringMapper.addQueryParameter(httpUrl, "page", request.getPage().get(), false);
                                   }
-                                  if (request.getType().isPresent()) {
-                                    QueryStringMapper.addQueryParameter(httpUrl, "type", request.getType().get(), true);
-                                  }
+                                  QueryStringMapper.addQueryParameter(httpUrl, "type", request.getType(), true);
                                   if (requestOptions != null) {
                                     requestOptions.getQueryParameters().forEach((_key, _value) -> {
                                       httpUrl.addQueryParameter(_key, _value);
@@ -1664,6 +1658,7 @@ public class RawApifreaksApiClient {
                                               case 403:throw new ForbiddenError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                               case 404:throw new NotFoundError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                               case 406:throw new NotAcceptableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
+                                              case 408:throw new RequestTimeoutError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                               case 413:throw new ContentTooLargeError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                               case 429:throw new TooManyRequestsError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                               case 500:throw new InternalServerError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
@@ -1739,6 +1734,7 @@ public class RawApifreaksApiClient {
                                                 case 403:throw new ForbiddenError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                 case 404:throw new NotFoundError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                 case 406:throw new NotAcceptableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
+                                                case 408:throw new RequestTimeoutError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                 case 413:throw new ContentTooLargeError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                 case 429:throw new TooManyRequestsError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                 case 500:throw new InternalServerError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
@@ -1813,7 +1809,9 @@ public class RawApifreaksApiClient {
                                                   case 402:throw new PaymentRequiredError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                   case 403:throw new ForbiddenError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                   case 404:throw new NotFoundError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
+                                                  case 405:throw new MethodNotAllowedError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, MethodNotAllowedErrorBody.class), response);
                                                   case 406:throw new NotAcceptableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
+                                                  case 408:throw new RequestTimeoutError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                   case 413:throw new ContentTooLargeError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                   case 429:throw new TooManyRequestsError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                   case 500:throw new InternalServerError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
@@ -1888,7 +1886,9 @@ public class RawApifreaksApiClient {
                                                     case 402:throw new PaymentRequiredError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                     case 403:throw new ForbiddenError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                     case 404:throw new NotFoundError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
+                                                    case 405:throw new MethodNotAllowedError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, MethodNotAllowedErrorBody.class), response);
                                                     case 406:throw new NotAcceptableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
+                                                    case 408:throw new RequestTimeoutError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                     case 413:throw new ContentTooLargeError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                     case 429:throw new TooManyRequestsError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                     case 500:throw new InternalServerError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
@@ -2185,6 +2185,7 @@ public class RawApifreaksApiClient {
                                                             case 403:throw new ForbiddenError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                             case 404:throw new NotFoundError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                             case 406:throw new NotAcceptableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
+                                                            case 408:throw new RequestTimeoutError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                             case 413:throw new ContentTooLargeError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                             case 429:throw new TooManyRequestsError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                             case 500:throw new InternalServerError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
@@ -2230,6 +2231,9 @@ public class RawApifreaksApiClient {
                                                         if (request.getCount().isPresent()) {
                                                           QueryStringMapper.addQueryParameter(httpUrl, "count", request.getCount().get(), false);
                                                         }
+                                                        if (request.getSug().isPresent()) {
+                                                          QueryStringMapper.addQueryParameter(httpUrl, "sug", request.getSug().get(), false);
+                                                        }
                                                         if (requestOptions != null) {
                                                           requestOptions.getQueryParameters().forEach((_key, _value) -> {
                                                             httpUrl.addQueryParameter(_key, _value);
@@ -2259,6 +2263,7 @@ public class RawApifreaksApiClient {
                                                               case 403:throw new ForbiddenError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                               case 404:throw new NotFoundError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                               case 406:throw new NotAcceptableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
+                                                              case 408:throw new RequestTimeoutError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                               case 413:throw new ContentTooLargeError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                               case 429:throw new TooManyRequestsError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                               case 500:throw new InternalServerError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
@@ -2339,6 +2344,7 @@ public class RawApifreaksApiClient {
                                                                 case 403:throw new ForbiddenError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                                 case 404:throw new NotFoundError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                                 case 406:throw new NotAcceptableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
+                                                                case 408:throw new RequestTimeoutError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                                 case 413:throw new ContentTooLargeError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                                 case 429:throw new TooManyRequestsError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                                 case 500:throw new InternalServerError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
@@ -4039,7 +4045,7 @@ public class RawApifreaksApiClient {
                                                                                          * This API uploads multiple PDF files to the API Freaks server and generates their unique file IDs.
                                                                                          */
                                                                                         public ApifreaksApiHttpResponse<PdfUploadResourcesResponse> pdfUploadResources(
-                                                                                            Optional<File> file,
+                                                                                            File file,
                                                                                             PdfUploadResourcesRequest request) {
                                                                                           return pdfUploadResources(file,request,null);
                                                                                         }
@@ -4048,7 +4054,7 @@ public class RawApifreaksApiClient {
                                                                                          * This API uploads multiple PDF files to the API Freaks server and generates their unique file IDs.
                                                                                          */
                                                                                         public ApifreaksApiHttpResponse<PdfUploadResourcesResponse> pdfUploadResources(
-                                                                                            Optional<File> file,
+                                                                                            File file,
                                                                                             PdfUploadResourcesRequest request,
                                                                                             RequestOptions requestOptions) {
                                                                                           HttpUrl.Builder httpUrl = HttpUrl.parse(this.clientOptions.environment().getUrl()).newBuilder()
@@ -4064,11 +4070,9 @@ public class RawApifreaksApiClient {
                                                                                             }
                                                                                             MultipartBody.Builder multipartBodyBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
                                                                                             try {
-                                                                                              if (file.isPresent()) {
-                                                                                                String fileMimeType = Files.probeContentType(file.get().toPath());
-                                                                                                MediaType fileMimeTypeMediaType = fileMimeType != null ? MediaType.parse(fileMimeType) : null;
-                                                                                                multipartBodyBuilder.addFormDataPart("file", file.get().getName(), RequestBody.create(file.get(), fileMimeTypeMediaType));
-                                                                                              }
+                                                                                              String fileMimeType = Files.probeContentType(file.toPath());
+                                                                                              MediaType fileMimeTypeMediaType = fileMimeType != null ? MediaType.parse(fileMimeType) : null;
+                                                                                              multipartBodyBuilder.addFormDataPart("file", file.getName(), RequestBody.create(file, fileMimeTypeMediaType));
                                                                                             }
                                                                                             catch(Exception e) {
                                                                                               throw new RuntimeException(e);
@@ -5633,9 +5637,7 @@ public class RawApifreaksApiClient {
                                                                                                                                   if (request.getQuote().isPresent()) {
                                                                                                                                     QueryStringMapper.addQueryParameter(httpUrl, "quote", request.getQuote().get(), false);
                                                                                                                                   }
-                                                                                                                                  if (request.getSymbols().isPresent()) {
-                                                                                                                                    QueryStringMapper.addQueryParameter(httpUrl, "symbols", request.getSymbols().get(), true);
-                                                                                                                                  }
+                                                                                                                                  QueryStringMapper.addQueryParameter(httpUrl, "symbols", request.getSymbols(), true);
                                                                                                                                   if (requestOptions != null) {
                                                                                                                                     requestOptions.getQueryParameters().forEach((_key, _value) -> {
                                                                                                                                       httpUrl.addQueryParameter(_key, _value);
@@ -5704,9 +5706,7 @@ public class RawApifreaksApiClient {
                                                                                                                                       QueryStringMapper.addQueryParameter(httpUrl, "format", request.getFormat().get(), false);
                                                                                                                                     }
                                                                                                                                     QueryStringMapper.addQueryParameter(httpUrl, "date", request.getDate(), false);
-                                                                                                                                    if (request.getSymbols().isPresent()) {
-                                                                                                                                      QueryStringMapper.addQueryParameter(httpUrl, "symbols", request.getSymbols().get(), true);
-                                                                                                                                    }
+                                                                                                                                    QueryStringMapper.addQueryParameter(httpUrl, "symbols", request.getSymbols(), true);
                                                                                                                                     if (requestOptions != null) {
                                                                                                                                       requestOptions.getQueryParameters().forEach((_key, _value) -> {
                                                                                                                                         httpUrl.addQueryParameter(_key, _value);
@@ -5776,9 +5776,7 @@ public class RawApifreaksApiClient {
                                                                                                                                       }
                                                                                                                                       QueryStringMapper.addQueryParameter(httpUrl, "startDate", request.getStartDate(), false);
                                                                                                                                       QueryStringMapper.addQueryParameter(httpUrl, "endDate", request.getEndDate(), false);
-                                                                                                                                      if (request.getSymbols().isPresent()) {
-                                                                                                                                        QueryStringMapper.addQueryParameter(httpUrl, "symbols", request.getSymbols().get(), true);
-                                                                                                                                      }
+                                                                                                                                      QueryStringMapper.addQueryParameter(httpUrl, "symbols", request.getSymbols(), true);
                                                                                                                                       if (requestOptions != null) {
                                                                                                                                         requestOptions.getQueryParameters().forEach((_key, _value) -> {
                                                                                                                                           httpUrl.addQueryParameter(_key, _value);
@@ -5848,9 +5846,7 @@ public class RawApifreaksApiClient {
                                                                                                                                         }
                                                                                                                                         QueryStringMapper.addQueryParameter(httpUrl, "startDate", request.getStartDate(), false);
                                                                                                                                         QueryStringMapper.addQueryParameter(httpUrl, "endDate", request.getEndDate(), false);
-                                                                                                                                        if (request.getSymbols().isPresent()) {
-                                                                                                                                          QueryStringMapper.addQueryParameter(httpUrl, "symbols", request.getSymbols().get(), true);
-                                                                                                                                        }
+                                                                                                                                        QueryStringMapper.addQueryParameter(httpUrl, "symbols", request.getSymbols(), true);
                                                                                                                                         if (requestOptions != null) {
                                                                                                                                           requestOptions.getQueryParameters().forEach((_key, _value) -> {
                                                                                                                                             httpUrl.addQueryParameter(_key, _value);
@@ -8645,7 +8641,8 @@ public class RawApifreaksApiClient {
                                                                                                                                                                                                                     .url(httpUrl.build())
                                                                                                                                                                                                                     .method("GET", null)
                                                                                                                                                                                                                     .headers(Headers.of(clientOptions.headers(requestOptions)))
-                                                                                                                                                                                                                    .addHeader("Accept", "application/json");
+                                                                                                                                                                                                                    .addHeader("Accept", "application/json")
+                                                                                                                                                                                                                    .addHeader("User-Agent", request.getUserAgent());
                                                                                                                                                                                                                   Request okhttpRequest = _requestBuilder.build();
                                                                                                                                                                                                                   OkHttpClient client = clientOptions.httpClient();
                                                                                                                                                                                                                   if (requestOptions != null && requestOptions.getTimeout().isPresent()) {

@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
@@ -37,38 +36,39 @@ public final class AstronomyLookupResponseLocation {
 
   private final Optional<String> countryCode3;
 
-  private final String countryName;
+  private final Optional<String> countryName;
 
   private final Optional<String> countryNameOfficial;
 
   private final Optional<Boolean> isEu;
 
-  private final String stateProv;
+  private final Optional<String> stateProv;
 
   private final Optional<String> stateCode;
 
   private final Optional<String> district;
 
-  private final String city;
+  private final Optional<String> city;
 
   private final Optional<String> zipcode;
 
-  private final String latitude;
+  private final Optional<String> latitude;
 
-  private final String longitude;
+  private final Optional<String> longitude;
 
-  private final String locality;
+  private final Optional<String> locality;
 
-  private final String elevation;
+  private final Optional<String> elevation;
 
   private final Map<String, Object> additionalProperties;
 
   private AstronomyLookupResponseLocation(Optional<String> locationString,
       Optional<String> continentCode, Optional<String> continentName, Optional<String> countryCode2,
-      Optional<String> countryCode3, String countryName, Optional<String> countryNameOfficial,
-      Optional<Boolean> isEu, String stateProv, Optional<String> stateCode,
-      Optional<String> district, String city, Optional<String> zipcode, String latitude,
-      String longitude, String locality, String elevation,
+      Optional<String> countryCode3, Optional<String> countryName,
+      Optional<String> countryNameOfficial, Optional<Boolean> isEu, Optional<String> stateProv,
+      Optional<String> stateCode, Optional<String> district, Optional<String> city,
+      Optional<String> zipcode, Optional<String> latitude, Optional<String> longitude,
+      Optional<String> locality, Optional<String> elevation,
       Map<String, Object> additionalProperties) {
     this.locationString = locationString;
     this.continentCode = continentCode;
@@ -119,7 +119,7 @@ public final class AstronomyLookupResponseLocation {
   }
 
   @JsonProperty("country_name")
-  public String getCountryName() {
+  public Optional<String> getCountryName() {
     return countryName;
   }
 
@@ -134,7 +134,7 @@ public final class AstronomyLookupResponseLocation {
   }
 
   @JsonProperty("state_prov")
-  public String getStateProv() {
+  public Optional<String> getStateProv() {
     return stateProv;
   }
 
@@ -149,7 +149,7 @@ public final class AstronomyLookupResponseLocation {
   }
 
   @JsonProperty("city")
-  public String getCity() {
+  public Optional<String> getCity() {
     return city;
   }
 
@@ -159,22 +159,22 @@ public final class AstronomyLookupResponseLocation {
   }
 
   @JsonProperty("latitude")
-  public String getLatitude() {
+  public Optional<String> getLatitude() {
     return latitude;
   }
 
   @JsonProperty("longitude")
-  public String getLongitude() {
+  public Optional<String> getLongitude() {
     return longitude;
   }
 
   @JsonProperty("locality")
-  public String getLocality() {
+  public Optional<String> getLocality() {
     return locality;
   }
 
   @JsonProperty("elevation")
-  public String getElevation() {
+  public Optional<String> getElevation() {
     return elevation;
   }
 
@@ -203,38 +203,8 @@ public final class AstronomyLookupResponseLocation {
     return ObjectMappers.stringify(this);
   }
 
-  public static CountryNameStage builder() {
+  public static Builder builder() {
     return new Builder();
-  }
-
-  public interface CountryNameStage {
-    StateProvStage countryName(@NotNull String countryName);
-
-    Builder from(AstronomyLookupResponseLocation other);
-  }
-
-  public interface StateProvStage {
-    CityStage stateProv(@NotNull String stateProv);
-  }
-
-  public interface CityStage {
-    LatitudeStage city(@NotNull String city);
-  }
-
-  public interface LatitudeStage {
-    LongitudeStage latitude(@NotNull String latitude);
-  }
-
-  public interface LongitudeStage {
-    LocalityStage longitude(@NotNull String longitude);
-  }
-
-  public interface LocalityStage {
-    ElevationStage locality(@NotNull String locality);
-  }
-
-  public interface ElevationStage {
-    _FinalStage elevation(@NotNull String elevation);
   }
 
   public interface _FinalStage {
@@ -267,6 +237,10 @@ public final class AstronomyLookupResponseLocation {
 
     _FinalStage countryCode3(String countryCode3);
 
+    _FinalStage countryName(Optional<String> countryName);
+
+    _FinalStage countryName(String countryName);
+
     _FinalStage countryNameOfficial(Optional<String> countryNameOfficial);
 
     _FinalStage countryNameOfficial(String countryNameOfficial);
@@ -274,6 +248,10 @@ public final class AstronomyLookupResponseLocation {
     _FinalStage isEu(Optional<Boolean> isEu);
 
     _FinalStage isEu(Boolean isEu);
+
+    _FinalStage stateProv(Optional<String> stateProv);
+
+    _FinalStage stateProv(String stateProv);
 
     _FinalStage stateCode(Optional<String> stateCode);
 
@@ -283,38 +261,56 @@ public final class AstronomyLookupResponseLocation {
 
     _FinalStage district(String district);
 
+    _FinalStage city(Optional<String> city);
+
+    _FinalStage city(String city);
+
     _FinalStage zipcode(Optional<String> zipcode);
 
     _FinalStage zipcode(String zipcode);
+
+    _FinalStage latitude(Optional<String> latitude);
+
+    _FinalStage latitude(String latitude);
+
+    _FinalStage longitude(Optional<String> longitude);
+
+    _FinalStage longitude(String longitude);
+
+    _FinalStage locality(Optional<String> locality);
+
+    _FinalStage locality(String locality);
+
+    _FinalStage elevation(Optional<String> elevation);
+
+    _FinalStage elevation(String elevation);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements CountryNameStage, StateProvStage, CityStage, LatitudeStage, LongitudeStage, LocalityStage, ElevationStage, _FinalStage {
-    private String countryName;
+  public static final class Builder implements _FinalStage {
+    private Optional<String> elevation = Optional.empty();
 
-    private String stateProv;
+    private Optional<String> locality = Optional.empty();
 
-    private String city;
+    private Optional<String> longitude = Optional.empty();
 
-    private String latitude;
+    private Optional<String> latitude = Optional.empty();
 
-    private String longitude;
-
-    private String locality;
-
-    private String elevation;
-
-    private Optional<String> zipcode = Optional.empty();
+    private Optional<String> city = Optional.empty();
 
     private Optional<String> district = Optional.empty();
 
     private Optional<String> stateCode = Optional.empty();
 
+    private Optional<String> stateProv = Optional.empty();
+
     private Optional<Boolean> isEu = Optional.empty();
 
     private Optional<String> countryNameOfficial = Optional.empty();
+
+    private Optional<String> countryName = Optional.empty();
 
     private Optional<String> countryCode3 = Optional.empty();
 
@@ -324,6 +320,8 @@ public final class AstronomyLookupResponseLocation {
 
     private Optional<String> continentCode = Optional.empty();
 
+    private Optional<String> zipcode = Optional.empty();
+
     private Optional<String> locationString = Optional.empty();
 
     @JsonAnySetter
@@ -332,7 +330,6 @@ public final class AstronomyLookupResponseLocation {
     private Builder() {
     }
 
-    @java.lang.Override
     public Builder from(AstronomyLookupResponseLocation other) {
       locationString(other.getLocationString());
       continentCode(other.getContinentCode());
@@ -355,51 +352,98 @@ public final class AstronomyLookupResponseLocation {
     }
 
     @java.lang.Override
-    @JsonSetter("country_name")
-    public StateProvStage countryName(@NotNull String countryName) {
-      this.countryName = Objects.requireNonNull(countryName, "countryName must not be null");
+    public _FinalStage elevation(String elevation) {
+      this.elevation = Optional.ofNullable(elevation);
       return this;
     }
 
     @java.lang.Override
-    @JsonSetter("state_prov")
-    public CityStage stateProv(@NotNull String stateProv) {
-      this.stateProv = Objects.requireNonNull(stateProv, "stateProv must not be null");
+    @JsonSetter(
+        value = "elevation",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage elevation(Optional<String> elevation) {
+      this.elevation = elevation;
       return this;
     }
 
     @java.lang.Override
-    @JsonSetter("city")
-    public LatitudeStage city(@NotNull String city) {
-      this.city = Objects.requireNonNull(city, "city must not be null");
+    public _FinalStage locality(String locality) {
+      this.locality = Optional.ofNullable(locality);
       return this;
     }
 
     @java.lang.Override
-    @JsonSetter("latitude")
-    public LongitudeStage latitude(@NotNull String latitude) {
-      this.latitude = Objects.requireNonNull(latitude, "latitude must not be null");
+    @JsonSetter(
+        value = "locality",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage locality(Optional<String> locality) {
+      this.locality = locality;
       return this;
     }
 
     @java.lang.Override
-    @JsonSetter("longitude")
-    public LocalityStage longitude(@NotNull String longitude) {
-      this.longitude = Objects.requireNonNull(longitude, "longitude must not be null");
+    public _FinalStage longitude(String longitude) {
+      this.longitude = Optional.ofNullable(longitude);
       return this;
     }
 
     @java.lang.Override
-    @JsonSetter("locality")
-    public ElevationStage locality(@NotNull String locality) {
-      this.locality = Objects.requireNonNull(locality, "locality must not be null");
+    @JsonSetter(
+        value = "longitude",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage longitude(Optional<String> longitude) {
+      this.longitude = longitude;
       return this;
     }
 
     @java.lang.Override
-    @JsonSetter("elevation")
-    public _FinalStage elevation(@NotNull String elevation) {
-      this.elevation = Objects.requireNonNull(elevation, "elevation must not be null");
+    public _FinalStage latitude(String latitude) {
+      this.latitude = Optional.ofNullable(latitude);
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter(
+        value = "latitude",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage latitude(Optional<String> latitude) {
+      this.latitude = latitude;
+      return this;
+    }
+
+    @java.lang.Override
+    public _FinalStage city(String city) {
+      this.city = Optional.ofNullable(city);
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter(
+        value = "city",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage city(Optional<String> city) {
+      this.city = city;
+      return this;
+    }
+
+    @java.lang.Override
+    public _FinalStage stateProv(String stateProv) {
+      this.stateProv = Optional.ofNullable(stateProv);
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter(
+        value = "state_prov",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage stateProv(Optional<String> stateProv) {
+      this.stateProv = stateProv;
       return this;
     }
 
@@ -480,6 +524,22 @@ public final class AstronomyLookupResponseLocation {
     )
     public _FinalStage countryNameOfficial(Optional<String> countryNameOfficial) {
       this.countryNameOfficial = countryNameOfficial;
+      return this;
+    }
+
+    @java.lang.Override
+    public _FinalStage countryName(String countryName) {
+      this.countryName = Optional.ofNullable(countryName);
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter(
+        value = "country_name",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage countryName(Optional<String> countryName) {
+      this.countryName = countryName;
       return this;
     }
 

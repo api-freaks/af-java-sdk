@@ -951,7 +951,7 @@ public class AsyncApifreaksApiClient {
   /**
    * This API uploads multiple PDF files to the API Freaks server and generates their unique file IDs.
    */
-  public CompletableFuture<PdfUploadResourcesResponse> pdfUploadResources(Optional<File> file,
+  public CompletableFuture<PdfUploadResourcesResponse> pdfUploadResources(File file,
       PdfUploadResourcesRequest request) {
     return this.rawClient.pdfUploadResources(file, request).thenApply(response -> response.body());
   }
@@ -959,7 +959,7 @@ public class AsyncApifreaksApiClient {
   /**
    * This API uploads multiple PDF files to the API Freaks server and generates their unique file IDs.
    */
-  public CompletableFuture<PdfUploadResourcesResponse> pdfUploadResources(Optional<File> file,
+  public CompletableFuture<PdfUploadResourcesResponse> pdfUploadResources(File file,
       PdfUploadResourcesRequest request, RequestOptions requestOptions) {
     return this.rawClient.pdfUploadResources(file, request, requestOptions).thenApply(response -> response.body());
   }

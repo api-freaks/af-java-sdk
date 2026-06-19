@@ -15,7 +15,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +28,7 @@ import com.apifreaks.sdk.types.CommodityTimeSeriesRequestFormat;
     builder = CommodityTimeSeriesRequest.Builder.class
 )
 public final class CommodityTimeSeriesRequest {
-  private final Optional<List<String>> symbols;
+  private final List<String> symbols;
 
   private final String apiKey;
 
@@ -41,7 +40,7 @@ public final class CommodityTimeSeriesRequest {
 
   private final Map<String, Object> additionalProperties;
 
-  private CommodityTimeSeriesRequest(Optional<List<String>> symbols, String apiKey,
+  private CommodityTimeSeriesRequest(List<String> symbols, String apiKey,
       Optional<CommodityTimeSeriesRequestFormat> format, String startDate, String endDate,
       Map<String, Object> additionalProperties) {
     this.symbols = symbols;
@@ -56,7 +55,7 @@ public final class CommodityTimeSeriesRequest {
    * @return Comma-separated list of commodity symbols
    */
   @JsonProperty("symbols")
-  public Optional<List<String>> getSymbols() {
+  public List<String> getSymbols() {
     return symbols;
   }
 
@@ -141,7 +140,14 @@ public final class CommodityTimeSeriesRequest {
     /**
      * <p>End date (YYYY-MM-DD)</p>
      */
-    _FinalStage endDate(@NotNull String endDate);
+    SymbolsStage endDate(@NotNull String endDate);
+  }
+
+  public interface SymbolsStage {
+    /**
+     * <p>Comma-separated list of commodity symbols</p>
+     */
+    _FinalStage symbols(@NotNull List<String> symbols);
   }
 
   public interface _FinalStage {
@@ -150,15 +156,6 @@ public final class CommodityTimeSeriesRequest {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
-
-    /**
-     * <p>Comma-separated list of commodity symbols</p>
-     */
-    _FinalStage symbols(Optional<List<String>> symbols);
-
-    _FinalStage symbols(List<String> symbols);
-
-    _FinalStage symbols(String symbols);
 
     /**
      * <p>Format of the response.</p>
@@ -171,16 +168,16 @@ public final class CommodityTimeSeriesRequest {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements ApiKeyStage, StartDateStage, EndDateStage, _FinalStage {
+  public static final class Builder implements ApiKeyStage, StartDateStage, EndDateStage, SymbolsStage, _FinalStage {
     private String apiKey;
 
     private String startDate;
 
     private String endDate;
 
-    private Optional<CommodityTimeSeriesRequestFormat> format = Optional.empty();
+    private List<String> symbols;
 
-    private Optional<List<String>> symbols = Optional.empty();
+    private Optional<CommodityTimeSeriesRequestFormat> format = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -229,7 +226,7 @@ public final class CommodityTimeSeriesRequest {
      */
     @java.lang.Override
     @JsonSetter("endDate")
-    public _FinalStage endDate(@NotNull String endDate) {
+    public SymbolsStage endDate(@NotNull String endDate) {
       this.endDate = Objects.requireNonNull(endDate, "endDate must not be null");
       return this;
     }
@@ -257,32 +254,14 @@ public final class CommodityTimeSeriesRequest {
       return this;
     }
 
-    @java.lang.Override
-    public _FinalStage symbols(String symbols) {
-      this.symbols = Optional.of(Collections.singletonList(symbols));
-      return this;
-    }
-
     /**
      * <p>Comma-separated list of commodity symbols</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage symbols(List<String> symbols) {
-      this.symbols = Optional.ofNullable(symbols);
-      return this;
-    }
-
-    /**
-     * <p>Comma-separated list of commodity symbols</p>
-     */
-    @java.lang.Override
-    @JsonSetter(
-        value = "symbols",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage symbols(Optional<List<String>> symbols) {
-      this.symbols = symbols;
+    @JsonSetter("symbols")
+    public _FinalStage symbols(@NotNull List<String> symbols) {
+      this.symbols = Objects.requireNonNull(symbols, "symbols must not be null");
       return this;
     }
 

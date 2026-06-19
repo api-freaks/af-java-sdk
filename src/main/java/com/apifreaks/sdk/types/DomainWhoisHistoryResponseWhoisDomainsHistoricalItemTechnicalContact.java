@@ -112,7 +112,7 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemTechnical
     return countryCode;
   }
 
-  @JsonProperty("emailaddress")
+  @JsonProperty("email_address")
   public Optional<String> getEmailaddress() {
     return emailaddress;
   }
@@ -127,7 +127,7 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemTechnical
     return fax;
   }
 
-  @JsonProperty("mailingaddress")
+  @JsonProperty("mailing_address")
   public Optional<String> getMailingaddress() {
     return mailingaddress;
   }
@@ -326,7 +326,7 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemTechnical
     }
 
     @JsonSetter(
-        value = "emailaddress",
+        value = "email_address",
         nulls = Nulls.SKIP
     )
     public Builder emailaddress(Optional<String> emailaddress) {
@@ -368,7 +368,7 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemTechnical
     }
 
     @JsonSetter(
-        value = "mailingaddress",
+        value = "mailing_address",
         nulls = Nulls.SKIP
     )
     public Builder mailingaddress(Optional<String> mailingaddress) {

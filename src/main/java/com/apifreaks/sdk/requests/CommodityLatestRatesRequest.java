@@ -15,7 +15,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +29,7 @@ import com.apifreaks.sdk.types.CommodityLatestRatesRequestUpdates;
     builder = CommodityLatestRatesRequest.Builder.class
 )
 public final class CommodityLatestRatesRequest {
-  private final Optional<List<String>> symbols;
+  private final List<String> symbols;
 
   private final String apiKey;
 
@@ -42,7 +41,7 @@ public final class CommodityLatestRatesRequest {
 
   private final Map<String, Object> additionalProperties;
 
-  private CommodityLatestRatesRequest(Optional<List<String>> symbols, String apiKey,
+  private CommodityLatestRatesRequest(List<String> symbols, String apiKey,
       Optional<CommodityLatestRatesRequestFormat> format,
       CommodityLatestRatesRequestUpdates updates, Optional<String> quote,
       Map<String, Object> additionalProperties) {
@@ -58,7 +57,7 @@ public final class CommodityLatestRatesRequest {
    * @return Comma separated list of desired commodities symbols <em>(e.g. XAU,XAG,WTI,BRENT)</em> <strong>Required</strong>
    */
   @JsonProperty("symbols")
-  public Optional<List<String>> getSymbols() {
+  public List<String> getSymbols() {
     return symbols;
   }
 
@@ -136,7 +135,14 @@ public final class CommodityLatestRatesRequest {
     /**
      * <p>Exchange rates update period. Possible values are: (1) <code>10m</code> - 10 minute update (2) <code>1m</code> - 1 minute update <strong>Required</strong></p>
      */
-    _FinalStage updates(@NotNull CommodityLatestRatesRequestUpdates updates);
+    SymbolsStage updates(@NotNull CommodityLatestRatesRequestUpdates updates);
+  }
+
+  public interface SymbolsStage {
+    /**
+     * <p>Comma separated list of desired commodities symbols <em>(e.g. XAU,XAG,WTI,BRENT)</em> <strong>Required</strong></p>
+     */
+    _FinalStage symbols(@NotNull List<String> symbols);
   }
 
   public interface _FinalStage {
@@ -145,15 +151,6 @@ public final class CommodityLatestRatesRequest {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
-
-    /**
-     * <p>Comma separated list of desired commodities symbols <em>(e.g. XAU,XAG,WTI,BRENT)</em> <strong>Required</strong></p>
-     */
-    _FinalStage symbols(Optional<List<String>> symbols);
-
-    _FinalStage symbols(List<String> symbols);
-
-    _FinalStage symbols(String symbols);
 
     /**
      * <p>Format of the Response</p>
@@ -173,16 +170,16 @@ public final class CommodityLatestRatesRequest {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements ApiKeyStage, UpdatesStage, _FinalStage {
+  public static final class Builder implements ApiKeyStage, UpdatesStage, SymbolsStage, _FinalStage {
     private String apiKey;
 
     private CommodityLatestRatesRequestUpdates updates;
 
+    private List<String> symbols;
+
     private Optional<String> quote = Optional.empty();
 
     private Optional<CommodityLatestRatesRequestFormat> format = Optional.empty();
-
-    private Optional<List<String>> symbols = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -219,7 +216,7 @@ public final class CommodityLatestRatesRequest {
      */
     @java.lang.Override
     @JsonSetter("updates")
-    public _FinalStage updates(@NotNull CommodityLatestRatesRequestUpdates updates) {
+    public SymbolsStage updates(@NotNull CommodityLatestRatesRequestUpdates updates) {
       this.updates = Objects.requireNonNull(updates, "updates must not be null");
       return this;
     }
@@ -270,32 +267,14 @@ public final class CommodityLatestRatesRequest {
       return this;
     }
 
-    @java.lang.Override
-    public _FinalStage symbols(String symbols) {
-      this.symbols = Optional.of(Collections.singletonList(symbols));
-      return this;
-    }
-
     /**
      * <p>Comma separated list of desired commodities symbols <em>(e.g. XAU,XAG,WTI,BRENT)</em> <strong>Required</strong></p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage symbols(List<String> symbols) {
-      this.symbols = Optional.ofNullable(symbols);
-      return this;
-    }
-
-    /**
-     * <p>Comma separated list of desired commodities symbols <em>(e.g. XAU,XAG,WTI,BRENT)</em> <strong>Required</strong></p>
-     */
-    @java.lang.Override
-    @JsonSetter(
-        value = "symbols",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage symbols(Optional<List<String>> symbols) {
-      this.symbols = symbols;
+    @JsonSetter("symbols")
+    public _FinalStage symbols(@NotNull List<String> symbols) {
+      this.symbols = Objects.requireNonNull(symbols, "symbols must not be null");
       return this;
     }
 

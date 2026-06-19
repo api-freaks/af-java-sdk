@@ -16,7 +16,6 @@ import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Integer;
 import java.lang.Object;
 import java.lang.String;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +29,7 @@ import com.apifreaks.sdk.types.DomainDnsHistoryRequestFormat;
     builder = DomainDnsHistoryRequest.Builder.class
 )
 public final class DomainDnsHistoryRequest {
-  private final Optional<List<String>> type;
+  private final List<String> type;
 
   private final String apiKey;
 
@@ -42,7 +41,7 @@ public final class DomainDnsHistoryRequest {
 
   private final Map<String, Object> additionalProperties;
 
-  private DomainDnsHistoryRequest(Optional<List<String>> type, String apiKey,
+  private DomainDnsHistoryRequest(List<String> type, String apiKey,
       Optional<DomainDnsHistoryRequestFormat> format, String hostName, Optional<Integer> page,
       Map<String, Object> additionalProperties) {
     this.type = type;
@@ -58,7 +57,7 @@ public final class DomainDnsHistoryRequest {
    * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all
    */
   @JsonProperty("type")
-  public Optional<List<String>> getType() {
+  public List<String> getType() {
     return type;
   }
 
@@ -136,7 +135,15 @@ public final class DomainDnsHistoryRequest {
     /**
      * <p>Hostname or URL whose historical DNS records are required</p>
      */
-    _FinalStage hostName(@NotNull String hostName);
+    TypeStage hostName(@NotNull String hostName);
+  }
+
+  public interface TypeStage {
+    /**
+     * <p>A comma-separated list of DNS record types for lookup.
+     * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all</p>
+     */
+    _FinalStage type(@NotNull List<String> type);
   }
 
   public interface _FinalStage {
@@ -145,16 +152,6 @@ public final class DomainDnsHistoryRequest {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
-
-    /**
-     * <p>A comma-separated list of DNS record types for lookup.
-     * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all</p>
-     */
-    _FinalStage type(Optional<List<String>> type);
-
-    _FinalStage type(List<String> type);
-
-    _FinalStage type(String type);
 
     /**
      * <p>Format of the response.</p>
@@ -174,16 +171,16 @@ public final class DomainDnsHistoryRequest {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements ApiKeyStage, HostNameStage, _FinalStage {
+  public static final class Builder implements ApiKeyStage, HostNameStage, TypeStage, _FinalStage {
     private String apiKey;
 
     private String hostName;
 
+    private List<String> type;
+
     private Optional<Integer> page = Optional.empty();
 
     private Optional<DomainDnsHistoryRequestFormat> format = Optional.empty();
-
-    private Optional<List<String>> type = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -220,7 +217,7 @@ public final class DomainDnsHistoryRequest {
      */
     @java.lang.Override
     @JsonSetter("host-name")
-    public _FinalStage hostName(@NotNull String hostName) {
+    public TypeStage hostName(@NotNull String hostName) {
       this.hostName = Objects.requireNonNull(hostName, "hostName must not be null");
       return this;
     }
@@ -271,34 +268,17 @@ public final class DomainDnsHistoryRequest {
       return this;
     }
 
-    @java.lang.Override
-    public _FinalStage type(String type) {
-      this.type = Optional.of(Collections.singletonList(type));
-      return this;
-    }
-
     /**
+     * <p>A comma-separated list of DNS record types for lookup.
+     * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all</p>
      * <p>A comma-separated list of DNS record types for lookup.
      * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage type(List<String> type) {
-      this.type = Optional.ofNullable(type);
-      return this;
-    }
-
-    /**
-     * <p>A comma-separated list of DNS record types for lookup.
-     * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all</p>
-     */
-    @java.lang.Override
-    @JsonSetter(
-        value = "type",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage type(Optional<List<String>> type) {
-      this.type = type;
+    @JsonSetter("type")
+    public _FinalStage type(@NotNull List<String> type) {
+      this.type = Objects.requireNonNull(type, "type must not be null");
       return this;
     }
 

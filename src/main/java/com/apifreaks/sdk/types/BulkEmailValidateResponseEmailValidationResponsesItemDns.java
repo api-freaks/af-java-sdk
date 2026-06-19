@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
@@ -29,12 +28,12 @@ import java.util.Optional;
 public final class BulkEmailValidateResponseEmailValidationResponsesItemDns {
   private final List<String> mxRecords;
 
-  private final Optional<List<String>> aRecords;
+  private final List<String> aRecords;
 
   private final Map<String, Object> additionalProperties;
 
   private BulkEmailValidateResponseEmailValidationResponsesItemDns(List<String> mxRecords,
-      Optional<List<String>> aRecords, Map<String, Object> additionalProperties) {
+      List<String> aRecords, Map<String, Object> additionalProperties) {
     this.mxRecords = mxRecords;
     this.aRecords = aRecords;
     this.additionalProperties = additionalProperties;
@@ -49,7 +48,7 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItemDns {
    * @return Collection of A (Address) records for the domain.
    */
   @JsonProperty("aRecords")
-  public Optional<List<String>> getARecords() {
+  public List<String> getARecords() {
     return aRecords;
   }
 
@@ -88,7 +87,7 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItemDns {
   public static final class Builder {
     private List<String> mxRecords = new ArrayList<>();
 
-    private Optional<List<String>> aRecords = Optional.empty();
+    private List<String> aRecords = new ArrayList<>();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -133,13 +132,23 @@ public final class BulkEmailValidateResponseEmailValidationResponsesItemDns {
         value = "aRecords",
         nulls = Nulls.SKIP
     )
-    public Builder aRecords(Optional<List<String>> aRecords) {
-      this.aRecords = aRecords;
+    public Builder aRecords(List<String> aRecords) {
+      this.aRecords.clear();
+      if (aRecords != null) {
+        this.aRecords.addAll(aRecords);
+      }
       return this;
     }
 
-    public Builder aRecords(List<String> aRecords) {
-      this.aRecords = Optional.ofNullable(aRecords);
+    public Builder addARecords(String aRecords) {
+      this.aRecords.add(aRecords);
+      return this;
+    }
+
+    public Builder addAllARecords(List<String> aRecords) {
+      if (aRecords != null) {
+        this.aRecords.addAll(aRecords);
+      }
       return this;
     }
 
