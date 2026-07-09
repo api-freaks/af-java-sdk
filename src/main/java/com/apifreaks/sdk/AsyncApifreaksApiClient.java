@@ -1985,4 +1985,100 @@ public class AsyncApifreaksApiClient {
   public static AsyncApifreaksApiClientBuilder builder() {
     return new AsyncApifreaksApiClientBuilder();
   }
+
+  /**
+   * Get detailed geolocation data for an IP address including country, city, timezone, currency, and optional security and user-agent information. (v2.0 endpoint)
+   */
+  public CompletableFuture<GeolocationLookupResponse> geolocationLookupV2(GeolocationLookupRequest request) {
+    return this.rawClient.geolocationLookupV2(request).thenApply(response -> response.body());
+  }
+
+  /**
+   * Get detailed geolocation data for an IP address including country, city, timezone, currency, and optional security and user-agent information. (v2.0 endpoint)
+   */
+  public CompletableFuture<GeolocationLookupResponse> geolocationLookupV2(GeolocationLookupRequest request,
+      RequestOptions requestOptions) {
+    return this.rawClient.geolocationLookupV2(request, requestOptions).thenApply(response -> response.body());
+  }
+
+
+  /**
+   * Retrieve detailed geolocation data for multiple IP addresses in a single request. Supports up to <code>50,000</code> IP-addresses/host-names per request. (v2.0 endpoint)
+   */
+  public CompletableFuture<List<BulkGeolocationLookupResponseItem>> bulkGeolocationLookupV2(BulkGeolocationLookupRequest request) {
+    return this.rawClient.bulkGeolocationLookupV2(request).thenApply(response -> response.body());
+  }
+
+  /**
+   * Retrieve detailed geolocation data for multiple IP addresses in a single request. Supports up to <code>50,000</code> IP-addresses/host-names per request. (v2.0 endpoint)
+   */
+  public CompletableFuture<List<BulkGeolocationLookupResponseItem>> bulkGeolocationLookupV2(BulkGeolocationLookupRequest request,
+      RequestOptions requestOptions) {
+    return this.rawClient.bulkGeolocationLookupV2(request, requestOptions).thenApply(response -> response.body());
+  }
+
+
+  /**
+   * Retrieve current WHOIS information for a domain name. This endpoint provides detailed registration information including registrar details, dates, nameservers, and registrant information. (v2.0 endpoint)
+   */
+  public CompletableFuture<DomainWhoisLookupResponse> domainWhoisLookupV2(DomainWhoisLookupRequest request) {
+    return this.rawClient.domainWhoisLookupV2(request).thenApply(response -> response.body());
+  }
+
+  /**
+   * Retrieve current WHOIS information for a domain name. This endpoint provides detailed registration information including registrar details, dates, nameservers, and registrant information. (v2.0 endpoint)
+   */
+  public CompletableFuture<DomainWhoisLookupResponse> domainWhoisLookupV2(DomainWhoisLookupRequest request,
+      RequestOptions requestOptions) {
+    return this.rawClient.domainWhoisLookupV2(request, requestOptions).thenApply(response -> response.body());
+  }
+
+
+  /**
+   * Retrieve WHOIS information for <code>100 Domains per Request</code>. (v2.0 endpoint)
+   */
+  public CompletableFuture<BulkDomainWhoisLookupResponse> bulkDomainWhoisLookupV2(BulkDomainWhoisLookupRequest request) {
+    return this.rawClient.bulkDomainWhoisLookupV2(request).thenApply(response -> response.body());
+  }
+
+  /**
+   * Retrieve WHOIS information for <code>100 Domains per Request</code>. (v2.0 endpoint)
+   */
+  public CompletableFuture<BulkDomainWhoisLookupResponse> bulkDomainWhoisLookupV2(BulkDomainWhoisLookupRequest request,
+      RequestOptions requestOptions) {
+    return this.rawClient.bulkDomainWhoisLookupV2(request, requestOptions).thenApply(response -> response.body());
+  }
+
+
+  /**
+   * Retrieve current time, date, and timezone-related information by specifying a timezone name, location address, location coordinates, IP address, or use the client IP address if no parameter is passed. (v2.0 endpoint)
+   */
+  public CompletableFuture<TimezoneLookupResponse> timezoneLookupV2(TimezoneLookupRequest request) {
+    return this.rawClient.timezoneLookupV2(request).thenApply(response -> response.body());
+  }
+
+  /**
+   * Retrieve current time, date, and timezone-related information by specifying a timezone name, location address, location coordinates, IP address, or use the client IP address if no parameter is passed. (v2.0 endpoint)
+   */
+  public CompletableFuture<TimezoneLookupResponse> timezoneLookupV2(TimezoneLookupRequest request,
+      RequestOptions requestOptions) {
+    return this.rawClient.timezoneLookupV2(request, requestOptions).thenApply(response -> response.body());
+  }
+
+
+  /**
+   * Retrieve sunrise and sunset times, current position of the moon, and other related information by specifying a location address, location coordinates, IP address, or using the client IP address if no parameter is passed. (v2.0 endpoint)
+   */
+  public CompletableFuture<AstronomyLookupResponse> astronomyLookupV2(AstronomyLookupRequest request) {
+    return this.rawClient.astronomyLookupV2(request).thenApply(response -> response.body());
+  }
+
+  /**
+   * Retrieve sunrise and sunset times, current position of the moon, and other related information by specifying a location address, location coordinates, IP address, or using the client IP address if no parameter is passed. (v2.0 endpoint)
+   */
+  public CompletableFuture<AstronomyLookupResponse> astronomyLookupV2(AstronomyLookupRequest request,
+      RequestOptions requestOptions) {
+    return this.rawClient.astronomyLookupV2(request, requestOptions).thenApply(response -> response.body());
+  }
+
 }

@@ -11926,4 +11926,643 @@ public class AsyncRawApifreaksApiClient {
                                                                                                                                                                                                                                 });
                                                                                                                                                                                                                                 return future;
                                                                                                                                                                                                                               }
-                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                            
+  /**
+   * Get detailed geolocation data for an IP address including country, city, timezone, currency, and optional security and user-agent information. (v2.0 endpoint)
+   */
+  public CompletableFuture<ApifreaksApiHttpResponse<GeolocationLookupResponse>> geolocationLookupV2(GeolocationLookupRequest request) {
+    return geolocationLookupV2(request, null);
+  }
+
+  /**
+   * Get detailed geolocation data for an IP address including country, city, timezone, currency, and optional security and user-agent information. (v2.0 endpoint)
+   */
+  public CompletableFuture<ApifreaksApiHttpResponse<GeolocationLookupResponse>> geolocationLookupV2(GeolocationLookupRequest request,
+      RequestOptions requestOptions) {
+    HttpUrl.Builder httpUrl = HttpUrl.parse(this.clientOptions.environment().getUrl()).newBuilder()
+      .addPathSegments("v2.0/geolocation/lookup");
+    QueryStringMapper.addQueryParameter(httpUrl, "apiKey", request.getApiKey(), false);
+    if (request.getFormat().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "format", request.getFormat().get(), false);
+    }
+    if (request.getIp().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "ip", request.getIp().get(), false);
+    }
+    if (request.getLang().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "lang", request.getLang().get(), false);
+    }
+    if (request.getFields().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "fields", request.getFields().get(), false);
+    }
+    if (request.getExcludes().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "excludes", request.getExcludes().get(), false);
+    }
+    if (request.getInclude().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "include", request.getInclude().get(), false);
+    }
+    if (requestOptions != null) {
+      requestOptions.getQueryParameters().forEach((_key, _value) -> {
+        httpUrl.addQueryParameter(_key, _value);
+      } );
+    }
+    Request.Builder _requestBuilder = new Request.Builder()
+      .url(httpUrl.build())
+      .method("GET", null)
+      .headers(Headers.of(clientOptions.headers(requestOptions)))
+      .addHeader("Accept", "application/json");
+    Request okhttpRequest = _requestBuilder.build();
+    OkHttpClient client = clientOptions.httpClient();
+    if (requestOptions != null && requestOptions.getTimeout().isPresent()) {
+      client = clientOptions.httpClientWithTimeout(requestOptions);
+    }
+    CompletableFuture<ApifreaksApiHttpResponse<GeolocationLookupResponse>> future = new CompletableFuture<>();
+    client.newCall(okhttpRequest).enqueue(new Callback() {
+      @Override
+      public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+        try (ResponseBody responseBody = response.body()) {
+          String responseBodyString = responseBody != null ? responseBody.string() : "{}";
+          if (response.isSuccessful()) {
+            future.complete(new ApifreaksApiHttpResponse<>(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, GeolocationLookupResponse.class), response));
+            return;
+          }
+          try {
+            switch (response.code()) {
+            case 400:future.completeExceptionally(new BadRequestError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 401:future.completeExceptionally(new UnauthorizedError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 402:future.completeExceptionally(new PaymentRequiredError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 403:future.completeExceptionally(new ForbiddenError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 404:future.completeExceptionally(new NotFoundError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 406:future.completeExceptionally(new NotAcceptableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 413:future.completeExceptionally(new ContentTooLargeError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 423:future.completeExceptionally(new LockedError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 429:future.completeExceptionally(new TooManyRequestsError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 500:future.completeExceptionally(new InternalServerError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 503:future.completeExceptionally(new ServiceUnavailableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 504:future.completeExceptionally(new GatewayTimeoutError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            }
+          }
+          catch (JsonProcessingException ignored) {
+            // unable to map error response, throwing generic error
+          }
+          Object errorBody = ObjectMappers.parseErrorBody(responseBodyString);
+          future.completeExceptionally(new ApifreaksApiApiException("Error with status code " + response.code(), response.code(), errorBody, response));
+          return;
+        }
+        catch (IOException e) {
+          future.completeExceptionally(new ApifreaksApiException("Network error executing HTTP request", e));
+        }
+      }
+
+      @Override
+      public void onFailure(@NotNull Call call, @NotNull IOException e) {
+        future.completeExceptionally(new ApifreaksApiException("Network error executing HTTP request", e));
+      }
+    });
+    return future;
+  }
+
+
+  /**
+   * Retrieve detailed geolocation data for multiple IP addresses in a single request. Supports up to <code>50,000</code> IP-addresses/host-names per request. (v2.0 endpoint)
+   */
+  public CompletableFuture<ApifreaksApiHttpResponse<List<BulkGeolocationLookupResponseItem>>> bulkGeolocationLookupV2(BulkGeolocationLookupRequest request) {
+    return bulkGeolocationLookupV2(request, null);
+  }
+
+  /**
+   * Retrieve detailed geolocation data for multiple IP addresses in a single request. Supports up to <code>50,000</code> IP-addresses/host-names per request. (v2.0 endpoint)
+   */
+  public CompletableFuture<ApifreaksApiHttpResponse<List<BulkGeolocationLookupResponseItem>>> bulkGeolocationLookupV2(BulkGeolocationLookupRequest request,
+      RequestOptions requestOptions) {
+    HttpUrl.Builder httpUrl = HttpUrl.parse(this.clientOptions.environment().getUrl()).newBuilder()
+      .addPathSegments("v2.0/geolocation/lookup");
+    QueryStringMapper.addQueryParameter(httpUrl, "apiKey", request.getApiKey(), false);
+    if (request.getFormat().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "format", request.getFormat().get(), false);
+    }
+    if (request.getLang().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "lang", request.getLang().get(), false);
+    }
+    if (request.getFields().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "fields", request.getFields().get(), false);
+    }
+    if (request.getExcludes().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "excludes", request.getExcludes().get(), false);
+    }
+    if (request.getInclude().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "include", request.getInclude().get(), false);
+    }
+    if (requestOptions != null) {
+      requestOptions.getQueryParameters().forEach((_key, _value) -> {
+        httpUrl.addQueryParameter(_key, _value);
+      } );
+    }
+    RequestBody body;
+    try {
+      body = RequestBody.create(ObjectMappers.JSON_MAPPER.writeValueAsBytes(request), MediaTypes.APPLICATION_JSON);
+    }
+    catch(Exception e) {
+      throw new RuntimeException(e);
+    }
+    Request.Builder _requestBuilder = new Request.Builder()
+      .url(httpUrl.build())
+      .method("POST", body)
+      .headers(Headers.of(clientOptions.headers(requestOptions)))
+      .addHeader("Content-Type", "application/json")
+      .addHeader("Accept", "application/json");
+    Request okhttpRequest = _requestBuilder.build();
+    OkHttpClient client = clientOptions.httpClient();
+    if (requestOptions != null && requestOptions.getTimeout().isPresent()) {
+      client = clientOptions.httpClientWithTimeout(requestOptions);
+    }
+    CompletableFuture<ApifreaksApiHttpResponse<List<BulkGeolocationLookupResponseItem>>> future = new CompletableFuture<>();
+    client.newCall(okhttpRequest).enqueue(new Callback() {
+      @Override
+      public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+        try (ResponseBody responseBody = response.body()) {
+          String responseBodyString = responseBody != null ? responseBody.string() : "{}";
+          if (response.isSuccessful()) {
+            future.complete(new ApifreaksApiHttpResponse<>(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, new TypeReference<List<BulkGeolocationLookupResponseItem>>() {}), response));
+            return;
+          }
+          try {
+            switch (response.code()) {
+            case 400:future.completeExceptionally(new BadRequestError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 401:future.completeExceptionally(new UnauthorizedError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 402:future.completeExceptionally(new PaymentRequiredError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 403:future.completeExceptionally(new ForbiddenError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 404:future.completeExceptionally(new NotFoundError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 406:future.completeExceptionally(new NotAcceptableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 413:future.completeExceptionally(new ContentTooLargeError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 429:future.completeExceptionally(new TooManyRequestsError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 500:future.completeExceptionally(new InternalServerError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 503:future.completeExceptionally(new ServiceUnavailableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 504:future.completeExceptionally(new GatewayTimeoutError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            }
+          }
+          catch (JsonProcessingException ignored) {
+            // unable to map error response, throwing generic error
+          }
+          Object errorBody = ObjectMappers.parseErrorBody(responseBodyString);
+          future.completeExceptionally(new ApifreaksApiApiException("Error with status code " + response.code(), response.code(), errorBody, response));
+          return;
+        }
+        catch (IOException e) {
+          future.completeExceptionally(new ApifreaksApiException("Network error executing HTTP request", e));
+        }
+      }
+
+      @Override
+      public void onFailure(@NotNull Call call, @NotNull IOException e) {
+        future.completeExceptionally(new ApifreaksApiException("Network error executing HTTP request", e));
+      }
+    });
+    return future;
+  }
+
+
+  /**
+   * Retrieve current WHOIS information for a domain name. This endpoint provides detailed registration information including registrar details, dates, nameservers, and registrant information. (v2.0 endpoint)
+   */
+  public CompletableFuture<ApifreaksApiHttpResponse<DomainWhoisLookupResponse>> domainWhoisLookupV2(DomainWhoisLookupRequest request) {
+    return domainWhoisLookupV2(request, null);
+  }
+
+  /**
+   * Retrieve current WHOIS information for a domain name. This endpoint provides detailed registration information including registrar details, dates, nameservers, and registrant information. (v2.0 endpoint)
+   */
+  public CompletableFuture<ApifreaksApiHttpResponse<DomainWhoisLookupResponse>> domainWhoisLookupV2(DomainWhoisLookupRequest request,
+      RequestOptions requestOptions) {
+    HttpUrl.Builder httpUrl = HttpUrl.parse(this.clientOptions.environment().getUrl()).newBuilder()
+      .addPathSegments("v2.0/domain/whois/live");
+    QueryStringMapper.addQueryParameter(httpUrl, "apiKey", request.getApiKey(), false);
+    if (request.getFormat().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "format", request.getFormat().get(), false);
+    }
+    QueryStringMapper.addQueryParameter(httpUrl, "domainName", request.getDomainName(), false);
+    if (requestOptions != null) {
+      requestOptions.getQueryParameters().forEach((_key, _value) -> {
+        httpUrl.addQueryParameter(_key, _value);
+      } );
+    }
+    Request.Builder _requestBuilder = new Request.Builder()
+      .url(httpUrl.build())
+      .method("GET", null)
+      .headers(Headers.of(clientOptions.headers(requestOptions)))
+      .addHeader("Accept", "application/json");
+    Request okhttpRequest = _requestBuilder.build();
+    OkHttpClient client = clientOptions.httpClient();
+    if (requestOptions != null && requestOptions.getTimeout().isPresent()) {
+      client = clientOptions.httpClientWithTimeout(requestOptions);
+    }
+    CompletableFuture<ApifreaksApiHttpResponse<DomainWhoisLookupResponse>> future = new CompletableFuture<>();
+    client.newCall(okhttpRequest).enqueue(new Callback() {
+      @Override
+      public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+        try (ResponseBody responseBody = response.body()) {
+          String responseBodyString = responseBody != null ? responseBody.string() : "{}";
+          if (response.isSuccessful()) {
+            future.complete(new ApifreaksApiHttpResponse<>(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, DomainWhoisLookupResponse.class), response));
+            return;
+          }
+          try {
+            switch (response.code()) {
+            case 400:future.completeExceptionally(new BadRequestError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 401:future.completeExceptionally(new UnauthorizedError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 402:future.completeExceptionally(new PaymentRequiredError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 403:future.completeExceptionally(new ForbiddenError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 404:future.completeExceptionally(new NotFoundError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 406:future.completeExceptionally(new NotAcceptableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 408:future.completeExceptionally(new RequestTimeoutError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 413:future.completeExceptionally(new ContentTooLargeError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 429:future.completeExceptionally(new TooManyRequestsError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 500:future.completeExceptionally(new InternalServerError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 503:future.completeExceptionally(new ServiceUnavailableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 504:future.completeExceptionally(new GatewayTimeoutError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            }
+          }
+          catch (JsonProcessingException ignored) {
+            // unable to map error response, throwing generic error
+          }
+          Object errorBody = ObjectMappers.parseErrorBody(responseBodyString);
+          future.completeExceptionally(new ApifreaksApiApiException("Error with status code " + response.code(), response.code(), errorBody, response));
+          return;
+        }
+        catch (IOException e) {
+          future.completeExceptionally(new ApifreaksApiException("Network error executing HTTP request", e));
+        }
+      }
+
+      @Override
+      public void onFailure(@NotNull Call call, @NotNull IOException e) {
+        future.completeExceptionally(new ApifreaksApiException("Network error executing HTTP request", e));
+      }
+    });
+    return future;
+  }
+
+
+  /**
+   * Retrieve WHOIS information for <code>100 Domains per Request</code>. (v2.0 endpoint)
+   */
+  public CompletableFuture<ApifreaksApiHttpResponse<BulkDomainWhoisLookupResponse>> bulkDomainWhoisLookupV2(BulkDomainWhoisLookupRequest request) {
+    return bulkDomainWhoisLookupV2(request, null);
+  }
+
+  /**
+   * Retrieve WHOIS information for <code>100 Domains per Request</code>. (v2.0 endpoint)
+   */
+  public CompletableFuture<ApifreaksApiHttpResponse<BulkDomainWhoisLookupResponse>> bulkDomainWhoisLookupV2(BulkDomainWhoisLookupRequest request,
+      RequestOptions requestOptions) {
+    HttpUrl.Builder httpUrl = HttpUrl.parse(this.clientOptions.environment().getUrl()).newBuilder()
+      .addPathSegments("v2.0/domain/whois/live");
+    QueryStringMapper.addQueryParameter(httpUrl, "apiKey", request.getApiKey(), false);
+    if (request.getFormat().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "format", request.getFormat().get(), false);
+    }
+    if (requestOptions != null) {
+      requestOptions.getQueryParameters().forEach((_key, _value) -> {
+        httpUrl.addQueryParameter(_key, _value);
+      } );
+    }
+    RequestBody body;
+    try {
+      body = RequestBody.create(ObjectMappers.JSON_MAPPER.writeValueAsBytes(request), MediaTypes.APPLICATION_JSON);
+    }
+    catch(Exception e) {
+      throw new RuntimeException(e);
+    }
+    Request.Builder _requestBuilder = new Request.Builder()
+      .url(httpUrl.build())
+      .method("POST", body)
+      .headers(Headers.of(clientOptions.headers(requestOptions)))
+      .addHeader("Content-Type", "application/json")
+      .addHeader("Accept", "application/json");
+    Request okhttpRequest = _requestBuilder.build();
+    OkHttpClient client = clientOptions.httpClient();
+    if (requestOptions != null && requestOptions.getTimeout().isPresent()) {
+      client = clientOptions.httpClientWithTimeout(requestOptions);
+    }
+    CompletableFuture<ApifreaksApiHttpResponse<BulkDomainWhoisLookupResponse>> future = new CompletableFuture<>();
+    client.newCall(okhttpRequest).enqueue(new Callback() {
+      @Override
+      public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+        try (ResponseBody responseBody = response.body()) {
+          String responseBodyString = responseBody != null ? responseBody.string() : "{}";
+          if (response.isSuccessful()) {
+            future.complete(new ApifreaksApiHttpResponse<>(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, BulkDomainWhoisLookupResponse.class), response));
+            return;
+          }
+          try {
+            switch (response.code()) {
+            case 400:future.completeExceptionally(new BadRequestError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 401:future.completeExceptionally(new UnauthorizedError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 402:future.completeExceptionally(new PaymentRequiredError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 403:future.completeExceptionally(new ForbiddenError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 404:future.completeExceptionally(new NotFoundError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 406:future.completeExceptionally(new NotAcceptableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 413:future.completeExceptionally(new ContentTooLargeError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 429:future.completeExceptionally(new TooManyRequestsError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 500:future.completeExceptionally(new InternalServerError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 503:future.completeExceptionally(new ServiceUnavailableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 504:future.completeExceptionally(new GatewayTimeoutError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            }
+          }
+          catch (JsonProcessingException ignored) {
+            // unable to map error response, throwing generic error
+          }
+          Object errorBody = ObjectMappers.parseErrorBody(responseBodyString);
+          future.completeExceptionally(new ApifreaksApiApiException("Error with status code " + response.code(), response.code(), errorBody, response));
+          return;
+        }
+        catch (IOException e) {
+          future.completeExceptionally(new ApifreaksApiException("Network error executing HTTP request", e));
+        }
+      }
+
+      @Override
+      public void onFailure(@NotNull Call call, @NotNull IOException e) {
+        future.completeExceptionally(new ApifreaksApiException("Network error executing HTTP request", e));
+      }
+    });
+    return future;
+  }
+
+
+  /**
+   * Retrieve current time, date, and timezone-related information by specifying a timezone name, location address, location coordinates, IP address, or use the client IP address if no parameter is passed. (v2.0 endpoint)
+   */
+  public CompletableFuture<ApifreaksApiHttpResponse<TimezoneLookupResponse>> timezoneLookupV2(TimezoneLookupRequest request) {
+    return timezoneLookupV2(request, null);
+  }
+
+  /**
+   * Retrieve current time, date, and timezone-related information by specifying a timezone name, location address, location coordinates, IP address, or use the client IP address if no parameter is passed. (v2.0 endpoint)
+   */
+  public CompletableFuture<ApifreaksApiHttpResponse<TimezoneLookupResponse>> timezoneLookupV2(TimezoneLookupRequest request,
+      RequestOptions requestOptions) {
+    HttpUrl.Builder httpUrl = HttpUrl.parse(this.clientOptions.environment().getUrl()).newBuilder()
+      .addPathSegments("v2.0/geolocation/timezone");
+    QueryStringMapper.addQueryParameter(httpUrl, "apiKey", request.getApiKey(), false);
+    if (request.getFormat().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "format", request.getFormat().get(), false);
+    }
+    if (request.getIp().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "ip", request.getIp().get(), false);
+    }
+    if (request.getTz().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "tz", request.getTz().get(), false);
+    }
+    if (request.getLocation().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "location", request.getLocation().get(), false);
+    }
+    if (request.getLat().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "lat", request.getLat().get(), false);
+    }
+    if (request.getLong().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "long", request.getLong().get(), false);
+    }
+    if (request.getLang().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "lang", request.getLang().get(), false);
+    }
+    if (request.getIataCode().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "iata_code", request.getIataCode().get(), false);
+    }
+    if (request.getIcaoCode().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "icao_code", request.getIcaoCode().get(), false);
+    }
+    if (request.getLoCode().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "lo_code", request.getLoCode().get(), false);
+    }
+    if (requestOptions != null) {
+      requestOptions.getQueryParameters().forEach((_key, _value) -> {
+        httpUrl.addQueryParameter(_key, _value);
+      } );
+    }
+    Request.Builder _requestBuilder = new Request.Builder()
+      .url(httpUrl.build())
+      .method("GET", null)
+      .headers(Headers.of(clientOptions.headers(requestOptions)))
+      .addHeader("Accept", "application/json");
+    Request okhttpRequest = _requestBuilder.build();
+    OkHttpClient client = clientOptions.httpClient();
+    if (requestOptions != null && requestOptions.getTimeout().isPresent()) {
+      client = clientOptions.httpClientWithTimeout(requestOptions);
+    }
+    CompletableFuture<ApifreaksApiHttpResponse<TimezoneLookupResponse>> future = new CompletableFuture<>();
+    client.newCall(okhttpRequest).enqueue(new Callback() {
+      @Override
+      public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+        try (ResponseBody responseBody = response.body()) {
+          String responseBodyString = responseBody != null ? responseBody.string() : "{}";
+          if (response.isSuccessful()) {
+            future.complete(new ApifreaksApiHttpResponse<>(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, TimezoneLookupResponse.class), response));
+            return;
+          }
+          try {
+            switch (response.code()) {
+            case 400:future.completeExceptionally(new BadRequestError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 401:future.completeExceptionally(new UnauthorizedError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 402:future.completeExceptionally(new PaymentRequiredError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 403:future.completeExceptionally(new ForbiddenError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 404:future.completeExceptionally(new NotFoundError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 406:future.completeExceptionally(new NotAcceptableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 413:future.completeExceptionally(new ContentTooLargeError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 429:future.completeExceptionally(new TooManyRequestsError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 500:future.completeExceptionally(new InternalServerError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 503:future.completeExceptionally(new ServiceUnavailableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 504:future.completeExceptionally(new GatewayTimeoutError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            }
+          }
+          catch (JsonProcessingException ignored) {
+            // unable to map error response, throwing generic error
+          }
+          Object errorBody = ObjectMappers.parseErrorBody(responseBodyString);
+          future.completeExceptionally(new ApifreaksApiApiException("Error with status code " + response.code(), response.code(), errorBody, response));
+          return;
+        }
+        catch (IOException e) {
+          future.completeExceptionally(new ApifreaksApiException("Network error executing HTTP request", e));
+        }
+      }
+
+      @Override
+      public void onFailure(@NotNull Call call, @NotNull IOException e) {
+        future.completeExceptionally(new ApifreaksApiException("Network error executing HTTP request", e));
+      }
+    });
+    return future;
+  }
+
+
+  /**
+   * Retrieve sunrise and sunset times, current position of the moon, and other related information by specifying a location address, location coordinates, IP address, or using the client IP address if no parameter is passed. (v2.0 endpoint)
+   */
+  public CompletableFuture<ApifreaksApiHttpResponse<AstronomyLookupResponse>> astronomyLookupV2(AstronomyLookupRequest request) {
+    return astronomyLookupV2(request, null);
+  }
+
+  /**
+   * Retrieve sunrise and sunset times, current position of the moon, and other related information by specifying a location address, location coordinates, IP address, or using the client IP address if no parameter is passed. (v2.0 endpoint)
+   */
+  public CompletableFuture<ApifreaksApiHttpResponse<AstronomyLookupResponse>> astronomyLookupV2(AstronomyLookupRequest request,
+      RequestOptions requestOptions) {
+    HttpUrl.Builder httpUrl = HttpUrl.parse(this.clientOptions.environment().getUrl()).newBuilder()
+      .addPathSegments("v2.0/geolocation/astronomy");
+    QueryStringMapper.addQueryParameter(httpUrl, "apiKey", request.getApiKey(), false);
+    if (request.getFormat().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "format", request.getFormat().get(), false);
+    }
+    if (request.getLocation().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "location", request.getLocation().get(), false);
+    }
+    if (request.getLat().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "lat", request.getLat().get(), false);
+    }
+    if (request.getLong().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "long", request.getLong().get(), false);
+    }
+    if (request.getIp().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "ip", request.getIp().get(), false);
+    }
+    if (request.getLang().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "lang", request.getLang().get(), false);
+    }
+    if (request.getDate().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "date", request.getDate().get(), false);
+    }
+    if (request.getElevation().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "elevation", request.getElevation().get(), false);
+    }
+    if (request.getTimeZone().isPresent()) {
+      QueryStringMapper.addQueryParameter(httpUrl, "time_zone", request.getTimeZone().get(), false);
+    }
+    if (requestOptions != null) {
+      requestOptions.getQueryParameters().forEach((_key, _value) -> {
+        httpUrl.addQueryParameter(_key, _value);
+      } );
+    }
+    Request.Builder _requestBuilder = new Request.Builder()
+      .url(httpUrl.build())
+      .method("GET", null)
+      .headers(Headers.of(clientOptions.headers(requestOptions)))
+      .addHeader("Accept", "application/json");
+    Request okhttpRequest = _requestBuilder.build();
+    OkHttpClient client = clientOptions.httpClient();
+    if (requestOptions != null && requestOptions.getTimeout().isPresent()) {
+      client = clientOptions.httpClientWithTimeout(requestOptions);
+    }
+    CompletableFuture<ApifreaksApiHttpResponse<AstronomyLookupResponse>> future = new CompletableFuture<>();
+    client.newCall(okhttpRequest).enqueue(new Callback() {
+      @Override
+      public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+        try (ResponseBody responseBody = response.body()) {
+          String responseBodyString = responseBody != null ? responseBody.string() : "{}";
+          if (response.isSuccessful()) {
+            future.complete(new ApifreaksApiHttpResponse<>(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, AstronomyLookupResponse.class), response));
+            return;
+          }
+          try {
+            switch (response.code()) {
+            case 400:future.completeExceptionally(new BadRequestError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 401:future.completeExceptionally(new UnauthorizedError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 402:future.completeExceptionally(new PaymentRequiredError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 403:future.completeExceptionally(new ForbiddenError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 404:future.completeExceptionally(new NotFoundError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 406:future.completeExceptionally(new NotAcceptableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 413:future.completeExceptionally(new ContentTooLargeError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 429:future.completeExceptionally(new TooManyRequestsError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 500:future.completeExceptionally(new InternalServerError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 503:future.completeExceptionally(new ServiceUnavailableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            case 504:future.completeExceptionally(new GatewayTimeoutError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+            return;
+            }
+          }
+          catch (JsonProcessingException ignored) {
+            // unable to map error response, throwing generic error
+          }
+          Object errorBody = ObjectMappers.parseErrorBody(responseBodyString);
+          future.completeExceptionally(new ApifreaksApiApiException("Error with status code " + response.code(), response.code(), errorBody, response));
+          return;
+        }
+        catch (IOException e) {
+          future.completeExceptionally(new ApifreaksApiException("Network error executing HTTP request", e));
+        }
+      }
+
+      @Override
+      public void onFailure(@NotNull Call call, @NotNull IOException e) {
+        future.completeExceptionally(new ApifreaksApiException("Network error executing HTTP request", e));
+      }
+    });
+    return future;
+  }
+
+}

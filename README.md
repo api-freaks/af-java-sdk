@@ -38,13 +38,13 @@ Add this dependency to your `pom.xml`:
 ### Gradle
 
 ```gradle
-implementation "com.apifreaks:sdk:1.0.1"
+implementation "com.apifreaks:sdk:1.0.2"
 ```
 
 For Kotlin DSL:
 
 ```kotlin
-implementation("com.apifreaks:sdk:1.0.1")
+implementation("com.apifreaks:sdk:1.0.2")
 ```
 
 ## Reference

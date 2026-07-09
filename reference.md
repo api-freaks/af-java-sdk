@@ -101,6 +101,110 @@ GeolocationLookupResponse response = client.geolocationLookup(request);
 </dl>
 </details>
 
+<details><summary><code>client.geolocationLookupV2(request) -> GeolocationLookupResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+> **v2.0 endpoint** — maps to `/v2.0/geolocation/lookup`. Uses the same request and response types as the v1 `geolocationLookup` method.
+
+Get detailed geolocation data for an IP address including country, city, timezone, currency, and optional security and user-agent information
+
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+```java
+import com.apifreaks.sdk.ApifreaksApiClient;
+import com.apifreaks.sdk.requests.GeolocationLookupRequest;
+import com.apifreaks.sdk.types.GeolocationLookupResponse;
+
+ApifreaksApiClient client = ApifreaksApiClient.builder().build();
+GeolocationLookupRequest request = GeolocationLookupRequest.builder()
+        .apiKey("apiKey")
+        .build();
+GeolocationLookupResponse response = client.geolocationLookupV2(request);
+```
+
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key _(required)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional&lt;GeolocationLookupRequestFormat&gt;` — Format of the response. _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ip:** `Optional&lt;String&gt;` — IPv4, IPv6, or hostname for geolocation lookup _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lang:** `Optional&lt;GeolocationLookupRequestLang&gt;` — Response language for location fields _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fields:** `Optional&lt;String&gt;` — Comma separated list of fields to include in response _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**excludes:** `Optional&lt;String&gt;` — Comma separated list of fields to exclude from response _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include:** `Optional&lt;String&gt;` — Additional data to include (location, network, security, currency, time_zone, user_agent, country_metadata , hostname, liveHostname, hostnameFallbackLivet) _(optional)_
+    
+</dd>
+</dl>
+
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.bulkGeolocationLookup(request) -> List<BulkGeolocationLookupResponseItem></code></summary>
 <dl>
 <dd>
@@ -132,6 +236,112 @@ BulkGeolocationLookupRequest request = BulkGeolocationLookupRequest.builder()
         .ips(java.util.List.of("8.8.8.8"))
         .build();
 List<BulkGeolocationLookupResponseItem> response = client.bulkGeolocationLookup(request);
+```
+
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — No description provided. _(required)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional&lt;BulkGeolocationLookupRequestFormat&gt;` — No description provided. _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lang:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fields:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**excludes:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ips:** `List<String&gt;` — List of IP addresses or hostnames to lookup _(required)_
+    
+</dd>
+</dl>
+
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.bulkGeolocationLookupV2(request) -> List<BulkGeolocationLookupResponseItem></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+> **v2.0 endpoint** — maps to `/v2.0/geolocation/lookup`. Uses the same request and response types as the v1 `bulkGeolocationLookup` method.
+
+Retrieve detailed geolocation data for multiple IP addresses in a single request. Supports up to <code>50,000</code> IP-addresses/host-names per request.
+
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+```java
+import com.apifreaks.sdk.ApifreaksApiClient;
+import com.apifreaks.sdk.requests.BulkGeolocationLookupRequest;
+import java.util.List;
+import com.apifreaks.sdk.types.BulkGeolocationLookupResponseItem;
+
+ApifreaksApiClient client = ApifreaksApiClient.builder().build();
+BulkGeolocationLookupRequest request = BulkGeolocationLookupRequest.builder()
+        .apiKey("apiKey")
+        .ips(java.util.List.of("8.8.8.8"))
+        .build();
+List<BulkGeolocationLookupResponseItem> response = client.bulkGeolocationLookupV2(request);
 ```
 
 </dd>
@@ -658,6 +868,79 @@ DomainWhoisLookupResponse response = client.domainWhoisLookup(request);
 </dl>
 </details>
 
+<details><summary><code>client.domainWhoisLookupV2(request) -> DomainWhoisLookupResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+> **v2.0 endpoint** — maps to `/v2.0/domain/whois/live`. Uses the same request and response types as the v1 `domainWhoisLookup` method.
+
+Retrieve current WHOIS information for a domain name. This endpoint provides detailed registration information including registrar details, dates, nameservers, and registrant information.
+
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+```java
+import com.apifreaks.sdk.ApifreaksApiClient;
+import com.apifreaks.sdk.requests.DomainWhoisLookupRequest;
+import com.apifreaks.sdk.types.DomainWhoisLookupResponse;
+
+ApifreaksApiClient client = ApifreaksApiClient.builder().build();
+DomainWhoisLookupRequest request = DomainWhoisLookupRequest.builder()
+        .apiKey("apiKey")
+        .domainName("example.com")
+        .build();
+DomainWhoisLookupResponse response = client.domainWhoisLookupV2(request);
+```
+
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key _(required)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional&lt;DomainWhoisLookupRequestFormat&gt;` — Response format (defaults to json) _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**domainName:** `String` — Domain name for WHOIS lookup _(required)_
+    
+</dd>
+</dl>
+
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.bulkDomainWhoisLookup(request) -> BulkDomainWhoisLookupResponse</code></summary>
 <dl>
 <dd>
@@ -688,6 +971,79 @@ BulkDomainWhoisLookupRequest request = BulkDomainWhoisLookupRequest.builder()
         .domainNames(java.util.List.of("example.com"))
         .build();
 BulkDomainWhoisLookupResponse response = client.bulkDomainWhoisLookup(request);
+```
+
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — No description provided. _(required)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional&lt;BulkDomainWhoisLookupRequestFormat&gt;` — No description provided. _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**domainNames:** `List<String&gt;` — A list of domain names for which WHOIS data is requested. _(required)_
+    
+</dd>
+</dl>
+
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.bulkDomainWhoisLookupV2(request) -> BulkDomainWhoisLookupResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+> **v2.0 endpoint** — maps to `/v2.0/domain/whois/live`. Uses the same request and response types as the v1 `bulkDomainWhoisLookup` method.
+
+Retrieve WHOIS information for <code>100 Domains per Request</code>.
+
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+```java
+import com.apifreaks.sdk.ApifreaksApiClient;
+import com.apifreaks.sdk.requests.BulkDomainWhoisLookupRequest;
+import com.apifreaks.sdk.types.BulkDomainWhoisLookupResponse;
+
+ApifreaksApiClient client = ApifreaksApiClient.builder().build();
+BulkDomainWhoisLookupRequest request = BulkDomainWhoisLookupRequest.builder()
+        .apiKey("apiKey")
+        .domainNames(java.util.List.of("example.com"))
+        .build();
+BulkDomainWhoisLookupResponse response = client.bulkDomainWhoisLookupV2(request);
 ```
 
 </dd>
@@ -9564,6 +9920,142 @@ TimezoneLookupResponse response = client.timezoneLookup(request);
 </dl>
 </details>
 
+<details><summary><code>client.timezoneLookupV2(request) -> TimezoneLookupResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+> **v2.0 endpoint** — maps to `/v2.0/geolocation/timezone`. Uses the same request and response types as the v1 `timezoneLookup` method.
+
+Retrieve current time, date, and timezone-related information by specifying a timezone name, location address, location coordinates, IP address, or use the client IP address if no parameter is passed.
+
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+```java
+import com.apifreaks.sdk.ApifreaksApiClient;
+import com.apifreaks.sdk.requests.TimezoneLookupRequest;
+import com.apifreaks.sdk.types.TimezoneLookupResponse;
+
+ApifreaksApiClient client = ApifreaksApiClient.builder().build();
+TimezoneLookupRequest request = TimezoneLookupRequest.builder()
+        .apiKey("apiKey")
+        .build();
+TimezoneLookupResponse response = client.timezoneLookupV2(request);
+```
+
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key _(required)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional&lt;TimezoneLookupRequestFormat&gt;` — Format of the response _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ip:** `Optional&lt;String&gt;` — IPv4 or IPv6 address to extract timezone information. _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tz:** `Optional&lt;String&gt;` — Timezone name (e.g., &quot;Asia/Kolkata&quot;) to retrieve information directly. _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**location:** `Optional&lt;String&gt;` — Location string (preferably city and country) to extract timezone. _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lat:** `Optional&lt;Float&gt;` — Latitude for geolocation lookup. _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**long_:** `Optional&lt;Float&gt;` — No description provided. _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lang:** `Optional&lt;TimezoneLookupRequestLang&gt;` — Language code for response localization (default is &quot;en&quot;). _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**iataCode:** `Optional&lt;String&gt;` — 3-letter IATA airport code (e.g., JFK). _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**icaoCode:** `Optional&lt;String&gt;` — 4-letter ICAO airport code (e.g., KJFK). _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**loCode:** `Optional&lt;String&gt;` — 5-letter UN/LO city code. _(optional)_
+    
+</dd>
+</dl>
+
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.timezoneConvert(request) -> TimezoneConvertResponse</code></summary>
 <dl>
 <dd>
@@ -10322,6 +10814,134 @@ AstronomyLookupRequest request = AstronomyLookupRequest.builder()
         .apiKey("apiKey")
         .build();
 AstronomyLookupResponse response = client.astronomyLookup(request);
+```
+
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key _(required)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional&lt;AstronomyLookupRequestFormat&gt;` — Format of the response. _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**location:** `Optional&lt;String&gt;` — Location name or address _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lat:** `Optional&lt;Float&gt;` — Latitude for location coordinates _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**long_:** `Optional&lt;Float&gt;` — No description provided. _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ip:** `Optional&lt;String&gt;` — IP address for location detection _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lang:** `Optional&lt;String&gt;` — IP address for location detection _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `Optional&lt;String&gt;` — Date for astronomy data (YYYY-MM-DD) _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**elevation:** `Optional&lt;Double&gt;` — Timezone of the location for which astronomy data is required _(optional)_
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**timeZone:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+    
+</dd>
+</dl>
+
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.astronomyLookupV2(request) -> AstronomyLookupResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+> **v2.0 endpoint** — maps to `/v2.0/geolocation/astronomy`. Uses the same request and response types as the v1 `astronomyLookup` method.
+
+Retrieve sunrise and sunset times, current position of the moon, and other related information by specifying a location address, location coordinates, IP address, or using the client IP address if no parameter is passed.
+
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+```java
+import com.apifreaks.sdk.ApifreaksApiClient;
+import com.apifreaks.sdk.requests.AstronomyLookupRequest;
+import com.apifreaks.sdk.types.AstronomyLookupResponse;
+
+ApifreaksApiClient client = ApifreaksApiClient.builder().build();
+AstronomyLookupRequest request = AstronomyLookupRequest.builder()
+        .apiKey("apiKey")
+        .build();
+AstronomyLookupResponse response = client.astronomyLookupV2(request);
 ```
 
 </dd>
