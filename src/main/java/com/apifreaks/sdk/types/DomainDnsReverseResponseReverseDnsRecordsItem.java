@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,8 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
-import java.lang.Boolean;
 import java.lang.Object;
 import java.lang.String;
 import java.time.OffsetDateTime;
@@ -22,7 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
@@ -34,7 +32,7 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItem {
 
   private final String domainName;
 
-  private final Optional<Boolean> domainRegistered;
+  private final boolean domainRegistered;
 
   private final DomainDnsReverseResponseReverseDnsRecordsItemDnsTypes dnsTypes;
 
@@ -43,8 +41,7 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItem {
   private final Map<String, Object> additionalProperties;
 
   private DomainDnsReverseResponseReverseDnsRecordsItem(OffsetDateTime queryTime, String domainName,
-      Optional<Boolean> domainRegistered,
-      DomainDnsReverseResponseReverseDnsRecordsItemDnsTypes dnsTypes,
+      boolean domainRegistered, DomainDnsReverseResponseReverseDnsRecordsItemDnsTypes dnsTypes,
       List<DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItem> dnsRecords,
       Map<String, Object> additionalProperties) {
     this.queryTime = queryTime;
@@ -66,7 +63,7 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItem {
   }
 
   @JsonProperty("domainRegistered")
-  public Optional<Boolean> getDomainRegistered() {
+  public boolean getDomainRegistered() {
     return domainRegistered;
   }
 
@@ -92,7 +89,7 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItem {
   }
 
   private boolean equalTo(DomainDnsReverseResponseReverseDnsRecordsItem other) {
-    return queryTime.equals(other.queryTime) && domainName.equals(other.domainName) && domainRegistered.equals(other.domainRegistered) && dnsTypes.equals(other.dnsTypes) && dnsRecords.equals(other.dnsRecords);
+    return queryTime.equals(other.queryTime) && domainName.equals(other.domainName) && domainRegistered == other.domainRegistered && dnsTypes.equals(other.dnsTypes) && dnsRecords.equals(other.dnsRecords);
   }
 
   @java.lang.Override
@@ -116,7 +113,11 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItem {
   }
 
   public interface DomainNameStage {
-    DnsTypesStage domainName(@NotNull String domainName);
+    DomainRegisteredStage domainName(@NotNull String domainName);
+  }
+
+  public interface DomainRegisteredStage {
+    DnsTypesStage domainRegistered(boolean domainRegistered);
   }
 
   public interface DnsTypesStage {
@@ -125,10 +126,6 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItem {
 
   public interface _FinalStage {
     DomainDnsReverseResponseReverseDnsRecordsItem build();
-
-    _FinalStage domainRegistered(Optional<Boolean> domainRegistered);
-
-    _FinalStage domainRegistered(Boolean domainRegistered);
 
     _FinalStage additionalProperty(String key, Object value);
 
@@ -147,16 +144,16 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItem {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements QueryTimeStage, DomainNameStage, DnsTypesStage, _FinalStage {
+  public static final class Builder implements QueryTimeStage, DomainNameStage, DomainRegisteredStage, DnsTypesStage, _FinalStage {
     private OffsetDateTime queryTime;
 
     private String domainName;
 
+    private boolean domainRegistered;
+
     private DomainDnsReverseResponseReverseDnsRecordsItemDnsTypes dnsTypes;
 
     private List<DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItem> dnsRecords = new ArrayList<>();
-
-    private Optional<Boolean> domainRegistered = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -183,8 +180,15 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItem {
 
     @java.lang.Override
     @JsonSetter("domainName")
-    public DnsTypesStage domainName(@NotNull String domainName) {
+    public DomainRegisteredStage domainName(@NotNull String domainName) {
       this.domainName = Objects.requireNonNull(domainName, "domainName must not be null");
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter("domainRegistered")
+    public DnsTypesStage domainRegistered(boolean domainRegistered) {
+      this.domainRegistered = domainRegistered;
       return this;
     }
 
@@ -223,22 +227,6 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItem {
       if (dnsRecords != null) {
         this.dnsRecords.addAll(dnsRecords);
       }
-      return this;
-    }
-
-    @java.lang.Override
-    public _FinalStage domainRegistered(Boolean domainRegistered) {
-      this.domainRegistered = Optional.ofNullable(domainRegistered);
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter(
-        value = "domainRegistered",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage domainRegistered(Optional<Boolean> domainRegistered) {
-      this.domainRegistered = domainRegistered;
       return this;
     }
 

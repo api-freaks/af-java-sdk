@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Double;
 import java.lang.Object;
 import java.lang.String;
@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
+import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
@@ -28,22 +30,28 @@ import java.util.Objects;
 public final class CommodityFluctuationResponse {
   private final boolean success;
 
-  private final double timestamp;
+  private final Optional<Double> timestamp;
 
-  private final Map<String, Double> rates;
+  private final Optional<Map<String, CommodityFluctuationResponseMetadataValue>> metadata;
 
-  private final Map<String, CommodityFluctuationResponseMetadataValue> metadata;
+  private final String startDate;
+
+  private final String endDate;
+
+  private final Map<String, CommodityFluctuationResponseRatesValue> rates;
 
   private final Map<String, Object> additionalProperties;
 
-  private CommodityFluctuationResponse(boolean success, double timestamp,
-      Map<String, Double> rates,
-      Map<String, CommodityFluctuationResponseMetadataValue> metadata,
+  private CommodityFluctuationResponse(boolean success, Optional<Double> timestamp,
+      Optional<Map<String, CommodityFluctuationResponseMetadataValue>> metadata, String startDate,
+      String endDate, Map<String, CommodityFluctuationResponseRatesValue> rates,
       Map<String, Object> additionalProperties) {
     this.success = success;
     this.timestamp = timestamp;
-    this.rates = rates;
     this.metadata = metadata;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.rates = rates;
     this.additionalProperties = additionalProperties;
   }
 
@@ -59,24 +67,40 @@ public final class CommodityFluctuationResponse {
    * @return Unix timestamp indicating when the response was generated.
    */
   @JsonProperty("timestamp")
-  public double getTimestamp() {
+  public Optional<Double> getTimestamp() {
     return timestamp;
-  }
-
-  /**
-   * @return Map keyed by commodity symbol; value contains fluctuation metrics.
-   */
-  @JsonProperty("rates")
-  public Map<String, Double> getRates() {
-    return rates;
   }
 
   /**
    * @return Map containing detailed information for all the requested commodities keyed by commodity symbol.
    */
   @JsonProperty("metadata")
-  public Map<String, CommodityFluctuationResponseMetadataValue> getMetadata() {
+  public Optional<Map<String, CommodityFluctuationResponseMetadataValue>> getMetadata() {
     return metadata;
+  }
+
+  /**
+   * @return The start date of the fluctuation interval in YYYY-MM-DD format.
+   */
+  @JsonProperty("startDate")
+  public String getStartDate() {
+    return startDate;
+  }
+
+  /**
+   * @return The end date of the fluctuation interval in YYYY-MM-DD format.
+   */
+  @JsonProperty("endDate")
+  public String getEndDate() {
+    return endDate;
+  }
+
+  /**
+   * @return Map keyed by commodity symbol; value contains fluctuation metrics.
+   */
+  @JsonProperty("rates")
+  public Map<String, CommodityFluctuationResponseRatesValue> getRates() {
+    return rates;
   }
 
   @java.lang.Override
@@ -91,12 +115,12 @@ public final class CommodityFluctuationResponse {
   }
 
   private boolean equalTo(CommodityFluctuationResponse other) {
-    return success == other.success && timestamp == other.timestamp && rates.equals(other.rates) && metadata.equals(other.metadata);
+    return success == other.success && timestamp.equals(other.timestamp) && metadata.equals(other.metadata) && startDate.equals(other.startDate) && endDate.equals(other.endDate) && rates.equals(other.rates);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.success, this.timestamp, this.rates, this.metadata);
+    return Objects.hash(this.success, this.timestamp, this.metadata, this.startDate, this.endDate, this.rates);
   }
 
   @java.lang.Override
@@ -112,16 +136,23 @@ public final class CommodityFluctuationResponse {
     /**
      * <p>API request success indicator. &quot;true&quot; for successful requests.</p>
      */
-    TimestampStage success(boolean success);
+    StartDateStage success(boolean success);
 
     Builder from(CommodityFluctuationResponse other);
   }
 
-  public interface TimestampStage {
+  public interface StartDateStage {
     /**
-     * <p>Unix timestamp indicating when the response was generated.</p>
+     * <p>The start date of the fluctuation interval in YYYY-MM-DD format.</p>
      */
-    _FinalStage timestamp(double timestamp);
+    EndDateStage startDate(@NotNull String startDate);
+  }
+
+  public interface EndDateStage {
+    /**
+     * <p>The end date of the fluctuation interval in YYYY-MM-DD format.</p>
+     */
+    _FinalStage endDate(@NotNull String endDate);
   }
 
   public interface _FinalStage {
@@ -132,35 +163,44 @@ public final class CommodityFluctuationResponse {
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
 
     /**
-     * <p>Map keyed by commodity symbol; value contains fluctuation metrics.</p>
+     * <p>Unix timestamp indicating when the response was generated.</p>
      */
-    _FinalStage rates(Map<String, Double> rates);
+    _FinalStage timestamp(Optional<Double> timestamp);
 
-    _FinalStage putAllRates(Map<String, Double> rates);
-
-    _FinalStage rates(String key, Double value);
+    _FinalStage timestamp(Double timestamp);
 
     /**
      * <p>Map containing detailed information for all the requested commodities keyed by commodity symbol.</p>
      */
+    _FinalStage metadata(Optional<Map<String, CommodityFluctuationResponseMetadataValue>> metadata);
+
     _FinalStage metadata(Map<String, CommodityFluctuationResponseMetadataValue> metadata);
 
-    _FinalStage putAllMetadata(Map<String, CommodityFluctuationResponseMetadataValue> metadata);
+    /**
+     * <p>Map keyed by commodity symbol; value contains fluctuation metrics.</p>
+     */
+    _FinalStage rates(Map<String, CommodityFluctuationResponseRatesValue> rates);
 
-    _FinalStage metadata(String key, CommodityFluctuationResponseMetadataValue value);
+    _FinalStage putAllRates(Map<String, CommodityFluctuationResponseRatesValue> rates);
+
+    _FinalStage rates(String key, CommodityFluctuationResponseRatesValue value);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements SuccessStage, TimestampStage, _FinalStage {
+  public static final class Builder implements SuccessStage, StartDateStage, EndDateStage, _FinalStage {
     private boolean success;
 
-    private double timestamp;
+    private String startDate;
 
-    private Map<String, CommodityFluctuationResponseMetadataValue> metadata = new LinkedHashMap<>();
+    private String endDate;
 
-    private Map<String, Double> rates = new LinkedHashMap<>();
+    private Map<String, CommodityFluctuationResponseRatesValue> rates = new LinkedHashMap<>();
+
+    private Optional<Map<String, CommodityFluctuationResponseMetadataValue>> metadata = Optional.empty();
+
+    private Optional<Double> timestamp = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -172,8 +212,10 @@ public final class CommodityFluctuationResponse {
     public Builder from(CommodityFluctuationResponse other) {
       success(other.getSuccess());
       timestamp(other.getTimestamp());
-      rates(other.getRates());
       metadata(other.getMetadata());
+      startDate(other.getStartDate());
+      endDate(other.getEndDate());
+      rates(other.getRates());
       return this;
     }
 
@@ -184,59 +226,32 @@ public final class CommodityFluctuationResponse {
      */
     @java.lang.Override
     @JsonSetter("success")
-    public TimestampStage success(boolean success) {
+    public StartDateStage success(boolean success) {
       this.success = success;
       return this;
     }
 
     /**
-     * <p>Unix timestamp indicating when the response was generated.</p>
-     * <p>Unix timestamp indicating when the response was generated.</p>
+     * <p>The start date of the fluctuation interval in YYYY-MM-DD format.</p>
+     * <p>The start date of the fluctuation interval in YYYY-MM-DD format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    @JsonSetter("timestamp")
-    public _FinalStage timestamp(double timestamp) {
-      this.timestamp = timestamp;
+    @JsonSetter("startDate")
+    public EndDateStage startDate(@NotNull String startDate) {
+      this.startDate = Objects.requireNonNull(startDate, "startDate must not be null");
       return this;
     }
 
     /**
-     * <p>Map containing detailed information for all the requested commodities keyed by commodity symbol.</p>
+     * <p>The end date of the fluctuation interval in YYYY-MM-DD format.</p>
+     * <p>The end date of the fluctuation interval in YYYY-MM-DD format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage metadata(String key, CommodityFluctuationResponseMetadataValue value) {
-      this.metadata.put(key, value);
-      return this;
-    }
-
-    /**
-     * <p>Map containing detailed information for all the requested commodities keyed by commodity symbol.</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    public _FinalStage putAllMetadata(
-        Map<String, CommodityFluctuationResponseMetadataValue> metadata) {
-      if (metadata != null) {
-        this.metadata.putAll(metadata);
-      }
-      return this;
-    }
-
-    /**
-     * <p>Map containing detailed information for all the requested commodities keyed by commodity symbol.</p>
-     */
-    @java.lang.Override
-    @JsonSetter(
-        value = "metadata",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage metadata(Map<String, CommodityFluctuationResponseMetadataValue> metadata) {
-      this.metadata.clear();
-      if (metadata != null) {
-        this.metadata.putAll(metadata);
-      }
+    @JsonSetter("endDate")
+    public _FinalStage endDate(@NotNull String endDate) {
+      this.endDate = Objects.requireNonNull(endDate, "endDate must not be null");
       return this;
     }
 
@@ -245,7 +260,7 @@ public final class CommodityFluctuationResponse {
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage rates(String key, Double value) {
+    public _FinalStage rates(String key, CommodityFluctuationResponseRatesValue value) {
       this.rates.put(key, value);
       return this;
     }
@@ -255,7 +270,7 @@ public final class CommodityFluctuationResponse {
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage putAllRates(Map<String, Double> rates) {
+    public _FinalStage putAllRates(Map<String, CommodityFluctuationResponseRatesValue> rates) {
       if (rates != null) {
         this.rates.putAll(rates);
       }
@@ -270,7 +285,7 @@ public final class CommodityFluctuationResponse {
         value = "rates",
         nulls = Nulls.SKIP
     )
-    public _FinalStage rates(Map<String, Double> rates) {
+    public _FinalStage rates(Map<String, CommodityFluctuationResponseRatesValue> rates) {
       this.rates.clear();
       if (rates != null) {
         this.rates.putAll(rates);
@@ -278,9 +293,56 @@ public final class CommodityFluctuationResponse {
       return this;
     }
 
+    /**
+     * <p>Map containing detailed information for all the requested commodities keyed by commodity symbol.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage metadata(Map<String, CommodityFluctuationResponseMetadataValue> metadata) {
+      this.metadata = Optional.ofNullable(metadata);
+      return this;
+    }
+
+    /**
+     * <p>Map containing detailed information for all the requested commodities keyed by commodity symbol.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "metadata",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage metadata(
+        Optional<Map<String, CommodityFluctuationResponseMetadataValue>> metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * <p>Unix timestamp indicating when the response was generated.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage timestamp(Double timestamp) {
+      this.timestamp = Optional.ofNullable(timestamp);
+      return this;
+    }
+
+    /**
+     * <p>Unix timestamp indicating when the response was generated.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "timestamp",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage timestamp(Optional<Double> timestamp) {
+      this.timestamp = timestamp;
+      return this;
+    }
+
     @java.lang.Override
     public CommodityFluctuationResponse build() {
-      return new CommodityFluctuationResponse(success, timestamp, rates, metadata, additionalProperties);
+      return new CommodityFluctuationResponse(success, timestamp, metadata, startDate, endDate, rates, additionalProperties);
     }
 
     @java.lang.Override

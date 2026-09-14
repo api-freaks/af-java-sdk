@@ -5,8 +5,8 @@
 package com.apifreaks.sdk.errors;
 
 import com.apifreaks.sdk.core.ApifreaksApiApiException;
-import okhttp3.Response;
 import com.apifreaks.sdk.types.ProxyAuthenticationRequiredErrorBody;
+import okhttp3.Response;
 
 public final class ProxyAuthenticationRequiredError extends ApifreaksApiApiException {
   /**

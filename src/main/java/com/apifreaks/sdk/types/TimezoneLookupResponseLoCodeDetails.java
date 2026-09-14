@@ -4,50 +4,47 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
-import java.lang.Double;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
+import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
     builder = TimezoneLookupResponseLoCodeDetails.Builder.class
 )
 public final class TimezoneLookupResponseLoCodeDetails {
-  private final Optional<String> loCode;
+  private final String loCode;
 
-  private final Optional<String> city;
+  private final String city;
 
-  private final Optional<Double> longitude;
+  private final String longitude;
 
-  private final Optional<Double> latitude;
+  private final String latitude;
 
-  private final Optional<String> stateCode;
+  private final String stateCode;
 
-  private final Optional<String> countryCode;
+  private final String countryCode;
 
-  private final Optional<String> countryName;
+  private final String countryName;
 
-  private final Optional<String> locationType;
+  private final String locationType;
 
   private final Map<String, Object> additionalProperties;
 
-  private TimezoneLookupResponseLoCodeDetails(Optional<String> loCode, Optional<String> city,
-      Optional<Double> longitude, Optional<Double> latitude, Optional<String> stateCode,
-      Optional<String> countryCode, Optional<String> countryName, Optional<String> locationType,
-      Map<String, Object> additionalProperties) {
+  private TimezoneLookupResponseLoCodeDetails(String loCode, String city, String longitude,
+      String latitude, String stateCode, String countryCode, String countryName,
+      String locationType, Map<String, Object> additionalProperties) {
     this.loCode = loCode;
     this.city = city;
     this.longitude = longitude;
@@ -60,42 +57,42 @@ public final class TimezoneLookupResponseLoCodeDetails {
   }
 
   @JsonProperty("lo_code")
-  public Optional<String> getLoCode() {
+  public String getLoCode() {
     return loCode;
   }
 
   @JsonProperty("city")
-  public Optional<String> getCity() {
+  public String getCity() {
     return city;
   }
 
   @JsonProperty("longitude")
-  public Optional<Double> getLongitude() {
+  public String getLongitude() {
     return longitude;
   }
 
   @JsonProperty("latitude")
-  public Optional<Double> getLatitude() {
+  public String getLatitude() {
     return latitude;
   }
 
   @JsonProperty("state_code")
-  public Optional<String> getStateCode() {
+  public String getStateCode() {
     return stateCode;
   }
 
   @JsonProperty("country_code")
-  public Optional<String> getCountryCode() {
+  public String getCountryCode() {
     return countryCode;
   }
 
   @JsonProperty("country_name")
-  public Optional<String> getCountryName() {
+  public String getCountryName() {
     return countryName;
   }
 
   @JsonProperty("location_type")
-  public Optional<String> getLocationType() {
+  public String getLocationType() {
     return locationType;
   }
 
@@ -124,29 +121,71 @@ public final class TimezoneLookupResponseLoCodeDetails {
     return ObjectMappers.stringify(this);
   }
 
-  public static Builder builder() {
+  public static LoCodeStage builder() {
     return new Builder();
+  }
+
+  public interface LoCodeStage {
+    CityStage loCode(@NotNull String loCode);
+
+    Builder from(TimezoneLookupResponseLoCodeDetails other);
+  }
+
+  public interface CityStage {
+    LongitudeStage city(@NotNull String city);
+  }
+
+  public interface LongitudeStage {
+    LatitudeStage longitude(@NotNull String longitude);
+  }
+
+  public interface LatitudeStage {
+    StateCodeStage latitude(@NotNull String latitude);
+  }
+
+  public interface StateCodeStage {
+    CountryCodeStage stateCode(@NotNull String stateCode);
+  }
+
+  public interface CountryCodeStage {
+    CountryNameStage countryCode(@NotNull String countryCode);
+  }
+
+  public interface CountryNameStage {
+    LocationTypeStage countryName(@NotNull String countryName);
+  }
+
+  public interface LocationTypeStage {
+    _FinalStage locationType(@NotNull String locationType);
+  }
+
+  public interface _FinalStage {
+    TimezoneLookupResponseLoCodeDetails build();
+
+    _FinalStage additionalProperty(String key, Object value);
+
+    _FinalStage additionalProperties(Map<String, Object> additionalProperties);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder {
-    private Optional<String> loCode = Optional.empty();
+  public static final class Builder implements LoCodeStage, CityStage, LongitudeStage, LatitudeStage, StateCodeStage, CountryCodeStage, CountryNameStage, LocationTypeStage, _FinalStage {
+    private String loCode;
 
-    private Optional<String> city = Optional.empty();
+    private String city;
 
-    private Optional<Double> longitude = Optional.empty();
+    private String longitude;
 
-    private Optional<Double> latitude = Optional.empty();
+    private String latitude;
 
-    private Optional<String> stateCode = Optional.empty();
+    private String stateCode;
 
-    private Optional<String> countryCode = Optional.empty();
+    private String countryCode;
 
-    private Optional<String> countryName = Optional.empty();
+    private String countryName;
 
-    private Optional<String> locationType = Optional.empty();
+    private String locationType;
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -154,6 +193,7 @@ public final class TimezoneLookupResponseLoCodeDetails {
     private Builder() {
     }
 
+    @java.lang.Override
     public Builder from(TimezoneLookupResponseLoCodeDetails other) {
       loCode(other.getLoCode());
       city(other.getCity());
@@ -166,127 +206,74 @@ public final class TimezoneLookupResponseLoCodeDetails {
       return this;
     }
 
-    @JsonSetter(
-        value = "lo_code",
-        nulls = Nulls.SKIP
-    )
-    public Builder loCode(Optional<String> loCode) {
-      this.loCode = loCode;
+    @java.lang.Override
+    @JsonSetter("lo_code")
+    public CityStage loCode(@NotNull String loCode) {
+      this.loCode = Objects.requireNonNull(loCode, "loCode must not be null");
       return this;
     }
 
-    public Builder loCode(String loCode) {
-      this.loCode = Optional.ofNullable(loCode);
+    @java.lang.Override
+    @JsonSetter("city")
+    public LongitudeStage city(@NotNull String city) {
+      this.city = Objects.requireNonNull(city, "city must not be null");
       return this;
     }
 
-    @JsonSetter(
-        value = "city",
-        nulls = Nulls.SKIP
-    )
-    public Builder city(Optional<String> city) {
-      this.city = city;
+    @java.lang.Override
+    @JsonSetter("longitude")
+    public LatitudeStage longitude(@NotNull String longitude) {
+      this.longitude = Objects.requireNonNull(longitude, "longitude must not be null");
       return this;
     }
 
-    public Builder city(String city) {
-      this.city = Optional.ofNullable(city);
+    @java.lang.Override
+    @JsonSetter("latitude")
+    public StateCodeStage latitude(@NotNull String latitude) {
+      this.latitude = Objects.requireNonNull(latitude, "latitude must not be null");
       return this;
     }
 
-    @JsonSetter(
-        value = "longitude",
-        nulls = Nulls.SKIP
-    )
-    public Builder longitude(Optional<Double> longitude) {
-      this.longitude = longitude;
+    @java.lang.Override
+    @JsonSetter("state_code")
+    public CountryCodeStage stateCode(@NotNull String stateCode) {
+      this.stateCode = Objects.requireNonNull(stateCode, "stateCode must not be null");
       return this;
     }
 
-    public Builder longitude(Double longitude) {
-      this.longitude = Optional.ofNullable(longitude);
+    @java.lang.Override
+    @JsonSetter("country_code")
+    public CountryNameStage countryCode(@NotNull String countryCode) {
+      this.countryCode = Objects.requireNonNull(countryCode, "countryCode must not be null");
       return this;
     }
 
-    @JsonSetter(
-        value = "latitude",
-        nulls = Nulls.SKIP
-    )
-    public Builder latitude(Optional<Double> latitude) {
-      this.latitude = latitude;
+    @java.lang.Override
+    @JsonSetter("country_name")
+    public LocationTypeStage countryName(@NotNull String countryName) {
+      this.countryName = Objects.requireNonNull(countryName, "countryName must not be null");
       return this;
     }
 
-    public Builder latitude(Double latitude) {
-      this.latitude = Optional.ofNullable(latitude);
+    @java.lang.Override
+    @JsonSetter("location_type")
+    public _FinalStage locationType(@NotNull String locationType) {
+      this.locationType = Objects.requireNonNull(locationType, "locationType must not be null");
       return this;
     }
 
-    @JsonSetter(
-        value = "state_code",
-        nulls = Nulls.SKIP
-    )
-    public Builder stateCode(Optional<String> stateCode) {
-      this.stateCode = stateCode;
-      return this;
-    }
-
-    public Builder stateCode(String stateCode) {
-      this.stateCode = Optional.ofNullable(stateCode);
-      return this;
-    }
-
-    @JsonSetter(
-        value = "country_code",
-        nulls = Nulls.SKIP
-    )
-    public Builder countryCode(Optional<String> countryCode) {
-      this.countryCode = countryCode;
-      return this;
-    }
-
-    public Builder countryCode(String countryCode) {
-      this.countryCode = Optional.ofNullable(countryCode);
-      return this;
-    }
-
-    @JsonSetter(
-        value = "country_name",
-        nulls = Nulls.SKIP
-    )
-    public Builder countryName(Optional<String> countryName) {
-      this.countryName = countryName;
-      return this;
-    }
-
-    public Builder countryName(String countryName) {
-      this.countryName = Optional.ofNullable(countryName);
-      return this;
-    }
-
-    @JsonSetter(
-        value = "location_type",
-        nulls = Nulls.SKIP
-    )
-    public Builder locationType(Optional<String> locationType) {
-      this.locationType = locationType;
-      return this;
-    }
-
-    public Builder locationType(String locationType) {
-      this.locationType = Optional.ofNullable(locationType);
-      return this;
-    }
-
+    @java.lang.Override
     public TimezoneLookupResponseLoCodeDetails build() {
       return new TimezoneLookupResponseLoCodeDetails(loCode, city, longitude, latitude, stateCode, countryCode, countryName, locationType, additionalProperties);
     }
 
+    @java.lang.Override
     public Builder additionalProperty(String key, Object value) {
       this.additionalProperties.put(key, value);
       return this;
     }
 
+    @java.lang.Override
     public Builder additionalProperties(Map<String, Object> additionalProperties) {
       this.additionalProperties.putAll(additionalProperties);
       return this;

@@ -4,6 +4,8 @@
 
 package com.apifreaks.sdk.requests;
 
+import com.apifreaks.sdk.core.ObjectMappers;
+import com.apifreaks.sdk.types.CurrencyConvertHistoricalRequestFormat;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
+import java.lang.Double;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -20,7 +22,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
-import com.apifreaks.sdk.types.CurrencyConvertHistoricalRequestFormat;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
@@ -35,7 +36,7 @@ public final class CurrencyConvertHistoricalRequest {
 
   private final String to;
 
-  private final Optional<String> amount;
+  private final Optional<Double> amount;
 
   private final String date;
 
@@ -43,7 +44,7 @@ public final class CurrencyConvertHistoricalRequest {
 
   private CurrencyConvertHistoricalRequest(String apiKey,
       Optional<CurrencyConvertHistoricalRequestFormat> format, String from, String to,
-      Optional<String> amount, String date, Map<String, Object> additionalProperties) {
+      Optional<Double> amount, String date, Map<String, Object> additionalProperties) {
     this.apiKey = apiKey;
     this.format = format;
     this.from = from;
@@ -89,7 +90,7 @@ public final class CurrencyConvertHistoricalRequest {
    * @return The Amount to be converted
    */
   @JsonProperty("amount")
-  public Optional<String> getAmount() {
+  public Optional<Double> getAmount() {
     return amount;
   }
 
@@ -177,9 +178,9 @@ public final class CurrencyConvertHistoricalRequest {
     /**
      * <p>The Amount to be converted</p>
      */
-    _FinalStage amount(Optional<String> amount);
+    _FinalStage amount(Optional<Double> amount);
 
-    _FinalStage amount(String amount);
+    _FinalStage amount(Double amount);
   }
 
   @JsonIgnoreProperties(
@@ -194,7 +195,7 @@ public final class CurrencyConvertHistoricalRequest {
 
     private String date;
 
-    private Optional<String> amount = Optional.empty();
+    private Optional<Double> amount = Optional.empty();
 
     private Optional<CurrencyConvertHistoricalRequestFormat> format = Optional.empty();
 
@@ -268,7 +269,7 @@ public final class CurrencyConvertHistoricalRequest {
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage amount(String amount) {
+    public _FinalStage amount(Double amount) {
       this.amount = Optional.ofNullable(amount);
       return this;
     }
@@ -281,7 +282,7 @@ public final class CurrencyConvertHistoricalRequest {
         value = "amount",
         nulls = Nulls.SKIP
     )
-    public _FinalStage amount(Optional<String> amount) {
+    public _FinalStage amount(Optional<Double> amount) {
       this.amount = amount;
       return this;
     }

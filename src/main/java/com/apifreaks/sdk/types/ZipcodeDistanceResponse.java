@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,8 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
-import java.lang.Integer;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -27,16 +26,16 @@ import java.util.Optional;
     builder = ZipcodeDistanceResponse.Builder.class
 )
 public final class ZipcodeDistanceResponse {
-  private final Optional<Integer> resultCount;
+  private final Optional<String> resultsCount;
 
   private final Optional<List<ZipcodeDistanceResponseResultsItem>> results;
 
   private final Map<String, Object> additionalProperties;
 
-  private ZipcodeDistanceResponse(Optional<Integer> resultCount,
+  private ZipcodeDistanceResponse(Optional<String> resultsCount,
       Optional<List<ZipcodeDistanceResponseResultsItem>> results,
       Map<String, Object> additionalProperties) {
-    this.resultCount = resultCount;
+    this.resultsCount = resultsCount;
     this.results = results;
     this.additionalProperties = additionalProperties;
   }
@@ -44,9 +43,9 @@ public final class ZipcodeDistanceResponse {
   /**
    * @return Number of distance results returned
    */
-  @JsonProperty("result_count")
-  public Optional<Integer> getResultCount() {
-    return resultCount;
+  @JsonProperty("results_count")
+  public Optional<String> getResultsCount() {
+    return resultsCount;
   }
 
   @JsonProperty("results")
@@ -66,12 +65,12 @@ public final class ZipcodeDistanceResponse {
   }
 
   private boolean equalTo(ZipcodeDistanceResponse other) {
-    return resultCount.equals(other.resultCount) && results.equals(other.results);
+    return resultsCount.equals(other.resultsCount) && results.equals(other.results);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.resultCount, this.results);
+    return Objects.hash(this.resultsCount, this.results);
   }
 
   @java.lang.Override
@@ -87,7 +86,7 @@ public final class ZipcodeDistanceResponse {
       ignoreUnknown = true
   )
   public static final class Builder {
-    private Optional<Integer> resultCount = Optional.empty();
+    private Optional<String> resultsCount = Optional.empty();
 
     private Optional<List<ZipcodeDistanceResponseResultsItem>> results = Optional.empty();
 
@@ -98,7 +97,7 @@ public final class ZipcodeDistanceResponse {
     }
 
     public Builder from(ZipcodeDistanceResponse other) {
-      resultCount(other.getResultCount());
+      resultsCount(other.getResultsCount());
       results(other.getResults());
       return this;
     }
@@ -107,16 +106,16 @@ public final class ZipcodeDistanceResponse {
      * <p>Number of distance results returned</p>
      */
     @JsonSetter(
-        value = "result_count",
+        value = "results_count",
         nulls = Nulls.SKIP
     )
-    public Builder resultCount(Optional<Integer> resultCount) {
-      this.resultCount = resultCount;
+    public Builder resultsCount(Optional<String> resultsCount) {
+      this.resultsCount = resultsCount;
       return this;
     }
 
-    public Builder resultCount(Integer resultCount) {
-      this.resultCount = Optional.ofNullable(resultCount);
+    public Builder resultsCount(String resultsCount) {
+      this.resultsCount = Optional.ofNullable(resultsCount);
       return this;
     }
 
@@ -135,7 +134,7 @@ public final class ZipcodeDistanceResponse {
     }
 
     public ZipcodeDistanceResponse build() {
-      return new ZipcodeDistanceResponse(resultCount, results, additionalProperties);
+      return new ZipcodeDistanceResponse(resultsCount, results, additionalProperties);
     }
 
     public Builder additionalProperty(String key, Object value) {

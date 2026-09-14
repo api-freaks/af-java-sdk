@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Integer;
 import java.lang.Object;
 import java.lang.String;
@@ -48,17 +48,17 @@ public final class DomainWhoisReverseResponse {
     this.additionalProperties = additionalProperties;
   }
 
-  @JsonProperty("total_Result")
+  @JsonProperty("totalResult")
   public Optional<Integer> getTotalResult() {
     return totalResult;
   }
 
-  @JsonProperty("total_Pages")
+  @JsonProperty("totalPages")
   public Optional<Integer> getTotalPages() {
     return totalPages;
   }
 
-  @JsonProperty("current_Page")
+  @JsonProperty("currentPage")
   public Optional<Integer> getCurrentPage() {
     return currentPage;
   }
@@ -125,7 +125,7 @@ public final class DomainWhoisReverseResponse {
     }
 
     @JsonSetter(
-        value = "total_Result",
+        value = "totalResult",
         nulls = Nulls.SKIP
     )
     public Builder totalResult(Optional<Integer> totalResult) {
@@ -139,7 +139,7 @@ public final class DomainWhoisReverseResponse {
     }
 
     @JsonSetter(
-        value = "total_Pages",
+        value = "totalPages",
         nulls = Nulls.SKIP
     )
     public Builder totalPages(Optional<Integer> totalPages) {
@@ -153,7 +153,7 @@ public final class DomainWhoisReverseResponse {
     }
 
     @JsonSetter(
-        value = "current_Page",
+        value = "currentPage",
         nulls = Nulls.SKIP
     )
     public Builder currentPage(Optional<Integer> currentPage) {

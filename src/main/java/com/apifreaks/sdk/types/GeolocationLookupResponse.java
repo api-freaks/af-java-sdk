@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,10 +13,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -39,7 +40,7 @@ public final class GeolocationLookupResponse {
 
   private final Optional<GeolocationLookupResponseSecurity> security;
 
-  private final Optional<GeolocationLookupResponseAbuseItem> abuse;
+  private final Optional<List<GeolocationLookupResponseAbuseItem>> abuse;
 
   private final Optional<GeolocationLookupResponseTimeZone> timeZone;
 
@@ -53,7 +54,7 @@ public final class GeolocationLookupResponse {
       Optional<GeolocationLookupResponseNetwork> network,
       Optional<GeolocationLookupResponseCurrency> currency,
       Optional<GeolocationLookupResponseSecurity> security,
-      Optional<GeolocationLookupResponseAbuseItem> abuse,
+      Optional<List<GeolocationLookupResponseAbuseItem>> abuse,
       Optional<GeolocationLookupResponseTimeZone> timeZone,
       Optional<GeolocationLookupResponseUserAgent> userAgent,
       Map<String, Object> additionalProperties) {
@@ -112,7 +113,7 @@ public final class GeolocationLookupResponse {
   }
 
   @JsonProperty("abuse")
-  public Optional<GeolocationLookupResponseAbuseItem> getAbuse() {
+  public Optional<List<GeolocationLookupResponseAbuseItem>> getAbuse() {
     return abuse;
   }
 
@@ -173,7 +174,7 @@ public final class GeolocationLookupResponse {
 
     private Optional<GeolocationLookupResponseSecurity> security = Optional.empty();
 
-    private Optional<GeolocationLookupResponseAbuseItem> abuse = Optional.empty();
+    private Optional<List<GeolocationLookupResponseAbuseItem>> abuse = Optional.empty();
 
     private Optional<GeolocationLookupResponseTimeZone> timeZone = Optional.empty();
 
@@ -308,12 +309,12 @@ public final class GeolocationLookupResponse {
         value = "abuse",
         nulls = Nulls.SKIP
     )
-    public Builder abuse(Optional<GeolocationLookupResponseAbuseItem> abuse) {
+    public Builder abuse(Optional<List<GeolocationLookupResponseAbuseItem>> abuse) {
       this.abuse = abuse;
       return this;
     }
 
-    public Builder abuse(GeolocationLookupResponseAbuseItem abuse) {
+    public Builder abuse(List<GeolocationLookupResponseAbuseItem> abuse) {
       this.abuse = Optional.ofNullable(abuse);
       return this;
     }

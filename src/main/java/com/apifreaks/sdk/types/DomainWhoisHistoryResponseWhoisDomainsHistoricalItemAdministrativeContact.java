@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -112,7 +112,7 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemAdministr
     return countryCode;
   }
 
-  @JsonProperty("email_address")
+  @JsonProperty("emailaddress")
   public Optional<String> getEmailaddress() {
     return emailaddress;
   }
@@ -127,7 +127,7 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemAdministr
     return fax;
   }
 
-  @JsonProperty("mailing_address")
+  @JsonProperty("mailingaddress")
   public Optional<String> getMailingaddress() {
     return mailingaddress;
   }
@@ -326,7 +326,7 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemAdministr
     }
 
     @JsonSetter(
-        value = "email_address",
+        value = "emailaddress",
         nulls = Nulls.SKIP
     )
     public Builder emailaddress(Optional<String> emailaddress) {
@@ -368,7 +368,7 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemAdministr
     }
 
     @JsonSetter(
-        value = "mailing_address",
+        value = "mailingaddress",
         nulls = Nulls.SKIP
     )
     public Builder mailingaddress(Optional<String> mailingaddress) {

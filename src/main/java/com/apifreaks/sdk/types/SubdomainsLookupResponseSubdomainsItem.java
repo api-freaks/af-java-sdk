@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -30,14 +30,14 @@ public final class SubdomainsLookupResponseSubdomainsItem {
 
   private final String firstSeen;
 
-  private final String lastSeen;
+  private final Optional<String> lastSeen;
 
   private final Optional<String> inactiveFrom;
 
   private final Map<String, Object> additionalProperties;
 
   private SubdomainsLookupResponseSubdomainsItem(String subdomain, String firstSeen,
-      String lastSeen, Optional<String> inactiveFrom,
+      Optional<String> lastSeen, Optional<String> inactiveFrom,
       Map<String, Object> additionalProperties) {
     this.subdomain = subdomain;
     this.firstSeen = firstSeen;
@@ -57,7 +57,7 @@ public final class SubdomainsLookupResponseSubdomainsItem {
   }
 
   @JsonProperty("last_seen")
-  public String getLastSeen() {
+  public Optional<String> getLastSeen() {
     return lastSeen;
   }
 
@@ -105,11 +105,7 @@ public final class SubdomainsLookupResponseSubdomainsItem {
   }
 
   public interface FirstSeenStage {
-    LastSeenStage firstSeen(@NotNull String firstSeen);
-  }
-
-  public interface LastSeenStage {
-    _FinalStage lastSeen(@NotNull String lastSeen);
+    _FinalStage firstSeen(@NotNull String firstSeen);
   }
 
   public interface _FinalStage {
@@ -118,6 +114,10 @@ public final class SubdomainsLookupResponseSubdomainsItem {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
+
+    _FinalStage lastSeen(Optional<String> lastSeen);
+
+    _FinalStage lastSeen(String lastSeen);
 
     /**
      * <p>The date from which the subdomain is considered inactive. Appears only if the subdomain is no longer active.</p>
@@ -130,14 +130,14 @@ public final class SubdomainsLookupResponseSubdomainsItem {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements SubdomainStage, FirstSeenStage, LastSeenStage, _FinalStage {
+  public static final class Builder implements SubdomainStage, FirstSeenStage, _FinalStage {
     private String subdomain;
 
     private String firstSeen;
 
-    private String lastSeen;
-
     private Optional<String> inactiveFrom = Optional.empty();
+
+    private Optional<String> lastSeen = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -163,15 +163,8 @@ public final class SubdomainsLookupResponseSubdomainsItem {
 
     @java.lang.Override
     @JsonSetter("first_seen")
-    public LastSeenStage firstSeen(@NotNull String firstSeen) {
+    public _FinalStage firstSeen(@NotNull String firstSeen) {
       this.firstSeen = Objects.requireNonNull(firstSeen, "firstSeen must not be null");
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter("last_seen")
-    public _FinalStage lastSeen(@NotNull String lastSeen) {
-      this.lastSeen = Objects.requireNonNull(lastSeen, "lastSeen must not be null");
       return this;
     }
 
@@ -195,6 +188,22 @@ public final class SubdomainsLookupResponseSubdomainsItem {
     )
     public _FinalStage inactiveFrom(Optional<String> inactiveFrom) {
       this.inactiveFrom = inactiveFrom;
+      return this;
+    }
+
+    @java.lang.Override
+    public _FinalStage lastSeen(String lastSeen) {
+      this.lastSeen = Optional.ofNullable(lastSeen);
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter(
+        value = "last_seen",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage lastSeen(Optional<String> lastSeen) {
+      this.lastSeen = lastSeen;
       return this;
     }
 

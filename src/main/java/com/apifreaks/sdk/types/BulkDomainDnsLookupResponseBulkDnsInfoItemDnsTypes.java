@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Double;
 import java.lang.Object;
 import java.lang.String;
@@ -42,13 +42,11 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsTypes {
 
   private final Optional<Double> spf;
 
-  private final Optional<Double> ptr;
-
   private final Map<String, Object> additionalProperties;
 
   private BulkDomainDnsLookupResponseBulkDnsInfoItemDnsTypes(Optional<Double> a,
       Optional<Double> aaaa, Optional<Double> cname, Optional<Double> mx, Optional<Double> ns,
-      Optional<Double> soa, Optional<Double> txt, Optional<Double> spf, Optional<Double> ptr,
+      Optional<Double> soa, Optional<Double> txt, Optional<Double> spf,
       Map<String, Object> additionalProperties) {
     this.a = a;
     this.aaaa = aaaa;
@@ -58,7 +56,6 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsTypes {
     this.soa = soa;
     this.txt = txt;
     this.spf = spf;
-    this.ptr = ptr;
     this.additionalProperties = additionalProperties;
   }
 
@@ -102,11 +99,6 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsTypes {
     return spf;
   }
 
-  @JsonProperty("PTR")
-  public Optional<Double> getPtr() {
-    return ptr;
-  }
-
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -119,12 +111,12 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsTypes {
   }
 
   private boolean equalTo(BulkDomainDnsLookupResponseBulkDnsInfoItemDnsTypes other) {
-    return a.equals(other.a) && aaaa.equals(other.aaaa) && cname.equals(other.cname) && mx.equals(other.mx) && ns.equals(other.ns) && soa.equals(other.soa) && txt.equals(other.txt) && spf.equals(other.spf) && ptr.equals(other.ptr);
+    return a.equals(other.a) && aaaa.equals(other.aaaa) && cname.equals(other.cname) && mx.equals(other.mx) && ns.equals(other.ns) && soa.equals(other.soa) && txt.equals(other.txt) && spf.equals(other.spf);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.a, this.aaaa, this.cname, this.mx, this.ns, this.soa, this.txt, this.spf, this.ptr);
+    return Objects.hash(this.a, this.aaaa, this.cname, this.mx, this.ns, this.soa, this.txt, this.spf);
   }
 
   @java.lang.Override
@@ -156,8 +148,6 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsTypes {
 
     private Optional<Double> spf = Optional.empty();
 
-    private Optional<Double> ptr = Optional.empty();
-
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
@@ -173,7 +163,6 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsTypes {
       soa(other.getSoa());
       txt(other.getTxt());
       spf(other.getSpf());
-      ptr(other.getPtr());
       return this;
     }
 
@@ -289,22 +278,8 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsTypes {
       return this;
     }
 
-    @JsonSetter(
-        value = "PTR",
-        nulls = Nulls.SKIP
-    )
-    public Builder ptr(Optional<Double> ptr) {
-      this.ptr = ptr;
-      return this;
-    }
-
-    public Builder ptr(Double ptr) {
-      this.ptr = Optional.ofNullable(ptr);
-      return this;
-    }
-
     public BulkDomainDnsLookupResponseBulkDnsInfoItemDnsTypes build() {
-      return new BulkDomainDnsLookupResponseBulkDnsInfoItemDnsTypes(a, aaaa, cname, mx, ns, soa, txt, spf, ptr, additionalProperties);
+      return new BulkDomainDnsLookupResponseBulkDnsInfoItemDnsTypes(a, aaaa, cname, mx, ns, soa, txt, spf, additionalProperties);
     }
 
     public Builder additionalProperty(String key, Object value) {

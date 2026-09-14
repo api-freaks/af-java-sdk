@@ -4,6 +4,8 @@
 
 package com.apifreaks.sdk.requests;
 
+import com.apifreaks.sdk.core.ObjectMappers;
+import com.apifreaks.sdk.types.DomainDnsLookupRequestFormat;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,23 +14,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
-import com.apifreaks.sdk.types.DomainDnsLookupRequestFormat;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
     builder = DomainDnsLookupRequest.Builder.class
 )
 public final class DomainDnsLookupRequest {
-  private final List<String> type;
+  private final Optional<List<String>> type;
 
   private final String apiKey;
 
@@ -40,7 +41,7 @@ public final class DomainDnsLookupRequest {
 
   private final Map<String, Object> additionalProperties;
 
-  private DomainDnsLookupRequest(List<String> type, String apiKey,
+  private DomainDnsLookupRequest(Optional<List<String>> type, String apiKey,
       Optional<DomainDnsLookupRequestFormat> format, Optional<String> hostName,
       Optional<String> ipAddress, Map<String, Object> additionalProperties) {
     this.type = type;
@@ -55,7 +56,7 @@ public final class DomainDnsLookupRequest {
    * @return A comma-separated list of DNS record types for lookup. Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all. When ipAddress is provided, type must be &quot;all&quot;.
    */
   @JsonProperty("type")
-  public List<String> getType() {
+  public Optional<List<String>> getType() {
     return type;
   }
 
@@ -124,16 +125,9 @@ public final class DomainDnsLookupRequest {
     /**
      * <p>Your API key</p>
      */
-    TypeStage apiKey(@NotNull String apiKey);
+    _FinalStage apiKey(@NotNull String apiKey);
 
     Builder from(DomainDnsLookupRequest other);
-  }
-
-  public interface TypeStage {
-    /**
-     * <p>A comma-separated list of DNS record types for lookup. Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all. When ipAddress is provided, type must be &quot;all&quot;.</p>
-     */
-    _FinalStage type(@NotNull List<String> type);
   }
 
   public interface _FinalStage {
@@ -142,6 +136,15 @@ public final class DomainDnsLookupRequest {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
+
+    /**
+     * <p>A comma-separated list of DNS record types for lookup. Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all. When ipAddress is provided, type must be &quot;all&quot;.</p>
+     */
+    _FinalStage type(Optional<List<String>> type);
+
+    _FinalStage type(List<String> type);
+
+    _FinalStage type(String type);
 
     /**
      * <p>Format of the response.</p>
@@ -168,16 +171,16 @@ public final class DomainDnsLookupRequest {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements ApiKeyStage, TypeStage, _FinalStage {
+  public static final class Builder implements ApiKeyStage, _FinalStage {
     private String apiKey;
-
-    private List<String> type;
 
     private Optional<String> ipAddress = Optional.empty();
 
     private Optional<String> hostName = Optional.empty();
 
     private Optional<DomainDnsLookupRequestFormat> format = Optional.empty();
+
+    private Optional<List<String>> type = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -202,7 +205,7 @@ public final class DomainDnsLookupRequest {
      */
     @java.lang.Override
     @JsonSetter("apiKey")
-    public TypeStage apiKey(@NotNull String apiKey) {
+    public _FinalStage apiKey(@NotNull String apiKey) {
       this.apiKey = Objects.requireNonNull(apiKey, "apiKey must not be null");
       return this;
     }
@@ -276,15 +279,32 @@ public final class DomainDnsLookupRequest {
       return this;
     }
 
+    @java.lang.Override
+    public _FinalStage type(String type) {
+      this.type = Optional.of(Collections.singletonList(type));
+      return this;
+    }
+
     /**
-     * <p>A comma-separated list of DNS record types for lookup. Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all. When ipAddress is provided, type must be &quot;all&quot;.</p>
      * <p>A comma-separated list of DNS record types for lookup. Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all. When ipAddress is provided, type must be &quot;all&quot;.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    @JsonSetter("type")
-    public _FinalStage type(@NotNull List<String> type) {
-      this.type = Objects.requireNonNull(type, "type must not be null");
+    public _FinalStage type(List<String> type) {
+      this.type = Optional.ofNullable(type);
+      return this;
+    }
+
+    /**
+     * <p>A comma-separated list of DNS record types for lookup. Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all. When ipAddress is provided, type must be &quot;all&quot;.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "type",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage type(Optional<List<String>> type) {
+      this.type = type;
       return this;
     }
 

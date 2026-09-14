@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,8 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
-import java.lang.Boolean;
 import java.lang.Object;
 import java.lang.String;
 import java.time.OffsetDateTime;
@@ -22,7 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
@@ -34,11 +32,9 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItem {
 
   private final OffsetDateTime queryTime;
 
-  private final Optional<String> domainName;
+  private final String domainName;
 
-  private final Optional<Boolean> domainRegistered;
-
-  private final Optional<String> ipAddress;
+  private final boolean domainRegistered;
 
   private final BulkDomainDnsLookupResponseBulkDnsInfoItemDnsTypes dnsTypes;
 
@@ -47,7 +43,7 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItem {
   private final Map<String, Object> additionalProperties;
 
   private BulkDomainDnsLookupResponseBulkDnsInfoItem(boolean status, OffsetDateTime queryTime,
-      Optional<String> domainName, Optional<Boolean> domainRegistered, Optional<String> ipAddress,
+      String domainName, boolean domainRegistered,
       BulkDomainDnsLookupResponseBulkDnsInfoItemDnsTypes dnsTypes,
       List<BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItem> dnsRecords,
       Map<String, Object> additionalProperties) {
@@ -55,7 +51,6 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItem {
     this.queryTime = queryTime;
     this.domainName = domainName;
     this.domainRegistered = domainRegistered;
-    this.ipAddress = ipAddress;
     this.dnsTypes = dnsTypes;
     this.dnsRecords = dnsRecords;
     this.additionalProperties = additionalProperties;
@@ -81,7 +76,7 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItem {
    * @return Queried domain.
    */
   @JsonProperty("domainName")
-  public Optional<String> getDomainName() {
+  public String getDomainName() {
     return domainName;
   }
 
@@ -89,13 +84,8 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItem {
    * @return Indicates whether the domain is registered.
    */
   @JsonProperty("domainRegistered")
-  public Optional<Boolean> getDomainRegistered() {
+  public boolean getDomainRegistered() {
     return domainRegistered;
-  }
-
-  @JsonProperty("ipAddress")
-  public Optional<String> getIpAddress() {
-    return ipAddress;
   }
 
   @JsonProperty("dnsTypes")
@@ -123,12 +113,12 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItem {
   }
 
   private boolean equalTo(BulkDomainDnsLookupResponseBulkDnsInfoItem other) {
-    return status == other.status && queryTime.equals(other.queryTime) && domainName.equals(other.domainName) && domainRegistered.equals(other.domainRegistered) && ipAddress.equals(other.ipAddress) && dnsTypes.equals(other.dnsTypes) && dnsRecords.equals(other.dnsRecords);
+    return status == other.status && queryTime.equals(other.queryTime) && domainName.equals(other.domainName) && domainRegistered == other.domainRegistered && dnsTypes.equals(other.dnsTypes) && dnsRecords.equals(other.dnsRecords);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.status, this.queryTime, this.domainName, this.domainRegistered, this.ipAddress, this.dnsTypes, this.dnsRecords);
+    return Objects.hash(this.status, this.queryTime, this.domainName, this.domainRegistered, this.dnsTypes, this.dnsRecords);
   }
 
   @java.lang.Override
@@ -153,7 +143,21 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItem {
     /**
      * <p>Time at which the query was made (Format:YYYY-MM-DD HH:mm:ss).</p>
      */
-    DnsTypesStage queryTime(@NotNull OffsetDateTime queryTime);
+    DomainNameStage queryTime(@NotNull OffsetDateTime queryTime);
+  }
+
+  public interface DomainNameStage {
+    /**
+     * <p>Queried domain.</p>
+     */
+    DomainRegisteredStage domainName(@NotNull String domainName);
+  }
+
+  public interface DomainRegisteredStage {
+    /**
+     * <p>Indicates whether the domain is registered.</p>
+     */
+    DnsTypesStage domainRegistered(boolean domainRegistered);
   }
 
   public interface DnsTypesStage {
@@ -162,24 +166,6 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItem {
 
   public interface _FinalStage {
     BulkDomainDnsLookupResponseBulkDnsInfoItem build();
-
-    /**
-     * <p>Queried domain.</p>
-     */
-    _FinalStage domainName(Optional<String> domainName);
-
-    _FinalStage domainName(String domainName);
-
-    /**
-     * <p>Indicates whether the domain is registered.</p>
-     */
-    _FinalStage domainRegistered(Optional<Boolean> domainRegistered);
-
-    _FinalStage domainRegistered(Boolean domainRegistered);
-
-    _FinalStage ipAddress(Optional<String> ipAddress);
-
-    _FinalStage ipAddress(String ipAddress);
 
     _FinalStage additionalProperty(String key, Object value);
 
@@ -200,20 +186,18 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItem {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements StatusStage, QueryTimeStage, DnsTypesStage, _FinalStage {
+  public static final class Builder implements StatusStage, QueryTimeStage, DomainNameStage, DomainRegisteredStage, DnsTypesStage, _FinalStage {
     private boolean status;
 
     private OffsetDateTime queryTime;
 
+    private String domainName;
+
+    private boolean domainRegistered;
+
     private BulkDomainDnsLookupResponseBulkDnsInfoItemDnsTypes dnsTypes;
 
     private List<BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItem> dnsRecords = new ArrayList<>();
-
-    private Optional<String> ipAddress = Optional.empty();
-
-    private Optional<Boolean> domainRegistered = Optional.empty();
-
-    private Optional<String> domainName = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -227,7 +211,6 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItem {
       queryTime(other.getQueryTime());
       domainName(other.getDomainName());
       domainRegistered(other.getDomainRegistered());
-      ipAddress(other.getIpAddress());
       dnsTypes(other.getDnsTypes());
       dnsRecords(other.getDnsRecords());
       return this;
@@ -252,8 +235,32 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItem {
      */
     @java.lang.Override
     @JsonSetter("queryTime")
-    public DnsTypesStage queryTime(@NotNull OffsetDateTime queryTime) {
+    public DomainNameStage queryTime(@NotNull OffsetDateTime queryTime) {
       this.queryTime = Objects.requireNonNull(queryTime, "queryTime must not be null");
+      return this;
+    }
+
+    /**
+     * <p>Queried domain.</p>
+     * <p>Queried domain.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    @JsonSetter("domainName")
+    public DomainRegisteredStage domainName(@NotNull String domainName) {
+      this.domainName = Objects.requireNonNull(domainName, "domainName must not be null");
+      return this;
+    }
+
+    /**
+     * <p>Indicates whether the domain is registered.</p>
+     * <p>Indicates whether the domain is registered.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    @JsonSetter("domainRegistered")
+    public DnsTypesStage domainRegistered(boolean domainRegistered) {
+      this.domainRegistered = domainRegistered;
       return this;
     }
 
@@ -307,64 +314,8 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItem {
     }
 
     @java.lang.Override
-    public _FinalStage ipAddress(String ipAddress) {
-      this.ipAddress = Optional.ofNullable(ipAddress);
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter(
-        value = "ipAddress",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage ipAddress(Optional<String> ipAddress) {
-      this.ipAddress = ipAddress;
-      return this;
-    }
-
-    /**
-     * <p>Indicates whether the domain is registered.</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    public _FinalStage domainRegistered(Boolean domainRegistered) {
-      this.domainRegistered = Optional.ofNullable(domainRegistered);
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter(
-        value = "domainRegistered",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage domainRegistered(Optional<Boolean> domainRegistered) {
-      this.domainRegistered = domainRegistered;
-      return this;
-    }
-
-    /**
-     * <p>Queried domain.</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    public _FinalStage domainName(String domainName) {
-      this.domainName = Optional.ofNullable(domainName);
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter(
-        value = "domainName",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage domainName(Optional<String> domainName) {
-      this.domainName = domainName;
-      return this;
-    }
-
-    @java.lang.Override
     public BulkDomainDnsLookupResponseBulkDnsInfoItem build() {
-      return new BulkDomainDnsLookupResponseBulkDnsInfoItem(status, queryTime, domainName, domainRegistered, ipAddress, dnsTypes, dnsRecords, additionalProperties);
+      return new BulkDomainDnsLookupResponseBulkDnsInfoItem(status, queryTime, domainName, domainRegistered, dnsTypes, dnsRecords, additionalProperties);
     }
 
     @java.lang.Override

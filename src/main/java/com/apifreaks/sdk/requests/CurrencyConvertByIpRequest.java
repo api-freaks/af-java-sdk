@@ -4,6 +4,9 @@
 
 package com.apifreaks.sdk.requests;
 
+import com.apifreaks.sdk.core.ObjectMappers;
+import com.apifreaks.sdk.types.CurrencyConvertByIpRequestFormat;
+import com.apifreaks.sdk.types.CurrencyConvertByIpRequestUpdates;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
+import java.lang.Double;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -20,8 +23,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
-import com.apifreaks.sdk.types.CurrencyConvertByIpRequestFormat;
-import com.apifreaks.sdk.types.CurrencyConvertByIpRequestUpdates;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
@@ -38,14 +39,14 @@ public final class CurrencyConvertByIpRequest {
 
   private final Optional<String> ip;
 
-  private final Optional<String> amount;
+  private final Optional<Double> amount;
 
   private final Map<String, Object> additionalProperties;
 
   private CurrencyConvertByIpRequest(String apiKey,
       Optional<CurrencyConvertByIpRequestFormat> format,
       Optional<CurrencyConvertByIpRequestUpdates> updates, String from, Optional<String> ip,
-      Optional<String> amount, Map<String, Object> additionalProperties) {
+      Optional<Double> amount, Map<String, Object> additionalProperties) {
     this.apiKey = apiKey;
     this.format = format;
     this.updates = updates;
@@ -99,7 +100,7 @@ public final class CurrencyConvertByIpRequest {
    * @return Amount to convert
    */
   @JsonProperty("amount")
-  public Optional<String> getAmount() {
+  public Optional<Double> getAmount() {
     return amount;
   }
 
@@ -179,9 +180,9 @@ public final class CurrencyConvertByIpRequest {
     /**
      * <p>Amount to convert</p>
      */
-    _FinalStage amount(Optional<String> amount);
+    _FinalStage amount(Optional<Double> amount);
 
-    _FinalStage amount(String amount);
+    _FinalStage amount(Double amount);
   }
 
   @JsonIgnoreProperties(
@@ -192,7 +193,7 @@ public final class CurrencyConvertByIpRequest {
 
     private String from;
 
-    private Optional<String> amount = Optional.empty();
+    private Optional<Double> amount = Optional.empty();
 
     private Optional<String> ip = Optional.empty();
 
@@ -246,7 +247,7 @@ public final class CurrencyConvertByIpRequest {
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage amount(String amount) {
+    public _FinalStage amount(Double amount) {
       this.amount = Optional.ofNullable(amount);
       return this;
     }
@@ -259,7 +260,7 @@ public final class CurrencyConvertByIpRequest {
         value = "amount",
         nulls = Nulls.SKIP
     )
-    public _FinalStage amount(Optional<String> amount) {
+    public _FinalStage amount(Optional<Double> amount) {
       this.amount = amount;
       return this;
     }

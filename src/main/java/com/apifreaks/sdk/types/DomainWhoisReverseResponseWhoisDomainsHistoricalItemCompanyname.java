@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -94,7 +94,7 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemCompanyna
     return email;
   }
 
-  @JsonProperty("company_name")
+  @JsonProperty("companyname")
   public Optional<String> getCompanyname() {
     return companyname;
   }
@@ -231,7 +231,7 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemCompanyna
 
     @java.lang.Override
     @JsonSetter(
-        value = "company_name",
+        value = "companyname",
         nulls = Nulls.SKIP
     )
     public _FinalStage companyname(Optional<String> companyname) {

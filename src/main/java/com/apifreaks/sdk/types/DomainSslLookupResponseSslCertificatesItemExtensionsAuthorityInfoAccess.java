@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,41 +13,39 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
     builder = DomainSslLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess.Builder.class
 )
 public final class DomainSslLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess {
-  private final Optional<List<String>> issuers;
+  private final List<String> issuers;
 
-  private final Optional<List<String>> ocsp;
+  private final List<String> ocsp;
 
   private final Map<String, Object> additionalProperties;
 
   private DomainSslLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess(
-      Optional<List<String>> issuers, Optional<List<String>> ocsp,
-      Map<String, Object> additionalProperties) {
+      List<String> issuers, List<String> ocsp, Map<String, Object> additionalProperties) {
     this.issuers = issuers;
     this.ocsp = ocsp;
     this.additionalProperties = additionalProperties;
   }
 
   @JsonProperty("issuers")
-  public Optional<List<String>> getIssuers() {
+  public List<String> getIssuers() {
     return issuers;
   }
 
   @JsonProperty("ocsp")
-  public Optional<List<String>> getOcsp() {
+  public List<String> getOcsp() {
     return ocsp;
   }
 
@@ -84,9 +83,9 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsAuthority
       ignoreUnknown = true
   )
   public static final class Builder {
-    private Optional<List<String>> issuers = Optional.empty();
+    private List<String> issuers = new ArrayList<>();
 
-    private Optional<List<String>> ocsp = Optional.empty();
+    private List<String> ocsp = new ArrayList<>();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -105,13 +104,23 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsAuthority
         value = "issuers",
         nulls = Nulls.SKIP
     )
-    public Builder issuers(Optional<List<String>> issuers) {
-      this.issuers = issuers;
+    public Builder issuers(List<String> issuers) {
+      this.issuers.clear();
+      if (issuers != null) {
+        this.issuers.addAll(issuers);
+      }
       return this;
     }
 
-    public Builder issuers(List<String> issuers) {
-      this.issuers = Optional.ofNullable(issuers);
+    public Builder addIssuers(String issuers) {
+      this.issuers.add(issuers);
+      return this;
+    }
+
+    public Builder addAllIssuers(List<String> issuers) {
+      if (issuers != null) {
+        this.issuers.addAll(issuers);
+      }
       return this;
     }
 
@@ -119,13 +128,23 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsAuthority
         value = "ocsp",
         nulls = Nulls.SKIP
     )
-    public Builder ocsp(Optional<List<String>> ocsp) {
-      this.ocsp = ocsp;
+    public Builder ocsp(List<String> ocsp) {
+      this.ocsp.clear();
+      if (ocsp != null) {
+        this.ocsp.addAll(ocsp);
+      }
       return this;
     }
 
-    public Builder ocsp(List<String> ocsp) {
-      this.ocsp = Optional.ofNullable(ocsp);
+    public Builder addOcsp(String ocsp) {
+      this.ocsp.add(ocsp);
+      return this;
+    }
+
+    public Builder addAllOcsp(List<String> ocsp) {
+      if (ocsp != null) {
+        this.ocsp.addAll(ocsp);
+      }
       return this;
     }
 

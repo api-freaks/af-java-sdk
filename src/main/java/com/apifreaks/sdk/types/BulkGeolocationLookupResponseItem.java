@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,10 +13,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -39,7 +40,7 @@ public final class BulkGeolocationLookupResponseItem {
 
   private final Optional<BulkGeolocationLookupResponseItemSecurity> security;
 
-  private final Optional<BulkGeolocationLookupResponseItemAbuseItem> abuse;
+  private final Optional<List<BulkGeolocationLookupResponseItemAbuseItem>> abuse;
 
   private final Optional<BulkGeolocationLookupResponseItemTimeZone> timeZone;
 
@@ -53,7 +54,7 @@ public final class BulkGeolocationLookupResponseItem {
       Optional<BulkGeolocationLookupResponseItemNetwork> network,
       Optional<BulkGeolocationLookupResponseItemCurrency> currency,
       Optional<BulkGeolocationLookupResponseItemSecurity> security,
-      Optional<BulkGeolocationLookupResponseItemAbuseItem> abuse,
+      Optional<List<BulkGeolocationLookupResponseItemAbuseItem>> abuse,
       Optional<BulkGeolocationLookupResponseItemTimeZone> timeZone,
       Optional<BulkGeolocationLookupResponseItemUserAgent> userAgent,
       Map<String, Object> additionalProperties) {
@@ -112,7 +113,7 @@ public final class BulkGeolocationLookupResponseItem {
   }
 
   @JsonProperty("abuse")
-  public Optional<BulkGeolocationLookupResponseItemAbuseItem> getAbuse() {
+  public Optional<List<BulkGeolocationLookupResponseItemAbuseItem>> getAbuse() {
     return abuse;
   }
 
@@ -173,7 +174,7 @@ public final class BulkGeolocationLookupResponseItem {
 
     private Optional<BulkGeolocationLookupResponseItemSecurity> security = Optional.empty();
 
-    private Optional<BulkGeolocationLookupResponseItemAbuseItem> abuse = Optional.empty();
+    private Optional<List<BulkGeolocationLookupResponseItemAbuseItem>> abuse = Optional.empty();
 
     private Optional<BulkGeolocationLookupResponseItemTimeZone> timeZone = Optional.empty();
 
@@ -309,12 +310,12 @@ public final class BulkGeolocationLookupResponseItem {
         value = "abuse",
         nulls = Nulls.SKIP
     )
-    public Builder abuse(Optional<BulkGeolocationLookupResponseItemAbuseItem> abuse) {
+    public Builder abuse(Optional<List<BulkGeolocationLookupResponseItemAbuseItem>> abuse) {
       this.abuse = abuse;
       return this;
     }
 
-    public Builder abuse(BulkGeolocationLookupResponseItemAbuseItem abuse) {
+    public Builder abuse(List<BulkGeolocationLookupResponseItemAbuseItem> abuse) {
       this.abuse = Optional.ofNullable(abuse);
       return this;
     }

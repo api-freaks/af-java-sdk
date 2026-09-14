@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,9 +13,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Boolean;
 import java.lang.Integer;
+import java.lang.Long;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -36,7 +37,7 @@ public final class PhoneValidateResponse {
 
   private final Optional<Integer> countryPrefix;
 
-  private final Optional<Integer> nationalNumber;
+  private final Optional<Long> nationalNumber;
 
   private final Optional<String> countryCode;
 
@@ -60,7 +61,7 @@ public final class PhoneValidateResponse {
 
   private PhoneValidateResponse(Optional<PhoneValidateResponseRawInput> rawInput,
       Optional<Boolean> possible, Optional<Boolean> valid, Optional<Integer> countryPrefix,
-      Optional<Integer> nationalNumber, Optional<String> countryCode, Optional<String> carrier,
+      Optional<Long> nationalNumber, Optional<String> countryCode, Optional<String> carrier,
       Optional<String> location, Optional<List<String>> timeZones,
       Optional<PhoneValidateResponseLineType> lineType,
       Optional<PhoneValidateResponseFormats> formats, Optional<Integer> areaCodeLength,
@@ -119,7 +120,7 @@ public final class PhoneValidateResponse {
    * @return National significant number without the country code.
    */
   @JsonProperty("national_number")
-  public Optional<Integer> getNationalNumber() {
+  public Optional<Long> getNationalNumber() {
     return nationalNumber;
   }
 
@@ -236,7 +237,7 @@ public final class PhoneValidateResponse {
 
     private Optional<Integer> countryPrefix = Optional.empty();
 
-    private Optional<Integer> nationalNumber = Optional.empty();
+    private Optional<Long> nationalNumber = Optional.empty();
 
     private Optional<String> countryCode = Optional.empty();
 
@@ -355,12 +356,12 @@ public final class PhoneValidateResponse {
         value = "national_number",
         nulls = Nulls.SKIP
     )
-    public Builder nationalNumber(Optional<Integer> nationalNumber) {
+    public Builder nationalNumber(Optional<Long> nationalNumber) {
       this.nationalNumber = nationalNumber;
       return this;
     }
 
-    public Builder nationalNumber(Integer nationalNumber) {
+    public Builder nationalNumber(Long nationalNumber) {
       this.nationalNumber = Optional.ofNullable(nationalNumber);
       return this;
     }

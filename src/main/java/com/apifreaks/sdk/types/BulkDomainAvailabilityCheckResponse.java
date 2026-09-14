@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,33 +13,32 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
     builder = BulkDomainAvailabilityCheckResponse.Builder.class
 )
 public final class BulkDomainAvailabilityCheckResponse {
-  private final List<BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem> bulkDomainAvailableResponse;
+  private final Optional<List<BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem>> bulkDomainAvailableResponse;
 
   private final Map<String, Object> additionalProperties;
 
   private BulkDomainAvailabilityCheckResponse(
-      List<BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem> bulkDomainAvailableResponse,
+      Optional<List<BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem>> bulkDomainAvailableResponse,
       Map<String, Object> additionalProperties) {
     this.bulkDomainAvailableResponse = bulkDomainAvailableResponse;
     this.additionalProperties = additionalProperties;
   }
 
   @JsonProperty("bulk_domain_available_response")
-  public List<BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem> getBulkDomainAvailableResponse(
+  public Optional<List<BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem>> getBulkDomainAvailableResponse(
       ) {
     return bulkDomainAvailableResponse;
   }
@@ -76,7 +76,7 @@ public final class BulkDomainAvailabilityCheckResponse {
       ignoreUnknown = true
   )
   public static final class Builder {
-    private List<BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem> bulkDomainAvailableResponse = new ArrayList<>();
+    private Optional<List<BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem>> bulkDomainAvailableResponse = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -94,21 +94,14 @@ public final class BulkDomainAvailabilityCheckResponse {
         nulls = Nulls.SKIP
     )
     public Builder bulkDomainAvailableResponse(
-        List<BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem> bulkDomainAvailableResponse) {
-      this.bulkDomainAvailableResponse.clear();
-      this.bulkDomainAvailableResponse.addAll(bulkDomainAvailableResponse);
+        Optional<List<BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem>> bulkDomainAvailableResponse) {
+      this.bulkDomainAvailableResponse = bulkDomainAvailableResponse;
       return this;
     }
 
-    public Builder addBulkDomainAvailableResponse(
-        BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem bulkDomainAvailableResponse) {
-      this.bulkDomainAvailableResponse.add(bulkDomainAvailableResponse);
-      return this;
-    }
-
-    public Builder addAllBulkDomainAvailableResponse(
+    public Builder bulkDomainAvailableResponse(
         List<BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem> bulkDomainAvailableResponse) {
-      this.bulkDomainAvailableResponse.addAll(bulkDomainAvailableResponse);
+      this.bulkDomainAvailableResponse = Optional.ofNullable(bulkDomainAvailableResponse);
       return this;
     }
 
