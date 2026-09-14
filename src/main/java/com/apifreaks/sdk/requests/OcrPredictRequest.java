@@ -4,6 +4,8 @@
 
 package com.apifreaks.sdk.requests;
 
+import com.apifreaks.sdk.core.ObjectMappers;
+import com.apifreaks.sdk.types.OcrPredictRequestModel;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Integer;
 import java.lang.Object;
 import java.lang.String;
@@ -22,7 +23,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
-import com.apifreaks.sdk.types.OcrPredictRequestModel;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
@@ -41,34 +41,17 @@ public final class OcrPredictRequest {
 
   private final Optional<Integer> newLine;
 
-  private final Optional<String> ocrPredictRequestUrl;
-
-  private final OcrPredictRequestModel ocrPredictRequestModel;
-
-  private final Optional<String> ocrPredictRequestPageRange;
-
-  private final Optional<String> ocrPredictRequestZone;
-
-  private final Optional<Integer> ocrPredictRequestNewLine;
-
   private final Map<String, Object> additionalProperties;
 
   private OcrPredictRequest(String apiKey, Optional<String> url, OcrPredictRequestModel model,
       Optional<String> pageRange, Optional<String> zone, Optional<Integer> newLine,
-      Optional<String> ocrPredictRequestUrl, OcrPredictRequestModel ocrPredictRequestModel,
-      Optional<String> ocrPredictRequestPageRange, Optional<String> ocrPredictRequestZone,
-      Optional<Integer> ocrPredictRequestNewLine, Map<String, Object> additionalProperties) {
+      Map<String, Object> additionalProperties) {
     this.apiKey = apiKey;
     this.url = url;
     this.model = model;
     this.pageRange = pageRange;
     this.zone = zone;
     this.newLine = newLine;
-    this.ocrPredictRequestUrl = ocrPredictRequestUrl;
-    this.ocrPredictRequestModel = ocrPredictRequestModel;
-    this.ocrPredictRequestPageRange = ocrPredictRequestPageRange;
-    this.ocrPredictRequestZone = ocrPredictRequestZone;
-    this.ocrPredictRequestNewLine = ocrPredictRequestNewLine;
     this.additionalProperties = additionalProperties;
   }
 
@@ -83,15 +66,15 @@ public final class OcrPredictRequest {
   /**
    * @return URL of the image or PDF (required if <code>file</code> not provided)
    */
-  @JsonIgnore
+  @JsonProperty("url")
   public Optional<String> getUrl() {
     return url;
   }
 
   /**
-   * @return OCR model to use.
+   * @return OCR model to use. <code>mini-ocr-v1</code> for CAPTCHA OCR, <code>ocr-v1</code> for general OCR
    */
-  @JsonIgnore
+  @JsonProperty("model")
   public OcrPredictRequestModel getModel() {
     return model;
   }
@@ -99,7 +82,7 @@ public final class OcrPredictRequest {
   /**
    * @return Specify page range for multi-page PDFs (e.g., '1,3,5-10' or 'allpages'). <strong>Note:</strong> This parameter can only be used with .pdf file types.
    */
-  @JsonIgnore
+  @JsonProperty("page_range")
   public Optional<String> getPageRange() {
     return pageRange;
   }
@@ -107,7 +90,7 @@ public final class OcrPredictRequest {
   /**
    * @return Define OCR zones using coordinates (top:left:height:width). Multiple zones can be defined using commas. Only available for model 'ocr-v1'. <strong>Note:</strong> This parameter cannot be used with .pdf and .zip file types as it can only be applied to single image queries.
    */
-  @JsonIgnore
+  @JsonProperty("zone")
   public Optional<String> getZone() {
     return zone;
   }
@@ -115,49 +98,9 @@ public final class OcrPredictRequest {
   /**
    * @return Set to 1 to split output text into individual lines (default: 0)
    */
-  @JsonIgnore
+  @JsonProperty("new_line")
   public Optional<Integer> getNewLine() {
     return newLine;
-  }
-
-  /**
-   * @return URL of the image or PDF (required if <code>file</code> not provided)
-   */
-  @JsonProperty("url")
-  public Optional<String> getOcrPredictRequestUrl() {
-    return ocrPredictRequestUrl;
-  }
-
-  /**
-   * @return OCR model to use. <code>mini-ocr-v1</code> for CAPTCHA OCR, <code>ocr-v1</code> for general OCR
-   */
-  @JsonProperty("model")
-  public OcrPredictRequestModel getOcrPredictRequestModel() {
-    return ocrPredictRequestModel;
-  }
-
-  /**
-   * @return Specify page range for multi-page PDFs (e.g., '1,3,5-10' or 'allpages'). <strong>Note:</strong> This parameter can only be used with .pdf file types.
-   */
-  @JsonProperty("page_range")
-  public Optional<String> getOcrPredictRequestPageRange() {
-    return ocrPredictRequestPageRange;
-  }
-
-  /**
-   * @return Define OCR zones using coordinates (top:left:height:width). Multiple zones can be defined using commas. Only available for model 'ocr-v1'. <strong>Note:</strong> This parameter cannot be used with .pdf and .zip file types as it can only be applied to single image queries.
-   */
-  @JsonProperty("zone")
-  public Optional<String> getOcrPredictRequestZone() {
-    return ocrPredictRequestZone;
-  }
-
-  /**
-   * @return Set to 1 to split output text into individual lines (default: 0)
-   */
-  @JsonProperty("new_line")
-  public Optional<Integer> getOcrPredictRequestNewLine() {
-    return ocrPredictRequestNewLine;
   }
 
   @java.lang.Override
@@ -172,12 +115,12 @@ public final class OcrPredictRequest {
   }
 
   private boolean equalTo(OcrPredictRequest other) {
-    return apiKey.equals(other.apiKey) && url.equals(other.url) && model.equals(other.model) && pageRange.equals(other.pageRange) && zone.equals(other.zone) && newLine.equals(other.newLine) && ocrPredictRequestUrl.equals(other.ocrPredictRequestUrl) && ocrPredictRequestModel.equals(other.ocrPredictRequestModel) && ocrPredictRequestPageRange.equals(other.ocrPredictRequestPageRange) && ocrPredictRequestZone.equals(other.ocrPredictRequestZone) && ocrPredictRequestNewLine.equals(other.ocrPredictRequestNewLine);
+    return apiKey.equals(other.apiKey) && url.equals(other.url) && model.equals(other.model) && pageRange.equals(other.pageRange) && zone.equals(other.zone) && newLine.equals(other.newLine);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.apiKey, this.url, this.model, this.pageRange, this.zone, this.newLine, this.ocrPredictRequestUrl, this.ocrPredictRequestModel, this.ocrPredictRequestPageRange, this.ocrPredictRequestZone, this.ocrPredictRequestNewLine);
+    return Objects.hash(this.apiKey, this.url, this.model, this.pageRange, this.zone, this.newLine);
   }
 
   @java.lang.Override
@@ -200,16 +143,9 @@ public final class OcrPredictRequest {
 
   public interface ModelStage {
     /**
-     * <p>OCR model to use.</p>
-     */
-    OcrPredictRequestModelStage model(@NotNull OcrPredictRequestModel model);
-  }
-
-  public interface OcrPredictRequestModelStage {
-    /**
      * <p>OCR model to use. <code>mini-ocr-v1</code> for CAPTCHA OCR, <code>ocr-v1</code> for general OCR</p>
      */
-    _FinalStage ocrPredictRequestModel(@NotNull OcrPredictRequestModel ocrPredictRequestModel);
+    _FinalStage model(@NotNull OcrPredictRequestModel model);
   }
 
   public interface _FinalStage {
@@ -246,53 +182,15 @@ public final class OcrPredictRequest {
     _FinalStage newLine(Optional<Integer> newLine);
 
     _FinalStage newLine(Integer newLine);
-
-    /**
-     * <p>URL of the image or PDF (required if <code>file</code> not provided)</p>
-     */
-    _FinalStage ocrPredictRequestUrl(Optional<String> ocrPredictRequestUrl);
-
-    _FinalStage ocrPredictRequestUrl(String ocrPredictRequestUrl);
-
-    /**
-     * <p>Specify page range for multi-page PDFs (e.g., '1,3,5-10' or 'allpages'). <strong>Note:</strong> This parameter can only be used with .pdf file types.</p>
-     */
-    _FinalStage ocrPredictRequestPageRange(Optional<String> ocrPredictRequestPageRange);
-
-    _FinalStage ocrPredictRequestPageRange(String ocrPredictRequestPageRange);
-
-    /**
-     * <p>Define OCR zones using coordinates (top:left:height:width). Multiple zones can be defined using commas. Only available for model 'ocr-v1'. <strong>Note:</strong> This parameter cannot be used with .pdf and .zip file types as it can only be applied to single image queries.</p>
-     */
-    _FinalStage ocrPredictRequestZone(Optional<String> ocrPredictRequestZone);
-
-    _FinalStage ocrPredictRequestZone(String ocrPredictRequestZone);
-
-    /**
-     * <p>Set to 1 to split output text into individual lines (default: 0)</p>
-     */
-    _FinalStage ocrPredictRequestNewLine(Optional<Integer> ocrPredictRequestNewLine);
-
-    _FinalStage ocrPredictRequestNewLine(Integer ocrPredictRequestNewLine);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements ApiKeyStage, ModelStage, OcrPredictRequestModelStage, _FinalStage {
+  public static final class Builder implements ApiKeyStage, ModelStage, _FinalStage {
     private String apiKey;
 
     private OcrPredictRequestModel model;
-
-    private OcrPredictRequestModel ocrPredictRequestModel;
-
-    private Optional<Integer> ocrPredictRequestNewLine = Optional.empty();
-
-    private Optional<String> ocrPredictRequestZone = Optional.empty();
-
-    private Optional<String> ocrPredictRequestPageRange = Optional.empty();
-
-    private Optional<String> ocrPredictRequestUrl = Optional.empty();
 
     private Optional<Integer> newLine = Optional.empty();
 
@@ -316,11 +214,6 @@ public final class OcrPredictRequest {
       pageRange(other.getPageRange());
       zone(other.getZone());
       newLine(other.getNewLine());
-      ocrPredictRequestUrl(other.getOcrPredictRequestUrl());
-      ocrPredictRequestModel(other.getOcrPredictRequestModel());
-      ocrPredictRequestPageRange(other.getOcrPredictRequestPageRange());
-      ocrPredictRequestZone(other.getOcrPredictRequestZone());
-      ocrPredictRequestNewLine(other.getOcrPredictRequestNewLine());
       return this;
     }
 
@@ -337,119 +230,14 @@ public final class OcrPredictRequest {
     }
 
     /**
-     * <p>OCR model to use.</p>
-     * <p>OCR model to use.</p>
+     * <p>OCR model to use. <code>mini-ocr-v1</code> for CAPTCHA OCR, <code>ocr-v1</code> for general OCR</p>
+     * <p>OCR model to use. <code>mini-ocr-v1</code> for CAPTCHA OCR, <code>ocr-v1</code> for general OCR</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("model")
-    public OcrPredictRequestModelStage model(@NotNull OcrPredictRequestModel model) {
+    public _FinalStage model(@NotNull OcrPredictRequestModel model) {
       this.model = Objects.requireNonNull(model, "model must not be null");
-      return this;
-    }
-
-    /**
-     * <p>OCR model to use. <code>mini-ocr-v1</code> for CAPTCHA OCR, <code>ocr-v1</code> for general OCR</p>
-     * <p>OCR model to use. <code>mini-ocr-v1</code> for CAPTCHA OCR, <code>ocr-v1</code> for general OCR</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    @JsonSetter("model")
-    public _FinalStage ocrPredictRequestModel(
-        @NotNull OcrPredictRequestModel ocrPredictRequestModel) {
-      this.ocrPredictRequestModel = Objects.requireNonNull(ocrPredictRequestModel, "ocrPredictRequestModel must not be null");
-      return this;
-    }
-
-    /**
-     * <p>Set to 1 to split output text into individual lines (default: 0)</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    public _FinalStage ocrPredictRequestNewLine(Integer ocrPredictRequestNewLine) {
-      this.ocrPredictRequestNewLine = Optional.ofNullable(ocrPredictRequestNewLine);
-      return this;
-    }
-
-    /**
-     * <p>Set to 1 to split output text into individual lines (default: 0)</p>
-     */
-    @java.lang.Override
-    @JsonSetter(
-        value = "new_line",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage ocrPredictRequestNewLine(Optional<Integer> ocrPredictRequestNewLine) {
-      this.ocrPredictRequestNewLine = ocrPredictRequestNewLine;
-      return this;
-    }
-
-    /**
-     * <p>Define OCR zones using coordinates (top:left:height:width). Multiple zones can be defined using commas. Only available for model 'ocr-v1'. <strong>Note:</strong> This parameter cannot be used with .pdf and .zip file types as it can only be applied to single image queries.</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    public _FinalStage ocrPredictRequestZone(String ocrPredictRequestZone) {
-      this.ocrPredictRequestZone = Optional.ofNullable(ocrPredictRequestZone);
-      return this;
-    }
-
-    /**
-     * <p>Define OCR zones using coordinates (top:left:height:width). Multiple zones can be defined using commas. Only available for model 'ocr-v1'. <strong>Note:</strong> This parameter cannot be used with .pdf and .zip file types as it can only be applied to single image queries.</p>
-     */
-    @java.lang.Override
-    @JsonSetter(
-        value = "zone",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage ocrPredictRequestZone(Optional<String> ocrPredictRequestZone) {
-      this.ocrPredictRequestZone = ocrPredictRequestZone;
-      return this;
-    }
-
-    /**
-     * <p>Specify page range for multi-page PDFs (e.g., '1,3,5-10' or 'allpages'). <strong>Note:</strong> This parameter can only be used with .pdf file types.</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    public _FinalStage ocrPredictRequestPageRange(String ocrPredictRequestPageRange) {
-      this.ocrPredictRequestPageRange = Optional.ofNullable(ocrPredictRequestPageRange);
-      return this;
-    }
-
-    /**
-     * <p>Specify page range for multi-page PDFs (e.g., '1,3,5-10' or 'allpages'). <strong>Note:</strong> This parameter can only be used with .pdf file types.</p>
-     */
-    @java.lang.Override
-    @JsonSetter(
-        value = "page_range",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage ocrPredictRequestPageRange(Optional<String> ocrPredictRequestPageRange) {
-      this.ocrPredictRequestPageRange = ocrPredictRequestPageRange;
-      return this;
-    }
-
-    /**
-     * <p>URL of the image or PDF (required if <code>file</code> not provided)</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    public _FinalStage ocrPredictRequestUrl(String ocrPredictRequestUrl) {
-      this.ocrPredictRequestUrl = Optional.ofNullable(ocrPredictRequestUrl);
-      return this;
-    }
-
-    /**
-     * <p>URL of the image or PDF (required if <code>file</code> not provided)</p>
-     */
-    @java.lang.Override
-    @JsonSetter(
-        value = "url",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage ocrPredictRequestUrl(Optional<String> ocrPredictRequestUrl) {
-      this.ocrPredictRequestUrl = ocrPredictRequestUrl;
       return this;
     }
 
@@ -547,7 +335,7 @@ public final class OcrPredictRequest {
 
     @java.lang.Override
     public OcrPredictRequest build() {
-      return new OcrPredictRequest(apiKey, url, model, pageRange, zone, newLine, ocrPredictRequestUrl, ocrPredictRequestModel, ocrPredictRequestPageRange, ocrPredictRequestZone, ocrPredictRequestNewLine, additionalProperties);
+      return new OcrPredictRequest(apiKey, url, model, pageRange, zone, newLine, additionalProperties);
     }
 
     @java.lang.Override

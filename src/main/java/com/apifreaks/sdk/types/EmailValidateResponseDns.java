@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
 import java.util.ArrayList;
@@ -20,36 +20,37 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
     builder = EmailValidateResponseDns.Builder.class
 )
 public final class EmailValidateResponseDns {
-  private final List<String> mxRecords;
+  private final List<String> mxRecord;
 
-  private final List<String> aRecords;
+  private final Optional<List<String>> aRecord;
 
   private final Map<String, Object> additionalProperties;
 
-  private EmailValidateResponseDns(List<String> mxRecords, List<String> aRecords,
+  private EmailValidateResponseDns(List<String> mxRecord, Optional<List<String>> aRecord,
       Map<String, Object> additionalProperties) {
-    this.mxRecords = mxRecords;
-    this.aRecords = aRecords;
+    this.mxRecord = mxRecord;
+    this.aRecord = aRecord;
     this.additionalProperties = additionalProperties;
   }
 
-  @JsonProperty("mxRecords")
-  public List<String> getMxRecords() {
-    return mxRecords;
+  @JsonProperty("mxRecord")
+  public List<String> getMxRecord() {
+    return mxRecord;
   }
 
   /**
    * @return Collection of A (Address) records for the domain.
    */
-  @JsonProperty("aRecords")
-  public List<String> getARecords() {
-    return aRecords;
+  @JsonProperty("aRecord")
+  public Optional<List<String>> getARecord() {
+    return aRecord;
   }
 
   @java.lang.Override
@@ -64,12 +65,12 @@ public final class EmailValidateResponseDns {
   }
 
   private boolean equalTo(EmailValidateResponseDns other) {
-    return mxRecords.equals(other.mxRecords) && aRecords.equals(other.aRecords);
+    return mxRecord.equals(other.mxRecord) && aRecord.equals(other.aRecord);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.mxRecords, this.aRecords);
+    return Objects.hash(this.mxRecord, this.aRecord);
   }
 
   @java.lang.Override
@@ -85,9 +86,9 @@ public final class EmailValidateResponseDns {
       ignoreUnknown = true
   )
   public static final class Builder {
-    private List<String> mxRecords = new ArrayList<>();
+    private List<String> mxRecord = new ArrayList<>();
 
-    private List<String> aRecords = new ArrayList<>();
+    private Optional<List<String>> aRecord = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -96,31 +97,31 @@ public final class EmailValidateResponseDns {
     }
 
     public Builder from(EmailValidateResponseDns other) {
-      mxRecords(other.getMxRecords());
-      aRecords(other.getARecords());
+      mxRecord(other.getMxRecord());
+      aRecord(other.getARecord());
       return this;
     }
 
     @JsonSetter(
-        value = "mxRecords",
+        value = "mxRecord",
         nulls = Nulls.SKIP
     )
-    public Builder mxRecords(List<String> mxRecords) {
-      this.mxRecords.clear();
-      if (mxRecords != null) {
-        this.mxRecords.addAll(mxRecords);
+    public Builder mxRecord(List<String> mxRecord) {
+      this.mxRecord.clear();
+      if (mxRecord != null) {
+        this.mxRecord.addAll(mxRecord);
       }
       return this;
     }
 
-    public Builder addMxRecords(String mxRecords) {
-      this.mxRecords.add(mxRecords);
+    public Builder addMxRecord(String mxRecord) {
+      this.mxRecord.add(mxRecord);
       return this;
     }
 
-    public Builder addAllMxRecords(List<String> mxRecords) {
-      if (mxRecords != null) {
-        this.mxRecords.addAll(mxRecords);
+    public Builder addAllMxRecord(List<String> mxRecord) {
+      if (mxRecord != null) {
+        this.mxRecord.addAll(mxRecord);
       }
       return this;
     }
@@ -129,31 +130,21 @@ public final class EmailValidateResponseDns {
      * <p>Collection of A (Address) records for the domain.</p>
      */
     @JsonSetter(
-        value = "aRecords",
+        value = "aRecord",
         nulls = Nulls.SKIP
     )
-    public Builder aRecords(List<String> aRecords) {
-      this.aRecords.clear();
-      if (aRecords != null) {
-        this.aRecords.addAll(aRecords);
-      }
+    public Builder aRecord(Optional<List<String>> aRecord) {
+      this.aRecord = aRecord;
       return this;
     }
 
-    public Builder addARecords(String aRecords) {
-      this.aRecords.add(aRecords);
-      return this;
-    }
-
-    public Builder addAllARecords(List<String> aRecords) {
-      if (aRecords != null) {
-        this.aRecords.addAll(aRecords);
-      }
+    public Builder aRecord(List<String> aRecord) {
+      this.aRecord = Optional.ofNullable(aRecord);
       return this;
     }
 
     public EmailValidateResponseDns build() {
-      return new EmailValidateResponseDns(mxRecords, aRecords, additionalProperties);
+      return new EmailValidateResponseDns(mxRecord, aRecord, additionalProperties);
     }
 
     public Builder additionalProperty(String key, Object value) {

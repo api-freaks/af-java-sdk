@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
@@ -11,7 +12,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.io.IOException;
 import java.lang.IllegalStateException;
 import java.lang.Object;

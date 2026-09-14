@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
 import java.time.OffsetDateTime;
@@ -32,6 +32,8 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
 
   private final String domainName;
 
+  private final boolean domainRegistered;
+
   private final DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsTypes dnsTypes;
 
   private final List<DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItem> dnsRecords;
@@ -39,11 +41,13 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
   private final Map<String, Object> additionalProperties;
 
   private DomainDnsHistoryResponseHistoricalDnsRecordsItem(OffsetDateTime queryTime,
-      String domainName, DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsTypes dnsTypes,
+      String domainName, boolean domainRegistered,
+      DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsTypes dnsTypes,
       List<DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItem> dnsRecords,
       Map<String, Object> additionalProperties) {
     this.queryTime = queryTime;
     this.domainName = domainName;
+    this.domainRegistered = domainRegistered;
     this.dnsTypes = dnsTypes;
     this.dnsRecords = dnsRecords;
     this.additionalProperties = additionalProperties;
@@ -57,6 +61,11 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
   @JsonProperty("domainName")
   public String getDomainName() {
     return domainName;
+  }
+
+  @JsonProperty("domainRegistered")
+  public boolean getDomainRegistered() {
+    return domainRegistered;
   }
 
   @JsonProperty("dnsTypes")
@@ -81,12 +90,12 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
   }
 
   private boolean equalTo(DomainDnsHistoryResponseHistoricalDnsRecordsItem other) {
-    return queryTime.equals(other.queryTime) && domainName.equals(other.domainName) && dnsTypes.equals(other.dnsTypes) && dnsRecords.equals(other.dnsRecords);
+    return queryTime.equals(other.queryTime) && domainName.equals(other.domainName) && domainRegistered == other.domainRegistered && dnsTypes.equals(other.dnsTypes) && dnsRecords.equals(other.dnsRecords);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.queryTime, this.domainName, this.dnsTypes, this.dnsRecords);
+    return Objects.hash(this.queryTime, this.domainName, this.domainRegistered, this.dnsTypes, this.dnsRecords);
   }
 
   @java.lang.Override
@@ -105,7 +114,11 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
   }
 
   public interface DomainNameStage {
-    DnsTypesStage domainName(@NotNull String domainName);
+    DomainRegisteredStage domainName(@NotNull String domainName);
+  }
+
+  public interface DomainRegisteredStage {
+    DnsTypesStage domainRegistered(boolean domainRegistered);
   }
 
   public interface DnsTypesStage {
@@ -133,10 +146,12 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements QueryTimeStage, DomainNameStage, DnsTypesStage, _FinalStage {
+  public static final class Builder implements QueryTimeStage, DomainNameStage, DomainRegisteredStage, DnsTypesStage, _FinalStage {
     private OffsetDateTime queryTime;
 
     private String domainName;
+
+    private boolean domainRegistered;
 
     private DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsTypes dnsTypes;
 
@@ -152,6 +167,7 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
     public Builder from(DomainDnsHistoryResponseHistoricalDnsRecordsItem other) {
       queryTime(other.getQueryTime());
       domainName(other.getDomainName());
+      domainRegistered(other.getDomainRegistered());
       dnsTypes(other.getDnsTypes());
       dnsRecords(other.getDnsRecords());
       return this;
@@ -166,8 +182,15 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
 
     @java.lang.Override
     @JsonSetter("domainName")
-    public DnsTypesStage domainName(@NotNull String domainName) {
+    public DomainRegisteredStage domainName(@NotNull String domainName) {
       this.domainName = Objects.requireNonNull(domainName, "domainName must not be null");
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter("domainRegistered")
+    public DnsTypesStage domainRegistered(boolean domainRegistered) {
+      this.domainRegistered = domainRegistered;
       return this;
     }
 
@@ -211,7 +234,7 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
 
     @java.lang.Override
     public DomainDnsHistoryResponseHistoricalDnsRecordsItem build() {
-      return new DomainDnsHistoryResponseHistoricalDnsRecordsItem(queryTime, domainName, dnsTypes, dnsRecords, additionalProperties);
+      return new DomainDnsHistoryResponseHistoricalDnsRecordsItem(queryTime, domainName, domainRegistered, dnsTypes, dnsRecords, additionalProperties);
     }
 
     @java.lang.Override

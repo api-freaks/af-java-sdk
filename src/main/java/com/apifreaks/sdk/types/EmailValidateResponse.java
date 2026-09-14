@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -44,7 +44,7 @@ public final class EmailValidateResponse {
 
   private final EmailValidateResponseDns dns;
 
-  private final Optional<String> ipAddress;
+  private final Optional<String> ip;
 
   private final Optional<EmailValidateResponseAddress> address;
 
@@ -53,7 +53,7 @@ public final class EmailValidateResponse {
   private EmailValidateResponse(boolean success, String email, Optional<String> name,
       Optional<String> reason, EmailValidateResponseValidEmail validEmail, boolean validSyntax,
       EmailValidateResponseDomain domain, EmailValidateResponseAccount account,
-      EmailValidateResponseDns dns, Optional<String> ipAddress,
+      EmailValidateResponseDns dns, Optional<String> ip,
       Optional<EmailValidateResponseAddress> address, Map<String, Object> additionalProperties) {
     this.success = success;
     this.email = email;
@@ -64,7 +64,7 @@ public final class EmailValidateResponse {
     this.domain = domain;
     this.account = account;
     this.dns = dns;
-    this.ipAddress = ipAddress;
+    this.ip = ip;
     this.address = address;
     this.additionalProperties = additionalProperties;
   }
@@ -114,9 +114,9 @@ public final class EmailValidateResponse {
     return dns;
   }
 
-  @JsonProperty("ipAddress")
-  public Optional<String> getIpAddress() {
-    return ipAddress;
+  @JsonProperty("ip")
+  public Optional<String> getIp() {
+    return ip;
   }
 
   @JsonProperty("address")
@@ -136,12 +136,12 @@ public final class EmailValidateResponse {
   }
 
   private boolean equalTo(EmailValidateResponse other) {
-    return success == other.success && email.equals(other.email) && name.equals(other.name) && reason.equals(other.reason) && validEmail.equals(other.validEmail) && validSyntax == other.validSyntax && domain.equals(other.domain) && account.equals(other.account) && dns.equals(other.dns) && ipAddress.equals(other.ipAddress) && address.equals(other.address);
+    return success == other.success && email.equals(other.email) && name.equals(other.name) && reason.equals(other.reason) && validEmail.equals(other.validEmail) && validSyntax == other.validSyntax && domain.equals(other.domain) && account.equals(other.account) && dns.equals(other.dns) && ip.equals(other.ip) && address.equals(other.address);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.success, this.email, this.name, this.reason, this.validEmail, this.validSyntax, this.domain, this.account, this.dns, this.ipAddress, this.address);
+    return Objects.hash(this.success, this.email, this.name, this.reason, this.validEmail, this.validSyntax, this.domain, this.account, this.dns, this.ip, this.address);
   }
 
   @java.lang.Override
@@ -198,9 +198,9 @@ public final class EmailValidateResponse {
 
     _FinalStage reason(String reason);
 
-    _FinalStage ipAddress(Optional<String> ipAddress);
+    _FinalStage ip(Optional<String> ip);
 
-    _FinalStage ipAddress(String ipAddress);
+    _FinalStage ip(String ip);
 
     _FinalStage address(Optional<EmailValidateResponseAddress> address);
 
@@ -227,7 +227,7 @@ public final class EmailValidateResponse {
 
     private Optional<EmailValidateResponseAddress> address = Optional.empty();
 
-    private Optional<String> ipAddress = Optional.empty();
+    private Optional<String> ip = Optional.empty();
 
     private Optional<String> reason = Optional.empty();
 
@@ -250,7 +250,7 @@ public final class EmailValidateResponse {
       domain(other.getDomain());
       account(other.getAccount());
       dns(other.getDns());
-      ipAddress(other.getIpAddress());
+      ip(other.getIp());
       address(other.getAddress());
       return this;
     }
@@ -321,18 +321,18 @@ public final class EmailValidateResponse {
     }
 
     @java.lang.Override
-    public _FinalStage ipAddress(String ipAddress) {
-      this.ipAddress = Optional.ofNullable(ipAddress);
+    public _FinalStage ip(String ip) {
+      this.ip = Optional.ofNullable(ip);
       return this;
     }
 
     @java.lang.Override
     @JsonSetter(
-        value = "ipAddress",
+        value = "ip",
         nulls = Nulls.SKIP
     )
-    public _FinalStage ipAddress(Optional<String> ipAddress) {
-      this.ipAddress = ipAddress;
+    public _FinalStage ip(Optional<String> ip) {
+      this.ip = ip;
       return this;
     }
 
@@ -370,7 +370,7 @@ public final class EmailValidateResponse {
 
     @java.lang.Override
     public EmailValidateResponse build() {
-      return new EmailValidateResponse(success, email, name, reason, validEmail, validSyntax, domain, account, dns, ipAddress, address, additionalProperties);
+      return new EmailValidateResponse(success, email, name, reason, validEmail, validSyntax, domain, account, dns, ip, address, additionalProperties);
     }
 
     @java.lang.Override

@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Double;
 import java.lang.Object;
 import java.lang.String;
@@ -32,6 +32,8 @@ public final class BulkZipcodeLookupResponseResultsItem {
 
   private final Optional<String> region;
 
+  private final Optional<String> regionCode;
+
   private final Optional<String> city;
 
   private final Optional<String> locality;
@@ -43,12 +45,13 @@ public final class BulkZipcodeLookupResponseResultsItem {
   private final Map<String, Object> additionalProperties;
 
   private BulkZipcodeLookupResponseResultsItem(Optional<String> code, Optional<String> countryCode,
-      Optional<String> region, Optional<String> city,
+      Optional<String> region, Optional<String> regionCode, Optional<String> city,
       Optional<String> locality, Optional<Double> latitude, Optional<Double> longitude,
       Map<String, Object> additionalProperties) {
     this.code = code;
     this.countryCode = countryCode;
     this.region = region;
+    this.regionCode = regionCode;
     this.city = city;
     this.locality = locality;
     this.latitude = latitude;
@@ -69,6 +72,11 @@ public final class BulkZipcodeLookupResponseResultsItem {
   @JsonProperty("region")
   public Optional<String> getRegion() {
     return region;
+  }
+
+  @JsonProperty("region_code")
+  public Optional<String> getRegionCode() {
+    return regionCode;
   }
 
   @JsonProperty("city")
@@ -103,12 +111,12 @@ public final class BulkZipcodeLookupResponseResultsItem {
   }
 
   private boolean equalTo(BulkZipcodeLookupResponseResultsItem other) {
-    return code.equals(other.code) && countryCode.equals(other.countryCode) && region.equals(other.region) && city.equals(other.city) && locality.equals(other.locality) && latitude.equals(other.latitude) && longitude.equals(other.longitude);
+    return code.equals(other.code) && countryCode.equals(other.countryCode) && region.equals(other.region) && regionCode.equals(other.regionCode) && city.equals(other.city) && locality.equals(other.locality) && latitude.equals(other.latitude) && longitude.equals(other.longitude);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.code, this.countryCode, this.region, this.city, this.locality, this.latitude, this.longitude);
+    return Objects.hash(this.code, this.countryCode, this.region, this.regionCode, this.city, this.locality, this.latitude, this.longitude);
   }
 
   @java.lang.Override
@@ -130,6 +138,8 @@ public final class BulkZipcodeLookupResponseResultsItem {
 
     private Optional<String> region = Optional.empty();
 
+    private Optional<String> regionCode = Optional.empty();
+
     private Optional<String> city = Optional.empty();
 
     private Optional<String> locality = Optional.empty();
@@ -148,6 +158,7 @@ public final class BulkZipcodeLookupResponseResultsItem {
       code(other.getCode());
       countryCode(other.getCountryCode());
       region(other.getRegion());
+      regionCode(other.getRegionCode());
       city(other.getCity());
       locality(other.getLocality());
       latitude(other.getLatitude());
@@ -194,6 +205,20 @@ public final class BulkZipcodeLookupResponseResultsItem {
 
     public Builder region(String region) {
       this.region = Optional.ofNullable(region);
+      return this;
+    }
+
+    @JsonSetter(
+        value = "region_code",
+        nulls = Nulls.SKIP
+    )
+    public Builder regionCode(Optional<String> regionCode) {
+      this.regionCode = regionCode;
+      return this;
+    }
+
+    public Builder regionCode(String regionCode) {
+      this.regionCode = Optional.ofNullable(regionCode);
       return this;
     }
 
@@ -254,7 +279,7 @@ public final class BulkZipcodeLookupResponseResultsItem {
     }
 
     public BulkZipcodeLookupResponseResultsItem build() {
-      return new BulkZipcodeLookupResponseResultsItem(code, countryCode, region, city, locality, latitude, longitude, additionalProperties);
+      return new BulkZipcodeLookupResponseResultsItem(code, countryCode, region, regionCode, city, locality, latitude, longitude, additionalProperties);
     }
 
     public Builder additionalProperty(String key, Object value) {

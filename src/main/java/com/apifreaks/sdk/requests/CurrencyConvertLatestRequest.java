@@ -4,6 +4,9 @@
 
 package com.apifreaks.sdk.requests;
 
+import com.apifreaks.sdk.core.ObjectMappers;
+import com.apifreaks.sdk.types.CurrencyConvertLatestRequestFormat;
+import com.apifreaks.sdk.types.CurrencyConvertLatestRequestUpdates;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
+import java.lang.Double;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -20,8 +23,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
-import com.apifreaks.sdk.types.CurrencyConvertLatestRequestFormat;
-import com.apifreaks.sdk.types.CurrencyConvertLatestRequestUpdates;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
@@ -36,7 +37,7 @@ public final class CurrencyConvertLatestRequest {
 
   private final String to;
 
-  private final Optional<String> amount;
+  private final Optional<Double> amount;
 
   private final Optional<CurrencyConvertLatestRequestUpdates> updates;
 
@@ -44,7 +45,7 @@ public final class CurrencyConvertLatestRequest {
 
   private CurrencyConvertLatestRequest(String apiKey,
       Optional<CurrencyConvertLatestRequestFormat> format, String from, String to,
-      Optional<String> amount, Optional<CurrencyConvertLatestRequestUpdates> updates,
+      Optional<Double> amount, Optional<CurrencyConvertLatestRequestUpdates> updates,
       Map<String, Object> additionalProperties) {
     this.apiKey = apiKey;
     this.format = format;
@@ -91,7 +92,7 @@ public final class CurrencyConvertLatestRequest {
    * @return Amount to convert
    */
   @JsonProperty("amount")
-  public Optional<String> getAmount() {
+  public Optional<Double> getAmount() {
     return amount;
   }
 
@@ -172,9 +173,9 @@ public final class CurrencyConvertLatestRequest {
     /**
      * <p>Amount to convert</p>
      */
-    _FinalStage amount(Optional<String> amount);
+    _FinalStage amount(Optional<Double> amount);
 
-    _FinalStage amount(String amount);
+    _FinalStage amount(Double amount);
 
     /**
      * <p>Exchange rates update period (1d=daily, 1h=hourly, 10m=10 minutes, 1m=1 minute)</p>
@@ -196,7 +197,7 @@ public final class CurrencyConvertLatestRequest {
 
     private Optional<CurrencyConvertLatestRequestUpdates> updates = Optional.empty();
 
-    private Optional<String> amount = Optional.empty();
+    private Optional<Double> amount = Optional.empty();
 
     private Optional<CurrencyConvertLatestRequestFormat> format = Optional.empty();
 
@@ -281,7 +282,7 @@ public final class CurrencyConvertLatestRequest {
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage amount(String amount) {
+    public _FinalStage amount(Double amount) {
       this.amount = Optional.ofNullable(amount);
       return this;
     }
@@ -294,7 +295,7 @@ public final class CurrencyConvertLatestRequest {
         value = "amount",
         nulls = Nulls.SKIP
     )
-    public _FinalStage amount(Optional<String> amount) {
+    public _FinalStage amount(Optional<Double> amount) {
       this.amount = amount;
       return this;
     }

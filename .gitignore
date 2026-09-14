@@ -1,0 +1,19 @@
+# Maven build output
+target/
+
+# Compiled class files (in case anything builds outside target/)
+*.class
+
+# JetBrains IDE (.idea/) and Eclipse project metadata
+.idea/
+*.iml
+*.iws
+.settings/
+.classpath
+.project
+
+# VS Code
+.vscode/
+
+# OS cruft
+.DS_Store

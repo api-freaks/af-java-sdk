@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -11,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -30,22 +30,18 @@ public final class GetAdminUnitDetailsResponse {
 
   private final String adminLevel;
 
-  private final String adminIso31662;
-
-  private final String countryIso31662;
+  private final String isoAlpha2;
 
   private final String countryName;
 
   private final Map<String, Object> additionalProperties;
 
   private GetAdminUnitDetailsResponse(String name, String adminCode, String adminLevel,
-      String adminIso31662, String countryIso31662, String countryName,
-      Map<String, Object> additionalProperties) {
+      String isoAlpha2, String countryName, Map<String, Object> additionalProperties) {
     this.name = name;
     this.adminCode = adminCode;
     this.adminLevel = adminLevel;
-    this.adminIso31662 = adminIso31662;
-    this.countryIso31662 = countryIso31662;
+    this.isoAlpha2 = isoAlpha2;
     this.countryName = countryName;
     this.additionalProperties = additionalProperties;
   }
@@ -65,14 +61,9 @@ public final class GetAdminUnitDetailsResponse {
     return adminLevel;
   }
 
-  @JsonProperty("admin_iso3166_2")
-  public String getAdminIso31662() {
-    return adminIso31662;
-  }
-
-  @JsonProperty("country_iso3166_2")
-  public String getCountryIso31662() {
-    return countryIso31662;
+  @JsonProperty("iso_alpha_2")
+  public String getIsoAlpha2() {
+    return isoAlpha2;
   }
 
   @JsonProperty("country_name")
@@ -92,12 +83,12 @@ public final class GetAdminUnitDetailsResponse {
   }
 
   private boolean equalTo(GetAdminUnitDetailsResponse other) {
-    return name.equals(other.name) && adminCode.equals(other.adminCode) && adminLevel.equals(other.adminLevel) && adminIso31662.equals(other.adminIso31662) && countryIso31662.equals(other.countryIso31662) && countryName.equals(other.countryName);
+    return name.equals(other.name) && adminCode.equals(other.adminCode) && adminLevel.equals(other.adminLevel) && isoAlpha2.equals(other.isoAlpha2) && countryName.equals(other.countryName);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.name, this.adminCode, this.adminLevel, this.adminIso31662, this.countryIso31662, this.countryName);
+    return Objects.hash(this.name, this.adminCode, this.adminLevel, this.isoAlpha2, this.countryName);
   }
 
   @java.lang.Override
@@ -120,15 +111,11 @@ public final class GetAdminUnitDetailsResponse {
   }
 
   public interface AdminLevelStage {
-    AdminIso31662Stage adminLevel(@NotNull String adminLevel);
+    IsoAlpha2Stage adminLevel(@NotNull String adminLevel);
   }
 
-  public interface AdminIso31662Stage {
-    CountryIso31662Stage adminIso31662(@NotNull String adminIso31662);
-  }
-
-  public interface CountryIso31662Stage {
-    CountryNameStage countryIso31662(@NotNull String countryIso31662);
+  public interface IsoAlpha2Stage {
+    CountryNameStage isoAlpha2(@NotNull String isoAlpha2);
   }
 
   public interface CountryNameStage {
@@ -146,16 +133,14 @@ public final class GetAdminUnitDetailsResponse {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements NameStage, AdminCodeStage, AdminLevelStage, AdminIso31662Stage, CountryIso31662Stage, CountryNameStage, _FinalStage {
+  public static final class Builder implements NameStage, AdminCodeStage, AdminLevelStage, IsoAlpha2Stage, CountryNameStage, _FinalStage {
     private String name;
 
     private String adminCode;
 
     private String adminLevel;
 
-    private String adminIso31662;
-
-    private String countryIso31662;
+    private String isoAlpha2;
 
     private String countryName;
 
@@ -170,8 +155,7 @@ public final class GetAdminUnitDetailsResponse {
       name(other.getName());
       adminCode(other.getAdminCode());
       adminLevel(other.getAdminLevel());
-      adminIso31662(other.getAdminIso31662());
-      countryIso31662(other.getCountryIso31662());
+      isoAlpha2(other.getIsoAlpha2());
       countryName(other.getCountryName());
       return this;
     }
@@ -192,22 +176,15 @@ public final class GetAdminUnitDetailsResponse {
 
     @java.lang.Override
     @JsonSetter("admin_level")
-    public AdminIso31662Stage adminLevel(@NotNull String adminLevel) {
+    public IsoAlpha2Stage adminLevel(@NotNull String adminLevel) {
       this.adminLevel = Objects.requireNonNull(adminLevel, "adminLevel must not be null");
       return this;
     }
 
     @java.lang.Override
-    @JsonSetter("admin_iso3166_2")
-    public CountryIso31662Stage adminIso31662(@NotNull String adminIso31662) {
-      this.adminIso31662 = Objects.requireNonNull(adminIso31662, "adminIso31662 must not be null");
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter("country_iso3166_2")
-    public CountryNameStage countryIso31662(@NotNull String countryIso31662) {
-      this.countryIso31662 = Objects.requireNonNull(countryIso31662, "countryIso31662 must not be null");
+    @JsonSetter("iso_alpha_2")
+    public CountryNameStage isoAlpha2(@NotNull String isoAlpha2) {
+      this.isoAlpha2 = Objects.requireNonNull(isoAlpha2, "isoAlpha2 must not be null");
       return this;
     }
 
@@ -220,7 +197,7 @@ public final class GetAdminUnitDetailsResponse {
 
     @java.lang.Override
     public GetAdminUnitDetailsResponse build() {
-      return new GetAdminUnitDetailsResponse(name, adminCode, adminLevel, adminIso31662, countryIso31662, countryName, additionalProperties);
+      return new GetAdminUnitDetailsResponse(name, adminCode, adminLevel, isoAlpha2, countryName, additionalProperties);
     }
 
     @java.lang.Override

@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,38 +13,35 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
     builder = BulkEmailValidateResponse.Builder.class
 )
 public final class BulkEmailValidateResponse {
-  private final Optional<List<BulkEmailValidateResponseEmailValidationResponsesItem>> emailValidationResponses;
+  private final List<BulkEmailValidateResponseEmailResponseItem> emailResponse;
 
   private final Map<String, Object> additionalProperties;
 
-  private BulkEmailValidateResponse(
-      Optional<List<BulkEmailValidateResponseEmailValidationResponsesItem>> emailValidationResponses,
+  private BulkEmailValidateResponse(List<BulkEmailValidateResponseEmailResponseItem> emailResponse,
       Map<String, Object> additionalProperties) {
-    this.emailValidationResponses = emailValidationResponses;
+    this.emailResponse = emailResponse;
     this.additionalProperties = additionalProperties;
   }
 
   /**
    * @return Array of SingleEmailValidationResponse objects for bulk validation
    */
-  @JsonProperty("emailValidationResponses")
-  public Optional<List<BulkEmailValidateResponseEmailValidationResponsesItem>> getEmailValidationResponses(
-      ) {
-    return emailValidationResponses;
+  @JsonProperty("emailResponse")
+  public List<BulkEmailValidateResponseEmailResponseItem> getEmailResponse() {
+    return emailResponse;
   }
 
   @java.lang.Override
@@ -58,12 +56,12 @@ public final class BulkEmailValidateResponse {
   }
 
   private boolean equalTo(BulkEmailValidateResponse other) {
-    return emailValidationResponses.equals(other.emailValidationResponses);
+    return emailResponse.equals(other.emailResponse);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.emailValidationResponses);
+    return Objects.hash(this.emailResponse);
   }
 
   @java.lang.Override
@@ -79,7 +77,7 @@ public final class BulkEmailValidateResponse {
       ignoreUnknown = true
   )
   public static final class Builder {
-    private Optional<List<BulkEmailValidateResponseEmailValidationResponsesItem>> emailValidationResponses = Optional.empty();
+    private List<BulkEmailValidateResponseEmailResponseItem> emailResponse = new ArrayList<>();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -88,7 +86,7 @@ public final class BulkEmailValidateResponse {
     }
 
     public Builder from(BulkEmailValidateResponse other) {
-      emailValidationResponses(other.getEmailValidationResponses());
+      emailResponse(other.getEmailResponse());
       return this;
     }
 
@@ -96,23 +94,32 @@ public final class BulkEmailValidateResponse {
      * <p>Array of SingleEmailValidationResponse objects for bulk validation</p>
      */
     @JsonSetter(
-        value = "emailValidationResponses",
+        value = "emailResponse",
         nulls = Nulls.SKIP
     )
-    public Builder emailValidationResponses(
-        Optional<List<BulkEmailValidateResponseEmailValidationResponsesItem>> emailValidationResponses) {
-      this.emailValidationResponses = emailValidationResponses;
+    public Builder emailResponse(List<BulkEmailValidateResponseEmailResponseItem> emailResponse) {
+      this.emailResponse.clear();
+      if (emailResponse != null) {
+        this.emailResponse.addAll(emailResponse);
+      }
       return this;
     }
 
-    public Builder emailValidationResponses(
-        List<BulkEmailValidateResponseEmailValidationResponsesItem> emailValidationResponses) {
-      this.emailValidationResponses = Optional.ofNullable(emailValidationResponses);
+    public Builder addEmailResponse(BulkEmailValidateResponseEmailResponseItem emailResponse) {
+      this.emailResponse.add(emailResponse);
+      return this;
+    }
+
+    public Builder addAllEmailResponse(
+        List<BulkEmailValidateResponseEmailResponseItem> emailResponse) {
+      if (emailResponse != null) {
+        this.emailResponse.addAll(emailResponse);
+      }
       return this;
     }
 
     public BulkEmailValidateResponse build() {
-      return new BulkEmailValidateResponse(emailValidationResponses, additionalProperties);
+      return new BulkEmailValidateResponse(emailResponse, additionalProperties);
     }
 
     public Builder additionalProperty(String key, Object value) {

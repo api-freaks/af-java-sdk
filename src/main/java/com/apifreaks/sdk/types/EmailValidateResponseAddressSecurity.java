@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -11,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
     builder = EmailValidateResponseAddressSecurity.Builder.class
 )
 public final class EmailValidateResponseAddressSecurity {
-  private final int threatScore;
+  private final double threatScore;
 
   private final boolean isTor;
 
@@ -48,7 +48,7 @@ public final class EmailValidateResponseAddressSecurity {
 
   private final Map<String, Object> additionalProperties;
 
-  private EmailValidateResponseAddressSecurity(int threatScore, boolean isTor, boolean isProxy,
+  private EmailValidateResponseAddressSecurity(double threatScore, boolean isTor, boolean isProxy,
       String proxyType, String proxyProvider, boolean isAnonymous, boolean isKnownAttacker,
       boolean isSpam, boolean isBot, boolean isCloudProvider, String cloudProvider,
       Map<String, Object> additionalProperties) {
@@ -67,7 +67,7 @@ public final class EmailValidateResponseAddressSecurity {
   }
 
   @JsonProperty("threat_score")
-  public int getThreatScore() {
+  public double getThreatScore() {
     return threatScore;
   }
 
@@ -151,7 +151,7 @@ public final class EmailValidateResponseAddressSecurity {
   }
 
   public interface ThreatScoreStage {
-    IsTorStage threatScore(int threatScore);
+    IsTorStage threatScore(double threatScore);
 
     Builder from(EmailValidateResponseAddressSecurity other);
   }
@@ -208,7 +208,7 @@ public final class EmailValidateResponseAddressSecurity {
       ignoreUnknown = true
   )
   public static final class Builder implements ThreatScoreStage, IsTorStage, IsProxyStage, ProxyTypeStage, ProxyProviderStage, IsAnonymousStage, IsKnownAttackerStage, IsSpamStage, IsBotStage, IsCloudProviderStage, CloudProviderStage, _FinalStage {
-    private int threatScore;
+    private double threatScore;
 
     private boolean isTor;
 
@@ -254,7 +254,7 @@ public final class EmailValidateResponseAddressSecurity {
 
     @java.lang.Override
     @JsonSetter("threat_score")
-    public IsTorStage threatScore(int threatScore) {
+    public IsTorStage threatScore(double threatScore) {
       this.threatScore = threatScore;
       return this;
     }

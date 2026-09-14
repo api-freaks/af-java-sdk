@@ -4,19 +4,21 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.apifreaks.sdk.core.ObjectMappers;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
@@ -46,13 +48,21 @@ public final class TimezoneLookupResponseTimeZone {
 
   private final String time12;
 
-  private final int week;
+  private final double week;
 
-  private final int month;
+  private final double month;
 
-  private final int year;
+  private final double year;
 
   private final String yearAbbr;
+
+  private final String currentTzAbbreviation;
+
+  private final String currentTzFullName;
+
+  private final String standardTzAbbreviation;
+
+  private final String standardTzFullName;
 
   private final boolean isDst;
 
@@ -60,17 +70,19 @@ public final class TimezoneLookupResponseTimeZone {
 
   private final boolean dstExists;
 
-  private final TimezoneLookupResponseTimeZoneDstStart dstStart;
+  private final Optional<TimezoneLookupResponseTimeZoneDstStart> dstStart;
 
-  private final TimezoneLookupResponseTimeZoneDstEnd dstEnd;
+  private final Optional<TimezoneLookupResponseTimeZoneDstEnd> dstEnd;
 
   private final Map<String, Object> additionalProperties;
 
   private TimezoneLookupResponseTimeZone(String name, double offset, double offsetWithDst,
       String date, String dateTime, String dateTimeTxt, String dateTimeWti, String dateTimeYmd,
-      double dateTimeUnix, String time24, String time12, int week, int month, int year,
-      String yearAbbr, boolean isDst, double dstSavings, boolean dstExists,
-      TimezoneLookupResponseTimeZoneDstStart dstStart, TimezoneLookupResponseTimeZoneDstEnd dstEnd,
+      double dateTimeUnix, String time24, String time12, double week, double month, double year,
+      String yearAbbr, String currentTzAbbreviation, String currentTzFullName,
+      String standardTzAbbreviation, String standardTzFullName, boolean isDst, double dstSavings,
+      boolean dstExists, Optional<TimezoneLookupResponseTimeZoneDstStart> dstStart,
+      Optional<TimezoneLookupResponseTimeZoneDstEnd> dstEnd,
       Map<String, Object> additionalProperties) {
     this.name = name;
     this.offset = offset;
@@ -87,6 +99,10 @@ public final class TimezoneLookupResponseTimeZone {
     this.month = month;
     this.year = year;
     this.yearAbbr = yearAbbr;
+    this.currentTzAbbreviation = currentTzAbbreviation;
+    this.currentTzFullName = currentTzFullName;
+    this.standardTzAbbreviation = standardTzAbbreviation;
+    this.standardTzFullName = standardTzFullName;
     this.isDst = isDst;
     this.dstSavings = dstSavings;
     this.dstExists = dstExists;
@@ -151,23 +167,43 @@ public final class TimezoneLookupResponseTimeZone {
   }
 
   @JsonProperty("week")
-  public int getWeek() {
+  public double getWeek() {
     return week;
   }
 
   @JsonProperty("month")
-  public int getMonth() {
+  public double getMonth() {
     return month;
   }
 
   @JsonProperty("year")
-  public int getYear() {
+  public double getYear() {
     return year;
   }
 
   @JsonProperty("year_abbr")
   public String getYearAbbr() {
     return yearAbbr;
+  }
+
+  @JsonProperty("current_tz_abbreviation")
+  public String getCurrentTzAbbreviation() {
+    return currentTzAbbreviation;
+  }
+
+  @JsonProperty("current_tz_full_name")
+  public String getCurrentTzFullName() {
+    return currentTzFullName;
+  }
+
+  @JsonProperty("standard_tz_abbreviation")
+  public String getStandardTzAbbreviation() {
+    return standardTzAbbreviation;
+  }
+
+  @JsonProperty("standard_tz_full_name")
+  public String getStandardTzFullName() {
+    return standardTzFullName;
   }
 
   @JsonProperty("is_dst")
@@ -186,12 +222,12 @@ public final class TimezoneLookupResponseTimeZone {
   }
 
   @JsonProperty("dst_start")
-  public TimezoneLookupResponseTimeZoneDstStart getDstStart() {
+  public Optional<TimezoneLookupResponseTimeZoneDstStart> getDstStart() {
     return dstStart;
   }
 
   @JsonProperty("dst_end")
-  public TimezoneLookupResponseTimeZoneDstEnd getDstEnd() {
+  public Optional<TimezoneLookupResponseTimeZoneDstEnd> getDstEnd() {
     return dstEnd;
   }
 
@@ -207,12 +243,12 @@ public final class TimezoneLookupResponseTimeZone {
   }
 
   private boolean equalTo(TimezoneLookupResponseTimeZone other) {
-    return name.equals(other.name) && offset == other.offset && offsetWithDst == other.offsetWithDst && date.equals(other.date) && dateTime.equals(other.dateTime) && dateTimeTxt.equals(other.dateTimeTxt) && dateTimeWti.equals(other.dateTimeWti) && dateTimeYmd.equals(other.dateTimeYmd) && dateTimeUnix == other.dateTimeUnix && time24.equals(other.time24) && time12.equals(other.time12) && week == other.week && month == other.month && year == other.year && yearAbbr.equals(other.yearAbbr) && isDst == other.isDst && dstSavings == other.dstSavings && dstExists == other.dstExists && dstStart.equals(other.dstStart) && dstEnd.equals(other.dstEnd);
+    return name.equals(other.name) && offset == other.offset && offsetWithDst == other.offsetWithDst && date.equals(other.date) && dateTime.equals(other.dateTime) && dateTimeTxt.equals(other.dateTimeTxt) && dateTimeWti.equals(other.dateTimeWti) && dateTimeYmd.equals(other.dateTimeYmd) && dateTimeUnix == other.dateTimeUnix && time24.equals(other.time24) && time12.equals(other.time12) && week == other.week && month == other.month && year == other.year && yearAbbr.equals(other.yearAbbr) && currentTzAbbreviation.equals(other.currentTzAbbreviation) && currentTzFullName.equals(other.currentTzFullName) && standardTzAbbreviation.equals(other.standardTzAbbreviation) && standardTzFullName.equals(other.standardTzFullName) && isDst == other.isDst && dstSavings == other.dstSavings && dstExists == other.dstExists && dstStart.equals(other.dstStart) && dstEnd.equals(other.dstEnd);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.name, this.offset, this.offsetWithDst, this.date, this.dateTime, this.dateTimeTxt, this.dateTimeWti, this.dateTimeYmd, this.dateTimeUnix, this.time24, this.time12, this.week, this.month, this.year, this.yearAbbr, this.isDst, this.dstSavings, this.dstExists, this.dstStart, this.dstEnd);
+    return Objects.hash(this.name, this.offset, this.offsetWithDst, this.date, this.dateTime, this.dateTimeTxt, this.dateTimeWti, this.dateTimeYmd, this.dateTimeUnix, this.time24, this.time12, this.week, this.month, this.year, this.yearAbbr, this.currentTzAbbreviation, this.currentTzFullName, this.standardTzAbbreviation, this.standardTzFullName, this.isDst, this.dstSavings, this.dstExists, this.dstStart, this.dstEnd);
   }
 
   @java.lang.Override
@@ -271,19 +307,35 @@ public final class TimezoneLookupResponseTimeZone {
   }
 
   public interface WeekStage {
-    MonthStage week(int week);
+    MonthStage week(double week);
   }
 
   public interface MonthStage {
-    YearStage month(int month);
+    YearStage month(double month);
   }
 
   public interface YearStage {
-    YearAbbrStage year(int year);
+    YearAbbrStage year(double year);
   }
 
   public interface YearAbbrStage {
-    IsDstStage yearAbbr(@NotNull String yearAbbr);
+    CurrentTzAbbreviationStage yearAbbr(@NotNull String yearAbbr);
+  }
+
+  public interface CurrentTzAbbreviationStage {
+    CurrentTzFullNameStage currentTzAbbreviation(@NotNull String currentTzAbbreviation);
+  }
+
+  public interface CurrentTzFullNameStage {
+    StandardTzAbbreviationStage currentTzFullName(@NotNull String currentTzFullName);
+  }
+
+  public interface StandardTzAbbreviationStage {
+    StandardTzFullNameStage standardTzAbbreviation(@NotNull String standardTzAbbreviation);
+  }
+
+  public interface StandardTzFullNameStage {
+    IsDstStage standardTzFullName(@NotNull String standardTzFullName);
   }
 
   public interface IsDstStage {
@@ -295,15 +347,7 @@ public final class TimezoneLookupResponseTimeZone {
   }
 
   public interface DstExistsStage {
-    DstStartStage dstExists(boolean dstExists);
-  }
-
-  public interface DstStartStage {
-    DstEndStage dstStart(@NotNull TimezoneLookupResponseTimeZoneDstStart dstStart);
-  }
-
-  public interface DstEndStage {
-    _FinalStage dstEnd(@NotNull TimezoneLookupResponseTimeZoneDstEnd dstEnd);
+    _FinalStage dstExists(boolean dstExists);
   }
 
   public interface _FinalStage {
@@ -312,12 +356,20 @@ public final class TimezoneLookupResponseTimeZone {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
+
+    _FinalStage dstStart(Optional<TimezoneLookupResponseTimeZoneDstStart> dstStart);
+
+    _FinalStage dstStart(TimezoneLookupResponseTimeZoneDstStart dstStart);
+
+    _FinalStage dstEnd(Optional<TimezoneLookupResponseTimeZoneDstEnd> dstEnd);
+
+    _FinalStage dstEnd(TimezoneLookupResponseTimeZoneDstEnd dstEnd);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements NameStage, OffsetStage, OffsetWithDstStage, DateStage, DateTimeStage, DateTimeTxtStage, DateTimeWtiStage, DateTimeYmdStage, DateTimeUnixStage, Time24Stage, Time12Stage, WeekStage, MonthStage, YearStage, YearAbbrStage, IsDstStage, DstSavingsStage, DstExistsStage, DstStartStage, DstEndStage, _FinalStage {
+  public static final class Builder implements NameStage, OffsetStage, OffsetWithDstStage, DateStage, DateTimeStage, DateTimeTxtStage, DateTimeWtiStage, DateTimeYmdStage, DateTimeUnixStage, Time24Stage, Time12Stage, WeekStage, MonthStage, YearStage, YearAbbrStage, CurrentTzAbbreviationStage, CurrentTzFullNameStage, StandardTzAbbreviationStage, StandardTzFullNameStage, IsDstStage, DstSavingsStage, DstExistsStage, _FinalStage {
     private String name;
 
     private double offset;
@@ -340,13 +392,21 @@ public final class TimezoneLookupResponseTimeZone {
 
     private String time12;
 
-    private int week;
+    private double week;
 
-    private int month;
+    private double month;
 
-    private int year;
+    private double year;
 
     private String yearAbbr;
+
+    private String currentTzAbbreviation;
+
+    private String currentTzFullName;
+
+    private String standardTzAbbreviation;
+
+    private String standardTzFullName;
 
     private boolean isDst;
 
@@ -354,9 +414,9 @@ public final class TimezoneLookupResponseTimeZone {
 
     private boolean dstExists;
 
-    private TimezoneLookupResponseTimeZoneDstStart dstStart;
+    private Optional<TimezoneLookupResponseTimeZoneDstEnd> dstEnd = Optional.empty();
 
-    private TimezoneLookupResponseTimeZoneDstEnd dstEnd;
+    private Optional<TimezoneLookupResponseTimeZoneDstStart> dstStart = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -381,6 +441,10 @@ public final class TimezoneLookupResponseTimeZone {
       month(other.getMonth());
       year(other.getYear());
       yearAbbr(other.getYearAbbr());
+      currentTzAbbreviation(other.getCurrentTzAbbreviation());
+      currentTzFullName(other.getCurrentTzFullName());
+      standardTzAbbreviation(other.getStandardTzAbbreviation());
+      standardTzFullName(other.getStandardTzFullName());
       isDst(other.getIsDst());
       dstSavings(other.getDstSavings());
       dstExists(other.getDstExists());
@@ -468,29 +532,57 @@ public final class TimezoneLookupResponseTimeZone {
 
     @java.lang.Override
     @JsonSetter("week")
-    public MonthStage week(int week) {
+    public MonthStage week(double week) {
       this.week = week;
       return this;
     }
 
     @java.lang.Override
     @JsonSetter("month")
-    public YearStage month(int month) {
+    public YearStage month(double month) {
       this.month = month;
       return this;
     }
 
     @java.lang.Override
     @JsonSetter("year")
-    public YearAbbrStage year(int year) {
+    public YearAbbrStage year(double year) {
       this.year = year;
       return this;
     }
 
     @java.lang.Override
     @JsonSetter("year_abbr")
-    public IsDstStage yearAbbr(@NotNull String yearAbbr) {
+    public CurrentTzAbbreviationStage yearAbbr(@NotNull String yearAbbr) {
       this.yearAbbr = Objects.requireNonNull(yearAbbr, "yearAbbr must not be null");
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter("current_tz_abbreviation")
+    public CurrentTzFullNameStage currentTzAbbreviation(@NotNull String currentTzAbbreviation) {
+      this.currentTzAbbreviation = Objects.requireNonNull(currentTzAbbreviation, "currentTzAbbreviation must not be null");
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter("current_tz_full_name")
+    public StandardTzAbbreviationStage currentTzFullName(@NotNull String currentTzFullName) {
+      this.currentTzFullName = Objects.requireNonNull(currentTzFullName, "currentTzFullName must not be null");
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter("standard_tz_abbreviation")
+    public StandardTzFullNameStage standardTzAbbreviation(@NotNull String standardTzAbbreviation) {
+      this.standardTzAbbreviation = Objects.requireNonNull(standardTzAbbreviation, "standardTzAbbreviation must not be null");
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter("standard_tz_full_name")
+    public IsDstStage standardTzFullName(@NotNull String standardTzFullName) {
+      this.standardTzFullName = Objects.requireNonNull(standardTzFullName, "standardTzFullName must not be null");
       return this;
     }
 
@@ -510,28 +602,46 @@ public final class TimezoneLookupResponseTimeZone {
 
     @java.lang.Override
     @JsonSetter("dst_exists")
-    public DstStartStage dstExists(boolean dstExists) {
+    public _FinalStage dstExists(boolean dstExists) {
       this.dstExists = dstExists;
       return this;
     }
 
     @java.lang.Override
-    @JsonSetter("dst_start")
-    public DstEndStage dstStart(@NotNull TimezoneLookupResponseTimeZoneDstStart dstStart) {
-      this.dstStart = Objects.requireNonNull(dstStart, "dstStart must not be null");
+    public _FinalStage dstEnd(TimezoneLookupResponseTimeZoneDstEnd dstEnd) {
+      this.dstEnd = Optional.ofNullable(dstEnd);
       return this;
     }
 
     @java.lang.Override
-    @JsonSetter("dst_end")
-    public _FinalStage dstEnd(@NotNull TimezoneLookupResponseTimeZoneDstEnd dstEnd) {
-      this.dstEnd = Objects.requireNonNull(dstEnd, "dstEnd must not be null");
+    @JsonSetter(
+        value = "dst_end",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage dstEnd(Optional<TimezoneLookupResponseTimeZoneDstEnd> dstEnd) {
+      this.dstEnd = dstEnd;
+      return this;
+    }
+
+    @java.lang.Override
+    public _FinalStage dstStart(TimezoneLookupResponseTimeZoneDstStart dstStart) {
+      this.dstStart = Optional.ofNullable(dstStart);
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter(
+        value = "dst_start",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage dstStart(Optional<TimezoneLookupResponseTimeZoneDstStart> dstStart) {
+      this.dstStart = dstStart;
       return this;
     }
 
     @java.lang.Override
     public TimezoneLookupResponseTimeZone build() {
-      return new TimezoneLookupResponseTimeZone(name, offset, offsetWithDst, date, dateTime, dateTimeTxt, dateTimeWti, dateTimeYmd, dateTimeUnix, time24, time12, week, month, year, yearAbbr, isDst, dstSavings, dstExists, dstStart, dstEnd, additionalProperties);
+      return new TimezoneLookupResponseTimeZone(name, offset, offsetWithDst, date, dateTime, dateTimeTxt, dateTimeWti, dateTimeYmd, dateTimeUnix, time24, time12, week, month, year, yearAbbr, currentTzAbbreviation, currentTzFullName, standardTzAbbreviation, standardTzFullName, isDst, dstSavings, dstExists, dstStart, dstEnd, additionalProperties);
     }
 
     @java.lang.Override

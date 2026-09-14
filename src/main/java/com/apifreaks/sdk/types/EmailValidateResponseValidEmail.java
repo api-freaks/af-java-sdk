@@ -10,13 +10,9 @@ import java.lang.Object;
 import java.lang.String;
 
 public final class EmailValidateResponseValidEmail {
-  public static final EmailValidateResponseValidEmail INVALID = new EmailValidateResponseValidEmail(Value.INVALID, "Invalid");
-
-  public static final EmailValidateResponseValidEmail RISKY = new EmailValidateResponseValidEmail(Value.RISKY, "Risky");
+  public static final EmailValidateResponseValidEmail INVALID = new EmailValidateResponseValidEmail(Value.INVALID, "invalid");
 
   public static final EmailValidateResponseValidEmail VALID = new EmailValidateResponseValidEmail(Value.VALID, "valid");
-
-  public static final EmailValidateResponseValidEmail UNKNOWN = new EmailValidateResponseValidEmail(Value.UNKNOWN, "Unknown");
 
   private final Value value;
 
@@ -39,7 +35,7 @@ public final class EmailValidateResponseValidEmail {
 
   @java.lang.Override
   public boolean equals(Object other) {
-    return (this == other)
+    return (this == other) 
       || (other instanceof EmailValidateResponseValidEmail && this.string.equals(((EmailValidateResponseValidEmail) other).string));
   }
 
@@ -52,8 +48,6 @@ public final class EmailValidateResponseValidEmail {
     switch (value) {
       case INVALID:
         return visitor.visitInvalid();
-      case RISKY:
-        return visitor.visitRisky();
       case VALID:
         return visitor.visitValid();
       case UNKNOWN:
@@ -67,14 +61,10 @@ public final class EmailValidateResponseValidEmail {
   )
   public static EmailValidateResponseValidEmail valueOf(String value) {
     switch (value) {
-      case "Invalid":
+      case "invalid":
         return INVALID;
-      case "Risky":
-        return RISKY;
       case "valid":
         return VALID;
-      case "Unknown":
-        return UNKNOWN;
       default:
         return new EmailValidateResponseValidEmail(Value.UNKNOWN, value);
     }
@@ -85,8 +75,6 @@ public final class EmailValidateResponseValidEmail {
 
     INVALID,
 
-    RISKY,
-
     UNKNOWN
   }
 
@@ -94,8 +82,6 @@ public final class EmailValidateResponseValidEmail {
     T visitValid();
 
     T visitInvalid();
-
-    T visitRisky();
 
     T visitUnknown(String unknownType);
   }
