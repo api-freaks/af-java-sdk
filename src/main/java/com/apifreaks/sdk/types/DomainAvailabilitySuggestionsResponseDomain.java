@@ -13,47 +13,46 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import java.lang.Boolean;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
-    builder = DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess.Builder.class
+    builder = DomainAvailabilitySuggestionsResponseDomain.Builder.class
 )
-public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess {
-  private final Optional<List<String>> issuers;
+public final class DomainAvailabilitySuggestionsResponseDomain {
+  private final Optional<String> domain;
 
-  private final Optional<List<String>> ocsp;
+  private final Optional<Boolean> domainAvailability;
 
   private final Map<String, Object> additionalProperties;
 
-  private DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess(
-      Optional<List<String>> issuers, Optional<List<String>> ocsp,
-      Map<String, Object> additionalProperties) {
-    this.issuers = issuers;
-    this.ocsp = ocsp;
+  private DomainAvailabilitySuggestionsResponseDomain(Optional<String> domain,
+      Optional<Boolean> domainAvailability, Map<String, Object> additionalProperties) {
+    this.domain = domain;
+    this.domainAvailability = domainAvailability;
     this.additionalProperties = additionalProperties;
   }
 
-  @JsonProperty("issuers")
-  public Optional<List<String>> getIssuers() {
-    return issuers;
+  @JsonProperty("domain")
+  public Optional<String> getDomain() {
+    return domain;
   }
 
-  @JsonProperty("ocsp")
-  public Optional<List<String>> getOcsp() {
-    return ocsp;
+  @JsonProperty("domainAvailability")
+  public Optional<Boolean> getDomainAvailability() {
+    return domainAvailability;
   }
 
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
-    return other instanceof DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess && equalTo((DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess) other);
+    return other instanceof DomainAvailabilitySuggestionsResponseDomain && equalTo((DomainAvailabilitySuggestionsResponseDomain) other);
   }
 
   @JsonAnyGetter
@@ -61,14 +60,13 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsAuth
     return this.additionalProperties;
   }
 
-  private boolean equalTo(
-      DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess other) {
-    return issuers.equals(other.issuers) && ocsp.equals(other.ocsp);
+  private boolean equalTo(DomainAvailabilitySuggestionsResponseDomain other) {
+    return domain.equals(other.domain) && domainAvailability.equals(other.domainAvailability);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.issuers, this.ocsp);
+    return Objects.hash(this.domain, this.domainAvailability);
   }
 
   @java.lang.Override
@@ -84,9 +82,9 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsAuth
       ignoreUnknown = true
   )
   public static final class Builder {
-    private Optional<List<String>> issuers = Optional.empty();
+    private Optional<String> domain = Optional.empty();
 
-    private Optional<List<String>> ocsp = Optional.empty();
+    private Optional<Boolean> domainAvailability = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -94,43 +92,42 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsAuth
     private Builder() {
     }
 
-    public Builder from(
-        DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess other) {
-      issuers(other.getIssuers());
-      ocsp(other.getOcsp());
+    public Builder from(DomainAvailabilitySuggestionsResponseDomain other) {
+      domain(other.getDomain());
+      domainAvailability(other.getDomainAvailability());
       return this;
     }
 
     @JsonSetter(
-        value = "issuers",
+        value = "domain",
         nulls = Nulls.SKIP
     )
-    public Builder issuers(Optional<List<String>> issuers) {
-      this.issuers = issuers;
+    public Builder domain(Optional<String> domain) {
+      this.domain = domain;
       return this;
     }
 
-    public Builder issuers(List<String> issuers) {
-      this.issuers = Optional.ofNullable(issuers);
+    public Builder domain(String domain) {
+      this.domain = Optional.ofNullable(domain);
       return this;
     }
 
     @JsonSetter(
-        value = "ocsp",
+        value = "domainAvailability",
         nulls = Nulls.SKIP
     )
-    public Builder ocsp(Optional<List<String>> ocsp) {
-      this.ocsp = ocsp;
+    public Builder domainAvailability(Optional<Boolean> domainAvailability) {
+      this.domainAvailability = domainAvailability;
       return this;
     }
 
-    public Builder ocsp(List<String> ocsp) {
-      this.ocsp = Optional.ofNullable(ocsp);
+    public Builder domainAvailability(Boolean domainAvailability) {
+      this.domainAvailability = Optional.ofNullable(domainAvailability);
       return this;
     }
 
-    public DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess build() {
-      return new DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess(issuers, ocsp, additionalProperties);
+    public DomainAvailabilitySuggestionsResponseDomain build() {
+      return new DomainAvailabilitySuggestionsResponseDomain(domain, domainAvailability, additionalProperties);
     }
 
     public Builder additionalProperty(String key, Object value) {

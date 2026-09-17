@@ -22,20 +22,20 @@ import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
-    builder = DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifier.Builder.class
+    builder = DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier.Builder.class
 )
-public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifier {
+public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier {
   private final Optional<String> oid;
 
   private final Optional<String> cpsUri;
 
-  private final Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNotice> userNotice;
+  private final Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNotice> userNotice;
 
   private final Map<String, Object> additionalProperties;
 
-  private DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifier(
+  private DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier(
       Optional<String> oid, Optional<String> cpsUri,
-      Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNotice> userNotice,
+      Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNotice> userNotice,
       Map<String, Object> additionalProperties) {
     this.oid = oid;
     this.cpsUri = cpsUri;
@@ -43,18 +43,24 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCert
     this.additionalProperties = additionalProperties;
   }
 
+  /**
+   * @return Object identifier
+   */
   @JsonProperty("oid")
   public Optional<String> getOid() {
     return oid;
   }
 
+  /**
+   * @return URI of the CPS
+   */
   @JsonProperty("cpsUri")
   public Optional<String> getCpsUri() {
     return cpsUri;
   }
 
   @JsonProperty("userNotice")
-  public Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNotice> getUserNotice(
+  public Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNotice> getUserNotice(
       ) {
     return userNotice;
   }
@@ -62,7 +68,7 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCert
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
-    return other instanceof DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifier && equalTo((DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifier) other);
+    return other instanceof DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier && equalTo((DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier) other);
   }
 
   @JsonAnyGetter
@@ -71,7 +77,7 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCert
   }
 
   private boolean equalTo(
-      DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifier other) {
+      DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier other) {
     return oid.equals(other.oid) && cpsUri.equals(other.cpsUri) && userNotice.equals(other.userNotice);
   }
 
@@ -97,7 +103,7 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCert
 
     private Optional<String> cpsUri = Optional.empty();
 
-    private Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNotice> userNotice = Optional.empty();
+    private Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNotice> userNotice = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -106,13 +112,16 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCert
     }
 
     public Builder from(
-        DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifier other) {
+        DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier other) {
       oid(other.getOid());
       cpsUri(other.getCpsUri());
       userNotice(other.getUserNotice());
       return this;
     }
 
+    /**
+     * <p>Object identifier</p>
+     */
     @JsonSetter(
         value = "oid",
         nulls = Nulls.SKIP
@@ -127,6 +136,9 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCert
       return this;
     }
 
+    /**
+     * <p>URI of the CPS</p>
+     */
     @JsonSetter(
         value = "cpsUri",
         nulls = Nulls.SKIP
@@ -146,20 +158,20 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCert
         nulls = Nulls.SKIP
     )
     public Builder userNotice(
-        Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNotice> userNotice) {
+        Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNotice> userNotice) {
       this.userNotice = userNotice;
       return this;
     }
 
     public Builder userNotice(
-        DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNotice userNotice) {
+        DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNotice userNotice) {
       this.userNotice = Optional.ofNullable(userNotice);
       return this;
     }
 
-    public DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifier build(
+    public DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier build(
         ) {
-      return new DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifier(oid, cpsUri, userNotice, additionalProperties);
+      return new DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier(oid, cpsUri, userNotice, additionalProperties);
     }
 
     public Builder additionalProperty(String key, Object value) {

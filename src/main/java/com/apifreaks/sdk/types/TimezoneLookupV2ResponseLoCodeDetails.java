@@ -13,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.lang.Float;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -38,15 +37,15 @@ public final class TimezoneLookupV2ResponseLoCodeDetails {
 
   private final Optional<String> locationType;
 
-  private final Optional<Float> latitude;
+  private final Optional<String> latitude;
 
-  private final Optional<Float> longitude;
+  private final Optional<String> longitude;
 
   private final Map<String, Object> additionalProperties;
 
   private TimezoneLookupV2ResponseLoCodeDetails(Optional<String> loCode, Optional<String> city,
       Optional<String> stateCode, Optional<String> countryCode, Optional<String> countryName,
-      Optional<String> locationType, Optional<Float> latitude, Optional<Float> longitude,
+      Optional<String> locationType, Optional<String> latitude, Optional<String> longitude,
       Map<String, Object> additionalProperties) {
     this.loCode = loCode;
     this.city = city;
@@ -111,7 +110,7 @@ public final class TimezoneLookupV2ResponseLoCodeDetails {
    * @return The latitude coordinate of the location.
    */
   @JsonProperty("latitude")
-  public Optional<Float> getLatitude() {
+  public Optional<String> getLatitude() {
     return latitude;
   }
 
@@ -119,7 +118,7 @@ public final class TimezoneLookupV2ResponseLoCodeDetails {
    * @return The longitude coordinate of the location.
    */
   @JsonProperty("longitude")
-  public Optional<Float> getLongitude() {
+  public Optional<String> getLongitude() {
     return longitude;
   }
 
@@ -168,9 +167,9 @@ public final class TimezoneLookupV2ResponseLoCodeDetails {
 
     private Optional<String> locationType = Optional.empty();
 
-    private Optional<Float> latitude = Optional.empty();
+    private Optional<String> latitude = Optional.empty();
 
-    private Optional<Float> longitude = Optional.empty();
+    private Optional<String> longitude = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -299,12 +298,12 @@ public final class TimezoneLookupV2ResponseLoCodeDetails {
         value = "latitude",
         nulls = Nulls.SKIP
     )
-    public Builder latitude(Optional<Float> latitude) {
+    public Builder latitude(Optional<String> latitude) {
       this.latitude = latitude;
       return this;
     }
 
-    public Builder latitude(Float latitude) {
+    public Builder latitude(String latitude) {
       this.latitude = Optional.ofNullable(latitude);
       return this;
     }
@@ -316,12 +315,12 @@ public final class TimezoneLookupV2ResponseLoCodeDetails {
         value = "longitude",
         nulls = Nulls.SKIP
     )
-    public Builder longitude(Optional<Float> longitude) {
+    public Builder longitude(Optional<String> longitude) {
       this.longitude = longitude;
       return this;
     }
 
-    public Builder longitude(Float longitude) {
+    public Builder longitude(String longitude) {
       this.longitude = Optional.ofNullable(longitude);
       return this;
     }

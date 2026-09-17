@@ -34,7 +34,7 @@ public final class DomainWhoisLookupV2Response {
 
   private final String queryTime;
 
-  private final String whoisServer;
+  private final Optional<String> whoisServer;
 
   private final DomainWhoisLookupV2ResponseDomainRegistered domainRegistered;
 
@@ -75,7 +75,7 @@ public final class DomainWhoisLookupV2Response {
   private final Map<String, Object> additionalProperties;
 
   private DomainWhoisLookupV2Response(boolean status, String domainName, String queryTime,
-      String whoisServer, DomainWhoisLookupV2ResponseDomainRegistered domainRegistered,
+      Optional<String> whoisServer, DomainWhoisLookupV2ResponseDomainRegistered domainRegistered,
       Optional<Boolean> secureDns, Optional<String> domainHandle, Optional<String> createDate,
       Optional<String> updateDate, Optional<String> expiryDate,
       Optional<DomainWhoisLookupV2ResponseDomainRegistrar> domainRegistrar,
@@ -143,7 +143,7 @@ public final class DomainWhoisLookupV2Response {
    * @return WHOIS or RDAP server that provided this record.
    */
   @JsonProperty("whois_server")
-  public String getWhoisServer() {
+  public Optional<String> getWhoisServer() {
     return whoisServer;
   }
 
@@ -340,14 +340,7 @@ public final class DomainWhoisLookupV2Response {
     /**
      * <p>Timestamp when the WHOIS query was executed.</p>
      */
-    WhoisServerStage queryTime(@NotNull String queryTime);
-  }
-
-  public interface WhoisServerStage {
-    /**
-     * <p>WHOIS or RDAP server that provided this record.</p>
-     */
-    DomainRegisteredStage whoisServer(@NotNull String whoisServer);
+    DomainRegisteredStage queryTime(@NotNull String queryTime);
   }
 
   public interface DomainRegisteredStage {
@@ -364,6 +357,13 @@ public final class DomainWhoisLookupV2Response {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
+
+    /**
+     * <p>WHOIS or RDAP server that provided this record.</p>
+     */
+    _FinalStage whoisServer(Optional<String> whoisServer);
+
+    _FinalStage whoisServer(String whoisServer);
 
     /**
      * <p>Indicates if DNSSEC or secure DNS is enabled for the domain.</p>
@@ -495,14 +495,12 @@ public final class DomainWhoisLookupV2Response {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements StatusStage, DomainNameStage, QueryTimeStage, WhoisServerStage, DomainRegisteredStage, _FinalStage {
+  public static final class Builder implements StatusStage, DomainNameStage, QueryTimeStage, DomainRegisteredStage, _FinalStage {
     private boolean status;
 
     private String domainName;
 
     private String queryTime;
-
-    private String whoisServer;
 
     private DomainWhoisLookupV2ResponseDomainRegistered domainRegistered;
 
@@ -539,6 +537,8 @@ public final class DomainWhoisLookupV2Response {
     private Optional<String> domainHandle = Optional.empty();
 
     private Optional<Boolean> secureDns = Optional.empty();
+
+    private Optional<String> whoisServer = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -604,20 +604,8 @@ public final class DomainWhoisLookupV2Response {
      */
     @java.lang.Override
     @JsonSetter("query_time")
-    public WhoisServerStage queryTime(@NotNull String queryTime) {
+    public DomainRegisteredStage queryTime(@NotNull String queryTime) {
       this.queryTime = Objects.requireNonNull(queryTime, "queryTime must not be null");
-      return this;
-    }
-
-    /**
-     * <p>WHOIS or RDAP server that provided this record.</p>
-     * <p>WHOIS or RDAP server that provided this record.</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    @JsonSetter("whois_server")
-    public DomainRegisteredStage whoisServer(@NotNull String whoisServer) {
-      this.whoisServer = Objects.requireNonNull(whoisServer, "whoisServer must not be null");
       return this;
     }
 
@@ -1034,6 +1022,29 @@ public final class DomainWhoisLookupV2Response {
     )
     public _FinalStage secureDns(Optional<Boolean> secureDns) {
       this.secureDns = secureDns;
+      return this;
+    }
+
+    /**
+     * <p>WHOIS or RDAP server that provided this record.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage whoisServer(String whoisServer) {
+      this.whoisServer = Optional.ofNullable(whoisServer);
+      return this;
+    }
+
+    /**
+     * <p>WHOIS or RDAP server that provided this record.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "whois_server",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage whoisServer(Optional<String> whoisServer) {
+      this.whoisServer = whoisServer;
       return this;
     }
 

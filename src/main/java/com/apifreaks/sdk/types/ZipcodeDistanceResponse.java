@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import java.lang.Integer;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -26,26 +27,26 @@ import java.util.Optional;
     builder = ZipcodeDistanceResponse.Builder.class
 )
 public final class ZipcodeDistanceResponse {
-  private final Optional<String> resultsCount;
+  private final Optional<Integer> resultCount;
 
   private final Optional<List<ZipcodeDistanceResponseResultsItem>> results;
 
   private final Map<String, Object> additionalProperties;
 
-  private ZipcodeDistanceResponse(Optional<String> resultsCount,
+  private ZipcodeDistanceResponse(Optional<Integer> resultCount,
       Optional<List<ZipcodeDistanceResponseResultsItem>> results,
       Map<String, Object> additionalProperties) {
-    this.resultsCount = resultsCount;
+    this.resultCount = resultCount;
     this.results = results;
     this.additionalProperties = additionalProperties;
   }
 
   /**
-   * @return Number of distance results returned
+   * @return Number of distance results returned (may be less than the number of requested compare codes).
    */
-  @JsonProperty("results_count")
-  public Optional<String> getResultsCount() {
-    return resultsCount;
+  @JsonProperty("result_count")
+  public Optional<Integer> getResultCount() {
+    return resultCount;
   }
 
   @JsonProperty("results")
@@ -65,12 +66,12 @@ public final class ZipcodeDistanceResponse {
   }
 
   private boolean equalTo(ZipcodeDistanceResponse other) {
-    return resultsCount.equals(other.resultsCount) && results.equals(other.results);
+    return resultCount.equals(other.resultCount) && results.equals(other.results);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.resultsCount, this.results);
+    return Objects.hash(this.resultCount, this.results);
   }
 
   @java.lang.Override
@@ -86,7 +87,7 @@ public final class ZipcodeDistanceResponse {
       ignoreUnknown = true
   )
   public static final class Builder {
-    private Optional<String> resultsCount = Optional.empty();
+    private Optional<Integer> resultCount = Optional.empty();
 
     private Optional<List<ZipcodeDistanceResponseResultsItem>> results = Optional.empty();
 
@@ -97,25 +98,25 @@ public final class ZipcodeDistanceResponse {
     }
 
     public Builder from(ZipcodeDistanceResponse other) {
-      resultsCount(other.getResultsCount());
+      resultCount(other.getResultCount());
       results(other.getResults());
       return this;
     }
 
     /**
-     * <p>Number of distance results returned</p>
+     * <p>Number of distance results returned (may be less than the number of requested compare codes).</p>
      */
     @JsonSetter(
-        value = "results_count",
+        value = "result_count",
         nulls = Nulls.SKIP
     )
-    public Builder resultsCount(Optional<String> resultsCount) {
-      this.resultsCount = resultsCount;
+    public Builder resultCount(Optional<Integer> resultCount) {
+      this.resultCount = resultCount;
       return this;
     }
 
-    public Builder resultsCount(String resultsCount) {
-      this.resultsCount = Optional.ofNullable(resultsCount);
+    public Builder resultCount(Integer resultCount) {
+      this.resultCount = Optional.ofNullable(resultCount);
       return this;
     }
 
@@ -134,7 +135,7 @@ public final class ZipcodeDistanceResponse {
     }
 
     public ZipcodeDistanceResponse build() {
-      return new ZipcodeDistanceResponse(resultsCount, results, additionalProperties);
+      return new ZipcodeDistanceResponse(resultCount, results, additionalProperties);
     }
 
     public Builder additionalProperty(String key, Object value) {

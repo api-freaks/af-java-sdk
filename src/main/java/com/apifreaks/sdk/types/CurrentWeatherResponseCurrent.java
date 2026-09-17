@@ -14,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
-import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -25,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
     builder = CurrentWeatherResponseCurrent.Builder.class
 )
 public final class CurrentWeatherResponseCurrent {
-  private final OffsetDateTime timestamp;
+  private final String timestamp;
 
   private final float temperature2M;
 
@@ -61,7 +60,7 @@ public final class CurrentWeatherResponseCurrent {
 
   private final Map<String, Object> additionalProperties;
 
-  private CurrentWeatherResponseCurrent(OffsetDateTime timestamp, float temperature2M,
+  private CurrentWeatherResponseCurrent(String timestamp, float temperature2M,
       float relativeHumidity2M, float apparentTemperature, float snowfall, float rain,
       float showers, float precipitation, int weatherCode, float cloudCover, float pressureMsl,
       float surfacePressure, float windSpeed10M, int windDirection10M, float windGusts10M,
@@ -89,10 +88,10 @@ public final class CurrentWeatherResponseCurrent {
   }
 
   /**
-   * @return ISO 8601 formatted timestamp of the current weather observation.
+   * @return Local timestamp of the current weather observation (format YYYY-MM-DDTHH:mm, not ISO 8601).
    */
   @JsonProperty("timestamp")
-  public OffsetDateTime getTimestamp() {
+  public String getTimestamp() {
     return timestamp;
   }
 
@@ -255,9 +254,9 @@ public final class CurrentWeatherResponseCurrent {
 
   public interface TimestampStage {
     /**
-     * <p>ISO 8601 formatted timestamp of the current weather observation.</p>
+     * <p>Local timestamp of the current weather observation (format YYYY-MM-DDTHH:mm, not ISO 8601).</p>
      */
-    Temperature2MStage timestamp(@NotNull OffsetDateTime timestamp);
+    Temperature2MStage timestamp(@NotNull String timestamp);
 
     Builder from(CurrentWeatherResponseCurrent other);
   }
@@ -386,7 +385,7 @@ public final class CurrentWeatherResponseCurrent {
       ignoreUnknown = true
   )
   public static final class Builder implements TimestampStage, Temperature2MStage, RelativeHumidity2MStage, ApparentTemperatureStage, SnowfallStage, RainStage, ShowersStage, PrecipitationStage, WeatherCodeStage, CloudCoverStage, PressureMslStage, SurfacePressureStage, WindSpeed10MStage, WindDirection10MStage, WindGusts10MStage, AstronomyStage, AirQualityStage, _FinalStage {
-    private OffsetDateTime timestamp;
+    private String timestamp;
 
     private float temperature2M;
 
@@ -449,13 +448,13 @@ public final class CurrentWeatherResponseCurrent {
     }
 
     /**
-     * <p>ISO 8601 formatted timestamp of the current weather observation.</p>
-     * <p>ISO 8601 formatted timestamp of the current weather observation.</p>
+     * <p>Local timestamp of the current weather observation (format YYYY-MM-DDTHH:mm, not ISO 8601).</p>
+     * <p>Local timestamp of the current weather observation (format YYYY-MM-DDTHH:mm, not ISO 8601).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("timestamp")
-    public Temperature2MStage timestamp(@NotNull OffsetDateTime timestamp) {
+    public Temperature2MStage timestamp(@NotNull String timestamp) {
       this.timestamp = Objects.requireNonNull(timestamp, "timestamp must not be null");
       return this;
     }

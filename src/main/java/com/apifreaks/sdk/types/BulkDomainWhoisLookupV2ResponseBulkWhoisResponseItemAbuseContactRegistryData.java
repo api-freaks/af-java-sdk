@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
-import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +28,7 @@ import java.util.Optional;
 public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseContactRegistryData {
   private final Optional<String> domainName;
 
-  private final Optional<OffsetDateTime> queryTime;
+  private final Optional<String> queryTime;
 
   private final Optional<String> whoisServer;
 
@@ -52,7 +51,7 @@ public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseCont
   private final Map<String, Object> additionalProperties;
 
   private BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseContactRegistryData(
-      Optional<String> domainName, Optional<OffsetDateTime> queryTime, Optional<String> whoisServer,
+      Optional<String> domainName, Optional<String> queryTime, Optional<String> whoisServer,
       Optional<BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseContactRegistryDataDomainRegistered> domainRegistered,
       Optional<String> createDate, Optional<String> updateDate, Optional<String> expiryDate,
       Optional<List<String>> nameServers, Optional<List<String>> domainStatus,
@@ -82,10 +81,10 @@ public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseCont
   }
 
   /**
-   * @return Timestamp when the registry-level record was queried.
+   * @return Timestamp when the registry-level record was queried (format YYYY-MM-DD HH:mm:ss, not ISO 8601).
    */
   @JsonProperty("query_time")
-  public Optional<OffsetDateTime> getQueryTime() {
+  public Optional<String> getQueryTime() {
     return queryTime;
   }
 
@@ -199,7 +198,7 @@ public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseCont
   public static final class Builder {
     private Optional<String> domainName = Optional.empty();
 
-    private Optional<OffsetDateTime> queryTime = Optional.empty();
+    private Optional<String> queryTime = Optional.empty();
 
     private Optional<String> whoisServer = Optional.empty();
 
@@ -259,18 +258,18 @@ public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseCont
     }
 
     /**
-     * <p>Timestamp when the registry-level record was queried.</p>
+     * <p>Timestamp when the registry-level record was queried (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
      */
     @JsonSetter(
         value = "query_time",
         nulls = Nulls.SKIP
     )
-    public Builder queryTime(Optional<OffsetDateTime> queryTime) {
+    public Builder queryTime(Optional<String> queryTime) {
       this.queryTime = queryTime;
       return this;
     }
 
-    public Builder queryTime(OffsetDateTime queryTime) {
+    public Builder queryTime(String queryTime) {
       this.queryTime = Optional.ofNullable(queryTime);
       return this;
     }

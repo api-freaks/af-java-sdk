@@ -14,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Boolean;
-import java.lang.Float;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -52,13 +51,13 @@ public final class BulkCurrentWeatherResponseBulkItemLocationContinentCode {
 
   private final Optional<String> zipcode;
 
-  private final float latitude;
+  private final String latitude;
 
-  private final float longitude;
+  private final String longitude;
 
   private final Optional<String> locality;
 
-  private final Optional<Float> elevation;
+  private final Optional<String> elevation;
 
   private final String timezone;
 
@@ -70,7 +69,7 @@ public final class BulkCurrentWeatherResponseBulkItemLocationContinentCode {
       String continentName, String countryCode2, String countryCode3, String countryName,
       String countryNameOfficial, Optional<Boolean> isEu, String stateProv,
       Optional<String> stateCode, Optional<String> district, String city, Optional<String> zipcode,
-      float latitude, float longitude, Optional<String> locality, Optional<Float> elevation,
+      String latitude, String longitude, Optional<String> locality, Optional<String> elevation,
       String timezone, String timezoneAbbreviation, Map<String, Object> additionalProperties) {
     this.continentCode = continentCode;
     this.continentName = continentName;
@@ -193,7 +192,7 @@ public final class BulkCurrentWeatherResponseBulkItemLocationContinentCode {
    * @return Geographic latitude in decimal degrees for the IP geolocation, ranging from -90 to +90.
    */
   @JsonProperty("latitude")
-  public float getLatitude() {
+  public String getLatitude() {
     return latitude;
   }
 
@@ -201,7 +200,7 @@ public final class BulkCurrentWeatherResponseBulkItemLocationContinentCode {
    * @return Geographic longitude in decimal degrees for the IP geolocation, ranging from -180 to +180.
    */
   @JsonProperty("longitude")
-  public float getLongitude() {
+  public String getLongitude() {
     return longitude;
   }
 
@@ -217,7 +216,7 @@ public final class BulkCurrentWeatherResponseBulkItemLocationContinentCode {
    * @return Elevation above mean sea level in meters for the IP geolocation.
    */
   @JsonProperty("elevation")
-  public Optional<Float> getElevation() {
+  public Optional<String> getElevation() {
     return elevation;
   }
 
@@ -249,7 +248,7 @@ public final class BulkCurrentWeatherResponseBulkItemLocationContinentCode {
   }
 
   private boolean equalTo(BulkCurrentWeatherResponseBulkItemLocationContinentCode other) {
-    return continentCode.equals(other.continentCode) && continentName.equals(other.continentName) && countryCode2.equals(other.countryCode2) && countryCode3.equals(other.countryCode3) && countryName.equals(other.countryName) && countryNameOfficial.equals(other.countryNameOfficial) && isEu.equals(other.isEu) && stateProv.equals(other.stateProv) && stateCode.equals(other.stateCode) && district.equals(other.district) && city.equals(other.city) && zipcode.equals(other.zipcode) && latitude == other.latitude && longitude == other.longitude && locality.equals(other.locality) && elevation.equals(other.elevation) && timezone.equals(other.timezone) && timezoneAbbreviation.equals(other.timezoneAbbreviation);
+    return continentCode.equals(other.continentCode) && continentName.equals(other.continentName) && countryCode2.equals(other.countryCode2) && countryCode3.equals(other.countryCode3) && countryName.equals(other.countryName) && countryNameOfficial.equals(other.countryNameOfficial) && isEu.equals(other.isEu) && stateProv.equals(other.stateProv) && stateCode.equals(other.stateCode) && district.equals(other.district) && city.equals(other.city) && zipcode.equals(other.zipcode) && latitude.equals(other.latitude) && longitude.equals(other.longitude) && locality.equals(other.locality) && elevation.equals(other.elevation) && timezone.equals(other.timezone) && timezoneAbbreviation.equals(other.timezoneAbbreviation);
   }
 
   @java.lang.Override
@@ -328,14 +327,14 @@ public final class BulkCurrentWeatherResponseBulkItemLocationContinentCode {
     /**
      * <p>Geographic latitude in decimal degrees for the IP geolocation, ranging from -90 to +90.</p>
      */
-    LongitudeStage latitude(float latitude);
+    LongitudeStage latitude(@NotNull String latitude);
   }
 
   public interface LongitudeStage {
     /**
      * <p>Geographic longitude in decimal degrees for the IP geolocation, ranging from -180 to +180.</p>
      */
-    TimezoneStage longitude(float longitude);
+    TimezoneStage longitude(@NotNull String longitude);
   }
 
   public interface TimezoneStage {
@@ -397,9 +396,9 @@ public final class BulkCurrentWeatherResponseBulkItemLocationContinentCode {
     /**
      * <p>Elevation above mean sea level in meters for the IP geolocation.</p>
      */
-    _FinalStage elevation(Optional<Float> elevation);
+    _FinalStage elevation(Optional<String> elevation);
 
-    _FinalStage elevation(Float elevation);
+    _FinalStage elevation(String elevation);
   }
 
   @JsonIgnoreProperties(
@@ -422,15 +421,15 @@ public final class BulkCurrentWeatherResponseBulkItemLocationContinentCode {
 
     private String city;
 
-    private float latitude;
+    private String latitude;
 
-    private float longitude;
+    private String longitude;
 
     private String timezone;
 
     private String timezoneAbbreviation;
 
-    private Optional<Float> elevation = Optional.empty();
+    private Optional<String> elevation = Optional.empty();
 
     private Optional<String> locality = Optional.empty();
 
@@ -574,8 +573,8 @@ public final class BulkCurrentWeatherResponseBulkItemLocationContinentCode {
      */
     @java.lang.Override
     @JsonSetter("latitude")
-    public LongitudeStage latitude(float latitude) {
-      this.latitude = latitude;
+    public LongitudeStage latitude(@NotNull String latitude) {
+      this.latitude = Objects.requireNonNull(latitude, "latitude must not be null");
       return this;
     }
 
@@ -586,8 +585,8 @@ public final class BulkCurrentWeatherResponseBulkItemLocationContinentCode {
      */
     @java.lang.Override
     @JsonSetter("longitude")
-    public TimezoneStage longitude(float longitude) {
-      this.longitude = longitude;
+    public TimezoneStage longitude(@NotNull String longitude) {
+      this.longitude = Objects.requireNonNull(longitude, "longitude must not be null");
       return this;
     }
 
@@ -620,7 +619,7 @@ public final class BulkCurrentWeatherResponseBulkItemLocationContinentCode {
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage elevation(Float elevation) {
+    public _FinalStage elevation(String elevation) {
       this.elevation = Optional.ofNullable(elevation);
       return this;
     }
@@ -633,7 +632,7 @@ public final class BulkCurrentWeatherResponseBulkItemLocationContinentCode {
         value = "elevation",
         nulls = Nulls.SKIP
     )
-    public _FinalStage elevation(Optional<Float> elevation) {
+    public _FinalStage elevation(Optional<String> elevation) {
       this.elevation = elevation;
       return this;
     }

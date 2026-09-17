@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
-import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +33,7 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
 
   private final String domainName;
 
-  private final OffsetDateTime queryTime;
+  private final String queryTime;
 
   private final String whoisServer;
 
@@ -69,7 +68,7 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
   private final Map<String, Object> additionalProperties;
 
   private DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministrativeContact(int num,
-      boolean status, String domainName, OffsetDateTime queryTime, String whoisServer,
+      boolean status, String domainName, String queryTime, String whoisServer,
       DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministrativeContactDomainRegistered domainRegistered,
       Optional<String> createDate, Optional<String> updateDate, Optional<String> expiryDate,
       Optional<DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministrativeContactDomainRegistrar> domainRegistrar,
@@ -119,8 +118,11 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
     return domainName;
   }
 
+  /**
+   * @return Timestamp when the WHOIS query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).
+   */
   @JsonProperty("query_time")
-  public OffsetDateTime getQueryTime() {
+  public String getQueryTime() {
     return queryTime;
   }
 
@@ -252,7 +254,10 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
   }
 
   public interface QueryTimeStage {
-    WhoisServerStage queryTime(@NotNull OffsetDateTime queryTime);
+    /**
+     * <p>Timestamp when the WHOIS query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
+     */
+    WhoisServerStage queryTime(@NotNull String queryTime);
   }
 
   public interface WhoisServerStage {
@@ -348,7 +353,7 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
 
     private String domainName;
 
-    private OffsetDateTime queryTime;
+    private String queryTime;
 
     private String whoisServer;
 
@@ -432,9 +437,14 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
       return this;
     }
 
+    /**
+     * <p>Timestamp when the WHOIS query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
+     * <p>Timestamp when the WHOIS query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
     @java.lang.Override
     @JsonSetter("query_time")
-    public WhoisServerStage queryTime(@NotNull OffsetDateTime queryTime) {
+    public WhoisServerStage queryTime(@NotNull String queryTime) {
       this.queryTime = Objects.requireNonNull(queryTime, "queryTime must not be null");
       return this;
     }

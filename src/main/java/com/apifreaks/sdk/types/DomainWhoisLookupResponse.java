@@ -16,7 +16,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Boolean;
 import java.lang.Object;
 import java.lang.String;
-import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,7 @@ public final class DomainWhoisLookupResponse {
 
   private final Optional<String> domainName;
 
-  private final Optional<OffsetDateTime> queryTime;
+  private final Optional<String> queryTime;
 
   private final Optional<String> whoisServer;
 
@@ -67,7 +66,7 @@ public final class DomainWhoisLookupResponse {
   private final Map<String, Object> additionalProperties;
 
   private DomainWhoisLookupResponse(Optional<Boolean> status, Optional<String> domainName,
-      Optional<OffsetDateTime> queryTime, Optional<String> whoisServer,
+      Optional<String> queryTime, Optional<String> whoisServer,
       Optional<DomainWhoisLookupResponseDomainRegistered> domainRegistered,
       Optional<String> createDate, Optional<String> updateDate, Optional<String> expiryDate,
       Optional<DomainWhoisLookupResponseDomainRegistrar> domainRegistrar,
@@ -110,8 +109,11 @@ public final class DomainWhoisLookupResponse {
     return domainName;
   }
 
+  /**
+   * @return Timestamp when the WHOIS query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).
+   */
   @JsonProperty("query_time")
-  public Optional<OffsetDateTime> getQueryTime() {
+  public Optional<String> getQueryTime() {
     return queryTime;
   }
 
@@ -227,7 +229,7 @@ public final class DomainWhoisLookupResponse {
 
     private Optional<String> domainName = Optional.empty();
 
-    private Optional<OffsetDateTime> queryTime = Optional.empty();
+    private Optional<String> queryTime = Optional.empty();
 
     private Optional<String> whoisServer = Optional.empty();
 
@@ -315,16 +317,19 @@ public final class DomainWhoisLookupResponse {
       return this;
     }
 
+    /**
+     * <p>Timestamp when the WHOIS query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
+     */
     @JsonSetter(
         value = "query_time",
         nulls = Nulls.SKIP
     )
-    public Builder queryTime(Optional<OffsetDateTime> queryTime) {
+    public Builder queryTime(Optional<String> queryTime) {
       this.queryTime = queryTime;
       return this;
     }
 
-    public Builder queryTime(OffsetDateTime queryTime) {
+    public Builder queryTime(String queryTime) {
       this.queryTime = Optional.ofNullable(queryTime);
       return this;
     }

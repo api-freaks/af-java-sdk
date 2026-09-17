@@ -23,30 +23,37 @@ import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
-    builder = DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePolicies.Builder.class
+    builder = DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem.Builder.class
 )
-public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePolicies {
+public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem {
   private final String policyId;
 
-  private final Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifier> policyQualifier;
+  private final Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier> policyQualifier;
 
   private final Map<String, Object> additionalProperties;
 
-  private DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePolicies(String policyId,
-      Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifier> policyQualifier,
+  private DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem(
+      String policyId,
+      Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier> policyQualifier,
       Map<String, Object> additionalProperties) {
     this.policyId = policyId;
     this.policyQualifier = policyQualifier;
     this.additionalProperties = additionalProperties;
   }
 
+  /**
+   * @return Policy identifier
+   */
   @JsonProperty("policyId")
   public String getPolicyId() {
     return policyId;
   }
 
+  /**
+   * @return Policy qualifier details
+   */
   @JsonProperty("policyQualifier")
-  public Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifier> getPolicyQualifier(
+  public Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier> getPolicyQualifier(
       ) {
     return policyQualifier;
   }
@@ -54,7 +61,7 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertifica
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
-    return other instanceof DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePolicies && equalTo((DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePolicies) other);
+    return other instanceof DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem && equalTo((DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem) other);
   }
 
   @JsonAnyGetter
@@ -63,7 +70,7 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertifica
   }
 
   private boolean equalTo(
-      DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePolicies other) {
+      DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem other) {
     return policyId.equals(other.policyId) && policyQualifier.equals(other.policyQualifier);
   }
 
@@ -82,23 +89,29 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertifica
   }
 
   public interface PolicyIdStage {
+    /**
+     * <p>Policy identifier</p>
+     */
     _FinalStage policyId(@NotNull String policyId);
 
-    Builder from(DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePolicies other);
+    Builder from(DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem other);
   }
 
   public interface _FinalStage {
-    DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePolicies build();
+    DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem build();
 
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
 
+    /**
+     * <p>Policy qualifier details</p>
+     */
     _FinalStage policyQualifier(
-        Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifier> policyQualifier);
+        Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier> policyQualifier);
 
     _FinalStage policyQualifier(
-        DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifier policyQualifier);
+        DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier policyQualifier);
   }
 
   @JsonIgnoreProperties(
@@ -107,7 +120,7 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertifica
   public static final class Builder implements PolicyIdStage, _FinalStage {
     private String policyId;
 
-    private Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifier> policyQualifier = Optional.empty();
+    private Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier> policyQualifier = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -117,12 +130,17 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertifica
 
     @java.lang.Override
     public Builder from(
-        DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePolicies other) {
+        DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem other) {
       policyId(other.getPolicyId());
       policyQualifier(other.getPolicyQualifier());
       return this;
     }
 
+    /**
+     * <p>Policy identifier</p>
+     * <p>Policy identifier</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
     @java.lang.Override
     @JsonSetter("policyId")
     public _FinalStage policyId(@NotNull String policyId) {
@@ -130,27 +148,34 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertifica
       return this;
     }
 
+    /**
+     * <p>Policy qualifier details</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
     @java.lang.Override
     public _FinalStage policyQualifier(
-        DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifier policyQualifier) {
+        DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier policyQualifier) {
       this.policyQualifier = Optional.ofNullable(policyQualifier);
       return this;
     }
 
+    /**
+     * <p>Policy qualifier details</p>
+     */
     @java.lang.Override
     @JsonSetter(
         value = "policyQualifier",
         nulls = Nulls.SKIP
     )
     public _FinalStage policyQualifier(
-        Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifier> policyQualifier) {
+        Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier> policyQualifier) {
       this.policyQualifier = policyQualifier;
       return this;
     }
 
     @java.lang.Override
-    public DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePolicies build() {
-      return new DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePolicies(policyId, policyQualifier, additionalProperties);
+    public DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem build() {
+      return new DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem(policyId, policyQualifier, additionalProperties);
     }
 
     @java.lang.Override

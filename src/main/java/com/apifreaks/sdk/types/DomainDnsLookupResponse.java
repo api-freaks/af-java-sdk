@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 public final class DomainDnsLookupResponse {
   private final boolean status;
 
-  private final OffsetDateTime queryTime;
+  private final String queryTime;
 
   private final String domainName;
 
@@ -42,7 +41,7 @@ public final class DomainDnsLookupResponse {
 
   private final Map<String, Object> additionalProperties;
 
-  private DomainDnsLookupResponse(boolean status, OffsetDateTime queryTime, String domainName,
+  private DomainDnsLookupResponse(boolean status, String queryTime, String domainName,
       boolean domainRegistered, DomainDnsLookupResponseDnsTypes dnsTypes,
       List<DomainDnsLookupResponseDnsRecordsItem> dnsRecords,
       Map<String, Object> additionalProperties) {
@@ -64,10 +63,10 @@ public final class DomainDnsLookupResponse {
   }
 
   /**
-   * @return Time at which the query was made (Format:YYYY-MM-DD HH:mm:ss).
+   * @return Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).
    */
   @JsonProperty("queryTime")
-  public OffsetDateTime getQueryTime() {
+  public String getQueryTime() {
     return queryTime;
   }
 
@@ -140,9 +139,9 @@ public final class DomainDnsLookupResponse {
 
   public interface QueryTimeStage {
     /**
-     * <p>Time at which the query was made (Format:YYYY-MM-DD HH:mm:ss).</p>
+     * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
      */
-    DomainNameStage queryTime(@NotNull OffsetDateTime queryTime);
+    DomainNameStage queryTime(@NotNull String queryTime);
   }
 
   public interface DomainNameStage {
@@ -186,7 +185,7 @@ public final class DomainDnsLookupResponse {
   public static final class Builder implements StatusStage, QueryTimeStage, DomainNameStage, DomainRegisteredStage, DnsTypesStage, _FinalStage {
     private boolean status;
 
-    private OffsetDateTime queryTime;
+    private String queryTime;
 
     private String domainName;
 
@@ -226,13 +225,13 @@ public final class DomainDnsLookupResponse {
     }
 
     /**
-     * <p>Time at which the query was made (Format:YYYY-MM-DD HH:mm:ss).</p>
-     * <p>Time at which the query was made (Format:YYYY-MM-DD HH:mm:ss).</p>
+     * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
+     * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("queryTime")
-    public DomainNameStage queryTime(@NotNull OffsetDateTime queryTime) {
+    public DomainNameStage queryTime(@NotNull String queryTime) {
       this.queryTime = Objects.requireNonNull(queryTime, "queryTime must not be null");
       return this;
     }

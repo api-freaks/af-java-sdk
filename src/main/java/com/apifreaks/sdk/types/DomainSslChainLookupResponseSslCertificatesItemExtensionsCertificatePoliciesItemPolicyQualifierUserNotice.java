@@ -22,31 +22,34 @@ import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
-    builder = DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNotice.Builder.class
+    builder = DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNotice.Builder.class
 )
-public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNotice {
+public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNotice {
   private final Optional<String> explicitText;
 
-  private final Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNoticeNoticeRef> noticeRef;
+  private final Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNoticeNoticeRef> noticeRef;
 
   private final Map<String, Object> additionalProperties;
 
-  private DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNotice(
+  private DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNotice(
       Optional<String> explicitText,
-      Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNoticeNoticeRef> noticeRef,
+      Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNoticeNoticeRef> noticeRef,
       Map<String, Object> additionalProperties) {
     this.explicitText = explicitText;
     this.noticeRef = noticeRef;
     this.additionalProperties = additionalProperties;
   }
 
+  /**
+   * @return Explicit text notice
+   */
   @JsonProperty("explicitText")
   public Optional<String> getExplicitText() {
     return explicitText;
   }
 
   @JsonProperty("noticeRef")
-  public Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNoticeNoticeRef> getNoticeRef(
+  public Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNoticeNoticeRef> getNoticeRef(
       ) {
     return noticeRef;
   }
@@ -54,7 +57,7 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertifica
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
-    return other instanceof DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNotice && equalTo((DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNotice) other);
+    return other instanceof DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNotice && equalTo((DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNotice) other);
   }
 
   @JsonAnyGetter
@@ -63,7 +66,7 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertifica
   }
 
   private boolean equalTo(
-      DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNotice other) {
+      DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNotice other) {
     return explicitText.equals(other.explicitText) && noticeRef.equals(other.noticeRef);
   }
 
@@ -87,7 +90,7 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertifica
   public static final class Builder {
     private Optional<String> explicitText = Optional.empty();
 
-    private Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNoticeNoticeRef> noticeRef = Optional.empty();
+    private Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNoticeNoticeRef> noticeRef = Optional.empty();
 
     @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -96,12 +99,15 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertifica
     }
 
     public Builder from(
-        DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNotice other) {
+        DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNotice other) {
       explicitText(other.getExplicitText());
       noticeRef(other.getNoticeRef());
       return this;
     }
 
+    /**
+     * <p>Explicit text notice</p>
+     */
     @JsonSetter(
         value = "explicitText",
         nulls = Nulls.SKIP
@@ -121,20 +127,20 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertifica
         nulls = Nulls.SKIP
     )
     public Builder noticeRef(
-        Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNoticeNoticeRef> noticeRef) {
+        Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNoticeNoticeRef> noticeRef) {
       this.noticeRef = noticeRef;
       return this;
     }
 
     public Builder noticeRef(
-        DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNoticeNoticeRef noticeRef) {
+        DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNoticeNoticeRef noticeRef) {
       this.noticeRef = Optional.ofNullable(noticeRef);
       return this;
     }
 
-    public DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNotice build(
+    public DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNotice build(
         ) {
-      return new DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNotice(explicitText, noticeRef, additionalProperties);
+      return new DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNotice(explicitText, noticeRef, additionalProperties);
     }
 
     public Builder additionalProperty(String key, Object value) {

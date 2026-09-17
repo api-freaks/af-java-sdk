@@ -5,42 +5,46 @@
 package com.apifreaks.sdk.types;
 
 import com.apifreaks.sdk.core.ObjectMappers;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.Nulls;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import java.io.IOException;
+import java.lang.IllegalStateException;
 import java.lang.Object;
+import java.lang.RuntimeException;
 import java.lang.String;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.SuppressWarnings;
 import java.util.Objects;
-import java.util.Optional;
 
-@JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
-    builder = DomainAvailabilitySuggestionsResponse.Builder.class
+    using = DomainAvailabilitySuggestionsResponse.Deserializer.class
 )
 public final class DomainAvailabilitySuggestionsResponse {
-  private final Optional<List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem>> domainAvailableResponse;
+  private final Object value;
 
-  private final Map<String, Object> additionalProperties;
+  private final int type;
 
-  private DomainAvailabilitySuggestionsResponse(
-      Optional<List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem>> domainAvailableResponse,
-      Map<String, Object> additionalProperties) {
-    this.domainAvailableResponse = domainAvailableResponse;
-    this.additionalProperties = additionalProperties;
+  private DomainAvailabilitySuggestionsResponse(Object value, int type) {
+    this.value = value;
+    this.type = type;
   }
 
-  @JsonProperty("domain_available_response")
-  public Optional<List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem>> getDomainAvailableResponse(
-      ) {
-    return domainAvailableResponse;
+  @JsonValue
+  public Object get() {
+    return this.value;
+  }
+
+  @SuppressWarnings("unchecked")
+  public <T> T visit(Visitor<T> visitor) {
+    if(this.type == 0) {
+      return visitor.visit((DomainAvailabilitySuggestionsResponseDomain) this.value);
+    } else if(this.type == 1) {
+      return visitor.visit((DomainAvailabilitySuggestionsResponseDomainAvailableResponse) this.value);
+    }
+    throw new IllegalStateException("Failed to visit value. This should never happen.");
   }
 
   @java.lang.Override
@@ -49,74 +53,54 @@ public final class DomainAvailabilitySuggestionsResponse {
     return other instanceof DomainAvailabilitySuggestionsResponse && equalTo((DomainAvailabilitySuggestionsResponse) other);
   }
 
-  @JsonAnyGetter
-  public Map<String, Object> getAdditionalProperties() {
-    return this.additionalProperties;
-  }
-
   private boolean equalTo(DomainAvailabilitySuggestionsResponse other) {
-    return domainAvailableResponse.equals(other.domainAvailableResponse);
+    return value.equals(other.value);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.domainAvailableResponse);
+    return Objects.hash(this.value);
   }
 
   @java.lang.Override
   public String toString() {
-    return ObjectMappers.stringify(this);
+    return this.value.toString();
   }
 
-  public static Builder builder() {
-    return new Builder();
+  public static DomainAvailabilitySuggestionsResponse of(
+      DomainAvailabilitySuggestionsResponseDomain value) {
+    return new DomainAvailabilitySuggestionsResponse(value, 0);
   }
 
-  @JsonIgnoreProperties(
-      ignoreUnknown = true
-  )
-  public static final class Builder {
-    private Optional<List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem>> domainAvailableResponse = Optional.empty();
+  public static DomainAvailabilitySuggestionsResponse of(
+      DomainAvailabilitySuggestionsResponseDomainAvailableResponse value) {
+    return new DomainAvailabilitySuggestionsResponse(value, 1);
+  }
 
-    @JsonAnySetter
-    private Map<String, Object> additionalProperties = new HashMap<>();
+  public interface Visitor<T> {
+    T visit(DomainAvailabilitySuggestionsResponseDomain value);
 
-    private Builder() {
+    T visit(DomainAvailabilitySuggestionsResponseDomainAvailableResponse value);
+  }
+
+  static final class Deserializer extends StdDeserializer<DomainAvailabilitySuggestionsResponse> {
+    Deserializer() {
+      super(DomainAvailabilitySuggestionsResponse.class);
     }
 
-    public Builder from(DomainAvailabilitySuggestionsResponse other) {
-      domainAvailableResponse(other.getDomainAvailableResponse());
-      return this;
-    }
-
-    @JsonSetter(
-        value = "domain_available_response",
-        nulls = Nulls.SKIP
-    )
-    public Builder domainAvailableResponse(
-        Optional<List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem>> domainAvailableResponse) {
-      this.domainAvailableResponse = domainAvailableResponse;
-      return this;
-    }
-
-    public Builder domainAvailableResponse(
-        List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem> domainAvailableResponse) {
-      this.domainAvailableResponse = Optional.ofNullable(domainAvailableResponse);
-      return this;
-    }
-
-    public DomainAvailabilitySuggestionsResponse build() {
-      return new DomainAvailabilitySuggestionsResponse(domainAvailableResponse, additionalProperties);
-    }
-
-    public Builder additionalProperty(String key, Object value) {
-      this.additionalProperties.put(key, value);
-      return this;
-    }
-
-    public Builder additionalProperties(Map<String, Object> additionalProperties) {
-      this.additionalProperties.putAll(additionalProperties);
-      return this;
+    @java.lang.Override
+    public DomainAvailabilitySuggestionsResponse deserialize(JsonParser p,
+        DeserializationContext context) throws IOException {
+      Object value = p.readValueAs(Object.class);
+      try {
+        return of(ObjectMappers.JSON_MAPPER.convertValue(value, DomainAvailabilitySuggestionsResponseDomain.class));
+      } catch(RuntimeException e) {
+      }
+      try {
+        return of(ObjectMappers.JSON_MAPPER.convertValue(value, DomainAvailabilitySuggestionsResponseDomainAvailableResponse.class));
+      } catch(RuntimeException e) {
+      }
+      throw new JsonParseException(p, "Failed to deserialize");
     }
   }
 }

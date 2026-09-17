@@ -13,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.lang.Float;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -37,11 +36,11 @@ public final class AirQualityResponseLocationCity {
 
   private final Optional<String> locality;
 
-  private final float latitude;
+  private final String latitude;
 
-  private final float longitude;
+  private final String longitude;
 
-  private final Optional<Float> elevation;
+  private final Optional<String> elevation;
 
   private final String timezone;
 
@@ -50,8 +49,8 @@ public final class AirQualityResponseLocationCity {
   private final Map<String, Object> additionalProperties;
 
   private AirQualityResponseLocationCity(String locationString, String countryName,
-      String stateProv, String city, Optional<String> locality, float latitude, float longitude,
-      Optional<Float> elevation, String timezone, String timezoneAbbreviation,
+      String stateProv, String city, Optional<String> locality, String latitude, String longitude,
+      Optional<String> elevation, String timezone, String timezoneAbbreviation,
       Map<String, Object> additionalProperties) {
     this.locationString = locationString;
     this.countryName = countryName;
@@ -110,7 +109,7 @@ public final class AirQualityResponseLocationCity {
    * @return Geocoded latitude coordinate in decimal degrees, ranging from -90 to +90.
    */
   @JsonProperty("latitude")
-  public float getLatitude() {
+  public String getLatitude() {
     return latitude;
   }
 
@@ -118,7 +117,7 @@ public final class AirQualityResponseLocationCity {
    * @return Geocoded longitude coordinate in decimal degrees, ranging from -180 to +180.
    */
   @JsonProperty("longitude")
-  public float getLongitude() {
+  public String getLongitude() {
     return longitude;
   }
 
@@ -126,7 +125,7 @@ public final class AirQualityResponseLocationCity {
    * @return Elevation above mean sea level in meters at the geocoded coordinates.
    */
   @JsonProperty("elevation")
-  public Optional<Float> getElevation() {
+  public Optional<String> getElevation() {
     return elevation;
   }
 
@@ -158,7 +157,7 @@ public final class AirQualityResponseLocationCity {
   }
 
   private boolean equalTo(AirQualityResponseLocationCity other) {
-    return locationString.equals(other.locationString) && countryName.equals(other.countryName) && stateProv.equals(other.stateProv) && city.equals(other.city) && locality.equals(other.locality) && latitude == other.latitude && longitude == other.longitude && elevation.equals(other.elevation) && timezone.equals(other.timezone) && timezoneAbbreviation.equals(other.timezoneAbbreviation);
+    return locationString.equals(other.locationString) && countryName.equals(other.countryName) && stateProv.equals(other.stateProv) && city.equals(other.city) && locality.equals(other.locality) && latitude.equals(other.latitude) && longitude.equals(other.longitude) && elevation.equals(other.elevation) && timezone.equals(other.timezone) && timezoneAbbreviation.equals(other.timezoneAbbreviation);
   }
 
   @java.lang.Override
@@ -209,14 +208,14 @@ public final class AirQualityResponseLocationCity {
     /**
      * <p>Geocoded latitude coordinate in decimal degrees, ranging from -90 to +90.</p>
      */
-    LongitudeStage latitude(float latitude);
+    LongitudeStage latitude(@NotNull String latitude);
   }
 
   public interface LongitudeStage {
     /**
      * <p>Geocoded longitude coordinate in decimal degrees, ranging from -180 to +180.</p>
      */
-    TimezoneStage longitude(float longitude);
+    TimezoneStage longitude(@NotNull String longitude);
   }
 
   public interface TimezoneStage {
@@ -250,9 +249,9 @@ public final class AirQualityResponseLocationCity {
     /**
      * <p>Elevation above mean sea level in meters at the geocoded coordinates.</p>
      */
-    _FinalStage elevation(Optional<Float> elevation);
+    _FinalStage elevation(Optional<String> elevation);
 
-    _FinalStage elevation(Float elevation);
+    _FinalStage elevation(String elevation);
   }
 
   @JsonIgnoreProperties(
@@ -267,15 +266,15 @@ public final class AirQualityResponseLocationCity {
 
     private String city;
 
-    private float latitude;
+    private String latitude;
 
-    private float longitude;
+    private String longitude;
 
     private String timezone;
 
     private String timezoneAbbreviation;
 
-    private Optional<Float> elevation = Optional.empty();
+    private Optional<String> elevation = Optional.empty();
 
     private Optional<String> locality = Optional.empty();
 
@@ -355,8 +354,8 @@ public final class AirQualityResponseLocationCity {
      */
     @java.lang.Override
     @JsonSetter("latitude")
-    public LongitudeStage latitude(float latitude) {
-      this.latitude = latitude;
+    public LongitudeStage latitude(@NotNull String latitude) {
+      this.latitude = Objects.requireNonNull(latitude, "latitude must not be null");
       return this;
     }
 
@@ -367,8 +366,8 @@ public final class AirQualityResponseLocationCity {
      */
     @java.lang.Override
     @JsonSetter("longitude")
-    public TimezoneStage longitude(float longitude) {
-      this.longitude = longitude;
+    public TimezoneStage longitude(@NotNull String longitude) {
+      this.longitude = Objects.requireNonNull(longitude, "longitude must not be null");
       return this;
     }
 
@@ -401,7 +400,7 @@ public final class AirQualityResponseLocationCity {
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage elevation(Float elevation) {
+    public _FinalStage elevation(String elevation) {
       this.elevation = Optional.ofNullable(elevation);
       return this;
     }
@@ -414,7 +413,7 @@ public final class AirQualityResponseLocationCity {
         value = "elevation",
         nulls = Nulls.SKIP
     )
-    public _FinalStage elevation(Optional<Float> elevation) {
+    public _FinalStage elevation(Optional<String> elevation) {
       this.elevation = elevation;
       return this;
     }

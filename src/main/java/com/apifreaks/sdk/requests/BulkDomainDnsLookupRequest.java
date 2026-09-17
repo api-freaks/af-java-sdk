@@ -39,15 +39,18 @@ public final class BulkDomainDnsLookupRequest {
 
   private final List<String> domainNames;
 
+  private final Optional<List<String>> ipAddresses;
+
   private final Map<String, Object> additionalProperties;
 
   private BulkDomainDnsLookupRequest(Optional<List<String>> type, String apiKey,
       Optional<BulkDomainDnsLookupRequestFormat> format, List<String> domainNames,
-      Map<String, Object> additionalProperties) {
+      Optional<List<String>> ipAddresses, Map<String, Object> additionalProperties) {
     this.type = type;
     this.apiKey = apiKey;
     this.format = format;
     this.domainNames = domainNames;
+    this.ipAddresses = ipAddresses;
     this.additionalProperties = additionalProperties;
   }
 
@@ -84,6 +87,14 @@ public final class BulkDomainDnsLookupRequest {
     return domainNames;
   }
 
+  /**
+   * @return Array of IP addresses to include in the lookup for PTR record enrichment.
+   */
+  @JsonProperty("ipAddresses")
+  public Optional<List<String>> getIpAddresses() {
+    return ipAddresses;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -96,12 +107,12 @@ public final class BulkDomainDnsLookupRequest {
   }
 
   private boolean equalTo(BulkDomainDnsLookupRequest other) {
-    return type.equals(other.type) && apiKey.equals(other.apiKey) && format.equals(other.format) && domainNames.equals(other.domainNames);
+    return type.equals(other.type) && apiKey.equals(other.apiKey) && format.equals(other.format) && domainNames.equals(other.domainNames) && ipAddresses.equals(other.ipAddresses);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.type, this.apiKey, this.format, this.domainNames);
+    return Objects.hash(this.type, this.apiKey, this.format, this.domainNames, this.ipAddresses);
   }
 
   @java.lang.Override
@@ -154,6 +165,13 @@ public final class BulkDomainDnsLookupRequest {
     _FinalStage addDomainNames(String domainNames);
 
     _FinalStage addAllDomainNames(List<String> domainNames);
+
+    /**
+     * <p>Array of IP addresses to include in the lookup for PTR record enrichment.</p>
+     */
+    _FinalStage ipAddresses(Optional<List<String>> ipAddresses);
+
+    _FinalStage ipAddresses(List<String> ipAddresses);
   }
 
   @JsonIgnoreProperties(
@@ -161,6 +179,8 @@ public final class BulkDomainDnsLookupRequest {
   )
   public static final class Builder implements ApiKeyStage, _FinalStage {
     private String apiKey;
+
+    private Optional<List<String>> ipAddresses = Optional.empty();
 
     private List<String> domainNames = new ArrayList<>();
 
@@ -180,6 +200,7 @@ public final class BulkDomainDnsLookupRequest {
       apiKey(other.getApiKey());
       format(other.getFormat());
       domainNames(other.getDomainNames());
+      ipAddresses(other.getIpAddresses());
       return this;
     }
 
@@ -192,6 +213,29 @@ public final class BulkDomainDnsLookupRequest {
     @JsonSetter("apiKey")
     public _FinalStage apiKey(@NotNull String apiKey) {
       this.apiKey = Objects.requireNonNull(apiKey, "apiKey must not be null");
+      return this;
+    }
+
+    /**
+     * <p>Array of IP addresses to include in the lookup for PTR record enrichment.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage ipAddresses(List<String> ipAddresses) {
+      this.ipAddresses = Optional.ofNullable(ipAddresses);
+      return this;
+    }
+
+    /**
+     * <p>Array of IP addresses to include in the lookup for PTR record enrichment.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "ipAddresses",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage ipAddresses(Optional<List<String>> ipAddresses) {
+      this.ipAddresses = ipAddresses;
       return this;
     }
 
@@ -289,7 +333,7 @@ public final class BulkDomainDnsLookupRequest {
 
     @java.lang.Override
     public BulkDomainDnsLookupRequest build() {
-      return new BulkDomainDnsLookupRequest(type, apiKey, format, domainNames, additionalProperties);
+      return new BulkDomainDnsLookupRequest(type, apiKey, format, domainNames, ipAddresses, additionalProperties);
     }
 
     @java.lang.Override
