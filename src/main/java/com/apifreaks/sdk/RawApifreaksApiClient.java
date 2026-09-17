@@ -2255,6 +2255,9 @@ public class RawApifreaksApiClient {
                                                         if (request.getCount().isPresent()) {
                                                           QueryStringMapper.addQueryParameter(httpUrl, "count", request.getCount().get(), false);
                                                         }
+                                                        if (request.getSug().isPresent()) {
+                                                          QueryStringMapper.addQueryParameter(httpUrl, "sug", request.getSug().get(), false);
+                                                        }
                                                         if (requestOptions != null) {
                                                           requestOptions.getQueryParameters().forEach((_key, _value) -> {
                                                             httpUrl.addQueryParameter(_key, _value);
@@ -2284,6 +2287,7 @@ public class RawApifreaksApiClient {
                                                               case 403:throw new ForbiddenError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                               case 404:throw new NotFoundError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                               case 406:throw new NotAcceptableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
+                                                              case 408:throw new RequestTimeoutError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                               case 413:throw new ContentTooLargeError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                               case 429:throw new TooManyRequestsError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
                                                               case 500:throw new InternalServerError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response);
@@ -9667,7 +9671,8 @@ public class RawApifreaksApiClient {
                                                                                                                                                                                                                                               .url(httpUrl.build())
                                                                                                                                                                                                                                               .method("GET", null)
                                                                                                                                                                                                                                               .headers(Headers.of(clientOptions.headers(requestOptions)))
-                                                                                                                                                                                                                                              .addHeader("Accept", "application/json");
+                                                                                                                                                                                                                                              .addHeader("Accept", "application/json")
+              .addHeader("User-Agent", request.getUserAgent());
                                                                                                                                                                                                                                             Request okhttpRequest = _requestBuilder.build();
                                                                                                                                                                                                                                             OkHttpClient client = clientOptions.httpClient();
                                                                                                                                                                                                                                             if (requestOptions != null && requestOptions.getTimeout().isPresent()) {
@@ -9706,7 +9711,7 @@ public class RawApifreaksApiClient {
                                                                                                                                                                                                                                           }
 
                                                                                                                                                                                                                                           /**
-                                                                                                                                                                                                                                           * Parse up to <code>50,000 User-Agent strings</code> at once in a single request.
+                                                                                                                                                                                                                                           * Parse up to <code>100 User-Agent strings</code> at once in a single request; exceeding that returns a 413, not a 400.
                                                                                                                                                                                                                                            */
                                                                                                                                                                                                                                           public ApifreaksApiHttpResponse<List<BulkUserAgentLookupResponseItem>> bulkUserAgentLookup(
                                                                                                                                                                                                                                               BulkUserAgentLookupRequest request) {
@@ -9714,7 +9719,7 @@ public class RawApifreaksApiClient {
                                                                                                                                                                                                                                           }
 
                                                                                                                                                                                                                                           /**
-                                                                                                                                                                                                                                           * Parse up to <code>50,000 User-Agent strings</code> at once in a single request.
+                                                                                                                                                                                                                                           * Parse up to <code>100 User-Agent strings</code> at once in a single request; exceeding that returns a 413, not a 400.
                                                                                                                                                                                                                                            */
                                                                                                                                                                                                                                           public ApifreaksApiHttpResponse<List<BulkUserAgentLookupResponseItem>> bulkUserAgentLookup(
                                                                                                                                                                                                                                               BulkUserAgentLookupRequest request,

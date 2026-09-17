@@ -17,7 +17,6 @@ import java.lang.Double;
 import java.lang.Integer;
 import java.lang.Object;
 import java.lang.String;
-import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -28,7 +27,7 @@ import java.util.Optional;
     builder = WeatherForecastResponseForecastValueMinutelyItem.Builder.class
 )
 public final class WeatherForecastResponseForecastValueMinutelyItem {
-  private final Optional<OffsetDateTime> timestamp;
+  private final Optional<String> timestamp;
 
   private final Optional<Double> temperature2M;
 
@@ -66,7 +65,7 @@ public final class WeatherForecastResponseForecastValueMinutelyItem {
 
   private final Map<String, Object> additionalProperties;
 
-  private WeatherForecastResponseForecastValueMinutelyItem(Optional<OffsetDateTime> timestamp,
+  private WeatherForecastResponseForecastValueMinutelyItem(Optional<String> timestamp,
       Optional<Double> temperature2M, Optional<Integer> relativeHumidity2M,
       Optional<Double> dewPoint2M, Optional<Double> apparentTemperature,
       Optional<Double> precipitation, Optional<Double> rain, Optional<Double> snowfall,
@@ -98,10 +97,10 @@ public final class WeatherForecastResponseForecastValueMinutelyItem {
   }
 
   /**
-   * @return ISO 8601 formatted timestamp
+   * @return Local timestamp of this reading (format YYYY-MM-DDTHH:mm, not ISO 8601).
    */
   @JsonProperty("timestamp")
-  public Optional<OffsetDateTime> getTimestamp() {
+  public Optional<String> getTimestamp() {
     return timestamp;
   }
 
@@ -274,7 +273,7 @@ public final class WeatherForecastResponseForecastValueMinutelyItem {
       ignoreUnknown = true
   )
   public static final class Builder {
-    private Optional<OffsetDateTime> timestamp = Optional.empty();
+    private Optional<String> timestamp = Optional.empty();
 
     private Optional<Double> temperature2M = Optional.empty();
 
@@ -339,18 +338,18 @@ public final class WeatherForecastResponseForecastValueMinutelyItem {
     }
 
     /**
-     * <p>ISO 8601 formatted timestamp</p>
+     * <p>Local timestamp of this reading (format YYYY-MM-DDTHH:mm, not ISO 8601).</p>
      */
     @JsonSetter(
         value = "timestamp",
         nulls = Nulls.SKIP
     )
-    public Builder timestamp(Optional<OffsetDateTime> timestamp) {
+    public Builder timestamp(Optional<String> timestamp) {
       this.timestamp = timestamp;
       return this;
     }
 
-    public Builder timestamp(OffsetDateTime timestamp) {
+    public Builder timestamp(String timestamp) {
       this.timestamp = Optional.ofNullable(timestamp);
       return this;
     }

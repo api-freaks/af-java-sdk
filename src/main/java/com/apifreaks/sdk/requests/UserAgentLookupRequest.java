@@ -9,6 +9,7 @@ import com.apifreaks.sdk.types.UserAgentLookupRequestFormat;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -29,13 +30,16 @@ import org.jetbrains.annotations.NotNull;
 public final class UserAgentLookupRequest {
   private final String apiKey;
 
+  private final String userAgent;
+
   private final Optional<UserAgentLookupRequestFormat> format;
 
   private final Map<String, Object> additionalProperties;
 
-  private UserAgentLookupRequest(String apiKey, Optional<UserAgentLookupRequestFormat> format,
-      Map<String, Object> additionalProperties) {
+  private UserAgentLookupRequest(String apiKey, String userAgent,
+      Optional<UserAgentLookupRequestFormat> format, Map<String, Object> additionalProperties) {
     this.apiKey = apiKey;
+    this.userAgent = userAgent;
     this.format = format;
     this.additionalProperties = additionalProperties;
   }
@@ -46,6 +50,14 @@ public final class UserAgentLookupRequest {
   @JsonProperty("apiKey")
   public String getApiKey() {
     return apiKey;
+  }
+
+  /**
+   * @return The User-Agent string to parse, sent as the User-Agent HTTP header.
+   */
+  @JsonIgnore
+  public String getUserAgent() {
+    return userAgent;
   }
 
   /**
@@ -68,12 +80,12 @@ public final class UserAgentLookupRequest {
   }
 
   private boolean equalTo(UserAgentLookupRequest other) {
-    return apiKey.equals(other.apiKey) && format.equals(other.format);
+    return apiKey.equals(other.apiKey) && userAgent.equals(other.userAgent) && format.equals(other.format);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.apiKey, this.format);
+    return Objects.hash(this.apiKey, this.userAgent, this.format);
   }
 
   @java.lang.Override
@@ -89,9 +101,16 @@ public final class UserAgentLookupRequest {
     /**
      * <p>Your API key</p>
      */
-    _FinalStage apiKey(@NotNull String apiKey);
+    UserAgentStage apiKey(@NotNull String apiKey);
 
     Builder from(UserAgentLookupRequest other);
+  }
+
+  public interface UserAgentStage {
+    /**
+     * <p>The User-Agent string to parse, sent as the User-Agent HTTP header.</p>
+     */
+    _FinalStage userAgent(@NotNull String userAgent);
   }
 
   public interface _FinalStage {
@@ -112,8 +131,10 @@ public final class UserAgentLookupRequest {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements ApiKeyStage, _FinalStage {
+  public static final class Builder implements ApiKeyStage, UserAgentStage, _FinalStage {
     private String apiKey;
+
+    private String userAgent;
 
     private Optional<UserAgentLookupRequestFormat> format = Optional.empty();
 
@@ -126,6 +147,7 @@ public final class UserAgentLookupRequest {
     @java.lang.Override
     public Builder from(UserAgentLookupRequest other) {
       apiKey(other.getApiKey());
+      userAgent(other.getUserAgent());
       format(other.getFormat());
       return this;
     }
@@ -137,8 +159,18 @@ public final class UserAgentLookupRequest {
      */
     @java.lang.Override
     @JsonSetter("apiKey")
-    public _FinalStage apiKey(@NotNull String apiKey) {
+    public UserAgentStage apiKey(@NotNull String apiKey) {
       this.apiKey = Objects.requireNonNull(apiKey, "apiKey must not be null");
+      return this;
+    }
+
+    /**
+     * <p>The User-Agent string to parse, sent as the User-Agent HTTP header.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage userAgent(@NotNull String userAgent) {
+      this.userAgent = Objects.requireNonNull(userAgent, "userAgent must not be null");
       return this;
     }
 
@@ -167,7 +199,7 @@ public final class UserAgentLookupRequest {
 
     @java.lang.Override
     public UserAgentLookupRequest build() {
-      return new UserAgentLookupRequest(apiKey, format, additionalProperties);
+      return new UserAgentLookupRequest(apiKey, userAgent, format, additionalProperties);
     }
 
     @java.lang.Override

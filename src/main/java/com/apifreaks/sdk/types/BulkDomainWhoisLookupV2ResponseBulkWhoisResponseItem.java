@@ -93,7 +93,7 @@ public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItem {
     public BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItem deserialize(JsonParser p,
         DeserializationContext context) throws IOException {
       Object value = p.readValueAs(Object.class);
-      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("status") && ((Map<?, ?>) value).containsKey("domain_name") && ((Map<?, ?>) value).containsKey("query_time") && ((Map<?, ?>) value).containsKey("whois_server") && ((Map<?, ?>) value).containsKey("domain_registered")) {
+      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("status") && ((Map<?, ?>) value).containsKey("domain_name") && ((Map<?, ?>) value).containsKey("query_time") && ((Map<?, ?>) value).containsKey("domain_registered")) {
         try {
           return of(ObjectMappers.JSON_MAPPER.convertValue(value, BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseContact.class));
         } catch(RuntimeException e) {

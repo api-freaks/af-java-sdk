@@ -49,9 +49,9 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
 
   private final Optional<Boolean> failOnError;
 
-  private final Optional<Double> longitude;
+  private final Optional<String> longitude;
 
-  private final Optional<Double> latitude;
+  private final Optional<String> latitude;
 
   private final Optional<String> proxy;
 
@@ -175,7 +175,7 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
       String createdAt, String format, String ttl, Optional<String> fileType,
       Optional<String> extractedHtml, Optional<Boolean> omitBackground,
       Optional<Boolean> destroyScreenshot, Optional<Boolean> failOnError,
-      Optional<Double> longitude, Optional<Double> latitude, Optional<String> proxy,
+      Optional<String> longitude, Optional<String> latitude, Optional<String> proxy,
       Optional<Boolean> noCookieBanners, Optional<Boolean> blockAds, Optional<String> headers,
       Optional<String> cookies, Optional<String> scrollToElement, Optional<String> selector,
       Optional<String> blurSelector, Optional<String> removeSelector, Optional<String> css,
@@ -322,12 +322,12 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
   }
 
   @JsonProperty("longitude")
-  public Optional<Double> getLongitude() {
+  public Optional<String> getLongitude() {
     return longitude;
   }
 
   @JsonProperty("latitude")
-  public Optional<Double> getLatitude() {
+  public Optional<String> getLatitude() {
     return latitude;
   }
 
@@ -699,13 +699,13 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
 
     _FinalStage failOnError(Boolean failOnError);
 
-    _FinalStage longitude(Optional<Double> longitude);
+    _FinalStage longitude(Optional<String> longitude);
 
-    _FinalStage longitude(Double longitude);
+    _FinalStage longitude(String longitude);
 
-    _FinalStage latitude(Optional<Double> latitude);
+    _FinalStage latitude(Optional<String> latitude);
 
-    _FinalStage latitude(Double latitude);
+    _FinalStage latitude(String latitude);
 
     _FinalStage proxy(Optional<String> proxy);
 
@@ -1070,9 +1070,9 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
 
     private Optional<String> proxy = Optional.empty();
 
-    private Optional<Double> latitude = Optional.empty();
+    private Optional<String> latitude = Optional.empty();
 
-    private Optional<Double> longitude = Optional.empty();
+    private Optional<String> longitude = Optional.empty();
 
     private Optional<Boolean> failOnError = Optional.empty();
 
@@ -2129,7 +2129,7 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
     }
 
     @java.lang.Override
-    public _FinalStage latitude(Double latitude) {
+    public _FinalStage latitude(String latitude) {
       this.latitude = Optional.ofNullable(latitude);
       return this;
     }
@@ -2139,13 +2139,13 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
         value = "latitude",
         nulls = Nulls.SKIP
     )
-    public _FinalStage latitude(Optional<Double> latitude) {
+    public _FinalStage latitude(Optional<String> latitude) {
       this.latitude = latitude;
       return this;
     }
 
     @java.lang.Override
-    public _FinalStage longitude(Double longitude) {
+    public _FinalStage longitude(String longitude) {
       this.longitude = Optional.ofNullable(longitude);
       return this;
     }
@@ -2155,7 +2155,7 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
         value = "longitude",
         nulls = Nulls.SKIP
     )
-    public _FinalStage longitude(Optional<Double> longitude) {
+    public _FinalStage longitude(Optional<String> longitude) {
       this.longitude = longitude;
       return this;
     }

@@ -14,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
-import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -25,9 +24,9 @@ import org.jetbrains.annotations.NotNull;
     builder = TimezoneConvertResponse.Builder.class
 )
 public final class TimezoneConvertResponse {
-  private final OffsetDateTime originalTime;
+  private final String originalTime;
 
-  private final OffsetDateTime convertedTime;
+  private final String convertedTime;
 
   private final float diffHour;
 
@@ -35,8 +34,8 @@ public final class TimezoneConvertResponse {
 
   private final Map<String, Object> additionalProperties;
 
-  private TimezoneConvertResponse(OffsetDateTime originalTime, OffsetDateTime convertedTime,
-      float diffHour, float diffMin, Map<String, Object> additionalProperties) {
+  private TimezoneConvertResponse(String originalTime, String convertedTime, float diffHour,
+      float diffMin, Map<String, Object> additionalProperties) {
     this.originalTime = originalTime;
     this.convertedTime = convertedTime;
     this.diffHour = diffHour;
@@ -45,18 +44,18 @@ public final class TimezoneConvertResponse {
   }
 
   /**
-   * @return Original time before conversion
+   * @return Original time before conversion (format YYYY-MM-DD HH:mm:ss, not ISO 8601).
    */
   @JsonProperty("original_time")
-  public OffsetDateTime getOriginalTime() {
+  public String getOriginalTime() {
     return originalTime;
   }
 
   /**
-   * @return Time after conversion
+   * @return Time after conversion (format YYYY-MM-DD HH:mm:ss, not ISO 8601).
    */
   @JsonProperty("converted_time")
-  public OffsetDateTime getConvertedTime() {
+  public String getConvertedTime() {
     return convertedTime;
   }
 
@@ -107,18 +106,18 @@ public final class TimezoneConvertResponse {
 
   public interface OriginalTimeStage {
     /**
-     * <p>Original time before conversion</p>
+     * <p>Original time before conversion (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
      */
-    ConvertedTimeStage originalTime(@NotNull OffsetDateTime originalTime);
+    ConvertedTimeStage originalTime(@NotNull String originalTime);
 
     Builder from(TimezoneConvertResponse other);
   }
 
   public interface ConvertedTimeStage {
     /**
-     * <p>Time after conversion</p>
+     * <p>Time after conversion (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
      */
-    DiffHourStage convertedTime(@NotNull OffsetDateTime convertedTime);
+    DiffHourStage convertedTime(@NotNull String convertedTime);
   }
 
   public interface DiffHourStage {
@@ -147,9 +146,9 @@ public final class TimezoneConvertResponse {
       ignoreUnknown = true
   )
   public static final class Builder implements OriginalTimeStage, ConvertedTimeStage, DiffHourStage, DiffMinStage, _FinalStage {
-    private OffsetDateTime originalTime;
+    private String originalTime;
 
-    private OffsetDateTime convertedTime;
+    private String convertedTime;
 
     private float diffHour;
 
@@ -171,25 +170,25 @@ public final class TimezoneConvertResponse {
     }
 
     /**
-     * <p>Original time before conversion</p>
-     * <p>Original time before conversion</p>
+     * <p>Original time before conversion (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
+     * <p>Original time before conversion (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("original_time")
-    public ConvertedTimeStage originalTime(@NotNull OffsetDateTime originalTime) {
+    public ConvertedTimeStage originalTime(@NotNull String originalTime) {
       this.originalTime = Objects.requireNonNull(originalTime, "originalTime must not be null");
       return this;
     }
 
     /**
-     * <p>Time after conversion</p>
-     * <p>Time after conversion</p>
+     * <p>Time after conversion (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
+     * <p>Time after conversion (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("converted_time")
-    public DiffHourStage convertedTime(@NotNull OffsetDateTime convertedTime) {
+    public DiffHourStage convertedTime(@NotNull String convertedTime) {
       this.convertedTime = Objects.requireNonNull(convertedTime, "convertedTime must not be null");
       return this;
     }

@@ -16,7 +16,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Double;
 import java.lang.Object;
 import java.lang.String;
-import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -27,7 +26,7 @@ import java.util.Optional;
     builder = MarineWeatherResponseCurrent.Builder.class
 )
 public final class MarineWeatherResponseCurrent {
-  private final Optional<OffsetDateTime> timestamp;
+  private final Optional<String> timestamp;
 
   private final Optional<Double> waveHeight;
 
@@ -57,14 +56,13 @@ public final class MarineWeatherResponseCurrent {
 
   private final Map<String, Object> additionalProperties;
 
-  private MarineWeatherResponseCurrent(Optional<OffsetDateTime> timestamp,
-      Optional<Double> waveHeight, Optional<Double> waveDirection, Optional<Double> wavePeriod,
-      Optional<Double> windWaveHeight, Optional<Double> windWaveDirection,
-      Optional<Double> windWavePeriod, Optional<Double> swellWaveHeight,
-      Optional<Double> swellWaveDirection, Optional<Double> swellWavePeriod,
-      Optional<Double> seaLevelHeightMsl, Optional<Double> seaSurfaceTemperature,
-      Optional<Double> oceanCurrentVelocity, Optional<Double> oceanCurrentDirection,
-      Map<String, Object> additionalProperties) {
+  private MarineWeatherResponseCurrent(Optional<String> timestamp, Optional<Double> waveHeight,
+      Optional<Double> waveDirection, Optional<Double> wavePeriod, Optional<Double> windWaveHeight,
+      Optional<Double> windWaveDirection, Optional<Double> windWavePeriod,
+      Optional<Double> swellWaveHeight, Optional<Double> swellWaveDirection,
+      Optional<Double> swellWavePeriod, Optional<Double> seaLevelHeightMsl,
+      Optional<Double> seaSurfaceTemperature, Optional<Double> oceanCurrentVelocity,
+      Optional<Double> oceanCurrentDirection, Map<String, Object> additionalProperties) {
     this.timestamp = timestamp;
     this.waveHeight = waveHeight;
     this.waveDirection = waveDirection;
@@ -83,10 +81,10 @@ public final class MarineWeatherResponseCurrent {
   }
 
   /**
-   * @return ISO 8601 formatted timestamp
+   * @return Local timestamp of this reading (format YYYY-MM-DDTHH:mm, not ISO 8601).
    */
   @JsonProperty("timestamp")
-  public Optional<OffsetDateTime> getTimestamp() {
+  public Optional<String> getTimestamp() {
     return timestamp;
   }
 
@@ -227,7 +225,7 @@ public final class MarineWeatherResponseCurrent {
       ignoreUnknown = true
   )
   public static final class Builder {
-    private Optional<OffsetDateTime> timestamp = Optional.empty();
+    private Optional<String> timestamp = Optional.empty();
 
     private Optional<Double> waveHeight = Optional.empty();
 
@@ -280,18 +278,18 @@ public final class MarineWeatherResponseCurrent {
     }
 
     /**
-     * <p>ISO 8601 formatted timestamp</p>
+     * <p>Local timestamp of this reading (format YYYY-MM-DDTHH:mm, not ISO 8601).</p>
      */
     @JsonSetter(
         value = "timestamp",
         nulls = Nulls.SKIP
     )
-    public Builder timestamp(Optional<OffsetDateTime> timestamp) {
+    public Builder timestamp(Optional<String> timestamp) {
       this.timestamp = timestamp;
       return this;
     }
 
-    public Builder timestamp(OffsetDateTime timestamp) {
+    public Builder timestamp(String timestamp) {
       this.timestamp = Optional.ofNullable(timestamp);
       return this;
     }

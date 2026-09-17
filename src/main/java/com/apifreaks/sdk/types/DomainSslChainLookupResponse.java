@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 public final class DomainSslChainLookupResponse {
   private final String domainName;
 
-  private final OffsetDateTime queryTime;
+  private final String queryTime;
 
   private final List<DomainSslChainLookupResponseSslCertificatesItem> sslCertificates;
 
@@ -39,7 +38,7 @@ public final class DomainSslChainLookupResponse {
 
   private final Map<String, Object> additionalProperties;
 
-  private DomainSslChainLookupResponse(String domainName, OffsetDateTime queryTime,
+  private DomainSslChainLookupResponse(String domainName, String queryTime,
       List<DomainSslChainLookupResponseSslCertificatesItem> sslCertificates,
       Optional<String> sslRaw, Map<String, Object> additionalProperties) {
     this.domainName = domainName;
@@ -54,8 +53,11 @@ public final class DomainSslChainLookupResponse {
     return domainName;
   }
 
+  /**
+   * @return Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).
+   */
   @JsonProperty("queryTime")
-  public OffsetDateTime getQueryTime() {
+  public String getQueryTime() {
     return queryTime;
   }
 
@@ -105,7 +107,10 @@ public final class DomainSslChainLookupResponse {
   }
 
   public interface QueryTimeStage {
-    _FinalStage queryTime(@NotNull OffsetDateTime queryTime);
+    /**
+     * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
+     */
+    _FinalStage queryTime(@NotNull String queryTime);
   }
 
   public interface _FinalStage {
@@ -134,7 +139,7 @@ public final class DomainSslChainLookupResponse {
   public static final class Builder implements DomainNameStage, QueryTimeStage, _FinalStage {
     private String domainName;
 
-    private OffsetDateTime queryTime;
+    private String queryTime;
 
     private Optional<String> sslRaw = Optional.empty();
 
@@ -162,9 +167,14 @@ public final class DomainSslChainLookupResponse {
       return this;
     }
 
+    /**
+     * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
+     * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
     @java.lang.Override
     @JsonSetter("queryTime")
-    public _FinalStage queryTime(@NotNull OffsetDateTime queryTime) {
+    public _FinalStage queryTime(@NotNull String queryTime) {
       this.queryTime = Objects.requireNonNull(queryTime, "queryTime must not be null");
       return this;
     }

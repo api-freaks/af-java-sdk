@@ -2870,6 +2870,9 @@ public class AsyncRawApifreaksApiClient {
                                                         if (request.getCount().isPresent()) {
                                                           QueryStringMapper.addQueryParameter(httpUrl, "count", request.getCount().get(), false);
                                                         }
+                                                        if (request.getSug().isPresent()) {
+                                                          QueryStringMapper.addQueryParameter(httpUrl, "sug", request.getSug().get(), false);
+                                                        }
                                                         if (requestOptions != null) {
                                                           requestOptions.getQueryParameters().forEach((_key, _value) -> {
                                                             httpUrl.addQueryParameter(_key, _value);
@@ -2908,6 +2911,8 @@ public class AsyncRawApifreaksApiClient {
                                                                   case 404:future.completeExceptionally(new NotFoundError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
                                                                   return;
                                                                   case 406:future.completeExceptionally(new NotAcceptableError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
+                                                                  return;
+                                                                  case 408:future.completeExceptionally(new RequestTimeoutError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
                                                                   return;
                                                                   case 413:future.completeExceptionally(new ContentTooLargeError(ObjectMappers.JSON_MAPPER.readValue(responseBodyString, Object.class), response));
                                                                   return;
@@ -12520,7 +12525,7 @@ public class AsyncRawApifreaksApiClient {
                                                                                                                                                                                                                                           }
 
                                                                                                                                                                                                                                           /**
-                                                                                                                                                                                                                                           * Parse up to <code>50,000 User-Agent strings</code> at once in a single request.
+                                                                                                                                                                                                                                           * Parse up to <code>100 User-Agent strings</code> at once in a single request; exceeding that returns a 413, not a 400.
                                                                                                                                                                                                                                            */
                                                                                                                                                                                                                                           public CompletableFuture<ApifreaksApiHttpResponse<List<BulkUserAgentLookupResponseItem>>> bulkUserAgentLookup(
                                                                                                                                                                                                                                               BulkUserAgentLookupRequest request) {
@@ -12528,7 +12533,7 @@ public class AsyncRawApifreaksApiClient {
                                                                                                                                                                                                                                           }
 
                                                                                                                                                                                                                                           /**
-                                                                                                                                                                                                                                           * Parse up to <code>50,000 User-Agent strings</code> at once in a single request.
+                                                                                                                                                                                                                                           * Parse up to <code>100 User-Agent strings</code> at once in a single request; exceeding that returns a 413, not a 400.
                                                                                                                                                                                                                                            */
                                                                                                                                                                                                                                           public CompletableFuture<ApifreaksApiHttpResponse<List<BulkUserAgentLookupResponseItem>>> bulkUserAgentLookup(
                                                                                                                                                                                                                                               BulkUserAgentLookupRequest request,

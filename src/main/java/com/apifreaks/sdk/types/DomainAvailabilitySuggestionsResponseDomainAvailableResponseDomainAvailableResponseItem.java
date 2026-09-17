@@ -23,9 +23,9 @@ import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
-    builder = DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem.Builder.class
+    builder = DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem.Builder.class
 )
-public final class DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem {
+public final class DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem {
   private final Optional<String> domain;
 
   private final Optional<Boolean> domainAvailability;
@@ -34,8 +34,8 @@ public final class DomainAvailabilitySuggestionsResponseDomainAvailableResponseI
 
   private final Map<String, Object> additionalProperties;
 
-  private DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem(Optional<String> domain,
-      Optional<Boolean> domainAvailability, Optional<String> message,
+  private DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem(
+      Optional<String> domain, Optional<Boolean> domainAvailability, Optional<String> message,
       Map<String, Object> additionalProperties) {
     this.domain = domain;
     this.domainAvailability = domainAvailability;
@@ -64,7 +64,7 @@ public final class DomainAvailabilitySuggestionsResponseDomainAvailableResponseI
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
-    return other instanceof DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem && equalTo((DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem) other);
+    return other instanceof DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem && equalTo((DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem) other);
   }
 
   @JsonAnyGetter
@@ -72,7 +72,8 @@ public final class DomainAvailabilitySuggestionsResponseDomainAvailableResponseI
     return this.additionalProperties;
   }
 
-  private boolean equalTo(DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem other) {
+  private boolean equalTo(
+      DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem other) {
     return domain.equals(other.domain) && domainAvailability.equals(other.domainAvailability) && message.equals(other.message);
   }
 
@@ -106,7 +107,8 @@ public final class DomainAvailabilitySuggestionsResponseDomainAvailableResponseI
     private Builder() {
     }
 
-    public Builder from(DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem other) {
+    public Builder from(
+        DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem other) {
       domain(other.getDomain());
       domainAvailability(other.getDomainAvailability());
       message(other.getMessage());
@@ -158,8 +160,9 @@ public final class DomainAvailabilitySuggestionsResponseDomainAvailableResponseI
       return this;
     }
 
-    public DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem build() {
-      return new DomainAvailabilitySuggestionsResponseDomainAvailableResponseItem(domain, domainAvailability, message, additionalProperties);
+    public DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem build(
+        ) {
+      return new DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem(domain, domainAvailability, message, additionalProperties);
     }
 
     public Builder additionalProperty(String key, Object value) {

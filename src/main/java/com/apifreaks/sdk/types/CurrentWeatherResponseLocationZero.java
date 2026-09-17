@@ -13,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.lang.Float;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -27,9 +26,9 @@ import org.jetbrains.annotations.NotNull;
     builder = CurrentWeatherResponseLocationZero.Builder.class
 )
 public final class CurrentWeatherResponseLocationZero {
-  private final float latitude;
+  private final String latitude;
 
-  private final float longitude;
+  private final String longitude;
 
   private final String countryName;
 
@@ -39,7 +38,7 @@ public final class CurrentWeatherResponseLocationZero {
 
   private final Optional<String> locality;
 
-  private final Optional<Float> elevation;
+  private final Optional<String> elevation;
 
   private final String timezone;
 
@@ -47,8 +46,8 @@ public final class CurrentWeatherResponseLocationZero {
 
   private final Map<String, Object> additionalProperties;
 
-  private CurrentWeatherResponseLocationZero(float latitude, float longitude, String countryName,
-      String stateProv, String city, Optional<String> locality, Optional<Float> elevation,
+  private CurrentWeatherResponseLocationZero(String latitude, String longitude, String countryName,
+      String stateProv, String city, Optional<String> locality, Optional<String> elevation,
       String timezone, String timezoneAbbreviation, Map<String, Object> additionalProperties) {
     this.latitude = latitude;
     this.longitude = longitude;
@@ -66,7 +65,7 @@ public final class CurrentWeatherResponseLocationZero {
    * @return Geographic latitude coordinate in decimal degrees, ranging from -90 (South Pole) to +90 (North Pole).
    */
   @JsonProperty("latitude")
-  public float getLatitude() {
+  public String getLatitude() {
     return latitude;
   }
 
@@ -74,7 +73,7 @@ public final class CurrentWeatherResponseLocationZero {
    * @return Geographic longitude coordinate in decimal degrees, ranging from -180 (West) to +180 (East).
    */
   @JsonProperty("longitude")
-  public float getLongitude() {
+  public String getLongitude() {
     return longitude;
   }
 
@@ -114,7 +113,7 @@ public final class CurrentWeatherResponseLocationZero {
    * @return Height above mean sea level in meters for the specified coordinates.
    */
   @JsonProperty("elevation")
-  public Optional<Float> getElevation() {
+  public Optional<String> getElevation() {
     return elevation;
   }
 
@@ -146,7 +145,7 @@ public final class CurrentWeatherResponseLocationZero {
   }
 
   private boolean equalTo(CurrentWeatherResponseLocationZero other) {
-    return latitude == other.latitude && longitude == other.longitude && countryName.equals(other.countryName) && stateProv.equals(other.stateProv) && city.equals(other.city) && locality.equals(other.locality) && elevation.equals(other.elevation) && timezone.equals(other.timezone) && timezoneAbbreviation.equals(other.timezoneAbbreviation);
+    return latitude.equals(other.latitude) && longitude.equals(other.longitude) && countryName.equals(other.countryName) && stateProv.equals(other.stateProv) && city.equals(other.city) && locality.equals(other.locality) && elevation.equals(other.elevation) && timezone.equals(other.timezone) && timezoneAbbreviation.equals(other.timezoneAbbreviation);
   }
 
   @java.lang.Override
@@ -167,7 +166,7 @@ public final class CurrentWeatherResponseLocationZero {
     /**
      * <p>Geographic latitude coordinate in decimal degrees, ranging from -90 (South Pole) to +90 (North Pole).</p>
      */
-    LongitudeStage latitude(float latitude);
+    LongitudeStage latitude(@NotNull String latitude);
 
     Builder from(CurrentWeatherResponseLocationZero other);
   }
@@ -176,7 +175,7 @@ public final class CurrentWeatherResponseLocationZero {
     /**
      * <p>Geographic longitude coordinate in decimal degrees, ranging from -180 (West) to +180 (East).</p>
      */
-    CountryNameStage longitude(float longitude);
+    CountryNameStage longitude(@NotNull String longitude);
   }
 
   public interface CountryNameStage {
@@ -231,18 +230,18 @@ public final class CurrentWeatherResponseLocationZero {
     /**
      * <p>Height above mean sea level in meters for the specified coordinates.</p>
      */
-    _FinalStage elevation(Optional<Float> elevation);
+    _FinalStage elevation(Optional<String> elevation);
 
-    _FinalStage elevation(Float elevation);
+    _FinalStage elevation(String elevation);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
   public static final class Builder implements LatitudeStage, LongitudeStage, CountryNameStage, StateProvStage, CityStage, TimezoneStage, TimezoneAbbreviationStage, _FinalStage {
-    private float latitude;
+    private String latitude;
 
-    private float longitude;
+    private String longitude;
 
     private String countryName;
 
@@ -254,7 +253,7 @@ public final class CurrentWeatherResponseLocationZero {
 
     private String timezoneAbbreviation;
 
-    private Optional<Float> elevation = Optional.empty();
+    private Optional<String> elevation = Optional.empty();
 
     private Optional<String> locality = Optional.empty();
 
@@ -285,8 +284,8 @@ public final class CurrentWeatherResponseLocationZero {
      */
     @java.lang.Override
     @JsonSetter("latitude")
-    public LongitudeStage latitude(float latitude) {
-      this.latitude = latitude;
+    public LongitudeStage latitude(@NotNull String latitude) {
+      this.latitude = Objects.requireNonNull(latitude, "latitude must not be null");
       return this;
     }
 
@@ -297,8 +296,8 @@ public final class CurrentWeatherResponseLocationZero {
      */
     @java.lang.Override
     @JsonSetter("longitude")
-    public CountryNameStage longitude(float longitude) {
-      this.longitude = longitude;
+    public CountryNameStage longitude(@NotNull String longitude) {
+      this.longitude = Objects.requireNonNull(longitude, "longitude must not be null");
       return this;
     }
 
@@ -367,7 +366,7 @@ public final class CurrentWeatherResponseLocationZero {
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage elevation(Float elevation) {
+    public _FinalStage elevation(String elevation) {
       this.elevation = Optional.ofNullable(elevation);
       return this;
     }
@@ -380,7 +379,7 @@ public final class CurrentWeatherResponseLocationZero {
         value = "elevation",
         nulls = Nulls.SKIP
     )
-    public _FinalStage elevation(Optional<Float> elevation) {
+    public _FinalStage elevation(Optional<String> elevation) {
       this.elevation = elevation;
       return this;
     }

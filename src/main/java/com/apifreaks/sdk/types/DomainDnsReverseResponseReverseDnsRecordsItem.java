@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
     builder = DomainDnsReverseResponseReverseDnsRecordsItem.Builder.class
 )
 public final class DomainDnsReverseResponseReverseDnsRecordsItem {
-  private final OffsetDateTime queryTime;
+  private final String queryTime;
 
   private final String domainName;
 
@@ -40,7 +39,7 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItem {
 
   private final Map<String, Object> additionalProperties;
 
-  private DomainDnsReverseResponseReverseDnsRecordsItem(OffsetDateTime queryTime, String domainName,
+  private DomainDnsReverseResponseReverseDnsRecordsItem(String queryTime, String domainName,
       boolean domainRegistered, DomainDnsReverseResponseReverseDnsRecordsItemDnsTypes dnsTypes,
       List<DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItem> dnsRecords,
       Map<String, Object> additionalProperties) {
@@ -52,8 +51,11 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItem {
     this.additionalProperties = additionalProperties;
   }
 
+  /**
+   * @return Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).
+   */
   @JsonProperty("queryTime")
-  public OffsetDateTime getQueryTime() {
+  public String getQueryTime() {
     return queryTime;
   }
 
@@ -107,7 +109,10 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItem {
   }
 
   public interface QueryTimeStage {
-    DomainNameStage queryTime(@NotNull OffsetDateTime queryTime);
+    /**
+     * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
+     */
+    DomainNameStage queryTime(@NotNull String queryTime);
 
     Builder from(DomainDnsReverseResponseReverseDnsRecordsItem other);
   }
@@ -145,7 +150,7 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItem {
       ignoreUnknown = true
   )
   public static final class Builder implements QueryTimeStage, DomainNameStage, DomainRegisteredStage, DnsTypesStage, _FinalStage {
-    private OffsetDateTime queryTime;
+    private String queryTime;
 
     private String domainName;
 
@@ -171,9 +176,14 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItem {
       return this;
     }
 
+    /**
+     * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
+     * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
     @java.lang.Override
     @JsonSetter("queryTime")
-    public DomainNameStage queryTime(@NotNull OffsetDateTime queryTime) {
+    public DomainNameStage queryTime(@NotNull String queryTime) {
       this.queryTime = Objects.requireNonNull(queryTime, "queryTime must not be null");
       return this;
     }

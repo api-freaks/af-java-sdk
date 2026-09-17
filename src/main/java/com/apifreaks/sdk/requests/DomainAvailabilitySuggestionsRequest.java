@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.Object;
 import java.lang.String;
@@ -39,17 +40,20 @@ public final class DomainAvailabilitySuggestionsRequest {
 
   private final Optional<Integer> count;
 
+  private final Optional<Boolean> sug;
+
   private final Map<String, Object> additionalProperties;
 
   private DomainAvailabilitySuggestionsRequest(String apiKey,
       Optional<DomainAvailabilitySuggestionsRequestFormat> format, String domain,
       Optional<DomainAvailabilitySuggestionsRequestSource> source, Optional<Integer> count,
-      Map<String, Object> additionalProperties) {
+      Optional<Boolean> sug, Map<String, Object> additionalProperties) {
     this.apiKey = apiKey;
     this.format = format;
     this.domain = domain;
     this.source = source;
     this.count = count;
+    this.sug = sug;
     this.additionalProperties = additionalProperties;
   }
 
@@ -86,11 +90,19 @@ public final class DomainAvailabilitySuggestionsRequest {
   }
 
   /**
-   * @return Number of suggestions to retrieve.
+   * @return Number of suggestions to retrieve. The API returns a minimum of 5 suggestions regardless of a lower value.
    */
   @JsonProperty("count")
   public Optional<Integer> getCount() {
     return count;
+  }
+
+  /**
+   * @return Controls the response shape. When <code>false</code>, returns a single availability object for the queried domain only. When omitted or <code>true</code>, returns an array of suggested domains instead.
+   */
+  @JsonProperty("sug")
+  public Optional<Boolean> getSug() {
+    return sug;
   }
 
   @java.lang.Override
@@ -105,12 +117,12 @@ public final class DomainAvailabilitySuggestionsRequest {
   }
 
   private boolean equalTo(DomainAvailabilitySuggestionsRequest other) {
-    return apiKey.equals(other.apiKey) && format.equals(other.format) && domain.equals(other.domain) && source.equals(other.source) && count.equals(other.count);
+    return apiKey.equals(other.apiKey) && format.equals(other.format) && domain.equals(other.domain) && source.equals(other.source) && count.equals(other.count) && sug.equals(other.sug);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.apiKey, this.format, this.domain, this.source, this.count);
+    return Objects.hash(this.apiKey, this.format, this.domain, this.source, this.count, this.sug);
   }
 
   @java.lang.Override
@@ -160,11 +172,18 @@ public final class DomainAvailabilitySuggestionsRequest {
     _FinalStage source(DomainAvailabilitySuggestionsRequestSource source);
 
     /**
-     * <p>Number of suggestions to retrieve.</p>
+     * <p>Number of suggestions to retrieve. The API returns a minimum of 5 suggestions regardless of a lower value.</p>
      */
     _FinalStage count(Optional<Integer> count);
 
     _FinalStage count(Integer count);
+
+    /**
+     * <p>Controls the response shape. When <code>false</code>, returns a single availability object for the queried domain only. When omitted or <code>true</code>, returns an array of suggested domains instead.</p>
+     */
+    _FinalStage sug(Optional<Boolean> sug);
+
+    _FinalStage sug(Boolean sug);
   }
 
   @JsonIgnoreProperties(
@@ -174,6 +193,8 @@ public final class DomainAvailabilitySuggestionsRequest {
     private String apiKey;
 
     private String domain;
+
+    private Optional<Boolean> sug = Optional.empty();
 
     private Optional<Integer> count = Optional.empty();
 
@@ -194,6 +215,7 @@ public final class DomainAvailabilitySuggestionsRequest {
       domain(other.getDomain());
       source(other.getSource());
       count(other.getCount());
+      sug(other.getSug());
       return this;
     }
 
@@ -222,7 +244,30 @@ public final class DomainAvailabilitySuggestionsRequest {
     }
 
     /**
-     * <p>Number of suggestions to retrieve.</p>
+     * <p>Controls the response shape. When <code>false</code>, returns a single availability object for the queried domain only. When omitted or <code>true</code>, returns an array of suggested domains instead.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage sug(Boolean sug) {
+      this.sug = Optional.ofNullable(sug);
+      return this;
+    }
+
+    /**
+     * <p>Controls the response shape. When <code>false</code>, returns a single availability object for the queried domain only. When omitted or <code>true</code>, returns an array of suggested domains instead.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "sug",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage sug(Optional<Boolean> sug) {
+      this.sug = sug;
+      return this;
+    }
+
+    /**
+     * <p>Number of suggestions to retrieve. The API returns a minimum of 5 suggestions regardless of a lower value.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -232,7 +277,7 @@ public final class DomainAvailabilitySuggestionsRequest {
     }
 
     /**
-     * <p>Number of suggestions to retrieve.</p>
+     * <p>Number of suggestions to retrieve. The API returns a minimum of 5 suggestions regardless of a lower value.</p>
      */
     @java.lang.Override
     @JsonSetter(
@@ -292,7 +337,7 @@ public final class DomainAvailabilitySuggestionsRequest {
 
     @java.lang.Override
     public DomainAvailabilitySuggestionsRequest build() {
-      return new DomainAvailabilitySuggestionsRequest(apiKey, format, domain, source, count, additionalProperties);
+      return new DomainAvailabilitySuggestionsRequest(apiKey, format, domain, source, count, sug, additionalProperties);
     }
 
     @java.lang.Override

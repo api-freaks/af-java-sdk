@@ -2007,7 +2007,7 @@ public class ApifreaksApiClient {
   }
 
   /**
-   * Parse up to <code>50,000 User-Agent strings</code> at once in a single request.
+   * Parse up to <code>100 User-Agent strings</code> at once in a single request; exceeding that returns a 413, not a 400.
    */
   public List<BulkUserAgentLookupResponseItem> bulkUserAgentLookup(
       BulkUserAgentLookupRequest request) {
@@ -2015,7 +2015,7 @@ public class ApifreaksApiClient {
   }
 
   /**
-   * Parse up to <code>50,000 User-Agent strings</code> at once in a single request.
+   * Parse up to <code>100 User-Agent strings</code> at once in a single request; exceeding that returns a 413, not a 400.
    */
   public List<BulkUserAgentLookupResponseItem> bulkUserAgentLookup(
       BulkUserAgentLookupRequest request, RequestOptions requestOptions) {

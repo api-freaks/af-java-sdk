@@ -34,24 +34,24 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensions {
 
   private final List<String> keyUsages;
 
-  private final List<String> extendedKeyUsages;
+  private final Optional<List<String>> extendedKeyUsages;
 
   private final Optional<List<String>> crlDistributionPoints;
 
-  private final DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess authorityInfoAccess;
+  private final Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess> authorityInfoAccess;
 
   private final Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsSubjectAlternativeNames> subjectAlternativeNames;
 
-  private final DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePolicies certificatePolicies;
+  private final Optional<List<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem>> certificatePolicies;
 
   private final Map<String, Object> additionalProperties;
 
   private DomainSslChainLookupResponseSslCertificatesItemExtensions(String authorityKeyIdentifier,
-      String subjectKeyIdentifier, List<String> keyUsages, List<String> extendedKeyUsages,
+      String subjectKeyIdentifier, List<String> keyUsages, Optional<List<String>> extendedKeyUsages,
       Optional<List<String>> crlDistributionPoints,
-      DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess authorityInfoAccess,
+      Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess> authorityInfoAccess,
       Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsSubjectAlternativeNames> subjectAlternativeNames,
-      DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePolicies certificatePolicies,
+      Optional<List<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem>> certificatePolicies,
       Map<String, Object> additionalProperties) {
     this.authorityKeyIdentifier = authorityKeyIdentifier;
     this.subjectKeyIdentifier = subjectKeyIdentifier;
@@ -80,7 +80,7 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensions {
   }
 
   @JsonProperty("extendedKeyUsages")
-  public List<String> getExtendedKeyUsages() {
+  public Optional<List<String>> getExtendedKeyUsages() {
     return extendedKeyUsages;
   }
 
@@ -90,7 +90,7 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensions {
   }
 
   @JsonProperty("authorityInfoAccess")
-  public DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess getAuthorityInfoAccess(
+  public Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess> getAuthorityInfoAccess(
       ) {
     return authorityInfoAccess;
   }
@@ -102,7 +102,7 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensions {
   }
 
   @JsonProperty("certificatePolicies")
-  public DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePolicies getCertificatePolicies(
+  public Optional<List<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem>> getCertificatePolicies(
       ) {
     return certificatePolicies;
   }
@@ -143,17 +143,7 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensions {
   }
 
   public interface SubjectKeyIdentifierStage {
-    AuthorityInfoAccessStage subjectKeyIdentifier(@NotNull String subjectKeyIdentifier);
-  }
-
-  public interface AuthorityInfoAccessStage {
-    CertificatePoliciesStage authorityInfoAccess(
-        @NotNull DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess authorityInfoAccess);
-  }
-
-  public interface CertificatePoliciesStage {
-    _FinalStage certificatePolicies(
-        @NotNull DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePolicies certificatePolicies);
+    _FinalStage subjectKeyIdentifier(@NotNull String subjectKeyIdentifier);
   }
 
   public interface _FinalStage {
@@ -169,40 +159,50 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensions {
 
     _FinalStage addAllKeyUsages(List<String> keyUsages);
 
+    _FinalStage extendedKeyUsages(Optional<List<String>> extendedKeyUsages);
+
     _FinalStage extendedKeyUsages(List<String> extendedKeyUsages);
-
-    _FinalStage addExtendedKeyUsages(String extendedKeyUsages);
-
-    _FinalStage addAllExtendedKeyUsages(List<String> extendedKeyUsages);
 
     _FinalStage crlDistributionPoints(Optional<List<String>> crlDistributionPoints);
 
     _FinalStage crlDistributionPoints(List<String> crlDistributionPoints);
+
+    _FinalStage authorityInfoAccess(
+        Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess> authorityInfoAccess);
+
+    _FinalStage authorityInfoAccess(
+        DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess authorityInfoAccess);
 
     _FinalStage subjectAlternativeNames(
         Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsSubjectAlternativeNames> subjectAlternativeNames);
 
     _FinalStage subjectAlternativeNames(
         DomainSslChainLookupResponseSslCertificatesItemExtensionsSubjectAlternativeNames subjectAlternativeNames);
+
+    _FinalStage certificatePolicies(
+        Optional<List<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem>> certificatePolicies);
+
+    _FinalStage certificatePolicies(
+        List<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem> certificatePolicies);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements AuthorityKeyIdentifierStage, SubjectKeyIdentifierStage, AuthorityInfoAccessStage, CertificatePoliciesStage, _FinalStage {
+  public static final class Builder implements AuthorityKeyIdentifierStage, SubjectKeyIdentifierStage, _FinalStage {
     private String authorityKeyIdentifier;
 
     private String subjectKeyIdentifier;
 
-    private DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess authorityInfoAccess;
-
-    private DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePolicies certificatePolicies;
+    private Optional<List<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem>> certificatePolicies = Optional.empty();
 
     private Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsSubjectAlternativeNames> subjectAlternativeNames = Optional.empty();
 
+    private Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess> authorityInfoAccess = Optional.empty();
+
     private Optional<List<String>> crlDistributionPoints = Optional.empty();
 
-    private List<String> extendedKeyUsages = new ArrayList<>();
+    private Optional<List<String>> extendedKeyUsages = Optional.empty();
 
     private List<String> keyUsages = new ArrayList<>();
 
@@ -235,24 +235,26 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensions {
 
     @java.lang.Override
     @JsonSetter("subjectKeyIdentifier")
-    public AuthorityInfoAccessStage subjectKeyIdentifier(@NotNull String subjectKeyIdentifier) {
+    public _FinalStage subjectKeyIdentifier(@NotNull String subjectKeyIdentifier) {
       this.subjectKeyIdentifier = Objects.requireNonNull(subjectKeyIdentifier, "subjectKeyIdentifier must not be null");
       return this;
     }
 
     @java.lang.Override
-    @JsonSetter("authorityInfoAccess")
-    public CertificatePoliciesStage authorityInfoAccess(
-        @NotNull DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess authorityInfoAccess) {
-      this.authorityInfoAccess = Objects.requireNonNull(authorityInfoAccess, "authorityInfoAccess must not be null");
+    public _FinalStage certificatePolicies(
+        List<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem> certificatePolicies) {
+      this.certificatePolicies = Optional.ofNullable(certificatePolicies);
       return this;
     }
 
     @java.lang.Override
-    @JsonSetter("certificatePolicies")
+    @JsonSetter(
+        value = "certificatePolicies",
+        nulls = Nulls.SKIP
+    )
     public _FinalStage certificatePolicies(
-        @NotNull DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePolicies certificatePolicies) {
-      this.certificatePolicies = Objects.requireNonNull(certificatePolicies, "certificatePolicies must not be null");
+        Optional<List<DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem>> certificatePolicies) {
+      this.certificatePolicies = certificatePolicies;
       return this;
     }
 
@@ -275,6 +277,24 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensions {
     }
 
     @java.lang.Override
+    public _FinalStage authorityInfoAccess(
+        DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess authorityInfoAccess) {
+      this.authorityInfoAccess = Optional.ofNullable(authorityInfoAccess);
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter(
+        value = "authorityInfoAccess",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage authorityInfoAccess(
+        Optional<DomainSslChainLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess> authorityInfoAccess) {
+      this.authorityInfoAccess = authorityInfoAccess;
+      return this;
+    }
+
+    @java.lang.Override
     public _FinalStage crlDistributionPoints(List<String> crlDistributionPoints) {
       this.crlDistributionPoints = Optional.ofNullable(crlDistributionPoints);
       return this;
@@ -291,16 +311,8 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensions {
     }
 
     @java.lang.Override
-    public _FinalStage addAllExtendedKeyUsages(List<String> extendedKeyUsages) {
-      if (extendedKeyUsages != null) {
-        this.extendedKeyUsages.addAll(extendedKeyUsages);
-      }
-      return this;
-    }
-
-    @java.lang.Override
-    public _FinalStage addExtendedKeyUsages(String extendedKeyUsages) {
-      this.extendedKeyUsages.add(extendedKeyUsages);
+    public _FinalStage extendedKeyUsages(List<String> extendedKeyUsages) {
+      this.extendedKeyUsages = Optional.ofNullable(extendedKeyUsages);
       return this;
     }
 
@@ -309,11 +321,8 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensions {
         value = "extendedKeyUsages",
         nulls = Nulls.SKIP
     )
-    public _FinalStage extendedKeyUsages(List<String> extendedKeyUsages) {
-      this.extendedKeyUsages.clear();
-      if (extendedKeyUsages != null) {
-        this.extendedKeyUsages.addAll(extendedKeyUsages);
-      }
+    public _FinalStage extendedKeyUsages(Optional<List<String>> extendedKeyUsages) {
+      this.extendedKeyUsages = extendedKeyUsages;
       return this;
     }
 

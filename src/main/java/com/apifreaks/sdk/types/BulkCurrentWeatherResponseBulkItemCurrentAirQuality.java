@@ -14,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
-import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -25,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
     builder = BulkCurrentWeatherResponseBulkItemCurrentAirQuality.Builder.class
 )
 public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
-  private final OffsetDateTime timestamp;
+  private final String timestamp;
 
   private final int europeanAqi;
 
@@ -53,10 +52,10 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
 
   private final Map<String, Object> additionalProperties;
 
-  private BulkCurrentWeatherResponseBulkItemCurrentAirQuality(OffsetDateTime timestamp,
-      int europeanAqi, int usAqi, float pm10, float pm25, float carbonMonoxide,
-      float nitrogenDioxide, float sulphurDioxide, float ozone, float dust, float uvIndex,
-      float aerosolOpticalDepth, float uvIndexClearSky, Map<String, Object> additionalProperties) {
+  private BulkCurrentWeatherResponseBulkItemCurrentAirQuality(String timestamp, int europeanAqi,
+      int usAqi, float pm10, float pm25, float carbonMonoxide, float nitrogenDioxide,
+      float sulphurDioxide, float ozone, float dust, float uvIndex, float aerosolOpticalDepth,
+      float uvIndexClearSky, Map<String, Object> additionalProperties) {
     this.timestamp = timestamp;
     this.europeanAqi = europeanAqi;
     this.usAqi = usAqi;
@@ -74,10 +73,10 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
   }
 
   /**
-   * @return ISO 8601 formatted timestamp (iso8601).
+   * @return Local timestamp of the observation (format YYYY-MM-DDTHH:mm, not ISO 8601).
    */
   @JsonProperty("timestamp")
-  public OffsetDateTime getTimestamp() {
+  public String getTimestamp() {
     return timestamp;
   }
 
@@ -208,9 +207,9 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
 
   public interface TimestampStage {
     /**
-     * <p>ISO 8601 formatted timestamp (iso8601).</p>
+     * <p>Local timestamp of the observation (format YYYY-MM-DDTHH:mm, not ISO 8601).</p>
      */
-    EuropeanAqiStage timestamp(@NotNull OffsetDateTime timestamp);
+    EuropeanAqiStage timestamp(@NotNull String timestamp);
 
     Builder from(BulkCurrentWeatherResponseBulkItemCurrentAirQuality other);
   }
@@ -311,7 +310,7 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
       ignoreUnknown = true
   )
   public static final class Builder implements TimestampStage, EuropeanAqiStage, UsAqiStage, Pm10Stage, Pm25Stage, CarbonMonoxideStage, NitrogenDioxideStage, SulphurDioxideStage, OzoneStage, DustStage, UvIndexStage, AerosolOpticalDepthStage, UvIndexClearSkyStage, _FinalStage {
-    private OffsetDateTime timestamp;
+    private String timestamp;
 
     private int europeanAqi;
 
@@ -362,13 +361,13 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
     }
 
     /**
-     * <p>ISO 8601 formatted timestamp (iso8601).</p>
-     * <p>ISO 8601 formatted timestamp (iso8601).</p>
+     * <p>Local timestamp of the observation (format YYYY-MM-DDTHH:mm, not ISO 8601).</p>
+     * <p>Local timestamp of the observation (format YYYY-MM-DDTHH:mm, not ISO 8601).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("timestamp")
-    public EuropeanAqiStage timestamp(@NotNull OffsetDateTime timestamp) {
+    public EuropeanAqiStage timestamp(@NotNull String timestamp) {
       this.timestamp = Objects.requireNonNull(timestamp, "timestamp must not be null");
       return this;
     }

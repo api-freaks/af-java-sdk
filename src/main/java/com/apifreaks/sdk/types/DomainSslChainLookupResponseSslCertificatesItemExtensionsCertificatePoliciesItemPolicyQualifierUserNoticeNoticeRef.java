@@ -22,16 +22,16 @@ import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
-    builder = DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNoticeNoticeRef.Builder.class
+    builder = DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNoticeNoticeRef.Builder.class
 )
-public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNoticeNoticeRef {
+public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNoticeNoticeRef {
   private final Optional<String> organization;
 
   private final Optional<String> noticeNumbers;
 
   private final Map<String, Object> additionalProperties;
 
-  private DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNoticeNoticeRef(
+  private DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNoticeNoticeRef(
       Optional<String> organization, Optional<String> noticeNumbers,
       Map<String, Object> additionalProperties) {
     this.organization = organization;
@@ -39,11 +39,17 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCert
     this.additionalProperties = additionalProperties;
   }
 
+  /**
+   * @return Organization providing the notice
+   */
   @JsonProperty("organization")
   public Optional<String> getOrganization() {
     return organization;
   }
 
+  /**
+   * @return Notice numbers
+   */
   @JsonProperty("noticeNumbers")
   public Optional<String> getNoticeNumbers() {
     return noticeNumbers;
@@ -52,7 +58,7 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCert
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
-    return other instanceof DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNoticeNoticeRef && equalTo((DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNoticeNoticeRef) other);
+    return other instanceof DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNoticeNoticeRef && equalTo((DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNoticeNoticeRef) other);
   }
 
   @JsonAnyGetter
@@ -61,7 +67,7 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCert
   }
 
   private boolean equalTo(
-      DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNoticeNoticeRef other) {
+      DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNoticeNoticeRef other) {
     return organization.equals(other.organization) && noticeNumbers.equals(other.noticeNumbers);
   }
 
@@ -94,12 +100,15 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCert
     }
 
     public Builder from(
-        DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNoticeNoticeRef other) {
+        DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNoticeNoticeRef other) {
       organization(other.getOrganization());
       noticeNumbers(other.getNoticeNumbers());
       return this;
     }
 
+    /**
+     * <p>Organization providing the notice</p>
+     */
     @JsonSetter(
         value = "organization",
         nulls = Nulls.SKIP
@@ -114,6 +123,9 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCert
       return this;
     }
 
+    /**
+     * <p>Notice numbers</p>
+     */
     @JsonSetter(
         value = "noticeNumbers",
         nulls = Nulls.SKIP
@@ -128,9 +140,9 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsCert
       return this;
     }
 
-    public DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNoticeNoticeRef build(
+    public DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNoticeNoticeRef build(
         ) {
-      return new DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesPolicyQualifierUserNoticeNoticeRef(organization, noticeNumbers, additionalProperties);
+      return new DomainSslChainLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNoticeNoticeRef(organization, noticeNumbers, additionalProperties);
     }
 
     public Builder additionalProperty(String key, Object value) {
