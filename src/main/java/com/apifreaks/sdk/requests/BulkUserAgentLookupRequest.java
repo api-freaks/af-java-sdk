@@ -64,7 +64,7 @@ public final class BulkUserAgentLookupRequest {
   }
 
   /**
-   * @return Array of User-Agent strings to parse. Maximum 100 strings per request — exceeding that returns a 413.
+   * @return Array of User-Agent strings to parse. Maximum 20000 strings per request — exceeding that returns a 413.
    */
   @JsonProperty("uaStrings")
   public List<String> getUaStrings() {
@@ -124,7 +124,7 @@ public final class BulkUserAgentLookupRequest {
     _FinalStage format(BulkUserAgentLookupRequestFormat format);
 
     /**
-     * <p>Array of User-Agent strings to parse. Maximum 100 strings per request — exceeding that returns a 413.</p>
+     * <p>Array of User-Agent strings to parse. Maximum 20000 strings per request — exceeding that returns a 413.</p>
      */
     _FinalStage uaStrings(List<String> uaStrings);
 
@@ -170,7 +170,7 @@ public final class BulkUserAgentLookupRequest {
     }
 
     /**
-     * <p>Array of User-Agent strings to parse. Maximum 100 strings per request — exceeding that returns a 413.</p>
+     * <p>Array of User-Agent strings to parse. Maximum 20000 strings per request — exceeding that returns a 413.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -182,7 +182,7 @@ public final class BulkUserAgentLookupRequest {
     }
 
     /**
-     * <p>Array of User-Agent strings to parse. Maximum 100 strings per request — exceeding that returns a 413.</p>
+     * <p>Array of User-Agent strings to parse. Maximum 20000 strings per request — exceeding that returns a 413.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -192,7 +192,7 @@ public final class BulkUserAgentLookupRequest {
     }
 
     /**
-     * <p>Array of User-Agent strings to parse. Maximum 100 strings per request — exceeding that returns a 413.</p>
+     * <p>Array of User-Agent strings to parse. Maximum 20000 strings per request — exceeding that returns a 413.</p>
      */
     @java.lang.Override
     @JsonSetter(
