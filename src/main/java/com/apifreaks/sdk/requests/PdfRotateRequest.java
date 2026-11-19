@@ -281,7 +281,6 @@ public final class PdfRotateRequest {
 
     private Optional<String> webhookAuthorization = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -304,7 +303,6 @@ public final class PdfRotateRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -315,7 +313,6 @@ public final class PdfRotateRequest {
     }
 
     /**
-     * <p>The angle in degrees to rotate the selected pages. Must be one of the following values: 0, 90, 180, 270, -90, -180, or -270. All rotations are applied clockwise.</p>
      * <p>The angle in degrees to rotate the selected pages. Must be one of the following values: 0, 90, 180, 270, -90, -180, or -270. All rotations are applied clockwise.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -509,6 +506,14 @@ public final class PdfRotateRequest {
     @java.lang.Override
     public PdfRotateRequest build() {
       return new PdfRotateRequest(webhookAuthorization, apiKey, format, fileId, destroy, output, pages, rotate, webhookUrl, webhookFailureNotification, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("file_id") || key.equalsIgnoreCase("destroy") || key.equalsIgnoreCase("output") || key.equalsIgnoreCase("pages") || key.equalsIgnoreCase("rotate") || key.equalsIgnoreCase("webhook_url") || key.equalsIgnoreCase("webhook_failure_notification")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

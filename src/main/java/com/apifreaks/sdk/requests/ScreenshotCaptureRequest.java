@@ -6,7 +6,11 @@ package com.apifreaks.sdk.requests;
 
 import com.apifreaks.sdk.core.ObjectMappers;
 import com.apifreaks.sdk.types.ScreenshotCaptureRequestFileType;
+import com.apifreaks.sdk.types.ScreenshotCaptureRequestFormat;
+import com.apifreaks.sdk.types.ScreenshotCaptureRequestOcrModel;
 import com.apifreaks.sdk.types.ScreenshotCaptureRequestOutput;
+import com.apifreaks.sdk.types.ScreenshotCaptureRequestPdfOptionsFormat;
+import com.apifreaks.sdk.types.ScreenshotCaptureRequestPdfOptionsMedia;
 import com.apifreaks.sdk.types.ScreenshotCaptureRequestScrollSpeed;
 import com.apifreaks.sdk.types.ScreenshotCaptureRequestWaitForEvent;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -175,6 +179,60 @@ public final class ScreenshotCaptureRequest {
 
   private final Optional<Double> imageQuality;
 
+  private final Optional<String> captchaError;
+
+  private final Optional<String> captchaImage;
+
+  private final Optional<String> captchaInput;
+
+  private final Optional<String> captchaRefresh;
+
+  private final Optional<Integer> captchaRetries;
+
+  private final Optional<String> captchaSubmit;
+
+  private final Optional<Boolean> classicProxy;
+
+  private final Optional<Integer> clickRecursion;
+
+  private final Optional<String> country;
+
+  private final Optional<Boolean> extractMarkdown;
+
+  private final Optional<ScreenshotCaptureRequestFormat> format;
+
+  private final Optional<Boolean> getImageUrls;
+
+  private final Optional<Boolean> gpu;
+
+  private final Optional<String> markdown;
+
+  private final Optional<ScreenshotCaptureRequestOcrModel> ocrModel;
+
+  private final Optional<ScreenshotCaptureRequestPdfOptionsFormat> pdfOptionsFormat;
+
+  private final Optional<Boolean> pdfOptionsLandscape;
+
+  private final Optional<ScreenshotCaptureRequestPdfOptionsMedia> pdfOptionsMedia;
+
+  private final Optional<String> pdfOptionsPageRange;
+
+  private final Optional<Boolean> pdfOptionsPrintBackground;
+
+  private final Optional<Boolean> premiumProxy;
+
+  private final Optional<Integer> scrollDelay;
+
+  private final Optional<String> selectorToClick;
+
+  private final Optional<Boolean> solveCaptcha;
+
+  private final Optional<Boolean> stealth;
+
+  private final Optional<String> timezone;
+
+  private final Optional<Boolean> video;
+
   private final Map<String, Object> additionalProperties;
 
   private ScreenshotCaptureRequest(Optional<List<String>> sizes, String apiKey,
@@ -205,7 +263,21 @@ public final class ScreenshotCaptureRequest {
       Optional<Double> latitude, Optional<String> proxy, Optional<String> headers,
       Optional<String> cookies, Optional<String> scrollToElement, Optional<String> selector,
       Optional<String> userAgent, Optional<String> acceptLanguages, Optional<String> customHtml,
-      Optional<Double> imageQuality, Map<String, Object> additionalProperties) {
+      Optional<Double> imageQuality, Optional<String> captchaError, Optional<String> captchaImage,
+      Optional<String> captchaInput, Optional<String> captchaRefresh,
+      Optional<Integer> captchaRetries, Optional<String> captchaSubmit,
+      Optional<Boolean> classicProxy, Optional<Integer> clickRecursion, Optional<String> country,
+      Optional<Boolean> extractMarkdown, Optional<ScreenshotCaptureRequestFormat> format,
+      Optional<Boolean> getImageUrls, Optional<Boolean> gpu, Optional<String> markdown,
+      Optional<ScreenshotCaptureRequestOcrModel> ocrModel,
+      Optional<ScreenshotCaptureRequestPdfOptionsFormat> pdfOptionsFormat,
+      Optional<Boolean> pdfOptionsLandscape,
+      Optional<ScreenshotCaptureRequestPdfOptionsMedia> pdfOptionsMedia,
+      Optional<String> pdfOptionsPageRange, Optional<Boolean> pdfOptionsPrintBackground,
+      Optional<Boolean> premiumProxy, Optional<Integer> scrollDelay,
+      Optional<String> selectorToClick, Optional<Boolean> solveCaptcha, Optional<Boolean> stealth,
+      Optional<String> timezone, Optional<Boolean> video,
+      Map<String, Object> additionalProperties) {
     this.sizes = sizes;
     this.apiKey = apiKey;
     this.output = output;
@@ -276,6 +348,33 @@ public final class ScreenshotCaptureRequest {
     this.acceptLanguages = acceptLanguages;
     this.customHtml = customHtml;
     this.imageQuality = imageQuality;
+    this.captchaError = captchaError;
+    this.captchaImage = captchaImage;
+    this.captchaInput = captchaInput;
+    this.captchaRefresh = captchaRefresh;
+    this.captchaRetries = captchaRetries;
+    this.captchaSubmit = captchaSubmit;
+    this.classicProxy = classicProxy;
+    this.clickRecursion = clickRecursion;
+    this.country = country;
+    this.extractMarkdown = extractMarkdown;
+    this.format = format;
+    this.getImageUrls = getImageUrls;
+    this.gpu = gpu;
+    this.markdown = markdown;
+    this.ocrModel = ocrModel;
+    this.pdfOptionsFormat = pdfOptionsFormat;
+    this.pdfOptionsLandscape = pdfOptionsLandscape;
+    this.pdfOptionsMedia = pdfOptionsMedia;
+    this.pdfOptionsPageRange = pdfOptionsPageRange;
+    this.pdfOptionsPrintBackground = pdfOptionsPrintBackground;
+    this.premiumProxy = premiumProxy;
+    this.scrollDelay = scrollDelay;
+    this.selectorToClick = selectorToClick;
+    this.solveCaptcha = solveCaptcha;
+    this.stealth = stealth;
+    this.timezone = timezone;
+    this.video = video;
     this.additionalProperties = additionalProperties;
   }
 
@@ -296,7 +395,7 @@ public final class ScreenshotCaptureRequest {
   }
 
   /**
-   * @return Output format for screenshot results
+   * @return Output format for screenshot results. The SDKs support only <code>json</code>, which returns metadata with the captured file's URL in <code>screenshot</code>; download the file from that URL. (The API's <code>output=image</code>, which returns the raw file, is not supported by the SDK methods.)
    */
   @JsonProperty("output")
   public Optional<ScreenshotCaptureRequestOutput> getOutput() {
@@ -806,6 +905,222 @@ public final class ScreenshotCaptureRequest {
     return imageQuality;
   }
 
+  /**
+   * @return CSS selector of the message shown for a wrong answer. While it is visible, the solver tries again.
+   */
+  @JsonProperty("captcha_error")
+  public Optional<String> getCaptchaError() {
+    return captchaError;
+  }
+
+  /**
+   * @return CSS selector of the captcha picture. Required when solve_captcha is true.
+   */
+  @JsonProperty("captcha_image")
+  public Optional<String> getCaptchaImage() {
+    return captchaImage;
+  }
+
+  /**
+   * @return CSS selector of the box the answer is typed into. Required when solve_captcha is true.
+   */
+  @JsonProperty("captcha_input")
+  public Optional<String> getCaptchaInput() {
+    return captchaInput;
+  }
+
+  /**
+   * @return CSS selector of the control that loads a new captcha picture before the next try.
+   */
+  @JsonProperty("captcha_refresh")
+  public Optional<String> getCaptchaRefresh() {
+    return captchaRefresh;
+  }
+
+  /**
+   * @return Number of guesses the solver makes, from 1 to 5.
+   */
+  @JsonProperty("captcha_retries")
+  public Optional<Integer> getCaptchaRetries() {
+    return captchaRetries;
+  }
+
+  /**
+   * @return CSS selector of the button to click after the answer is typed.
+   */
+  @JsonProperty("captcha_submit")
+  public Optional<String> getCaptchaSubmit() {
+    return captchaSubmit;
+  }
+
+  /**
+   * @return Loads the page through a datacenter proxy. Adds 20 credits per request. Ignored when premium_proxy is true or a custom proxy is set.
+   */
+  @JsonProperty("classic_proxy")
+  public Optional<Boolean> getClassicProxy() {
+    return classicProxy;
+  }
+
+  /**
+   * @return Number of times to click the selector (when set via <code>selector_to_click</code>).
+   */
+  @JsonProperty("click_recursion")
+  public Optional<Integer> getClickRecursion() {
+    return clickRecursion;
+  }
+
+  /**
+   * @return Two-letter country code, such as US or DE, for the exit address of classic_proxy or premium_proxy. Ignored when you send your own proxy. Any two-letter code is sent, including one that is not listed. Classic proxy countries: BG, GE, DE, HN, MD, UA, GB, US. Premium proxy countries: AF, AL, DZ, AO, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BT, BO, BQ, BA, BW, BR, BN, BG, BF, BI, CV, KH, CM, CA, KY, CF, TD, CL, CN, CO, KM, CG, CR, CI, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, EC, EG, SV, GQ, EE, SZ, ET, FO, FJ, FI, FR, GF, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IL, IT, JM, JP, JE, JO, KZ, KE, XK, KW, KG, LA, LV, LB, LS, LR, LY, LT, MO, MG, MW, MY, MV, ML, MT, MQ, MR, MU, YT, MX, MD, MN, ME, MA, MZ, MM, NA, NP, NL, NC, NZ, NI, NE, NG, MK, NO, OM, PK, PS, PA, PG, PY, PE, PH, PL, PT, PR, QA, RE, RO, RU, RW, KN, LC, VC, WS, SA, SN, RS, SC, SL, SG, SK, SI, SB, SO, ZA, KR, SS, ES, LK, SD, SR, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TO, TT, TN, TR, TM, UG, UA, AE, GB, US, UY, UZ, VE, VN, YE, ZM, ZW.
+   */
+  @JsonProperty("country")
+  public Optional<String> getCountry() {
+    return country;
+  }
+
+  /**
+   * @return Extracts rendered page content as a structured .md (Markdown) file. Preserves headings, lists, links. Only with output=json.
+   */
+  @JsonProperty("extract_markdown")
+  public Optional<Boolean> getExtractMarkdown() {
+    return extractMarkdown;
+  }
+
+  /**
+   * @return Response format: json (default).
+   */
+  @JsonProperty("format")
+  public Optional<ScreenshotCaptureRequestFormat> getFormat() {
+    return format;
+  }
+
+  /**
+   * @return Extracts all image URLs from the rendered DOM and returns them in structured format. Only with output=json.
+   */
+  @JsonProperty("get_image_urls")
+  public Optional<Boolean> getGetImageUrls() {
+    return getImageUrls;
+  }
+
+  /**
+   * @return Renders the page with a GPU, including WebGL and canvas content. Adds 20 credits per request.
+   */
+  @JsonProperty("gpu")
+  public Optional<Boolean> getGpu() {
+    return gpu;
+  }
+
+  /**
+   * @return Markdown to render instead of loading a URL. Works like custom_html, so you can capture a README or notes without hosting a page.
+   */
+  @JsonProperty("markdown")
+  public Optional<String> getMarkdown() {
+    return markdown;
+  }
+
+  /**
+   * @return Recognition model used by the captcha solver: mini-ocr-v1 (default) or ocr-v1.
+   */
+  @JsonProperty("ocr_model")
+  public Optional<ScreenshotCaptureRequestOcrModel> getOcrModel() {
+    return ocrModel;
+  }
+
+  /**
+   * @return Paper size of the PDF. Applies when file_type is PDF. Without it, width and height are used if set, otherwise the page renders as one long page: A0, A1, A2, A3, A4, A5, A6, Letter, Legal, Tabloid, or Ledger.
+   */
+  @JsonProperty("pdf_options[format]")
+  public Optional<ScreenshotCaptureRequestPdfOptionsFormat> getPdfOptionsFormat() {
+    return pdfOptionsFormat;
+  }
+
+  /**
+   * @return Renders the PDF in landscape orientation, swapping the width and height of the paper size. Applies when file_type is PDF.
+   */
+  @JsonProperty("pdf_options[landscape]")
+  public Optional<Boolean> getPdfOptionsLandscape() {
+    return pdfOptionsLandscape;
+  }
+
+  /**
+   * @return CSS media type used to render the PDF: print or screen.
+   */
+  @JsonProperty("pdf_options[media]")
+  public Optional<ScreenshotCaptureRequestPdfOptionsMedia> getPdfOptionsMedia() {
+    return pdfOptionsMedia;
+  }
+
+  /**
+   * @return Pages to keep in the PDF, as start-end, for example 1-3 or 5-5. Pages are rendered first and then trimmed. Has no effect on a single-page PDF. Applies when file_type is PDF.
+   */
+  @JsonProperty("pdf_options[page_range]")
+  public Optional<String> getPdfOptionsPageRange() {
+    return pdfOptionsPageRange;
+  }
+
+  /**
+   * @return Includes background colors and images in the PDF. Applies when file_type is PDF.
+   */
+  @JsonProperty("pdf_options[print_background]")
+  public Optional<Boolean> getPdfOptionsPrintBackground() {
+    return pdfOptionsPrintBackground;
+  }
+
+  /**
+   * @return Loads the page through a residential proxy. Adds 200 credits per request. Used instead of classic_proxy.
+   */
+  @JsonProperty("premium_proxy")
+  public Optional<Boolean> getPremiumProxy() {
+    return premiumProxy;
+  }
+
+  /**
+   * @return Delay in milliseconds between scroll steps when <code>lazy_load</code> is enabled. Use higher values for heavy pages.
+   */
+  @JsonProperty("scroll_delay")
+  public Optional<Integer> getScrollDelay() {
+    return scrollDelay;
+  }
+
+  /**
+   * @return CSS selector for an element to click before capturing the screenshot. Useful for opening dropdowns, modals, or triggering content.
+   */
+  @JsonProperty("selector_to_click")
+  public Optional<String> getSelectorToClick() {
+    return selectorToClick;
+  }
+
+  /**
+   * @return Solves a captcha made of text drawn in a picture, then takes the screenshot. Requires captcha_image and captcha_input. Adds 20 credits per request.
+   */
+  @JsonProperty("solve_captcha")
+  public Optional<Boolean> getSolveCaptcha() {
+    return solveCaptcha;
+  }
+
+  /**
+   * @return Makes the browser look like a regular visitor for pages that block automated traffic. No extra credits.
+   */
+  @JsonProperty("stealth")
+  public Optional<Boolean> getStealth() {
+    return stealth;
+  }
+
+  /**
+   * @return IANA timezone the browser uses while rendering, such as Asia/Karachi or Europe/London. Useful for clocks and localized dates.
+   */
+  @JsonProperty("timezone")
+  public Optional<String> getTimezone() {
+    return timezone;
+  }
+
+  /**
+   * @return Records visible viewport only for a specified duration. Use with <code>duration</code> parameter. Ideal for dashboards and animations.
+   */
+  @JsonProperty("video")
+  public Optional<Boolean> getVideo() {
+    return video;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -818,12 +1133,12 @@ public final class ScreenshotCaptureRequest {
   }
 
   private boolean equalTo(ScreenshotCaptureRequest other) {
-    return sizes.equals(other.sizes) && apiKey.equals(other.apiKey) && output.equals(other.output) && fileType.equals(other.fileType) && url.equals(other.url) && width.equals(other.width) && height.equals(other.height) && fullPage.equals(other.fullPage) && fresh.equals(other.fresh) && noCookieBanners.equals(other.noCookieBanners) && enableCaching.equals(other.enableCaching) && blockAds.equals(other.blockAds) && blockChatWidgets.equals(other.blockChatWidgets) && extractText.equals(other.extractText) && extractHtml.equals(other.extractHtml) && destroyScreenshot.equals(other.destroyScreenshot) && lazyLoad.equals(other.lazyLoad) && retina.equals(other.retina) && darkMode.equals(other.darkMode) && blockTracking.equals(other.blockTracking) && enableIncognito.equals(other.enableIncognito) && omitBackground.equals(other.omitBackground) && thumbnailWidth.equals(other.thumbnailWidth) && adjustTop.equals(other.adjustTop) && waitForEvent.equals(other.waitForEvent) && grayscale.equals(other.grayscale) && delay.equals(other.delay) && timeout.equals(other.timeout) && ttl.equals(other.ttl) && clipX.equals(other.clipX) && clipY.equals(other.clipY) && clipWidth.equals(other.clipWidth) && clipHeight.equals(other.clipHeight) && cssUrl.equals(other.cssUrl) && css.equals(other.css) && jsUrl.equals(other.jsUrl) && js.equals(other.js) && blockJs.equals(other.blockJs) && blockStylesheets.equals(other.blockStylesheets) && blockImages.equals(other.blockImages) && blockMedia.equals(other.blockMedia) && blockFont.equals(other.blockFont) && blockTextTrack.equals(other.blockTextTrack) && blockXhr.equals(other.blockXhr) && blockFetch.equals(other.blockFetch) && blockEventSource.equals(other.blockEventSource) && blockWebSocket.equals(other.blockWebSocket) && blockManifest.equals(other.blockManifest) && blockSpecificRequests.equals(other.blockSpecificRequests) && blurSelector.equals(other.blurSelector) && removeSelector.equals(other.removeSelector) && resultFileName.equals(other.resultFileName) && scrollingScreenshot.equals(other.scrollingScreenshot) && scrollSpeed.equals(other.scrollSpeed) && scrollBack.equals(other.scrollBack) && startImmediately.equals(other.startImmediately) && multipleScrolling.equals(other.multipleScrolling) && duration.equals(other.duration) && failOnError.equals(other.failOnError) && longitude.equals(other.longitude) && latitude.equals(other.latitude) && proxy.equals(other.proxy) && headers.equals(other.headers) && cookies.equals(other.cookies) && scrollToElement.equals(other.scrollToElement) && selector.equals(other.selector) && userAgent.equals(other.userAgent) && acceptLanguages.equals(other.acceptLanguages) && customHtml.equals(other.customHtml) && imageQuality.equals(other.imageQuality);
+    return sizes.equals(other.sizes) && apiKey.equals(other.apiKey) && output.equals(other.output) && fileType.equals(other.fileType) && url.equals(other.url) && width.equals(other.width) && height.equals(other.height) && fullPage.equals(other.fullPage) && fresh.equals(other.fresh) && noCookieBanners.equals(other.noCookieBanners) && enableCaching.equals(other.enableCaching) && blockAds.equals(other.blockAds) && blockChatWidgets.equals(other.blockChatWidgets) && extractText.equals(other.extractText) && extractHtml.equals(other.extractHtml) && destroyScreenshot.equals(other.destroyScreenshot) && lazyLoad.equals(other.lazyLoad) && retina.equals(other.retina) && darkMode.equals(other.darkMode) && blockTracking.equals(other.blockTracking) && enableIncognito.equals(other.enableIncognito) && omitBackground.equals(other.omitBackground) && thumbnailWidth.equals(other.thumbnailWidth) && adjustTop.equals(other.adjustTop) && waitForEvent.equals(other.waitForEvent) && grayscale.equals(other.grayscale) && delay.equals(other.delay) && timeout.equals(other.timeout) && ttl.equals(other.ttl) && clipX.equals(other.clipX) && clipY.equals(other.clipY) && clipWidth.equals(other.clipWidth) && clipHeight.equals(other.clipHeight) && cssUrl.equals(other.cssUrl) && css.equals(other.css) && jsUrl.equals(other.jsUrl) && js.equals(other.js) && blockJs.equals(other.blockJs) && blockStylesheets.equals(other.blockStylesheets) && blockImages.equals(other.blockImages) && blockMedia.equals(other.blockMedia) && blockFont.equals(other.blockFont) && blockTextTrack.equals(other.blockTextTrack) && blockXhr.equals(other.blockXhr) && blockFetch.equals(other.blockFetch) && blockEventSource.equals(other.blockEventSource) && blockWebSocket.equals(other.blockWebSocket) && blockManifest.equals(other.blockManifest) && blockSpecificRequests.equals(other.blockSpecificRequests) && blurSelector.equals(other.blurSelector) && removeSelector.equals(other.removeSelector) && resultFileName.equals(other.resultFileName) && scrollingScreenshot.equals(other.scrollingScreenshot) && scrollSpeed.equals(other.scrollSpeed) && scrollBack.equals(other.scrollBack) && startImmediately.equals(other.startImmediately) && multipleScrolling.equals(other.multipleScrolling) && duration.equals(other.duration) && failOnError.equals(other.failOnError) && longitude.equals(other.longitude) && latitude.equals(other.latitude) && proxy.equals(other.proxy) && headers.equals(other.headers) && cookies.equals(other.cookies) && scrollToElement.equals(other.scrollToElement) && selector.equals(other.selector) && userAgent.equals(other.userAgent) && acceptLanguages.equals(other.acceptLanguages) && customHtml.equals(other.customHtml) && imageQuality.equals(other.imageQuality) && captchaError.equals(other.captchaError) && captchaImage.equals(other.captchaImage) && captchaInput.equals(other.captchaInput) && captchaRefresh.equals(other.captchaRefresh) && captchaRetries.equals(other.captchaRetries) && captchaSubmit.equals(other.captchaSubmit) && classicProxy.equals(other.classicProxy) && clickRecursion.equals(other.clickRecursion) && country.equals(other.country) && extractMarkdown.equals(other.extractMarkdown) && format.equals(other.format) && getImageUrls.equals(other.getImageUrls) && gpu.equals(other.gpu) && markdown.equals(other.markdown) && ocrModel.equals(other.ocrModel) && pdfOptionsFormat.equals(other.pdfOptionsFormat) && pdfOptionsLandscape.equals(other.pdfOptionsLandscape) && pdfOptionsMedia.equals(other.pdfOptionsMedia) && pdfOptionsPageRange.equals(other.pdfOptionsPageRange) && pdfOptionsPrintBackground.equals(other.pdfOptionsPrintBackground) && premiumProxy.equals(other.premiumProxy) && scrollDelay.equals(other.scrollDelay) && selectorToClick.equals(other.selectorToClick) && solveCaptcha.equals(other.solveCaptcha) && stealth.equals(other.stealth) && timezone.equals(other.timezone) && video.equals(other.video);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.sizes, this.apiKey, this.output, this.fileType, this.url, this.width, this.height, this.fullPage, this.fresh, this.noCookieBanners, this.enableCaching, this.blockAds, this.blockChatWidgets, this.extractText, this.extractHtml, this.destroyScreenshot, this.lazyLoad, this.retina, this.darkMode, this.blockTracking, this.enableIncognito, this.omitBackground, this.thumbnailWidth, this.adjustTop, this.waitForEvent, this.grayscale, this.delay, this.timeout, this.ttl, this.clipX, this.clipY, this.clipWidth, this.clipHeight, this.cssUrl, this.css, this.jsUrl, this.js, this.blockJs, this.blockStylesheets, this.blockImages, this.blockMedia, this.blockFont, this.blockTextTrack, this.blockXhr, this.blockFetch, this.blockEventSource, this.blockWebSocket, this.blockManifest, this.blockSpecificRequests, this.blurSelector, this.removeSelector, this.resultFileName, this.scrollingScreenshot, this.scrollSpeed, this.scrollBack, this.startImmediately, this.multipleScrolling, this.duration, this.failOnError, this.longitude, this.latitude, this.proxy, this.headers, this.cookies, this.scrollToElement, this.selector, this.userAgent, this.acceptLanguages, this.customHtml, this.imageQuality);
+    return Objects.hash(this.sizes, this.apiKey, this.output, this.fileType, this.url, this.width, this.height, this.fullPage, this.fresh, this.noCookieBanners, this.enableCaching, this.blockAds, this.blockChatWidgets, this.extractText, this.extractHtml, this.destroyScreenshot, this.lazyLoad, this.retina, this.darkMode, this.blockTracking, this.enableIncognito, this.omitBackground, this.thumbnailWidth, this.adjustTop, this.waitForEvent, this.grayscale, this.delay, this.timeout, this.ttl, this.clipX, this.clipY, this.clipWidth, this.clipHeight, this.cssUrl, this.css, this.jsUrl, this.js, this.blockJs, this.blockStylesheets, this.blockImages, this.blockMedia, this.blockFont, this.blockTextTrack, this.blockXhr, this.blockFetch, this.blockEventSource, this.blockWebSocket, this.blockManifest, this.blockSpecificRequests, this.blurSelector, this.removeSelector, this.resultFileName, this.scrollingScreenshot, this.scrollSpeed, this.scrollBack, this.startImmediately, this.multipleScrolling, this.duration, this.failOnError, this.longitude, this.latitude, this.proxy, this.headers, this.cookies, this.scrollToElement, this.selector, this.userAgent, this.acceptLanguages, this.customHtml, this.imageQuality, this.captchaError, this.captchaImage, this.captchaInput, this.captchaRefresh, this.captchaRetries, this.captchaSubmit, this.classicProxy, this.clickRecursion, this.country, this.extractMarkdown, this.format, this.getImageUrls, this.gpu, this.markdown, this.ocrModel, this.pdfOptionsFormat, this.pdfOptionsLandscape, this.pdfOptionsMedia, this.pdfOptionsPageRange, this.pdfOptionsPrintBackground, this.premiumProxy, this.scrollDelay, this.selectorToClick, this.solveCaptcha, this.stealth, this.timezone, this.video);
   }
 
   @java.lang.Override
@@ -868,7 +1183,7 @@ public final class ScreenshotCaptureRequest {
     _FinalStage sizes(String sizes);
 
     /**
-     * <p>Output format for screenshot results</p>
+     * <p>Output format for screenshot results. The SDKs support only <code>json</code>, which returns metadata with the captured file's URL in <code>screenshot</code>; download the file from that URL. (The API's <code>output=image</code>, which returns the raw file, is not supported by the SDK methods.)</p>
      */
     _FinalStage output(Optional<ScreenshotCaptureRequestOutput> output);
 
@@ -1302,6 +1617,196 @@ public final class ScreenshotCaptureRequest {
     _FinalStage imageQuality(Optional<Double> imageQuality);
 
     _FinalStage imageQuality(Double imageQuality);
+
+    /**
+     * <p>CSS selector of the message shown for a wrong answer. While it is visible, the solver tries again.</p>
+     */
+    _FinalStage captchaError(Optional<String> captchaError);
+
+    _FinalStage captchaError(String captchaError);
+
+    /**
+     * <p>CSS selector of the captcha picture. Required when solve_captcha is true.</p>
+     */
+    _FinalStage captchaImage(Optional<String> captchaImage);
+
+    _FinalStage captchaImage(String captchaImage);
+
+    /**
+     * <p>CSS selector of the box the answer is typed into. Required when solve_captcha is true.</p>
+     */
+    _FinalStage captchaInput(Optional<String> captchaInput);
+
+    _FinalStage captchaInput(String captchaInput);
+
+    /**
+     * <p>CSS selector of the control that loads a new captcha picture before the next try.</p>
+     */
+    _FinalStage captchaRefresh(Optional<String> captchaRefresh);
+
+    _FinalStage captchaRefresh(String captchaRefresh);
+
+    /**
+     * <p>Number of guesses the solver makes, from 1 to 5.</p>
+     */
+    _FinalStage captchaRetries(Optional<Integer> captchaRetries);
+
+    _FinalStage captchaRetries(Integer captchaRetries);
+
+    /**
+     * <p>CSS selector of the button to click after the answer is typed.</p>
+     */
+    _FinalStage captchaSubmit(Optional<String> captchaSubmit);
+
+    _FinalStage captchaSubmit(String captchaSubmit);
+
+    /**
+     * <p>Loads the page through a datacenter proxy. Adds 20 credits per request. Ignored when premium_proxy is true or a custom proxy is set.</p>
+     */
+    _FinalStage classicProxy(Optional<Boolean> classicProxy);
+
+    _FinalStage classicProxy(Boolean classicProxy);
+
+    /**
+     * <p>Number of times to click the selector (when set via <code>selector_to_click</code>).</p>
+     */
+    _FinalStage clickRecursion(Optional<Integer> clickRecursion);
+
+    _FinalStage clickRecursion(Integer clickRecursion);
+
+    /**
+     * <p>Two-letter country code, such as US or DE, for the exit address of classic_proxy or premium_proxy. Ignored when you send your own proxy. Any two-letter code is sent, including one that is not listed. Classic proxy countries: BG, GE, DE, HN, MD, UA, GB, US. Premium proxy countries: AF, AL, DZ, AO, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BT, BO, BQ, BA, BW, BR, BN, BG, BF, BI, CV, KH, CM, CA, KY, CF, TD, CL, CN, CO, KM, CG, CR, CI, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, EC, EG, SV, GQ, EE, SZ, ET, FO, FJ, FI, FR, GF, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IL, IT, JM, JP, JE, JO, KZ, KE, XK, KW, KG, LA, LV, LB, LS, LR, LY, LT, MO, MG, MW, MY, MV, ML, MT, MQ, MR, MU, YT, MX, MD, MN, ME, MA, MZ, MM, NA, NP, NL, NC, NZ, NI, NE, NG, MK, NO, OM, PK, PS, PA, PG, PY, PE, PH, PL, PT, PR, QA, RE, RO, RU, RW, KN, LC, VC, WS, SA, SN, RS, SC, SL, SG, SK, SI, SB, SO, ZA, KR, SS, ES, LK, SD, SR, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TO, TT, TN, TR, TM, UG, UA, AE, GB, US, UY, UZ, VE, VN, YE, ZM, ZW.</p>
+     */
+    _FinalStage country(Optional<String> country);
+
+    _FinalStage country(String country);
+
+    /**
+     * <p>Extracts rendered page content as a structured .md (Markdown) file. Preserves headings, lists, links. Only with output=json.</p>
+     */
+    _FinalStage extractMarkdown(Optional<Boolean> extractMarkdown);
+
+    _FinalStage extractMarkdown(Boolean extractMarkdown);
+
+    /**
+     * <p>Response format: json (default).</p>
+     */
+    _FinalStage format(Optional<ScreenshotCaptureRequestFormat> format);
+
+    _FinalStage format(ScreenshotCaptureRequestFormat format);
+
+    /**
+     * <p>Extracts all image URLs from the rendered DOM and returns them in structured format. Only with output=json.</p>
+     */
+    _FinalStage getImageUrls(Optional<Boolean> getImageUrls);
+
+    _FinalStage getImageUrls(Boolean getImageUrls);
+
+    /**
+     * <p>Renders the page with a GPU, including WebGL and canvas content. Adds 20 credits per request.</p>
+     */
+    _FinalStage gpu(Optional<Boolean> gpu);
+
+    _FinalStage gpu(Boolean gpu);
+
+    /**
+     * <p>Markdown to render instead of loading a URL. Works like custom_html, so you can capture a README or notes without hosting a page.</p>
+     */
+    _FinalStage markdown(Optional<String> markdown);
+
+    _FinalStage markdown(String markdown);
+
+    /**
+     * <p>Recognition model used by the captcha solver: mini-ocr-v1 (default) or ocr-v1.</p>
+     */
+    _FinalStage ocrModel(Optional<ScreenshotCaptureRequestOcrModel> ocrModel);
+
+    _FinalStage ocrModel(ScreenshotCaptureRequestOcrModel ocrModel);
+
+    /**
+     * <p>Paper size of the PDF. Applies when file_type is PDF. Without it, width and height are used if set, otherwise the page renders as one long page: A0, A1, A2, A3, A4, A5, A6, Letter, Legal, Tabloid, or Ledger.</p>
+     */
+    _FinalStage pdfOptionsFormat(
+        Optional<ScreenshotCaptureRequestPdfOptionsFormat> pdfOptionsFormat);
+
+    _FinalStage pdfOptionsFormat(ScreenshotCaptureRequestPdfOptionsFormat pdfOptionsFormat);
+
+    /**
+     * <p>Renders the PDF in landscape orientation, swapping the width and height of the paper size. Applies when file_type is PDF.</p>
+     */
+    _FinalStage pdfOptionsLandscape(Optional<Boolean> pdfOptionsLandscape);
+
+    _FinalStage pdfOptionsLandscape(Boolean pdfOptionsLandscape);
+
+    /**
+     * <p>CSS media type used to render the PDF: print or screen.</p>
+     */
+    _FinalStage pdfOptionsMedia(Optional<ScreenshotCaptureRequestPdfOptionsMedia> pdfOptionsMedia);
+
+    _FinalStage pdfOptionsMedia(ScreenshotCaptureRequestPdfOptionsMedia pdfOptionsMedia);
+
+    /**
+     * <p>Pages to keep in the PDF, as start-end, for example 1-3 or 5-5. Pages are rendered first and then trimmed. Has no effect on a single-page PDF. Applies when file_type is PDF.</p>
+     */
+    _FinalStage pdfOptionsPageRange(Optional<String> pdfOptionsPageRange);
+
+    _FinalStage pdfOptionsPageRange(String pdfOptionsPageRange);
+
+    /**
+     * <p>Includes background colors and images in the PDF. Applies when file_type is PDF.</p>
+     */
+    _FinalStage pdfOptionsPrintBackground(Optional<Boolean> pdfOptionsPrintBackground);
+
+    _FinalStage pdfOptionsPrintBackground(Boolean pdfOptionsPrintBackground);
+
+    /**
+     * <p>Loads the page through a residential proxy. Adds 200 credits per request. Used instead of classic_proxy.</p>
+     */
+    _FinalStage premiumProxy(Optional<Boolean> premiumProxy);
+
+    _FinalStage premiumProxy(Boolean premiumProxy);
+
+    /**
+     * <p>Delay in milliseconds between scroll steps when <code>lazy_load</code> is enabled. Use higher values for heavy pages.</p>
+     */
+    _FinalStage scrollDelay(Optional<Integer> scrollDelay);
+
+    _FinalStage scrollDelay(Integer scrollDelay);
+
+    /**
+     * <p>CSS selector for an element to click before capturing the screenshot. Useful for opening dropdowns, modals, or triggering content.</p>
+     */
+    _FinalStage selectorToClick(Optional<String> selectorToClick);
+
+    _FinalStage selectorToClick(String selectorToClick);
+
+    /**
+     * <p>Solves a captcha made of text drawn in a picture, then takes the screenshot. Requires captcha_image and captcha_input. Adds 20 credits per request.</p>
+     */
+    _FinalStage solveCaptcha(Optional<Boolean> solveCaptcha);
+
+    _FinalStage solveCaptcha(Boolean solveCaptcha);
+
+    /**
+     * <p>Makes the browser look like a regular visitor for pages that block automated traffic. No extra credits.</p>
+     */
+    _FinalStage stealth(Optional<Boolean> stealth);
+
+    _FinalStage stealth(Boolean stealth);
+
+    /**
+     * <p>IANA timezone the browser uses while rendering, such as Asia/Karachi or Europe/London. Useful for clocks and localized dates.</p>
+     */
+    _FinalStage timezone(Optional<String> timezone);
+
+    _FinalStage timezone(String timezone);
+
+    /**
+     * <p>Records visible viewport only for a specified duration. Use with <code>duration</code> parameter. Ideal for dashboards and animations.</p>
+     */
+    _FinalStage video(Optional<Boolean> video);
+
+    _FinalStage video(Boolean video);
   }
 
   @JsonIgnoreProperties(
@@ -1311,6 +1816,60 @@ public final class ScreenshotCaptureRequest {
     private String apiKey;
 
     private String url;
+
+    private Optional<Boolean> video = Optional.empty();
+
+    private Optional<String> timezone = Optional.empty();
+
+    private Optional<Boolean> stealth = Optional.empty();
+
+    private Optional<Boolean> solveCaptcha = Optional.empty();
+
+    private Optional<String> selectorToClick = Optional.empty();
+
+    private Optional<Integer> scrollDelay = Optional.empty();
+
+    private Optional<Boolean> premiumProxy = Optional.empty();
+
+    private Optional<Boolean> pdfOptionsPrintBackground = Optional.empty();
+
+    private Optional<String> pdfOptionsPageRange = Optional.empty();
+
+    private Optional<ScreenshotCaptureRequestPdfOptionsMedia> pdfOptionsMedia = Optional.empty();
+
+    private Optional<Boolean> pdfOptionsLandscape = Optional.empty();
+
+    private Optional<ScreenshotCaptureRequestPdfOptionsFormat> pdfOptionsFormat = Optional.empty();
+
+    private Optional<ScreenshotCaptureRequestOcrModel> ocrModel = Optional.empty();
+
+    private Optional<String> markdown = Optional.empty();
+
+    private Optional<Boolean> gpu = Optional.empty();
+
+    private Optional<Boolean> getImageUrls = Optional.empty();
+
+    private Optional<ScreenshotCaptureRequestFormat> format = Optional.empty();
+
+    private Optional<Boolean> extractMarkdown = Optional.empty();
+
+    private Optional<String> country = Optional.empty();
+
+    private Optional<Integer> clickRecursion = Optional.empty();
+
+    private Optional<Boolean> classicProxy = Optional.empty();
+
+    private Optional<String> captchaSubmit = Optional.empty();
+
+    private Optional<Integer> captchaRetries = Optional.empty();
+
+    private Optional<String> captchaRefresh = Optional.empty();
+
+    private Optional<String> captchaInput = Optional.empty();
+
+    private Optional<String> captchaImage = Optional.empty();
+
+    private Optional<String> captchaError = Optional.empty();
 
     private Optional<Double> imageQuality = Optional.empty();
 
@@ -1448,7 +2007,6 @@ public final class ScreenshotCaptureRequest {
 
     private Optional<List<String>> sizes = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -1526,11 +2084,37 @@ public final class ScreenshotCaptureRequest {
       acceptLanguages(other.getAcceptLanguages());
       customHtml(other.getCustomHtml());
       imageQuality(other.getImageQuality());
+      captchaError(other.getCaptchaError());
+      captchaImage(other.getCaptchaImage());
+      captchaInput(other.getCaptchaInput());
+      captchaRefresh(other.getCaptchaRefresh());
+      captchaRetries(other.getCaptchaRetries());
+      captchaSubmit(other.getCaptchaSubmit());
+      classicProxy(other.getClassicProxy());
+      clickRecursion(other.getClickRecursion());
+      country(other.getCountry());
+      extractMarkdown(other.getExtractMarkdown());
+      format(other.getFormat());
+      getImageUrls(other.getGetImageUrls());
+      gpu(other.getGpu());
+      markdown(other.getMarkdown());
+      ocrModel(other.getOcrModel());
+      pdfOptionsFormat(other.getPdfOptionsFormat());
+      pdfOptionsLandscape(other.getPdfOptionsLandscape());
+      pdfOptionsMedia(other.getPdfOptionsMedia());
+      pdfOptionsPageRange(other.getPdfOptionsPageRange());
+      pdfOptionsPrintBackground(other.getPdfOptionsPrintBackground());
+      premiumProxy(other.getPremiumProxy());
+      scrollDelay(other.getScrollDelay());
+      selectorToClick(other.getSelectorToClick());
+      solveCaptcha(other.getSolveCaptcha());
+      stealth(other.getStealth());
+      timezone(other.getTimezone());
+      video(other.getVideo());
       return this;
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -1543,13 +2127,635 @@ public final class ScreenshotCaptureRequest {
 
     /**
      * <p>URLs to capture screenshots of</p>
-     * <p>URLs to capture screenshots of</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("url")
     public _FinalStage url(@NotNull String url) {
       this.url = Objects.requireNonNull(url, "url must not be null");
+      return this;
+    }
+
+    /**
+     * <p>Records visible viewport only for a specified duration. Use with <code>duration</code> parameter. Ideal for dashboards and animations.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage video(Boolean video) {
+      this.video = Optional.ofNullable(video);
+      return this;
+    }
+
+    /**
+     * <p>Records visible viewport only for a specified duration. Use with <code>duration</code> parameter. Ideal for dashboards and animations.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "video",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage video(Optional<Boolean> video) {
+      this.video = video;
+      return this;
+    }
+
+    /**
+     * <p>IANA timezone the browser uses while rendering, such as Asia/Karachi or Europe/London. Useful for clocks and localized dates.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage timezone(String timezone) {
+      this.timezone = Optional.ofNullable(timezone);
+      return this;
+    }
+
+    /**
+     * <p>IANA timezone the browser uses while rendering, such as Asia/Karachi or Europe/London. Useful for clocks and localized dates.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "timezone",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage timezone(Optional<String> timezone) {
+      this.timezone = timezone;
+      return this;
+    }
+
+    /**
+     * <p>Makes the browser look like a regular visitor for pages that block automated traffic. No extra credits.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage stealth(Boolean stealth) {
+      this.stealth = Optional.ofNullable(stealth);
+      return this;
+    }
+
+    /**
+     * <p>Makes the browser look like a regular visitor for pages that block automated traffic. No extra credits.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "stealth",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage stealth(Optional<Boolean> stealth) {
+      this.stealth = stealth;
+      return this;
+    }
+
+    /**
+     * <p>Solves a captcha made of text drawn in a picture, then takes the screenshot. Requires captcha_image and captcha_input. Adds 20 credits per request.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage solveCaptcha(Boolean solveCaptcha) {
+      this.solveCaptcha = Optional.ofNullable(solveCaptcha);
+      return this;
+    }
+
+    /**
+     * <p>Solves a captcha made of text drawn in a picture, then takes the screenshot. Requires captcha_image and captcha_input. Adds 20 credits per request.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "solve_captcha",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage solveCaptcha(Optional<Boolean> solveCaptcha) {
+      this.solveCaptcha = solveCaptcha;
+      return this;
+    }
+
+    /**
+     * <p>CSS selector for an element to click before capturing the screenshot. Useful for opening dropdowns, modals, or triggering content.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage selectorToClick(String selectorToClick) {
+      this.selectorToClick = Optional.ofNullable(selectorToClick);
+      return this;
+    }
+
+    /**
+     * <p>CSS selector for an element to click before capturing the screenshot. Useful for opening dropdowns, modals, or triggering content.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "selector_to_click",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage selectorToClick(Optional<String> selectorToClick) {
+      this.selectorToClick = selectorToClick;
+      return this;
+    }
+
+    /**
+     * <p>Delay in milliseconds between scroll steps when <code>lazy_load</code> is enabled. Use higher values for heavy pages.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage scrollDelay(Integer scrollDelay) {
+      this.scrollDelay = Optional.ofNullable(scrollDelay);
+      return this;
+    }
+
+    /**
+     * <p>Delay in milliseconds between scroll steps when <code>lazy_load</code> is enabled. Use higher values for heavy pages.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "scroll_delay",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage scrollDelay(Optional<Integer> scrollDelay) {
+      this.scrollDelay = scrollDelay;
+      return this;
+    }
+
+    /**
+     * <p>Loads the page through a residential proxy. Adds 200 credits per request. Used instead of classic_proxy.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage premiumProxy(Boolean premiumProxy) {
+      this.premiumProxy = Optional.ofNullable(premiumProxy);
+      return this;
+    }
+
+    /**
+     * <p>Loads the page through a residential proxy. Adds 200 credits per request. Used instead of classic_proxy.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "premium_proxy",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage premiumProxy(Optional<Boolean> premiumProxy) {
+      this.premiumProxy = premiumProxy;
+      return this;
+    }
+
+    /**
+     * <p>Includes background colors and images in the PDF. Applies when file_type is PDF.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage pdfOptionsPrintBackground(Boolean pdfOptionsPrintBackground) {
+      this.pdfOptionsPrintBackground = Optional.ofNullable(pdfOptionsPrintBackground);
+      return this;
+    }
+
+    /**
+     * <p>Includes background colors and images in the PDF. Applies when file_type is PDF.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "pdf_options[print_background]",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage pdfOptionsPrintBackground(Optional<Boolean> pdfOptionsPrintBackground) {
+      this.pdfOptionsPrintBackground = pdfOptionsPrintBackground;
+      return this;
+    }
+
+    /**
+     * <p>Pages to keep in the PDF, as start-end, for example 1-3 or 5-5. Pages are rendered first and then trimmed. Has no effect on a single-page PDF. Applies when file_type is PDF.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage pdfOptionsPageRange(String pdfOptionsPageRange) {
+      this.pdfOptionsPageRange = Optional.ofNullable(pdfOptionsPageRange);
+      return this;
+    }
+
+    /**
+     * <p>Pages to keep in the PDF, as start-end, for example 1-3 or 5-5. Pages are rendered first and then trimmed. Has no effect on a single-page PDF. Applies when file_type is PDF.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "pdf_options[page_range]",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage pdfOptionsPageRange(Optional<String> pdfOptionsPageRange) {
+      this.pdfOptionsPageRange = pdfOptionsPageRange;
+      return this;
+    }
+
+    /**
+     * <p>CSS media type used to render the PDF: print or screen.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage pdfOptionsMedia(ScreenshotCaptureRequestPdfOptionsMedia pdfOptionsMedia) {
+      this.pdfOptionsMedia = Optional.ofNullable(pdfOptionsMedia);
+      return this;
+    }
+
+    /**
+     * <p>CSS media type used to render the PDF: print or screen.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "pdf_options[media]",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage pdfOptionsMedia(
+        Optional<ScreenshotCaptureRequestPdfOptionsMedia> pdfOptionsMedia) {
+      this.pdfOptionsMedia = pdfOptionsMedia;
+      return this;
+    }
+
+    /**
+     * <p>Renders the PDF in landscape orientation, swapping the width and height of the paper size. Applies when file_type is PDF.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage pdfOptionsLandscape(Boolean pdfOptionsLandscape) {
+      this.pdfOptionsLandscape = Optional.ofNullable(pdfOptionsLandscape);
+      return this;
+    }
+
+    /**
+     * <p>Renders the PDF in landscape orientation, swapping the width and height of the paper size. Applies when file_type is PDF.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "pdf_options[landscape]",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage pdfOptionsLandscape(Optional<Boolean> pdfOptionsLandscape) {
+      this.pdfOptionsLandscape = pdfOptionsLandscape;
+      return this;
+    }
+
+    /**
+     * <p>Paper size of the PDF. Applies when file_type is PDF. Without it, width and height are used if set, otherwise the page renders as one long page: A0, A1, A2, A3, A4, A5, A6, Letter, Legal, Tabloid, or Ledger.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage pdfOptionsFormat(ScreenshotCaptureRequestPdfOptionsFormat pdfOptionsFormat) {
+      this.pdfOptionsFormat = Optional.ofNullable(pdfOptionsFormat);
+      return this;
+    }
+
+    /**
+     * <p>Paper size of the PDF. Applies when file_type is PDF. Without it, width and height are used if set, otherwise the page renders as one long page: A0, A1, A2, A3, A4, A5, A6, Letter, Legal, Tabloid, or Ledger.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "pdf_options[format]",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage pdfOptionsFormat(
+        Optional<ScreenshotCaptureRequestPdfOptionsFormat> pdfOptionsFormat) {
+      this.pdfOptionsFormat = pdfOptionsFormat;
+      return this;
+    }
+
+    /**
+     * <p>Recognition model used by the captcha solver: mini-ocr-v1 (default) or ocr-v1.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage ocrModel(ScreenshotCaptureRequestOcrModel ocrModel) {
+      this.ocrModel = Optional.ofNullable(ocrModel);
+      return this;
+    }
+
+    /**
+     * <p>Recognition model used by the captcha solver: mini-ocr-v1 (default) or ocr-v1.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "ocr_model",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage ocrModel(Optional<ScreenshotCaptureRequestOcrModel> ocrModel) {
+      this.ocrModel = ocrModel;
+      return this;
+    }
+
+    /**
+     * <p>Markdown to render instead of loading a URL. Works like custom_html, so you can capture a README or notes without hosting a page.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage markdown(String markdown) {
+      this.markdown = Optional.ofNullable(markdown);
+      return this;
+    }
+
+    /**
+     * <p>Markdown to render instead of loading a URL. Works like custom_html, so you can capture a README or notes without hosting a page.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "markdown",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage markdown(Optional<String> markdown) {
+      this.markdown = markdown;
+      return this;
+    }
+
+    /**
+     * <p>Renders the page with a GPU, including WebGL and canvas content. Adds 20 credits per request.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage gpu(Boolean gpu) {
+      this.gpu = Optional.ofNullable(gpu);
+      return this;
+    }
+
+    /**
+     * <p>Renders the page with a GPU, including WebGL and canvas content. Adds 20 credits per request.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "gpu",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage gpu(Optional<Boolean> gpu) {
+      this.gpu = gpu;
+      return this;
+    }
+
+    /**
+     * <p>Extracts all image URLs from the rendered DOM and returns them in structured format. Only with output=json.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage getImageUrls(Boolean getImageUrls) {
+      this.getImageUrls = Optional.ofNullable(getImageUrls);
+      return this;
+    }
+
+    /**
+     * <p>Extracts all image URLs from the rendered DOM and returns them in structured format. Only with output=json.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "get_image_urls",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage getImageUrls(Optional<Boolean> getImageUrls) {
+      this.getImageUrls = getImageUrls;
+      return this;
+    }
+
+    /**
+     * <p>Response format: json (default).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage format(ScreenshotCaptureRequestFormat format) {
+      this.format = Optional.ofNullable(format);
+      return this;
+    }
+
+    /**
+     * <p>Response format: json (default).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "format",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage format(Optional<ScreenshotCaptureRequestFormat> format) {
+      this.format = format;
+      return this;
+    }
+
+    /**
+     * <p>Extracts rendered page content as a structured .md (Markdown) file. Preserves headings, lists, links. Only with output=json.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage extractMarkdown(Boolean extractMarkdown) {
+      this.extractMarkdown = Optional.ofNullable(extractMarkdown);
+      return this;
+    }
+
+    /**
+     * <p>Extracts rendered page content as a structured .md (Markdown) file. Preserves headings, lists, links. Only with output=json.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "extract_markdown",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage extractMarkdown(Optional<Boolean> extractMarkdown) {
+      this.extractMarkdown = extractMarkdown;
+      return this;
+    }
+
+    /**
+     * <p>Two-letter country code, such as US or DE, for the exit address of classic_proxy or premium_proxy. Ignored when you send your own proxy. Any two-letter code is sent, including one that is not listed. Classic proxy countries: BG, GE, DE, HN, MD, UA, GB, US. Premium proxy countries: AF, AL, DZ, AO, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BT, BO, BQ, BA, BW, BR, BN, BG, BF, BI, CV, KH, CM, CA, KY, CF, TD, CL, CN, CO, KM, CG, CR, CI, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, EC, EG, SV, GQ, EE, SZ, ET, FO, FJ, FI, FR, GF, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IL, IT, JM, JP, JE, JO, KZ, KE, XK, KW, KG, LA, LV, LB, LS, LR, LY, LT, MO, MG, MW, MY, MV, ML, MT, MQ, MR, MU, YT, MX, MD, MN, ME, MA, MZ, MM, NA, NP, NL, NC, NZ, NI, NE, NG, MK, NO, OM, PK, PS, PA, PG, PY, PE, PH, PL, PT, PR, QA, RE, RO, RU, RW, KN, LC, VC, WS, SA, SN, RS, SC, SL, SG, SK, SI, SB, SO, ZA, KR, SS, ES, LK, SD, SR, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TO, TT, TN, TR, TM, UG, UA, AE, GB, US, UY, UZ, VE, VN, YE, ZM, ZW.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage country(String country) {
+      this.country = Optional.ofNullable(country);
+      return this;
+    }
+
+    /**
+     * <p>Two-letter country code, such as US or DE, for the exit address of classic_proxy or premium_proxy. Ignored when you send your own proxy. Any two-letter code is sent, including one that is not listed. Classic proxy countries: BG, GE, DE, HN, MD, UA, GB, US. Premium proxy countries: AF, AL, DZ, AO, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BT, BO, BQ, BA, BW, BR, BN, BG, BF, BI, CV, KH, CM, CA, KY, CF, TD, CL, CN, CO, KM, CG, CR, CI, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, EC, EG, SV, GQ, EE, SZ, ET, FO, FJ, FI, FR, GF, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IL, IT, JM, JP, JE, JO, KZ, KE, XK, KW, KG, LA, LV, LB, LS, LR, LY, LT, MO, MG, MW, MY, MV, ML, MT, MQ, MR, MU, YT, MX, MD, MN, ME, MA, MZ, MM, NA, NP, NL, NC, NZ, NI, NE, NG, MK, NO, OM, PK, PS, PA, PG, PY, PE, PH, PL, PT, PR, QA, RE, RO, RU, RW, KN, LC, VC, WS, SA, SN, RS, SC, SL, SG, SK, SI, SB, SO, ZA, KR, SS, ES, LK, SD, SR, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TO, TT, TN, TR, TM, UG, UA, AE, GB, US, UY, UZ, VE, VN, YE, ZM, ZW.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "country",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage country(Optional<String> country) {
+      this.country = country;
+      return this;
+    }
+
+    /**
+     * <p>Number of times to click the selector (when set via <code>selector_to_click</code>).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage clickRecursion(Integer clickRecursion) {
+      this.clickRecursion = Optional.ofNullable(clickRecursion);
+      return this;
+    }
+
+    /**
+     * <p>Number of times to click the selector (when set via <code>selector_to_click</code>).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "click_recursion",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage clickRecursion(Optional<Integer> clickRecursion) {
+      this.clickRecursion = clickRecursion;
+      return this;
+    }
+
+    /**
+     * <p>Loads the page through a datacenter proxy. Adds 20 credits per request. Ignored when premium_proxy is true or a custom proxy is set.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage classicProxy(Boolean classicProxy) {
+      this.classicProxy = Optional.ofNullable(classicProxy);
+      return this;
+    }
+
+    /**
+     * <p>Loads the page through a datacenter proxy. Adds 20 credits per request. Ignored when premium_proxy is true or a custom proxy is set.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "classic_proxy",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage classicProxy(Optional<Boolean> classicProxy) {
+      this.classicProxy = classicProxy;
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the button to click after the answer is typed.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage captchaSubmit(String captchaSubmit) {
+      this.captchaSubmit = Optional.ofNullable(captchaSubmit);
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the button to click after the answer is typed.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "captcha_submit",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage captchaSubmit(Optional<String> captchaSubmit) {
+      this.captchaSubmit = captchaSubmit;
+      return this;
+    }
+
+    /**
+     * <p>Number of guesses the solver makes, from 1 to 5.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage captchaRetries(Integer captchaRetries) {
+      this.captchaRetries = Optional.ofNullable(captchaRetries);
+      return this;
+    }
+
+    /**
+     * <p>Number of guesses the solver makes, from 1 to 5.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "captcha_retries",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage captchaRetries(Optional<Integer> captchaRetries) {
+      this.captchaRetries = captchaRetries;
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the control that loads a new captcha picture before the next try.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage captchaRefresh(String captchaRefresh) {
+      this.captchaRefresh = Optional.ofNullable(captchaRefresh);
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the control that loads a new captcha picture before the next try.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "captcha_refresh",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage captchaRefresh(Optional<String> captchaRefresh) {
+      this.captchaRefresh = captchaRefresh;
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the box the answer is typed into. Required when solve_captcha is true.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage captchaInput(String captchaInput) {
+      this.captchaInput = Optional.ofNullable(captchaInput);
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the box the answer is typed into. Required when solve_captcha is true.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "captcha_input",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage captchaInput(Optional<String> captchaInput) {
+      this.captchaInput = captchaInput;
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the captcha picture. Required when solve_captcha is true.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage captchaImage(String captchaImage) {
+      this.captchaImage = Optional.ofNullable(captchaImage);
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the captcha picture. Required when solve_captcha is true.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "captcha_image",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage captchaImage(Optional<String> captchaImage) {
+      this.captchaImage = captchaImage;
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the message shown for a wrong answer. While it is visible, the solver tries again.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage captchaError(String captchaError) {
+      this.captchaError = Optional.ofNullable(captchaError);
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the message shown for a wrong answer. While it is visible, the solver tries again.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "captcha_error",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage captchaError(Optional<String> captchaError) {
+      this.captchaError = captchaError;
       return this;
     }
 
@@ -2994,7 +4200,7 @@ public final class ScreenshotCaptureRequest {
     }
 
     /**
-     * <p>Output format for screenshot results</p>
+     * <p>Output format for screenshot results. The SDKs support only <code>json</code>, which returns metadata with the captured file's URL in <code>screenshot</code>; download the file from that URL. (The API's <code>output=image</code>, which returns the raw file, is not supported by the SDK methods.)</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -3004,7 +4210,7 @@ public final class ScreenshotCaptureRequest {
     }
 
     /**
-     * <p>Output format for screenshot results</p>
+     * <p>Output format for screenshot results. The SDKs support only <code>json</code>, which returns metadata with the captured file's URL in <code>screenshot</code>; download the file from that URL. (The API's <code>output=image</code>, which returns the raw file, is not supported by the SDK methods.)</p>
      */
     @java.lang.Override
     @JsonSetter(
@@ -3047,7 +4253,15 @@ public final class ScreenshotCaptureRequest {
 
     @java.lang.Override
     public ScreenshotCaptureRequest build() {
-      return new ScreenshotCaptureRequest(sizes, apiKey, output, fileType, url, width, height, fullPage, fresh, noCookieBanners, enableCaching, blockAds, blockChatWidgets, extractText, extractHtml, destroyScreenshot, lazyLoad, retina, darkMode, blockTracking, enableIncognito, omitBackground, thumbnailWidth, adjustTop, waitForEvent, grayscale, delay, timeout, ttl, clipX, clipY, clipWidth, clipHeight, cssUrl, css, jsUrl, js, blockJs, blockStylesheets, blockImages, blockMedia, blockFont, blockTextTrack, blockXhr, blockFetch, blockEventSource, blockWebSocket, blockManifest, blockSpecificRequests, blurSelector, removeSelector, resultFileName, scrollingScreenshot, scrollSpeed, scrollBack, startImmediately, multipleScrolling, duration, failOnError, longitude, latitude, proxy, headers, cookies, scrollToElement, selector, userAgent, acceptLanguages, customHtml, imageQuality, additionalProperties);
+      return new ScreenshotCaptureRequest(sizes, apiKey, output, fileType, url, width, height, fullPage, fresh, noCookieBanners, enableCaching, blockAds, blockChatWidgets, extractText, extractHtml, destroyScreenshot, lazyLoad, retina, darkMode, blockTracking, enableIncognito, omitBackground, thumbnailWidth, adjustTop, waitForEvent, grayscale, delay, timeout, ttl, clipX, clipY, clipWidth, clipHeight, cssUrl, css, jsUrl, js, blockJs, blockStylesheets, blockImages, blockMedia, blockFont, blockTextTrack, blockXhr, blockFetch, blockEventSource, blockWebSocket, blockManifest, blockSpecificRequests, blurSelector, removeSelector, resultFileName, scrollingScreenshot, scrollSpeed, scrollBack, startImmediately, multipleScrolling, duration, failOnError, longitude, latitude, proxy, headers, cookies, scrollToElement, selector, userAgent, acceptLanguages, customHtml, imageQuality, captchaError, captchaImage, captchaInput, captchaRefresh, captchaRetries, captchaSubmit, classicProxy, clickRecursion, country, extractMarkdown, format, getImageUrls, gpu, markdown, ocrModel, pdfOptionsFormat, pdfOptionsLandscape, pdfOptionsMedia, pdfOptionsPageRange, pdfOptionsPrintBackground, premiumProxy, scrollDelay, selectorToClick, solveCaptcha, stealth, timezone, video, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("sizes") || key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("output") || key.equalsIgnoreCase("file_type") || key.equalsIgnoreCase("url") || key.equalsIgnoreCase("width") || key.equalsIgnoreCase("height") || key.equalsIgnoreCase("full_page") || key.equalsIgnoreCase("fresh") || key.equalsIgnoreCase("no_cookie_banners") || key.equalsIgnoreCase("enable_caching") || key.equalsIgnoreCase("block_ads") || key.equalsIgnoreCase("block_chat_widgets") || key.equalsIgnoreCase("extract_text") || key.equalsIgnoreCase("extract_html") || key.equalsIgnoreCase("destroy_screenshot") || key.equalsIgnoreCase("lazy_load") || key.equalsIgnoreCase("retina") || key.equalsIgnoreCase("dark_mode") || key.equalsIgnoreCase("block_tracking") || key.equalsIgnoreCase("enable_incognito") || key.equalsIgnoreCase("omit_background") || key.equalsIgnoreCase("thumbnail_width") || key.equalsIgnoreCase("adjust_top") || key.equalsIgnoreCase("wait_for_event") || key.equalsIgnoreCase("grayscale") || key.equalsIgnoreCase("delay") || key.equalsIgnoreCase("timeout") || key.equalsIgnoreCase("ttl") || key.equalsIgnoreCase("clip[x]") || key.equalsIgnoreCase("clip[y]") || key.equalsIgnoreCase("clip[width]") || key.equalsIgnoreCase("clip[height]") || key.equalsIgnoreCase("css_url") || key.equalsIgnoreCase("css") || key.equalsIgnoreCase("js_url") || key.equalsIgnoreCase("js") || key.equalsIgnoreCase("block_js") || key.equalsIgnoreCase("block_stylesheets") || key.equalsIgnoreCase("block_images") || key.equalsIgnoreCase("block_media") || key.equalsIgnoreCase("block_font") || key.equalsIgnoreCase("block_text_track") || key.equalsIgnoreCase("block_xhr") || key.equalsIgnoreCase("block_fetch") || key.equalsIgnoreCase("block_event_source") || key.equalsIgnoreCase("block_web_socket") || key.equalsIgnoreCase("block_manifest") || key.equalsIgnoreCase("block_specific_requests") || key.equalsIgnoreCase("blur_selector") || key.equalsIgnoreCase("remove_selector") || key.equalsIgnoreCase("result_file_name") || key.equalsIgnoreCase("scrolling_screenshot") || key.equalsIgnoreCase("scroll_speed") || key.equalsIgnoreCase("scroll_back") || key.equalsIgnoreCase("start_immediately") || key.equalsIgnoreCase("multiple_scrolling") || key.equalsIgnoreCase("duration") || key.equalsIgnoreCase("fail_on_error") || key.equalsIgnoreCase("longitude") || key.equalsIgnoreCase("latitude") || key.equalsIgnoreCase("proxy") || key.equalsIgnoreCase("headers") || key.equalsIgnoreCase("cookies") || key.equalsIgnoreCase("scroll_to_element") || key.equalsIgnoreCase("selector") || key.equalsIgnoreCase("user_agent") || key.equalsIgnoreCase("accept_languages") || key.equalsIgnoreCase("custom_html") || key.equalsIgnoreCase("image_quality") || key.equalsIgnoreCase("captcha_error") || key.equalsIgnoreCase("captcha_image") || key.equalsIgnoreCase("captcha_input") || key.equalsIgnoreCase("captcha_refresh") || key.equalsIgnoreCase("captcha_retries") || key.equalsIgnoreCase("captcha_submit") || key.equalsIgnoreCase("classic_proxy") || key.equalsIgnoreCase("click_recursion") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("extract_markdown") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("get_image_urls") || key.equalsIgnoreCase("gpu") || key.equalsIgnoreCase("markdown") || key.equalsIgnoreCase("ocr_model") || key.equalsIgnoreCase("pdf_options[format]") || key.equalsIgnoreCase("pdf_options[landscape]") || key.equalsIgnoreCase("pdf_options[media]") || key.equalsIgnoreCase("pdf_options[page_range]") || key.equalsIgnoreCase("pdf_options[print_background]") || key.equalsIgnoreCase("premium_proxy") || key.equalsIgnoreCase("scroll_delay") || key.equalsIgnoreCase("selector_to_click") || key.equalsIgnoreCase("solve_captcha") || key.equalsIgnoreCase("stealth") || key.equalsIgnoreCase("timezone") || key.equalsIgnoreCase("video")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

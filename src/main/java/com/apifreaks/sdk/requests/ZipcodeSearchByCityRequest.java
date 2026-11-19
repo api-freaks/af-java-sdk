@@ -200,7 +200,6 @@ public final class ZipcodeSearchByCityRequest {
 
     private Optional<ZipcodeSearchByCityRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -219,7 +218,6 @@ public final class ZipcodeSearchByCityRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -231,7 +229,6 @@ public final class ZipcodeSearchByCityRequest {
 
     /**
      * <p>Name of the city in which we want to find zipcodes in.</p>
-     * <p>Name of the city in which we want to find zipcodes in.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -242,7 +239,6 @@ public final class ZipcodeSearchByCityRequest {
     }
 
     /**
-     * <p>Country code in ISO 3166-1 alpha-2 format.</p>
      * <p>Country code in ISO 3166-1 alpha-2 format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -325,6 +321,14 @@ public final class ZipcodeSearchByCityRequest {
     @java.lang.Override
     public ZipcodeSearchByCityRequest build() {
       return new ZipcodeSearchByCityRequest(apiKey, format, city, country, stateName, page, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("state_name") || key.equalsIgnoreCase("page")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -183,7 +183,6 @@ public final class CommodityHistoricalRatesResponse {
 
     private Optional<Double> timestamp = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -201,7 +200,6 @@ public final class CommodityHistoricalRatesResponse {
 
     /**
      * <p>API request success indicator. &quot;true&quot; for successful requests.</p>
-     * <p>API request success indicator. &quot;true&quot; for successful requests.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -212,7 +210,6 @@ public final class CommodityHistoricalRatesResponse {
     }
 
     /**
-     * <p>Date for which the user requested the commodity price. Format: YYYY-MM-DD.</p>
      * <p>Date for which the user requested the commodity price. Format: YYYY-MM-DD.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -312,6 +309,14 @@ public final class CommodityHistoricalRatesResponse {
     @java.lang.Override
     public CommodityHistoricalRatesResponse build() {
       return new CommodityHistoricalRatesResponse(success, timestamp, metadata, date, rates, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("success") || key.equalsIgnoreCase("timestamp") || key.equalsIgnoreCase("metadata") || key.equalsIgnoreCase("date") || key.equalsIgnoreCase("rates")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

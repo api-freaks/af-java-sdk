@@ -5,21 +5,21 @@
 package com.apifreaks.sdk.errors;
 
 import com.apifreaks.sdk.core.ApifreaksApiApiException;
-import java.lang.Object;
+import com.apifreaks.sdk.types.ServiceUnavailableErrorBody;
 import okhttp3.Response;
 
 public final class ServiceUnavailableError extends ApifreaksApiApiException {
   /**
    * The body of the response that triggered the exception.
    */
-  private final Object body;
+  private final ServiceUnavailableErrorBody body;
 
-  public ServiceUnavailableError(Object body) {
+  public ServiceUnavailableError(ServiceUnavailableErrorBody body) {
     super("ServiceUnavailableError", 503, body);
     this.body = body;
   }
 
-  public ServiceUnavailableError(Object body, Response rawResponse) {
+  public ServiceUnavailableError(ServiceUnavailableErrorBody body, Response rawResponse) {
     super("ServiceUnavailableError", 503, body, rawResponse);
     this.body = body;
   }
@@ -28,7 +28,7 @@ public final class ServiceUnavailableError extends ApifreaksApiApiException {
    * @return the body
    */
   @java.lang.Override
-  public Object body() {
+  public ServiceUnavailableErrorBody body() {
     return this.body;
   }
 }

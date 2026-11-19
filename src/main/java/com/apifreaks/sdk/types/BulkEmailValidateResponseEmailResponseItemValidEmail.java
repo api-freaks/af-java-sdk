@@ -12,6 +12,16 @@ import java.lang.String;
 public final class BulkEmailValidateResponseEmailResponseItemValidEmail {
   public static final BulkEmailValidateResponseEmailResponseItemValidEmail INVALID = new BulkEmailValidateResponseEmailResponseItemValidEmail(Value.INVALID, "invalid");
 
+  public static final BulkEmailValidateResponseEmailResponseItemValidEmail APP_SERVER_BLOCKED = new BulkEmailValidateResponseEmailResponseItemValidEmail(Value.APP_SERVER_BLOCKED, "app_server_blocked");
+
+  public static final BulkEmailValidateResponseEmailResponseItemValidEmail INVALID_EMAIL = new BulkEmailValidateResponseEmailResponseItemValidEmail(Value.INVALID_EMAIL, "INVALID_EMAIL");
+
+  public static final BulkEmailValidateResponseEmailResponseItemValidEmail ACCEPT_ALL = new BulkEmailValidateResponseEmailResponseItemValidEmail(Value.ACCEPT_ALL, "accept_all");
+
+  public static final BulkEmailValidateResponseEmailResponseItemValidEmail UNKNOWN = new BulkEmailValidateResponseEmailResponseItemValidEmail(Value.UNKNOWN, "unknown");
+
+  public static final BulkEmailValidateResponseEmailResponseItemValidEmail RISKY = new BulkEmailValidateResponseEmailResponseItemValidEmail(Value.RISKY, "risky");
+
   public static final BulkEmailValidateResponseEmailResponseItemValidEmail VALID = new BulkEmailValidateResponseEmailResponseItemValidEmail(Value.VALID, "valid");
 
   private final Value value;
@@ -48,9 +58,19 @@ public final class BulkEmailValidateResponseEmailResponseItemValidEmail {
     switch (value) {
       case INVALID:
         return visitor.visitInvalid();
+      case APP_SERVER_BLOCKED:
+        return visitor.visitAppServerBlocked();
+      case INVALID_EMAIL:
+        return visitor.visitInvalidEmail();
+      case ACCEPT_ALL:
+        return visitor.visitAcceptAll();
+      case UNKNOWN:
+        return visitor.visitUnknown();
+      case RISKY:
+        return visitor.visitRisky();
       case VALID:
         return visitor.visitValid();
-      case UNKNOWN:
+      case _UNKNOWN:
       default:
         return visitor.visitUnknown(string);
     }
@@ -63,25 +83,55 @@ public final class BulkEmailValidateResponseEmailResponseItemValidEmail {
     switch (value) {
       case "invalid":
         return INVALID;
+      case "app_server_blocked":
+        return APP_SERVER_BLOCKED;
+      case "INVALID_EMAIL":
+        return INVALID_EMAIL;
+      case "accept_all":
+        return ACCEPT_ALL;
+      case "unknown":
+        return UNKNOWN;
+      case "risky":
+        return RISKY;
       case "valid":
         return VALID;
       default:
-        return new BulkEmailValidateResponseEmailResponseItemValidEmail(Value.UNKNOWN, value);
+        return new BulkEmailValidateResponseEmailResponseItemValidEmail(Value._UNKNOWN, value);
     }
   }
 
   public enum Value {
     VALID,
 
+    ACCEPT_ALL,
+
     INVALID,
 
-    UNKNOWN
+    INVALID_EMAIL,
+
+    UNKNOWN,
+
+    RISKY,
+
+    APP_SERVER_BLOCKED,
+
+    _UNKNOWN
   }
 
   public interface Visitor<T> {
     T visitValid();
 
+    T visitAcceptAll();
+
     T visitInvalid();
+
+    T visitInvalidEmail();
+
+    T visitUnknown();
+
+    T visitRisky();
+
+    T visitAppServerBlocked();
 
     T visitUnknown(String unknownType);
   }

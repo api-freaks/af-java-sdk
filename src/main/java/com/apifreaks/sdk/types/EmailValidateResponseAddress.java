@@ -97,7 +97,6 @@ public final class EmailValidateResponseAddress {
 
     private Optional<Boolean> validIpAddress = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -154,6 +153,14 @@ public final class EmailValidateResponseAddress {
 
     public EmailValidateResponseAddress build() {
       return new EmailValidateResponseAddress(security, location, validIpAddress, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("security") || key.equalsIgnoreCase("location") || key.equalsIgnoreCase("validIpAddress")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

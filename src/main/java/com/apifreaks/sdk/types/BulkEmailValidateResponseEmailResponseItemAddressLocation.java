@@ -200,7 +200,6 @@ public final class BulkEmailValidateResponseEmailResponseItemAddressLocation {
 
     private Optional<Boolean> isEu = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -407,6 +406,14 @@ public final class BulkEmailValidateResponseEmailResponseItemAddressLocation {
 
     public BulkEmailValidateResponseEmailResponseItemAddressLocation build() {
       return new BulkEmailValidateResponseEmailResponseItemAddressLocation(city, district, confidence, zipcode, stateProv, countryName, continentName, continentCode, countryCode2, countryCode3, countryNameOfficial, accuracyRadius, isEu, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("city") || key.equalsIgnoreCase("district") || key.equalsIgnoreCase("confidence") || key.equalsIgnoreCase("zipcode") || key.equalsIgnoreCase("state_prov") || key.equalsIgnoreCase("country_name") || key.equalsIgnoreCase("continent_name") || key.equalsIgnoreCase("continent_code") || key.equalsIgnoreCase("country_code2") || key.equalsIgnoreCase("country_code3") || key.equalsIgnoreCase("country_name_official") || key.equalsIgnoreCase("accuracy_radius") || key.equalsIgnoreCase("is_eu")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

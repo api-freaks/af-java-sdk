@@ -48,17 +48,26 @@ public final class DomainWhoisReverseResponse {
     this.additionalProperties = additionalProperties;
   }
 
-  @JsonProperty("totalResult")
+  /**
+   * @return Total results found across the query.
+   */
+  @JsonProperty("total_Result")
   public Optional<Integer> getTotalResult() {
     return totalResult;
   }
 
-  @JsonProperty("totalPages")
+  /**
+   * @return Total number of pages (50 records per page in default mode, 100 in mini mode).
+   */
+  @JsonProperty("total_Pages")
   public Optional<Integer> getTotalPages() {
     return totalPages;
   }
 
-  @JsonProperty("currentPage")
+  /**
+   * @return Current page number.
+   */
+  @JsonProperty("current_Page")
   public Optional<Integer> getCurrentPage() {
     return currentPage;
   }
@@ -110,7 +119,6 @@ public final class DomainWhoisReverseResponse {
 
     private Optional<List<DomainWhoisReverseResponseWhoisDomainsHistoricalItem>> whoisDomainsHistorical = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -124,8 +132,11 @@ public final class DomainWhoisReverseResponse {
       return this;
     }
 
+    /**
+     * <p>Total results found across the query.</p>
+     */
     @JsonSetter(
-        value = "totalResult",
+        value = "total_Result",
         nulls = Nulls.SKIP
     )
     public Builder totalResult(Optional<Integer> totalResult) {
@@ -138,8 +149,11 @@ public final class DomainWhoisReverseResponse {
       return this;
     }
 
+    /**
+     * <p>Total number of pages (50 records per page in default mode, 100 in mini mode).</p>
+     */
     @JsonSetter(
-        value = "totalPages",
+        value = "total_Pages",
         nulls = Nulls.SKIP
     )
     public Builder totalPages(Optional<Integer> totalPages) {
@@ -152,8 +166,11 @@ public final class DomainWhoisReverseResponse {
       return this;
     }
 
+    /**
+     * <p>Current page number.</p>
+     */
     @JsonSetter(
-        value = "currentPage",
+        value = "current_Page",
         nulls = Nulls.SKIP
     )
     public Builder currentPage(Optional<Integer> currentPage) {
@@ -184,6 +201,14 @@ public final class DomainWhoisReverseResponse {
 
     public DomainWhoisReverseResponse build() {
       return new DomainWhoisReverseResponse(totalResult, totalPages, currentPage, whoisDomainsHistorical, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("total_Result") || key.equalsIgnoreCase("total_Pages") || key.equalsIgnoreCase("current_Page") || key.equalsIgnoreCase("whois_domains_historical")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

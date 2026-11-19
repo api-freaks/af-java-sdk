@@ -43,9 +43,9 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItem {
     if(this.type == 0) {
       return visitor.visit((BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemAddress) this.value);
     } else if(this.type == 1) {
-      return visitor.visit((BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemOne) this.value);
-    } else if(this.type == 2) {
       return visitor.visit((BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemPriority) this.value);
+    } else if(this.type == 2) {
+      return visitor.visit((BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemOne) this.value);
     } else if(this.type == 3) {
       return visitor.visit((BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingleName) this.value);
     } else if(this.type == 4) {
@@ -82,12 +82,12 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItem {
   }
 
   public static BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItem of(
-      BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemOne value) {
+      BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemPriority value) {
     return new BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItem(value, 1);
   }
 
   public static BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItem of(
-      BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemPriority value) {
+      BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemOne value) {
     return new BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItem(value, 2);
   }
 
@@ -109,9 +109,9 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItem {
   public interface Visitor<T> {
     T visit(BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemAddress value);
 
-    T visit(BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemOne value);
-
     T visit(BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemPriority value);
+
+    T visit(BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemOne value);
 
     T visit(BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingleName value);
 
@@ -135,15 +135,15 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItem {
         } catch(RuntimeException e) {
         }
       }
-      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("name") && ((Map<?, ?>) value).containsKey("type") && ((Map<?, ?>) value).containsKey("dnsType") && ((Map<?, ?>) value).containsKey("ttl") && ((Map<?, ?>) value).containsKey("rawText") && ((Map<?, ?>) value).containsKey("rRsetType") && ((Map<?, ?>) value).containsKey("target")) {
-        try {
-          return of(ObjectMappers.JSON_MAPPER.convertValue(value, BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemOne.class));
-        } catch(RuntimeException e) {
-        }
-      }
       if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("name") && ((Map<?, ?>) value).containsKey("type") && ((Map<?, ?>) value).containsKey("dnsType") && ((Map<?, ?>) value).containsKey("ttl") && ((Map<?, ?>) value).containsKey("rawText") && ((Map<?, ?>) value).containsKey("rRsetType") && ((Map<?, ?>) value).containsKey("target") && ((Map<?, ?>) value).containsKey("priority")) {
         try {
           return of(ObjectMappers.JSON_MAPPER.convertValue(value, BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemPriority.class));
+        } catch(RuntimeException e) {
+        }
+      }
+      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("name") && ((Map<?, ?>) value).containsKey("type") && ((Map<?, ?>) value).containsKey("dnsType") && ((Map<?, ?>) value).containsKey("ttl") && ((Map<?, ?>) value).containsKey("rawText") && ((Map<?, ?>) value).containsKey("rRsetType") && ((Map<?, ?>) value).containsKey("target")) {
+        try {
+          return of(ObjectMappers.JSON_MAPPER.convertValue(value, BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemOne.class));
         } catch(RuntimeException e) {
         }
       }

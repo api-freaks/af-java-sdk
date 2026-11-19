@@ -180,7 +180,6 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemStrin
 
     private List<String> strings = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -271,6 +270,14 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemStrin
     @java.lang.Override
     public BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemStrings build() {
       return new BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemStrings(name, type, dnsType, ttl, rawText, rRsetType, strings, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("dnsType") || key.equalsIgnoreCase("ttl") || key.equalsIgnoreCase("rawText") || key.equalsIgnoreCase("rRsetType") || key.equalsIgnoreCase("strings")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

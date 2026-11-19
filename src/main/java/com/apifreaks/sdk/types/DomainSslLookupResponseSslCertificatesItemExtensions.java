@@ -206,7 +206,6 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensions {
 
     private List<String> keyUsages = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -356,6 +355,14 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensions {
     @java.lang.Override
     public DomainSslLookupResponseSslCertificatesItemExtensions build() {
       return new DomainSslLookupResponseSslCertificatesItemExtensions(authorityKeyIdentifier, subjectKeyIdentifier, keyUsages, extendedKeyUsages, crlDistributionPoints, authorityInfoAccess, subjectAlternativeNames, certificatePolicies, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("authorityKeyIdentifier") || key.equalsIgnoreCase("subjectKeyIdentifier") || key.equalsIgnoreCase("keyUsages") || key.equalsIgnoreCase("extendedKeyUsages") || key.equalsIgnoreCase("crlDistributionPoints") || key.equalsIgnoreCase("authorityInfoAccess") || key.equalsIgnoreCase("subjectAlternativeNames") || key.equalsIgnoreCase("certificatePolicies")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

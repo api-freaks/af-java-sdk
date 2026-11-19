@@ -237,7 +237,6 @@ public final class BulkEmailValidateResponseEmailResponseItem {
 
     private Optional<String> name = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -377,6 +376,14 @@ public final class BulkEmailValidateResponseEmailResponseItem {
     @java.lang.Override
     public BulkEmailValidateResponseEmailResponseItem build() {
       return new BulkEmailValidateResponseEmailResponseItem(success, email, name, reason, validEmail, validSyntax, domain, account, dns, ip, address, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("success") || key.equalsIgnoreCase("email") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("reason") || key.equalsIgnoreCase("validEmail") || key.equalsIgnoreCase("validSyntax") || key.equalsIgnoreCase("domain") || key.equalsIgnoreCase("account") || key.equalsIgnoreCase("dns") || key.equalsIgnoreCase("ip") || key.equalsIgnoreCase("address")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

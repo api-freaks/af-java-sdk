@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import java.lang.Boolean;
 import java.lang.Object;
 import java.lang.String;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
@@ -31,19 +33,21 @@ public final class DomainDnsLookupResponse {
 
   private final String queryTime;
 
-  private final String domainName;
+  private final Optional<String> domainName;
 
-  private final boolean domainRegistered;
+  private final Optional<Boolean> domainRegistered;
 
   private final DomainDnsLookupResponseDnsTypes dnsTypes;
 
   private final List<DomainDnsLookupResponseDnsRecordsItem> dnsRecords;
 
+  private final Optional<String> ipAddress;
+
   private final Map<String, Object> additionalProperties;
 
-  private DomainDnsLookupResponse(boolean status, String queryTime, String domainName,
-      boolean domainRegistered, DomainDnsLookupResponseDnsTypes dnsTypes,
-      List<DomainDnsLookupResponseDnsRecordsItem> dnsRecords,
+  private DomainDnsLookupResponse(boolean status, String queryTime, Optional<String> domainName,
+      Optional<Boolean> domainRegistered, DomainDnsLookupResponseDnsTypes dnsTypes,
+      List<DomainDnsLookupResponseDnsRecordsItem> dnsRecords, Optional<String> ipAddress,
       Map<String, Object> additionalProperties) {
     this.status = status;
     this.queryTime = queryTime;
@@ -51,6 +55,7 @@ public final class DomainDnsLookupResponse {
     this.domainRegistered = domainRegistered;
     this.dnsTypes = dnsTypes;
     this.dnsRecords = dnsRecords;
+    this.ipAddress = ipAddress;
     this.additionalProperties = additionalProperties;
   }
 
@@ -74,7 +79,7 @@ public final class DomainDnsLookupResponse {
    * @return Queried domain.
    */
   @JsonProperty("domainName")
-  public String getDomainName() {
+  public Optional<String> getDomainName() {
     return domainName;
   }
 
@@ -82,7 +87,7 @@ public final class DomainDnsLookupResponse {
    * @return Indicates whether the domain is registered.
    */
   @JsonProperty("domainRegistered")
-  public boolean getDomainRegistered() {
+  public Optional<Boolean> getDomainRegistered() {
     return domainRegistered;
   }
 
@@ -99,6 +104,14 @@ public final class DomainDnsLookupResponse {
     return dnsRecords;
   }
 
+  /**
+   * @return IP address queried (present when ipAddress parameter is used instead of host-name).
+   */
+  @JsonProperty("ipAddress")
+  public Optional<String> getIpAddress() {
+    return ipAddress;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -111,12 +124,12 @@ public final class DomainDnsLookupResponse {
   }
 
   private boolean equalTo(DomainDnsLookupResponse other) {
-    return status == other.status && queryTime.equals(other.queryTime) && domainName.equals(other.domainName) && domainRegistered == other.domainRegistered && dnsTypes.equals(other.dnsTypes) && dnsRecords.equals(other.dnsRecords);
+    return status == other.status && queryTime.equals(other.queryTime) && domainName.equals(other.domainName) && domainRegistered.equals(other.domainRegistered) && dnsTypes.equals(other.dnsTypes) && dnsRecords.equals(other.dnsRecords) && ipAddress.equals(other.ipAddress);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.status, this.queryTime, this.domainName, this.domainRegistered, this.dnsTypes, this.dnsRecords);
+    return Objects.hash(this.status, this.queryTime, this.domainName, this.domainRegistered, this.dnsTypes, this.dnsRecords, this.ipAddress);
   }
 
   @java.lang.Override
@@ -141,21 +154,7 @@ public final class DomainDnsLookupResponse {
     /**
      * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
      */
-    DomainNameStage queryTime(@NotNull String queryTime);
-  }
-
-  public interface DomainNameStage {
-    /**
-     * <p>Queried domain.</p>
-     */
-    DomainRegisteredStage domainName(@NotNull String domainName);
-  }
-
-  public interface DomainRegisteredStage {
-    /**
-     * <p>Indicates whether the domain is registered.</p>
-     */
-    DnsTypesStage domainRegistered(boolean domainRegistered);
+    DnsTypesStage queryTime(@NotNull String queryTime);
   }
 
   public interface DnsTypesStage {
@@ -170,6 +169,20 @@ public final class DomainDnsLookupResponse {
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
 
     /**
+     * <p>Queried domain.</p>
+     */
+    _FinalStage domainName(Optional<String> domainName);
+
+    _FinalStage domainName(String domainName);
+
+    /**
+     * <p>Indicates whether the domain is registered.</p>
+     */
+    _FinalStage domainRegistered(Optional<Boolean> domainRegistered);
+
+    _FinalStage domainRegistered(Boolean domainRegistered);
+
+    /**
      * <p>List of DNS records, each based on its type.</p>
      */
     _FinalStage dnsRecords(List<DomainDnsLookupResponseDnsRecordsItem> dnsRecords);
@@ -177,25 +190,33 @@ public final class DomainDnsLookupResponse {
     _FinalStage addDnsRecords(DomainDnsLookupResponseDnsRecordsItem dnsRecords);
 
     _FinalStage addAllDnsRecords(List<DomainDnsLookupResponseDnsRecordsItem> dnsRecords);
+
+    /**
+     * <p>IP address queried (present when ipAddress parameter is used instead of host-name).</p>
+     */
+    _FinalStage ipAddress(Optional<String> ipAddress);
+
+    _FinalStage ipAddress(String ipAddress);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements StatusStage, QueryTimeStage, DomainNameStage, DomainRegisteredStage, DnsTypesStage, _FinalStage {
+  public static final class Builder implements StatusStage, QueryTimeStage, DnsTypesStage, _FinalStage {
     private boolean status;
 
     private String queryTime;
 
-    private String domainName;
-
-    private boolean domainRegistered;
-
     private DomainDnsLookupResponseDnsTypes dnsTypes;
+
+    private Optional<String> ipAddress = Optional.empty();
 
     private List<DomainDnsLookupResponseDnsRecordsItem> dnsRecords = new ArrayList<>();
 
-    @JsonAnySetter
+    private Optional<Boolean> domainRegistered = Optional.empty();
+
+    private Optional<String> domainName = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -209,11 +230,11 @@ public final class DomainDnsLookupResponse {
       domainRegistered(other.getDomainRegistered());
       dnsTypes(other.getDnsTypes());
       dnsRecords(other.getDnsRecords());
+      ipAddress(other.getIpAddress());
       return this;
     }
 
     /**
-     * <p>Indicates whether the query was processed successfully.</p>
      * <p>Indicates whether the query was processed successfully.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -226,37 +247,12 @@ public final class DomainDnsLookupResponse {
 
     /**
      * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
-     * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("queryTime")
-    public DomainNameStage queryTime(@NotNull String queryTime) {
+    public DnsTypesStage queryTime(@NotNull String queryTime) {
       this.queryTime = Objects.requireNonNull(queryTime, "queryTime must not be null");
-      return this;
-    }
-
-    /**
-     * <p>Queried domain.</p>
-     * <p>Queried domain.</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    @JsonSetter("domainName")
-    public DomainRegisteredStage domainName(@NotNull String domainName) {
-      this.domainName = Objects.requireNonNull(domainName, "domainName must not be null");
-      return this;
-    }
-
-    /**
-     * <p>Indicates whether the domain is registered.</p>
-     * <p>Indicates whether the domain is registered.</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    @JsonSetter("domainRegistered")
-    public DnsTypesStage domainRegistered(boolean domainRegistered) {
-      this.domainRegistered = domainRegistered;
       return this;
     }
 
@@ -264,6 +260,29 @@ public final class DomainDnsLookupResponse {
     @JsonSetter("dnsTypes")
     public _FinalStage dnsTypes(@NotNull DomainDnsLookupResponseDnsTypes dnsTypes) {
       this.dnsTypes = Objects.requireNonNull(dnsTypes, "dnsTypes must not be null");
+      return this;
+    }
+
+    /**
+     * <p>IP address queried (present when ipAddress parameter is used instead of host-name).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage ipAddress(String ipAddress) {
+      this.ipAddress = Optional.ofNullable(ipAddress);
+      return this;
+    }
+
+    /**
+     * <p>IP address queried (present when ipAddress parameter is used instead of host-name).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "ipAddress",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage ipAddress(Optional<String> ipAddress) {
+      this.ipAddress = ipAddress;
       return this;
     }
 
@@ -305,9 +324,63 @@ public final class DomainDnsLookupResponse {
       return this;
     }
 
+    /**
+     * <p>Indicates whether the domain is registered.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage domainRegistered(Boolean domainRegistered) {
+      this.domainRegistered = Optional.ofNullable(domainRegistered);
+      return this;
+    }
+
+    /**
+     * <p>Indicates whether the domain is registered.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "domainRegistered",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage domainRegistered(Optional<Boolean> domainRegistered) {
+      this.domainRegistered = domainRegistered;
+      return this;
+    }
+
+    /**
+     * <p>Queried domain.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage domainName(String domainName) {
+      this.domainName = Optional.ofNullable(domainName);
+      return this;
+    }
+
+    /**
+     * <p>Queried domain.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "domainName",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage domainName(Optional<String> domainName) {
+      this.domainName = domainName;
+      return this;
+    }
+
     @java.lang.Override
     public DomainDnsLookupResponse build() {
-      return new DomainDnsLookupResponse(status, queryTime, domainName, domainRegistered, dnsTypes, dnsRecords, additionalProperties);
+      return new DomainDnsLookupResponse(status, queryTime, domainName, domainRegistered, dnsTypes, dnsRecords, ipAddress, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("status") || key.equalsIgnoreCase("queryTime") || key.equalsIgnoreCase("domainName") || key.equalsIgnoreCase("domainRegistered") || key.equalsIgnoreCase("dnsTypes") || key.equalsIgnoreCase("dnsRecords") || key.equalsIgnoreCase("ipAddress")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

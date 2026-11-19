@@ -13,6 +13,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import java.lang.Boolean;
+import java.lang.Double;
+import java.lang.Integer;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -37,6 +40,12 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
   private final double proxyConfidenceScore;
 
   private final Optional<String> proxyLastSeen;
+
+  private final Optional<Integer> proxyDaysSeen30D;
+
+  private final Optional<Integer> proxyDaysSeen7D;
+
+  private final Optional<Integer> proxyProviderCount30D;
 
   private final boolean isResidentialProxy;
 
@@ -64,15 +73,36 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
 
   private final Optional<String> cloudProviderName;
 
+  private final Optional<Double> botConfidenceScore;
+
+  private final Optional<String> botLastSeen;
+
+  private final Optional<String> botOperatorName;
+
+  private final Optional<String> botType;
+
+  private final Optional<String> corporateGatewayProviderName;
+
+  private final Optional<String> corporateGatewayType;
+
+  private final Optional<Boolean> isCorporateGateway;
+
+  private final Optional<Boolean> isKnownGoodBot;
+
   private final Map<String, Object> additionalProperties;
 
   private BulkGeolocationLookupV2ResponseItemAbuseSecurity(double threatScore, boolean isTor,
       boolean isProxy, Optional<List<String>> proxyProviderNames, double proxyConfidenceScore,
-      Optional<String> proxyLastSeen, boolean isResidentialProxy, boolean isVpn,
-      Optional<List<String>> vpnProviderNames, double vpnConfidenceScore,
-      Optional<String> vpnLastSeen, boolean isRelay, Optional<String> relayProviderName,
-      boolean isAnonymous, boolean isKnownAttacker, boolean isBot, boolean isSpam,
-      boolean isCloudProvider, Optional<String> cloudProviderName,
+      Optional<String> proxyLastSeen, Optional<Integer> proxyDaysSeen30D,
+      Optional<Integer> proxyDaysSeen7D, Optional<Integer> proxyProviderCount30D,
+      boolean isResidentialProxy, boolean isVpn, Optional<List<String>> vpnProviderNames,
+      double vpnConfidenceScore, Optional<String> vpnLastSeen, boolean isRelay,
+      Optional<String> relayProviderName, boolean isAnonymous, boolean isKnownAttacker,
+      boolean isBot, boolean isSpam, boolean isCloudProvider, Optional<String> cloudProviderName,
+      Optional<Double> botConfidenceScore, Optional<String> botLastSeen,
+      Optional<String> botOperatorName, Optional<String> botType,
+      Optional<String> corporateGatewayProviderName, Optional<String> corporateGatewayType,
+      Optional<Boolean> isCorporateGateway, Optional<Boolean> isKnownGoodBot,
       Map<String, Object> additionalProperties) {
     this.threatScore = threatScore;
     this.isTor = isTor;
@@ -80,6 +110,9 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
     this.proxyProviderNames = proxyProviderNames;
     this.proxyConfidenceScore = proxyConfidenceScore;
     this.proxyLastSeen = proxyLastSeen;
+    this.proxyDaysSeen30D = proxyDaysSeen30D;
+    this.proxyDaysSeen7D = proxyDaysSeen7D;
+    this.proxyProviderCount30D = proxyProviderCount30D;
     this.isResidentialProxy = isResidentialProxy;
     this.isVpn = isVpn;
     this.vpnProviderNames = vpnProviderNames;
@@ -93,6 +126,14 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
     this.isSpam = isSpam;
     this.isCloudProvider = isCloudProvider;
     this.cloudProviderName = cloudProviderName;
+    this.botConfidenceScore = botConfidenceScore;
+    this.botLastSeen = botLastSeen;
+    this.botOperatorName = botOperatorName;
+    this.botType = botType;
+    this.corporateGatewayProviderName = corporateGatewayProviderName;
+    this.corporateGatewayType = corporateGatewayType;
+    this.isCorporateGateway = isCorporateGateway;
+    this.isKnownGoodBot = isKnownGoodBot;
     this.additionalProperties = additionalProperties;
   }
 
@@ -142,6 +183,30 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
   @JsonProperty("proxy_last_seen")
   public Optional<String> getProxyLastSeen() {
     return proxyLastSeen;
+  }
+
+  /**
+   * @return Number of days in the last 30 days on which the IP was seen acting as a proxy. <code>0</code> when no proxy activity was observed.
+   */
+  @JsonProperty("proxy_days_seen_30d")
+  public Optional<Integer> getProxyDaysSeen30D() {
+    return proxyDaysSeen30D;
+  }
+
+  /**
+   * @return Number of days in the last 7 days on which the IP was seen acting as a proxy. <code>0</code> when no proxy activity was observed.
+   */
+  @JsonProperty("proxy_days_seen_7d")
+  public Optional<Integer> getProxyDaysSeen7D() {
+    return proxyDaysSeen7D;
+  }
+
+  /**
+   * @return Number of distinct proxy providers that offered the IP in the last 30 days. <code>0</code> when no proxy activity was observed.
+   */
+  @JsonProperty("proxy_provider_count_30d")
+  public Optional<Integer> getProxyProviderCount30D() {
+    return proxyProviderCount30D;
   }
 
   /**
@@ -248,6 +313,70 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
     return cloudProviderName;
   }
 
+  /**
+   * @return Bot detection confidence from 0 to 100. 0 unless is_bot is true.
+   */
+  @JsonProperty("bot_confidence_score")
+  public Optional<Double> getBotConfidenceScore() {
+    return botConfidenceScore;
+  }
+
+  /**
+   * @return Last observed bot activity date in YYYY-MM-DD, when available.
+   */
+  @JsonProperty("bot_last_seen")
+  public Optional<String> getBotLastSeen() {
+    return botLastSeen;
+  }
+
+  /**
+   * @return Organization running the bot, when known (mostly declared bots).
+   */
+  @JsonProperty("bot_operator_name")
+  public Optional<String> getBotOperatorName() {
+    return botOperatorName;
+  }
+
+  /**
+   * @return Kind of bot activity, when known. Declared bots (is_known_good_bot true): search_engine, ai_crawler, ai_assistant, seo_crawler, site_monitor, link_preview, feed_fetcher, archiver, ad_verification, scanner. Undeclared bots (is_known_good_bot false): scanner, scraper, exploit, credential_stuffing, brute_force, worm. New values can be added over time, so treat it as a plain string.
+   */
+  @JsonProperty("bot_type")
+  public Optional<String> getBotType() {
+    return botType;
+  }
+
+  /**
+   * @return Corporate gateway provider name, when known.
+   */
+  @JsonProperty("corporate_gateway_provider_name")
+  public Optional<String> getCorporateGatewayProviderName() {
+    return corporateGatewayProviderName;
+  }
+
+  /**
+   * @return Kind of corporate gateway, when known. Known values: secure_web_gateway, browser_isolation.
+   */
+  @JsonProperty("corporate_gateway_type")
+  public Optional<String> getCorporateGatewayType() {
+    return corporateGatewayType;
+  }
+
+  /**
+   * @return true if the IP is an outbound address of a corporate security gateway (SWG, SSE, or SASE).
+   */
+  @JsonProperty("is_corporate_gateway")
+  public Optional<Boolean> getIsCorporateGateway() {
+    return isCorporateGateway;
+  }
+
+  /**
+   * @return true if the bot is a declared bot with a verifiable operator (e.g. a search engine crawler or uptime monitor).
+   */
+  @JsonProperty("is_known_good_bot")
+  public Optional<Boolean> getIsKnownGoodBot() {
+    return isKnownGoodBot;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -260,12 +389,12 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
   }
 
   private boolean equalTo(BulkGeolocationLookupV2ResponseItemAbuseSecurity other) {
-    return threatScore == other.threatScore && isTor == other.isTor && isProxy == other.isProxy && proxyProviderNames.equals(other.proxyProviderNames) && proxyConfidenceScore == other.proxyConfidenceScore && proxyLastSeen.equals(other.proxyLastSeen) && isResidentialProxy == other.isResidentialProxy && isVpn == other.isVpn && vpnProviderNames.equals(other.vpnProviderNames) && vpnConfidenceScore == other.vpnConfidenceScore && vpnLastSeen.equals(other.vpnLastSeen) && isRelay == other.isRelay && relayProviderName.equals(other.relayProviderName) && isAnonymous == other.isAnonymous && isKnownAttacker == other.isKnownAttacker && isBot == other.isBot && isSpam == other.isSpam && isCloudProvider == other.isCloudProvider && cloudProviderName.equals(other.cloudProviderName);
+    return threatScore == other.threatScore && isTor == other.isTor && isProxy == other.isProxy && proxyProviderNames.equals(other.proxyProviderNames) && proxyConfidenceScore == other.proxyConfidenceScore && proxyLastSeen.equals(other.proxyLastSeen) && proxyDaysSeen30D.equals(other.proxyDaysSeen30D) && proxyDaysSeen7D.equals(other.proxyDaysSeen7D) && proxyProviderCount30D.equals(other.proxyProviderCount30D) && isResidentialProxy == other.isResidentialProxy && isVpn == other.isVpn && vpnProviderNames.equals(other.vpnProviderNames) && vpnConfidenceScore == other.vpnConfidenceScore && vpnLastSeen.equals(other.vpnLastSeen) && isRelay == other.isRelay && relayProviderName.equals(other.relayProviderName) && isAnonymous == other.isAnonymous && isKnownAttacker == other.isKnownAttacker && isBot == other.isBot && isSpam == other.isSpam && isCloudProvider == other.isCloudProvider && cloudProviderName.equals(other.cloudProviderName) && botConfidenceScore.equals(other.botConfidenceScore) && botLastSeen.equals(other.botLastSeen) && botOperatorName.equals(other.botOperatorName) && botType.equals(other.botType) && corporateGatewayProviderName.equals(other.corporateGatewayProviderName) && corporateGatewayType.equals(other.corporateGatewayType) && isCorporateGateway.equals(other.isCorporateGateway) && isKnownGoodBot.equals(other.isKnownGoodBot);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.threatScore, this.isTor, this.isProxy, this.proxyProviderNames, this.proxyConfidenceScore, this.proxyLastSeen, this.isResidentialProxy, this.isVpn, this.vpnProviderNames, this.vpnConfidenceScore, this.vpnLastSeen, this.isRelay, this.relayProviderName, this.isAnonymous, this.isKnownAttacker, this.isBot, this.isSpam, this.isCloudProvider, this.cloudProviderName);
+    return Objects.hash(this.threatScore, this.isTor, this.isProxy, this.proxyProviderNames, this.proxyConfidenceScore, this.proxyLastSeen, this.proxyDaysSeen30D, this.proxyDaysSeen7D, this.proxyProviderCount30D, this.isResidentialProxy, this.isVpn, this.vpnProviderNames, this.vpnConfidenceScore, this.vpnLastSeen, this.isRelay, this.relayProviderName, this.isAnonymous, this.isKnownAttacker, this.isBot, this.isSpam, this.isCloudProvider, this.cloudProviderName, this.botConfidenceScore, this.botLastSeen, this.botOperatorName, this.botType, this.corporateGatewayProviderName, this.corporateGatewayType, this.isCorporateGateway, this.isKnownGoodBot);
   }
 
   @java.lang.Override
@@ -392,6 +521,27 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
     _FinalStage proxyLastSeen(String proxyLastSeen);
 
     /**
+     * <p>Number of days in the last 30 days on which the IP was seen acting as a proxy. <code>0</code> when no proxy activity was observed.</p>
+     */
+    _FinalStage proxyDaysSeen30D(Optional<Integer> proxyDaysSeen30D);
+
+    _FinalStage proxyDaysSeen30D(Integer proxyDaysSeen30D);
+
+    /**
+     * <p>Number of days in the last 7 days on which the IP was seen acting as a proxy. <code>0</code> when no proxy activity was observed.</p>
+     */
+    _FinalStage proxyDaysSeen7D(Optional<Integer> proxyDaysSeen7D);
+
+    _FinalStage proxyDaysSeen7D(Integer proxyDaysSeen7D);
+
+    /**
+     * <p>Number of distinct proxy providers that offered the IP in the last 30 days. <code>0</code> when no proxy activity was observed.</p>
+     */
+    _FinalStage proxyProviderCount30D(Optional<Integer> proxyProviderCount30D);
+
+    _FinalStage proxyProviderCount30D(Integer proxyProviderCount30D);
+
+    /**
      * <p>Detected VPN provider names.</p>
      */
     _FinalStage vpnProviderNames(Optional<List<String>> vpnProviderNames);
@@ -418,6 +568,62 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
     _FinalStage cloudProviderName(Optional<String> cloudProviderName);
 
     _FinalStage cloudProviderName(String cloudProviderName);
+
+    /**
+     * <p>Bot detection confidence from 0 to 100. 0 unless is_bot is true.</p>
+     */
+    _FinalStage botConfidenceScore(Optional<Double> botConfidenceScore);
+
+    _FinalStage botConfidenceScore(Double botConfidenceScore);
+
+    /**
+     * <p>Last observed bot activity date in YYYY-MM-DD, when available.</p>
+     */
+    _FinalStage botLastSeen(Optional<String> botLastSeen);
+
+    _FinalStage botLastSeen(String botLastSeen);
+
+    /**
+     * <p>Organization running the bot, when known (mostly declared bots).</p>
+     */
+    _FinalStage botOperatorName(Optional<String> botOperatorName);
+
+    _FinalStage botOperatorName(String botOperatorName);
+
+    /**
+     * <p>Kind of bot activity, when known. Declared bots (is_known_good_bot true): search_engine, ai_crawler, ai_assistant, seo_crawler, site_monitor, link_preview, feed_fetcher, archiver, ad_verification, scanner. Undeclared bots (is_known_good_bot false): scanner, scraper, exploit, credential_stuffing, brute_force, worm. New values can be added over time, so treat it as a plain string.</p>
+     */
+    _FinalStage botType(Optional<String> botType);
+
+    _FinalStage botType(String botType);
+
+    /**
+     * <p>Corporate gateway provider name, when known.</p>
+     */
+    _FinalStage corporateGatewayProviderName(Optional<String> corporateGatewayProviderName);
+
+    _FinalStage corporateGatewayProviderName(String corporateGatewayProviderName);
+
+    /**
+     * <p>Kind of corporate gateway, when known. Known values: secure_web_gateway, browser_isolation.</p>
+     */
+    _FinalStage corporateGatewayType(Optional<String> corporateGatewayType);
+
+    _FinalStage corporateGatewayType(String corporateGatewayType);
+
+    /**
+     * <p>true if the IP is an outbound address of a corporate security gateway (SWG, SSE, or SASE).</p>
+     */
+    _FinalStage isCorporateGateway(Optional<Boolean> isCorporateGateway);
+
+    _FinalStage isCorporateGateway(Boolean isCorporateGateway);
+
+    /**
+     * <p>true if the bot is a declared bot with a verifiable operator (e.g. a search engine crawler or uptime monitor).</p>
+     */
+    _FinalStage isKnownGoodBot(Optional<Boolean> isKnownGoodBot);
+
+    _FinalStage isKnownGoodBot(Boolean isKnownGoodBot);
   }
 
   @JsonIgnoreProperties(
@@ -450,6 +656,22 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
 
     private boolean isCloudProvider;
 
+    private Optional<Boolean> isKnownGoodBot = Optional.empty();
+
+    private Optional<Boolean> isCorporateGateway = Optional.empty();
+
+    private Optional<String> corporateGatewayType = Optional.empty();
+
+    private Optional<String> corporateGatewayProviderName = Optional.empty();
+
+    private Optional<String> botType = Optional.empty();
+
+    private Optional<String> botOperatorName = Optional.empty();
+
+    private Optional<String> botLastSeen = Optional.empty();
+
+    private Optional<Double> botConfidenceScore = Optional.empty();
+
     private Optional<String> cloudProviderName = Optional.empty();
 
     private Optional<String> relayProviderName = Optional.empty();
@@ -458,11 +680,16 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
 
     private Optional<List<String>> vpnProviderNames = Optional.empty();
 
+    private Optional<Integer> proxyProviderCount30D = Optional.empty();
+
+    private Optional<Integer> proxyDaysSeen7D = Optional.empty();
+
+    private Optional<Integer> proxyDaysSeen30D = Optional.empty();
+
     private Optional<String> proxyLastSeen = Optional.empty();
 
     private Optional<List<String>> proxyProviderNames = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -476,6 +703,9 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
       proxyProviderNames(other.getProxyProviderNames());
       proxyConfidenceScore(other.getProxyConfidenceScore());
       proxyLastSeen(other.getProxyLastSeen());
+      proxyDaysSeen30D(other.getProxyDaysSeen30D());
+      proxyDaysSeen7D(other.getProxyDaysSeen7D());
+      proxyProviderCount30D(other.getProxyProviderCount30D());
       isResidentialProxy(other.getIsResidentialProxy());
       isVpn(other.getIsVpn());
       vpnProviderNames(other.getVpnProviderNames());
@@ -489,11 +719,18 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
       isSpam(other.getIsSpam());
       isCloudProvider(other.getIsCloudProvider());
       cloudProviderName(other.getCloudProviderName());
+      botConfidenceScore(other.getBotConfidenceScore());
+      botLastSeen(other.getBotLastSeen());
+      botOperatorName(other.getBotOperatorName());
+      botType(other.getBotType());
+      corporateGatewayProviderName(other.getCorporateGatewayProviderName());
+      corporateGatewayType(other.getCorporateGatewayType());
+      isCorporateGateway(other.getIsCorporateGateway());
+      isKnownGoodBot(other.getIsKnownGoodBot());
       return this;
     }
 
     /**
-     * <p>Aggregate risk score from 0 to 100.</p>
      * <p>Aggregate risk score from 0 to 100.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -506,7 +743,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
 
     /**
      * <p>true if the IP matches a Tor exit node.</p>
-     * <p>true if the IP matches a Tor exit node.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -517,7 +753,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
     }
 
     /**
-     * <p>true if the IP is associated with a proxy service.</p>
      * <p>true if the IP is associated with a proxy service.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -530,7 +765,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
 
     /**
      * <p>Proxy detection confidence from 0 to 100.</p>
-     * <p>Proxy detection confidence from 0 to 100.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -541,7 +775,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
     }
 
     /**
-     * <p>true if the IP is linked to a residential proxy network.</p>
      * <p>true if the IP is linked to a residential proxy network.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -554,7 +787,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
 
     /**
      * <p>true if the IP is associated with a VPN service.</p>
-     * <p>true if the IP is associated with a VPN service.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -565,7 +797,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
     }
 
     /**
-     * <p>VPN detection confidence from 0 to 100.</p>
      * <p>VPN detection confidence from 0 to 100.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -578,7 +809,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
 
     /**
      * <p>true if the IP is associated with a relay network.</p>
-     * <p>true if the IP is associated with a relay network.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -589,7 +819,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
     }
 
     /**
-     * <p>true if any anonymity signal is present.</p>
      * <p>true if any anonymity signal is present.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -602,7 +831,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
 
     /**
      * <p>true if the IP is flagged for known attacker behavior.</p>
-     * <p>true if the IP is flagged for known attacker behavior.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -613,7 +841,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
     }
 
     /**
-     * <p>true if the IP is associated with bot activity.</p>
      * <p>true if the IP is associated with bot activity.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -626,7 +853,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
 
     /**
      * <p>true if the IP is associated with spam activity.</p>
-     * <p>true if the IP is associated with spam activity.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -638,13 +864,196 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
 
     /**
      * <p>true if the IP belongs to a cloud provider range.</p>
-     * <p>true if the IP belongs to a cloud provider range.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("is_cloud_provider")
     public _FinalStage isCloudProvider(boolean isCloudProvider) {
       this.isCloudProvider = isCloudProvider;
+      return this;
+    }
+
+    /**
+     * <p>true if the bot is a declared bot with a verifiable operator (e.g. a search engine crawler or uptime monitor).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage isKnownGoodBot(Boolean isKnownGoodBot) {
+      this.isKnownGoodBot = Optional.ofNullable(isKnownGoodBot);
+      return this;
+    }
+
+    /**
+     * <p>true if the bot is a declared bot with a verifiable operator (e.g. a search engine crawler or uptime monitor).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "is_known_good_bot",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage isKnownGoodBot(Optional<Boolean> isKnownGoodBot) {
+      this.isKnownGoodBot = isKnownGoodBot;
+      return this;
+    }
+
+    /**
+     * <p>true if the IP is an outbound address of a corporate security gateway (SWG, SSE, or SASE).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage isCorporateGateway(Boolean isCorporateGateway) {
+      this.isCorporateGateway = Optional.ofNullable(isCorporateGateway);
+      return this;
+    }
+
+    /**
+     * <p>true if the IP is an outbound address of a corporate security gateway (SWG, SSE, or SASE).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "is_corporate_gateway",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage isCorporateGateway(Optional<Boolean> isCorporateGateway) {
+      this.isCorporateGateway = isCorporateGateway;
+      return this;
+    }
+
+    /**
+     * <p>Kind of corporate gateway, when known. Known values: secure_web_gateway, browser_isolation.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage corporateGatewayType(String corporateGatewayType) {
+      this.corporateGatewayType = Optional.ofNullable(corporateGatewayType);
+      return this;
+    }
+
+    /**
+     * <p>Kind of corporate gateway, when known. Known values: secure_web_gateway, browser_isolation.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "corporate_gateway_type",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage corporateGatewayType(Optional<String> corporateGatewayType) {
+      this.corporateGatewayType = corporateGatewayType;
+      return this;
+    }
+
+    /**
+     * <p>Corporate gateway provider name, when known.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage corporateGatewayProviderName(String corporateGatewayProviderName) {
+      this.corporateGatewayProviderName = Optional.ofNullable(corporateGatewayProviderName);
+      return this;
+    }
+
+    /**
+     * <p>Corporate gateway provider name, when known.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "corporate_gateway_provider_name",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage corporateGatewayProviderName(Optional<String> corporateGatewayProviderName) {
+      this.corporateGatewayProviderName = corporateGatewayProviderName;
+      return this;
+    }
+
+    /**
+     * <p>Kind of bot activity, when known. Declared bots (is_known_good_bot true): search_engine, ai_crawler, ai_assistant, seo_crawler, site_monitor, link_preview, feed_fetcher, archiver, ad_verification, scanner. Undeclared bots (is_known_good_bot false): scanner, scraper, exploit, credential_stuffing, brute_force, worm. New values can be added over time, so treat it as a plain string.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage botType(String botType) {
+      this.botType = Optional.ofNullable(botType);
+      return this;
+    }
+
+    /**
+     * <p>Kind of bot activity, when known. Declared bots (is_known_good_bot true): search_engine, ai_crawler, ai_assistant, seo_crawler, site_monitor, link_preview, feed_fetcher, archiver, ad_verification, scanner. Undeclared bots (is_known_good_bot false): scanner, scraper, exploit, credential_stuffing, brute_force, worm. New values can be added over time, so treat it as a plain string.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "bot_type",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage botType(Optional<String> botType) {
+      this.botType = botType;
+      return this;
+    }
+
+    /**
+     * <p>Organization running the bot, when known (mostly declared bots).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage botOperatorName(String botOperatorName) {
+      this.botOperatorName = Optional.ofNullable(botOperatorName);
+      return this;
+    }
+
+    /**
+     * <p>Organization running the bot, when known (mostly declared bots).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "bot_operator_name",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage botOperatorName(Optional<String> botOperatorName) {
+      this.botOperatorName = botOperatorName;
+      return this;
+    }
+
+    /**
+     * <p>Last observed bot activity date in YYYY-MM-DD, when available.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage botLastSeen(String botLastSeen) {
+      this.botLastSeen = Optional.ofNullable(botLastSeen);
+      return this;
+    }
+
+    /**
+     * <p>Last observed bot activity date in YYYY-MM-DD, when available.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "bot_last_seen",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage botLastSeen(Optional<String> botLastSeen) {
+      this.botLastSeen = botLastSeen;
+      return this;
+    }
+
+    /**
+     * <p>Bot detection confidence from 0 to 100. 0 unless is_bot is true.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage botConfidenceScore(Double botConfidenceScore) {
+      this.botConfidenceScore = Optional.ofNullable(botConfidenceScore);
+      return this;
+    }
+
+    /**
+     * <p>Bot detection confidence from 0 to 100. 0 unless is_bot is true.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "bot_confidence_score",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage botConfidenceScore(Optional<Double> botConfidenceScore) {
+      this.botConfidenceScore = botConfidenceScore;
       return this;
     }
 
@@ -741,6 +1150,75 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
     }
 
     /**
+     * <p>Number of distinct proxy providers that offered the IP in the last 30 days. <code>0</code> when no proxy activity was observed.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage proxyProviderCount30D(Integer proxyProviderCount30D) {
+      this.proxyProviderCount30D = Optional.ofNullable(proxyProviderCount30D);
+      return this;
+    }
+
+    /**
+     * <p>Number of distinct proxy providers that offered the IP in the last 30 days. <code>0</code> when no proxy activity was observed.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "proxy_provider_count_30d",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage proxyProviderCount30D(Optional<Integer> proxyProviderCount30D) {
+      this.proxyProviderCount30D = proxyProviderCount30D;
+      return this;
+    }
+
+    /**
+     * <p>Number of days in the last 7 days on which the IP was seen acting as a proxy. <code>0</code> when no proxy activity was observed.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage proxyDaysSeen7D(Integer proxyDaysSeen7D) {
+      this.proxyDaysSeen7D = Optional.ofNullable(proxyDaysSeen7D);
+      return this;
+    }
+
+    /**
+     * <p>Number of days in the last 7 days on which the IP was seen acting as a proxy. <code>0</code> when no proxy activity was observed.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "proxy_days_seen_7d",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage proxyDaysSeen7D(Optional<Integer> proxyDaysSeen7D) {
+      this.proxyDaysSeen7D = proxyDaysSeen7D;
+      return this;
+    }
+
+    /**
+     * <p>Number of days in the last 30 days on which the IP was seen acting as a proxy. <code>0</code> when no proxy activity was observed.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage proxyDaysSeen30D(Integer proxyDaysSeen30D) {
+      this.proxyDaysSeen30D = Optional.ofNullable(proxyDaysSeen30D);
+      return this;
+    }
+
+    /**
+     * <p>Number of days in the last 30 days on which the IP was seen acting as a proxy. <code>0</code> when no proxy activity was observed.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "proxy_days_seen_30d",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage proxyDaysSeen30D(Optional<Integer> proxyDaysSeen30D) {
+      this.proxyDaysSeen30D = proxyDaysSeen30D;
+      return this;
+    }
+
+    /**
      * <p>Last observed proxy activity date in YYYY-MM-DD.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -788,7 +1266,15 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseSecurity {
 
     @java.lang.Override
     public BulkGeolocationLookupV2ResponseItemAbuseSecurity build() {
-      return new BulkGeolocationLookupV2ResponseItemAbuseSecurity(threatScore, isTor, isProxy, proxyProviderNames, proxyConfidenceScore, proxyLastSeen, isResidentialProxy, isVpn, vpnProviderNames, vpnConfidenceScore, vpnLastSeen, isRelay, relayProviderName, isAnonymous, isKnownAttacker, isBot, isSpam, isCloudProvider, cloudProviderName, additionalProperties);
+      return new BulkGeolocationLookupV2ResponseItemAbuseSecurity(threatScore, isTor, isProxy, proxyProviderNames, proxyConfidenceScore, proxyLastSeen, proxyDaysSeen30D, proxyDaysSeen7D, proxyProviderCount30D, isResidentialProxy, isVpn, vpnProviderNames, vpnConfidenceScore, vpnLastSeen, isRelay, relayProviderName, isAnonymous, isKnownAttacker, isBot, isSpam, isCloudProvider, cloudProviderName, botConfidenceScore, botLastSeen, botOperatorName, botType, corporateGatewayProviderName, corporateGatewayType, isCorporateGateway, isKnownGoodBot, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("threat_score") || key.equalsIgnoreCase("is_tor") || key.equalsIgnoreCase("is_proxy") || key.equalsIgnoreCase("proxy_provider_names") || key.equalsIgnoreCase("proxy_confidence_score") || key.equalsIgnoreCase("proxy_last_seen") || key.equalsIgnoreCase("proxy_days_seen_30d") || key.equalsIgnoreCase("proxy_days_seen_7d") || key.equalsIgnoreCase("proxy_provider_count_30d") || key.equalsIgnoreCase("is_residential_proxy") || key.equalsIgnoreCase("is_vpn") || key.equalsIgnoreCase("vpn_provider_names") || key.equalsIgnoreCase("vpn_confidence_score") || key.equalsIgnoreCase("vpn_last_seen") || key.equalsIgnoreCase("is_relay") || key.equalsIgnoreCase("relay_provider_name") || key.equalsIgnoreCase("is_anonymous") || key.equalsIgnoreCase("is_known_attacker") || key.equalsIgnoreCase("is_bot") || key.equalsIgnoreCase("is_spam") || key.equalsIgnoreCase("is_cloud_provider") || key.equalsIgnoreCase("cloud_provider_name") || key.equalsIgnoreCase("bot_confidence_score") || key.equalsIgnoreCase("bot_last_seen") || key.equalsIgnoreCase("bot_operator_name") || key.equalsIgnoreCase("bot_type") || key.equalsIgnoreCase("corporate_gateway_provider_name") || key.equalsIgnoreCase("corporate_gateway_type") || key.equalsIgnoreCase("is_corporate_gateway") || key.equalsIgnoreCase("is_known_good_bot")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

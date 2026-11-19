@@ -5,21 +5,21 @@
 package com.apifreaks.sdk.errors;
 
 import com.apifreaks.sdk.core.ApifreaksApiApiException;
-import java.lang.Object;
+import com.apifreaks.sdk.types.UnsupportedMediaTypeErrorBody;
 import okhttp3.Response;
 
 public final class UnsupportedMediaTypeError extends ApifreaksApiApiException {
   /**
    * The body of the response that triggered the exception.
    */
-  private final Object body;
+  private final UnsupportedMediaTypeErrorBody body;
 
-  public UnsupportedMediaTypeError(Object body) {
+  public UnsupportedMediaTypeError(UnsupportedMediaTypeErrorBody body) {
     super("UnsupportedMediaTypeError", 415, body);
     this.body = body;
   }
 
-  public UnsupportedMediaTypeError(Object body, Response rawResponse) {
+  public UnsupportedMediaTypeError(UnsupportedMediaTypeErrorBody body, Response rawResponse) {
     super("UnsupportedMediaTypeError", 415, body, rawResponse);
     this.body = body;
   }
@@ -28,7 +28,7 @@ public final class UnsupportedMediaTypeError extends ApifreaksApiApiException {
    * @return the body
    */
   @java.lang.Override
-  public Object body() {
+  public UnsupportedMediaTypeErrorBody body() {
     return this.body;
   }
 }

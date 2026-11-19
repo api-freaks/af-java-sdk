@@ -25,23 +25,33 @@ import java.util.Optional;
     builder = WebScrapeRequestBodyOneInstructionsItemPostForm.Builder.class
 )
 public final class WebScrapeRequestBodyOneInstructionsItemPostForm {
-  private final Optional<WebScrapeRequestBodyOneInstructionsItemPostFormPostForm> postForm;
+  private final Optional<String> selector;
+
+  private final Optional<Map<String, String>> data;
 
   private final Map<String, Object> additionalProperties;
 
-  private WebScrapeRequestBodyOneInstructionsItemPostForm(
-      Optional<WebScrapeRequestBodyOneInstructionsItemPostFormPostForm> postForm,
-      Map<String, Object> additionalProperties) {
-    this.postForm = postForm;
+  private WebScrapeRequestBodyOneInstructionsItemPostForm(Optional<String> selector,
+      Optional<Map<String, String>> data, Map<String, Object> additionalProperties) {
+    this.selector = selector;
+    this.data = data;
     this.additionalProperties = additionalProperties;
   }
 
   /**
-   * @return Submits a form using POST method. Provide the form's XPath/CSS selector and input values.
+   * @return CSS or XPath selector identifying the form element.
    */
-  @JsonProperty("postForm")
-  public Optional<WebScrapeRequestBodyOneInstructionsItemPostFormPostForm> getPostForm() {
-    return postForm;
+  @JsonProperty("selector")
+  public Optional<String> getSelector() {
+    return selector;
+  }
+
+  /**
+   * @return Form field name/value pairs to submit.
+   */
+  @JsonProperty("data")
+  public Optional<Map<String, String>> getData() {
+    return data;
   }
 
   @java.lang.Override
@@ -56,12 +66,12 @@ public final class WebScrapeRequestBodyOneInstructionsItemPostForm {
   }
 
   private boolean equalTo(WebScrapeRequestBodyOneInstructionsItemPostForm other) {
-    return postForm.equals(other.postForm);
+    return selector.equals(other.selector) && data.equals(other.data);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.postForm);
+    return Objects.hash(this.selector, this.data);
   }
 
   @java.lang.Override
@@ -77,39 +87,65 @@ public final class WebScrapeRequestBodyOneInstructionsItemPostForm {
       ignoreUnknown = true
   )
   public static final class Builder {
-    private Optional<WebScrapeRequestBodyOneInstructionsItemPostFormPostForm> postForm = Optional.empty();
+    private Optional<String> selector = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<Map<String, String>> data = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
     }
 
     public Builder from(WebScrapeRequestBodyOneInstructionsItemPostForm other) {
-      postForm(other.getPostForm());
+      selector(other.getSelector());
+      data(other.getData());
       return this;
     }
 
     /**
-     * <p>Submits a form using POST method. Provide the form's XPath/CSS selector and input values.</p>
+     * <p>CSS or XPath selector identifying the form element.</p>
      */
     @JsonSetter(
-        value = "postForm",
+        value = "selector",
         nulls = Nulls.SKIP
     )
-    public Builder postForm(
-        Optional<WebScrapeRequestBodyOneInstructionsItemPostFormPostForm> postForm) {
-      this.postForm = postForm;
+    public Builder selector(Optional<String> selector) {
+      this.selector = selector;
       return this;
     }
 
-    public Builder postForm(WebScrapeRequestBodyOneInstructionsItemPostFormPostForm postForm) {
-      this.postForm = Optional.ofNullable(postForm);
+    public Builder selector(String selector) {
+      this.selector = Optional.ofNullable(selector);
+      return this;
+    }
+
+    /**
+     * <p>Form field name/value pairs to submit.</p>
+     */
+    @JsonSetter(
+        value = "data",
+        nulls = Nulls.SKIP
+    )
+    public Builder data(Optional<Map<String, String>> data) {
+      this.data = data;
+      return this;
+    }
+
+    public Builder data(Map<String, String> data) {
+      this.data = Optional.ofNullable(data);
       return this;
     }
 
     public WebScrapeRequestBodyOneInstructionsItemPostForm build() {
-      return new WebScrapeRequestBodyOneInstructionsItemPostForm(postForm, additionalProperties);
+      return new WebScrapeRequestBodyOneInstructionsItemPostForm(selector, data, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("selector") || key.equalsIgnoreCase("data")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

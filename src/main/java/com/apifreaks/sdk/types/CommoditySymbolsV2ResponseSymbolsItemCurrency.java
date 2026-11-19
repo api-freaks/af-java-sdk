@@ -134,7 +134,6 @@ public final class CommoditySymbolsV2ResponseSymbolsItemCurrency {
 
     private String symbol;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -150,7 +149,6 @@ public final class CommoditySymbolsV2ResponseSymbolsItemCurrency {
 
     /**
      * <p>The ISO 4217 currency code (e.g., &quot;USD&quot;).</p>
-     * <p>The ISO 4217 currency code (e.g., &quot;USD&quot;).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -162,7 +160,6 @@ public final class CommoditySymbolsV2ResponseSymbolsItemCurrency {
 
     /**
      * <p>The full name of the currency (e.g., &quot;US Dollar&quot;).</p>
-     * <p>The full name of the currency (e.g., &quot;US Dollar&quot;).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -173,7 +170,6 @@ public final class CommoditySymbolsV2ResponseSymbolsItemCurrency {
     }
 
     /**
-     * <p>The symbol of the currency (e.g., &quot;$&quot;).</p>
      * <p>The symbol of the currency (e.g., &quot;$&quot;).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -187,6 +183,14 @@ public final class CommoditySymbolsV2ResponseSymbolsItemCurrency {
     @java.lang.Override
     public CommoditySymbolsV2ResponseSymbolsItemCurrency build() {
       return new CommoditySymbolsV2ResponseSymbolsItemCurrency(code, name, symbol, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("code") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("symbol")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

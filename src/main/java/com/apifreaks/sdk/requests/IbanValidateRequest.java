@@ -137,7 +137,6 @@ public final class IbanValidateRequest {
 
     private Optional<IbanValidateRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -153,7 +152,6 @@ public final class IbanValidateRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -164,7 +162,6 @@ public final class IbanValidateRequest {
     }
 
     /**
-     * <p>IBAN to validate.</p>
      * <p>IBAN to validate.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -201,6 +198,14 @@ public final class IbanValidateRequest {
     @java.lang.Override
     public IbanValidateRequest build() {
       return new IbanValidateRequest(apiKey, format, iban, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("iban")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

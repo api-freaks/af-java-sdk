@@ -174,7 +174,6 @@ public final class CommodityHistoricalRatesResponseRatesValue {
 
     private double close;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -192,7 +191,6 @@ public final class CommodityHistoricalRatesResponseRatesValue {
 
     /**
      * <p>Date for which commodity prices were fetched. Format: YYYY-MM-DD.</p>
-     * <p>Date for which commodity prices were fetched. Format: YYYY-MM-DD.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -203,7 +201,6 @@ public final class CommodityHistoricalRatesResponseRatesValue {
     }
 
     /**
-     * <p>The opening price of the commodity on the given date.</p>
      * <p>The opening price of the commodity on the given date.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -216,7 +213,6 @@ public final class CommodityHistoricalRatesResponseRatesValue {
 
     /**
      * <p>The highest price of the commodity recorded on the given date.</p>
-     * <p>The highest price of the commodity recorded on the given date.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -228,7 +224,6 @@ public final class CommodityHistoricalRatesResponseRatesValue {
 
     /**
      * <p>The lowest price of the commodity recorded on the given date.</p>
-     * <p>The lowest price of the commodity recorded on the given date.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -239,7 +234,6 @@ public final class CommodityHistoricalRatesResponseRatesValue {
     }
 
     /**
-     * <p>The closing price of the commodity on the given date.</p>
      * <p>The closing price of the commodity on the given date.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -253,6 +247,14 @@ public final class CommodityHistoricalRatesResponseRatesValue {
     @java.lang.Override
     public CommodityHistoricalRatesResponseRatesValue build() {
       return new CommodityHistoricalRatesResponseRatesValue(date, open, high, low, close, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("date") || key.equalsIgnoreCase("open") || key.equalsIgnoreCase("high") || key.equalsIgnoreCase("low") || key.equalsIgnoreCase("close")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

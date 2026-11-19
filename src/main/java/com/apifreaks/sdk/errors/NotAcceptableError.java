@@ -5,21 +5,21 @@
 package com.apifreaks.sdk.errors;
 
 import com.apifreaks.sdk.core.ApifreaksApiApiException;
-import java.lang.Object;
+import com.apifreaks.sdk.types.NotAcceptableErrorBody;
 import okhttp3.Response;
 
 public final class NotAcceptableError extends ApifreaksApiApiException {
   /**
    * The body of the response that triggered the exception.
    */
-  private final Object body;
+  private final NotAcceptableErrorBody body;
 
-  public NotAcceptableError(Object body) {
+  public NotAcceptableError(NotAcceptableErrorBody body) {
     super("NotAcceptableError", 406, body);
     this.body = body;
   }
 
-  public NotAcceptableError(Object body, Response rawResponse) {
+  public NotAcceptableError(NotAcceptableErrorBody body, Response rawResponse) {
     super("NotAcceptableError", 406, body, rawResponse);
     this.body = body;
   }
@@ -28,7 +28,7 @@ public final class NotAcceptableError extends ApifreaksApiApiException {
    * @return the body
    */
   @java.lang.Override
-  public Object body() {
+  public NotAcceptableErrorBody body() {
     return this.body;
   }
 }

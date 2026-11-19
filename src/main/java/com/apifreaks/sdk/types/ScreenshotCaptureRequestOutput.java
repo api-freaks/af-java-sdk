@@ -10,8 +10,6 @@ import java.lang.Object;
 import java.lang.String;
 
 public final class ScreenshotCaptureRequestOutput {
-  public static final ScreenshotCaptureRequestOutput IMAGE = new ScreenshotCaptureRequestOutput(Value.IMAGE, "image");
-
   public static final ScreenshotCaptureRequestOutput JSON = new ScreenshotCaptureRequestOutput(Value.JSON, "json");
 
   private final Value value;
@@ -46,8 +44,6 @@ public final class ScreenshotCaptureRequestOutput {
 
   public <T> T visit(Visitor<T> visitor) {
     switch (value) {
-      case IMAGE:
-        return visitor.visitImage();
       case JSON:
         return visitor.visitJson();
       case UNKNOWN:
@@ -61,8 +57,6 @@ public final class ScreenshotCaptureRequestOutput {
   )
   public static ScreenshotCaptureRequestOutput valueOf(String value) {
     switch (value) {
-      case "image":
-        return IMAGE;
       case "json":
         return JSON;
       default:
@@ -73,15 +67,11 @@ public final class ScreenshotCaptureRequestOutput {
   public enum Value {
     JSON,
 
-    IMAGE,
-
     UNKNOWN
   }
 
   public interface Visitor<T> {
     T visitJson();
-
-    T visitImage();
 
     T visitUnknown(String unknownType);
   }

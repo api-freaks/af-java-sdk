@@ -11,34 +11,46 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
+import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
     builder = WebScrapeRequestBodyBlockUrlInstructionsItemFill.Builder.class
 )
 public final class WebScrapeRequestBodyBlockUrlInstructionsItemFill {
-  private final Optional<WebScrapeRequestBodyBlockUrlInstructionsItemFillFill> fill;
+  private final String place;
+
+  private final String value;
 
   private final Map<String, Object> additionalProperties;
 
-  private WebScrapeRequestBodyBlockUrlInstructionsItemFill(
-      Optional<WebScrapeRequestBodyBlockUrlInstructionsItemFillFill> fill,
+  private WebScrapeRequestBodyBlockUrlInstructionsItemFill(String place, String value,
       Map<String, Object> additionalProperties) {
-    this.fill = fill;
+    this.place = place;
+    this.value = value;
     this.additionalProperties = additionalProperties;
   }
 
-  @JsonProperty("fill")
-  public Optional<WebScrapeRequestBodyBlockUrlInstructionsItemFillFill> getFill() {
-    return fill;
+  /**
+   * @return CSS or XPath selector identifying the target element.
+   */
+  @JsonProperty("place")
+  public String getPlace() {
+    return place;
+  }
+
+  /**
+   * @return Value to fill, select, or match against.
+   */
+  @JsonProperty("value")
+  public String getValue() {
+    return value;
   }
 
   @java.lang.Override
@@ -53,12 +65,12 @@ public final class WebScrapeRequestBodyBlockUrlInstructionsItemFill {
   }
 
   private boolean equalTo(WebScrapeRequestBodyBlockUrlInstructionsItemFill other) {
-    return fill.equals(other.fill);
+    return place.equals(other.place) && value.equals(other.value);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.fill);
+    return Objects.hash(this.place, this.value);
   }
 
   @java.lang.Override
@@ -66,50 +78,96 @@ public final class WebScrapeRequestBodyBlockUrlInstructionsItemFill {
     return ObjectMappers.stringify(this);
   }
 
-  public static Builder builder() {
+  public static PlaceStage builder() {
     return new Builder();
+  }
+
+  public interface PlaceStage {
+    /**
+     * <p>CSS or XPath selector identifying the target element.</p>
+     */
+    ValueStage place(@NotNull String place);
+
+    Builder from(WebScrapeRequestBodyBlockUrlInstructionsItemFill other);
+  }
+
+  public interface ValueStage {
+    /**
+     * <p>Value to fill, select, or match against.</p>
+     */
+    _FinalStage value(@NotNull String value);
+  }
+
+  public interface _FinalStage {
+    WebScrapeRequestBodyBlockUrlInstructionsItemFill build();
+
+    _FinalStage additionalProperty(String key, Object value);
+
+    _FinalStage additionalProperties(Map<String, Object> additionalProperties);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder {
-    private Optional<WebScrapeRequestBodyBlockUrlInstructionsItemFillFill> fill = Optional.empty();
+  public static final class Builder implements PlaceStage, ValueStage, _FinalStage {
+    private String place;
 
-    @JsonAnySetter
+    private String value;
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
     }
 
+    @java.lang.Override
     public Builder from(WebScrapeRequestBodyBlockUrlInstructionsItemFill other) {
-      fill(other.getFill());
+      place(other.getPlace());
+      value(other.getValue());
       return this;
     }
 
-    @JsonSetter(
-        value = "fill",
-        nulls = Nulls.SKIP
-    )
-    public Builder fill(Optional<WebScrapeRequestBodyBlockUrlInstructionsItemFillFill> fill) {
-      this.fill = fill;
+    /**
+     * <p>CSS or XPath selector identifying the target element.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    @JsonSetter("place")
+    public ValueStage place(@NotNull String place) {
+      this.place = Objects.requireNonNull(place, "place must not be null");
       return this;
     }
 
-    public Builder fill(WebScrapeRequestBodyBlockUrlInstructionsItemFillFill fill) {
-      this.fill = Optional.ofNullable(fill);
+    /**
+     * <p>Value to fill, select, or match against.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    @JsonSetter("value")
+    public _FinalStage value(@NotNull String value) {
+      this.value = Objects.requireNonNull(value, "value must not be null");
       return this;
     }
 
+    @java.lang.Override
     public WebScrapeRequestBodyBlockUrlInstructionsItemFill build() {
-      return new WebScrapeRequestBodyBlockUrlInstructionsItemFill(fill, additionalProperties);
+      return new WebScrapeRequestBodyBlockUrlInstructionsItemFill(place, value, additionalProperties);
     }
 
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("place") || key.equalsIgnoreCase("value")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
+    }
+
+    @java.lang.Override
     public Builder additionalProperty(String key, Object value) {
       this.additionalProperties.put(key, value);
       return this;
     }
 
+    @java.lang.Override
     public Builder additionalProperties(Map<String, Object> additionalProperties) {
       this.additionalProperties.putAll(additionalProperties);
       return this;

@@ -79,7 +79,6 @@ public final class WeakWordsDetectResponse {
   public static final class Builder {
     private List<WeakWordsDetectResponseWeakWordsItem> weakWords = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -119,6 +118,14 @@ public final class WeakWordsDetectResponse {
 
     public WeakWordsDetectResponse build() {
       return new WeakWordsDetectResponse(weakWords, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("weak_words")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -282,7 +282,6 @@ public final class MarineWeatherResponseForecastValueHourlyItem {
 
     private Optional<Integer> oceanCurrentDirection = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -582,6 +581,14 @@ public final class MarineWeatherResponseForecastValueHourlyItem {
 
     public MarineWeatherResponseForecastValueHourlyItem build() {
       return new MarineWeatherResponseForecastValueHourlyItem(timestamp, waveHeight, waveDirection, wavePeriod, windWaveHeight, windWavePeakPeriod, windWaveDirection, windWavePeriod, swellWaveHeight, swellWaveDirection, swellWavePeriod, swellWavePeakPeriod, seaSurfaceTemperature, seaLevelHeightMsl, oceanCurrentVelocity, oceanCurrentDirection, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("timestamp") || key.equalsIgnoreCase("wave_height") || key.equalsIgnoreCase("wave_direction") || key.equalsIgnoreCase("wave_period") || key.equalsIgnoreCase("wind_wave_height") || key.equalsIgnoreCase("wind_wave_peak_period") || key.equalsIgnoreCase("wind_wave_direction") || key.equalsIgnoreCase("wind_wave_period") || key.equalsIgnoreCase("swell_wave_height") || key.equalsIgnoreCase("swell_wave_direction") || key.equalsIgnoreCase("swell_wave_period") || key.equalsIgnoreCase("swell_wave_peak_period") || key.equalsIgnoreCase("sea_surface_temperature") || key.equalsIgnoreCase("sea_level_height_msl") || key.equalsIgnoreCase("ocean_current_velocity") || key.equalsIgnoreCase("ocean_current_direction")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

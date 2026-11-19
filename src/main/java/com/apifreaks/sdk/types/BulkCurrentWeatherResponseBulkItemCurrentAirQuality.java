@@ -336,7 +336,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
 
     private float uvIndexClearSky;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -362,7 +361,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
 
     /**
      * <p>Local timestamp of the observation (format YYYY-MM-DDTHH:mm, not ISO 8601).</p>
-     * <p>Local timestamp of the observation (format YYYY-MM-DDTHH:mm, not ISO 8601).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -373,7 +371,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
     }
 
     /**
-     * <p>Consolidated European Air Quality Index representing the highest value among individual pollutant indices. Ranges: 0-20 (good), 20-40 (fair), 40-60 (moderate), 60-80 (poor), 80-100 (very poor), &gt;100 (extremely poor).</p>
      * <p>Consolidated European Air Quality Index representing the highest value among individual pollutant indices. Ranges: 0-20 (good), 20-40 (fair), 40-60 (moderate), 60-80 (poor), 80-100 (very poor), &gt;100 (extremely poor).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -386,7 +383,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
 
     /**
      * <p>Consolidated U.S. Air Quality Index representing the highest value among individual pollutant indices. Ranges: 0-50 (good), 51-100 (moderate), 101-150 (unhealthy for sensitive groups), 151-200 (unhealthy), 201-300 (very unhealthy), 301-500 (hazardous).</p>
-     * <p>Consolidated U.S. Air Quality Index representing the highest value among individual pollutant indices. Ranges: 0-50 (good), 51-100 (moderate), 101-150 (unhealthy for sensitive groups), 151-200 (unhealthy), 201-300 (very unhealthy), 301-500 (hazardous).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -397,7 +393,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
     }
 
     /**
-     * <p>Particulate matter with diameter less than 10 micrometers (μg/m³) measured at 10 meters above ground.</p>
      * <p>Particulate matter with diameter less than 10 micrometers (μg/m³) measured at 10 meters above ground.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -410,7 +405,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
 
     /**
      * <p>Particulate matter with diameter less than 2.5 micrometers (μg/m³) measured at 10 meters above ground.</p>
-     * <p>Particulate matter with diameter less than 2.5 micrometers (μg/m³) measured at 10 meters above ground.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -421,7 +415,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
     }
 
     /**
-     * <p>Atmospheric carbon monoxide gas concentration (μg/m³) at 10 meters above ground.</p>
      * <p>Atmospheric carbon monoxide gas concentration (μg/m³) at 10 meters above ground.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -434,7 +427,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
 
     /**
      * <p>Atmospheric nitrogen dioxide gas concentration (μg/m³) at 10 meters above ground.</p>
-     * <p>Atmospheric nitrogen dioxide gas concentration (μg/m³) at 10 meters above ground.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -445,7 +437,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
     }
 
     /**
-     * <p>Atmospheric sulphur dioxide gas concentration (μg/m³) at 10 meters above ground.</p>
      * <p>Atmospheric sulphur dioxide gas concentration (μg/m³) at 10 meters above ground.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -458,7 +449,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
 
     /**
      * <p>Atmospheric ozone gas concentration (μg/m³) at 10 meters above ground.</p>
-     * <p>Atmospheric ozone gas concentration (μg/m³) at 10 meters above ground.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -469,7 +459,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
     }
 
     /**
-     * <p>Saharan dust particle concentration (μg/m³) at 10 meters above ground.</p>
      * <p>Saharan dust particle concentration (μg/m³) at 10 meters above ground.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -482,7 +471,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
 
     /**
      * <p>Ultraviolet radiation intensity index accounting for cloud coverage.</p>
-     * <p>Ultraviolet radiation intensity index accounting for cloud coverage.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -494,7 +482,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
 
     /**
      * <p>Aerosol optical depth at 550 nm wavelength indicating atmospheric haze levels.</p>
-     * <p>Aerosol optical depth at 550 nm wavelength indicating atmospheric haze levels.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -505,7 +492,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
     }
 
     /**
-     * <p>Ultraviolet radiation intensity index assuming cloud-free conditions.</p>
      * <p>Ultraviolet radiation intensity index assuming cloud-free conditions.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -519,6 +505,14 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAirQuality {
     @java.lang.Override
     public BulkCurrentWeatherResponseBulkItemCurrentAirQuality build() {
       return new BulkCurrentWeatherResponseBulkItemCurrentAirQuality(timestamp, europeanAqi, usAqi, pm10, pm25, carbonMonoxide, nitrogenDioxide, sulphurDioxide, ozone, dust, uvIndex, aerosolOpticalDepth, uvIndexClearSky, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("timestamp") || key.equalsIgnoreCase("european_aqi") || key.equalsIgnoreCase("us_aqi") || key.equalsIgnoreCase("pm10") || key.equalsIgnoreCase("pm2_5") || key.equalsIgnoreCase("carbon_monoxide") || key.equalsIgnoreCase("nitrogen_dioxide") || key.equalsIgnoreCase("sulphur_dioxide") || key.equalsIgnoreCase("ozone") || key.equalsIgnoreCase("dust") || key.equalsIgnoreCase("uv_index") || key.equalsIgnoreCase("aerosol_optical_depth") || key.equalsIgnoreCase("uv_index_clear_sky")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

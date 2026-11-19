@@ -4,9 +4,12 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.Nullable;
+import com.apifreaks.sdk.core.NullableNonemptyFilter;
 import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -46,11 +49,18 @@ public final class IbanValidateResponseBankData {
 
   private final boolean sepa;
 
+  private final Optional<String> branchName;
+
+  private final Optional<String> institType;
+
+  private final Optional<String> postalCode;
+
   private final Map<String, Object> additionalProperties;
 
   private IbanValidateResponseBankData(Optional<String> bic, Optional<String> bank,
       Optional<String> bankCode, Optional<String> branchCode, String country, String countryIso2,
       Optional<String> city, Optional<String> address, Optional<String> account, boolean sepa,
+      Optional<String> branchName, Optional<String> institType, Optional<String> postalCode,
       Map<String, Object> additionalProperties) {
     this.bic = bic;
     this.bank = bank;
@@ -62,6 +72,9 @@ public final class IbanValidateResponseBankData {
     this.address = address;
     this.account = account;
     this.sepa = sepa;
+    this.branchName = branchName;
+    this.institType = institType;
+    this.postalCode = postalCode;
     this.additionalProperties = additionalProperties;
   }
 
@@ -145,6 +158,66 @@ public final class IbanValidateResponseBankData {
     return sepa;
   }
 
+  /**
+   * @return Name of the branch or office. Null when not resolvable.
+   */
+  @JsonIgnore
+  public Optional<String> getBranchName() {
+    if (branchName == null) {
+      return Optional.empty();
+    }
+    return branchName;
+  }
+
+  /**
+   * @return Type of institution: &quot;FIIN&quot; (financial institution) or &quot;NFIN&quot; (non-financial institution). Null when not resolvable.
+   */
+  @JsonIgnore
+  public Optional<String> getInstitType() {
+    if (institType == null) {
+      return Optional.empty();
+    }
+    return institType;
+  }
+
+  /**
+   * @return Postal/ZIP code of the bank branch. Null when not resolvable.
+   */
+  @JsonIgnore
+  public Optional<String> getPostalCode() {
+    if (postalCode == null) {
+      return Optional.empty();
+    }
+    return postalCode;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("branch_name")
+  private Optional<String> _getBranchName() {
+    return branchName;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("instit_type")
+  private Optional<String> _getInstitType() {
+    return institType;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("postal_code")
+  private Optional<String> _getPostalCode() {
+    return postalCode;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -157,12 +230,12 @@ public final class IbanValidateResponseBankData {
   }
 
   private boolean equalTo(IbanValidateResponseBankData other) {
-    return bic.equals(other.bic) && bank.equals(other.bank) && bankCode.equals(other.bankCode) && branchCode.equals(other.branchCode) && country.equals(other.country) && countryIso2.equals(other.countryIso2) && city.equals(other.city) && address.equals(other.address) && account.equals(other.account) && sepa == other.sepa;
+    return bic.equals(other.bic) && bank.equals(other.bank) && bankCode.equals(other.bankCode) && branchCode.equals(other.branchCode) && country.equals(other.country) && countryIso2.equals(other.countryIso2) && city.equals(other.city) && address.equals(other.address) && account.equals(other.account) && sepa == other.sepa && branchName.equals(other.branchName) && institType.equals(other.institType) && postalCode.equals(other.postalCode);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.bic, this.bank, this.bankCode, this.branchCode, this.country, this.countryIso2, this.city, this.address, this.account, this.sepa);
+    return Objects.hash(this.bic, this.bank, this.bankCode, this.branchCode, this.country, this.countryIso2, this.city, this.address, this.account, this.sepa, this.branchName, this.institType, this.postalCode);
   }
 
   @java.lang.Override
@@ -252,6 +325,33 @@ public final class IbanValidateResponseBankData {
     _FinalStage account(Optional<String> account);
 
     _FinalStage account(String account);
+
+    /**
+     * <p>Name of the branch or office. Null when not resolvable.</p>
+     */
+    _FinalStage branchName(Optional<String> branchName);
+
+    _FinalStage branchName(String branchName);
+
+    _FinalStage branchName(Nullable<String> branchName);
+
+    /**
+     * <p>Type of institution: &quot;FIIN&quot; (financial institution) or &quot;NFIN&quot; (non-financial institution). Null when not resolvable.</p>
+     */
+    _FinalStage institType(Optional<String> institType);
+
+    _FinalStage institType(String institType);
+
+    _FinalStage institType(Nullable<String> institType);
+
+    /**
+     * <p>Postal/ZIP code of the bank branch. Null when not resolvable.</p>
+     */
+    _FinalStage postalCode(Optional<String> postalCode);
+
+    _FinalStage postalCode(String postalCode);
+
+    _FinalStage postalCode(Nullable<String> postalCode);
   }
 
   @JsonIgnoreProperties(
@@ -263,6 +363,12 @@ public final class IbanValidateResponseBankData {
     private String countryIso2;
 
     private boolean sepa;
+
+    private Optional<String> postalCode = Optional.empty();
+
+    private Optional<String> institType = Optional.empty();
+
+    private Optional<String> branchName = Optional.empty();
 
     private Optional<String> account = Optional.empty();
 
@@ -278,7 +384,6 @@ public final class IbanValidateResponseBankData {
 
     private Optional<String> bic = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -296,11 +401,13 @@ public final class IbanValidateResponseBankData {
       address(other.getAddress());
       account(other.getAccount());
       sepa(other.getSepa());
+      branchName(other.getBranchName());
+      institType(other.getInstitType());
+      postalCode(other.getPostalCode());
       return this;
     }
 
     /**
-     * <p>Country name extracted from IBAN.</p>
      * <p>Country name extracted from IBAN.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -313,7 +420,6 @@ public final class IbanValidateResponseBankData {
 
     /**
      * <p>Alpha-2 standard country code extracted from IBAN.</p>
-     * <p>Alpha-2 standard country code extracted from IBAN.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -325,13 +431,135 @@ public final class IbanValidateResponseBankData {
 
     /**
      * <p>Indicates whether given IBAN country supports Single Euro Payments Area (SEPA)</p>
-     * <p>Indicates whether given IBAN country supports Single Euro Payments Area (SEPA)</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("sepa")
     public _FinalStage sepa(boolean sepa) {
       this.sepa = sepa;
+      return this;
+    }
+
+    /**
+     * <p>Postal/ZIP code of the bank branch. Null when not resolvable.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage postalCode(Nullable<String> postalCode) {
+      if (postalCode.isNull()) {
+        this.postalCode = null;
+      }
+      else if (postalCode.isEmpty()) {
+        this.postalCode = Optional.empty();
+      }
+      else {
+        this.postalCode = Optional.of(postalCode.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Postal/ZIP code of the bank branch. Null when not resolvable.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage postalCode(String postalCode) {
+      this.postalCode = Optional.ofNullable(postalCode);
+      return this;
+    }
+
+    /**
+     * <p>Postal/ZIP code of the bank branch. Null when not resolvable.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "postal_code",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage postalCode(Optional<String> postalCode) {
+      this.postalCode = postalCode;
+      return this;
+    }
+
+    /**
+     * <p>Type of institution: &quot;FIIN&quot; (financial institution) or &quot;NFIN&quot; (non-financial institution). Null when not resolvable.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage institType(Nullable<String> institType) {
+      if (institType.isNull()) {
+        this.institType = null;
+      }
+      else if (institType.isEmpty()) {
+        this.institType = Optional.empty();
+      }
+      else {
+        this.institType = Optional.of(institType.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Type of institution: &quot;FIIN&quot; (financial institution) or &quot;NFIN&quot; (non-financial institution). Null when not resolvable.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage institType(String institType) {
+      this.institType = Optional.ofNullable(institType);
+      return this;
+    }
+
+    /**
+     * <p>Type of institution: &quot;FIIN&quot; (financial institution) or &quot;NFIN&quot; (non-financial institution). Null when not resolvable.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "instit_type",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage institType(Optional<String> institType) {
+      this.institType = institType;
+      return this;
+    }
+
+    /**
+     * <p>Name of the branch or office. Null when not resolvable.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage branchName(Nullable<String> branchName) {
+      if (branchName.isNull()) {
+        this.branchName = null;
+      }
+      else if (branchName.isEmpty()) {
+        this.branchName = Optional.empty();
+      }
+      else {
+        this.branchName = Optional.of(branchName.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Name of the branch or office. Null when not resolvable.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage branchName(String branchName) {
+      this.branchName = Optional.ofNullable(branchName);
+      return this;
+    }
+
+    /**
+     * <p>Name of the branch or office. Null when not resolvable.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "branch_name",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage branchName(Optional<String> branchName) {
+      this.branchName = branchName;
       return this;
     }
 
@@ -498,7 +726,15 @@ public final class IbanValidateResponseBankData {
 
     @java.lang.Override
     public IbanValidateResponseBankData build() {
-      return new IbanValidateResponseBankData(bic, bank, bankCode, branchCode, country, countryIso2, city, address, account, sepa, additionalProperties);
+      return new IbanValidateResponseBankData(bic, bank, bankCode, branchCode, country, countryIso2, city, address, account, sepa, branchName, institType, postalCode, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("bic") || key.equalsIgnoreCase("bank") || key.equalsIgnoreCase("bank_code") || key.equalsIgnoreCase("branch_code") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("country_iso2") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("address") || key.equalsIgnoreCase("account") || key.equalsIgnoreCase("sepa") || key.equalsIgnoreCase("branch_name") || key.equalsIgnoreCase("instit_type") || key.equalsIgnoreCase("postal_code")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

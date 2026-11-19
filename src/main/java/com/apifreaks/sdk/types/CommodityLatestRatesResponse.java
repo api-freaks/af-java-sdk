@@ -161,7 +161,6 @@ public final class CommodityLatestRatesResponse {
 
     private Map<String, Double> rates = new LinkedHashMap<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -178,7 +177,6 @@ public final class CommodityLatestRatesResponse {
 
     /**
      * <p>API request success indicator. 'true' for successful requests.</p>
-     * <p>API request success indicator. 'true' for successful requests.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -189,7 +187,6 @@ public final class CommodityLatestRatesResponse {
     }
 
     /**
-     * <p>Unix timestamp indicating when the response was generated.</p>
      * <p>Unix timestamp indicating when the response was generated.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -280,6 +277,14 @@ public final class CommodityLatestRatesResponse {
     @java.lang.Override
     public CommodityLatestRatesResponse build() {
       return new CommodityLatestRatesResponse(success, timestamp, rates, metadata, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("success") || key.equalsIgnoreCase("timestamp") || key.equalsIgnoreCase("rates") || key.equalsIgnoreCase("metadata")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

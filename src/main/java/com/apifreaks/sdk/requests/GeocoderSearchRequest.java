@@ -262,7 +262,6 @@ public final class GeocoderSearchRequest {
 
     private Optional<String> acceptLanguage = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -284,7 +283,6 @@ public final class GeocoderSearchRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -295,7 +293,6 @@ public final class GeocoderSearchRequest {
     }
 
     /**
-     * <p>Free-form search query, e.g. Wembley Stadium, London</p>
      * <p>Free-form search query, e.g. Wembley Stadium, London</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -466,6 +463,14 @@ public final class GeocoderSearchRequest {
     @java.lang.Override
     public GeocoderSearchRequest build() {
       return new GeocoderSearchRequest(acceptLanguage, apiKey, format, query, limit, minLat, maxLat, minLon, maxLon, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("query") || key.equalsIgnoreCase("limit") || key.equalsIgnoreCase("min_lat") || key.equalsIgnoreCase("max_lat") || key.equalsIgnoreCase("min_lon") || key.equalsIgnoreCase("max_lon")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

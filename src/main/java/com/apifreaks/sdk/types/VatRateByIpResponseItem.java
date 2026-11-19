@@ -16,9 +16,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Float;
 import java.lang.Object;
 import java.lang.String;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -38,19 +36,22 @@ public final class VatRateByIpResponseItem {
 
   private final float standardRate;
 
-  private final List<Float> reducedRate;
+  private final Optional<List<Float>> reducedRate;
 
   private final Optional<List<Float>> superReducedRate;
 
   private final Optional<Float> parkingRate;
 
-  private final Map<String, Float> categories;
+  private final Optional<Map<String, Float>> categories;
+
+  private final Optional<String> state;
 
   private final Map<String, Object> additionalProperties;
 
   private VatRateByIpResponseItem(String country, String type, String currency, float standardRate,
-      List<Float> reducedRate, Optional<List<Float>> superReducedRate, Optional<Float> parkingRate,
-      Map<String, Float> categories, Map<String, Object> additionalProperties) {
+      Optional<List<Float>> reducedRate, Optional<List<Float>> superReducedRate,
+      Optional<Float> parkingRate, Optional<Map<String, Float>> categories, Optional<String> state,
+      Map<String, Object> additionalProperties) {
     this.country = country;
     this.type = type;
     this.currency = currency;
@@ -59,6 +60,7 @@ public final class VatRateByIpResponseItem {
     this.superReducedRate = superReducedRate;
     this.parkingRate = parkingRate;
     this.categories = categories;
+    this.state = state;
     this.additionalProperties = additionalProperties;
   }
 
@@ -83,7 +85,7 @@ public final class VatRateByIpResponseItem {
   }
 
   @JsonProperty("reduced_rate")
-  public List<Float> getReducedRate() {
+  public Optional<List<Float>> getReducedRate() {
     return reducedRate;
   }
 
@@ -101,8 +103,16 @@ public final class VatRateByIpResponseItem {
   }
 
   @JsonProperty("categories")
-  public Map<String, Float> getCategories() {
+  public Optional<Map<String, Float>> getCategories() {
     return categories;
+  }
+
+  /**
+   * @return State or region resolved from the IP address, for countries with sub-national tax rates (e.g. US). Only present when applicable.
+   */
+  @JsonProperty("state")
+  public Optional<String> getState() {
+    return state;
   }
 
   @java.lang.Override
@@ -117,12 +127,12 @@ public final class VatRateByIpResponseItem {
   }
 
   private boolean equalTo(VatRateByIpResponseItem other) {
-    return country.equals(other.country) && type.equals(other.type) && currency.equals(other.currency) && standardRate == other.standardRate && reducedRate.equals(other.reducedRate) && superReducedRate.equals(other.superReducedRate) && parkingRate.equals(other.parkingRate) && categories.equals(other.categories);
+    return country.equals(other.country) && type.equals(other.type) && currency.equals(other.currency) && standardRate == other.standardRate && reducedRate.equals(other.reducedRate) && superReducedRate.equals(other.superReducedRate) && parkingRate.equals(other.parkingRate) && categories.equals(other.categories) && state.equals(other.state);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.country, this.type, this.currency, this.standardRate, this.reducedRate, this.superReducedRate, this.parkingRate, this.categories);
+    return Objects.hash(this.country, this.type, this.currency, this.standardRate, this.reducedRate, this.superReducedRate, this.parkingRate, this.categories, this.state);
   }
 
   @java.lang.Override
@@ -159,11 +169,9 @@ public final class VatRateByIpResponseItem {
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
 
+    _FinalStage reducedRate(Optional<List<Float>> reducedRate);
+
     _FinalStage reducedRate(List<Float> reducedRate);
-
-    _FinalStage addReducedRate(Float reducedRate);
-
-    _FinalStage addAllReducedRate(List<Float> reducedRate);
 
     /**
      * <p>Optional super-reduced VAT rates applicable in specific categories.</p>
@@ -176,11 +184,16 @@ public final class VatRateByIpResponseItem {
 
     _FinalStage parkingRate(Float parkingRate);
 
+    _FinalStage categories(Optional<Map<String, Float>> categories);
+
     _FinalStage categories(Map<String, Float> categories);
 
-    _FinalStage putAllCategories(Map<String, Float> categories);
+    /**
+     * <p>State or region resolved from the IP address, for countries with sub-national tax rates (e.g. US). Only present when applicable.</p>
+     */
+    _FinalStage state(Optional<String> state);
 
-    _FinalStage categories(String key, Float value);
+    _FinalStage state(String state);
   }
 
   @JsonIgnoreProperties(
@@ -195,15 +208,16 @@ public final class VatRateByIpResponseItem {
 
     private float standardRate;
 
-    private Map<String, Float> categories = new LinkedHashMap<>();
+    private Optional<String> state = Optional.empty();
+
+    private Optional<Map<String, Float>> categories = Optional.empty();
 
     private Optional<Float> parkingRate = Optional.empty();
 
     private Optional<List<Float>> superReducedRate = Optional.empty();
 
-    private List<Float> reducedRate = new ArrayList<>();
+    private Optional<List<Float>> reducedRate = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -219,6 +233,7 @@ public final class VatRateByIpResponseItem {
       superReducedRate(other.getSuperReducedRate());
       parkingRate(other.getParkingRate());
       categories(other.getCategories());
+      state(other.getState());
       return this;
     }
 
@@ -250,17 +265,32 @@ public final class VatRateByIpResponseItem {
       return this;
     }
 
+    /**
+     * <p>State or region resolved from the IP address, for countries with sub-national tax rates (e.g. US). Only present when applicable.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
     @java.lang.Override
-    public _FinalStage categories(String key, Float value) {
-      this.categories.put(key, value);
+    public _FinalStage state(String state) {
+      this.state = Optional.ofNullable(state);
+      return this;
+    }
+
+    /**
+     * <p>State or region resolved from the IP address, for countries with sub-national tax rates (e.g. US). Only present when applicable.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "state",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage state(Optional<String> state) {
+      this.state = state;
       return this;
     }
 
     @java.lang.Override
-    public _FinalStage putAllCategories(Map<String, Float> categories) {
-      if (categories != null) {
-        this.categories.putAll(categories);
-      }
+    public _FinalStage categories(Map<String, Float> categories) {
+      this.categories = Optional.ofNullable(categories);
       return this;
     }
 
@@ -269,11 +299,8 @@ public final class VatRateByIpResponseItem {
         value = "categories",
         nulls = Nulls.SKIP
     )
-    public _FinalStage categories(Map<String, Float> categories) {
-      this.categories.clear();
-      if (categories != null) {
-        this.categories.putAll(categories);
-      }
+    public _FinalStage categories(Optional<Map<String, Float>> categories) {
+      this.categories = categories;
       return this;
     }
 
@@ -317,16 +344,8 @@ public final class VatRateByIpResponseItem {
     }
 
     @java.lang.Override
-    public _FinalStage addAllReducedRate(List<Float> reducedRate) {
-      if (reducedRate != null) {
-        this.reducedRate.addAll(reducedRate);
-      }
-      return this;
-    }
-
-    @java.lang.Override
-    public _FinalStage addReducedRate(Float reducedRate) {
-      this.reducedRate.add(reducedRate);
+    public _FinalStage reducedRate(List<Float> reducedRate) {
+      this.reducedRate = Optional.ofNullable(reducedRate);
       return this;
     }
 
@@ -335,17 +354,22 @@ public final class VatRateByIpResponseItem {
         value = "reduced_rate",
         nulls = Nulls.SKIP
     )
-    public _FinalStage reducedRate(List<Float> reducedRate) {
-      this.reducedRate.clear();
-      if (reducedRate != null) {
-        this.reducedRate.addAll(reducedRate);
-      }
+    public _FinalStage reducedRate(Optional<List<Float>> reducedRate) {
+      this.reducedRate = reducedRate;
       return this;
     }
 
     @java.lang.Override
     public VatRateByIpResponseItem build() {
-      return new VatRateByIpResponseItem(country, type, currency, standardRate, reducedRate, superReducedRate, parkingRate, categories, additionalProperties);
+      return new VatRateByIpResponseItem(country, type, currency, standardRate, reducedRate, superReducedRate, parkingRate, categories, state, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("country") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("currency") || key.equalsIgnoreCase("standard_rate") || key.equalsIgnoreCase("reduced_rate") || key.equalsIgnoreCase("super_reduced_rate") || key.equalsIgnoreCase("parking_rate") || key.equalsIgnoreCase("categories") || key.equalsIgnoreCase("state")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

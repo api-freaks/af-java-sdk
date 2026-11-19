@@ -291,7 +291,6 @@ public final class PdfSplitRequest {
 
     private Optional<List<String>> pages = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -312,7 +311,6 @@ public final class PdfSplitRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -538,6 +536,14 @@ public final class PdfSplitRequest {
     @java.lang.Override
     public PdfSplitRequest build() {
       return new PdfSplitRequest(pages, webhookAuthorization, apiKey, format, fileId, destroy, output, webhookUrl, webhookFailureNotification, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("pages") || key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("file_id") || key.equalsIgnoreCase("destroy") || key.equalsIgnoreCase("output") || key.equalsIgnoreCase("webhook_url") || key.equalsIgnoreCase("webhook_failure_notification")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

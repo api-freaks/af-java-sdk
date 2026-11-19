@@ -34,7 +34,7 @@ public final class TimezoneLookupV2ResponseTimeZone {
 
   private final String currentTime;
 
-  private final float currentTimeUnix;
+  private final double currentTimeUnix;
 
   private final String date;
 
@@ -83,7 +83,7 @@ public final class TimezoneLookupV2ResponseTimeZone {
   private final Map<String, Object> additionalProperties;
 
   private TimezoneLookupV2ResponseTimeZone(String name, float offset, float offsetWithDst,
-      String currentTime, float currentTimeUnix, String date, String dateTime, String dateTimeTxt,
+      String currentTime, double currentTimeUnix, String date, String dateTime, String dateTimeTxt,
       String dateTimeWti, String dateTimeYmd, String time24, String time12, int week, int month,
       int year, String yearAbbr, String currentTzAbbreviation, String currentTzFullName,
       String standardTzAbbreviation, String standardTzFullName, boolean isDst,
@@ -157,7 +157,7 @@ public final class TimezoneLookupV2ResponseTimeZone {
    * @return The Unix timestamp representing the date and time in seconds.
    */
   @JsonProperty("current_time_unix")
-  public float getCurrentTimeUnix() {
+  public double getCurrentTimeUnix() {
     return currentTimeUnix;
   }
 
@@ -400,7 +400,7 @@ public final class TimezoneLookupV2ResponseTimeZone {
     /**
      * <p>The Unix timestamp representing the date and time in seconds.</p>
      */
-    DateStage currentTimeUnix(float currentTimeUnix);
+    DateStage currentTimeUnix(double currentTimeUnix);
   }
 
   public interface DateStage {
@@ -577,7 +577,7 @@ public final class TimezoneLookupV2ResponseTimeZone {
 
     private String currentTime;
 
-    private float currentTimeUnix;
+    private double currentTimeUnix;
 
     private String date;
 
@@ -623,7 +623,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
 
     private Optional<String> dstTzAbbreviation = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -663,7 +662,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
 
     /**
      * <p>The IANA timezone name/identifier for the location.</p>
-     * <p>The IANA timezone name/identifier for the location.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -674,7 +672,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
     }
 
     /**
-     * <p>The Standard time zone offset from UTC in hours.</p>
      * <p>The Standard time zone offset from UTC in hours.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -687,7 +684,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
 
     /**
      * <p>The time zone offset from UTC in hours, accounting for DST.</p>
-     * <p>The time zone offset from UTC in hours, accounting for DST.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -698,7 +694,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
     }
 
     /**
-     * <p>The current date and time with timezone offset in YYYY-MM-DD HH:mm:ss.SSS±ZZZZ format.</p>
      * <p>The current date and time with timezone offset in YYYY-MM-DD HH:mm:ss.SSS±ZZZZ format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -711,18 +706,16 @@ public final class TimezoneLookupV2ResponseTimeZone {
 
     /**
      * <p>The Unix timestamp representing the date and time in seconds.</p>
-     * <p>The Unix timestamp representing the date and time in seconds.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("current_time_unix")
-    public DateStage currentTimeUnix(float currentTimeUnix) {
+    public DateStage currentTimeUnix(double currentTimeUnix) {
       this.currentTimeUnix = currentTimeUnix;
       return this;
     }
 
     /**
-     * <p>The current date in YYYY-MM-DD format.</p>
      * <p>The current date in YYYY-MM-DD format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -735,7 +728,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
 
     /**
      * <p>The current date and time in YYYY-MM-DD HH:mm:ss format.</p>
-     * <p>The current date and time in YYYY-MM-DD HH:mm:ss format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -746,7 +738,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
     }
 
     /**
-     * <p>The current date and time in descriptive format EEEE, MMMM dd, yyyy HH:mm:ss.</p>
      * <p>The current date and time in descriptive format EEEE, MMMM dd, yyyy HH:mm:ss.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -759,7 +750,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
 
     /**
      * <p>The date and time with time zone information in EEE, dd MMM yyyy HH:mm:ss Z format.</p>
-     * <p>The date and time with time zone information in EEE, dd MMM yyyy HH:mm:ss Z format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -770,7 +760,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
     }
 
     /**
-     * <p>The date and time with timezone offset in ISO 8601 format YYYY-MM-DDTHH:mm:ss±HHMM.</p>
      * <p>The date and time with timezone offset in ISO 8601 format YYYY-MM-DDTHH:mm:ss±HHMM.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -783,7 +772,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
 
     /**
      * <p>The current time in 24-hour format HH:mm:ss.</p>
-     * <p>The current time in 24-hour format HH:mm:ss.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -794,7 +782,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
     }
 
     /**
-     * <p>The current time in 12-hour format with AM/PM notation.</p>
      * <p>The current time in 12-hour format with AM/PM notation.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -807,7 +794,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
 
     /**
      * <p>The week number of the year (1-52).</p>
-     * <p>The week number of the year (1-52).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -818,7 +804,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
     }
 
     /**
-     * <p>The current month as a number (1-12).</p>
      * <p>The current month as a number (1-12).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -831,7 +816,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
 
     /**
      * <p>The four-digit current year.</p>
-     * <p>The four-digit current year.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -842,7 +826,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
     }
 
     /**
-     * <p>The two-digit abbreviation for the year.</p>
      * <p>The two-digit abbreviation for the year.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -855,7 +838,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
 
     /**
      * <p>Abbreviation of the time zone currently in effect (standard or DST).</p>
-     * <p>Abbreviation of the time zone currently in effect (standard or DST).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -866,7 +848,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
     }
 
     /**
-     * <p>Full name of the time zone currently in effect.</p>
      * <p>Full name of the time zone currently in effect.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -879,7 +860,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
 
     /**
      * <p>Abbreviation of the standard (non-DST) time zone.</p>
-     * <p>Abbreviation of the standard (non-DST) time zone.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -890,7 +870,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
     }
 
     /**
-     * <p>Full name of the standard (non-DST) time zone.</p>
      * <p>Full name of the standard (non-DST) time zone.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -903,7 +882,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
 
     /**
      * <p>Is the time zone in daylight savings?</p>
-     * <p>Is the time zone in daylight savings?</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -915,7 +893,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
 
     /**
      * <p>The amount of time added for daylight saving in hours.</p>
-     * <p>The amount of time added for daylight saving in hours.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -926,7 +903,6 @@ public final class TimezoneLookupV2ResponseTimeZone {
     }
 
     /**
-     * <p>Indicates whether DST is observed in the region.</p>
      * <p>Indicates whether DST is observed in the region.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -1032,6 +1008,14 @@ public final class TimezoneLookupV2ResponseTimeZone {
     @java.lang.Override
     public TimezoneLookupV2ResponseTimeZone build() {
       return new TimezoneLookupV2ResponseTimeZone(name, offset, offsetWithDst, currentTime, currentTimeUnix, date, dateTime, dateTimeTxt, dateTimeWti, dateTimeYmd, time24, time12, week, month, year, yearAbbr, currentTzAbbreviation, currentTzFullName, standardTzAbbreviation, standardTzFullName, isDst, dstTzAbbreviation, dstTzFullName, dstSavings, dstExists, dstStart, dstEnd, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("offset") || key.equalsIgnoreCase("offset_with_dst") || key.equalsIgnoreCase("current_time") || key.equalsIgnoreCase("current_time_unix") || key.equalsIgnoreCase("date") || key.equalsIgnoreCase("date_time") || key.equalsIgnoreCase("date_time_txt") || key.equalsIgnoreCase("date_time_wti") || key.equalsIgnoreCase("date_time_ymd") || key.equalsIgnoreCase("time_24") || key.equalsIgnoreCase("time_12") || key.equalsIgnoreCase("week") || key.equalsIgnoreCase("month") || key.equalsIgnoreCase("year") || key.equalsIgnoreCase("year_abbr") || key.equalsIgnoreCase("current_tz_abbreviation") || key.equalsIgnoreCase("current_tz_full_name") || key.equalsIgnoreCase("standard_tz_abbreviation") || key.equalsIgnoreCase("standard_tz_full_name") || key.equalsIgnoreCase("is_dst") || key.equalsIgnoreCase("dst_tz_abbreviation") || key.equalsIgnoreCase("dst_tz_full_name") || key.equalsIgnoreCase("dst_savings") || key.equalsIgnoreCase("dst_exists") || key.equalsIgnoreCase("dst_start") || key.equalsIgnoreCase("dst_end")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

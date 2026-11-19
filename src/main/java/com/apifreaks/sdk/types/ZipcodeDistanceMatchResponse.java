@@ -91,7 +91,6 @@ public final class ZipcodeDistanceMatchResponse {
 
     private Optional<List<ZipcodeDistanceMatchResponseResultsItem>> results = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -136,6 +135,14 @@ public final class ZipcodeDistanceMatchResponse {
 
     public ZipcodeDistanceMatchResponse build() {
       return new ZipcodeDistanceMatchResponse(resultCount, results, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("result_count") || key.equalsIgnoreCase("results")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

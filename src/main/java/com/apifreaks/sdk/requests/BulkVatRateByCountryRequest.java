@@ -139,7 +139,6 @@ public final class BulkVatRateByCountryRequest {
 
     private Optional<BulkVatRateByCountryRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -154,7 +153,6 @@ public final class BulkVatRateByCountryRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -218,6 +216,14 @@ public final class BulkVatRateByCountryRequest {
     @java.lang.Override
     public BulkVatRateByCountryRequest build() {
       return new BulkVatRateByCountryRequest(apiKey, format, countries, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("countries")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

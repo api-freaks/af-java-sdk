@@ -108,7 +108,6 @@ public final class DomainReputationResponseTrustSignalsSignals {
 
     private List<DomainReputationResponseTrustSignalsSignalsNeutralItem> neutral = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -209,6 +208,14 @@ public final class DomainReputationResponseTrustSignalsSignals {
 
     public DomainReputationResponseTrustSignalsSignals build() {
       return new DomainReputationResponseTrustSignalsSignals(positive, negative, neutral, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("positive") || key.equalsIgnoreCase("negative") || key.equalsIgnoreCase("neutral")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

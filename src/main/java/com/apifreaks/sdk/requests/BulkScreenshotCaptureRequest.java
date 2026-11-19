@@ -138,7 +138,6 @@ public final class BulkScreenshotCaptureRequest {
 
     private Optional<BulkScreenshotCaptureRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -153,7 +152,6 @@ public final class BulkScreenshotCaptureRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -221,6 +219,14 @@ public final class BulkScreenshotCaptureRequest {
     @java.lang.Override
     public BulkScreenshotCaptureRequest build() {
       return new BulkScreenshotCaptureRequest(apiKey, format, urls, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("urls")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

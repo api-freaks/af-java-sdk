@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
@@ -39,6 +40,12 @@ public final class AsnWhoisLookupResponseParsedWhoisResponse {
 
   private final List<AsnWhoisLookupResponseParsedWhoisResponseAbuseContactsItem> abuseContacts;
 
+  private final Optional<String> queryTime;
+
+  private final Optional<String> rWhoisRawResponse;
+
+  private final Optional<String> whoisRawResponse;
+
   private final Map<String, Object> additionalProperties;
 
   private AsnWhoisLookupResponseParsedWhoisResponse(boolean status, String whoisServer,
@@ -46,13 +53,17 @@ public final class AsnWhoisLookupResponseParsedWhoisResponse {
       AsnWhoisLookupResponseParsedWhoisResponseOrganization organization,
       List<AsnWhoisLookupResponseParsedWhoisResponseTechnicalContactsItem> technicalContacts,
       List<AsnWhoisLookupResponseParsedWhoisResponseAbuseContactsItem> abuseContacts,
-      Map<String, Object> additionalProperties) {
+      Optional<String> queryTime, Optional<String> rWhoisRawResponse,
+      Optional<String> whoisRawResponse, Map<String, Object> additionalProperties) {
     this.status = status;
     this.whoisServer = whoisServer;
     this.autNums = autNums;
     this.organization = organization;
     this.technicalContacts = technicalContacts;
     this.abuseContacts = abuseContacts;
+    this.queryTime = queryTime;
+    this.rWhoisRawResponse = rWhoisRawResponse;
+    this.whoisRawResponse = whoisRawResponse;
     this.additionalProperties = additionalProperties;
   }
 
@@ -87,6 +98,30 @@ public final class AsnWhoisLookupResponseParsedWhoisResponse {
     return abuseContacts;
   }
 
+  /**
+   * @return Timestamp when the WHOIS query was executed, in <code>YYYY-MM-DD HH:mm:ss</code> format — not ISO 8601 (no <code>T</code> separator, no milliseconds, no <code>Z</code>).
+   */
+  @JsonProperty("query_time")
+  public Optional<String> getQueryTime() {
+    return queryTime;
+  }
+
+  /**
+   * @return Raw referral WHOIS (rwhois) text, when the registry delegates to a referral server.
+   */
+  @JsonProperty("r_whois_raw_response")
+  public Optional<String> getRWhoisRawResponse() {
+    return rWhoisRawResponse;
+  }
+
+  /**
+   * @return Unparsed raw WHOIS text, when returned separately from whoisResponse.
+   */
+  @JsonProperty("whois_raw_response")
+  public Optional<String> getWhoisRawResponse() {
+    return whoisRawResponse;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -99,12 +134,12 @@ public final class AsnWhoisLookupResponseParsedWhoisResponse {
   }
 
   private boolean equalTo(AsnWhoisLookupResponseParsedWhoisResponse other) {
-    return status == other.status && whoisServer.equals(other.whoisServer) && autNums.equals(other.autNums) && organization.equals(other.organization) && technicalContacts.equals(other.technicalContacts) && abuseContacts.equals(other.abuseContacts);
+    return status == other.status && whoisServer.equals(other.whoisServer) && autNums.equals(other.autNums) && organization.equals(other.organization) && technicalContacts.equals(other.technicalContacts) && abuseContacts.equals(other.abuseContacts) && queryTime.equals(other.queryTime) && rWhoisRawResponse.equals(other.rWhoisRawResponse) && whoisRawResponse.equals(other.whoisRawResponse);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.status, this.whoisServer, this.autNums, this.organization, this.technicalContacts, this.abuseContacts);
+    return Objects.hash(this.status, this.whoisServer, this.autNums, this.organization, this.technicalContacts, this.abuseContacts, this.queryTime, this.rWhoisRawResponse, this.whoisRawResponse);
   }
 
   @java.lang.Override
@@ -161,6 +196,27 @@ public final class AsnWhoisLookupResponseParsedWhoisResponse {
 
     _FinalStage addAllAbuseContacts(
         List<AsnWhoisLookupResponseParsedWhoisResponseAbuseContactsItem> abuseContacts);
+
+    /**
+     * <p>Timestamp when the WHOIS query was executed, in <code>YYYY-MM-DD HH:mm:ss</code> format — not ISO 8601 (no <code>T</code> separator, no milliseconds, no <code>Z</code>).</p>
+     */
+    _FinalStage queryTime(Optional<String> queryTime);
+
+    _FinalStage queryTime(String queryTime);
+
+    /**
+     * <p>Raw referral WHOIS (rwhois) text, when the registry delegates to a referral server.</p>
+     */
+    _FinalStage rWhoisRawResponse(Optional<String> rWhoisRawResponse);
+
+    _FinalStage rWhoisRawResponse(String rWhoisRawResponse);
+
+    /**
+     * <p>Unparsed raw WHOIS text, when returned separately from whoisResponse.</p>
+     */
+    _FinalStage whoisRawResponse(Optional<String> whoisRawResponse);
+
+    _FinalStage whoisRawResponse(String whoisRawResponse);
   }
 
   @JsonIgnoreProperties(
@@ -173,13 +229,18 @@ public final class AsnWhoisLookupResponseParsedWhoisResponse {
 
     private AsnWhoisLookupResponseParsedWhoisResponseOrganization organization;
 
+    private Optional<String> whoisRawResponse = Optional.empty();
+
+    private Optional<String> rWhoisRawResponse = Optional.empty();
+
+    private Optional<String> queryTime = Optional.empty();
+
     private List<AsnWhoisLookupResponseParsedWhoisResponseAbuseContactsItem> abuseContacts = new ArrayList<>();
 
     private List<AsnWhoisLookupResponseParsedWhoisResponseTechnicalContactsItem> technicalContacts = new ArrayList<>();
 
     private List<AsnWhoisLookupResponseParsedWhoisResponseAutNumsItem> autNums = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -193,6 +254,9 @@ public final class AsnWhoisLookupResponseParsedWhoisResponse {
       organization(other.getOrganization());
       technicalContacts(other.getTechnicalContacts());
       abuseContacts(other.getAbuseContacts());
+      queryTime(other.getQueryTime());
+      rWhoisRawResponse(other.getRWhoisRawResponse());
+      whoisRawResponse(other.getWhoisRawResponse());
       return this;
     }
 
@@ -215,6 +279,75 @@ public final class AsnWhoisLookupResponseParsedWhoisResponse {
     public _FinalStage organization(
         @NotNull AsnWhoisLookupResponseParsedWhoisResponseOrganization organization) {
       this.organization = Objects.requireNonNull(organization, "organization must not be null");
+      return this;
+    }
+
+    /**
+     * <p>Unparsed raw WHOIS text, when returned separately from whoisResponse.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage whoisRawResponse(String whoisRawResponse) {
+      this.whoisRawResponse = Optional.ofNullable(whoisRawResponse);
+      return this;
+    }
+
+    /**
+     * <p>Unparsed raw WHOIS text, when returned separately from whoisResponse.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "whois_raw_response",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage whoisRawResponse(Optional<String> whoisRawResponse) {
+      this.whoisRawResponse = whoisRawResponse;
+      return this;
+    }
+
+    /**
+     * <p>Raw referral WHOIS (rwhois) text, when the registry delegates to a referral server.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage rWhoisRawResponse(String rWhoisRawResponse) {
+      this.rWhoisRawResponse = Optional.ofNullable(rWhoisRawResponse);
+      return this;
+    }
+
+    /**
+     * <p>Raw referral WHOIS (rwhois) text, when the registry delegates to a referral server.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "r_whois_raw_response",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage rWhoisRawResponse(Optional<String> rWhoisRawResponse) {
+      this.rWhoisRawResponse = rWhoisRawResponse;
+      return this;
+    }
+
+    /**
+     * <p>Timestamp when the WHOIS query was executed, in <code>YYYY-MM-DD HH:mm:ss</code> format — not ISO 8601 (no <code>T</code> separator, no milliseconds, no <code>Z</code>).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage queryTime(String queryTime) {
+      this.queryTime = Optional.ofNullable(queryTime);
+      return this;
+    }
+
+    /**
+     * <p>Timestamp when the WHOIS query was executed, in <code>YYYY-MM-DD HH:mm:ss</code> format — not ISO 8601 (no <code>T</code> separator, no milliseconds, no <code>Z</code>).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "query_time",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage queryTime(Optional<String> queryTime) {
+      this.queryTime = queryTime;
       return this;
     }
 
@@ -308,7 +441,15 @@ public final class AsnWhoisLookupResponseParsedWhoisResponse {
 
     @java.lang.Override
     public AsnWhoisLookupResponseParsedWhoisResponse build() {
-      return new AsnWhoisLookupResponseParsedWhoisResponse(status, whoisServer, autNums, organization, technicalContacts, abuseContacts, additionalProperties);
+      return new AsnWhoisLookupResponseParsedWhoisResponse(status, whoisServer, autNums, organization, technicalContacts, abuseContacts, queryTime, rWhoisRawResponse, whoisRawResponse, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("status") || key.equalsIgnoreCase("whois_server") || key.equalsIgnoreCase("aut_nums") || key.equalsIgnoreCase("organization") || key.equalsIgnoreCase("technical_contacts") || key.equalsIgnoreCase("abuse_contacts") || key.equalsIgnoreCase("query_time") || key.equalsIgnoreCase("r_whois_raw_response") || key.equalsIgnoreCase("whois_raw_response")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

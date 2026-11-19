@@ -220,7 +220,6 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItem {
 
     private Optional<String> domainName = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -240,7 +239,6 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItem {
 
     /**
      * <p>Indicates whether the query was processed successfully.</p>
-     * <p>Indicates whether the query was processed successfully.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -251,7 +249,6 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItem {
     }
 
     /**
-     * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
      * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -383,6 +380,14 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItem {
     @java.lang.Override
     public BulkDomainDnsLookupResponseBulkDnsInfoItem build() {
       return new BulkDomainDnsLookupResponseBulkDnsInfoItem(status, queryTime, domainName, domainRegistered, ipAddress, dnsTypes, dnsRecords, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("status") || key.equalsIgnoreCase("queryTime") || key.equalsIgnoreCase("domainName") || key.equalsIgnoreCase("domainRegistered") || key.equalsIgnoreCase("ipAddress") || key.equalsIgnoreCase("dnsTypes") || key.equalsIgnoreCase("dnsRecords")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

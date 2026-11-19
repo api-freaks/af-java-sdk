@@ -33,11 +33,11 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItem {
 
   private final String domainName;
 
-  private final String queryTime;
+  private final Optional<String> queryTime;
 
   private final String whoisServer;
 
-  private final DomainWhoisHistoryResponseWhoisDomainsHistoricalItemDomainRegistered domainRegistered;
+  private final Optional<DomainWhoisHistoryResponseWhoisDomainsHistoricalItemDomainRegistered> domainRegistered;
 
   private final Optional<String> createDate;
 
@@ -68,8 +68,8 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItem {
   private final Map<String, Object> additionalProperties;
 
   private DomainWhoisHistoryResponseWhoisDomainsHistoricalItem(int num, boolean status,
-      String domainName, String queryTime, String whoisServer,
-      DomainWhoisHistoryResponseWhoisDomainsHistoricalItemDomainRegistered domainRegistered,
+      String domainName, Optional<String> queryTime, String whoisServer,
+      Optional<DomainWhoisHistoryResponseWhoisDomainsHistoricalItemDomainRegistered> domainRegistered,
       Optional<String> createDate, Optional<String> updateDate, Optional<String> expiryDate,
       Optional<DomainWhoisHistoryResponseWhoisDomainsHistoricalItemDomainRegistrar> domainRegistrar,
       Optional<DomainWhoisHistoryResponseWhoisDomainsHistoricalItemResellerContact> resellerContact,
@@ -131,7 +131,7 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItem {
    * @return The timestamp when the query was made (format YYYY-MM-DD HH:mm:ss, not ISO 8601).
    */
   @JsonProperty("query_time")
-  public String getQueryTime() {
+  public Optional<String> getQueryTime() {
     return queryTime;
   }
 
@@ -147,7 +147,7 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItem {
    * @return Domain registration status.
    */
   @JsonProperty("domain_registered")
-  public DomainWhoisHistoryResponseWhoisDomainsHistoricalItemDomainRegistered getDomainRegistered(
+  public Optional<DomainWhoisHistoryResponseWhoisDomainsHistoricalItemDomainRegistered> getDomainRegistered(
       ) {
     return domainRegistered;
   }
@@ -282,29 +282,14 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItem {
     /**
      * <p>Domain name which was queried.</p>
      */
-    QueryTimeStage domainName(@NotNull String domainName);
-  }
-
-  public interface QueryTimeStage {
-    /**
-     * <p>The timestamp when the query was made (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
-     */
-    WhoisServerStage queryTime(@NotNull String queryTime);
+    WhoisServerStage domainName(@NotNull String domainName);
   }
 
   public interface WhoisServerStage {
     /**
      * <p>The WHOIS server that provided the domain information.</p>
      */
-    DomainRegisteredStage whoisServer(@NotNull String whoisServer);
-  }
-
-  public interface DomainRegisteredStage {
-    /**
-     * <p>Domain registration status.</p>
-     */
-    _FinalStage domainRegistered(
-        @NotNull DomainWhoisHistoryResponseWhoisDomainsHistoricalItemDomainRegistered domainRegistered);
+    _FinalStage whoisServer(@NotNull String whoisServer);
   }
 
   public interface _FinalStage {
@@ -313,6 +298,22 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItem {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
+
+    /**
+     * <p>The timestamp when the query was made (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
+     */
+    _FinalStage queryTime(Optional<String> queryTime);
+
+    _FinalStage queryTime(String queryTime);
+
+    /**
+     * <p>Domain registration status.</p>
+     */
+    _FinalStage domainRegistered(
+        Optional<DomainWhoisHistoryResponseWhoisDomainsHistoricalItemDomainRegistered> domainRegistered);
+
+    _FinalStage domainRegistered(
+        DomainWhoisHistoryResponseWhoisDomainsHistoricalItemDomainRegistered domainRegistered);
 
     /**
      * <p>Date when the domain was initially registered.</p>
@@ -393,18 +394,14 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItem {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements NumStage, StatusStage, DomainNameStage, QueryTimeStage, WhoisServerStage, DomainRegisteredStage, _FinalStage {
+  public static final class Builder implements NumStage, StatusStage, DomainNameStage, WhoisServerStage, _FinalStage {
     private int num;
 
     private boolean status;
 
     private String domainName;
 
-    private String queryTime;
-
     private String whoisServer;
-
-    private DomainWhoisHistoryResponseWhoisDomainsHistoricalItemDomainRegistered domainRegistered;
 
     private Optional<DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryData> registryData = Optional.empty();
 
@@ -432,7 +429,10 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItem {
 
     private Optional<String> createDate = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<DomainWhoisHistoryResponseWhoisDomainsHistoricalItemDomainRegistered> domainRegistered = Optional.empty();
+
+    private Optional<String> queryTime = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -464,7 +464,6 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItem {
 
     /**
      * <p>Shows the number of the record in the array.</p>
-     * <p>Shows the number of the record in the array.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -475,7 +474,6 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItem {
     }
 
     /**
-     * <p>Always true.</p>
      * <p>Always true.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -488,50 +486,23 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItem {
 
     /**
      * <p>Domain name which was queried.</p>
-     * <p>Domain name which was queried.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("domain_name")
-    public QueryTimeStage domainName(@NotNull String domainName) {
+    public WhoisServerStage domainName(@NotNull String domainName) {
       this.domainName = Objects.requireNonNull(domainName, "domainName must not be null");
       return this;
     }
 
     /**
-     * <p>The timestamp when the query was made (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
-     * <p>The timestamp when the query was made (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    @JsonSetter("query_time")
-    public WhoisServerStage queryTime(@NotNull String queryTime) {
-      this.queryTime = Objects.requireNonNull(queryTime, "queryTime must not be null");
-      return this;
-    }
-
-    /**
-     * <p>The WHOIS server that provided the domain information.</p>
      * <p>The WHOIS server that provided the domain information.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("whois_server")
-    public DomainRegisteredStage whoisServer(@NotNull String whoisServer) {
+    public _FinalStage whoisServer(@NotNull String whoisServer) {
       this.whoisServer = Objects.requireNonNull(whoisServer, "whoisServer must not be null");
-      return this;
-    }
-
-    /**
-     * <p>Domain registration status.</p>
-     * <p>Domain registration status.</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    @JsonSetter("domain_registered")
-    public _FinalStage domainRegistered(
-        @NotNull DomainWhoisHistoryResponseWhoisDomainsHistoricalItemDomainRegistered domainRegistered) {
-      this.domainRegistered = Objects.requireNonNull(domainRegistered, "domainRegistered must not be null");
       return this;
     }
 
@@ -778,9 +749,65 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItem {
       return this;
     }
 
+    /**
+     * <p>Domain registration status.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage domainRegistered(
+        DomainWhoisHistoryResponseWhoisDomainsHistoricalItemDomainRegistered domainRegistered) {
+      this.domainRegistered = Optional.ofNullable(domainRegistered);
+      return this;
+    }
+
+    /**
+     * <p>Domain registration status.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "domain_registered",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage domainRegistered(
+        Optional<DomainWhoisHistoryResponseWhoisDomainsHistoricalItemDomainRegistered> domainRegistered) {
+      this.domainRegistered = domainRegistered;
+      return this;
+    }
+
+    /**
+     * <p>The timestamp when the query was made (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage queryTime(String queryTime) {
+      this.queryTime = Optional.ofNullable(queryTime);
+      return this;
+    }
+
+    /**
+     * <p>The timestamp when the query was made (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "query_time",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage queryTime(Optional<String> queryTime) {
+      this.queryTime = queryTime;
+      return this;
+    }
+
     @java.lang.Override
     public DomainWhoisHistoryResponseWhoisDomainsHistoricalItem build() {
       return new DomainWhoisHistoryResponseWhoisDomainsHistoricalItem(num, status, domainName, queryTime, whoisServer, domainRegistered, createDate, updateDate, expiryDate, domainRegistrar, resellerContact, registrantContact, administrativeContact, technicalContact, billingContact, nameServers, domainStatus, whoisRawDomain, registryData, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("num") || key.equalsIgnoreCase("status") || key.equalsIgnoreCase("domain_name") || key.equalsIgnoreCase("query_time") || key.equalsIgnoreCase("whois_server") || key.equalsIgnoreCase("domain_registered") || key.equalsIgnoreCase("create_date") || key.equalsIgnoreCase("update_date") || key.equalsIgnoreCase("expiry_date") || key.equalsIgnoreCase("domain_registrar") || key.equalsIgnoreCase("reseller_contact") || key.equalsIgnoreCase("registrant_contact") || key.equalsIgnoreCase("administrative_contact") || key.equalsIgnoreCase("technical_contact") || key.equalsIgnoreCase("billing_contact") || key.equalsIgnoreCase("name_servers") || key.equalsIgnoreCase("domain_status") || key.equalsIgnoreCase("whois_raw_domain") || key.equalsIgnoreCase("registry_data")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

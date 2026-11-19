@@ -48,14 +48,14 @@ public final class DomainDnsLookupResponseDnsRecordsItemAdmin {
 
   private final int retry;
 
-  private final int serial;
+  private final long serial;
 
   private final Map<String, Object> additionalProperties;
 
   private DomainDnsLookupResponseDnsRecordsItemAdmin(String name, int type,
       DomainDnsLookupResponseDnsRecordsItemAdminDnsType dnsType, int ttl, String rawText,
       int rRsetType, String admin, String host, int expire, int minimum, int refresh, int retry,
-      int serial, Map<String, Object> additionalProperties) {
+      long serial, Map<String, Object> additionalProperties) {
     this.name = name;
     this.type = type;
     this.dnsType = dnsType;
@@ -133,7 +133,7 @@ public final class DomainDnsLookupResponseDnsRecordsItemAdmin {
   }
 
   @JsonProperty("serial")
-  public int getSerial() {
+  public long getSerial() {
     return serial;
   }
 
@@ -217,7 +217,7 @@ public final class DomainDnsLookupResponseDnsRecordsItemAdmin {
   }
 
   public interface SerialStage {
-    _FinalStage serial(int serial);
+    _FinalStage serial(long serial);
   }
 
   public interface _FinalStage {
@@ -256,9 +256,8 @@ public final class DomainDnsLookupResponseDnsRecordsItemAdmin {
 
     private int retry;
 
-    private int serial;
+    private long serial;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -368,7 +367,7 @@ public final class DomainDnsLookupResponseDnsRecordsItemAdmin {
 
     @java.lang.Override
     @JsonSetter("serial")
-    public _FinalStage serial(int serial) {
+    public _FinalStage serial(long serial) {
       this.serial = serial;
       return this;
     }
@@ -376,6 +375,14 @@ public final class DomainDnsLookupResponseDnsRecordsItemAdmin {
     @java.lang.Override
     public DomainDnsLookupResponseDnsRecordsItemAdmin build() {
       return new DomainDnsLookupResponseDnsRecordsItemAdmin(name, type, dnsType, ttl, rawText, rRsetType, admin, host, expire, minimum, refresh, retry, serial, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("dnsType") || key.equalsIgnoreCase("ttl") || key.equalsIgnoreCase("rawText") || key.equalsIgnoreCase("rRsetType") || key.equalsIgnoreCase("admin") || key.equalsIgnoreCase("host") || key.equalsIgnoreCase("expire") || key.equalsIgnoreCase("minimum") || key.equalsIgnoreCase("refresh") || key.equalsIgnoreCase("retry") || key.equalsIgnoreCase("serial")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

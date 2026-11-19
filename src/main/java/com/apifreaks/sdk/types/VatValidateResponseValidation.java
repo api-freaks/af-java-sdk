@@ -124,7 +124,6 @@ public final class VatValidateResponseValidation {
 
     private Optional<String> consultationNumber = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -178,6 +177,14 @@ public final class VatValidateResponseValidation {
     @java.lang.Override
     public VatValidateResponseValidation build() {
       return new VatValidateResponseValidation(isValid, consultationNumber, consultationAuthority, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("is_valid") || key.equalsIgnoreCase("consultation_number") || key.equalsIgnoreCase("consultation_authority")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

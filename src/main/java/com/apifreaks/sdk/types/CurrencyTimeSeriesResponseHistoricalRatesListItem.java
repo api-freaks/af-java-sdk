@@ -118,7 +118,6 @@ public final class CurrencyTimeSeriesResponseHistoricalRatesListItem {
 
     private Map<String, String> rates = new LinkedHashMap<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -132,7 +131,6 @@ public final class CurrencyTimeSeriesResponseHistoricalRatesListItem {
     }
 
     /**
-     * <p>Date of the specific exchange rates.</p>
      * <p>Date of the specific exchange rates.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -184,6 +182,14 @@ public final class CurrencyTimeSeriesResponseHistoricalRatesListItem {
     @java.lang.Override
     public CurrencyTimeSeriesResponseHistoricalRatesListItem build() {
       return new CurrencyTimeSeriesResponseHistoricalRatesListItem(date, rates, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("date") || key.equalsIgnoreCase("rates")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

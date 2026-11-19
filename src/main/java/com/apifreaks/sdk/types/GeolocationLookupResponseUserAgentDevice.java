@@ -105,7 +105,6 @@ public final class GeolocationLookupResponseUserAgentDevice {
 
     private Optional<String> cpu = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -177,6 +176,14 @@ public final class GeolocationLookupResponseUserAgentDevice {
 
     public GeolocationLookupResponseUserAgentDevice build() {
       return new GeolocationLookupResponseUserAgentDevice(name, type, brand, cpu, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("brand") || key.equalsIgnoreCase("cpu")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

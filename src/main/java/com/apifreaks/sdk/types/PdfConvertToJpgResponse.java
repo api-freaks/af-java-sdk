@@ -105,7 +105,6 @@ public final class PdfConvertToJpgResponse {
 
     private Optional<List<String>> inputIds = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -144,6 +143,14 @@ public final class PdfConvertToJpgResponse {
     @java.lang.Override
     public PdfConvertToJpgResponse build() {
       return new PdfConvertToJpgResponse(taskId, inputIds, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("taskId") || key.equalsIgnoreCase("inputIds")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

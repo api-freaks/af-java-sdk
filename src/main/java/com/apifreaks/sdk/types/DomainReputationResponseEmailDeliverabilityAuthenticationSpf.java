@@ -4,20 +4,24 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.Nullable;
+import com.apifreaks.sdk.core.NullableNonemptyFilter;
 import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import org.jetbrains.annotations.NotNull;
+import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
@@ -26,14 +30,14 @@ import org.jetbrains.annotations.NotNull;
 public final class DomainReputationResponseEmailDeliverabilityAuthenticationSpf {
   private final boolean present;
 
-  private final String policy;
+  private final Optional<String> policy;
 
-  private final String record;
+  private final Optional<String> record;
 
   private final Map<String, Object> additionalProperties;
 
   private DomainReputationResponseEmailDeliverabilityAuthenticationSpf(boolean present,
-      String policy, String record, Map<String, Object> additionalProperties) {
+      Optional<String> policy, Optional<String> record, Map<String, Object> additionalProperties) {
     this.present = present;
     this.policy = policy;
     this.record = record;
@@ -51,16 +55,40 @@ public final class DomainReputationResponseEmailDeliverabilityAuthenticationSpf 
   /**
    * @return SPF enforcement policy qualifier found in the record (e.g. ~all, -all).
    */
-  @JsonProperty("policy")
-  public String getPolicy() {
+  @JsonIgnore
+  public Optional<String> getPolicy() {
+    if (policy == null) {
+      return Optional.empty();
+    }
     return policy;
   }
 
   /**
    * @return Raw SPF DNS TXT record string.
    */
+  @JsonIgnore
+  public Optional<String> getRecord() {
+    if (record == null) {
+      return Optional.empty();
+    }
+    return record;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("policy")
+  private Optional<String> _getPolicy() {
+    return policy;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
   @JsonProperty("record")
-  public String getRecord() {
+  private Optional<String> _getRecord() {
     return record;
   }
 
@@ -97,23 +125,9 @@ public final class DomainReputationResponseEmailDeliverabilityAuthenticationSpf 
     /**
      * <p>Indicates whether an SPF record was found.</p>
      */
-    PolicyStage present(boolean present);
+    _FinalStage present(boolean present);
 
     Builder from(DomainReputationResponseEmailDeliverabilityAuthenticationSpf other);
-  }
-
-  public interface PolicyStage {
-    /**
-     * <p>SPF enforcement policy qualifier found in the record (e.g. ~all, -all).</p>
-     */
-    RecordStage policy(@NotNull String policy);
-  }
-
-  public interface RecordStage {
-    /**
-     * <p>Raw SPF DNS TXT record string.</p>
-     */
-    _FinalStage record(@NotNull String record);
   }
 
   public interface _FinalStage {
@@ -122,19 +136,36 @@ public final class DomainReputationResponseEmailDeliverabilityAuthenticationSpf 
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
+
+    /**
+     * <p>SPF enforcement policy qualifier found in the record (e.g. ~all, -all).</p>
+     */
+    _FinalStage policy(Optional<String> policy);
+
+    _FinalStage policy(String policy);
+
+    _FinalStage policy(Nullable<String> policy);
+
+    /**
+     * <p>Raw SPF DNS TXT record string.</p>
+     */
+    _FinalStage record(Optional<String> record);
+
+    _FinalStage record(String record);
+
+    _FinalStage record(Nullable<String> record);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements PresentStage, PolicyStage, RecordStage, _FinalStage {
+  public static final class Builder implements PresentStage, _FinalStage {
     private boolean present;
 
-    private String policy;
+    private Optional<String> record = Optional.empty();
 
-    private String record;
+    private Optional<String> policy = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -150,43 +181,108 @@ public final class DomainReputationResponseEmailDeliverabilityAuthenticationSpf 
 
     /**
      * <p>Indicates whether an SPF record was found.</p>
-     * <p>Indicates whether an SPF record was found.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("present")
-    public PolicyStage present(boolean present) {
+    public _FinalStage present(boolean present) {
       this.present = present;
       return this;
     }
 
     /**
-     * <p>SPF enforcement policy qualifier found in the record (e.g. ~all, -all).</p>
-     * <p>SPF enforcement policy qualifier found in the record (e.g. ~all, -all).</p>
+     * <p>Raw SPF DNS TXT record string.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    @JsonSetter("policy")
-    public RecordStage policy(@NotNull String policy) {
-      this.policy = Objects.requireNonNull(policy, "policy must not be null");
+    public _FinalStage record(Nullable<String> record) {
+      if (record.isNull()) {
+        this.record = null;
+      }
+      else if (record.isEmpty()) {
+        this.record = Optional.empty();
+      }
+      else {
+        this.record = Optional.of(record.get());
+      }
       return this;
     }
 
     /**
      * <p>Raw SPF DNS TXT record string.</p>
-     * <p>Raw SPF DNS TXT record string.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    @JsonSetter("record")
-    public _FinalStage record(@NotNull String record) {
-      this.record = Objects.requireNonNull(record, "record must not be null");
+    public _FinalStage record(String record) {
+      this.record = Optional.ofNullable(record);
+      return this;
+    }
+
+    /**
+     * <p>Raw SPF DNS TXT record string.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "record",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage record(Optional<String> record) {
+      this.record = record;
+      return this;
+    }
+
+    /**
+     * <p>SPF enforcement policy qualifier found in the record (e.g. ~all, -all).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage policy(Nullable<String> policy) {
+      if (policy.isNull()) {
+        this.policy = null;
+      }
+      else if (policy.isEmpty()) {
+        this.policy = Optional.empty();
+      }
+      else {
+        this.policy = Optional.of(policy.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>SPF enforcement policy qualifier found in the record (e.g. ~all, -all).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage policy(String policy) {
+      this.policy = Optional.ofNullable(policy);
+      return this;
+    }
+
+    /**
+     * <p>SPF enforcement policy qualifier found in the record (e.g. ~all, -all).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "policy",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage policy(Optional<String> policy) {
+      this.policy = policy;
       return this;
     }
 
     @java.lang.Override
     public DomainReputationResponseEmailDeliverabilityAuthenticationSpf build() {
       return new DomainReputationResponseEmailDeliverabilityAuthenticationSpf(present, policy, record, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("present") || key.equalsIgnoreCase("policy") || key.equalsIgnoreCase("record")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

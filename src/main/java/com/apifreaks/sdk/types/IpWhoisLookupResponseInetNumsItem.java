@@ -378,7 +378,6 @@ public final class IpWhoisLookupResponseInetNumsItem {
 
     private Optional<List<String>> parents = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -840,6 +839,14 @@ public final class IpWhoisLookupResponseInetNumsItem {
 
     public IpWhoisLookupResponseInetNumsItem build() {
       return new IpWhoisLookupResponseInetNumsItem(startIp, endIp, cidr, netName, netHandle, description, countries, geofeed, latitude, longitude, city, languages, status, organization, sponsoringOrganization, adminContacts, techContacts, abuseContacts, remarks, assignmentSize, notify, mntBy, mntLower, mntDomains, mntRoutes, mntIrt, dateCreated, dateUpdated, source, parents, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("start_ip") || key.equalsIgnoreCase("end_ip") || key.equalsIgnoreCase("cidr") || key.equalsIgnoreCase("net_name") || key.equalsIgnoreCase("net_handle") || key.equalsIgnoreCase("description") || key.equalsIgnoreCase("countries") || key.equalsIgnoreCase("geofeed") || key.equalsIgnoreCase("latitude") || key.equalsIgnoreCase("longitude") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("languages") || key.equalsIgnoreCase("status") || key.equalsIgnoreCase("organization") || key.equalsIgnoreCase("sponsoring_organization") || key.equalsIgnoreCase("admin_contacts") || key.equalsIgnoreCase("tech_contacts") || key.equalsIgnoreCase("abuse_contacts") || key.equalsIgnoreCase("remarks") || key.equalsIgnoreCase("assignment_size") || key.equalsIgnoreCase("notify") || key.equalsIgnoreCase("mnt_by") || key.equalsIgnoreCase("mnt_lower") || key.equalsIgnoreCase("mnt_domains") || key.equalsIgnoreCase("mnt_routes") || key.equalsIgnoreCase("mnt_irt") || key.equalsIgnoreCase("date_created") || key.equalsIgnoreCase("date_updated") || key.equalsIgnoreCase("source") || key.equalsIgnoreCase("parents")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

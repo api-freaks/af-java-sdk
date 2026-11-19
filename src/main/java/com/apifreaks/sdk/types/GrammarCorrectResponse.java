@@ -94,7 +94,6 @@ public final class GrammarCorrectResponse {
   public static final class Builder implements GrammarCorrectionStage, _FinalStage {
     private String grammarCorrection;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -108,7 +107,6 @@ public final class GrammarCorrectResponse {
 
     /**
      * <p>The fully corrected text</p>
-     * <p>The fully corrected text</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -121,6 +119,14 @@ public final class GrammarCorrectResponse {
     @java.lang.Override
     public GrammarCorrectResponse build() {
       return new GrammarCorrectResponse(grammarCorrection, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("grammar_correction")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

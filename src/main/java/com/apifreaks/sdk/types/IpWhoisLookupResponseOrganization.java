@@ -4,9 +4,12 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.Nullable;
+import com.apifreaks.sdk.core.NullableNonemptyFilter;
 import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -73,6 +76,20 @@ public final class IpWhoisLookupResponseOrganization {
 
   private final Optional<List<String>> remarks;
 
+  private final Optional<List<String>> notify;
+
+  private final Optional<List<String>> refNfy;
+
+  private final Optional<List<String>> mntBy;
+
+  private final Optional<List<String>> mntRef;
+
+  private final Optional<String> dateCreated;
+
+  private final Optional<String> dateUpdated;
+
+  private final Optional<String> source;
+
   private final Map<String, Object> additionalProperties;
 
   private IpWhoisLookupResponseOrganization(Optional<String> handle, Optional<String> name,
@@ -84,7 +101,10 @@ public final class IpWhoisLookupResponseOrganization {
       Optional<List<String>> faxNo, Optional<List<String>> organizations,
       Optional<List<String>> adminContacts, Optional<List<String>> techContacts,
       Optional<List<String>> abuseContacts, Optional<List<String>> languages,
-      Optional<List<String>> remarks, Map<String, Object> additionalProperties) {
+      Optional<List<String>> remarks, Optional<List<String>> notify, Optional<List<String>> refNfy,
+      Optional<List<String>> mntBy, Optional<List<String>> mntRef, Optional<String> dateCreated,
+      Optional<String> dateUpdated, Optional<String> source,
+      Map<String, Object> additionalProperties) {
     this.handle = handle;
     this.name = name;
     this.type = type;
@@ -108,6 +128,13 @@ public final class IpWhoisLookupResponseOrganization {
     this.abuseContacts = abuseContacts;
     this.languages = languages;
     this.remarks = remarks;
+    this.notify = notify;
+    this.refNfy = refNfy;
+    this.mntBy = mntBy;
+    this.mntRef = mntRef;
+    this.dateCreated = dateCreated;
+    this.dateUpdated = dateUpdated;
+    this.source = source;
     this.additionalProperties = additionalProperties;
   }
 
@@ -226,6 +253,134 @@ public final class IpWhoisLookupResponseOrganization {
     return remarks;
   }
 
+  /**
+   * @return Notify email addresses for this organization object.
+   */
+  @JsonIgnore
+  public Optional<List<String>> getNotify() {
+    if (notify == null) {
+      return Optional.empty();
+    }
+    return notify;
+  }
+
+  /**
+   * @return Reference notification email addresses for this organization object.
+   */
+  @JsonIgnore
+  public Optional<List<String>> getRefNfy() {
+    if (refNfy == null) {
+      return Optional.empty();
+    }
+    return refNfy;
+  }
+
+  /**
+   * @return Maintainer handles for this organization object.
+   */
+  @JsonIgnore
+  public Optional<List<String>> getMntBy() {
+    if (mntBy == null) {
+      return Optional.empty();
+    }
+    return mntBy;
+  }
+
+  /**
+   * @return Referenced maintainer handles for this organization object.
+   */
+  @JsonIgnore
+  public Optional<List<String>> getMntRef() {
+    if (mntRef == null) {
+      return Optional.empty();
+    }
+    return mntRef;
+  }
+
+  /**
+   * @return Registration date of this organization object (YYYY-MM-DD).
+   */
+  @JsonIgnore
+  public Optional<String> getDateCreated() {
+    if (dateCreated == null) {
+      return Optional.empty();
+    }
+    return dateCreated;
+  }
+
+  /**
+   * @return Last update date of this organization object (YYYY-MM-DD).
+   */
+  @JsonIgnore
+  public Optional<String> getDateUpdated() {
+    if (dateUpdated == null) {
+      return Optional.empty();
+    }
+    return dateUpdated;
+  }
+
+  /**
+   * @return WHOIS data source (RIR registry URL) for this object.
+   */
+  @JsonProperty("source")
+  public Optional<String> getSource() {
+    return source;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("notify")
+  private Optional<List<String>> _getNotify() {
+    return notify;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("ref_nfy")
+  private Optional<List<String>> _getRefNfy() {
+    return refNfy;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("mnt_by")
+  private Optional<List<String>> _getMntBy() {
+    return mntBy;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("mnt_ref")
+  private Optional<List<String>> _getMntRef() {
+    return mntRef;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("date_created")
+  private Optional<String> _getDateCreated() {
+    return dateCreated;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("date_updated")
+  private Optional<String> _getDateUpdated() {
+    return dateUpdated;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -238,12 +393,12 @@ public final class IpWhoisLookupResponseOrganization {
   }
 
   private boolean equalTo(IpWhoisLookupResponseOrganization other) {
-    return handle.equals(other.handle) && name.equals(other.name) && type.equals(other.type) && description.equals(other.description) && address.equals(other.address) && street.equals(other.street) && city.equals(other.city) && district.equals(other.district) && state.equals(other.state) && zipCode.equals(other.zipCode) && country.equals(other.country) && latitude.equals(other.latitude) && longitude.equals(other.longitude) && email.equals(other.email) && abuseMailbox.equals(other.abuseMailbox) && phone.equals(other.phone) && faxNo.equals(other.faxNo) && organizations.equals(other.organizations) && adminContacts.equals(other.adminContacts) && techContacts.equals(other.techContacts) && abuseContacts.equals(other.abuseContacts) && languages.equals(other.languages) && remarks.equals(other.remarks);
+    return handle.equals(other.handle) && name.equals(other.name) && type.equals(other.type) && description.equals(other.description) && address.equals(other.address) && street.equals(other.street) && city.equals(other.city) && district.equals(other.district) && state.equals(other.state) && zipCode.equals(other.zipCode) && country.equals(other.country) && latitude.equals(other.latitude) && longitude.equals(other.longitude) && email.equals(other.email) && abuseMailbox.equals(other.abuseMailbox) && phone.equals(other.phone) && faxNo.equals(other.faxNo) && organizations.equals(other.organizations) && adminContacts.equals(other.adminContacts) && techContacts.equals(other.techContacts) && abuseContacts.equals(other.abuseContacts) && languages.equals(other.languages) && remarks.equals(other.remarks) && notify.equals(other.notify) && refNfy.equals(other.refNfy) && mntBy.equals(other.mntBy) && mntRef.equals(other.mntRef) && dateCreated.equals(other.dateCreated) && dateUpdated.equals(other.dateUpdated) && source.equals(other.source);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.handle, this.name, this.type, this.description, this.address, this.street, this.city, this.district, this.state, this.zipCode, this.country, this.latitude, this.longitude, this.email, this.abuseMailbox, this.phone, this.faxNo, this.organizations, this.adminContacts, this.techContacts, this.abuseContacts, this.languages, this.remarks);
+    return Objects.hash(this.handle, this.name, this.type, this.description, this.address, this.street, this.city, this.district, this.state, this.zipCode, this.country, this.latitude, this.longitude, this.email, this.abuseMailbox, this.phone, this.faxNo, this.organizations, this.adminContacts, this.techContacts, this.abuseContacts, this.languages, this.remarks, this.notify, this.refNfy, this.mntBy, this.mntRef, this.dateCreated, this.dateUpdated, this.source);
   }
 
   @java.lang.Override
@@ -305,7 +460,20 @@ public final class IpWhoisLookupResponseOrganization {
 
     private Optional<List<String>> remarks = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<List<String>> notify = Optional.empty();
+
+    private Optional<List<String>> refNfy = Optional.empty();
+
+    private Optional<List<String>> mntBy = Optional.empty();
+
+    private Optional<List<String>> mntRef = Optional.empty();
+
+    private Optional<String> dateCreated = Optional.empty();
+
+    private Optional<String> dateUpdated = Optional.empty();
+
+    private Optional<String> source = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -335,6 +503,13 @@ public final class IpWhoisLookupResponseOrganization {
       abuseContacts(other.getAbuseContacts());
       languages(other.getLanguages());
       remarks(other.getRemarks());
+      notify(other.getNotify());
+      refNfy(other.getRefNfy());
+      mntBy(other.getMntBy());
+      mntRef(other.getMntRef());
+      dateCreated(other.getDateCreated());
+      dateUpdated(other.getDateUpdated());
+      source(other.getSource());
       return this;
     }
 
@@ -660,8 +835,213 @@ public final class IpWhoisLookupResponseOrganization {
       return this;
     }
 
+    /**
+     * <p>Notify email addresses for this organization object.</p>
+     */
+    @JsonSetter(
+        value = "notify",
+        nulls = Nulls.SKIP
+    )
+    public Builder notify(Optional<List<String>> notify) {
+      this.notify = notify;
+      return this;
+    }
+
+    public Builder notify(List<String> notify) {
+      this.notify = Optional.ofNullable(notify);
+      return this;
+    }
+
+    public Builder notify(Nullable<List<String>> notify) {
+      if (notify.isNull()) {
+        this.notify = null;
+      }
+      else if (notify.isEmpty()) {
+        this.notify = Optional.empty();
+      }
+      else {
+        this.notify = Optional.of(notify.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Reference notification email addresses for this organization object.</p>
+     */
+    @JsonSetter(
+        value = "ref_nfy",
+        nulls = Nulls.SKIP
+    )
+    public Builder refNfy(Optional<List<String>> refNfy) {
+      this.refNfy = refNfy;
+      return this;
+    }
+
+    public Builder refNfy(List<String> refNfy) {
+      this.refNfy = Optional.ofNullable(refNfy);
+      return this;
+    }
+
+    public Builder refNfy(Nullable<List<String>> refNfy) {
+      if (refNfy.isNull()) {
+        this.refNfy = null;
+      }
+      else if (refNfy.isEmpty()) {
+        this.refNfy = Optional.empty();
+      }
+      else {
+        this.refNfy = Optional.of(refNfy.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Maintainer handles for this organization object.</p>
+     */
+    @JsonSetter(
+        value = "mnt_by",
+        nulls = Nulls.SKIP
+    )
+    public Builder mntBy(Optional<List<String>> mntBy) {
+      this.mntBy = mntBy;
+      return this;
+    }
+
+    public Builder mntBy(List<String> mntBy) {
+      this.mntBy = Optional.ofNullable(mntBy);
+      return this;
+    }
+
+    public Builder mntBy(Nullable<List<String>> mntBy) {
+      if (mntBy.isNull()) {
+        this.mntBy = null;
+      }
+      else if (mntBy.isEmpty()) {
+        this.mntBy = Optional.empty();
+      }
+      else {
+        this.mntBy = Optional.of(mntBy.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Referenced maintainer handles for this organization object.</p>
+     */
+    @JsonSetter(
+        value = "mnt_ref",
+        nulls = Nulls.SKIP
+    )
+    public Builder mntRef(Optional<List<String>> mntRef) {
+      this.mntRef = mntRef;
+      return this;
+    }
+
+    public Builder mntRef(List<String> mntRef) {
+      this.mntRef = Optional.ofNullable(mntRef);
+      return this;
+    }
+
+    public Builder mntRef(Nullable<List<String>> mntRef) {
+      if (mntRef.isNull()) {
+        this.mntRef = null;
+      }
+      else if (mntRef.isEmpty()) {
+        this.mntRef = Optional.empty();
+      }
+      else {
+        this.mntRef = Optional.of(mntRef.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Registration date of this organization object (YYYY-MM-DD).</p>
+     */
+    @JsonSetter(
+        value = "date_created",
+        nulls = Nulls.SKIP
+    )
+    public Builder dateCreated(Optional<String> dateCreated) {
+      this.dateCreated = dateCreated;
+      return this;
+    }
+
+    public Builder dateCreated(String dateCreated) {
+      this.dateCreated = Optional.ofNullable(dateCreated);
+      return this;
+    }
+
+    public Builder dateCreated(Nullable<String> dateCreated) {
+      if (dateCreated.isNull()) {
+        this.dateCreated = null;
+      }
+      else if (dateCreated.isEmpty()) {
+        this.dateCreated = Optional.empty();
+      }
+      else {
+        this.dateCreated = Optional.of(dateCreated.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Last update date of this organization object (YYYY-MM-DD).</p>
+     */
+    @JsonSetter(
+        value = "date_updated",
+        nulls = Nulls.SKIP
+    )
+    public Builder dateUpdated(Optional<String> dateUpdated) {
+      this.dateUpdated = dateUpdated;
+      return this;
+    }
+
+    public Builder dateUpdated(String dateUpdated) {
+      this.dateUpdated = Optional.ofNullable(dateUpdated);
+      return this;
+    }
+
+    public Builder dateUpdated(Nullable<String> dateUpdated) {
+      if (dateUpdated.isNull()) {
+        this.dateUpdated = null;
+      }
+      else if (dateUpdated.isEmpty()) {
+        this.dateUpdated = Optional.empty();
+      }
+      else {
+        this.dateUpdated = Optional.of(dateUpdated.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>WHOIS data source (RIR registry URL) for this object.</p>
+     */
+    @JsonSetter(
+        value = "source",
+        nulls = Nulls.SKIP
+    )
+    public Builder source(Optional<String> source) {
+      this.source = source;
+      return this;
+    }
+
+    public Builder source(String source) {
+      this.source = Optional.ofNullable(source);
+      return this;
+    }
+
     public IpWhoisLookupResponseOrganization build() {
-      return new IpWhoisLookupResponseOrganization(handle, name, type, description, address, street, city, district, state, zipCode, country, latitude, longitude, email, abuseMailbox, phone, faxNo, organizations, adminContacts, techContacts, abuseContacts, languages, remarks, additionalProperties);
+      return new IpWhoisLookupResponseOrganization(handle, name, type, description, address, street, city, district, state, zipCode, country, latitude, longitude, email, abuseMailbox, phone, faxNo, organizations, adminContacts, techContacts, abuseContacts, languages, remarks, notify, refNfy, mntBy, mntRef, dateCreated, dateUpdated, source, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("handle") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("description") || key.equalsIgnoreCase("address") || key.equalsIgnoreCase("street") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("district") || key.equalsIgnoreCase("state") || key.equalsIgnoreCase("zip_code") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("latitude") || key.equalsIgnoreCase("longitude") || key.equalsIgnoreCase("email") || key.equalsIgnoreCase("abuse_mailbox") || key.equalsIgnoreCase("phone") || key.equalsIgnoreCase("fax_no") || key.equalsIgnoreCase("organizations") || key.equalsIgnoreCase("admin_contacts") || key.equalsIgnoreCase("tech_contacts") || key.equalsIgnoreCase("abuse_contacts") || key.equalsIgnoreCase("languages") || key.equalsIgnoreCase("remarks") || key.equalsIgnoreCase("notify") || key.equalsIgnoreCase("ref_nfy") || key.equalsIgnoreCase("mnt_by") || key.equalsIgnoreCase("mnt_ref") || key.equalsIgnoreCase("date_created") || key.equalsIgnoreCase("date_updated") || key.equalsIgnoreCase("source")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

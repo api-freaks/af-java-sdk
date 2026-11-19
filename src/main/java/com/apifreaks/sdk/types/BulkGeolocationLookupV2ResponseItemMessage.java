@@ -94,7 +94,6 @@ public final class BulkGeolocationLookupV2ResponseItemMessage {
   public static final class Builder implements MessageStage, _FinalStage {
     private String message;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -108,7 +107,6 @@ public final class BulkGeolocationLookupV2ResponseItemMessage {
 
     /**
      * <p>Human-readable reason this IP could not be resolved.</p>
-     * <p>Human-readable reason this IP could not be resolved.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -121,6 +119,14 @@ public final class BulkGeolocationLookupV2ResponseItemMessage {
     @java.lang.Override
     public BulkGeolocationLookupV2ResponseItemMessage build() {
       return new BulkGeolocationLookupV2ResponseItemMessage(message, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("message")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

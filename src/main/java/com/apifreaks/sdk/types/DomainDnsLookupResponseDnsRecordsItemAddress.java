@@ -179,7 +179,6 @@ public final class DomainDnsLookupResponseDnsRecordsItemAddress {
 
     private String address;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -241,7 +240,6 @@ public final class DomainDnsLookupResponseDnsRecordsItemAddress {
 
     /**
      * <p>IPv4 or IPv6 address</p>
-     * <p>IPv4 or IPv6 address</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -254,6 +252,14 @@ public final class DomainDnsLookupResponseDnsRecordsItemAddress {
     @java.lang.Override
     public DomainDnsLookupResponseDnsRecordsItemAddress build() {
       return new DomainDnsLookupResponseDnsRecordsItemAddress(name, type, dnsType, ttl, rawText, rRsetType, address, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("dnsType") || key.equalsIgnoreCase("ttl") || key.equalsIgnoreCase("rawText") || key.equalsIgnoreCase("rRsetType") || key.equalsIgnoreCase("address")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

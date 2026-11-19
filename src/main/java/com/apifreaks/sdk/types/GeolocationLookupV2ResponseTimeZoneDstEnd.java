@@ -146,7 +146,6 @@ public final class GeolocationLookupV2ResponseTimeZoneDstEnd {
 
     private Optional<Boolean> overlap = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -266,6 +265,14 @@ public final class GeolocationLookupV2ResponseTimeZoneDstEnd {
 
     public GeolocationLookupV2ResponseTimeZoneDstEnd build() {
       return new GeolocationLookupV2ResponseTimeZoneDstEnd(utcTime, duration, gap, dateTimeAfter, dateTimeBefore, overlap, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("utc_time") || key.equalsIgnoreCase("duration") || key.equalsIgnoreCase("gap") || key.equalsIgnoreCase("date_time_after") || key.equalsIgnoreCase("date_time_before") || key.equalsIgnoreCase("overlap")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

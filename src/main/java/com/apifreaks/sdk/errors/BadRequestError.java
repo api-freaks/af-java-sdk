@@ -5,21 +5,21 @@
 package com.apifreaks.sdk.errors;
 
 import com.apifreaks.sdk.core.ApifreaksApiApiException;
-import java.lang.Object;
+import com.apifreaks.sdk.types.BadRequestErrorBody;
 import okhttp3.Response;
 
 public final class BadRequestError extends ApifreaksApiApiException {
   /**
    * The body of the response that triggered the exception.
    */
-  private final Object body;
+  private final BadRequestErrorBody body;
 
-  public BadRequestError(Object body) {
+  public BadRequestError(BadRequestErrorBody body) {
     super("BadRequestError", 400, body);
     this.body = body;
   }
 
-  public BadRequestError(Object body, Response rawResponse) {
+  public BadRequestError(BadRequestErrorBody body, Response rawResponse) {
     super("BadRequestError", 400, body, rawResponse);
     this.body = body;
   }
@@ -28,7 +28,7 @@ public final class BadRequestError extends ApifreaksApiApiException {
    * @return the body
    */
   @java.lang.Override
-  public Object body() {
+  public BadRequestErrorBody body() {
     return this.body;
   }
 }

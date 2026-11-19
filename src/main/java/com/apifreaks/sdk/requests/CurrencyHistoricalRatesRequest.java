@@ -182,7 +182,6 @@ public final class CurrencyHistoricalRatesRequest {
 
     private Optional<List<String>> symbols = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -200,7 +199,6 @@ public final class CurrencyHistoricalRatesRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -211,7 +209,6 @@ public final class CurrencyHistoricalRatesRequest {
     }
 
     /**
-     * <p>Specific date in YYYY-MM-DD format</p>
      * <p>Specific date in YYYY-MM-DD format</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -300,6 +297,14 @@ public final class CurrencyHistoricalRatesRequest {
     @java.lang.Override
     public CurrencyHistoricalRatesRequest build() {
       return new CurrencyHistoricalRatesRequest(symbols, apiKey, format, base, date, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("symbols") || key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("base") || key.equalsIgnoreCase("date")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

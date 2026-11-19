@@ -93,7 +93,6 @@ public final class GetSupportedFlagsRequest {
   public static final class Builder implements ApiKeyStage, _FinalStage {
     private String apiKey;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -107,7 +106,6 @@ public final class GetSupportedFlagsRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -120,6 +118,14 @@ public final class GetSupportedFlagsRequest {
     @java.lang.Override
     public GetSupportedFlagsRequest build() {
       return new GetSupportedFlagsRequest(apiKey, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

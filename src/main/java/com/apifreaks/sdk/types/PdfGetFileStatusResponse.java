@@ -178,7 +178,6 @@ public final class PdfGetFileStatusResponse {
 
     private Optional<String> fileName = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -196,7 +195,6 @@ public final class PdfGetFileStatusResponse {
 
     /**
      * <p>The unique identifier of the file.</p>
-     * <p>The unique identifier of the file.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -207,7 +205,6 @@ public final class PdfGetFileStatusResponse {
     }
 
     /**
-     * <p>The timestamp when the file was created.</p>
      * <p>The timestamp when the file was created.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -290,6 +287,14 @@ public final class PdfGetFileStatusResponse {
     @java.lang.Override
     public PdfGetFileStatusResponse build() {
       return new PdfGetFileStatusResponse(fileId, fileName, fileType, fileCreationTime, fileDeletionTime, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("fileId") || key.equalsIgnoreCase("fileName") || key.equalsIgnoreCase("fileType") || key.equalsIgnoreCase("fileCreationTime") || key.equalsIgnoreCase("fileDeletionTime")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

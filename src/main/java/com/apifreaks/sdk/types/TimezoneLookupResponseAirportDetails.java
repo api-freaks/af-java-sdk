@@ -244,7 +244,6 @@ public final class TimezoneLookupResponseAirportDetails {
 
     private String faaCode;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -354,6 +353,14 @@ public final class TimezoneLookupResponseAirportDetails {
     @java.lang.Override
     public TimezoneLookupResponseAirportDetails build() {
       return new TimezoneLookupResponseAirportDetails(type, name, longitude, latitude, elevationFt, continentCode, countryCode, stateCode, city, iataCode, icaoCode, faaCode, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("type") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("longitude") || key.equalsIgnoreCase("latitude") || key.equalsIgnoreCase("elevation_ft") || key.equalsIgnoreCase("continent_code") || key.equalsIgnoreCase("country_code") || key.equalsIgnoreCase("state_code") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("iata_code") || key.equalsIgnoreCase("icao_code") || key.equalsIgnoreCase("faa_code")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -5,21 +5,21 @@
 package com.apifreaks.sdk.errors;
 
 import com.apifreaks.sdk.core.ApifreaksApiApiException;
-import java.lang.Object;
+import com.apifreaks.sdk.types.TooManyRequestsErrorBody;
 import okhttp3.Response;
 
 public final class TooManyRequestsError extends ApifreaksApiApiException {
   /**
    * The body of the response that triggered the exception.
    */
-  private final Object body;
+  private final TooManyRequestsErrorBody body;
 
-  public TooManyRequestsError(Object body) {
+  public TooManyRequestsError(TooManyRequestsErrorBody body) {
     super("TooManyRequestsError", 429, body);
     this.body = body;
   }
 
-  public TooManyRequestsError(Object body, Response rawResponse) {
+  public TooManyRequestsError(TooManyRequestsErrorBody body, Response rawResponse) {
     super("TooManyRequestsError", 429, body, rawResponse);
     this.body = body;
   }
@@ -28,7 +28,7 @@ public final class TooManyRequestsError extends ApifreaksApiApiException {
    * @return the body
    */
   @java.lang.Override
-  public Object body() {
+  public TooManyRequestsErrorBody body() {
     return this.body;
   }
 }

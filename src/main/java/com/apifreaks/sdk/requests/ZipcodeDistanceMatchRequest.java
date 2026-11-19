@@ -206,7 +206,6 @@ public final class ZipcodeDistanceMatchRequest {
 
     private Optional<ZipcodeDistanceMatchRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -225,7 +224,6 @@ public final class ZipcodeDistanceMatchRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -236,7 +234,6 @@ public final class ZipcodeDistanceMatchRequest {
     }
 
     /**
-     * <p>Country code in ISO 3166-1 alpha-2 format.</p>
      * <p>Country code in ISO 3166-1 alpha-2 format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -357,6 +354,14 @@ public final class ZipcodeDistanceMatchRequest {
     @java.lang.Override
     public ZipcodeDistanceMatchRequest build() {
       return new ZipcodeDistanceMatchRequest(apiKey, format, codes, country, distance, unit, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("codes") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("distance") || key.equalsIgnoreCase("unit")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

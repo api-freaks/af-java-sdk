@@ -173,7 +173,6 @@ public final class GeolocationLookupV2ResponseUserAgent {
 
     private Optional<GeolocationLookupV2ResponseUserAgentOperatingSystem> operatingSystem = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -331,6 +330,14 @@ public final class GeolocationLookupV2ResponseUserAgent {
 
     public GeolocationLookupV2ResponseUserAgent build() {
       return new GeolocationLookupV2ResponseUserAgent(userAgentString, name, type, version, versionMajor, device, engine, operatingSystem, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("user_agent_string") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("version") || key.equalsIgnoreCase("version_major") || key.equalsIgnoreCase("device") || key.equalsIgnoreCase("engine") || key.equalsIgnoreCase("operating_system")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -134,7 +134,6 @@ public final class ZipcodeSearchByRegionResponse {
 
     private Optional<List<String>> codes = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -236,6 +235,14 @@ public final class ZipcodeSearchByRegionResponse {
 
     public ZipcodeSearchByRegionResponse build() {
       return new ZipcodeSearchByRegionResponse(totalResults, totalPages, currentPage, currentPageSize, codes, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("total_results") || key.equalsIgnoreCase("total_pages") || key.equalsIgnoreCase("current_page") || key.equalsIgnoreCase("current_page_size") || key.equalsIgnoreCase("codes")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

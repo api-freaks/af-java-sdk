@@ -74,7 +74,7 @@ public final class HistoricalWeatherRequest {
   }
 
   /**
-   * @return Response format returned by the API.
+   * @return Response format returned by the API. Only JSON is supported.
    */
   @JsonProperty("format")
   public Optional<HistoricalWeatherRequestFormat> getFormat() {
@@ -190,7 +190,7 @@ public final class HistoricalWeatherRequest {
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
 
     /**
-     * <p>Response format returned by the API.</p>
+     * <p>Response format returned by the API. Only JSON is supported.</p>
      */
     _FinalStage format(Optional<HistoricalWeatherRequestFormat> format);
 
@@ -261,7 +261,6 @@ public final class HistoricalWeatherRequest {
 
     private Optional<HistoricalWeatherRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -283,7 +282,6 @@ public final class HistoricalWeatherRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -294,7 +292,6 @@ public final class HistoricalWeatherRequest {
     }
 
     /**
-     * <p>Specific date for which to fetch weather data in YYYY-MM-DD format. Historical dates must be past dates only. Current or future dates are not allowed for historical data. Data available from 1940 onwards.</p>
      * <p>Specific date for which to fetch weather data in YYYY-MM-DD format. Historical dates must be past dates only. Current or future dates are not allowed for historical data. Data available from 1940 onwards.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -444,7 +441,7 @@ public final class HistoricalWeatherRequest {
     }
 
     /**
-     * <p>Response format returned by the API.</p>
+     * <p>Response format returned by the API. Only JSON is supported.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -454,7 +451,7 @@ public final class HistoricalWeatherRequest {
     }
 
     /**
-     * <p>Response format returned by the API.</p>
+     * <p>Response format returned by the API. Only JSON is supported.</p>
      */
     @java.lang.Override
     @JsonSetter(
@@ -469,6 +466,14 @@ public final class HistoricalWeatherRequest {
     @java.lang.Override
     public HistoricalWeatherRequest build() {
       return new HistoricalWeatherRequest(apiKey, format, date, location, lat, long_, ip, precision, timezone, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("date") || key.equalsIgnoreCase("location") || key.equalsIgnoreCase("lat") || key.equalsIgnoreCase("long") || key.equalsIgnoreCase("ip") || key.equalsIgnoreCase("precision") || key.equalsIgnoreCase("timezone")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

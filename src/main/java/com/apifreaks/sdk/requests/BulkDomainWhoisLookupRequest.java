@@ -143,7 +143,6 @@ public final class BulkDomainWhoisLookupRequest {
 
     private Optional<BulkDomainWhoisLookupRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -158,7 +157,6 @@ public final class BulkDomainWhoisLookupRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -233,6 +231,14 @@ public final class BulkDomainWhoisLookupRequest {
     @java.lang.Override
     public BulkDomainWhoisLookupRequest build() {
       return new BulkDomainWhoisLookupRequest(apiKey, format, domainNames, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("domainNames")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -137,7 +137,6 @@ public final class PdfGetTaskStatusRequest {
 
     private Optional<PdfGetTaskStatusRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -153,7 +152,6 @@ public final class PdfGetTaskStatusRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -164,7 +162,6 @@ public final class PdfGetTaskStatusRequest {
     }
 
     /**
-     * <p>The unique ID of the PDF processing task for which the status is requested.</p>
      * <p>The unique ID of the PDF processing task for which the status is requested.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -201,6 +198,14 @@ public final class PdfGetTaskStatusRequest {
     @java.lang.Override
     public PdfGetTaskStatusRequest build() {
       return new PdfGetTaskStatusRequest(apiKey, format, taskId, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("task_id")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

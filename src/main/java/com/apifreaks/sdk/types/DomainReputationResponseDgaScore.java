@@ -175,7 +175,6 @@ public final class DomainReputationResponseDgaScore {
 
     private String interpretation;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -193,7 +192,6 @@ public final class DomainReputationResponseDgaScore {
 
     /**
      * <p>DGA likelihood score (0-1).</p>
-     * <p>DGA likelihood score (0-1).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -204,7 +202,6 @@ public final class DomainReputationResponseDgaScore {
     }
 
     /**
-     * <p>Indicates whether the domain is likely DGA-generated.</p>
      * <p>Indicates whether the domain is likely DGA-generated.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -217,7 +214,6 @@ public final class DomainReputationResponseDgaScore {
 
     /**
      * <p>Model used to compute the DGA score.</p>
-     * <p>Model used to compute the DGA score.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -228,7 +224,6 @@ public final class DomainReputationResponseDgaScore {
     }
 
     /**
-     * <p>Underlying lexical / statistical features used in DGA detection.</p>
      * <p>Underlying lexical / statistical features used in DGA detection.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -242,7 +237,6 @@ public final class DomainReputationResponseDgaScore {
 
     /**
      * <p>Human-readable interpretation of the DGA score.</p>
-     * <p>Human-readable interpretation of the DGA score.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -255,6 +249,14 @@ public final class DomainReputationResponseDgaScore {
     @java.lang.Override
     public DomainReputationResponseDgaScore build() {
       return new DomainReputationResponseDgaScore(score, isDga, model, features, interpretation, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("score") || key.equalsIgnoreCase("is_dga") || key.equalsIgnoreCase("model") || key.equalsIgnoreCase("features") || key.equalsIgnoreCase("interpretation")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

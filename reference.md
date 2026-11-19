@@ -1,15 +1,19 @@
 # Reference
-<details><summary><code>client.geolocationLookup(request) -> GeolocationLookupResponse</code></summary>
+<details><summary><code>client.geolocationLookup() -> GeolocationLookupResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Get detailed geolocation data for an IP address including country, city, timezone, currency, and optional security and user-agent information
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -18,18 +22,19 @@ Get detailed geolocation data for an IP address including country, city, timezon
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.GeolocationLookupRequest;
-import com.apifreaks.sdk.types.GeolocationLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-GeolocationLookupRequest request = GeolocationLookupRequest.builder()
+client.geolocationLookup(
+    GeolocationLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-GeolocationLookupResponse response = client.geolocationLookup(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -41,7 +46,7 @@ GeolocationLookupResponse response = client.geolocationLookup(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -49,7 +54,7 @@ GeolocationLookupResponse response = client.geolocationLookup(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;GeolocationLookupRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<GeolocationLookupRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -57,7 +62,7 @@ GeolocationLookupResponse response = client.geolocationLookup(request);
 <dl>
 <dd>
 
-**ip:** `Optional&lt;String&gt;` — IPv4, IPv6, or hostname for geolocation lookup _(optional)_
+**ip:** `Optional<String>` — IPv4, IPv6, or hostname for geolocation lookup
     
 </dd>
 </dl>
@@ -65,7 +70,7 @@ GeolocationLookupResponse response = client.geolocationLookup(request);
 <dl>
 <dd>
 
-**lang:** `Optional&lt;GeolocationLookupRequestLang&gt;` — Response language for location fields _(optional)_
+**lang:** `Optional<GeolocationLookupRequestLang>` — Response language for location fields
     
 </dd>
 </dl>
@@ -73,7 +78,7 @@ GeolocationLookupResponse response = client.geolocationLookup(request);
 <dl>
 <dd>
 
-**fields:** `Optional&lt;String&gt;` — Comma separated list of fields to include in response _(optional)_
+**fields:** `Optional<String>` — Comma separated list of fields to include in response
     
 </dd>
 </dl>
@@ -81,7 +86,7 @@ GeolocationLookupResponse response = client.geolocationLookup(request);
 <dl>
 <dd>
 
-**excludes:** `Optional&lt;String&gt;` — Comma separated list of fields to exclude from response _(optional)_
+**excludes:** `Optional<String>` — Comma separated list of fields to exclude from response
     
 </dd>
 </dl>
@@ -89,19 +94,19 @@ GeolocationLookupResponse response = client.geolocationLookup(request);
 <dl>
 <dd>
 
-**include:** `Optional&lt;String&gt;` — Additional data to include (location, network, security, currency, time_zone, user_agent, country_metadata , hostname, liveHostname, hostnameFallbackLivet) _(optional)_
+**include:** `Optional<String>` — Additional data to include (location, network, security, currency, time_zone, user_agent, country_metadata , hostname, liveHostname, hostnameFallbackLivet)
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.geolocationLookupV2(request) -> GeolocationLookupResponse</code></summary>
+<details><summary><code>client.bulkGeolocationLookup(request) -> List&amp;lt;BulkGeolocationLookupResponseItem&amp;gt;</code></summary>
 <dl>
 <dd>
 
@@ -110,10 +115,13 @@ GeolocationLookupResponse response = client.geolocationLookup(request);
 <dl>
 <dd>
 
-> **v2.0 endpoint** — maps to `/v2.0/geolocation/lookup`. Uses the same request and response types as the v1 `geolocationLookup` method.
+<dl>
+<dd>
 
-Get detailed geolocation data for an IP address including country, city, timezone, currency, and optional security and user-agent information
-
+Retrieve detailed geolocation data for multiple IP addresses in a single request.
+Supports up to `50,000` IP-addresses/host-names per request.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -122,18 +130,22 @@ Get detailed geolocation data for an IP address including country, city, timezon
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.GeolocationLookupRequest;
-import com.apifreaks.sdk.types.GeolocationLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-GeolocationLookupRequest request = GeolocationLookupRequest.builder()
+client.bulkGeolocationLookup(
+    BulkGeolocationLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-GeolocationLookupResponse response = client.geolocationLookupV2(request);
+        .ips(
+            Arrays.asList("ips")
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -145,7 +157,7 @@ GeolocationLookupResponse response = client.geolocationLookupV2(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -153,7 +165,7 @@ GeolocationLookupResponse response = client.geolocationLookupV2(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;GeolocationLookupRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<BulkGeolocationLookupRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -161,7 +173,7 @@ GeolocationLookupResponse response = client.geolocationLookupV2(request);
 <dl>
 <dd>
 
-**ip:** `Optional&lt;String&gt;` — IPv4, IPv6, or hostname for geolocation lookup _(optional)_
+**lang:** `Optional<String>` — Language of the response.
     
 </dd>
 </dl>
@@ -169,7 +181,7 @@ GeolocationLookupResponse response = client.geolocationLookupV2(request);
 <dl>
 <dd>
 
-**lang:** `Optional&lt;GeolocationLookupRequestLang&gt;` — Response language for location fields _(optional)_
+**fields:** `Optional<String>` — Comma-separated list of fields to include in the response. Can include "geo".
     
 </dd>
 </dl>
@@ -177,7 +189,7 @@ GeolocationLookupResponse response = client.geolocationLookupV2(request);
 <dl>
 <dd>
 
-**fields:** `Optional&lt;String&gt;` — Comma separated list of fields to include in response _(optional)_
+**excludes:** `Optional<String>` — Comma-separated list of fields to exclude from the response (except "ip").
     
 </dd>
 </dl>
@@ -185,7 +197,7 @@ GeolocationLookupResponse response = client.geolocationLookupV2(request);
 <dl>
 <dd>
 
-**excludes:** `Optional&lt;String&gt;` — Comma separated list of fields to exclude from response _(optional)_
+**include:** `Optional<String>` — Comma-separated list of additional information to include in the response.
     
 </dd>
 </dl>
@@ -193,19 +205,19 @@ GeolocationLookupResponse response = client.geolocationLookupV2(request);
 <dl>
 <dd>
 
-**include:** `Optional&lt;String&gt;` — Additional data to include (location, network, security, currency, time_zone, user_agent, country_metadata , hostname, liveHostname, hostnameFallbackLivet) _(optional)_
+**ips:** `List<String>` — List of IP addresses or hostnames to lookup
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.bulkGeolocationLookup(request) -> List<BulkGeolocationLookupResponseItem></code></summary>
+<details><summary><code>client.ipSecurityLookup() -> IpSecurityLookupResponse</code></summary>
 <dl>
 <dd>
 
@@ -213,219 +225,13 @@ GeolocationLookupResponse response = client.geolocationLookupV2(request);
 
 <dl>
 <dd>
-
-Retrieve detailed geolocation data for multiple IP addresses in a single request. Supports up to <code>50,000</code> IP-addresses/host-names per request.
-
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.BulkGeolocationLookupRequest;
-import java.util.List;
-import com.apifreaks.sdk.types.BulkGeolocationLookupResponseItem;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-BulkGeolocationLookupRequest request = BulkGeolocationLookupRequest.builder()
-        .apiKey("apiKey")
-        .ips(java.util.List.of("8.8.8.8"))
-        .build();
-List<BulkGeolocationLookupResponseItem> response = client.bulkGeolocationLookup(request);
-```
-
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**apiKey:** `String` — No description provided. _(required)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**format:** `Optional&lt;BulkGeolocationLookupRequestFormat&gt;` — No description provided. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**lang:** `Optional&lt;String&gt;` — No description provided. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**fields:** `Optional&lt;String&gt;` — No description provided. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**excludes:** `Optional&lt;String&gt;` — No description provided. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**include:** `Optional&lt;String&gt;` — No description provided. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**ips:** `List<String&gt;` — List of IP addresses or hostnames to lookup _(required)_
-    
-</dd>
-</dl>
-
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.bulkGeolocationLookupV2(request) -> List<BulkGeolocationLookupResponseItem></code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-> **v2.0 endpoint** — maps to `/v2.0/geolocation/lookup`. Uses the same request and response types as the v1 `bulkGeolocationLookup` method.
-
-Retrieve detailed geolocation data for multiple IP addresses in a single request. Supports up to <code>50,000</code> IP-addresses/host-names per request.
-
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.BulkGeolocationLookupRequest;
-import java.util.List;
-import com.apifreaks.sdk.types.BulkGeolocationLookupResponseItem;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-BulkGeolocationLookupRequest request = BulkGeolocationLookupRequest.builder()
-        .apiKey("apiKey")
-        .ips(java.util.List.of("8.8.8.8"))
-        .build();
-List<BulkGeolocationLookupResponseItem> response = client.bulkGeolocationLookupV2(request);
-```
-
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**apiKey:** `String` — No description provided. _(required)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**format:** `Optional&lt;BulkGeolocationLookupRequestFormat&gt;` — No description provided. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**lang:** `Optional&lt;String&gt;` — No description provided. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**fields:** `Optional&lt;String&gt;` — No description provided. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**excludes:** `Optional&lt;String&gt;` — No description provided. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**include:** `Optional&lt;String&gt;` — No description provided. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**ips:** `List<String&gt;` — List of IP addresses or hostnames to lookup _(required)_
-    
-</dd>
-</dl>
-
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.ipSecurityLookup(request) -> IpSecurityLookupResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
 
 <dl>
 <dd>
 
 Get comprehensive security information for a given IP address. Detects VPNs, proxies, Tor nodes, and other security threats.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -434,18 +240,19 @@ Get comprehensive security information for a given IP address. Detects VPNs, pro
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.IpSecurityLookupRequest;
-import com.apifreaks.sdk.types.IpSecurityLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-IpSecurityLookupRequest request = IpSecurityLookupRequest.builder()
+client.ipSecurityLookup(
+    IpSecurityLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-IpSecurityLookupResponse response = client.ipSecurityLookup(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -457,7 +264,7 @@ IpSecurityLookupResponse response = client.ipSecurityLookup(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -465,7 +272,7 @@ IpSecurityLookupResponse response = client.ipSecurityLookup(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;IpSecurityLookupRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<IpSecurityLookupRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -473,7 +280,7 @@ IpSecurityLookupResponse response = client.ipSecurityLookup(request);
 <dl>
 <dd>
 
-**ip:** `Optional&lt;String&gt;` — A valid IPv4 or IPv6 address to look up. If omitted, the API uses the public IP of the requesting client. _(optional)_
+**ip:** `Optional<String>` — A valid IPv4 or IPv6 address to look up. If omitted, the API uses the public IP of the requesting client.
     
 </dd>
 </dl>
@@ -481,7 +288,7 @@ IpSecurityLookupResponse response = client.ipSecurityLookup(request);
 <dl>
 <dd>
 
-**fields:** `Optional&lt;String&gt;` — Comma-separated list of fields to return. Supports dot notation (e.g. security.threat_score). _(optional)_
+**fields:** `Optional<String>` — Comma-separated list of fields to return. Supports dot notation (e.g. security.threat_score).
     
 </dd>
 </dl>
@@ -489,19 +296,19 @@ IpSecurityLookupResponse response = client.ipSecurityLookup(request);
 <dl>
 <dd>
 
-**excludes:** `Optional&lt;String&gt;` — Comma-separated list of fields to remove from the response. Supports dot notation (e.g. security.is_tor). _(optional)_
+**excludes:** `Optional<String>` — Comma-separated list of fields to remove from the response. Supports dot notation (e.g. security.is_tor).
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.bulkIpSecurityLookup(request) -> List<BulkIpSecurityLookupResponseItem></code></summary>
+<details><summary><code>client.bulkIpSecurityLookup(request) -> List&amp;lt;BulkIpSecurityLookupResponseItem&amp;gt;</code></summary>
 <dl>
 <dd>
 
@@ -510,8 +317,12 @@ IpSecurityLookupResponse response = client.ipSecurityLookup(request);
 <dl>
 <dd>
 
-The Bulk IP Security Lookup API allows you to retrieve security details for up to <code>50,000</code> IP-addresses in a single request.
+<dl>
+<dd>
 
+The Bulk IP Security Lookup API allows you to retrieve security details for up to `50,000` IP-addresses in a single request.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -520,20 +331,22 @@ The Bulk IP Security Lookup API allows you to retrieve security details for up t
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.BulkIpSecurityLookupRequest;
-import java.util.List;
-import com.apifreaks.sdk.types.BulkIpSecurityLookupResponseItem;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-BulkIpSecurityLookupRequest request = BulkIpSecurityLookupRequest.builder()
+client.bulkIpSecurityLookup(
+    BulkIpSecurityLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .ips(java.util.List.of("8.8.8.8"))
-        .build();
-List<BulkIpSecurityLookupResponseItem> response = client.bulkIpSecurityLookup(request);
+        .ips(
+            Arrays.asList("ips")
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -545,7 +358,7 @@ List<BulkIpSecurityLookupResponseItem> response = client.bulkIpSecurityLookup(re
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -553,7 +366,7 @@ List<BulkIpSecurityLookupResponseItem> response = client.bulkIpSecurityLookup(re
 <dl>
 <dd>
 
-**format:** `Optional&lt;BulkIpSecurityLookupRequestFormat&gt;` — No description provided. _(optional)_
+**format:** `Optional<BulkIpSecurityLookupRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -561,7 +374,7 @@ List<BulkIpSecurityLookupResponseItem> response = client.bulkIpSecurityLookup(re
 <dl>
 <dd>
 
-**fields:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**fields:** `Optional<String>` — Comma-separated list of fields to return. Supports dot notation (e.g. security.threat_score).
     
 </dd>
 </dl>
@@ -569,7 +382,7 @@ List<BulkIpSecurityLookupResponseItem> response = client.bulkIpSecurityLookup(re
 <dl>
 <dd>
 
-**excludes:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**excludes:** `Optional<String>` — Comma-separated list of fields to remove from the response. Supports dot notation (e.g. security.is_tor).
     
 </dd>
 </dl>
@@ -577,29 +390,33 @@ List<BulkIpSecurityLookupResponseItem> response = client.bulkIpSecurityLookup(re
 <dl>
 <dd>
 
-**ips:** `List<String&gt;` — List of IP addresses to lookup _(required)_
+**ips:** `List<String>` — List of IP addresses to lookup
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.geocoderSearch(request) -> List<GeocoderSearchResponseItem></code></summary>
+<details><summary><code>client.geocoderSearch() -> List&amp;lt;GeocoderSearchResponseItem&amp;gt;</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Convert a given address or place name into geographic coordinates (latitude and longitude).
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -608,20 +425,20 @@ Convert a given address or place name into geographic coordinates (latitude and 
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.GeocoderSearchRequest;
-import java.util.List;
-import com.apifreaks.sdk.types.GeocoderSearchResponseItem;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-GeocoderSearchRequest request = GeocoderSearchRequest.builder()
+client.geocoderSearch(
+    GeocoderSearchRequest
+        .builder()
         .apiKey("apiKey")
-        .query("Wembley Stadium, London")
-        .build();
-List<GeocoderSearchResponseItem> response = client.geocoderSearch(request);
+        .query("query")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -633,7 +450,7 @@ List<GeocoderSearchResponseItem> response = client.geocoderSearch(request);
 <dl>
 <dd>
 
-**acceptLanguage:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -641,7 +458,7 @@ List<GeocoderSearchResponseItem> response = client.geocoderSearch(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**format:** `Optional<GeocoderSearchRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -649,7 +466,7 @@ List<GeocoderSearchResponseItem> response = client.geocoderSearch(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;GeocoderSearchRequestFormat&gt;` — Format of the response. _(optional)_
+**query:** `String` — Free-form search query, e.g. Wembley Stadium, London
     
 </dd>
 </dl>
@@ -657,7 +474,7 @@ List<GeocoderSearchResponseItem> response = client.geocoderSearch(request);
 <dl>
 <dd>
 
-**query:** `String` — Free-form search query, e.g. Wembley Stadium, London _(required)_
+**limit:** `Optional<Integer>` — Max number of results to return (1–40). May return fewer if matches are weak.
     
 </dd>
 </dl>
@@ -665,7 +482,7 @@ List<GeocoderSearchResponseItem> response = client.geocoderSearch(request);
 <dl>
 <dd>
 
-**limit:** `Optional&lt;Integer&gt;` — Max number of results to return (1–40). May return fewer if matches are weak. _(optional)_
+**minLat:** `Optional<Float>` — Minimum latitude for the viewbox. Must be ≤ max_lat and between -90 and 90.
     
 </dd>
 </dl>
@@ -673,7 +490,7 @@ List<GeocoderSearchResponseItem> response = client.geocoderSearch(request);
 <dl>
 <dd>
 
-**minLat:** `Optional&lt;Float&gt;` — Minimum latitude for the viewbox. Must be ≤ max_lat and between -90 and 90. _(optional)_
+**maxLat:** `Optional<Float>` — Maximum latitude for the viewbox. Must be ≥ min_lat and between -90 and 90.
     
 </dd>
 </dl>
@@ -681,7 +498,7 @@ List<GeocoderSearchResponseItem> response = client.geocoderSearch(request);
 <dl>
 <dd>
 
-**maxLat:** `Optional&lt;Float&gt;` — Maximum latitude for the viewbox. Must be ≥ min_lat and between -90 and 90. _(optional)_
+**minLon:** `Optional<Float>` — Minimum longitude for the viewbox. Must be ≤ max_lon and between -180 and 180.
     
 </dd>
 </dl>
@@ -689,7 +506,7 @@ List<GeocoderSearchResponseItem> response = client.geocoderSearch(request);
 <dl>
 <dd>
 
-**minLon:** `Optional&lt;Float&gt;` — Minimum longitude for the viewbox. Must be ≤ max_lon and between -180 and 180. _(optional)_
+**maxLon:** `Optional<Float>` — Maximum longitude for the viewbox. Must be ≥ min_lon and between -180 and 180.
     
 </dd>
 </dl>
@@ -697,29 +514,33 @@ List<GeocoderSearchResponseItem> response = client.geocoderSearch(request);
 <dl>
 <dd>
 
-**maxLon:** `Optional&lt;Float&gt;` — Maximum longitude for the viewbox. Must be ≥ min_lon and between -180 and 180. _(optional)_
+**acceptLanguage:** `Optional<String>` — Preferred language order for showing search results. This may either be a simple comma-separated list of language codes or a single entry. The results will be in the 1st language which is matched from the header. As a fallback if the results are not supported in the given language, 'en' will be used.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.geocoderReverse(request) -> GeocoderReverseResponse</code></summary>
+<details><summary><code>client.geocoderReverse() -> GeocoderReverseResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Convert geographic coordinates (latitude and longitude) into a human-readable address or place name.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -728,20 +549,21 @@ Convert geographic coordinates (latitude and longitude) into a human-readable ad
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.GeocoderReverseRequest;
-import com.apifreaks.sdk.types.GeocoderReverseResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-GeocoderReverseRequest request = GeocoderReverseRequest.builder()
+client.geocoderReverse(
+    GeocoderReverseRequest
+        .builder()
         .apiKey("apiKey")
-        .lat(51.5074)
-        .lon(-0.1278)
-        .build();
-GeocoderReverseResponse response = client.geocoderReverse(request);
+        .lat(1.1)
+        .lon(1.1)
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -753,7 +575,7 @@ GeocoderReverseResponse response = client.geocoderReverse(request);
 <dl>
 <dd>
 
-**acceptLanguage:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -761,7 +583,7 @@ GeocoderReverseResponse response = client.geocoderReverse(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**format:** `Optional<GeocoderReverseRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -769,7 +591,7 @@ GeocoderReverseResponse response = client.geocoderReverse(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;GeocoderReverseRequestFormat&gt;` — Format of the response. _(optional)_
+**lat:** `Double` — WGS84 latitude value ranging from -90 to 90.
     
 </dd>
 </dl>
@@ -777,7 +599,7 @@ GeocoderReverseResponse response = client.geocoderReverse(request);
 <dl>
 <dd>
 
-**lat:** `double` — WGS84 latitude value ranging from -90 to 90. _(required)_
+**lon:** `Double` — WGS84 longitude value ranging from -180 to 180.
     
 </dd>
 </dl>
@@ -785,19 +607,19 @@ GeocoderReverseResponse response = client.geocoderReverse(request);
 <dl>
 <dd>
 
-**lon:** `double` — WGS84 longitude value ranging from -180 to 180. _(required)_
+**acceptLanguage:** `Optional<String>` — Preferred language order for showing search results. This may either be a simple comma-separated list of language codes or a single entry. The results will be in the 1st language which is matched from the header. As a fallback if the results are not supported in the given language, en will be used.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.domainWhoisLookup(request) -> DomainWhoisLookupResponse</code></summary>
+<details><summary><code>client.domainWhoisLookup() -> DomainWhoisLookupResponse</code></summary>
 <dl>
 <dd>
 
@@ -806,8 +628,14 @@ GeocoderReverseResponse response = client.geocoderReverse(request);
 <dl>
 <dd>
 
-Retrieve current WHOIS information for a domain name. This endpoint provides detailed registration information including registrar details, dates, nameservers, and registrant information.
+<dl>
+<dd>
 
+Retrieve current WHOIS information for a domain name.
+This endpoint provides detailed registration information including registrar details,
+dates, nameservers, and registrant information.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -816,19 +644,20 @@ Retrieve current WHOIS information for a domain name. This endpoint provides det
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.DomainWhoisLookupRequest;
-import com.apifreaks.sdk.types.DomainWhoisLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-DomainWhoisLookupRequest request = DomainWhoisLookupRequest.builder()
+client.domainWhoisLookup(
+    DomainWhoisLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .domainName("example.com")
-        .build();
-DomainWhoisLookupResponse response = client.domainWhoisLookup(request);
+        .domainName("domainName")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -840,7 +669,7 @@ DomainWhoisLookupResponse response = client.domainWhoisLookup(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -848,7 +677,7 @@ DomainWhoisLookupResponse response = client.domainWhoisLookup(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;DomainWhoisLookupRequestFormat&gt;` — Response format (defaults to json) _(optional)_
+**format:** `Optional<DomainWhoisLookupRequestFormat>` — Response format (defaults to json)
     
 </dd>
 </dl>
@@ -856,86 +685,13 @@ DomainWhoisLookupResponse response = client.domainWhoisLookup(request);
 <dl>
 <dd>
 
-**domainName:** `String` — Domain name for WHOIS lookup _(required)_
+**domainName:** `String` — Domain name for WHOIS lookup
     
 </dd>
 </dl>
-
 </dd>
 </dl>
 
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.domainWhoisLookupV2(request) -> DomainWhoisLookupResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-> **v2.0 endpoint** — maps to `/v2.0/domain/whois/live`. Uses the same request and response types as the v1 `domainWhoisLookup` method.
-
-Retrieve current WHOIS information for a domain name. This endpoint provides detailed registration information including registrar details, dates, nameservers, and registrant information.
-
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.DomainWhoisLookupRequest;
-import com.apifreaks.sdk.types.DomainWhoisLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-DomainWhoisLookupRequest request = DomainWhoisLookupRequest.builder()
-        .apiKey("apiKey")
-        .domainName("example.com")
-        .build();
-DomainWhoisLookupResponse response = client.domainWhoisLookupV2(request);
-```
-
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**apiKey:** `String` — Your API key _(required)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**format:** `Optional&lt;DomainWhoisLookupRequestFormat&gt;` — Response format (defaults to json) _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**domainName:** `String` — Domain name for WHOIS lookup _(required)_
-    
-</dd>
-</dl>
-
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -950,8 +706,12 @@ DomainWhoisLookupResponse response = client.domainWhoisLookupV2(request);
 <dl>
 <dd>
 
-Retrieve WHOIS information for <code>100 Domains per Request</code>.
+<dl>
+<dd>
 
+Retrieve WHOIS information for `100 Domains per Request`.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -960,19 +720,22 @@ Retrieve WHOIS information for <code>100 Domains per Request</code>.
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.BulkDomainWhoisLookupRequest;
-import com.apifreaks.sdk.types.BulkDomainWhoisLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-BulkDomainWhoisLookupRequest request = BulkDomainWhoisLookupRequest.builder()
+client.bulkDomainWhoisLookup(
+    BulkDomainWhoisLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .domainNames(java.util.List.of("example.com"))
-        .build();
-BulkDomainWhoisLookupResponse response = client.bulkDomainWhoisLookup(request);
+        .domainNames(
+            Arrays.asList("domainNames")
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -984,7 +747,7 @@ BulkDomainWhoisLookupResponse response = client.bulkDomainWhoisLookup(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -992,7 +755,7 @@ BulkDomainWhoisLookupResponse response = client.bulkDomainWhoisLookup(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;BulkDomainWhoisLookupRequestFormat&gt;` — No description provided. _(optional)_
+**format:** `Optional<BulkDomainWhoisLookupRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -1000,19 +763,19 @@ BulkDomainWhoisLookupResponse response = client.bulkDomainWhoisLookup(request);
 <dl>
 <dd>
 
-**domainNames:** `List<String&gt;` — A list of domain names for which WHOIS data is requested. _(required)_
+**domainNames:** `List<String>` — A list of domain names for which WHOIS data is requested.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.bulkDomainWhoisLookupV2(request) -> BulkDomainWhoisLookupResponse</code></summary>
+<details><summary><code>client.ipWhoisLookup() -> IpWhoisLookupResponse</code></summary>
 <dl>
 <dd>
 
@@ -1020,82 +783,13 @@ BulkDomainWhoisLookupResponse response = client.bulkDomainWhoisLookup(request);
 
 <dl>
 <dd>
-
-> **v2.0 endpoint** — maps to `/v2.0/domain/whois/live`. Uses the same request and response types as the v1 `bulkDomainWhoisLookup` method.
-
-Retrieve WHOIS information for <code>100 Domains per Request</code>.
-
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.BulkDomainWhoisLookupRequest;
-import com.apifreaks.sdk.types.BulkDomainWhoisLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-BulkDomainWhoisLookupRequest request = BulkDomainWhoisLookupRequest.builder()
-        .apiKey("apiKey")
-        .domainNames(java.util.List.of("example.com"))
-        .build();
-BulkDomainWhoisLookupResponse response = client.bulkDomainWhoisLookupV2(request);
-```
-
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**apiKey:** `String` — No description provided. _(required)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**format:** `Optional&lt;BulkDomainWhoisLookupRequestFormat&gt;` — No description provided. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**domainNames:** `List<String&gt;` — A list of domain names for which WHOIS data is requested. _(required)_
-    
-</dd>
-</dl>
-
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.ipWhoisLookup(request) -> IpWhoisLookupResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
 
 <dl>
 <dd>
 
 Returns WHOIS registration details for a specified IP address (IPv4 or IPv6).
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1104,19 +798,20 @@ Returns WHOIS registration details for a specified IP address (IPv4 or IPv6).
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.IpWhoisLookupRequest;
-import com.apifreaks.sdk.types.IpWhoisLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-IpWhoisLookupRequest request = IpWhoisLookupRequest.builder()
+client.ipWhoisLookup(
+    IpWhoisLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .ip("8.8.8.8")
-        .build();
-IpWhoisLookupResponse response = client.ipWhoisLookup(request);
+        .ip("ip")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1128,7 +823,7 @@ IpWhoisLookupResponse response = client.ipWhoisLookup(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -1136,7 +831,7 @@ IpWhoisLookupResponse response = client.ipWhoisLookup(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;IpWhoisLookupRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<IpWhoisLookupRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -1144,29 +839,33 @@ IpWhoisLookupResponse response = client.ipWhoisLookup(request);
 <dl>
 <dd>
 
-**ip:** `String` — The IP address (IPv4 or IPv6) for which WHOIS data is requested. _(required)_
+**ip:** `String` — The IP address (IPv4 or IPv6) for which WHOIS data is requested.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.asnWhoisLookup(request) -> AsnWhoisLookupResponse</code></summary>
+<details><summary><code>client.asnWhoisLookup() -> AsnWhoisLookupResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Returns WHOIS registration details for a specified ASN, with or without the 'as' prefix.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1175,19 +874,20 @@ Returns WHOIS registration details for a specified ASN, with or without the 'as'
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.AsnWhoisLookupRequest;
-import com.apifreaks.sdk.types.AsnWhoisLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-AsnWhoisLookupRequest request = AsnWhoisLookupRequest.builder()
+client.asnWhoisLookup(
+    AsnWhoisLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .asn("AS15169")
-        .build();
-AsnWhoisLookupResponse response = client.asnWhoisLookup(request);
+        .asn("asn")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1199,7 +899,7 @@ AsnWhoisLookupResponse response = client.asnWhoisLookup(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -1207,7 +907,7 @@ AsnWhoisLookupResponse response = client.asnWhoisLookup(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;AsnWhoisLookupRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<AsnWhoisLookupRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -1215,19 +915,19 @@ AsnWhoisLookupResponse response = client.asnWhoisLookup(request);
 <dl>
 <dd>
 
-**asn:** `String` — The Autonomous System Number (ASN) to retrieve WHOIS data for. Can be prefixed with 'as' or not. _(required)_
+**asn:** `String` — The Autonomous System Number (ASN) to retrieve WHOIS data for. Can be prefixed with 'as' or not.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.domainWhoisHistory(request) -> DomainWhoisHistoryResponse</code></summary>
+<details><summary><code>client.domainWhoisHistory() -> DomainWhoisHistoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -1236,8 +936,13 @@ AsnWhoisLookupResponse response = client.asnWhoisLookup(request);
 <dl>
 <dd>
 
-Retrieve historical WHOIS records for a domain name. This endpoint provides a timeline of all recorded changes in domain registration information.
+<dl>
+<dd>
 
+Retrieve historical WHOIS records for a domain name.
+This endpoint provides a timeline of all recorded changes in domain registration information.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1246,19 +951,20 @@ Retrieve historical WHOIS records for a domain name. This endpoint provides a ti
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.DomainWhoisHistoryRequest;
-import com.apifreaks.sdk.types.DomainWhoisHistoryResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-DomainWhoisHistoryRequest request = DomainWhoisHistoryRequest.builder()
+client.domainWhoisHistory(
+    DomainWhoisHistoryRequest
+        .builder()
         .apiKey("apiKey")
-        .domainName("example.com")
-        .build();
-DomainWhoisHistoryResponse response = client.domainWhoisHistory(request);
+        .domainName("domainName")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1270,7 +976,7 @@ DomainWhoisHistoryResponse response = client.domainWhoisHistory(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -1278,7 +984,7 @@ DomainWhoisHistoryResponse response = client.domainWhoisHistory(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;DomainWhoisHistoryRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<DomainWhoisHistoryRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -1286,29 +992,33 @@ DomainWhoisHistoryResponse response = client.domainWhoisHistory(request);
 <dl>
 <dd>
 
-**domainName:** `String` — Domain name for historical WHOIS lookup _(required)_
+**domainName:** `String` — Domain name for historical WHOIS lookup
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.domainWhoisReverse(request) -> DomainWhoisReverseResponse</code></summary>
+<details><summary><code>client.domainWhoisReverse() -> DomainWhoisReverseResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Performs a reverse WHOIS search using one or more search parameters like keyword, email, owner, or company.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1317,18 +1027,19 @@ Performs a reverse WHOIS search using one or more search parameters like keyword
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.DomainWhoisReverseRequest;
-import com.apifreaks.sdk.types.DomainWhoisReverseResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-DomainWhoisReverseRequest request = DomainWhoisReverseRequest.builder()
+client.domainWhoisReverse(
+    DomainWhoisReverseRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-DomainWhoisReverseResponse response = client.domainWhoisReverse(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1340,7 +1051,7 @@ DomainWhoisReverseResponse response = client.domainWhoisReverse(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -1348,7 +1059,7 @@ DomainWhoisReverseResponse response = client.domainWhoisReverse(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;DomainWhoisReverseRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<DomainWhoisReverseRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -1356,7 +1067,7 @@ DomainWhoisReverseResponse response = client.domainWhoisReverse(request);
 <dl>
 <dd>
 
-**keyword:** `Optional&lt;String&gt;` — Keyword search term for reverse WHOIS by keyword (case-insensitive pattern matching). _(optional)_
+**keyword:** `Optional<String>` — Keyword search term for reverse WHOIS by keyword (case-insensitive pattern matching).
     
 </dd>
 </dl>
@@ -1364,7 +1075,7 @@ DomainWhoisReverseResponse response = client.domainWhoisReverse(request);
 <dl>
 <dd>
 
-**email:** `Optional&lt;String&gt;` — Email search term for reverse WHOIS by email address (case-insensitive exact or regex match; * wildcard supported). _(optional)_
+**email:** `Optional<String>` — Email search term for reverse WHOIS by email address (case-insensitive exact or regex match; * wildcard supported).
     
 </dd>
 </dl>
@@ -1372,7 +1083,7 @@ DomainWhoisReverseResponse response = client.domainWhoisReverse(request);
 <dl>
 <dd>
 
-**owner:** `Optional&lt;String&gt;` — Registrant or owner name for reverse WHOIS (a full-text search phrase matching technique to retrieve results). _(optional)_
+**owner:** `Optional<String>` — Registrant or owner name for reverse WHOIS (a full-text search phrase matching technique to retrieve results).
     
 </dd>
 </dl>
@@ -1380,7 +1091,7 @@ DomainWhoisReverseResponse response = client.domainWhoisReverse(request);
 <dl>
 <dd>
 
-**company:** `Optional&lt;String&gt;` — Organization or company name for reverse WHOIS (full-text search phrase matching technique to retrieve results). _(optional)_
+**company:** `Optional<String>` — Organization or company name for reverse WHOIS (full-text search phrase matching technique to retrieve results).
     
 </dd>
 </dl>
@@ -1388,7 +1099,7 @@ DomainWhoisReverseResponse response = client.domainWhoisReverse(request);
 <dl>
 <dd>
 
-**exact:** `Optional&lt;Boolean&gt;` — Accepts 'true' or 'false'. &quot;true&quot; returns only records that exactly match the input (keyword, owner/registrant, or company). &quot;false&quot; returns all matches and is the default when omitted. _(optional)_
+**exact:** `Optional<Boolean>` — Accepts 'true' or 'false'. "true" returns only records that exactly match the input (keyword, owner/registrant, or company). "false" returns all matches and is the default when omitted.
     
 </dd>
 </dl>
@@ -1396,7 +1107,7 @@ DomainWhoisReverseResponse response = client.domainWhoisReverse(request);
 <dl>
 <dd>
 
-**mode:** `Optional&lt;DomainWhoisReverseRequestMode&gt;` — Accepts 'true' or 'false'. &quot;true&quot; returns only records that exactly match the input (keyword, owner/registrant, or company). &quot;false&quot; returns all matches and is the default when omitted. _(optional)_
+**mode:** `Optional<DomainWhoisReverseRequestMode>` 
     
 </dd>
 </dl>
@@ -1404,19 +1115,19 @@ DomainWhoisReverseResponse response = client.domainWhoisReverse(request);
 <dl>
 <dd>
 
-**page:** `Optional&lt;Integer&gt;` — Page number for paginated results. _(optional)_
+**page:** `Optional<Integer>` — Page number for paginated results.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.domainDnsLookup(request) -> DomainDnsLookupResponse</code></summary>
+<details><summary><code>client.domainDnsLookup() -> DomainDnsLookupResponse</code></summary>
 <dl>
 <dd>
 
@@ -1425,8 +1136,12 @@ DomainWhoisReverseResponse response = client.domainWhoisReverse(request);
 <dl>
 <dd>
 
-Retrieve real-time DNS records for any hostname. Supports multiple record types including A, AAAA, MX, NS, SOA, SPF, TXT, and CNAME records.
+<dl>
+<dd>
 
+Retrieve real-time DNS records for any hostname. Supports multiple record types including A, AAAA, MX, NS, SOA, SPF, TXT, and CNAME records.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1435,19 +1150,22 @@ Retrieve real-time DNS records for any hostname. Supports multiple record types 
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.DomainDnsLookupRequest;
-import com.apifreaks.sdk.types.DomainDnsLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-DomainDnsLookupRequest request = DomainDnsLookupRequest.builder()
+client.domainDnsLookup(
+    DomainDnsLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .type(java.util.List.of("all"))
-        .build();
-DomainDnsLookupResponse response = client.domainDnsLookup(request);
+        .type(
+            Arrays.asList("type")
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1459,7 +1177,7 @@ DomainDnsLookupResponse response = client.domainDnsLookup(request);
 <dl>
 <dd>
 
-**type:** `List&lt;String&gt;` — A comma-separated list of DNS record types for lookup. Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all. When ipAddress is provided, type must be &quot;all&quot;. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -1467,7 +1185,7 @@ DomainDnsLookupResponse response = client.domainDnsLookup(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**format:** `Optional<DomainDnsLookupRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -1475,7 +1193,7 @@ DomainDnsLookupResponse response = client.domainDnsLookup(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;DomainDnsLookupRequestFormat&gt;` — Format of the response. _(optional)_
+**hostName:** `Optional<String>` — Hostname or URL whose DNS records are required. Give either `host-name` or `ipAddress`.
     
 </dd>
 </dl>
@@ -1483,7 +1201,7 @@ DomainDnsLookupResponse response = client.domainDnsLookup(request);
 <dl>
 <dd>
 
-**hostName:** `Optional&lt;String&gt;` — Hostname or URL whose DNS records are required. _(optional)_
+**ipAddress:** `Optional<String>` — The IP address whose PTR (reverse DNS) record is required. Give either `host-name` or `ipAddress`; with `ipAddress`, set `type` to `all` or `PTR`.
     
 </dd>
 </dl>
@@ -1491,13 +1209,13 @@ DomainDnsLookupResponse response = client.domainDnsLookup(request);
 <dl>
 <dd>
 
-**ipAddress:** `Optional&lt;String&gt;` — The IP address for requested DNS's PTR record. 'type' parameter must be set to 'all'. _(optional)_
+**type:** `Optional<String>` — DNS record types to look up, sent as a comma-separated list (e.g. `A,MX`). Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, PTR, or all. When ipAddress is provided, use "all" or "PTR".
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
@@ -1512,8 +1230,13 @@ DomainDnsLookupResponse response = client.domainDnsLookup(request);
 <dl>
 <dd>
 
-Perform DNS lookups for multiple hostnames in a single request. Supports up to <code>100 host-names per request</code> and returns DNS records including A, AAAA, MX, NS, SOA, SPF, TXT, and CNAME records.
+<dl>
+<dd>
 
+Perform DNS lookups for multiple hostnames in a single request. Supports up to `100 host-names per request`
+and returns DNS records including A, AAAA, MX, NS, SOA, SPF, TXT, and CNAME records.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1522,20 +1245,25 @@ Perform DNS lookups for multiple hostnames in a single request. Supports up to <
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.BulkDomainDnsLookupRequest;
-import com.apifreaks.sdk.types.BulkDomainDnsLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-BulkDomainDnsLookupRequest request = BulkDomainDnsLookupRequest.builder()
+client.bulkDomainDnsLookup(
+    BulkDomainDnsLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .type(java.util.List.of("all"))
-        .domainNames(java.util.List.of("example.com"))
-        .build();
-BulkDomainDnsLookupResponse response = client.bulkDomainDnsLookup(request);
+        .type(
+            Arrays.asList("type")
+        )
+        .domainNames(
+            Arrays.asList("domainNames")
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1547,7 +1275,7 @@ BulkDomainDnsLookupResponse response = client.bulkDomainDnsLookup(request);
 <dl>
 <dd>
 
-**type:** `List&lt;String&gt;` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -1555,7 +1283,7 @@ BulkDomainDnsLookupResponse response = client.bulkDomainDnsLookup(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**format:** `Optional<BulkDomainDnsLookupRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -1563,7 +1291,7 @@ BulkDomainDnsLookupResponse response = client.bulkDomainDnsLookup(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;BulkDomainDnsLookupRequestFormat&gt;` — No description provided. _(optional)_
+**type:** `Optional<String>` — DNS record types to look up, sent as a comma-separated list (e.g. `A,MX`). Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all.
     
 </dd>
 </dl>
@@ -1571,7 +1299,7 @@ BulkDomainDnsLookupResponse response = client.bulkDomainDnsLookup(request);
 <dl>
 <dd>
 
-**domainNames:** `List<String&gt;` — List of hostnames to lookup DNS records for _(required)_
+**domainNames:** `List<String>` — List of hostnames to lookup DNS records for
     
 </dd>
 </dl>
@@ -1579,19 +1307,19 @@ BulkDomainDnsLookupResponse response = client.bulkDomainDnsLookup(request);
 <dl>
 <dd>
 
-**ipAddresses:** `Optional&lt;List<String&gt;&gt;` — A comma-separated list of IP addresses for reverse DNS lookup _(optional)_
+**ipAddresses:** `Optional<List<String>>` — Array of IP addresses to include in the lookup for PTR record enrichment.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.domainDnsHistory(request) -> DomainDnsHistoryResponse</code></summary>
+<details><summary><code>client.domainDnsHistory() -> DomainDnsHistoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -1600,8 +1328,13 @@ BulkDomainDnsLookupResponse response = client.bulkDomainDnsLookup(request);
 <dl>
 <dd>
 
-Retrieve historical DNS records for any hostname. Access unique historical data for A, AAAA, MX, NS, SOA, SPF, TXT, and CNAME records, including subdomains. Results are paginated with up to 100 unique records per page.
+<dl>
+<dd>
 
+Retrieve historical DNS records for any hostname. Access unique historical data for A, AAAA, MX, NS, SOA, SPF, TXT, and CNAME records,
+including subdomains. Results are paginated with up to 100 unique records per page.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1610,20 +1343,23 @@ Retrieve historical DNS records for any hostname. Access unique historical data 
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.DomainDnsHistoryRequest;
-import com.apifreaks.sdk.types.DomainDnsHistoryResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-DomainDnsHistoryRequest request = DomainDnsHistoryRequest.builder()
+client.domainDnsHistory(
+    DomainDnsHistoryRequest
+        .builder()
         .apiKey("apiKey")
-        .hostName("example.com")
-        .type(java.util.List.of("all"))
-        .build();
-DomainDnsHistoryResponse response = client.domainDnsHistory(request);
+        .hostName("host-name")
+        .type(
+            Arrays.asList("type")
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1635,7 +1371,7 @@ DomainDnsHistoryResponse response = client.domainDnsHistory(request);
 <dl>
 <dd>
 
-**type:** `List&lt;String&gt;` — A comma-separated list of DNS record types for lookup. Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -1643,7 +1379,7 @@ DomainDnsHistoryResponse response = client.domainDnsHistory(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**format:** `Optional<DomainDnsHistoryRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -1651,7 +1387,7 @@ DomainDnsHistoryResponse response = client.domainDnsHistory(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;DomainDnsHistoryRequestFormat&gt;` — Format of the response. _(optional)_
+**hostName:** `String` — Hostname or URL whose historical DNS records are required
     
 </dd>
 </dl>
@@ -1659,7 +1395,7 @@ DomainDnsHistoryResponse response = client.domainDnsHistory(request);
 <dl>
 <dd>
 
-**hostName:** `String` — Hostname or URL whose historical DNS records are required _(required)_
+**type:** `Optional<String>` — DNS record types to look up, sent as a comma-separated list (e.g. `A,MX`). Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all.
     
 </dd>
 </dl>
@@ -1667,29 +1403,33 @@ DomainDnsHistoryResponse response = client.domainDnsHistory(request);
 <dl>
 <dd>
 
-**page:** `Optional&lt;Integer&gt;` — Page number for paginated results _(optional)_
+**page:** `Optional<Integer>` — Page number for paginated results
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.domainDnsReverse(request) -> DomainDnsReverseResponse</code></summary>
+<details><summary><code>client.domainDnsReverse() -> DomainDnsReverseResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Retrieve all the hostnames associated with any particular A, AAAA, MX, NS, SOA, SPF, TXT, and CNAME DNS records. For instance, you can access all the hostnames hosted on any IP/CIDR notation, all the domain names using Cloudflare name servers, and all the domain names using Google Mailbox
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1698,20 +1438,21 @@ Retrieve all the hostnames associated with any particular A, AAAA, MX, NS, SOA, 
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.DomainDnsReverseRequest;
-import com.apifreaks.sdk.types.DomainDnsReverseResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-DomainDnsReverseRequest request = DomainDnsReverseRequest.builder()
+client.domainDnsReverse(
+    DomainDnsReverseRequest
+        .builder()
         .apiKey("apiKey")
-        .type("A")
+        .type(DomainDnsReverseRequestType.A)
         .value("value")
-        .build();
-DomainDnsReverseResponse response = client.domainDnsReverse(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1723,7 +1464,7 @@ DomainDnsReverseResponse response = client.domainDnsReverse(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -1731,7 +1472,7 @@ DomainDnsReverseResponse response = client.domainDnsReverse(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;DomainDnsReverseRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<DomainDnsReverseRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -1739,7 +1480,16 @@ DomainDnsReverseResponse response = client.domainDnsReverse(request);
 <dl>
 <dd>
 
-**type:** `DomainDnsReverseRequestType` — The type of reverse DNS lookup to perform. Determines how the value parameter is interpreted: A: IPv4 CIDR block AAAA: IPv6 CIDR block MX: Mail provider domain NS: Name server provider hostname SOA: SOA record admin domain SPF/TXT: Target verification strings CNAME: Target hostname _(required)_
+**type:** `DomainDnsReverseRequestType` 
+
+The type of reverse DNS lookup to perform. Determines how the value parameter is interpreted:
+- A: IPv4 CIDR block
+- AAAA: IPv6 CIDR block
+- MX: Mail provider domain
+- NS: Name server provider hostname
+- SOA: SOA record admin domain
+- SPF/TXT: Target verification strings
+- CNAME: Target hostname
     
 </dd>
 </dl>
@@ -1747,7 +1497,7 @@ DomainDnsReverseResponse response = client.domainDnsReverse(request);
 <dl>
 <dd>
 
-**value:** `String` — Provide an IP or CIDR for A/AAAA lookups, or a hostname/selector for MX, NS, SOA, SPF, TXT, and CNAME queries. Wildcard regex patterns are also supported (e.g., mail.google.com, m*.google.com, _spf.g*.com, s*.g*.com). _(required)_
+**value:** `String` — Provide an IP or CIDR for A/AAAA lookups, or a hostname/selector for MX, NS, SOA, SPF, TXT, and CNAME queries. Wildcard regex patterns are also supported (e.g., mail.google.com, m*.google.com, _spf.g*.com, s*.g*.com).
     
 </dd>
 </dl>
@@ -1755,7 +1505,7 @@ DomainDnsReverseResponse response = client.domainDnsReverse(request);
 <dl>
 <dd>
 
-**exact:** `Optional&lt;Boolean&gt;` — Accepts 'true' or 'false'. &quot;true&quot; returns only records that exactly match the input (NS, MX, CNAME, SOA, SPF, TXT). &quot;false&quot; returns all matches (default when omitted). _(optional)_
+**exact:** `Optional<Boolean>` — Accepts 'true' or 'false'. "true" returns only records that exactly match the input (NS, MX, CNAME, SOA, SPF, TXT). "false" returns all matches (default when omitted).
     
 </dd>
 </dl>
@@ -1763,13 +1513,13 @@ DomainDnsReverseResponse response = client.domainDnsReverse(request);
 <dl>
 <dd>
 
-**page:** `Optional&lt;Integer&gt;` — Page number to paginate through results (defaults to 1). _(optional)_
+**page:** `Optional<Integer>` — Page number to paginate through results (defaults to 1).
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
@@ -1784,8 +1534,13 @@ DomainDnsReverseResponse response = client.domainDnsReverse(request);
 <dl>
 <dd>
 
-Execute a series of web scraping instructions on a target URL. Supports various operations like form filling, clicking, data extraction, and CAPTCHA solving.
+<dl>
+<dd>
 
+Execute a series of web scraping instructions on a target URL. 
+Supports various operations like form filling, clicking, data extraction, and CAPTCHA solving.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1794,20 +1549,59 @@ Execute a series of web scraping instructions on a target URL. Supports various 
 <dl>
 <dd>
 
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.WebScrapeRequest;
-import com.apifreaks.sdk.types.WebScrapeResponse;
+<dl>
+<dd>
 
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-WebScrapeRequest request = WebScrapeRequest.builder()
+```java
+client.webScrape(
+    WebScrapeRequest
+        .builder()
         .apiKey("apiKey")
         .url("https://example.com")
-        .body(null)
-        .build();
-WebScrapeResponse response = client.webScrape(request);
+        .body(
+            WebScrapeRequestBody.of(
+                WebScrapeRequestBodyBlockUrl
+                    .builder()
+                    .instructions(
+                        Arrays.asList(
+                            WebScrapeRequestBodyBlockUrlInstructionsItem
+                                .builder()
+                                .build(),
+                            WebScrapeRequestBodyBlockUrlInstructionsItem
+                                .builder()
+                                .build(),
+                            WebScrapeRequestBodyBlockUrlInstructionsItem
+                                .builder()
+                                .build(),
+                            WebScrapeRequestBodyBlockUrlInstructionsItem
+                                .builder()
+                                .build(),
+                            WebScrapeRequestBodyBlockUrlInstructionsItem
+                                .builder()
+                                .extract(
+                                    new HashMap<String, String>() {{
+                                        put("profile", "#profile");
+                                        put("welcomeMessage", "#welcome-message");
+                                        put("userInfo", "#user-info");
+                                    }}
+                                )
+                                .build(),
+                            WebScrapeRequestBodyBlockUrlInstructionsItem
+                                .builder()
+                                .build(),
+                            WebScrapeRequestBodyBlockUrlInstructionsItem
+                                .builder()
+                                .build()
+                        )
+                    )
+                    .build()
+            )
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1819,7 +1613,7 @@ WebScrapeResponse response = client.webScrape(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -1827,7 +1621,7 @@ WebScrapeResponse response = client.webScrape(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;WebScrapeRequestFormat&gt;` — Response format returned by the API. _(optional)_
+**format:** `Optional<WebScrapeRequestFormat>` — Response format returned by the API.
     
 </dd>
 </dl>
@@ -1835,7 +1629,7 @@ WebScrapeResponse response = client.webScrape(request);
 <dl>
 <dd>
 
-**url:** `String` — Target URL to scrape _(required)_
+**url:** `String` — Target URL to scrape
     
 </dd>
 </dl>
@@ -1843,7 +1637,7 @@ WebScrapeResponse response = client.webScrape(request);
 <dl>
 <dd>
 
-**text:** `Optional&lt;Boolean&gt;` — Set to true to return the data in text format else false for data in html format with tags. _(optional)_
+**text:** `Optional<Boolean>` — Set to `true` to return the data in text format else `false` for data in html format with tags.
     
 </dd>
 </dl>
@@ -1851,7 +1645,12 @@ WebScrapeResponse response = client.webScrape(request);
 <dl>
 <dd>
 
-**jsEnabled:** `Optional&lt;Boolean&gt;` — Set true to handle websites with JavaScript. Set false to handle static html websites. Default value is true. _(optional)_
+**jsEnabled:** `Optional<Boolean>` 
+
+Set  `true` to handle websites with JavaScript. Set `false` to handle static html websites.
+
+
+ Default value is `true`.
     
 </dd>
 </dl>
@@ -1859,7 +1658,7 @@ WebScrapeResponse response = client.webScrape(request);
 <dl>
 <dd>
 
-**proxy:** `Optional&lt;WebScrapeRequestProxy&gt;` — Use proxy for requests _(optional)_
+**proxy:** `Optional<WebScrapeRequestProxy>` — Use a proxy for the request. Pass true/false to toggle the default proxy pool, or a proxy URL string to use a specific proxy.
     
 </dd>
 </dl>
@@ -1867,7 +1666,12 @@ WebScrapeResponse response = client.webScrape(request);
 <dl>
 <dd>
 
-**sslIgnore:** `Optional&lt;Boolean&gt;` — Ignore SSL certificate errors. Only works if jsEnabled is true. _(optional)_
+**sslIgnore:** `Optional<Boolean>` 
+
+Ignore SSL certificate errors.
+
+
+ Only works if **jsEnabled** is **true**.
     
 </dd>
 </dl>
@@ -1875,7 +1679,12 @@ WebScrapeResponse response = client.webScrape(request);
 <dl>
 <dd>
 
-**windowSize:** `Optional&lt;String&gt;` — Specify the browser window size in the format 'width,height' (e.g., &quot;1920w,1080h&quot;). Default value is the default resolutions provided by web/browser. Only works if jsEnabled is true. _(optional)_
+**windowSize:** `Optional<String>` 
+
+Specify the browser window size in the format 'width,height' (e.g., "1920w,1080h"). Default value is the default resolutions provided by web/browser.
+
+
+ Only works if **jsEnabled** is **true**.
     
 </dd>
 </dl>
@@ -1883,7 +1692,12 @@ WebScrapeResponse response = client.webScrape(request);
 <dl>
 <dd>
 
-**adBlock:** `Optional&lt;Boolean&gt;` — Set to true to apply ad-blocker to the specified URL else false or ignore to not apply. Only works if jsEnabled is true. _(optional)_
+**adBlock:** `Optional<Boolean>` 
+
+Set to `true` to apply ad-blocker to the specified URL else false or ignore to not apply.
+
+
+ Only works if **jsEnabled** is **true**.
     
 </dd>
 </dl>
@@ -1891,7 +1705,12 @@ WebScrapeResponse response = client.webScrape(request);
 <dl>
 <dd>
 
-**captcha:** `Optional&lt;Boolean&gt;` — if true user can provide captcha instructions in the instructions to solve image captchas. Only works if jsEnabled is true. _(optional)_
+**captcha:** `Optional<Boolean>` 
+
+if true user can provide captcha instructions in the instructions to solve image captchas.
+
+
+  Only works if **jsEnabled** is **true**.
     
 </dd>
 </dl>
@@ -1899,13 +1718,13 @@ WebScrapeResponse response = client.webScrape(request);
 <dl>
 <dd>
 
-**body:** `WebScrapeRequestBody` — if true user can provide captcha instructions in the instructions to solve image captchas. Only works if jsEnabled is true. _(required)_
+**request:** `WebScrapeRequestBody` 
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
@@ -1920,8 +1739,12 @@ WebScrapeResponse response = client.webScrape(request);
 <dl>
 <dd>
 
-Validates a single email address and returns result.
+<dl>
+<dd>
 
+Validates a single email address and returns result.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1930,19 +1753,20 @@ Validates a single email address and returns result.
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.EmailValidateRequest;
-import com.apifreaks.sdk.types.EmailValidateResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-EmailValidateRequest request = EmailValidateRequest.builder()
+client.emailValidate(
+    EmailValidateRequest
+        .builder()
         .apiKey("apiKey")
-        .email("user@example.com")
-        .build();
-EmailValidateResponse response = client.emailValidate(request);
+        .email("email")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1954,7 +1778,7 @@ EmailValidateResponse response = client.emailValidate(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -1962,7 +1786,7 @@ EmailValidateResponse response = client.emailValidate(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;EmailValidateRequestFormat&gt;` — No description provided. _(optional)_
+**format:** `Optional<EmailValidateRequestFormat>` — Format of the response
     
 </dd>
 </dl>
@@ -1970,7 +1794,7 @@ EmailValidateResponse response = client.emailValidate(request);
 <dl>
 <dd>
 
-**email:** `String` — Email address to validate _(required)_
+**email:** `String` — Email address to validate
     
 </dd>
 </dl>
@@ -1978,7 +1802,7 @@ EmailValidateResponse response = client.emailValidate(request);
 <dl>
 <dd>
 
-**name:** `Optional&lt;String&gt;` — Name of the email address _(optional)_
+**name:** `Optional<String>` — Name of the email address
     
 </dd>
 </dl>
@@ -1986,13 +1810,13 @@ EmailValidateResponse response = client.emailValidate(request);
 <dl>
 <dd>
 
-**ip:** `Optional&lt;String&gt;` — IP address of the email address _(optional)_
+**ip:** `Optional<String>` — IP address of the email address
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
@@ -2007,8 +1831,12 @@ EmailValidateResponse response = client.emailValidate(request);
 <dl>
 <dd>
 
-Validates a bulk of email addresses and returns result for each. Maximum <code>10</code> email addresses per request.
+<dl>
+<dd>
 
+Validates a bulk of email addresses and returns result for each. Maximum `10` email addresses per request.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2017,19 +1845,27 @@ Validates a bulk of email addresses and returns result for each. Maximum <code>1
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.BulkEmailValidateRequest;
-import com.apifreaks.sdk.types.BulkEmailValidateResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-BulkEmailValidateRequest request = BulkEmailValidateRequest.builder()
+client.bulkEmailValidate(
+    BulkEmailValidateRequest
+        .builder()
         .apiKey("apiKey")
-        .emailData(java.util.List.of())
-        .build();
-BulkEmailValidateResponse response = client.bulkEmailValidate(request);
+        .emailData(
+            Arrays.asList(
+                BulkEmailValidateRequestEmailDataItem
+                    .builder()
+                    .email("email")
+                    .build()
+            )
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2041,7 +1877,7 @@ BulkEmailValidateResponse response = client.bulkEmailValidate(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -2049,7 +1885,7 @@ BulkEmailValidateResponse response = client.bulkEmailValidate(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;BulkEmailValidateRequestFormat&gt;` — No description provided. _(optional)_
+**format:** `Optional<BulkEmailValidateRequestFormat>` — Format of the response
     
 </dd>
 </dl>
@@ -2057,13 +1893,189 @@ BulkEmailValidateResponse response = client.bulkEmailValidate(request);
 <dl>
 <dd>
 
-**emailData:** `List<BulkEmailValidateRequestEmailDataItem&gt;` — Array of email objects for bulk validation _(required)_
+**emailData:** `List<BulkEmailValidateRequestEmailDataItem>` — Array of email objects for bulk validation
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.disposableEmailCheckV2(request) -> DisposableEmailCheckV2Response</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Validates email syntax and checks the domain for disposable, free, spam, and role-account signals, plus MX/A DNS records. Send the email (and optionally an ip) as a JSON request body. When an ip is included, the response also carries geolocation and security data for it.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.disposableEmailCheckV2(
+    DisposableEmailCheckV2Request
+        .builder()
+        .apiKey("apiKey")
+        .email("test@sogetthis.com")
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
 
+<dl>
+<dd>
+
+**format:** `Optional<DisposableEmailCheckV2RequestFormat>` — Format of the response.
+    
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**email:** `String` — The email address to check.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ip:** `Optional<String>` — Optional IP address to look up for location and security data, such as the IP the signup came from.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.bulkDisposableEmailCheckV2(request) -> BulkDisposableEmailCheckV2Response</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Checks a bulk of email addresses (each with an optional ip) and returns a disposable email check result for each, in the same order as the request. Maximum `100` entries per request.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.bulkDisposableEmailCheckV2(
+    BulkDisposableEmailCheckV2Request
+        .builder()
+        .apiKey("apiKey")
+        .emailData(
+            Arrays.asList(
+                BulkDisposableEmailCheckV2RequestEmailDataItem
+                    .builder()
+                    .email("abc")
+                    .build(),
+                BulkDisposableEmailCheckV2RequestEmailDataItem
+                    .builder()
+                    .email("john@microsoft.com")
+                    .ip("8.8.8.8")
+                    .build(),
+                BulkDisposableEmailCheckV2RequestEmailDataItem
+                    .builder()
+                    .email("test@mailinator.com")
+                    .build()
+            )
+        )
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<BulkDisposableEmailCheckV2RequestFormat>` — Format of the response.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**emailData:** `List<BulkDisposableEmailCheckV2RequestEmailDataItem>` — Entries to check. Maximum 100 per request. Must not be empty, and must not contain null entries or entries without a valid email.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
 
 </dd>
 </dl>
@@ -2078,8 +2090,12 @@ BulkEmailValidateResponse response = client.bulkEmailValidate(request);
 <dl>
 <dd>
 
-Validates a single phone number and returns detailed metadata including carrier, line type, geolocation, time zones, and standardized formats.
+<dl>
+<dd>
 
+Validates a single phone number and returns detailed metadata including carrier, line type, geolocation, time zones, and standardized formats.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2088,19 +2104,20 @@ Validates a single phone number and returns detailed metadata including carrier,
 <dl>
 <dd>
 
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PhoneValidateRequest;
-import com.apifreaks.sdk.types.PhoneValidateResponse;
+<dl>
+<dd>
 
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PhoneValidateRequest request = PhoneValidateRequest.builder()
+```java
+client.phoneValidate(
+    PhoneValidateRequest
+        .builder()
         .apiKey("apiKey")
         .number("+14155552671")
-        .build();
-PhoneValidateResponse response = client.phoneValidate(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2112,7 +2129,7 @@ PhoneValidateResponse response = client.phoneValidate(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -2120,7 +2137,7 @@ PhoneValidateResponse response = client.phoneValidate(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;PhoneValidateRequestFormat&gt;` — No description provided. _(optional)_
+**format:** `Optional<PhoneValidateRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object. If not provided, the API defaults to JSON format.
     
 </dd>
 </dl>
@@ -2128,7 +2145,7 @@ PhoneValidateResponse response = client.phoneValidate(request);
 <dl>
 <dd>
 
-**number:** `String` — Phone number to validate. Accepts international format (+14155552671), local format (4155552671) with region, or IDD format (0014155552671) with dialer_region. _(required)_
+**number:** `String` — Phone number to validate. Accepts international format (+14155552671), local format (4155552671) with region, or IDD format (0014155552671) with dialer_region.
     
 </dd>
 </dl>
@@ -2136,7 +2153,7 @@ PhoneValidateResponse response = client.phoneValidate(request);
 <dl>
 <dd>
 
-**region:** `Optional&lt;String&gt;` — Two-letter ISO country code (e.g., US, GB). Required when number is in local format without + prefix. Cannot be used together with dialer_region. _(optional)_
+**region:** `Optional<String>` — Two-letter ISO country code (e.g., US, GB). Required when number is in local format without + prefix. Cannot be used together with dialer_region.
     
 </dd>
 </dl>
@@ -2144,29 +2161,33 @@ PhoneValidateResponse response = client.phoneValidate(request);
 <dl>
 <dd>
 
-**dialerRegion:** `Optional&lt;String&gt;` — Two-letter ISO country code indicating the country the number is being dialed from. Required when number uses IDD exit code. Cannot be used together with region. _(optional)_
+**dialerRegion:** `Optional<String>` — Two-letter ISO country code indicating the country the number is being dialed from. Required when number uses IDD exit code. Cannot be used together with region.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.bulkPhoneValidate(request) -> List<BulkPhoneValidateResponseItem></code></summary>
+<details><summary><code>client.bulkPhoneValidate(request) -> List&amp;lt;BulkPhoneValidateResponseItem&amp;gt;</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Validates up to 100 phone numbers in a single request. Each number is processed independently — invalid entries return per-number errors without affecting the rest of the batch.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2175,20 +2196,35 @@ Validates up to 100 phone numbers in a single request. Each number is processed 
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.BulkPhoneValidateRequest;
-import java.util.List;
-import com.apifreaks.sdk.types.BulkPhoneValidateResponseItem;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-BulkPhoneValidateRequest request = BulkPhoneValidateRequest.builder()
+client.bulkPhoneValidate(
+    BulkPhoneValidateRequest
+        .builder()
         .apiKey("apiKey")
-        .numbers(java.util.List.of())
-        .build();
-List<BulkPhoneValidateResponseItem> response = client.bulkPhoneValidate(request);
+        .numbers(
+            Arrays.asList(
+                BulkPhoneValidateRequestNumbersItem
+                    .builder()
+                    .number("+14155552671")
+                    .build(),
+                BulkPhoneValidateRequestNumbersItem
+                    .builder()
+                    .number("+447911123456")
+                    .build(),
+                BulkPhoneValidateRequestNumbersItem
+                    .builder()
+                    .number("+919876543210")
+                    .build()
+            )
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2200,7 +2236,7 @@ List<BulkPhoneValidateResponseItem> response = client.bulkPhoneValidate(request)
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -2208,7 +2244,7 @@ List<BulkPhoneValidateResponseItem> response = client.bulkPhoneValidate(request)
 <dl>
 <dd>
 
-**format:** `Optional&lt;BulkPhoneValidateRequestFormat&gt;` — No description provided. _(optional)_
+**format:** `Optional<BulkPhoneValidateRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object. If not provided, the API defaults to JSON format.
     
 </dd>
 </dl>
@@ -2216,19 +2252,19 @@ List<BulkPhoneValidateResponseItem> response = client.bulkPhoneValidate(request)
 <dl>
 <dd>
 
-**numbers:** `List<BulkPhoneValidateRequestNumbersItem&gt;` — Array of phone number objects. Maximum 100 per request. _(required)_
+**numbers:** `List<BulkPhoneValidateRequestNumbersItem>` — Array of phone number objects. Maximum 100 per request.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.domainSslLookup(request) -> DomainSslLookupResponse</code></summary>
+<details><summary><code>client.domainSslLookup() -> DomainSslLookupResponse</code></summary>
 <dl>
 <dd>
 
@@ -2237,8 +2273,13 @@ List<BulkPhoneValidateResponseItem> response = client.bulkPhoneValidate(request)
 <dl>
 <dd>
 
-Retrieve comprehensive SSL certificate information without the certificate chain. This endpoint provides detailed information about the SSL certificate including expiry dates, issuer details, and encryption methods.
+<dl>
+<dd>
 
+Retrieve comprehensive SSL certificate information without the certificate chain.
+This endpoint provides detailed information about the SSL certificate including expiry dates, issuer details, and encryption methods.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2247,19 +2288,20 @@ Retrieve comprehensive SSL certificate information without the certificate chain
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.DomainSslLookupRequest;
-import com.apifreaks.sdk.types.DomainSslLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-DomainSslLookupRequest request = DomainSslLookupRequest.builder()
+client.domainSslLookup(
+    DomainSslLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .domainName("example.com")
-        .build();
-DomainSslLookupResponse response = client.domainSslLookup(request);
+        .domainName("domainName")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2271,7 +2313,7 @@ DomainSslLookupResponse response = client.domainSslLookup(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -2279,7 +2321,7 @@ DomainSslLookupResponse response = client.domainSslLookup(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;DomainSslLookupRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<DomainSslLookupRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -2287,7 +2329,7 @@ DomainSslLookupResponse response = client.domainSslLookup(request);
 <dl>
 <dd>
 
-**domainName:** `String` — Domain name or URL whose SSL certificate lookup is required _(required)_
+**domainName:** `String` — Domain name or URL whose SSL certificate lookup is required
     
 </dd>
 </dl>
@@ -2295,19 +2337,19 @@ DomainSslLookupResponse response = client.domainSslLookup(request);
 <dl>
 <dd>
 
-**sslRaw:** `Optional&lt;Boolean&gt;` — Set to true to get the raw openSSL response of the domain _(optional)_
+**sslRaw:** `Optional<Boolean>` — Set to true to get the raw openSSL response of the domain
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.domainSslChainLookup(request) -> DomainSslChainLookupResponse</code></summary>
+<details><summary><code>client.domainSslChainLookup() -> DomainSslChainLookupResponse</code></summary>
 <dl>
 <dd>
 
@@ -2316,8 +2358,13 @@ DomainSslLookupResponse response = client.domainSslLookup(request);
 <dl>
 <dd>
 
-Retrieve the complete SSL certificate chain from root Certificate Authority (CA) to end-user certificate. This endpoint provides comprehensive information about each certificate in the chain.
+<dl>
+<dd>
 
+Retrieve the complete SSL certificate chain from root Certificate Authority (CA) to end-user certificate.
+This endpoint provides comprehensive information about each certificate in the chain.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2326,19 +2373,20 @@ Retrieve the complete SSL certificate chain from root Certificate Authority (CA)
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.DomainSslChainLookupRequest;
-import com.apifreaks.sdk.types.DomainSslChainLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-DomainSslChainLookupRequest request = DomainSslChainLookupRequest.builder()
+client.domainSslChainLookup(
+    DomainSslChainLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .domainName("example.com")
-        .build();
-DomainSslChainLookupResponse response = client.domainSslChainLookup(request);
+        .domainName("domainName")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2350,7 +2398,7 @@ DomainSslChainLookupResponse response = client.domainSslChainLookup(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -2358,7 +2406,7 @@ DomainSslChainLookupResponse response = client.domainSslChainLookup(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;DomainSslChainLookupRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<DomainSslChainLookupRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -2366,7 +2414,7 @@ DomainSslChainLookupResponse response = client.domainSslChainLookup(request);
 <dl>
 <dd>
 
-**domainName:** `String` — Domain name or URL whose SSL certificate chain lookup is required _(required)_
+**domainName:** `String` — Domain name or URL whose SSL certificate chain lookup is required
     
 </dd>
 </dl>
@@ -2374,29 +2422,33 @@ DomainSslChainLookupResponse response = client.domainSslChainLookup(request);
 <dl>
 <dd>
 
-**sslRaw:** `Optional&lt;Boolean&gt;` — Set to true to get the raw openSSL response for each certificate in the chain _(optional)_
+**sslRaw:** `Optional<Boolean>` — Set to true to get the raw openSSL response for each certificate in the chain
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.domainAvailabilityCheck(request) -> DomainAvailabilityCheckResponse</code></summary>
+<details><summary><code>client.domainAvailabilityCheck() -> DomainAvailabilityCheckResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 The Domain Search API is designed to simplify the process of finding available domain names across all top-level domains (TLDs) and second-level domains (SLDs).
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2405,19 +2457,20 @@ The Domain Search API is designed to simplify the process of finding available d
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.DomainAvailabilityCheckRequest;
-import com.apifreaks.sdk.types.DomainAvailabilityCheckResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-DomainAvailabilityCheckRequest request = DomainAvailabilityCheckRequest.builder()
+client.domainAvailabilityCheck(
+    DomainAvailabilityCheckRequest
+        .builder()
         .apiKey("apiKey")
-        .domain("example.com")
-        .build();
-DomainAvailabilityCheckResponse response = client.domainAvailabilityCheck(request);
+        .domain("domain")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2429,7 +2482,7 @@ DomainAvailabilityCheckResponse response = client.domainAvailabilityCheck(reques
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -2437,7 +2490,7 @@ DomainAvailabilityCheckResponse response = client.domainAvailabilityCheck(reques
 <dl>
 <dd>
 
-**format:** `Optional&lt;DomainAvailabilityCheckRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<DomainAvailabilityCheckRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -2445,7 +2498,7 @@ DomainAvailabilityCheckResponse response = client.domainAvailabilityCheck(reques
 <dl>
 <dd>
 
-**domain:** `String` — Domain name whose availability is to be checked. _(required)_
+**domain:** `String` — Domain name whose availability is to be checked.
     
 </dd>
 </dl>
@@ -2453,13 +2506,13 @@ DomainAvailabilityCheckResponse response = client.domainAvailabilityCheck(reques
 <dl>
 <dd>
 
-**source:** `Optional&lt;DomainAvailabilityCheckRequestSource&gt;` — Specify the data source for domain availability checks. Use &quot;dns&quot; for DNS-based lookups or &quot;whois&quot; for WHOIS-based lookups. By default, &quot;dns&quot; is used. _(optional)_
+**source:** `Optional<DomainAvailabilityCheckRequestSource>` — Specify the data source for domain availability checks. Use "dns" for DNS-based lookups or "whois" for WHOIS-based lookups. By default, "dns" is used.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
@@ -2474,8 +2527,12 @@ DomainAvailabilityCheckResponse response = client.domainAvailabilityCheck(reques
 <dl>
 <dd>
 
-Perform Bulk Domain Availability checks using a list of domains. Supports upto <code>100 Domains Per Request</code>.
+<dl>
+<dd>
 
+Perform Bulk Domain Availability checks using a list of domains. Supports upto `100 Domains Per Request`.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2484,19 +2541,22 @@ Perform Bulk Domain Availability checks using a list of domains. Supports upto <
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.BulkDomainAvailabilityCheckRequest;
-import com.apifreaks.sdk.types.BulkDomainAvailabilityCheckResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-BulkDomainAvailabilityCheckRequest request = BulkDomainAvailabilityCheckRequest.builder()
+client.bulkDomainAvailabilityCheck(
+    BulkDomainAvailabilityCheckRequest
+        .builder()
         .apiKey("apiKey")
-        .domainNames(java.util.List.of("example.com"))
-        .build();
-BulkDomainAvailabilityCheckResponse response = client.bulkDomainAvailabilityCheck(request);
+        .domainNames(
+            Arrays.asList("domainNames")
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2508,7 +2568,7 @@ BulkDomainAvailabilityCheckResponse response = client.bulkDomainAvailabilityChec
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -2516,7 +2576,7 @@ BulkDomainAvailabilityCheckResponse response = client.bulkDomainAvailabilityChec
 <dl>
 <dd>
 
-**format:** `Optional&lt;BulkDomainAvailabilityCheckRequestFormat&gt;` — No description provided. _(optional)_
+**format:** `Optional<BulkDomainAvailabilityCheckRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -2524,7 +2584,7 @@ BulkDomainAvailabilityCheckResponse response = client.bulkDomainAvailabilityChec
 <dl>
 <dd>
 
-**source:** `Optional&lt;BulkDomainAvailabilityCheckRequestSource&gt;` — No description provided. _(optional)_
+**source:** `Optional<BulkDomainAvailabilityCheckRequestSource>` — Specify the data source for domain availability checks. Use "dns" for DNS-based lookups or "whois" for WHOIS-based lookups. By default, "dns" is used.
     
 </dd>
 </dl>
@@ -2532,29 +2592,33 @@ BulkDomainAvailabilityCheckResponse response = client.bulkDomainAvailabilityChec
 <dl>
 <dd>
 
-**domainNames:** `List<String&gt;` — List of domain names to check. _(required)_
+**domainNames:** `List<String>` — List of domain names to check.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.domainAvailabilitySuggestions(request) -> DomainAvailabilitySuggestionsResponse</code></summary>
+<details><summary><code>client.domainAvailabilitySuggestions() -> DomainAvailabilitySuggestionsResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 The Domain Search API is designed to simplify the process of finding available domain names across all top-level domains (TLDs) and second-level domains (SLDs).
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2563,19 +2627,20 @@ The Domain Search API is designed to simplify the process of finding available d
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.DomainAvailabilitySuggestionsRequest;
-import com.apifreaks.sdk.types.DomainAvailabilitySuggestionsResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-DomainAvailabilitySuggestionsRequest request = DomainAvailabilitySuggestionsRequest.builder()
+client.domainAvailabilitySuggestions(
+    DomainAvailabilitySuggestionsRequest
+        .builder()
         .apiKey("apiKey")
-        .domain("example.com")
-        .build();
-DomainAvailabilitySuggestionsResponse response = client.domainAvailabilitySuggestions(request);
+        .domain("domain")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2587,7 +2652,7 @@ DomainAvailabilitySuggestionsResponse response = client.domainAvailabilitySugges
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -2595,7 +2660,7 @@ DomainAvailabilitySuggestionsResponse response = client.domainAvailabilitySugges
 <dl>
 <dd>
 
-**format:** `Optional&lt;DomainAvailabilitySuggestionsRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<DomainAvailabilitySuggestionsRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -2603,7 +2668,7 @@ DomainAvailabilitySuggestionsResponse response = client.domainAvailabilitySugges
 <dl>
 <dd>
 
-**domain:** `String` — Domain name for availability and suggestions. _(required)_
+**domain:** `String` — Domain name for availability and suggestions.
     
 </dd>
 </dl>
@@ -2611,7 +2676,7 @@ DomainAvailabilitySuggestionsResponse response = client.domainAvailabilitySugges
 <dl>
 <dd>
 
-**source:** `Optional&lt;DomainAvailabilitySuggestionsRequestSource&gt;` — Specify the data source for domain availability checks. Use &quot;dns&quot; for DNS-based lookups or &quot;whois&quot; for WHOIS-based lookups. By default, &quot;dns&quot; is used. _(optional)_
+**source:** `Optional<DomainAvailabilitySuggestionsRequestSource>` — Specify the data source for domain availability checks. Use "dns" for DNS-based lookups or "whois" for WHOIS-based lookups. By default, "dns" is used.
     
 </dd>
 </dl>
@@ -2619,7 +2684,7 @@ DomainAvailabilitySuggestionsResponse response = client.domainAvailabilitySugges
 <dl>
 <dd>
 
-**count:** `Optional&lt;Integer&gt;` — Number of suggestions to retrieve. _(optional)_
+**count:** `Optional<Integer>` — Number of suggestions to retrieve. The API returns a minimum of 5 suggestions regardless of a lower value.
     
 </dd>
 </dl>
@@ -2627,29 +2692,33 @@ DomainAvailabilitySuggestionsResponse response = client.domainAvailabilitySugges
 <dl>
 <dd>
 
-**sug:** `Optional&lt;Boolean&gt;` — Whether to return domain suggestions _(optional)_
+**sug:** `Optional<Boolean>` — Controls the response shape. When `false`, returns a single availability object for the queried domain only. When omitted or `true`, returns an array of suggested domains instead.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.subdomainsLookup(request) -> SubdomainsLookupResponse</code></summary>
+<details><summary><code>client.subdomainsLookup() -> SubdomainsLookupResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 The Subdomain Lookup API is designed to retrieve subdomains related to the given domain name. It helps you explore subdomains that are available for registration or usage.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2658,19 +2727,20 @@ The Subdomain Lookup API is designed to retrieve subdomains related to the given
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.SubdomainsLookupRequest;
-import com.apifreaks.sdk.types.SubdomainsLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-SubdomainsLookupRequest request = SubdomainsLookupRequest.builder()
+client.subdomainsLookup(
+    SubdomainsLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .domain("example.com")
-        .build();
-SubdomainsLookupResponse response = client.subdomainsLookup(request);
+        .domain("domain")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2682,7 +2752,7 @@ SubdomainsLookupResponse response = client.subdomainsLookup(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -2690,7 +2760,7 @@ SubdomainsLookupResponse response = client.subdomainsLookup(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;SubdomainsLookupRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<SubdomainsLookupRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -2698,7 +2768,7 @@ SubdomainsLookupResponse response = client.subdomainsLookup(request);
 <dl>
 <dd>
 
-**domain:** `String` — Domain name for availability and suggestions. _(required)_
+**domain:** `String` — Domain name for availability and suggestions.
     
 </dd>
 </dl>
@@ -2706,7 +2776,7 @@ SubdomainsLookupResponse response = client.subdomainsLookup(request);
 <dl>
 <dd>
 
-**after:** `Optional&lt;String&gt;` — Filter subdomains seen after this date (format YYYY-MM-DD). _(optional)_
+**after:** `Optional<String>` — Filter subdomains seen after this date (format YYYY-MM-DD).
     
 </dd>
 </dl>
@@ -2714,7 +2784,7 @@ SubdomainsLookupResponse response = client.subdomainsLookup(request);
 <dl>
 <dd>
 
-**before:** `Optional&lt;String&gt;` — Filter subdomains seen before this date( format YYYY-MM-DD). _(optional)_
+**before:** `Optional<String>` — Filter subdomains seen before this date( format YYYY-MM-DD).
     
 </dd>
 </dl>
@@ -2722,7 +2792,7 @@ SubdomainsLookupResponse response = client.subdomainsLookup(request);
 <dl>
 <dd>
 
-**status:** `Optional&lt;SubdomainsLookupRequestStatus&gt;` — Filter subdomains by status (active or inactive). _(optional)_
+**status:** `Optional<SubdomainsLookupRequestStatus>` — Filter subdomains by status (active or inactive).
     
 </dd>
 </dl>
@@ -2730,29 +2800,1375 @@ SubdomainsLookupResponse response = client.subdomainsLookup(request);
 <dl>
 <dd>
 
-**page:** `Optional&lt;String&gt;` — Page number for paginated results. _(optional)_
+**page:** `Optional<String>` — Page number for paginated results.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfMerge(file, request) -> PdfMergeResponse</code></summary>
+<details><summary><code>client.domainTyposquatting() -> DomainTyposquattingResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+The Domain Typosquatting API searches for registered domains that are typo or look-alike variants of a brand keyword, or that match a wildcard pattern. Results include registration lifecycle data and drop status across 1529+ TLDs, paginated at 100 domains per page.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.domainTyposquatting(
+    DomainTyposquattingRequest
+        .builder()
+        .apiKey("apiKey")
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<DomainTyposquattingRequestFormat>` — Format of the response.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**keyword:** `Optional<String>` — Brand or label to find typo variants for. 3-63 characters, letters, digits, or hyphens, a single label with no dots. Case-insensitive. Use either keyword or pattern, never both.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pattern:** `Optional<String>` — Wildcard search string that combines fuzzy matching with * wildcards. 3-63 characters total, * is the only supported wildcard and each one matches zero or more characters, maximum 3 asterisks per request. Use either keyword or pattern, never both.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageToken:** `Optional<String>` — Token from nextPageToken in the previous response. Required to retrieve page 2 and onward. The original keyword or pattern must be passed alongside the token on every page request. Results page at 100 domains per page.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.domainReputation() -> DomainReputationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+The Domain Reputation API evaluates a domain against threat intelligence sources, DGA (domain generation algorithm) scoring, trust signals, and email deliverability configuration, returning a consolidated risk assessment with a verdict, severity, and supporting evidence.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.domainReputation(
+    DomainReputationRequest
+        .builder()
+        .apiKey("apiKey")
+        .domainName("domainName")
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<DomainReputationRequestFormat>` — Format of the response.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**domainName:** `String` — The domain name to assess (e.g. example.com). Must contain at least one dot and be at most 253 characters. Automatically lowercased.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.astronomyLookupV2() -> AstronomyLookupV2Response</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve sunrise and sunset times, current position of the moon, and other related information by specifying a location address, location coordinates, IP address, or using the client IP address if no parameter is passed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.astronomyLookupV2(
+    AstronomyLookupV2Request
+        .builder()
+        .apiKey("apiKey")
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<AstronomyLookupV2RequestFormat>` — Format of the response. Can be "json" or "xml".
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**location:** `Optional<String>` — Extract astronomy information using location (preferably city)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lat:** `Optional<Float>` — Latitude to extract astronomy information using location coordinates
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**long_:** `Optional<Float>` — Longitude to extract astronomy information using location coordinates
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ip:** `Optional<String>` — IPv4 or IPv6 address to extract astronomy information using IP address
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lang:** `Optional<AstronomyLookupV2RequestLang>` — Response language of "location" field in case of lookup through IP address only.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `Optional<String>` — Specific date (format YYYY-MM-DD) for which astronomy data is required
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**elevation:** `Optional<Float>` — Elevation above sea level at the location, in meters. The value should be between 0 meter and a maximum value of 10,000 meters. Negative value is set to 0.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**timeZone:** `Optional<String>` — Time zone to receive all time-based data in your preferred local time.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.timezoneLookupV2() -> TimezoneLookupV2Response</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get current time, date, and timezone details by specifying a timezone name, location address, GPS coordinates, IP address, IATA/ICAO airport code, UN/LOCODE, or use the client IP if no parameter is provided.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.timezoneLookupV2(
+    TimezoneLookupV2Request
+        .builder()
+        .apiKey("apiKey")
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<TimezoneLookupV2RequestFormat>` — Format of the response. Possible values: json, xml.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ip:** `Optional<String>` — IPv4 or IPv6 address to extract timezone information.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tz:** `Optional<String>` — Timezone name in IANA format (e.g., Asia/Kolkata) to retrieve information directly.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**location:** `Optional<String>` — Location string (preferably city and country) to extract timezone.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lat:** `Optional<Float>` — Latitude for geolocation-based timezone lookup. Only time_zone is returned for this mode; no location object is included.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**long_:** `Optional<Float>` — Longitude for geolocation-based timezone lookup. Only time_zone is returned for this mode; no location object is included.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lang:** `Optional<TimezoneLookupV2RequestLang>` — Response language for location fields. Default: en.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**iataCode:** `Optional<String>` — 3-letter IATA airport code (e.g., LHR) to extract timezone.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**icaoCode:** `Optional<String>` — 4-letter ICAO airport code (e.g., KJFK) to extract timezone.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**loCode:** `Optional<String>` — 5-letter UN/LOCODE city code to extract timezone.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.geolocationLookupV2() -> GeolocationLookupV2Response</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get detailed IP geolocation data for an IP address including country, city, timezone, currency, and optional threat intelligence and user-agent information.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.geolocationLookupV2(
+    GeolocationLookupV2Request
+        .builder()
+        .apiKey("apiKey")
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<GeolocationLookupV2RequestFormat>` — Format of the response.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ip:** `Optional<String>` — IPv4, IPv6, or hostname for geolocation lookup.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lang:** `Optional<GeolocationLookupV2RequestLang>` — Response language for location fields. Default: en.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fields:** `Optional<String>` — Comma-separated list of fields to include in response. For example, `location` includes all location fields, `location.city` is a specific field.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**excludes:** `Optional<String>` — Comma-separated list of fields to exclude from response.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include:** `Optional<String>` — Comma-separated list of additional data modules to include. Possible values: security (threat intelligence), hostname (IP-Hostname lookup), liveHostname (live hostname lookup), hostnameFallbackLive (hostname with live fallback), user_agent (parse User-Agent header), abuse (abuse contact info), dma_code (DMA code), geo_accuracy (accuracy_radius, confidence, locality), * (all modules).
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.bulkGeolocationLookupV2(request) -> List&amp;lt;BulkGeolocationLookupV2ResponseItem&amp;gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get detailed IP geolocation data for multiple IP addresses including country, city, timezone, currency, and optional threat intelligence information. Supports up to 50,000 IP addresses per request.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.bulkGeolocationLookupV2(
+    BulkGeolocationLookupV2Request
+        .builder()
+        .apiKey("apiKey")
+        .ips(
+            Arrays.asList("ips")
+        )
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<BulkGeolocationLookupV2RequestFormat>` — Format of the response.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lang:** `Optional<BulkGeolocationLookupV2RequestLang>` — Response language for location fields. Default: en.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fields:** `Optional<String>` — Comma-separated list of fields to include in the response. For example, `location` includes all location fields, `location.city` is a specific field.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**excludes:** `Optional<String>` — Comma-separated list of fields to exclude from response.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include:** `Optional<String>` — Comma-separated list of additional data modules to include. Possible values: security (threat intelligence), hostname (IP-Hostname lookup), liveHostname (live hostname lookup), user_agent (parse User-Agent header), abuse (abuse contact info), * (all modules).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ips:** `List<String>` — List of IP addresses or hostnames to lookup.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.domainWhoisLookupV2() -> DomainWhoisLookupV2Response</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the current WHOIS record for the specified domain, including registrar details, registrant/administrative/technical/billing/reseller contacts, name servers, status codes, and raw WHOIS text.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.domainWhoisLookupV2(
+    DomainWhoisLookupV2Request
+        .builder()
+        .apiKey("apiKey")
+        .domainName("domainName")
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<DomainWhoisLookupV2RequestFormat>` — Format of the response.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**domainName:** `String` — Domain name to retrieve WHOIS data for (e.g. example.com).
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.bulkDomainWhoisLookupV2(request) -> BulkDomainWhoisLookupV2Response</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the current WHOIS record for each requested domain, in request order. Supports up to 100 domain names per request; a domain that fails to resolve yields an error item instead of failing the whole batch.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.bulkDomainWhoisLookupV2(
+    BulkDomainWhoisLookupV2Request
+        .builder()
+        .apiKey("apiKey")
+        .domainNames(
+            Arrays.asList("domainNames")
+        )
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<BulkDomainWhoisLookupV2RequestFormat>` — Format of the response.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**domainNames:** `List<String>` — List of domain names to retrieve WHOIS data for.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.commodityLatestRatesV2() -> CommodityLatestRatesV2Response</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the current live price for the requested commodity symbols. Unresolved symbols degrade to a 206 partial response instead of failing the whole request.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.commodityLatestRatesV2(
+    CommodityLatestRatesV2Request
+        .builder()
+        .apiKey("apiKey")
+        .symbols(
+            Arrays.asList("symbols")
+        )
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<CommodityLatestRatesV2RequestFormat>` — Response format. Currently only `json` is supported.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**symbols:** `Optional<String>` — Comma-separated list of commodity symbols (e.g., XAU, WTIOIL-SPOT). Case-insensitive; duplicates are deduplicated server-side, with one response entry and one credit charge per unique symbol.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**quote:** `Optional<String>` — Target currency for the exchange rate. If omitted (or set to `default`), the default quote currency of each commodity is used. Requires a premium plan; ignored on lower-tier plans.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.commodityHistoricalRatesV2() -> CommodityHistoricalRatesV2Response</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns OHLC price data for the requested commodity symbols on a specific date. Falls back to the nearest earlier rate if none exists for the exact date. Unresolved symbols degrade to a 206 partial response instead of failing the whole request.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.commodityHistoricalRatesV2(
+    CommodityHistoricalRatesV2Request
+        .builder()
+        .apiKey("apiKey")
+        .date("2023-01-15")
+        .symbols(
+            Arrays.asList("symbols")
+        )
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<CommodityHistoricalRatesV2RequestFormat>` — Response format. Currently only `json` is supported.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**symbols:** `Optional<String>` — Comma-separated list of commodity symbols. Case-insensitive; duplicates are deduplicated server-side, with one response entry and one credit charge per unique symbol.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `String` — Date in YYYY-MM-DD format. Data available from 1990 onwards.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.commodityFluctuationV2() -> CommodityFluctuationV2Response</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns price fluctuation metrics (start, end, change, percent change) for the requested commodity symbols over a date range. For monthly-updated commodities the range snaps to month boundaries. Unresolved symbols degrade to a 206 partial response instead of failing the whole request.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.commodityFluctuationV2(
+    CommodityFluctuationV2Request
+        .builder()
+        .apiKey("apiKey")
+        .startDate("2023-01-15")
+        .endDate("2023-01-15")
+        .symbols(
+            Arrays.asList("symbols")
+        )
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<CommodityFluctuationV2RequestFormat>` — Response format. Currently only `json` is supported.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**symbols:** `Optional<String>` — Comma-separated list of commodity symbols. Case-insensitive; duplicates are deduplicated server-side, with one response entry and one credit charge per unique symbol.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**startDate:** `String` — Start date (YYYY-MM-DD)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**endDate:** `String` — End date (YYYY-MM-DD)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.commodityTimeSeriesV2() -> CommodityTimeSeriesV2Response</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns day-by-day OHLC data for the requested commodity symbols within a date range, indexed by date. Non-trading days are excluded. Unresolved symbols degrade to a 206 partial response instead of failing the whole request.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.commodityTimeSeriesV2(
+    CommodityTimeSeriesV2Request
+        .builder()
+        .apiKey("apiKey")
+        .startDate("2023-01-15")
+        .endDate("2023-01-15")
+        .symbols(
+            Arrays.asList("symbols")
+        )
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<CommodityTimeSeriesV2RequestFormat>` — Response format. Currently only `json` is supported.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**symbols:** `Optional<String>` — Comma-separated list of commodity symbols. Case-insensitive; duplicates are deduplicated server-side, with one response entry and one credit charge per unique symbol.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**startDate:** `String` — Start date (YYYY-MM-DD)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**endDate:** `String` — End date (YYYY-MM-DD). Maximum range is 365 days.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.commoditySymbolsV2() -> CommoditySymbolsV2Response</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the list of supported commodity symbols with metadata. Deprecated symbols stay listed with status "inactive" and a deprecationDate.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.commoditySymbolsV2(
+    CommoditySymbolsV2Request
+        .builder()
+        .apiKey("apiKey")
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<CommoditySymbolsV2RequestFormat>` — Response format. Currently only `json` is supported.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.commodityIntradayRatesV2() -> CommodityIntradayRatesV2Response</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the prices of one commodity through a UTC day at the requested interval, keyed by UTC timestamp. Each request costs a flat 50 credits however many points it returns.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.commodityIntradayRatesV2(
+    CommodityIntradayRatesV2Request
+        .builder()
+        .apiKey("apiKey")
+        .symbols("symbols")
+        .interval(CommodityIntradayRatesV2RequestInterval.ONE_M)
+        .date("2023-01-15")
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**symbols:** `String` — Exactly one commodity symbol. Case-insensitive. Sending two or more returns a 400. Only symbols updated every second, every minute, or every 10 minutes have intraday rates; symbols updated hourly or less often return a 400. Use the Commodity Symbols endpoint for all valid values.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**interval:** `CommodityIntradayRatesV2RequestInterval` — Spacing between points. Case-insensitive. Symbols updated every 10 minutes accept only `10m`, `30m`, `1h`, `2h`, `4h`, `8h`, `12h`, `1d`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `String` — The UTC day to read, in `YYYY-MM-DD` format. Cannot be in the future. For today, points stop at the current UTC minute.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**startTime:** `Optional<String>` — First mark of the window, as a 24-hour UTC time in `HH:mm`. Must fall on a mark of the interval (for example, `14:30` works for `5m` or `30m`, but not for `1h`). For `1d` it can only be `00:00`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**metadata:** `Optional<Boolean>` — Whether to include the `metadata` object. Pass `false` to receive only the prices.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pdfMerge(files, request) -> PdfMergeResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API merges multiple PDF files into a single PDF, in the order they are provided
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2761,21 +4177,20 @@ This API merges multiple PDF files into a single PDF, in the order they are prov
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import java.io.File;
-import java.util.Optional;
-
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfMergeRequest;
-import com.apifreaks.sdk.types.PdfMergeResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfMergeRequest request = PdfMergeRequest.builder()
+client.pdfMerge(
+    List.of(new File("first.pdf"), new File("second.pdf")),
+    PdfMergeRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-PdfMergeResponse response = client.pdfMerge(Optional.of(new File("input.pdf")), request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2787,7 +4202,7 @@ PdfMergeResponse response = client.pdfMerge(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**file:** `Optional<File>` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`.
+**files:** `List<File>` — The PDF files to merge, sent as repeated `file` parts in this order. A single-file `pdfMerge(Optional<File> file, request)` overload is kept for v1.x callers.
     
 </dd>
 </dl>
@@ -2795,7 +4210,7 @@ PdfMergeResponse response = client.pdfMerge(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**fileId:** `Optional&lt;List<String&gt;&gt;` — An array of unique file IDs referencing PDF files previously uploaded to the API Freaks server. Use this parameter to merge existing files without re-uploading them. Provide multiple IDs to merge files in the specified order. _(optional)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -2803,7 +4218,7 @@ PdfMergeResponse response = client.pdfMerge(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**webhookAuthorization:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**format:** `Optional<PdfMergeRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -2811,7 +4226,7 @@ PdfMergeResponse response = client.pdfMerge(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**fileId:** `Optional<String>` — An array of unique file IDs referencing PDF files previously uploaded to the API Freaks server. Use this parameter to merge existing files without re-uploading them. Provide multiple IDs to merge files in the specified order.
     
 </dd>
 </dl>
@@ -2819,7 +4234,7 @@ PdfMergeResponse response = client.pdfMerge(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfMergeRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**destroy:** `Optional<Boolean>` — If set to `true`, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated.
     
 </dd>
 </dl>
@@ -2827,7 +4242,7 @@ PdfMergeResponse response = client.pdfMerge(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**destroy:** `Optional&lt;Boolean&gt;` — If set to true, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated. _(optional)_
+**output:** `Optional<String>` — Specifies the desired name for the resulting merged PDF file. If not provided, a default name will be assigned.
     
 </dd>
 </dl>
@@ -2835,7 +4250,7 @@ PdfMergeResponse response = client.pdfMerge(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**output:** `Optional&lt;String&gt;` — Specifies the desired name for the resulting merged PDF file. If not provided, a default name will be assigned. _(optional)_
+**webhookUrl:** `Optional<String>` — The URL to which the webhook notification will be sent after the task is completed.
     
 </dd>
 </dl>
@@ -2843,7 +4258,7 @@ PdfMergeResponse response = client.pdfMerge(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**webhookUrl:** `Optional&lt;String&gt;` — The URL to which the webhook notification will be sent after the task is completed. _(optional)_
+**webhookFailureNotification:** `Optional<Boolean>` — If true, a notification will also be sent by email in case the webhook request fails all the retries.  The email notification will be sent to the requesting user or their organization’s admin if part of one.
     
 </dd>
 </dl>
@@ -2851,29 +4266,33 @@ PdfMergeResponse response = client.pdfMerge(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**webhookFailureNotification:** `Optional&lt;Boolean&gt;` — If true, a notification will also be sent by email in case the webhook request fails all the retries. The email notification will be sent to the requesting user or their organization’s admin if part of one. _(optional)_
+**webhookAuthorization:** `Optional<String>` — Optional custom header for webhook requests. Format: `Key:Value` (e.g., `Authorization:Bearer token123`). This will be sent as an HTTP header in the webhook call.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfRemovePages(file, request) -> PdfRemovePagesResponse</code></summary>
+<details><summary><code>client.pdfRemovePages(request) -> PdfRemovePagesResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API removes a selection or range of pages from a PDF file.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2882,22 +4301,21 @@ This API removes a selection or range of pages from a PDF file.
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import java.io.File;
-import java.util.Optional;
-
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfRemovePagesRequest;
-import com.apifreaks.sdk.types.PdfRemovePagesResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfRemovePagesRequest request = PdfRemovePagesRequest.builder()
+client.pdfRemovePages(
+    Optional.of(new File("document.pdf")),
+    PdfRemovePagesRequest
+        .builder()
         .apiKey("apiKey")
-        .pages("1-3")
-        .build();
-PdfRemovePagesResponse response = client.pdfRemovePages(Optional.of(new File("input.pdf")), request);
+        .pages("pages")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2909,7 +4327,7 @@ PdfRemovePagesResponse response = client.pdfRemovePages(Optional.of(new File("in
 <dl>
 <dd>
 
-**file:** `Optional<File>` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`.
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -2917,7 +4335,7 @@ PdfRemovePagesResponse response = client.pdfRemovePages(Optional.of(new File("in
 <dl>
 <dd>
 
-**webhookAuthorization:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**format:** `Optional<PdfRemovePagesRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -2925,7 +4343,7 @@ PdfRemovePagesResponse response = client.pdfRemovePages(Optional.of(new File("in
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**fileId:** `Optional<String>` — The unique identifier of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly.
     
 </dd>
 </dl>
@@ -2933,7 +4351,7 @@ PdfRemovePagesResponse response = client.pdfRemovePages(Optional.of(new File("in
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfRemovePagesRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**destroy:** `Optional<Boolean>` — If set to `true`, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated.
     
 </dd>
 </dl>
@@ -2941,7 +4359,7 @@ PdfRemovePagesResponse response = client.pdfRemovePages(Optional.of(new File("in
 <dl>
 <dd>
 
-**fileId:** `Optional&lt;String&gt;` — The unique identifier of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly. _(optional)_
+**output:** `Optional<String>` — The desired name for the output PDF file after pages have been removed. If not provided, a default name will be assigned.
     
 </dd>
 </dl>
@@ -2949,7 +4367,7 @@ PdfRemovePagesResponse response = client.pdfRemovePages(Optional.of(new File("in
 <dl>
 <dd>
 
-**destroy:** `Optional&lt;Boolean&gt;` — If set to true, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated. _(optional)_
+**pages:** `String` — Specifies which pages to remove from the PDF. Accepts individual page numbers (e.g., '1,7') and/or ascending page ranges (e.g., '3-5'). Use commas to separate entries and hyphens for ranges. Reverse ranges (e.g., '5-3') are not allowed. Alternatively, you may provide only one of the following keywords: 'even' (removes all even-numbered pages), 'odd' (removes all odd-numbered pages), or 'last' (removes only the last page). The keyword 'all' is not supported for this operation. Examples: '1,3-5', 'even'. Mixing special keywords with specific pages/ranges is not allowed.
     
 </dd>
 </dl>
@@ -2957,7 +4375,7 @@ PdfRemovePagesResponse response = client.pdfRemovePages(Optional.of(new File("in
 <dl>
 <dd>
 
-**output:** `Optional&lt;String&gt;` — The desired name for the output PDF file after pages have been removed. If not provided, a default name will be assigned. _(optional)_
+**webhookUrl:** `Optional<String>` — The URL to which the webhook notification will be sent after the task is completed.
     
 </dd>
 </dl>
@@ -2965,7 +4383,7 @@ PdfRemovePagesResponse response = client.pdfRemovePages(Optional.of(new File("in
 <dl>
 <dd>
 
-**pages:** `String` — Specifies which pages to remove from the PDF. Accepts individual page numbers (e.g., '1,7') and/or ascending page ranges (e.g., '3-5'). Use commas to separate entries and hyphens for ranges. Reverse ranges (e.g., '5-3') are not allowed. Alternatively, you may provide only one of the following keywords: 'even' (removes all even-numbered pages), 'odd' (removes all odd-numbered pages), or 'last' (removes only the last page). The keyword 'all' is not supported for this operation. Examples: '1,3-5', 'even'. Mixing special keywords with specific pages/ranges is not allowed. _(required)_
+**webhookFailureNotification:** `Optional<Boolean>` — If true, a notification will also be sent by email in case the webhook request fails all the retries.  The email notification will be sent to the requesting user or their organization’s admin if part of one.
     
 </dd>
 </dl>
@@ -2973,37 +4391,33 @@ PdfRemovePagesResponse response = client.pdfRemovePages(Optional.of(new File("in
 <dl>
 <dd>
 
-**webhookUrl:** `Optional&lt;String&gt;` — The URL to which the webhook notification will be sent after the task is completed. _(optional)_
+**webhookAuthorization:** `Optional<String>` — Optional custom header for webhook requests. Format: `Key:Value` (e.g., `Authorization:Bearer token123`). This will be sent as an HTTP header in the webhook call.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**webhookFailureNotification:** `Optional&lt;Boolean&gt;` — If true, a notification will also be sent by email in case the webhook request fails all the retries. The email notification will be sent to the requesting user or their organization’s admin if part of one. _(optional)_
-    
 </dd>
 </dl>
 
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfSplit(file, request) -> PdfSplitResponse</code></summary>
+<details><summary><code>client.pdfSplit(request) -> PdfSplitResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API splits a PDF into multiple parts based on specified page numbers or ranges.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3012,21 +4426,20 @@ This API splits a PDF into multiple parts based on specified page numbers or ran
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import java.io.File;
-import java.util.Optional;
-
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfSplitRequest;
-import com.apifreaks.sdk.types.PdfSplitResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfSplitRequest request = PdfSplitRequest.builder()
+client.pdfSplit(
+    Optional.of(new File("document.pdf")),
+    PdfSplitRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-PdfSplitResponse response = client.pdfSplit(Optional.of(new File("input.pdf")), request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3038,7 +4451,7 @@ PdfSplitResponse response = client.pdfSplit(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**file:** `Optional<File>` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`.
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -3046,7 +4459,7 @@ PdfSplitResponse response = client.pdfSplit(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**pages:** `Optional&lt;List<String&gt;&gt;` — Defines the page numbers or ranges where the PDF should be split. Provide individual pages and/or ranges in any order (for example: &quot;1-4,9-5,16-last&quot;). Separate entries with commas and use hyphens for ranges. Special keywords (use alone): • even — split at every even-numbered page • odd — split at every odd-numbered page • all — split the PDF into single-page files The keyword last can be used anywhere in the string, in combination with page numbers or ranges (for example: &quot;5-last&quot;, &quot;last-2&quot;, &quot;1,last,9&quot;). Examples: &quot;1,4-2,last&quot; &quot;odd&quot; &quot;all&quot; &quot;last,2-5&quot; Invalid example: &quot;1,odd&quot; (mixing a keyword other than &quot;last&quot; with specific pages/ranges is not allowed). You can pass multiple pages entries to produce multiple output files. _(optional)_
+**format:** `Optional<PdfSplitRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -3054,7 +4467,7 @@ PdfSplitResponse response = client.pdfSplit(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**webhookAuthorization:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**fileId:** `Optional<String>` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly.
     
 </dd>
 </dl>
@@ -3062,7 +4475,7 @@ PdfSplitResponse response = client.pdfSplit(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**destroy:** `Optional<Boolean>` — If set to `true`, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated.
     
 </dd>
 </dl>
@@ -3070,7 +4483,7 @@ PdfSplitResponse response = client.pdfSplit(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfSplitRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**output:** `Optional<String>` — The desired base name for the output PDF files after splitting. If not provided, a default naming convention will be used.
     
 </dd>
 </dl>
@@ -3078,7 +4491,27 @@ PdfSplitResponse response = client.pdfSplit(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**fileId:** `Optional&lt;String&gt;` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly. _(optional)_
+**pages:** `Optional<String>` 
+
+Defines the page numbers or ranges where the PDF should be split. Provide individual pages and/or ranges in any order (for example: "1-4,9-5,16-last"). Separate entries with commas and use hyphens for ranges.
+
+Special keywords (use alone):
+
+• `even` — split at every even-numbered page
+
+• `odd` — split at every odd-numbered page
+
+• `all` — split the PDF into single-page files
+
+The keyword `last` can be used anywhere in the string, in combination with page numbers or ranges (for example: "5-last", "last-2", "1,last,9").
+
+Examples:
+- "1,4-2,last"
+- "odd"
+- "all"
+- "last,2-5"
+
+Invalid example: "1,odd" (mixing a keyword other than "last" with specific pages/ranges is not allowed). You can pass multiple pages entries to produce multiple output files.
     
 </dd>
 </dl>
@@ -3086,7 +4519,7 @@ PdfSplitResponse response = client.pdfSplit(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**destroy:** `Optional&lt;Boolean&gt;` — If set to true, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated. _(optional)_
+**webhookUrl:** `Optional<String>` — The URL to which the webhook notification will be sent after the task is completed.
     
 </dd>
 </dl>
@@ -3094,7 +4527,7 @@ PdfSplitResponse response = client.pdfSplit(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**output:** `Optional&lt;String&gt;` — The desired base name for the output PDF files after splitting. If not provided, a default naming convention will be used. _(optional)_
+**webhookFailureNotification:** `Optional<Boolean>` — If true, a notification will also be sent by email in case the webhook request fails all the retries.  The email notification will be sent to the requesting user or their organization’s admin if part of one.
     
 </dd>
 </dl>
@@ -3102,37 +4535,33 @@ PdfSplitResponse response = client.pdfSplit(Optional.of(new File("input.pdf")), 
 <dl>
 <dd>
 
-**webhookUrl:** `Optional&lt;String&gt;` — The URL to which the webhook notification will be sent after the task is completed. _(optional)_
+**webhookAuthorization:** `Optional<String>` — Optional custom header for webhook requests. Format: `Key:Value` (e.g., `Authorization:Bearer token123`). This will be sent as an HTTP header in the webhook call.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**webhookFailureNotification:** `Optional&lt;Boolean&gt;` — If true, a notification will also be sent by email in case the webhook request fails all the retries. The email notification will be sent to the requesting user or their organization’s admin if part of one. _(optional)_
-    
 </dd>
 </dl>
 
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfRotate(file, request) -> PdfRotateResponse</code></summary>
+<details><summary><code>client.pdfRotate(request) -> PdfRotateResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API rotates pages of a PDF by a specified angle (in multiples of 90 degrees).
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3141,22 +4570,21 @@ This API rotates pages of a PDF by a specified angle (in multiples of 90 degrees
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import java.io.File;
-import java.util.Optional;
-
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfRotateRequest;
-import com.apifreaks.sdk.types.PdfRotateResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfRotateRequest request = PdfRotateRequest.builder()
+client.pdfRotate(
+    Optional.of(new File("document.pdf")),
+    PdfRotateRequest
+        .builder()
         .apiKey("apiKey")
-        .rotate(90)
-        .build();
-PdfRotateResponse response = client.pdfRotate(Optional.of(new File("input.pdf")), request);
+        .rotate(1)
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3168,7 +4596,7 @@ PdfRotateResponse response = client.pdfRotate(Optional.of(new File("input.pdf"))
 <dl>
 <dd>
 
-**file:** `Optional<File>` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`.
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -3176,7 +4604,7 @@ PdfRotateResponse response = client.pdfRotate(Optional.of(new File("input.pdf"))
 <dl>
 <dd>
 
-**webhookAuthorization:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**format:** `Optional<PdfRotateRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -3184,7 +4612,7 @@ PdfRotateResponse response = client.pdfRotate(Optional.of(new File("input.pdf"))
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**fileId:** `Optional<String>` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly.
     
 </dd>
 </dl>
@@ -3192,7 +4620,7 @@ PdfRotateResponse response = client.pdfRotate(Optional.of(new File("input.pdf"))
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfRotateRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**destroy:** `Optional<Boolean>` — If set to `true`, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated.
     
 </dd>
 </dl>
@@ -3200,7 +4628,7 @@ PdfRotateResponse response = client.pdfRotate(Optional.of(new File("input.pdf"))
 <dl>
 <dd>
 
-**fileId:** `Optional&lt;String&gt;` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly. _(optional)_
+**output:** `Optional<String>` — The desired name for the output PDF file after rotation. If not provided, a default name will be assigned.
     
 </dd>
 </dl>
@@ -3208,7 +4636,7 @@ PdfRotateResponse response = client.pdfRotate(Optional.of(new File("input.pdf"))
 <dl>
 <dd>
 
-**destroy:** `Optional&lt;Boolean&gt;` — If set to true, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated. _(optional)_
+**pages:** `Optional<String>` — Specifies which pages to rotate. Accepts individual page numbers (e.g., '1,7') and/or ascending page ranges (e.g., '3-5'). Use commas to separate entries and hyphens for ranges. Reverse ranges (e.g., '5-3') are not allowed. Alternatively, provide only one of the following keywords: 'even' (rotate all even-numbered pages), 'odd' (rotate all odd-numbered pages), 'last' (rotate only the last page), or 'all' (rotate all pages). Examples: '1,3-5', 'odd', 'all'. Mixing special keywords with specific pages/ranges is not allowed.
     
 </dd>
 </dl>
@@ -3216,7 +4644,7 @@ PdfRotateResponse response = client.pdfRotate(Optional.of(new File("input.pdf"))
 <dl>
 <dd>
 
-**output:** `Optional&lt;String&gt;` — The desired name for the output PDF file after rotation. If not provided, a default name will be assigned. _(optional)_
+**rotate:** `Integer` — The angle in degrees to rotate the selected pages. Must be one of the following values: 0, 90, 180, 270, -90, -180, or -270. All rotations are applied clockwise.
     
 </dd>
 </dl>
@@ -3224,7 +4652,7 @@ PdfRotateResponse response = client.pdfRotate(Optional.of(new File("input.pdf"))
 <dl>
 <dd>
 
-**pages:** `Optional&lt;String&gt;` — Specifies which pages to rotate. Accepts individual page numbers (e.g., '1,7') and/or ascending page ranges (e.g., '3-5'). Use commas to separate entries and hyphens for ranges. Reverse ranges (e.g., '5-3') are not allowed. Alternatively, provide only one of the following keywords: 'even' (rotate all even-numbered pages), 'odd' (rotate all odd-numbered pages), 'last' (rotate only the last page), or 'all' (rotate all pages). Examples: '1,3-5', 'odd', 'all'. Mixing special keywords with specific pages/ranges is not allowed. _(optional)_
+**webhookUrl:** `Optional<String>` — The URL to which the webhook notification will be sent after the task is completed.
     
 </dd>
 </dl>
@@ -3232,7 +4660,7 @@ PdfRotateResponse response = client.pdfRotate(Optional.of(new File("input.pdf"))
 <dl>
 <dd>
 
-**rotate:** `int` — The angle in degrees to rotate the selected pages. Must be one of the following values: 0, 90, 180, 270, -90, -180, or -270. All rotations are applied clockwise. _(required)_
+**webhookFailureNotification:** `Optional<Boolean>` — If true, a notification will also be sent by email in case the webhook request fails all the retries.  The email notification will be sent to the requesting user or their organization’s admin if part of one.
     
 </dd>
 </dl>
@@ -3240,37 +4668,33 @@ PdfRotateResponse response = client.pdfRotate(Optional.of(new File("input.pdf"))
 <dl>
 <dd>
 
-**webhookUrl:** `Optional&lt;String&gt;` — The URL to which the webhook notification will be sent after the task is completed. _(optional)_
+**webhookAuthorization:** `Optional<String>` — Optional custom header for webhook requests. Format: `Key:Value` (e.g., `Authorization:Bearer token123`). This will be sent as an HTTP header in the webhook call.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**webhookFailureNotification:** `Optional&lt;Boolean&gt;` — If true, a notification will also be sent by email in case the webhook request fails all the retries. The email notification will be sent to the requesting user or their organization’s admin if part of one. _(optional)_
-    
 </dd>
 </dl>
 
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfCompress(file, request) -> PdfCompressResponse</code></summary>
+<details><summary><code>client.pdfCompress(request) -> PdfCompressResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API compresses a given PDF file to reduce its file size.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3279,22 +4703,21 @@ This API compresses a given PDF file to reduce its file size.
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import java.io.File;
-import java.util.Optional;
-
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfCompressRequest;
-import com.apifreaks.sdk.types.PdfCompressResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfCompressRequest request = PdfCompressRequest.builder()
+client.pdfCompress(
+    Optional.of(new File("document.pdf")),
+    PdfCompressRequest
+        .builder()
         .apiKey("apiKey")
-        .compressionLevel(null)
-        .build();
-PdfCompressResponse response = client.pdfCompress(Optional.of(new File("input.pdf")), request);
+        .compressionLevel(PdfCompressRequestCompressionLevel.LOW)
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3306,7 +4729,7 @@ PdfCompressResponse response = client.pdfCompress(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**file:** `Optional<File>` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`.
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -3314,7 +4737,7 @@ PdfCompressResponse response = client.pdfCompress(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**webhookAuthorization:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**format:** `Optional<PdfCompressRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -3322,7 +4745,7 @@ PdfCompressResponse response = client.pdfCompress(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**fileId:** `Optional<String>` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file.
     
 </dd>
 </dl>
@@ -3330,7 +4753,7 @@ PdfCompressResponse response = client.pdfCompress(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfCompressRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**output:** `Optional<String>` — Name of the output PDF.
     
 </dd>
 </dl>
@@ -3338,7 +4761,7 @@ PdfCompressResponse response = client.pdfCompress(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**fileId:** `Optional&lt;String&gt;` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file. _(optional)_
+**compressionLevel:** `PdfCompressRequestCompressionLevel` — Controls how aggressively the PDF is compressed. Lower levels preserve more quality, while higher levels reduce file size more.
     
 </dd>
 </dl>
@@ -3346,7 +4769,7 @@ PdfCompressResponse response = client.pdfCompress(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**output:** `Optional&lt;String&gt;` — Name of the output PDF. _(optional)_
+**destroy:** `Optional<Boolean>` — If set to true, the input file(s) will be deleted from the server immediately after the output is generated.
     
 </dd>
 </dl>
@@ -3354,7 +4777,7 @@ PdfCompressResponse response = client.pdfCompress(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**compressionLevel:** `PdfCompressRequestCompressionLevel` — Controls how aggressively the PDF is compressed. Lower levels preserve more quality, while higher levels reduce file size more. _(required)_
+**webhookUrl:** `Optional<String>` — The URL to which the webhook notification will be sent after the task is completed.
     
 </dd>
 </dl>
@@ -3362,7 +4785,7 @@ PdfCompressResponse response = client.pdfCompress(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**destroy:** `Optional&lt;Boolean&gt;` — If set to true, the input file(s) will be deleted from the server immediately after the output is generated. _(optional)_
+**webhookFailureNotification:** `Optional<Boolean>` — If true, a notification will also be sent by email in case the webhook request fails all the retries.  The email notification will be sent to the requesting user or their organization’s admin if part of one.
     
 </dd>
 </dl>
@@ -3370,37 +4793,33 @@ PdfCompressResponse response = client.pdfCompress(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**webhookUrl:** `Optional&lt;String&gt;` — The URL to which the webhook notification will be sent after the task is completed. _(optional)_
+**webhookAuthorization:** `Optional<String>` — Optional custom header for webhook requests. Format: `Key:Value` (e.g., `Authorization:Bearer token123`). This will be sent as an HTTP header in the webhook call.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**webhookFailureNotification:** `Optional&lt;Boolean&gt;` — If true, a notification will also be sent by email in case the webhook request fails all the retries. The email notification will be sent to the requesting user or their organization’s admin if part of one. _(optional)_
-    
 </dd>
 </dl>
 
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfExtractPages(file, request) -> PdfExtractPagesResponse</code></summary>
+<details><summary><code>client.pdfExtractPages(request) -> PdfExtractPagesResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API extracts specific pages or page ranges from a PDF file and returns them as a new PDF.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3409,22 +4828,21 @@ This API extracts specific pages or page ranges from a PDF file and returns them
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import java.io.File;
-import java.util.Optional;
-
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfExtractPagesRequest;
-import com.apifreaks.sdk.types.PdfExtractPagesResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfExtractPagesRequest request = PdfExtractPagesRequest.builder()
+client.pdfExtractPages(
+    Optional.of(new File("document.pdf")),
+    PdfExtractPagesRequest
+        .builder()
         .apiKey("apiKey")
-        .pages("1-3")
-        .build();
-PdfExtractPagesResponse response = client.pdfExtractPages(Optional.of(new File("input.pdf")), request);
+        .pages("pages")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3436,7 +4854,7 @@ PdfExtractPagesResponse response = client.pdfExtractPages(Optional.of(new File("
 <dl>
 <dd>
 
-**file:** `Optional<File>` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`.
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -3444,7 +4862,7 @@ PdfExtractPagesResponse response = client.pdfExtractPages(Optional.of(new File("
 <dl>
 <dd>
 
-**webhookAuthorization:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**format:** `Optional<PdfExtractPagesRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -3452,7 +4870,7 @@ PdfExtractPagesResponse response = client.pdfExtractPages(Optional.of(new File("
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**fileId:** `Optional<String>` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly.
     
 </dd>
 </dl>
@@ -3460,7 +4878,7 @@ PdfExtractPagesResponse response = client.pdfExtractPages(Optional.of(new File("
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfExtractPagesRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**destroy:** `Optional<Boolean>` — If set to `true`, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated.
     
 </dd>
 </dl>
@@ -3468,7 +4886,7 @@ PdfExtractPagesResponse response = client.pdfExtractPages(Optional.of(new File("
 <dl>
 <dd>
 
-**fileId:** `Optional&lt;String&gt;` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly. _(optional)_
+**output:** `Optional<String>` — The desired name for the output PDF file after pages have been extracted. If not provided, a default name will be assigned.
     
 </dd>
 </dl>
@@ -3476,7 +4894,7 @@ PdfExtractPagesResponse response = client.pdfExtractPages(Optional.of(new File("
 <dl>
 <dd>
 
-**destroy:** `Optional&lt;Boolean&gt;` — If set to true, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated. _(optional)_
+**pages:** `String` — Specifies which pages to extract from the PDF. You can provide individual page numbers (e.g., '2') and/or page ranges in any order, including descending (e.g., '9-5', '16-last'). Use commas to separate entries and hyphens for ranges. You may alternatively pass only one of the special keywords: 'even' (extracts all even-numbered pages), 'odd' (extracts all odd-numbered pages), 'last' (extracts only the last page), or 'all' (extracts all pages into individual files). Examples: '2,6-3', 'even', 'all'. Mixing special keywords with specific pages/ranges is not allowed.
     
 </dd>
 </dl>
@@ -3484,7 +4902,7 @@ PdfExtractPagesResponse response = client.pdfExtractPages(Optional.of(new File("
 <dl>
 <dd>
 
-**output:** `Optional&lt;String&gt;` — The desired name for the output PDF file after pages have been extracted. If not provided, a default name will be assigned. _(optional)_
+**separated:** `Optional<Boolean>` — If set to `true`, each of the specified pages will be extracted and returned as a separate PDF file.
     
 </dd>
 </dl>
@@ -3492,7 +4910,7 @@ PdfExtractPagesResponse response = client.pdfExtractPages(Optional.of(new File("
 <dl>
 <dd>
 
-**pages:** `String` — Specifies which pages to extract from the PDF. You can provide individual page numbers (e.g., '2') and/or page ranges in any order, including descending (e.g., '9-5', '16-last'). Use commas to separate entries and hyphens for ranges. You may alternatively pass only one of the special keywords: 'even' (extracts all even-numbered pages), 'odd' (extracts all odd-numbered pages), 'last' (extracts only the last page), or 'all' (extracts all pages into individual files). Examples: '2,6-3', 'even', 'all'. Mixing special keywords with specific pages/ranges is not allowed. _(required)_
+**webhookUrl:** `Optional<String>` — The URL to which the webhook notification will be sent after the task is completed.
     
 </dd>
 </dl>
@@ -3500,7 +4918,7 @@ PdfExtractPagesResponse response = client.pdfExtractPages(Optional.of(new File("
 <dl>
 <dd>
 
-**separated:** `Optional&lt;Boolean&gt;` — If set to true, each of the specified pages will be extracted and returned as a separate PDF file. _(optional)_
+**webhookFailureNotification:** `Optional<Boolean>` — If true, a notification will also be sent by email in case the webhook request fails all the retries.  The email notification will be sent to the requesting user or their organization’s admin if part of one.
     
 </dd>
 </dl>
@@ -3508,37 +4926,33 @@ PdfExtractPagesResponse response = client.pdfExtractPages(Optional.of(new File("
 <dl>
 <dd>
 
-**webhookUrl:** `Optional&lt;String&gt;` — The URL to which the webhook notification will be sent after the task is completed. _(optional)_
+**webhookAuthorization:** `Optional<String>` — Optional custom header for webhook requests. Format: `Key:Value` (e.g., `Authorization:Bearer token123`). This will be sent as an HTTP header in the webhook call.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**webhookFailureNotification:** `Optional&lt;Boolean&gt;` — If true, a notification will also be sent by email in case the webhook request fails all the retries. The email notification will be sent to the requesting user or their organization’s admin if part of one. _(optional)_
-    
 </dd>
 </dl>
 
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfLinearize(file, request) -> PdfLinearizeResponse</code></summary>
+<details><summary><code>client.pdfLinearize(request) -> PdfLinearizeResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 API endpoint that linearizes any given PDF, restructuring it for faster loading and page-by-page viewing in web browsers.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3547,21 +4961,20 @@ API endpoint that linearizes any given PDF, restructuring it for faster loading 
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import java.io.File;
-import java.util.Optional;
-
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfLinearizeRequest;
-import com.apifreaks.sdk.types.PdfLinearizeResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfLinearizeRequest request = PdfLinearizeRequest.builder()
+client.pdfLinearize(
+    Optional.of(new File("document.pdf")),
+    PdfLinearizeRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-PdfLinearizeResponse response = client.pdfLinearize(Optional.of(new File("input.pdf")), request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3573,7 +4986,7 @@ PdfLinearizeResponse response = client.pdfLinearize(Optional.of(new File("input.
 <dl>
 <dd>
 
-**file:** `Optional<File>` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`.
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -3581,7 +4994,7 @@ PdfLinearizeResponse response = client.pdfLinearize(Optional.of(new File("input.
 <dl>
 <dd>
 
-**webhookAuthorization:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**format:** `Optional<PdfLinearizeRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -3589,7 +5002,7 @@ PdfLinearizeResponse response = client.pdfLinearize(Optional.of(new File("input.
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**fileId:** `Optional<String>` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly.
     
 </dd>
 </dl>
@@ -3597,7 +5010,7 @@ PdfLinearizeResponse response = client.pdfLinearize(Optional.of(new File("input.
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfLinearizeRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**destroy:** `Optional<Boolean>` — If set to `true`, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated.
     
 </dd>
 </dl>
@@ -3605,7 +5018,7 @@ PdfLinearizeResponse response = client.pdfLinearize(Optional.of(new File("input.
 <dl>
 <dd>
 
-**fileId:** `Optional&lt;String&gt;` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly. _(optional)_
+**output:** `Optional<String>` — The desired name for the output PDF file after pages have been extracted. If not provided, a default name will be assigned.
     
 </dd>
 </dl>
@@ -3613,7 +5026,7 @@ PdfLinearizeResponse response = client.pdfLinearize(Optional.of(new File("input.
 <dl>
 <dd>
 
-**destroy:** `Optional&lt;Boolean&gt;` — If set to true, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated. _(optional)_
+**webhookUrl:** `Optional<String>` — The URL to which the webhook notification will be sent after the task is completed.
     
 </dd>
 </dl>
@@ -3621,7 +5034,7 @@ PdfLinearizeResponse response = client.pdfLinearize(Optional.of(new File("input.
 <dl>
 <dd>
 
-**output:** `Optional&lt;String&gt;` — The desired name for the output PDF file after pages have been extracted. If not provided, a default name will be assigned. _(optional)_
+**webhookFailureNotification:** `Optional<Boolean>` — If true, a notification will also be sent by email in case the webhook request fails all the retries.  The email notification will be sent to the requesting user or their organization’s admin if part of one.
     
 </dd>
 </dl>
@@ -3629,37 +5042,33 @@ PdfLinearizeResponse response = client.pdfLinearize(Optional.of(new File("input.
 <dl>
 <dd>
 
-**webhookUrl:** `Optional&lt;String&gt;` — The URL to which the webhook notification will be sent after the task is completed. _(optional)_
+**webhookAuthorization:** `Optional<String>` — Optional custom header for webhook requests. Format: `Key:Value` (e.g., `Authorization:Bearer token123`). This will be sent as an HTTP header in the webhook call.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**webhookFailureNotification:** `Optional&lt;Boolean&gt;` — If true, a notification will also be sent by email in case the webhook request fails all the retries. The email notification will be sent to the requesting user or their organization’s admin if part of one. _(optional)_
-    
 </dd>
 </dl>
 
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfEncrypt(file, request) -> PdfEncryptResponse</code></summary>
+<details><summary><code>client.pdfEncrypt(request) -> PdfEncryptResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API encrypts a PDF file by setting a password required to open it.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3668,22 +5077,21 @@ This API encrypts a PDF file by setting a password required to open it.
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import java.io.File;
-import java.util.Optional;
-
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfEncryptRequest;
-import com.apifreaks.sdk.types.PdfEncryptResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfEncryptRequest request = PdfEncryptRequest.builder()
+client.pdfEncrypt(
+    Optional.of(new File("document.pdf")),
+    PdfEncryptRequest
+        .builder()
         .apiKey("apiKey")
-        .userPassword("password")
-        .build();
-PdfEncryptResponse response = client.pdfEncrypt(Optional.of(new File("input.pdf")), request);
+        .userPassword("user_password")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3695,7 +5103,7 @@ PdfEncryptResponse response = client.pdfEncrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**file:** `Optional<File>` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`.
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -3703,7 +5111,7 @@ PdfEncryptResponse response = client.pdfEncrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**webhookAuthorization:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**format:** `Optional<PdfEncryptRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -3711,7 +5119,7 @@ PdfEncryptResponse response = client.pdfEncrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**fileId:** `Optional<String>` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly.
     
 </dd>
 </dl>
@@ -3719,7 +5127,7 @@ PdfEncryptResponse response = client.pdfEncrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfEncryptRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**destroy:** `Optional<Boolean>` — If set to `true`, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated.
     
 </dd>
 </dl>
@@ -3727,7 +5135,7 @@ PdfEncryptResponse response = client.pdfEncrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**fileId:** `Optional&lt;String&gt;` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly. _(optional)_
+**output:** `Optional<String>` — The desired name for the output encrypted PDF file. If not provided, a default name will be assigned.
     
 </dd>
 </dl>
@@ -3735,7 +5143,7 @@ PdfEncryptResponse response = client.pdfEncrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**destroy:** `Optional&lt;Boolean&gt;` — If set to true, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated. _(optional)_
+**filePassword:** `Optional<String>` — The password to unlock the input file if it is already protected. Either the owner password or user password can be provided. The owner password takes precedence. Password Length should be between 6 and 128 characters.
     
 </dd>
 </dl>
@@ -3743,7 +5151,7 @@ PdfEncryptResponse response = client.pdfEncrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**output:** `Optional&lt;String&gt;` — The desired name for the output encrypted PDF file. If not provided, a default name will be assigned. _(optional)_
+**userPassword:** `String` — Sets the user password required to open and view the encrypted PDF file. Password Length should be between 6 and 128 characters.
     
 </dd>
 </dl>
@@ -3751,7 +5159,7 @@ PdfEncryptResponse response = client.pdfEncrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**filePassword:** `Optional&lt;String&gt;` — The password to unlock the input file if it is already protected. Either the owner password or user password can be provided. The owner password takes precedence. Password Length should be between 6 and 128 characters. _(optional)_
+**ownerPassword:** `Optional<String>` — Sets the owner password for the PDF file. This password provides full access, including the ability to remove restrictions. If not provided, the `user_password` will also be used as the owner password. Password Length should be between 6 and 128 characters.
     
 </dd>
 </dl>
@@ -3759,7 +5167,7 @@ PdfEncryptResponse response = client.pdfEncrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**userPassword:** `String` — Sets the user password required to open and view the encrypted PDF file. Password Length should be between 6 and 128 characters. _(required)_
+**webhookUrl:** `Optional<String>` — The URL to which the webhook notification will be sent after the task is completed.
     
 </dd>
 </dl>
@@ -3767,7 +5175,7 @@ PdfEncryptResponse response = client.pdfEncrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**ownerPassword:** `Optional&lt;String&gt;` — Sets the owner password for the PDF file. This password provides full access, including the ability to remove restrictions. If not provided, the user_password will also be used as the owner password. Password Length should be between 6 and 128 characters. _(optional)_
+**webhookFailureNotification:** `Optional<Boolean>` — If true, a notification will also be sent by email in case the webhook request fails all the retries.  The email notification will be sent to the requesting user or their organization’s admin if part of one.
     
 </dd>
 </dl>
@@ -3775,37 +5183,33 @@ PdfEncryptResponse response = client.pdfEncrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**webhookUrl:** `Optional&lt;String&gt;` — The URL to which the webhook notification will be sent after the task is completed. _(optional)_
+**webhookAuthorization:** `Optional<String>` — Optional custom header for webhook requests. Format: `Key:Value` (e.g., `Authorization:Bearer token123`). This will be sent as an HTTP header in the webhook call.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**webhookFailureNotification:** `Optional&lt;Boolean&gt;` — If true, a notification will also be sent by email in case the webhook request fails all the retries. The email notification will be sent to the requesting user or their organization’s admin if part of one. _(optional)_
-    
 </dd>
 </dl>
 
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfDecrypt(file, request) -> PdfDecryptResponse</code></summary>
+<details><summary><code>client.pdfDecrypt(request) -> PdfDecryptResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API decrypts PDF files, removing all encryption, including open passwords and permission restrictions.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3814,22 +5218,21 @@ This API decrypts PDF files, removing all encryption, including open passwords a
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import java.io.File;
-import java.util.Optional;
-
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfDecryptRequest;
-import com.apifreaks.sdk.types.PdfDecryptResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfDecryptRequest request = PdfDecryptRequest.builder()
+client.pdfDecrypt(
+    Optional.of(new File("document.pdf")),
+    PdfDecryptRequest
+        .builder()
         .apiKey("apiKey")
-        .filePassword("filePassword")
-        .build();
-PdfDecryptResponse response = client.pdfDecrypt(Optional.of(new File("input.pdf")), request);
+        .filePassword("file_password")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3841,7 +5244,7 @@ PdfDecryptResponse response = client.pdfDecrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**file:** `Optional<File>` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`.
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -3849,7 +5252,7 @@ PdfDecryptResponse response = client.pdfDecrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**webhookAuthorization:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**format:** `Optional<PdfDecryptRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -3857,7 +5260,7 @@ PdfDecryptResponse response = client.pdfDecrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**fileId:** `Optional<String>` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly.
     
 </dd>
 </dl>
@@ -3865,7 +5268,7 @@ PdfDecryptResponse response = client.pdfDecrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfDecryptRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**destroy:** `Optional<Boolean>` — If set to `true`, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated.
     
 </dd>
 </dl>
@@ -3873,7 +5276,7 @@ PdfDecryptResponse response = client.pdfDecrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**fileId:** `Optional&lt;String&gt;` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly. _(optional)_
+**output:** `Optional<String>` — The desired name for the output decrypted PDF file. If not provided, a default name will be assigned.
     
 </dd>
 </dl>
@@ -3881,7 +5284,7 @@ PdfDecryptResponse response = client.pdfDecrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**destroy:** `Optional&lt;Boolean&gt;` — If set to true, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated. _(optional)_
+**filePassword:** `String` — The password to unlock the input file if it is protected. Either the owner password or user password can be provided. The owner password takes precedence. Password Length should be between 6 and 128 characters.
     
 </dd>
 </dl>
@@ -3889,7 +5292,7 @@ PdfDecryptResponse response = client.pdfDecrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**output:** `Optional&lt;String&gt;` — The desired name for the output decrypted PDF file. If not provided, a default name will be assigned. _(optional)_
+**webhookUrl:** `Optional<String>` — The URL to which the webhook notification will be sent after the task is completed.
     
 </dd>
 </dl>
@@ -3897,7 +5300,7 @@ PdfDecryptResponse response = client.pdfDecrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**filePassword:** `String` — The password to unlock the input file if it is protected. Either the owner password or user password can be provided. The owner password takes precedence. Password Length should be between 6 and 128 characters. _(required)_
+**webhookFailureNotification:** `Optional<Boolean>` — If true, a notification will also be sent by email in case the webhook request fails all the retries.  The email notification will be sent to the requesting user or their organization’s admin if part of one.
     
 </dd>
 </dl>
@@ -3905,37 +5308,33 @@ PdfDecryptResponse response = client.pdfDecrypt(Optional.of(new File("input.pdf"
 <dl>
 <dd>
 
-**webhookUrl:** `Optional&lt;String&gt;` — The URL to which the webhook notification will be sent after the task is completed. _(optional)_
+**webhookAuthorization:** `Optional<String>` — Optional custom header for webhook requests. Format: `Key:Value` (e.g., `Authorization:Bearer token123`). This will be sent as an HTTP header in the webhook call.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**webhookFailureNotification:** `Optional&lt;Boolean&gt;` — If true, a notification will also be sent by email in case the webhook request fails all the retries. The email notification will be sent to the requesting user or their organization’s admin if part of one. _(optional)_
-    
 </dd>
 </dl>
 
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfRestrict(file, request) -> PdfRestrictResponse</code></summary>
+<details><summary><code>client.pdfRestrict(request) -> PdfRestrictResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API applies permission restrictions on a PDF file, such as disabling printing, copying, or editing. This can include password protection to enforce restrictions.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3944,22 +5343,24 @@ This API applies permission restrictions on a PDF file, such as disabling printi
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import java.io.File;
-import java.util.Optional;
-
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfRestrictRequest;
-import com.apifreaks.sdk.types.PdfRestrictResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfRestrictRequest request = PdfRestrictRequest.builder()
+client.pdfRestrict(
+    Optional.of(new File("document.pdf")),
+    PdfRestrictRequest
+        .builder()
         .apiKey("apiKey")
-        .userPassword("password")
-        .build();
-PdfRestrictResponse response = client.pdfRestrict(Optional.of(new File("input.pdf")), request);
+        .userPassword("user_password")
+        .restrictions(
+            Arrays.asList(PdfRestrictRequestRestrictionsItem.PRINT_HIGH)
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3971,7 +5372,7 @@ PdfRestrictResponse response = client.pdfRestrict(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**file:** `Optional<File>` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`.
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -3979,7 +5380,7 @@ PdfRestrictResponse response = client.pdfRestrict(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**restrictions:** `Optional&lt;List<PdfRestrictRequestRestrictionsItem&gt;&gt;` — A comma-separated list of restrictions to apply to the PDF. These define what the end-user is not allowed to do with the PDF. Available options are: print_high – Disables high-quality printing. print_low – Disables low-resolution printing. edit_document_assembly – Prevents reordering or inserting pages. fill_form_fields – Disallows filling in PDF form fields. edit_annotations – Disables adding or modifying annotations or comments. modify_content – Prevents modifying existing content in the PDF. copy_and_extract_content – Disables copying text or images from the PDF. use_accessibility – Prevents screen readers or accessibility tools from accessing content. _(optional)_
+**format:** `Optional<PdfRestrictRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -3987,7 +5388,7 @@ PdfRestrictResponse response = client.pdfRestrict(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**webhookAuthorization:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**fileId:** `Optional<String>` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly.
     
 </dd>
 </dl>
@@ -3995,7 +5396,7 @@ PdfRestrictResponse response = client.pdfRestrict(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**destroy:** `Optional<Boolean>` — If set to `true`, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated.
     
 </dd>
 </dl>
@@ -4003,7 +5404,7 @@ PdfRestrictResponse response = client.pdfRestrict(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfRestrictRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**output:** `Optional<String>` — The desired name for the output restricted PDF file. If not provided, a default name will be assigned.
     
 </dd>
 </dl>
@@ -4011,7 +5412,7 @@ PdfRestrictResponse response = client.pdfRestrict(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**fileId:** `Optional&lt;String&gt;` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly. _(optional)_
+**filePassword:** `Optional<String>` — The password to unlock the input file if it is already secured. Provide the owner password if available; otherwise, the user password. The owner password takes precedence. Password Length should be between 6 and 128 characters.
     
 </dd>
 </dl>
@@ -4019,7 +5420,7 @@ PdfRestrictResponse response = client.pdfRestrict(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**destroy:** `Optional&lt;Boolean&gt;` — If set to true, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated. _(optional)_
+**userPassword:** `String` — Sets the password users will use to open the PDF. If this is not set, only the owner password will be configured, and anyone can open the PDF file with the provided restrictions enabled. Password Length should be between 6 and 128 characters.
     
 </dd>
 </dl>
@@ -4027,7 +5428,7 @@ PdfRestrictResponse response = client.pdfRestrict(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**output:** `Optional&lt;String&gt;` — The desired name for the output restricted PDF file. If not provided, a default name will be assigned. _(optional)_
+**ownerPassword:** `Optional<String>` — Sets the password that allows full access to the PDF (e.g., removing restrictions). If not provided, the `user_password` (if set) will also be used as the owner password. Password Length should be between 6 and 128 characters.
     
 </dd>
 </dl>
@@ -4035,7 +5436,19 @@ PdfRestrictResponse response = client.pdfRestrict(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**filePassword:** `Optional&lt;String&gt;` — The password to unlock the input file if it is already secured. Provide the owner password if available; otherwise, the user password. The owner password takes precedence. Password Length should be between 6 and 128 characters. _(optional)_
+**restrictions:** `Optional<PdfRestrictRequestRestrictionsItem>` 
+
+A comma-separated list of restrictions to apply to the PDF. These define what the end-user is *not* allowed to do with the PDF. Available options are:
+
+
+* **print_high** – Disables high-quality printing.
+* **print_low** – Disables low-resolution printing.
+* **edit_document_assembly** – Prevents reordering or inserting pages.
+* **fill_form_fields** – Disallows filling in PDF form fields.
+* **edit_annotations** – Disables adding or modifying annotations or comments.
+* **modify_content** – Prevents modifying existing content in the PDF.
+* **copy_and_extract_content** – Disables copying text or images from the PDF.
+* **use_accessibility** – Prevents screen readers or accessibility tools from accessing content.
     
 </dd>
 </dl>
@@ -4043,7 +5456,7 @@ PdfRestrictResponse response = client.pdfRestrict(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**userPassword:** `String` — Sets the password users will use to open the PDF. If this is not set, only the owner password will be configured, and anyone can open the PDF file with the provided restrictions enabled. Password Length should be between 6 and 128 characters. _(required)_
+**webhookUrl:** `Optional<String>` — The URL to which the webhook notification will be sent after the task is completed.
     
 </dd>
 </dl>
@@ -4051,7 +5464,7 @@ PdfRestrictResponse response = client.pdfRestrict(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**ownerPassword:** `Optional&lt;String&gt;` — Sets the password that allows full access to the PDF (e.g., removing restrictions). If not provided, the user_password (if set) will also be used as the owner password. Password Length should be between 6 and 128 characters. _(optional)_
+**webhookFailureNotification:** `Optional<Boolean>` — If true, a notification will also be sent by email in case the webhook request fails all the retries.  The email notification will be sent to the requesting user or their organization’s admin if part of one.
     
 </dd>
 </dl>
@@ -4059,27 +5472,19 @@ PdfRestrictResponse response = client.pdfRestrict(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-**webhookUrl:** `Optional&lt;String&gt;` — The URL to which the webhook notification will be sent after the task is completed. _(optional)_
+**webhookAuthorization:** `Optional<String>` — Optional custom header for webhook requests. Format: `Key:Value` (e.g., `Authorization:Bearer token123`). This will be sent as an HTTP header in the webhook call.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**webhookFailureNotification:** `Optional&lt;Boolean&gt;` — If true, a notification will also be sent by email in case the webhook request fails all the retries. The email notification will be sent to the requesting user or their organization’s admin if part of one. _(optional)_
-    
 </dd>
 </dl>
 
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfUnrestrict(file, request) -> PdfUnrestrictResponse</code></summary>
+<details><summary><code>client.pdfUnrestrict(request) -> PdfUnrestrictResponse</code></summary>
 <dl>
 <dd>
 
@@ -4088,8 +5493,12 @@ PdfRestrictResponse response = client.pdfRestrict(Optional.of(new File("input.pd
 <dl>
 <dd>
 
-This API removes permission restrictions from a PDF while keeping it encrypted. If you want to remove all security (including encryption), use the <code>/pdf/decrypt</code> endpoint instead.
+<dl>
+<dd>
 
+This API removes permission restrictions from a PDF while keeping it encrypted. If you want to remove all security (including encryption), use the `/pdf/decrypt` endpoint instead.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4098,22 +5507,22 @@ This API removes permission restrictions from a PDF while keeping it encrypted. 
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import java.io.File;
-import java.util.Optional;
-
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfUnrestrictRequest;
-import com.apifreaks.sdk.types.PdfUnrestrictResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfUnrestrictRequest request = PdfUnrestrictRequest.builder()
+client.pdfUnrestrict(
+    Optional.of(new File("document.pdf")),
+    PdfUnrestrictRequest
+        .builder()
         .apiKey("apiKey")
-        .filePassword("filePassword")
-        .build();
-PdfUnrestrictResponse response = client.pdfUnrestrict(Optional.of(new File("input.pdf")), request);
+        .filePassword("file_password")
+        .userPassword("user_password")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4125,7 +5534,7 @@ PdfUnrestrictResponse response = client.pdfUnrestrict(Optional.of(new File("inpu
 <dl>
 <dd>
 
-**file:** `Optional<File>` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`.
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -4133,7 +5542,7 @@ PdfUnrestrictResponse response = client.pdfUnrestrict(Optional.of(new File("inpu
 <dl>
 <dd>
 
-**webhookAuthorization:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**format:** `Optional<PdfUnrestrictRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -4141,7 +5550,7 @@ PdfUnrestrictResponse response = client.pdfUnrestrict(Optional.of(new File("inpu
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**fileId:** `Optional<String>` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly.
     
 </dd>
 </dl>
@@ -4149,7 +5558,7 @@ PdfUnrestrictResponse response = client.pdfUnrestrict(Optional.of(new File("inpu
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfUnrestrictRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**destroy:** `Optional<Boolean>` — If set to `true`, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated.
     
 </dd>
 </dl>
@@ -4157,7 +5566,7 @@ PdfUnrestrictResponse response = client.pdfUnrestrict(Optional.of(new File("inpu
 <dl>
 <dd>
 
-**fileId:** `Optional&lt;String&gt;` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly. _(optional)_
+**output:** `Optional<String>` — The desired name for the output unrestricted PDF file. If not provided, a default name will be assigned.
     
 </dd>
 </dl>
@@ -4165,7 +5574,7 @@ PdfUnrestrictResponse response = client.pdfUnrestrict(Optional.of(new File("inpu
 <dl>
 <dd>
 
-**destroy:** `Optional&lt;Boolean&gt;` — If set to true, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated. _(optional)_
+**filePassword:** `String` — The password to unlock the input file. Either the owner password or user password can be provided. The owner password takes precedence. Password Length should be between 6 and 128 characters.
     
 </dd>
 </dl>
@@ -4173,7 +5582,7 @@ PdfUnrestrictResponse response = client.pdfUnrestrict(Optional.of(new File("inpu
 <dl>
 <dd>
 
-**output:** `Optional&lt;String&gt;` — The desired name for the output unrestricted PDF file. If not provided, a default name will be assigned. _(optional)_
+**userPassword:** `String` — Sets the user password for the PDF file. Password Length should be between 6 and 128 characters.
     
 </dd>
 </dl>
@@ -4181,7 +5590,7 @@ PdfUnrestrictResponse response = client.pdfUnrestrict(Optional.of(new File("inpu
 <dl>
 <dd>
 
-**filePassword:** `String` — The password to unlock the input file. Either the owner password or user password can be provided. The owner password takes precedence. Password Length should be between 6 and 128 characters. _(required)_
+**ownerPassword:** `Optional<String>` — Sets the owner password for the PDF file. If the owner password is not provided, the `user_password` will also be used as the owner password. Password Length should be between 6 and 128 characters.
     
 </dd>
 </dl>
@@ -4189,7 +5598,7 @@ PdfUnrestrictResponse response = client.pdfUnrestrict(Optional.of(new File("inpu
 <dl>
 <dd>
 
-**userPassword:** `Optional&lt;String&gt;` — Sets the user password for the PDF file. Password Length should be between 6 and 128 characters. _(optional)_
+**webhookUrl:** `Optional<String>` — The URL to which the webhook notification will be sent after the task is completed.
     
 </dd>
 </dl>
@@ -4197,7 +5606,7 @@ PdfUnrestrictResponse response = client.pdfUnrestrict(Optional.of(new File("inpu
 <dl>
 <dd>
 
-**ownerPassword:** `Optional&lt;String&gt;` — Sets the owner password for the PDF file. If the owner password is not provided, the user_password will also be used as the owner password. Password Length should be between 6 and 128 characters. _(optional)_
+**webhookFailureNotification:** `Optional<Boolean>` — If true, a notification will also be sent by email in case the webhook request fails all the retries.  The email notification will be sent to the requesting user or their organization’s admin if part of one.
     
 </dd>
 </dl>
@@ -4205,37 +5614,33 @@ PdfUnrestrictResponse response = client.pdfUnrestrict(Optional.of(new File("inpu
 <dl>
 <dd>
 
-**webhookUrl:** `Optional&lt;String&gt;` — The URL to which the webhook notification will be sent after the task is completed. _(optional)_
+**webhookAuthorization:** `Optional<String>` — Optional custom header for webhook requests. Format: `Key:Value` (e.g., `Authorization:Bearer token123`). This will be sent as an HTTP header in the webhook call.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**webhookFailureNotification:** `Optional&lt;Boolean&gt;` — If true, a notification will also be sent by email in case the webhook request fails all the retries. The email notification will be sent to the requesting user or their organization’s admin if part of one. _(optional)_
-    
 </dd>
 </dl>
 
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfConvertToPng(file, request) -> PdfConvertToPngResponse</code></summary>
+<details><summary><code>client.pdfConvertToPng(request) -> PdfConvertToPngResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API converts a given PDF file into a sequence of PNG images.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4244,21 +5649,20 @@ This API converts a given PDF file into a sequence of PNG images.
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import java.io.File;
-import java.util.Optional;
-
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfConvertToPngRequest;
-import com.apifreaks.sdk.types.PdfConvertToPngResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfConvertToPngRequest request = PdfConvertToPngRequest.builder()
+client.pdfConvertToPng(
+    Optional.of(new File("document.pdf")),
+    PdfConvertToPngRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-PdfConvertToPngResponse response = client.pdfConvertToPng(Optional.of(new File("input.pdf")), request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4270,7 +5674,7 @@ PdfConvertToPngResponse response = client.pdfConvertToPng(Optional.of(new File("
 <dl>
 <dd>
 
-**file:** `Optional<File>` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`.
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -4278,7 +5682,7 @@ PdfConvertToPngResponse response = client.pdfConvertToPng(Optional.of(new File("
 <dl>
 <dd>
 
-**webhookAuthorization:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**format:** `Optional<PdfConvertToPngRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -4286,7 +5690,7 @@ PdfConvertToPngResponse response = client.pdfConvertToPng(Optional.of(new File("
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**fileId:** `Optional<String>` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly.
     
 </dd>
 </dl>
@@ -4294,7 +5698,7 @@ PdfConvertToPngResponse response = client.pdfConvertToPng(Optional.of(new File("
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfConvertToPngRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**destroy:** `Optional<Boolean>` — If set to `true`, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated.
     
 </dd>
 </dl>
@@ -4302,7 +5706,7 @@ PdfConvertToPngResponse response = client.pdfConvertToPng(Optional.of(new File("
 <dl>
 <dd>
 
-**fileId:** `Optional&lt;String&gt;` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly. _(optional)_
+**output:** `Optional<String>` — The desired name for the output unrestricted PDF file. If not provided, a default name will be assigned.
     
 </dd>
 </dl>
@@ -4310,7 +5714,7 @@ PdfConvertToPngResponse response = client.pdfConvertToPng(Optional.of(new File("
 <dl>
 <dd>
 
-**destroy:** `Optional&lt;Boolean&gt;` — If set to true, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated. _(optional)_
+**pages:** `Optional<String>` — Specifies the pages or ranges at which to split the PDF. Accepts individual page numbers (e.g., '1') and/or page ranges (e.g., '4-2', 'last'). Ranges can be ascending or descending. Use commas to separate entries and hyphens for ranges. Alternatively, provide only one of the following keywords: 'even' (split at every even-numbered page), 'odd' (split at every odd-numbered page), 'last' (split at the last page only), or 'all' (split into single pages). Examples: '1,4-2,last', 'odd', 'all'. Mixing special keywords with specific pages/ranges is not allowed.
     
 </dd>
 </dl>
@@ -4318,7 +5722,7 @@ PdfConvertToPngResponse response = client.pdfConvertToPng(Optional.of(new File("
 <dl>
 <dd>
 
-**output:** `Optional&lt;String&gt;` — The desired name for the output unrestricted PDF file. If not provided, a default name will be assigned. _(optional)_
+**resolution:** `Optional<Integer>` — Specifies the resolution (in DPI) for the output images. Acceptable Range is from 20 to 1200.
     
 </dd>
 </dl>
@@ -4326,7 +5730,7 @@ PdfConvertToPngResponse response = client.pdfConvertToPng(Optional.of(new File("
 <dl>
 <dd>
 
-**pages:** `Optional&lt;String&gt;` — Specifies the pages or ranges at which to split the PDF. Accepts individual page numbers (e.g., '1') and/or page ranges (e.g., '4-2', 'last'). Ranges can be ascending or descending. Use commas to separate entries and hyphens for ranges. Alternatively, provide only one of the following keywords: 'even' (split at every even-numbered page), 'odd' (split at every odd-numbered page), 'last' (split at the last page only), or 'all' (split into single pages). Examples: '1,4-2,last', 'odd', 'all'. Mixing special keywords with specific pages/ranges is not allowed. _(optional)_
+**imageSmoothing:** `Optional<String>` — Determines the smoothing options to apply during image conversion. Valid values are 'none', 'all' or a combination of 'text', 'line', and 'image' (comma-separated).If not provided, no smoothing will be applied.
     
 </dd>
 </dl>
@@ -4334,7 +5738,7 @@ PdfConvertToPngResponse response = client.pdfConvertToPng(Optional.of(new File("
 <dl>
 <dd>
 
-**resolution:** `Optional&lt;Integer&gt;` — Specifies the resolution (in DPI) for the output images. Acceptable Range is from 20 to 1200. _(optional)_
+**profile:** `Optional<PdfConvertToPngRequestProfile>` — Specifies the color profile for the output PNG images. Acceptable values: bw (1-bit black & white, smallest size, no grayscale or color), gray (8-bit grayscale), rgb (24-bit RGB color, default), rgba (32-bit RGB color with alpha channel for transparency), 4-bit (4-bit indexed color, up to 16 colors, smaller size), or 8-bit (8-bit indexed color, up to 256 colors).
     
 </dd>
 </dl>
@@ -4342,7 +5746,7 @@ PdfConvertToPngResponse response = client.pdfConvertToPng(Optional.of(new File("
 <dl>
 <dd>
 
-**imageSmoothing:** `Optional&lt;String&gt;` — Determines the smoothing options to apply during image conversion. Valid values are 'none', 'all' or a combination of 'text', 'line', and 'image' (comma-separated).If not provided, no smoothing will be applied. _(optional)_
+**webhookUrl:** `Optional<String>` — The URL to which the webhook notification will be sent after the task is completed.
     
 </dd>
 </dl>
@@ -4350,7 +5754,7 @@ PdfConvertToPngResponse response = client.pdfConvertToPng(Optional.of(new File("
 <dl>
 <dd>
 
-**profile:** `Optional&lt;PdfConvertToPngRequestProfile&gt;` — Specifies the color profile for the output PNG images. Acceptable values: bw (1-bit black &amp; white, smallest size, no grayscale or color), gray (8-bit grayscale), rgb (24-bit RGB color, default), rgba (32-bit RGB color with alpha channel for transparency), 4-bit (4-bit indexed color, up to 16 colors, smaller size), or 8-bit (8-bit indexed color, up to 256 colors). _(optional)_
+**webhookFailureNotification:** `Optional<Boolean>` — If true, a notification will also be sent by email in case the webhook request fails all the retries.  The email notification will be sent to the requesting user or their organization’s admin if part of one.
     
 </dd>
 </dl>
@@ -4358,37 +5762,33 @@ PdfConvertToPngResponse response = client.pdfConvertToPng(Optional.of(new File("
 <dl>
 <dd>
 
-**webhookUrl:** `Optional&lt;String&gt;` — The URL to which the webhook notification will be sent after the task is completed. _(optional)_
+**webhookAuthorization:** `Optional<String>` — Optional custom header for webhook requests. Format: `Key:Value` (e.g., `Authorization:Bearer token123`). This will be sent as an HTTP header in the webhook call.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**webhookFailureNotification:** `Optional&lt;Boolean&gt;` — If true, a notification will also be sent by email in case the webhook request fails all the retries. The email notification will be sent to the requesting user or their organization’s admin if part of one. _(optional)_
-    
 </dd>
 </dl>
 
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfConvertToJpg(file, request) -> PdfConvertToJpgResponse</code></summary>
+<details><summary><code>client.pdfConvertToJpg(request) -> PdfConvertToJpgResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API converts a given PDF file into a sequence of JPG images.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4397,21 +5797,20 @@ This API converts a given PDF file into a sequence of JPG images.
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import java.io.File;
-import java.util.Optional;
-
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfConvertToJpgRequest;
-import com.apifreaks.sdk.types.PdfConvertToJpgResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfConvertToJpgRequest request = PdfConvertToJpgRequest.builder()
+client.pdfConvertToJpg(
+    Optional.of(new File("document.pdf")),
+    PdfConvertToJpgRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-PdfConvertToJpgResponse response = client.pdfConvertToJpg(Optional.of(new File("input.pdf")), request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4423,7 +5822,7 @@ PdfConvertToJpgResponse response = client.pdfConvertToJpg(Optional.of(new File("
 <dl>
 <dd>
 
-**file:** `Optional<File>` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`.
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -4431,7 +5830,7 @@ PdfConvertToJpgResponse response = client.pdfConvertToJpg(Optional.of(new File("
 <dl>
 <dd>
 
-**webhookAuthorization:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**format:** `Optional<PdfConvertToJpgRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -4439,7 +5838,7 @@ PdfConvertToJpgResponse response = client.pdfConvertToJpg(Optional.of(new File("
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**fileId:** `Optional<String>` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly.
     
 </dd>
 </dl>
@@ -4447,7 +5846,7 @@ PdfConvertToJpgResponse response = client.pdfConvertToJpg(Optional.of(new File("
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfConvertToJpgRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**destroy:** `Optional<Boolean>` — If set to `true`, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated.
     
 </dd>
 </dl>
@@ -4455,7 +5854,7 @@ PdfConvertToJpgResponse response = client.pdfConvertToJpg(Optional.of(new File("
 <dl>
 <dd>
 
-**fileId:** `Optional&lt;String&gt;` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly. _(optional)_
+**output:** `Optional<String>` — The desired name for the output unrestricted PDF file. If not provided, a default name will be assigned.
     
 </dd>
 </dl>
@@ -4463,7 +5862,7 @@ PdfConvertToJpgResponse response = client.pdfConvertToJpg(Optional.of(new File("
 <dl>
 <dd>
 
-**destroy:** `Optional&lt;Boolean&gt;` — If set to true, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated. _(optional)_
+**quality:** `Optional<Integer>` — Controls JPG compression quality. Higher values yield sharper images with larger file sizes.
     
 </dd>
 </dl>
@@ -4471,7 +5870,7 @@ PdfConvertToJpgResponse response = client.pdfConvertToJpg(Optional.of(new File("
 <dl>
 <dd>
 
-**output:** `Optional&lt;String&gt;` — The desired name for the output unrestricted PDF file. If not provided, a default name will be assigned. _(optional)_
+**pages:** `Optional<String>` — Specifies the pages or ranges at which to split the PDF. Accepts individual page numbers (e.g., '1') and/or page ranges (e.g., '4-2', 'last'). Ranges can be ascending or descending. Use commas to separate entries and hyphens for ranges. Alternatively, provide only one of the following keywords: 'even' (split at every even-numbered page), 'odd' (split at every odd-numbered page), 'last' (split at the last page only), or 'all' (split into single pages). Examples: '1,4-2,last', 'odd', 'all'. Mixing special keywords with specific pages/ranges is not allowed.
     
 </dd>
 </dl>
@@ -4479,7 +5878,7 @@ PdfConvertToJpgResponse response = client.pdfConvertToJpg(Optional.of(new File("
 <dl>
 <dd>
 
-**quality:** `Optional&lt;Integer&gt;` — Controls JPG compression quality. Higher values yield sharper images with larger file sizes. _(optional)_
+**resolution:** `Optional<Integer>` — Specifies the resolution (in DPI) for the output images. Acceptable Range is from 20 to 1200.
     
 </dd>
 </dl>
@@ -4487,7 +5886,7 @@ PdfConvertToJpgResponse response = client.pdfConvertToJpg(Optional.of(new File("
 <dl>
 <dd>
 
-**pages:** `Optional&lt;String&gt;` — Specifies the pages or ranges at which to split the PDF. Accepts individual page numbers (e.g., '1') and/or page ranges (e.g., '4-2', 'last'). Ranges can be ascending or descending. Use commas to separate entries and hyphens for ranges. Alternatively, provide only one of the following keywords: 'even' (split at every even-numbered page), 'odd' (split at every odd-numbered page), 'last' (split at the last page only), or 'all' (split into single pages). Examples: '1,4-2,last', 'odd', 'all'. Mixing special keywords with specific pages/ranges is not allowed. _(optional)_
+**imageSmoothing:** `Optional<String>` — Determines the smoothing options to apply during image conversion. Valid values are 'none', 'all' or a combination of 'text', 'line', and 'image' (comma-separated).If not provided, no smoothing will be applied.
     
 </dd>
 </dl>
@@ -4495,7 +5894,7 @@ PdfConvertToJpgResponse response = client.pdfConvertToJpg(Optional.of(new File("
 <dl>
 <dd>
 
-**resolution:** `Optional&lt;Integer&gt;` — Specifies the resolution (in DPI) for the output images. Acceptable Range is from 20 to 1200. _(optional)_
+**profile:** `Optional<PdfConvertToJpgRequestProfile>` — Specifies the color profile for the output PNG images. Acceptable values: bw (1-bit black & white, smallest size, no grayscale or color), gray (8-bit grayscale), rgb (24-bit RGB color, default), rgba (32-bit RGB color with alpha channel for transparency), 4-bit (4-bit indexed color, up to 16 colors, smaller size), or 8-bit (8-bit indexed color, up to 256 colors).
     
 </dd>
 </dl>
@@ -4503,7 +5902,7 @@ PdfConvertToJpgResponse response = client.pdfConvertToJpg(Optional.of(new File("
 <dl>
 <dd>
 
-**imageSmoothing:** `Optional&lt;String&gt;` — Determines the smoothing options to apply during image conversion. Valid values are 'none', 'all' or a combination of 'text', 'line', and 'image' (comma-separated).If not provided, no smoothing will be applied. _(optional)_
+**webhookUrl:** `Optional<String>` — The URL to which the webhook notification will be sent after the task is completed.
     
 </dd>
 </dl>
@@ -4511,7 +5910,7 @@ PdfConvertToJpgResponse response = client.pdfConvertToJpg(Optional.of(new File("
 <dl>
 <dd>
 
-**profile:** `Optional&lt;PdfConvertToJpgRequestProfile&gt;` — Specifies the color profile for the output PNG images. Acceptable values: bw (1-bit black &amp; white, smallest size, no grayscale or color), gray (8-bit grayscale), rgb (24-bit RGB color, default), rgba (32-bit RGB color with alpha channel for transparency), 4-bit (4-bit indexed color, up to 16 colors, smaller size), or 8-bit (8-bit indexed color, up to 256 colors). _(optional)_
+**webhookFailureNotification:** `Optional<Boolean>` — If true, a notification will also be sent by email in case the webhook request fails all the retries.  The email notification will be sent to the requesting user or their organization’s admin if part of one.
     
 </dd>
 </dl>
@@ -4519,37 +5918,33 @@ PdfConvertToJpgResponse response = client.pdfConvertToJpg(Optional.of(new File("
 <dl>
 <dd>
 
-**webhookUrl:** `Optional&lt;String&gt;` — The URL to which the webhook notification will be sent after the task is completed. _(optional)_
+**webhookAuthorization:** `Optional<String>` — Optional custom header for webhook requests. Format: `Key:Value` (e.g., `Authorization:Bearer token123`). This will be sent as an HTTP header in the webhook call.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**webhookFailureNotification:** `Optional&lt;Boolean&gt;` — If true, a notification will also be sent by email in case the webhook request fails all the retries. The email notification will be sent to the requesting user or their organization’s admin if part of one. _(optional)_
-    
 </dd>
 </dl>
 
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfConvertToTiff(file, request) -> PdfConvertToTiffResponse</code></summary>
+<details><summary><code>client.pdfConvertToTiff(request) -> PdfConvertToTiffResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API converts a given PDF file into a sequence of TIFF images. The output images can be saved as a single TIFF file, or as a sequence of TIFF files.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4558,21 +5953,20 @@ This API converts a given PDF file into a sequence of TIFF images. The output im
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import java.io.File;
-import java.util.Optional;
-
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfConvertToTiffRequest;
-import com.apifreaks.sdk.types.PdfConvertToTiffResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfConvertToTiffRequest request = PdfConvertToTiffRequest.builder()
+client.pdfConvertToTiff(
+    Optional.of(new File("document.pdf")),
+    PdfConvertToTiffRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-PdfConvertToTiffResponse response = client.pdfConvertToTiff(Optional.of(new File("input.pdf")), request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4584,7 +5978,7 @@ PdfConvertToTiffResponse response = client.pdfConvertToTiff(Optional.of(new File
 <dl>
 <dd>
 
-**file:** `Optional<File>` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`.
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -4592,7 +5986,7 @@ PdfConvertToTiffResponse response = client.pdfConvertToTiff(Optional.of(new File
 <dl>
 <dd>
 
-**webhookAuthorization:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**format:** `Optional<PdfConvertToTiffRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -4600,7 +5994,7 @@ PdfConvertToTiffResponse response = client.pdfConvertToTiff(Optional.of(new File
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**fileId:** `Optional<String>` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly.
     
 </dd>
 </dl>
@@ -4608,7 +6002,7 @@ PdfConvertToTiffResponse response = client.pdfConvertToTiff(Optional.of(new File
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfConvertToTiffRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**destroy:** `Optional<Boolean>` — If set to `true`, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated.
     
 </dd>
 </dl>
@@ -4616,7 +6010,7 @@ PdfConvertToTiffResponse response = client.pdfConvertToTiff(Optional.of(new File
 <dl>
 <dd>
 
-**fileId:** `Optional&lt;String&gt;` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly. _(optional)_
+**output:** `Optional<String>` — The desired name for the output unrestricted PDF file. If not provided, a default name will be assigned.
     
 </dd>
 </dl>
@@ -4624,7 +6018,7 @@ PdfConvertToTiffResponse response = client.pdfConvertToTiff(Optional.of(new File
 <dl>
 <dd>
 
-**destroy:** `Optional&lt;Boolean&gt;` — If set to true, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated. _(optional)_
+**pages:** `Optional<String>` — Specifies the pages or ranges at which to split the PDF. Accepts individual page numbers (e.g., '1') and/or page ranges (e.g., '4-2', 'last'). Ranges can be ascending or descending. Use commas to separate entries and hyphens for ranges. Alternatively, provide only one of the following keywords: 'even' (split at every even-numbered page), 'odd' (split at every odd-numbered page), 'last' (split at the last page only), or 'all' (split into single pages). Examples: '1,4-2,last', 'odd', 'all'. Mixing special keywords with specific pages/ranges is not allowed.
     
 </dd>
 </dl>
@@ -4632,7 +6026,7 @@ PdfConvertToTiffResponse response = client.pdfConvertToTiff(Optional.of(new File
 <dl>
 <dd>
 
-**output:** `Optional&lt;String&gt;` — The desired name for the output unrestricted PDF file. If not provided, a default name will be assigned. _(optional)_
+**resolution:** `Optional<Integer>` — Specifies the resolution (in DPI) for the output images. Acceptable Range is from 20 to 1200.
     
 </dd>
 </dl>
@@ -4640,7 +6034,7 @@ PdfConvertToTiffResponse response = client.pdfConvertToTiff(Optional.of(new File
 <dl>
 <dd>
 
-**pages:** `Optional&lt;String&gt;` — Specifies the pages or ranges at which to split the PDF. Accepts individual page numbers (e.g., '1') and/or page ranges (e.g., '4-2', 'last'). Ranges can be ascending or descending. Use commas to separate entries and hyphens for ranges. Alternatively, provide only one of the following keywords: 'even' (split at every even-numbered page), 'odd' (split at every odd-numbered page), 'last' (split at the last page only), or 'all' (split into single pages). Examples: '1,4-2,last', 'odd', 'all'. Mixing special keywords with specific pages/ranges is not allowed. _(optional)_
+**imageSmoothing:** `Optional<String>` — Determines the smoothing options to apply during image conversion. Valid values are 'none', 'all' or a combination of 'text', 'line', and 'image' (comma-separated).If not provided, no smoothing will be applied.
     
 </dd>
 </dl>
@@ -4648,7 +6042,7 @@ PdfConvertToTiffResponse response = client.pdfConvertToTiff(Optional.of(new File
 <dl>
 <dd>
 
-**resolution:** `Optional&lt;Integer&gt;` — Specifies the resolution (in DPI) for the output images. Acceptable Range is from 20 to 1200. _(optional)_
+**profile:** `Optional<PdfConvertToTiffRequestProfile>` — Specifies the color profile for the output PNG images. Acceptable values: bw (1-bit black & white, smallest size, no grayscale or color), gray (8-bit grayscale), rgb (24-bit RGB color, default), rgba (32-bit RGB color with alpha channel for transparency), 4-bit (4-bit indexed color, up to 16 colors, smaller size), or 8-bit (8-bit indexed color, up to 256 colors).
     
 </dd>
 </dl>
@@ -4656,7 +6050,7 @@ PdfConvertToTiffResponse response = client.pdfConvertToTiff(Optional.of(new File
 <dl>
 <dd>
 
-**imageSmoothing:** `Optional&lt;String&gt;` — Determines the smoothing options to apply during image conversion. Valid values are 'none', 'all' or a combination of 'text', 'line', and 'image' (comma-separated).If not provided, no smoothing will be applied. _(optional)_
+**webhookUrl:** `Optional<String>` — The URL to which the webhook notification will be sent after the task is completed.
     
 </dd>
 </dl>
@@ -4664,7 +6058,7 @@ PdfConvertToTiffResponse response = client.pdfConvertToTiff(Optional.of(new File
 <dl>
 <dd>
 
-**profile:** `Optional&lt;PdfConvertToTiffRequestProfile&gt;` — Specifies the color profile for the output PNG images. Acceptable values: bw (1-bit black &amp; white, smallest size, no grayscale or color), gray (8-bit grayscale), rgb (24-bit RGB color, default), rgba (32-bit RGB color with alpha channel for transparency), 4-bit (4-bit indexed color, up to 16 colors, smaller size), or 8-bit (8-bit indexed color, up to 256 colors). _(optional)_
+**webhookFailureNotification:** `Optional<Boolean>` — If true, a notification will also be sent by email in case the webhook request fails all the retries.  The email notification will be sent to the requesting user or their organization’s admin if part of one.
     
 </dd>
 </dl>
@@ -4672,37 +6066,33 @@ PdfConvertToTiffResponse response = client.pdfConvertToTiff(Optional.of(new File
 <dl>
 <dd>
 
-**webhookUrl:** `Optional&lt;String&gt;` — The URL to which the webhook notification will be sent after the task is completed. _(optional)_
+**webhookAuthorization:** `Optional<String>` — Optional custom header for webhook requests. Format: `Key:Value` (e.g., `Authorization:Bearer token123`). This will be sent as an HTTP header in the webhook call.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**webhookFailureNotification:** `Optional&lt;Boolean&gt;` — If true, a notification will also be sent by email in case the webhook request fails all the retries. The email notification will be sent to the requesting user or their organization’s admin if part of one. _(optional)_
-    
 </dd>
 </dl>
 
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfConvertToBmp(file, request) -> PdfConvertToBmpResponse</code></summary>
+<details><summary><code>client.pdfConvertToBmp(request) -> PdfConvertToBmpResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Converts a PDF file to a BMP image.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4711,21 +6101,20 @@ Converts a PDF file to a BMP image.
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import java.io.File;
-import java.util.Optional;
-
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfConvertToBmpRequest;
-import com.apifreaks.sdk.types.PdfConvertToBmpResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfConvertToBmpRequest request = PdfConvertToBmpRequest.builder()
+client.pdfConvertToBmp(
+    Optional.of(new File("document.pdf")),
+    PdfConvertToBmpRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-PdfConvertToBmpResponse response = client.pdfConvertToBmp(Optional.of(new File("input.pdf")), request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4737,7 +6126,7 @@ PdfConvertToBmpResponse response = client.pdfConvertToBmp(Optional.of(new File("
 <dl>
 <dd>
 
-**file:** `Optional<File>` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`.
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -4745,7 +6134,7 @@ PdfConvertToBmpResponse response = client.pdfConvertToBmp(Optional.of(new File("
 <dl>
 <dd>
 
-**webhookAuthorization:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**format:** `Optional<PdfConvertToBmpRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -4753,7 +6142,7 @@ PdfConvertToBmpResponse response = client.pdfConvertToBmp(Optional.of(new File("
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**fileId:** `Optional<String>` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly.
     
 </dd>
 </dl>
@@ -4761,7 +6150,7 @@ PdfConvertToBmpResponse response = client.pdfConvertToBmp(Optional.of(new File("
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfConvertToBmpRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**destroy:** `Optional<Boolean>` — If set to `true`, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated.
     
 </dd>
 </dl>
@@ -4769,7 +6158,7 @@ PdfConvertToBmpResponse response = client.pdfConvertToBmp(Optional.of(new File("
 <dl>
 <dd>
 
-**fileId:** `Optional&lt;String&gt;` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly. _(optional)_
+**output:** `Optional<String>` — The desired name for the output unrestricted PDF file. If not provided, a default name will be assigned.
     
 </dd>
 </dl>
@@ -4777,7 +6166,7 @@ PdfConvertToBmpResponse response = client.pdfConvertToBmp(Optional.of(new File("
 <dl>
 <dd>
 
-**destroy:** `Optional&lt;Boolean&gt;` — If set to true, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated. _(optional)_
+**pages:** `Optional<String>` — Specifies the pages or ranges at which to split the PDF. Accepts individual page numbers (e.g., '1') and/or page ranges (e.g., '4-2', 'last'). Ranges can be ascending or descending. Use commas to separate entries and hyphens for ranges. Alternatively, provide only one of the following keywords: 'even' (split at every even-numbered page), 'odd' (split at every odd-numbered page), 'last' (split at the last page only), or 'all' (split into single pages). Examples: '1,4-2,last', 'odd', 'all'. Mixing special keywords with specific pages/ranges is not allowed.
     
 </dd>
 </dl>
@@ -4785,7 +6174,7 @@ PdfConvertToBmpResponse response = client.pdfConvertToBmp(Optional.of(new File("
 <dl>
 <dd>
 
-**output:** `Optional&lt;String&gt;` — The desired name for the output unrestricted PDF file. If not provided, a default name will be assigned. _(optional)_
+**resolution:** `Optional<Integer>` — Specifies the resolution (in DPI) for the output images. Acceptable Range is from 20 to 1200.
     
 </dd>
 </dl>
@@ -4793,7 +6182,7 @@ PdfConvertToBmpResponse response = client.pdfConvertToBmp(Optional.of(new File("
 <dl>
 <dd>
 
-**pages:** `Optional&lt;String&gt;` — Specifies the pages or ranges at which to split the PDF. Accepts individual page numbers (e.g., '1') and/or page ranges (e.g., '4-2', 'last'). Ranges can be ascending or descending. Use commas to separate entries and hyphens for ranges. Alternatively, provide only one of the following keywords: 'even' (split at every even-numbered page), 'odd' (split at every odd-numbered page), 'last' (split at the last page only), or 'all' (split into single pages). Examples: '1,4-2,last', 'odd', 'all'. Mixing special keywords with specific pages/ranges is not allowed. _(optional)_
+**imageSmoothing:** `Optional<String>` — Determines the smoothing options to apply during image conversion. Valid values are 'none', 'all' or a combination of 'text', 'line', and 'image' (comma-separated).If not provided, no smoothing will be applied.
     
 </dd>
 </dl>
@@ -4801,7 +6190,7 @@ PdfConvertToBmpResponse response = client.pdfConvertToBmp(Optional.of(new File("
 <dl>
 <dd>
 
-**resolution:** `Optional&lt;Integer&gt;` — Specifies the resolution (in DPI) for the output images. Acceptable Range is from 20 to 1200. _(optional)_
+**profile:** `Optional<PdfConvertToBmpRequestProfile>` — Specifies the color profile for the output PNG images. Acceptable values: bw (1-bit black & white, smallest size, no grayscale or color), gray (8-bit grayscale), rgb (24-bit RGB color, default), rgba (32-bit RGB color with alpha channel for transparency), 4-bit (4-bit indexed color, up to 16 colors, smaller size), or 8-bit (8-bit indexed color, up to 256 colors).
     
 </dd>
 </dl>
@@ -4809,7 +6198,7 @@ PdfConvertToBmpResponse response = client.pdfConvertToBmp(Optional.of(new File("
 <dl>
 <dd>
 
-**imageSmoothing:** `Optional&lt;String&gt;` — Determines the smoothing options to apply during image conversion. Valid values are 'none', 'all' or a combination of 'text', 'line', and 'image' (comma-separated).If not provided, no smoothing will be applied. _(optional)_
+**webhookUrl:** `Optional<String>` — The URL to which the webhook notification will be sent after the task is completed.
     
 </dd>
 </dl>
@@ -4817,7 +6206,7 @@ PdfConvertToBmpResponse response = client.pdfConvertToBmp(Optional.of(new File("
 <dl>
 <dd>
 
-**profile:** `Optional&lt;PdfConvertToBmpRequestProfile&gt;` — Specifies the color profile for the output PNG images. Acceptable values: bw (1-bit black &amp; white, smallest size, no grayscale or color), gray (8-bit grayscale), rgb (24-bit RGB color, default), rgba (32-bit RGB color with alpha channel for transparency), 4-bit (4-bit indexed color, up to 16 colors, smaller size), or 8-bit (8-bit indexed color, up to 256 colors). _(optional)_
+**webhookFailureNotification:** `Optional<Boolean>` — If true, a notification will also be sent by email in case the webhook request fails all the retries.  The email notification will be sent to the requesting user or their organization’s admin if part of one.
     
 </dd>
 </dl>
@@ -4825,37 +6214,33 @@ PdfConvertToBmpResponse response = client.pdfConvertToBmp(Optional.of(new File("
 <dl>
 <dd>
 
-**webhookUrl:** `Optional&lt;String&gt;` — The URL to which the webhook notification will be sent after the task is completed. _(optional)_
+**webhookAuthorization:** `Optional<String>` — Optional custom header for webhook requests. Format: `Key:Value` (e.g., `Authorization:Bearer token123`). This will be sent as an HTTP header in the webhook call.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**webhookFailureNotification:** `Optional&lt;Boolean&gt;` — If true, a notification will also be sent by email in case the webhook request fails all the retries. The email notification will be sent to the requesting user or their organization’s admin if part of one. _(optional)_
-    
 </dd>
 </dl>
 
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfConvertToGif(file, request) -> PdfConvertToGifResponse</code></summary>
+<details><summary><code>client.pdfConvertToGif(request) -> PdfConvertToGifResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API converts a given PDF file into a sequence of GIF images.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4864,21 +6249,20 @@ This API converts a given PDF file into a sequence of GIF images.
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import java.io.File;
-import java.util.Optional;
-
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfConvertToGifRequest;
-import com.apifreaks.sdk.types.PdfConvertToGifResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfConvertToGifRequest request = PdfConvertToGifRequest.builder()
+client.pdfConvertToGif(
+    Optional.of(new File("document.pdf")),
+    PdfConvertToGifRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-PdfConvertToGifResponse response = client.pdfConvertToGif(Optional.of(new File("input.pdf")), request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4890,7 +6274,7 @@ PdfConvertToGifResponse response = client.pdfConvertToGif(Optional.of(new File("
 <dl>
 <dd>
 
-**file:** `Optional<File>` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`.
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -4898,7 +6282,7 @@ PdfConvertToGifResponse response = client.pdfConvertToGif(Optional.of(new File("
 <dl>
 <dd>
 
-**webhookAuthorization:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**format:** `Optional<PdfConvertToGifRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -4906,7 +6290,7 @@ PdfConvertToGifResponse response = client.pdfConvertToGif(Optional.of(new File("
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**fileId:** `Optional<String>` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly.
     
 </dd>
 </dl>
@@ -4914,7 +6298,7 @@ PdfConvertToGifResponse response = client.pdfConvertToGif(Optional.of(new File("
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfConvertToGifRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**destroy:** `Optional<Boolean>` — If set to `true`, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated.
     
 </dd>
 </dl>
@@ -4922,7 +6306,7 @@ PdfConvertToGifResponse response = client.pdfConvertToGif(Optional.of(new File("
 <dl>
 <dd>
 
-**fileId:** `Optional&lt;String&gt;` — The unique ID of a PDF file already uploaded to the API Freaks server. Use this as an alternative to uploading a new file directly. _(optional)_
+**output:** `Optional<String>` — The desired name for the output unrestricted PDF file. If not provided, a default name will be assigned.
     
 </dd>
 </dl>
@@ -4930,7 +6314,7 @@ PdfConvertToGifResponse response = client.pdfConvertToGif(Optional.of(new File("
 <dl>
 <dd>
 
-**destroy:** `Optional&lt;Boolean&gt;` — If set to true, the input file(s) will be permanently deleted from the server immediately after the output PDF is generated. _(optional)_
+**pages:** `Optional<String>` — Specifies the pages or ranges at which to split the PDF. Accepts individual page numbers (e.g., '1') and/or page ranges (e.g., '4-2', 'last'). Ranges can be ascending or descending. Use commas to separate entries and hyphens for ranges. Alternatively, provide only one of the following keywords: 'even' (split at every even-numbered page), 'odd' (split at every odd-numbered page), 'last' (split at the last page only), or 'all' (split into single pages). Examples: '1,4-2,last', 'odd', 'all'. Mixing special keywords with specific pages/ranges is not allowed.
     
 </dd>
 </dl>
@@ -4938,7 +6322,7 @@ PdfConvertToGifResponse response = client.pdfConvertToGif(Optional.of(new File("
 <dl>
 <dd>
 
-**output:** `Optional&lt;String&gt;` — The desired name for the output unrestricted PDF file. If not provided, a default name will be assigned. _(optional)_
+**resolution:** `Optional<Integer>` — Specifies the resolution (in DPI) for the output images. Acceptable Range is from 20 to 1200.
     
 </dd>
 </dl>
@@ -4946,7 +6330,7 @@ PdfConvertToGifResponse response = client.pdfConvertToGif(Optional.of(new File("
 <dl>
 <dd>
 
-**pages:** `Optional&lt;String&gt;` — Specifies the pages or ranges at which to split the PDF. Accepts individual page numbers (e.g., '1') and/or page ranges (e.g., '4-2', 'last'). Ranges can be ascending or descending. Use commas to separate entries and hyphens for ranges. Alternatively, provide only one of the following keywords: 'even' (split at every even-numbered page), 'odd' (split at every odd-numbered page), 'last' (split at the last page only), or 'all' (split into single pages). Examples: '1,4-2,last', 'odd', 'all'. Mixing special keywords with specific pages/ranges is not allowed. _(optional)_
+**imageSmoothing:** `Optional<String>` — Determines the smoothing options to apply during image conversion. Valid values are 'none', 'all' or a combination of 'text', 'line', and 'image' (comma-separated).If not provided, no smoothing will be applied.
     
 </dd>
 </dl>
@@ -4954,7 +6338,7 @@ PdfConvertToGifResponse response = client.pdfConvertToGif(Optional.of(new File("
 <dl>
 <dd>
 
-**resolution:** `Optional&lt;Integer&gt;` — Specifies the resolution (in DPI) for the output images. Acceptable Range is from 20 to 1200. _(optional)_
+**profile:** `Optional<PdfConvertToGifRequestProfile>` — Specifies the color profile for the output PNG images. Acceptable values: bw (1-bit black & white, smallest size, no grayscale or color), gray (8-bit grayscale), rgb (24-bit RGB color, default), rgba (32-bit RGB color with alpha channel for transparency), 4-bit (4-bit indexed color, up to 16 colors, smaller size), or 8-bit (8-bit indexed color, up to 256 colors).
     
 </dd>
 </dl>
@@ -4962,7 +6346,7 @@ PdfConvertToGifResponse response = client.pdfConvertToGif(Optional.of(new File("
 <dl>
 <dd>
 
-**imageSmoothing:** `Optional&lt;String&gt;` — Determines the smoothing options to apply during image conversion. Valid values are 'none', 'all' or a combination of 'text', 'line', and 'image' (comma-separated).If not provided, no smoothing will be applied. _(optional)_
+**webhookUrl:** `Optional<String>` — The URL to which the webhook notification will be sent after the task is completed.
     
 </dd>
 </dl>
@@ -4970,7 +6354,7 @@ PdfConvertToGifResponse response = client.pdfConvertToGif(Optional.of(new File("
 <dl>
 <dd>
 
-**profile:** `Optional&lt;PdfConvertToGifRequestProfile&gt;` — Specifies the color profile for the output PNG images. Acceptable values: bw (1-bit black &amp; white, smallest size, no grayscale or color), gray (8-bit grayscale), rgb (24-bit RGB color, default), rgba (32-bit RGB color with alpha channel for transparency), 4-bit (4-bit indexed color, up to 16 colors, smaller size), or 8-bit (8-bit indexed color, up to 256 colors). _(optional)_
+**webhookFailureNotification:** `Optional<Boolean>` — If true, a notification will also be sent by email in case the webhook request fails all the retries.  The email notification will be sent to the requesting user or their organization’s admin if part of one.
     
 </dd>
 </dl>
@@ -4978,27 +6362,19 @@ PdfConvertToGifResponse response = client.pdfConvertToGif(Optional.of(new File("
 <dl>
 <dd>
 
-**webhookUrl:** `Optional&lt;String&gt;` — The URL to which the webhook notification will be sent after the task is completed. _(optional)_
+**webhookAuthorization:** `Optional<String>` — Optional custom header for webhook requests. Format: `Key:Value` (e.g., `Authorization:Bearer token123`). This will be sent as an HTTP header in the webhook call.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**webhookFailureNotification:** `Optional&lt;Boolean&gt;` — If true, a notification will also be sent by email in case the webhook request fails all the retries. The email notification will be sent to the requesting user or their organization’s admin if part of one. _(optional)_
-    
 </dd>
 </dl>
 
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfUploadResources(file, request) -> PdfUploadResourcesResponse</code></summary>
+<details><summary><code>client.pdfUploadResources(request) -> PdfUploadResourcesResponse</code></summary>
 <dl>
 <dd>
 
@@ -5007,8 +6383,12 @@ PdfConvertToGifResponse response = client.pdfConvertToGif(Optional.of(new File("
 <dl>
 <dd>
 
-This API uploads multiple PDF files to the API Freaks server and generates their unique file IDs.
+<dl>
+<dd>
 
+This API uploads multiple PDF files to the API Freaks server and generates their unique file IDs.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5017,20 +6397,20 @@ This API uploads multiple PDF files to the API Freaks server and generates their
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import java.io.File;
-
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfUploadResourcesRequest;
-import com.apifreaks.sdk.types.PdfUploadResourcesResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfUploadResourcesRequest request = PdfUploadResourcesRequest.builder()
+client.pdfUploadResources(
+    Optional.of(new File("document.pdf")),
+    PdfUploadResourcesRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-PdfUploadResourcesResponse response = client.pdfUploadResources(new File("input.pdf"), request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5042,7 +6422,7 @@ PdfUploadResourcesResponse response = client.pdfUploadResources(new File("input.
 <dl>
 <dd>
 
-**file:** `File` — PDF or resource file to upload with the request. Use `Optional.empty()` when using an existing `fileId`. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -5050,21 +6430,13 @@ PdfUploadResourcesResponse response = client.pdfUploadResources(new File("input.
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**format:** `Optional<PdfUploadResourcesRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**format:** `Optional&lt;PdfUploadResourcesRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
-    
 </dd>
 </dl>
 
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -5079,8 +6451,12 @@ PdfUploadResourcesResponse response = client.pdfUploadResources(new File("input.
 <dl>
 <dd>
 
-This API uploads PDF files to the API Freaks server in binary format.
+<dl>
+<dd>
 
+This API uploads PDF files to the API Freaks server in binary format.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5089,20 +6465,21 @@ This API uploads PDF files to the API Freaks server in binary format.
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfUploadBinaryRequest;
-import com.apifreaks.sdk.types.PdfUploadBinaryResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfUploadBinaryRequest request = PdfUploadBinaryRequest.builder()
+client.pdfUploadBinary(
+    PdfUploadBinaryRequest
+        .builder()
         .apiKey("apiKey")
-        .fileName("fileName")
-        .body(null)
-        .build();
-PdfUploadBinaryResponse response = client.pdfUploadBinary(request);
+        .fileName("document.pdf")
+        .body(Files.readAllBytes(Paths.get("document.pdf")))
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5114,7 +6491,7 @@ PdfUploadBinaryResponse response = client.pdfUploadBinary(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -5122,7 +6499,7 @@ PdfUploadBinaryResponse response = client.pdfUploadBinary(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfUploadBinaryRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**fileName:** `String` — Name to store the uploaded file under (sent as the `file_name` query parameter)
     
 </dd>
 </dl>
@@ -5130,7 +6507,7 @@ PdfUploadBinaryResponse response = client.pdfUploadBinary(request);
 <dl>
 <dd>
 
-**fileName:** `String` — The desired name for the uploaded PDF file. This name will be used for storage on the server. NOTE: Please ensure file_name has extension .pdf. _(required)_
+**body:** `byte[]` — The raw PDF bytes, sent as the `application/octet-stream` request body
     
 </dd>
 </dl>
@@ -5138,29 +6515,33 @@ PdfUploadBinaryResponse response = client.pdfUploadBinary(request);
 <dl>
 <dd>
 
-**body:** `byte[]` — The desired name for the uploaded PDF file. This name will be used for storage on the server. NOTE: Please ensure file_name has extension .pdf. _(required)_
+**format:** `Optional<PdfUploadBinaryRequestFormat>` — Response format, `json` or `xml`
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfDownloadResource(request) -> InputStream</code></summary>
+<details><summary><code>client.pdfDownloadResource() -> InputStream</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API downloads PDF files or ZIP archives from the server using their unique resource ID.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5169,19 +6550,20 @@ This API downloads PDF files or ZIP archives from the server using their unique 
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfDownloadResourceRequest;
-import java.io.InputStream;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfDownloadResourceRequest request = PdfDownloadResourceRequest.builder()
+client.pdfDownloadResource(
+    PdfDownloadResourceRequest
+        .builder()
         .apiKey("apiKey")
-        .resourceId("resourceId")
-        .build();
-InputStream response = client.pdfDownloadResource(request);
+        .resourceId("resource_id")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5193,7 +6575,7 @@ InputStream response = client.pdfDownloadResource(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -5201,7 +6583,7 @@ InputStream response = client.pdfDownloadResource(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfDownloadResourceRequestFormat&gt;` — Your API key _(optional)_
+**format:** `Optional<PdfDownloadResourceRequestFormat>` 
     
 </dd>
 </dl>
@@ -5209,29 +6591,33 @@ InputStream response = client.pdfDownloadResource(request);
 <dl>
 <dd>
 
-**resourceId:** `String` — The unique identifier of the file or ZIP archive to download. _(required)_
+**resourceId:** `String` — The unique identifier of the file or ZIP archive to download.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfGetTaskStatus(request) -> PdfGetTaskStatusResponse</code></summary>
+<details><summary><code>client.pdfGetTaskStatus() -> PdfGetTaskStatusResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API checks the status of a previously initiated PDF processing task using its unique task ID.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5240,19 +6626,20 @@ This API checks the status of a previously initiated PDF processing task using i
 <dl>
 <dd>
 
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfGetTaskStatusRequest;
-import com.apifreaks.sdk.types.PdfGetTaskStatusResponse;
+<dl>
+<dd>
 
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfGetTaskStatusRequest request = PdfGetTaskStatusRequest.builder()
+```java
+client.pdfGetTaskStatus(
+    PdfGetTaskStatusRequest
+        .builder()
         .apiKey("apiKey")
         .taskId("task_id")
-        .build();
-PdfGetTaskStatusResponse response = client.pdfGetTaskStatus(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5264,7 +6651,7 @@ PdfGetTaskStatusResponse response = client.pdfGetTaskStatus(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -5272,7 +6659,7 @@ PdfGetTaskStatusResponse response = client.pdfGetTaskStatus(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfGetTaskStatusRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**format:** `Optional<PdfGetTaskStatusRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -5280,29 +6667,33 @@ PdfGetTaskStatusResponse response = client.pdfGetTaskStatus(request);
 <dl>
 <dd>
 
-**taskId:** `String` — The unique ID of the PDF processing task for which the status is requested. _(required)_
+**taskId:** `String` — The unique ID of the PDF processing task for which the status is requested.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfGetFileStatus(request) -> PdfGetFileStatusResponse</code></summary>
+<details><summary><code>client.pdfGetFileStatus() -> PdfGetFileStatusResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API checks the status of a PDF file using its unique file ID, providing information about its creation and potential deletion time.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5311,19 +6702,20 @@ This API checks the status of a PDF file using its unique file ID, providing inf
 <dl>
 <dd>
 
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfGetFileStatusRequest;
-import com.apifreaks.sdk.types.PdfGetFileStatusResponse;
+<dl>
+<dd>
 
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfGetFileStatusRequest request = PdfGetFileStatusRequest.builder()
+```java
+client.pdfGetFileStatus(
+    PdfGetFileStatusRequest
+        .builder()
         .apiKey("apiKey")
         .fileId("file_id")
-        .build();
-PdfGetFileStatusResponse response = client.pdfGetFileStatus(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5335,7 +6727,7 @@ PdfGetFileStatusResponse response = client.pdfGetFileStatus(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -5343,7 +6735,7 @@ PdfGetFileStatusResponse response = client.pdfGetFileStatus(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfGetFileStatusRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**format:** `Optional<PdfGetFileStatusRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -5351,29 +6743,33 @@ PdfGetFileStatusResponse response = client.pdfGetFileStatus(request);
 <dl>
 <dd>
 
-**fileId:** `String` — The unique ID of the file whose status is requested. _(required)_
+**fileId:** `String` — The unique ID of the file whose status is requested.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfListFiles(request) -> PdfListFilesResponse</code></summary>
+<details><summary><code>client.pdfListFiles() -> PdfListFilesResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API retrieves a list of all PDF files uploaded and generated by a specific user. Please note that if the user is part of an organization, only the Organization Administrator can access this endpoint. Organization Members cannot access this endpoint.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5382,18 +6778,19 @@ This API retrieves a list of all PDF files uploaded and generated by a specific 
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfListFilesRequest;
-import com.apifreaks.sdk.types.PdfListFilesResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfListFilesRequest request = PdfListFilesRequest.builder()
+client.pdfListFiles(
+    PdfListFilesRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-PdfListFilesResponse response = client.pdfListFiles(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5405,7 +6802,7 @@ PdfListFilesResponse response = client.pdfListFiles(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -5413,29 +6810,33 @@ PdfListFilesResponse response = client.pdfListFiles(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfListFilesRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**format:** `Optional<PdfListFilesRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.pdfDeleteFile(request) -> PdfDeleteFileResponse</code></summary>
+<details><summary><code>client.pdfDeleteFile() -> PdfDeleteFileResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 This API deletes a PDF file using its unique file ID.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5444,19 +6845,20 @@ This API deletes a PDF file using its unique file ID.
 <dl>
 <dd>
 
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.PdfDeleteFileRequest;
-import com.apifreaks.sdk.types.PdfDeleteFileResponse;
+<dl>
+<dd>
 
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-PdfDeleteFileRequest request = PdfDeleteFileRequest.builder()
+```java
+client.pdfDeleteFile(
+    PdfDeleteFileRequest
+        .builder()
         .apiKey("apiKey")
         .fileId("file_id")
-        .build();
-PdfDeleteFileResponse response = client.pdfDeleteFile(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5468,7 +6870,7 @@ PdfDeleteFileResponse response = client.pdfDeleteFile(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -5476,7 +6878,7 @@ PdfDeleteFileResponse response = client.pdfDeleteFile(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;PdfDeleteFileRequestFormat&gt;` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure. _(optional)_
+**format:** `Optional<PdfDeleteFileRequestFormat>` — Specifies the desired format for the API response. Choose 'json' for a JSON object or 'xml' for an XML structure.
     
 </dd>
 </dl>
@@ -5484,19 +6886,19 @@ PdfDeleteFileResponse response = client.pdfDeleteFile(request);
 <dl>
 <dd>
 
-**fileId:** `String` — The unique ID of the file to be deleted. _(required)_
+**fileId:** `String` — The unique ID of the file to be deleted.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.screenshotCapture(request) -> InputStream</code></summary>
+<details><summary><code>client.pdfGenerateFromTemplate(request) -> PdfGenerateFromTemplateResponse</code></summary>
 <dl>
 <dd>
 
@@ -5505,8 +6907,12 @@ PdfDeleteFileResponse response = client.pdfDeleteFile(request);
 <dl>
 <dd>
 
-Capture full-page screenshots and videos of websites with advanced options like device simulation, custom code injection, cookie banner blocking, and scrollable content recording. Supports multiple output formats including JSON, image, GIF, MP4, and WebM.
+<dl>
+<dd>
 
+Renders the template identified by template_id with the JSON data supplied in the request body (or fetched from data_url). Returns a hosted URL for the generated PDF. Provide either a request body or a data_url; one of the two is required. The keys of the data object are the fields you bound when you designed the template in the APIFreaks PDF Template Builder, so the exact shape is up to you. Pin the version parameter to a specific template version (e.g. version=v2) so later design changes never touch what is already live; omit it to use the latest version.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5515,19 +6921,60 @@ Capture full-page screenshots and videos of websites with advanced options like 
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.ScreenshotCaptureRequest;
-import java.io.InputStream;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-ScreenshotCaptureRequest request = ScreenshotCaptureRequest.builder()
+client.pdfGenerateFromTemplate(
+    PdfGenerateFromTemplateRequest
+        .builder()
         .apiKey("apiKey")
-        .url("https://example.com")
-        .build();
-InputStream response = client.screenshotCapture(request);
+        .templateId("template_id")
+        .body(
+            new HashMap<String, Object>() {{
+                put("candidate_name", "Ava Thompson");
+                put("candidate_title", "Senior Operations Analyst");
+                put("email", "ava.thompson@example.com");
+                put("phone", "+1 (555) 381-2048");
+                put("city", "Austin, TX");
+                put("portfolio_url", "portfolio.example.com");
+                put("profile_summary", "Analytical operations professional with 8+ years of experience improving reporting pipelines, streamlining process documentation, and coordinating cross-functional delivery for distributed teams across multiple time zones.");
+                put("company_name", "Northwind Logistics");
+                put("job_title", "Operations Analyst");
+                put("employment_period", "2021 - Present");
+                put("job_achievement_1", "Led weekly KPI reporting for finance, fulfillment, and customer success stakeholders across three business units.");
+                put("job_achievement_2", "Reduced manual reconciliation work by 35% through workflow redesign and documentation automation.");
+                put("job_achievement_3", "Spearheaded a cross-team initiative that improved on-time delivery metrics by 18% within six months.");
+                put("skills", new ArrayList<Object>(Arrays.asList(new 
+                HashMap<String, Object>() {{put("skill", "Process Improvement");
+                    put("level", "Advanced");
+                    put("years", "7");
+                }}, new 
+                HashMap<String, Object>() {{put("skill", "Stakeholder Reporting");
+                    put("level", "Expert");
+                    put("years", "8");
+                }}, new 
+                HashMap<String, Object>() {{put("skill", "Cross-functional Coordination");
+                    put("level", "Advanced");
+                    put("years", "5");
+                }}, new 
+                HashMap<String, Object>() {{put("skill", "Workflow Documentation");
+                    put("level", "Advanced");
+                    put("years", "6");
+                }})));
+                put("degree", "B.S. in Information Systems");
+                put("institution", "University of Texas");
+                put("graduation_year", "2018");
+                put("certification_1", "Certified Business Analysis Professional (CBAP)");
+                put("certification_2", "Six Sigma Green Belt");
+                put("languages", "English (Native), Spanish (Professional)");
+            }}
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5539,7 +6986,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**sizes:** `Optional&lt;List<String&gt;&gt;` — Comma-separated list of viewport sizes in the format index:XXw:YYh. Example: sizes=0:120w:300h,1:240w:500h _(optional)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -5547,7 +6994,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**templateId:** `String` — The template to render, from the APIFreaks PDF Template Builder. Copy it from your dashboard when you save the template.
     
 </dd>
 </dl>
@@ -5555,7 +7002,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**output:** `Optional&lt;ScreenshotCaptureRequestOutput&gt;` — Output format for screenshot results _(optional)_
+**version:** `Optional<String>` — Template version to render, e.g. v2. Must start with v. Omit this parameter entirely to use the latest version; the literal value 'latest' is not accepted by the API.
     
 </dd>
 </dl>
@@ -5563,7 +7010,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**fileType:** `Optional&lt;ScreenshotCaptureRequestFileType&gt;` — File type for screenshot output _(optional)_
+**dataUrl:** `Optional<String>` — A URL the API fetches your JSON data from, instead of the request body. Provide this when you are not sending a request body.
     
 </dd>
 </dl>
@@ -5571,15 +7018,393 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**url:** `String` — URLs to capture screenshots of _(required)_
+**request:** `Map<String, Object>` — Free-form JSON object whose keys map to the fields bound in the template.
     
 </dd>
 </dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.bulkPdfGenerateFromTemplate(request) -> List&amp;lt;BulkPdfGenerateFromTemplateResponseItem&amp;gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Upload a CSV file where each row is one record. The API generates one PDF per row and returns an array of results, each with its own pdf_url. Rows are processed independently, so a failure in one row does not block the rest of the batch. The response gives a row-by-row breakdown of which PDFs succeeded and which failed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.bulkPdfGenerateFromTemplate(
+    new File("data.csv"),
+    BulkPdfGenerateFromTemplateRequest
+        .builder()
+        .apiKey("apiKey")
+        .templateId("template_id")
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**templateId:** `String` — The template to render, from the APIFreaks PDF Template Builder. Copy it from your dashboard when you save the template.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version:** `Optional<String>` — Template version to render, e.g. v2. Must start with v. Omit this parameter entirely to use the latest version; the literal value 'latest' is not accepted by the API.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.screenshotCapture() -> ScreenshotCaptureResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Capture full-page screenshots and videos of websites with advanced options like device simulation, custom code injection, cookie banner blocking, and scrollable content recording.
+Supports multiple output formats including JSON, image, GIF, MP4, and WebM.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.screenshotCapture(
+    ScreenshotCaptureRequest
+        .builder()
+        .apiKey("apiKey")
+        .url("url")
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**output:** `Optional<ScreenshotCaptureRequestOutput>` — Output format for screenshot results. The SDKs support only `json`, which returns metadata with the captured file's URL in `screenshot`; download the file from that URL. (The API's `output=image`, which returns the raw file, is not supported by the SDK methods.)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fileType:** `Optional<ScreenshotCaptureRequestFileType>` — File type for screenshot output
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**url:** `String` — URLs to capture screenshots of
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**width:** `Optional<Integer>` — Browser viewport width in pixels
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**height:** `Optional<Integer>` — Browser viewport height in pixels
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fullPage:** `Optional<Boolean>` — Capture a full-page screenshot
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fresh:** `Optional<Boolean>` — Bypass cache and take a fresh screenshot
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**noCookieBanners:** `Optional<Boolean>` — Remove cookie banners from the screenshot
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
 
+**enableCaching:** `Optional<Boolean>` — Enable caching for repeated requests
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**blockAds:** `Optional<Boolean>` — Block advertisements on the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**blockChatWidgets:** `Optional<Boolean>` — Block chat widget scripts from loading
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**extractText:** `Optional<Boolean>` — Extract visible text from the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**extractHtml:** `Optional<Boolean>` — Extract HTML content of the page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**destroyScreenshot:** `Optional<Boolean>` — Auto-destroy screenshot after fetch
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lazyLoad:** `Optional<Boolean>` — Enable lazy-loading content before screenshot
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**retina:** `Optional<Boolean>` — Capture screenshot in high-DPI (Retina) mode
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**darkMode:** `Optional<Boolean>` — Render page in dark mode
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**blockTracking:** `Optional<Boolean>` — Block common user-tracking scripts
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**enableIncognito:** `Optional<Boolean>` — Enable private/incognito mode for browser session
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**omitBackground:** `Optional<Boolean>` — Omit background color (transparent background)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**thumbnailWidth:** `Optional<Integer>` — Thumbnail width in pixels
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**adjustTop:** `Optional<Integer>` — Adjust top in pixels
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**waitForEvent:** `Optional<ScreenshotCaptureRequestWaitForEvent>` — Wait for a specific load event before capturing the screenshot.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**grayscale:** `Optional<Integer>` — Range:0 to 100 for grayscale filter
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**delay:** `Optional<Integer>` — How many milliseconds to wait before taking the screenshot
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**timeout:** `Optional<Integer>` — Maximum timeout in milliseconds. Defalut is `10,000`
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ttl:** `Optional<Integer>` — Number of seconds the screenshot should be cached
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**clipX:** `Optional<Integer>` — X position of the clipping rectangle in pixels
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**clipY:** `Optional<Integer>` — Y position of the clipping rectangle in pixels
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**clipWidth:** `Optional<Integer>` — Width of the clipping rectangle in pixels
+    
+</dd>
+</dl>
+
 <dl>
 <dd>
 
-**width:** `Optional&lt;Integer&gt;` — Browser viewport width in pixels _(optional)_
+**clipHeight:** `Optional<Integer>` — Height of the clipping rectangle in pixels
     
 </dd>
 </dl>
@@ -5587,7 +7412,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**height:** `Optional&lt;Integer&gt;` — Browser viewport height in pixels _(optional)_
+**cssUrl:** `Optional<String>` — URL to CSS file
     
 </dd>
 </dl>
@@ -5595,7 +7420,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**fullPage:** `Optional&lt;Boolean&gt;` — Capture a full-page screenshot _(optional)_
+**css:** `Optional<String>` — Your custom CSS code
     
 </dd>
 </dl>
@@ -5603,7 +7428,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**fresh:** `Optional&lt;Boolean&gt;` — Bypass cache and take a fresh screenshot _(optional)_
+**jsUrl:** `Optional<String>` — URL to JS file
     
 </dd>
 </dl>
@@ -5611,7 +7436,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**noCookieBanners:** `Optional&lt;Boolean&gt;` — Remove cookie banners from the screenshot _(optional)_
+**js:** `Optional<String>` — Your JS code
     
 </dd>
 </dl>
@@ -5619,7 +7444,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**enableCaching:** `Optional&lt;Boolean&gt;` — Enable caching for repeated requests _(optional)_
+**blockJs:** `Optional<Boolean>` — Block Scripts
     
 </dd>
 </dl>
@@ -5627,7 +7452,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**blockAds:** `Optional&lt;Boolean&gt;` — Block advertisements on the page _(optional)_
+**blockStylesheets:** `Optional<Boolean>` — Block Stylesheets
     
 </dd>
 </dl>
@@ -5635,7 +7460,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**blockChatWidgets:** `Optional&lt;Boolean&gt;` — Block chat widget scripts from loading _(optional)_
+**blockImages:** `Optional<Boolean>` — Block Images
     
 </dd>
 </dl>
@@ -5643,7 +7468,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**extractText:** `Optional&lt;Boolean&gt;` — Extract visible text from the page _(optional)_
+**blockMedia:** `Optional<Boolean>` — Block Media
     
 </dd>
 </dl>
@@ -5651,7 +7476,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**extractHtml:** `Optional&lt;Boolean&gt;` — Extract HTML content of the page _(optional)_
+**blockFont:** `Optional<Boolean>` — Block Fonts
     
 </dd>
 </dl>
@@ -5659,7 +7484,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**destroyScreenshot:** `Optional&lt;Boolean&gt;` — Auto-destroy screenshot after fetch _(optional)_
+**blockTextTrack:** `Optional<Boolean>` — Block Text Tracks
     
 </dd>
 </dl>
@@ -5667,7 +7492,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**lazyLoad:** `Optional&lt;Boolean&gt;` — Enable lazy-loading content before screenshot _(optional)_
+**blockXhr:** `Optional<Boolean>` — Block XHR Requests
     
 </dd>
 </dl>
@@ -5675,7 +7500,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**retina:** `Optional&lt;Boolean&gt;` — Capture screenshot in high-DPI (Retina) mode _(optional)_
+**blockFetch:** `Optional<Boolean>` — Block Fetch Requests
     
 </dd>
 </dl>
@@ -5683,7 +7508,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**darkMode:** `Optional&lt;Boolean&gt;` — Render page in dark mode _(optional)_
+**blockEventSource:** `Optional<Boolean>` — Block Event Source
     
 </dd>
 </dl>
@@ -5691,7 +7516,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**blockTracking:** `Optional&lt;Boolean&gt;` — Block common user-tracking scripts _(optional)_
+**blockWebSocket:** `Optional<Boolean>` — Block Web Sockets
     
 </dd>
 </dl>
@@ -5699,7 +7524,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**enableIncognito:** `Optional&lt;Boolean&gt;` — Enable private/incognito mode for browser session _(optional)_
+**blockManifest:** `Optional<Boolean>` — Block Manifest
     
 </dd>
 </dl>
@@ -5707,15 +7532,18 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**omitBackground:** `Optional&lt;Boolean&gt;` — Omit background color (transparent background) _(optional)_
+**blockSpecificRequests:** `Optional<String>` — Comma- or newline-separated list of specific requests to block. Each line and comma are treated as separate requests for processing. Example: https://example.com, https://example.js
     
 </dd>
 </dl>
 
 <dl>
 <dd>
+
+**blurSelector:** `Optional<String>` 
 
-**thumbnailWidth:** `Optional&lt;Integer&gt;` — Thumbnail width in pixels _(optional)_
+Comma-separated list of indexed CSS selectors to blur.
+Format: `index:<selector>`, e.g., `0:.banner,1:#ads`.
     
 </dd>
 </dl>
@@ -5723,7 +7551,10 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**adjustTop:** `Optional&lt;Integer&gt;` — Adjust top in pixels _(optional)_
+**removeSelector:** `Optional<String>` 
+
+Comma-separated list of indexed CSS selectors to blur.
+Format: `index:<selector>`, e.g., `0:.banner,1:#ads`.
     
 </dd>
 </dl>
@@ -5731,7 +7562,10 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**waitForEvent:** `Optional&lt;ScreenshotCaptureRequestWaitForEvent&gt;` — Wait for a specific load event before capturing the screenshot. _(optional)_
+**resultFileName:** `Optional<String>` 
+
+Specify a meaningful & unique file name to easily identify the screenshot result.
+Avoid using spaces or special characters; use hyphens or underscores to separate words.
     
 </dd>
 </dl>
@@ -5739,7 +7573,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**grayscale:** `Optional&lt;Integer&gt;` — Range:0 to 100 for grayscale filter _(optional)_
+**scrollingScreenshot:** `Optional<Boolean>` — **`Scrolling Screenshot`**: Capture a long scrolling screenshot. When true, disable `fullPage` and `freshScreenshot`.
     
 </dd>
 </dl>
@@ -5747,7 +7581,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**delay:** `Optional&lt;Integer&gt;` — How many milliseconds to wait before taking the screenshot _(optional)_
+**scrollSpeed:** `Optional<ScreenshotCaptureRequestScrollSpeed>` — Speed of scrolling during the screenshot.
     
 </dd>
 </dl>
@@ -5755,7 +7589,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**timeout:** `Optional&lt;Integer&gt;` — Maximum timeout in milliseconds. Defalut is 10,000 _(optional)_
+**scrollBack:** `Optional<Boolean>` — If true, the scroll will reverse back to the top after reaching the bottom.
     
 </dd>
 </dl>
@@ -5763,7 +7597,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**ttl:** `Optional&lt;Integer&gt;` — Number of seconds the screenshot should be cached _(optional)_
+**startImmediately:** `Optional<Boolean>` — If true, the scrolling capture will start immediately upon page load.
     
 </dd>
 </dl>
@@ -5771,7 +7605,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**clipX:** `Optional&lt;Integer&gt;` — X position of the clipping rectangle in pixels _(optional)_
+**multipleScrolling:** `Optional<Boolean>` — If true, multiple scrolling screenshots will be taken at different viewport sizes.
     
 </dd>
 </dl>
@@ -5779,7 +7613,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**clipY:** `Optional&lt;Integer&gt;` — Y position of the clipping rectangle in pixels _(optional)_
+**sizes:** `Optional<String>` — Comma-separated list of viewport sizes in the format index:XXw:YYh. Example: sizes=0:120w:300h,1:240w:500h
     
 </dd>
 </dl>
@@ -5787,7 +7621,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**clipWidth:** `Optional&lt;Integer&gt;` — Width of the clipping rectangle in pixels _(optional)_
+**duration:** `Optional<Double>` — Duration in seconds for the scrolling capture. Acceptable range: 0 to 100 seconds.
     
 </dd>
 </dl>
@@ -5795,7 +7629,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**clipHeight:** `Optional&lt;Integer&gt;` — Height of the clipping rectangle in pixels _(optional)_
+**failOnError:** `Optional<Boolean>` 
     
 </dd>
 </dl>
@@ -5803,7 +7637,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**cssUrl:** `Optional&lt;String&gt;` — URL to CSS file _(optional)_
+**longitude:** `Optional<Double>` 
     
 </dd>
 </dl>
@@ -5811,7 +7645,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**css:** `Optional&lt;String&gt;` — Your custom CSS code _(optional)_
+**latitude:** `Optional<Double>` 
     
 </dd>
 </dl>
@@ -5819,7 +7653,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**jsUrl:** `Optional&lt;String&gt;` — URL to JS file _(optional)_
+**proxy:** `Optional<String>` 
     
 </dd>
 </dl>
@@ -5827,7 +7661,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**js:** `Optional&lt;String&gt;` — Your JS code _(optional)_
+**headers:** `Optional<String>` 
     
 </dd>
 </dl>
@@ -5835,7 +7669,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**blockJs:** `Optional&lt;Boolean&gt;` — Block Scripts _(optional)_
+**cookies:** `Optional<String>` 
     
 </dd>
 </dl>
@@ -5843,7 +7677,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**blockStylesheets:** `Optional&lt;Boolean&gt;` — Block Stylesheets _(optional)_
+**scrollToElement:** `Optional<String>` 
     
 </dd>
 </dl>
@@ -5851,7 +7685,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**blockImages:** `Optional&lt;Boolean&gt;` — Block Images _(optional)_
+**selector:** `Optional<String>` 
     
 </dd>
 </dl>
@@ -5859,7 +7693,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**blockMedia:** `Optional&lt;Boolean&gt;` — Block Media _(optional)_
+**userAgent:** `Optional<String>` 
     
 </dd>
 </dl>
@@ -5867,7 +7701,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**blockFont:** `Optional&lt;Boolean&gt;` — Block Fonts _(optional)_
+**acceptLanguages:** `Optional<String>` 
     
 </dd>
 </dl>
@@ -5875,7 +7709,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**blockTextTrack:** `Optional&lt;Boolean&gt;` — Block Text Tracks _(optional)_
+**customHtml:** `Optional<String>` 
     
 </dd>
 </dl>
@@ -5883,7 +7717,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**blockXhr:** `Optional&lt;Boolean&gt;` — Block XHR Requests _(optional)_
+**imageQuality:** `Optional<Double>` 
     
 </dd>
 </dl>
@@ -5891,7 +7725,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**blockFetch:** `Optional&lt;Boolean&gt;` — Block Fetch Requests _(optional)_
+**captchaError:** `Optional<String>` — CSS selector of the message shown for a wrong answer. While it is visible, the solver tries again.
     
 </dd>
 </dl>
@@ -5899,7 +7733,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**blockEventSource:** `Optional&lt;Boolean&gt;` — Block Event Source _(optional)_
+**captchaImage:** `Optional<String>` — CSS selector of the captcha picture. Required when solve_captcha is true.
     
 </dd>
 </dl>
@@ -5907,7 +7741,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**blockWebSocket:** `Optional&lt;Boolean&gt;` — Block Web Sockets _(optional)_
+**captchaInput:** `Optional<String>` — CSS selector of the box the answer is typed into. Required when solve_captcha is true.
     
 </dd>
 </dl>
@@ -5915,7 +7749,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**blockManifest:** `Optional&lt;Boolean&gt;` — Block Manifest _(optional)_
+**captchaRefresh:** `Optional<String>` — CSS selector of the control that loads a new captcha picture before the next try.
     
 </dd>
 </dl>
@@ -5923,7 +7757,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**blockSpecificRequests:** `Optional&lt;String&gt;` — Comma- or newline-separated list of specific requests to block. Each line and comma are treated as separate requests for processing. Example: https://example.com, https://example.js _(optional)_
+**captchaRetries:** `Optional<Integer>` — Number of guesses the solver makes, from 1 to 5.
     
 </dd>
 </dl>
@@ -5931,7 +7765,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**blurSelector:** `Optional&lt;String&gt;` — Comma-separated list of indexed CSS selectors to blur. Format: index:&lt;selector&gt;, e.g., 0:.banner,1:#ads. _(optional)_
+**captchaSubmit:** `Optional<String>` — CSS selector of the button to click after the answer is typed.
     
 </dd>
 </dl>
@@ -5939,7 +7773,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**removeSelector:** `Optional&lt;String&gt;` — Comma-separated list of indexed CSS selectors to blur. Format: index:&lt;selector&gt;, e.g., 0:.banner,1:#ads. _(optional)_
+**classicProxy:** `Optional<Boolean>` — Loads the page through a datacenter proxy. Adds 20 credits per request. Ignored when premium_proxy is true or a custom proxy is set.
     
 </dd>
 </dl>
@@ -5947,7 +7781,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**resultFileName:** `Optional&lt;String&gt;` — Specify a meaningful &amp; unique file name to easily identify the screenshot result. Avoid using spaces or special characters; use hyphens or underscores to separate words. _(optional)_
+**clickRecursion:** `Optional<Integer>` — Number of times to click the selector (when set via `selector_to_click`).
     
 </dd>
 </dl>
@@ -5955,7 +7789,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**scrollingScreenshot:** `Optional&lt;Boolean&gt;` — Scrolling Screenshot: Capture a long scrolling screenshot. When true, disable fullPage and freshScreenshot. _(optional)_
+**country:** `Optional<String>` — Two-letter country code, such as US or DE, for the exit address of classic_proxy or premium_proxy. Ignored when you send your own proxy. Any two-letter code is sent, including one that is not listed. Classic proxy countries: BG, GE, DE, HN, MD, UA, GB, US. Premium proxy countries: AF, AL, DZ, AO, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BT, BO, BQ, BA, BW, BR, BN, BG, BF, BI, CV, KH, CM, CA, KY, CF, TD, CL, CN, CO, KM, CG, CR, CI, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, EC, EG, SV, GQ, EE, SZ, ET, FO, FJ, FI, FR, GF, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IL, IT, JM, JP, JE, JO, KZ, KE, XK, KW, KG, LA, LV, LB, LS, LR, LY, LT, MO, MG, MW, MY, MV, ML, MT, MQ, MR, MU, YT, MX, MD, MN, ME, MA, MZ, MM, NA, NP, NL, NC, NZ, NI, NE, NG, MK, NO, OM, PK, PS, PA, PG, PY, PE, PH, PL, PT, PR, QA, RE, RO, RU, RW, KN, LC, VC, WS, SA, SN, RS, SC, SL, SG, SK, SI, SB, SO, ZA, KR, SS, ES, LK, SD, SR, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TO, TT, TN, TR, TM, UG, UA, AE, GB, US, UY, UZ, VE, VN, YE, ZM, ZW.
     
 </dd>
 </dl>
@@ -5963,7 +7797,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**scrollSpeed:** `Optional&lt;ScreenshotCaptureRequestScrollSpeed&gt;` — Speed of scrolling during the screenshot. _(optional)_
+**extractMarkdown:** `Optional<Boolean>` — Extracts rendered page content as a structured .md (Markdown) file. Preserves headings, lists, links. Only with output=json.
     
 </dd>
 </dl>
@@ -5971,7 +7805,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**scrollBack:** `Optional&lt;Boolean&gt;` — If true, the scroll will reverse back to the top after reaching the bottom. _(optional)_
+**format:** `Optional<ScreenshotCaptureRequestFormat>` — Response format: json (default).
     
 </dd>
 </dl>
@@ -5979,7 +7813,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**startImmediately:** `Optional&lt;Boolean&gt;` — If true, the scrolling capture will start immediately upon page load. _(optional)_
+**getImageUrls:** `Optional<Boolean>` — Extracts all image URLs from the rendered DOM and returns them in structured format. Only with output=json.
     
 </dd>
 </dl>
@@ -5987,7 +7821,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**multipleScrolling:** `Optional&lt;Boolean&gt;` — If true, multiple scrolling screenshots will be taken at different viewport sizes. _(optional)_
+**gpu:** `Optional<Boolean>` — Renders the page with a GPU, including WebGL and canvas content. Adds 20 credits per request.
     
 </dd>
 </dl>
@@ -5995,7 +7829,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**duration:** `Optional&lt;Double&gt;` — Duration in seconds for the scrolling capture. Acceptable range: 0 to 100 seconds. _(optional)_
+**markdown:** `Optional<String>` — Markdown to render instead of loading a URL. Works like custom_html, so you can capture a README or notes without hosting a page.
     
 </dd>
 </dl>
@@ -6003,7 +7837,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**failOnError:** `Optional&lt;Boolean&gt;` — Duration in seconds for the scrolling capture. Acceptable range: 0 to 100 seconds. _(optional)_
+**ocrModel:** `Optional<ScreenshotCaptureRequestOcrModel>` — Recognition model used by the captcha solver: mini-ocr-v1 (default) or ocr-v1.
     
 </dd>
 </dl>
@@ -6011,7 +7845,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**longitude:** `Optional&lt;Double&gt;` — Duration in seconds for the scrolling capture. Acceptable range: 0 to 100 seconds. _(optional)_
+**pdfOptionsFormat:** `Optional<ScreenshotCaptureRequestPdfOptionsFormat>` — Paper size of the PDF. Applies when file_type is PDF. Without it, width and height are used if set, otherwise the page renders as one long page: A0, A1, A2, A3, A4, A5, A6, Letter, Legal, Tabloid, or Ledger.
     
 </dd>
 </dl>
@@ -6019,7 +7853,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**latitude:** `Optional&lt;Double&gt;` — Duration in seconds for the scrolling capture. Acceptable range: 0 to 100 seconds. _(optional)_
+**pdfOptionsLandscape:** `Optional<Boolean>` — Renders the PDF in landscape orientation, swapping the width and height of the paper size. Applies when file_type is PDF.
     
 </dd>
 </dl>
@@ -6027,7 +7861,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**proxy:** `Optional&lt;String&gt;` — Duration in seconds for the scrolling capture. Acceptable range: 0 to 100 seconds. _(optional)_
+**pdfOptionsMedia:** `Optional<ScreenshotCaptureRequestPdfOptionsMedia>` — CSS media type used to render the PDF: print or screen.
     
 </dd>
 </dl>
@@ -6035,7 +7869,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**headers:** `Optional&lt;String&gt;` — Duration in seconds for the scrolling capture. Acceptable range: 0 to 100 seconds. _(optional)_
+**pdfOptionsPageRange:** `Optional<String>` — Pages to keep in the PDF, as start-end, for example 1-3 or 5-5. Pages are rendered first and then trimmed. Has no effect on a single-page PDF. Applies when file_type is PDF.
     
 </dd>
 </dl>
@@ -6043,7 +7877,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**cookies:** `Optional&lt;String&gt;` — Duration in seconds for the scrolling capture. Acceptable range: 0 to 100 seconds. _(optional)_
+**pdfOptionsPrintBackground:** `Optional<Boolean>` — Includes background colors and images in the PDF. Applies when file_type is PDF.
     
 </dd>
 </dl>
@@ -6051,7 +7885,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**scrollToElement:** `Optional&lt;String&gt;` — Duration in seconds for the scrolling capture. Acceptable range: 0 to 100 seconds. _(optional)_
+**premiumProxy:** `Optional<Boolean>` — Loads the page through a residential proxy. Adds 200 credits per request. Used instead of classic_proxy.
     
 </dd>
 </dl>
@@ -6059,7 +7893,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**selector:** `Optional&lt;String&gt;` — Duration in seconds for the scrolling capture. Acceptable range: 0 to 100 seconds. _(optional)_
+**scrollDelay:** `Optional<Integer>` — Delay in milliseconds between scroll steps when `lazy_load` is enabled. Use higher values for heavy pages.
     
 </dd>
 </dl>
@@ -6067,7 +7901,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**userAgent:** `Optional&lt;String&gt;` — Duration in seconds for the scrolling capture. Acceptable range: 0 to 100 seconds. _(optional)_
+**selectorToClick:** `Optional<String>` — CSS selector for an element to click before capturing the screenshot. Useful for opening dropdowns, modals, or triggering content.
     
 </dd>
 </dl>
@@ -6075,7 +7909,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**acceptLanguages:** `Optional&lt;String&gt;` — Duration in seconds for the scrolling capture. Acceptable range: 0 to 100 seconds. _(optional)_
+**solveCaptcha:** `Optional<Boolean>` — Solves a captcha made of text drawn in a picture, then takes the screenshot. Requires captcha_image and captcha_input. Adds 20 credits per request.
     
 </dd>
 </dl>
@@ -6083,7 +7917,7 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**customHtml:** `Optional&lt;String&gt;` — Duration in seconds for the scrolling capture. Acceptable range: 0 to 100 seconds. _(optional)_
+**stealth:** `Optional<Boolean>` — Makes the browser look like a regular visitor for pages that block automated traffic. No extra credits.
     
 </dd>
 </dl>
@@ -6091,13 +7925,21 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-**imageQuality:** `Optional&lt;Double&gt;` — Duration in seconds for the scrolling capture. Acceptable range: 0 to 100 seconds. _(optional)_
+**timezone:** `Optional<String>` — IANA timezone the browser uses while rendering, such as Asia/Karachi or Europe/London. Useful for clocks and localized dates.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
 
+**video:** `Optional<Boolean>` — Records visible viewport only for a specified duration. Use with `duration` parameter. Ideal for dashboards and animations.
+    
 </dd>
 </dl>
+</dd>
+</dl>
+
 
 </dd>
 </dl>
@@ -6112,8 +7954,13 @@ InputStream response = client.screenshotCapture(request);
 <dl>
 <dd>
 
-Our Bulk Screenshot API allows you to capture screenshots of multiple webpages simultaneously, saving you time and effort. Instead of manually capturing each page one by one, you can batch process URLs and receive high-quality screenshots in the format you choose. Maximum <code>50 URLs</code> per request.
+<dl>
+<dd>
 
+Our Bulk Screenshot API allows you to capture screenshots of multiple webpages simultaneously, saving you time and effort. Instead of manually capturing each page one by one, you can batch process URLs and receive high-quality screenshots in the format you choose.
+ Maximum `50 URLs` per request.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6122,19 +7969,27 @@ Our Bulk Screenshot API allows you to capture screenshots of multiple webpages s
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.BulkScreenshotCaptureRequest;
-import com.apifreaks.sdk.types.BulkScreenshotCaptureResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-BulkScreenshotCaptureRequest request = BulkScreenshotCaptureRequest.builder()
+client.bulkScreenshotCapture(
+    BulkScreenshotCaptureRequest
+        .builder()
         .apiKey("apiKey")
-        .urls(java.util.List.of())
-        .build();
-BulkScreenshotCaptureResponse response = client.bulkScreenshotCapture(request);
+        .urls(
+            Arrays.asList(
+                BulkScreenshotCaptureRequestUrlsItem
+                    .builder()
+                    .url("url")
+                    .build()
+            )
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6146,7 +8001,7 @@ BulkScreenshotCaptureResponse response = client.bulkScreenshotCapture(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -6154,7 +8009,7 @@ BulkScreenshotCaptureResponse response = client.bulkScreenshotCapture(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;BulkScreenshotCaptureRequestFormat&gt;` — No description provided. _(optional)_
+**format:** `Optional<BulkScreenshotCaptureRequestFormat>` 
     
 </dd>
 </dl>
@@ -6162,29 +8017,33 @@ BulkScreenshotCaptureResponse response = client.bulkScreenshotCapture(request);
 <dl>
 <dd>
 
-**urls:** `List<BulkScreenshotCaptureRequestUrlsItem&gt;` — List of website URLs to capture screenshots of _(required)_
+**urls:** `List<BulkScreenshotCaptureRequestUrlsItem>` — List of website URLs to capture screenshots of
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.currencyLatestRates(request) -> CurrencyLatestRatesResponse</code></summary>
+<details><summary><code>client.currencyLatestRates() -> CurrencyLatestRatesResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Get live forex rates for all world currencies with customizable update frequency
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6193,18 +8052,19 @@ Get live forex rates for all world currencies with customizable update frequency
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.CurrencyLatestRatesRequest;
-import com.apifreaks.sdk.types.CurrencyLatestRatesResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-CurrencyLatestRatesRequest request = CurrencyLatestRatesRequest.builder()
+client.currencyLatestRates(
+    CurrencyLatestRatesRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-CurrencyLatestRatesResponse response = client.currencyLatestRates(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6216,7 +8076,7 @@ CurrencyLatestRatesResponse response = client.currencyLatestRates(request);
 <dl>
 <dd>
 
-**symbols:** `Optional&lt;List<String&gt;&gt;` — Comma separated list of desired currency codes _(optional)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -6224,7 +8084,7 @@ CurrencyLatestRatesResponse response = client.currencyLatestRates(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**format:** `Optional<CurrencyLatestRatesRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -6232,7 +8092,7 @@ CurrencyLatestRatesResponse response = client.currencyLatestRates(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;CurrencyLatestRatesRequestFormat&gt;` — Format of the response. _(optional)_
+**base:** `Optional<String>` — Base currency for rate calculations
     
 </dd>
 </dl>
@@ -6240,7 +8100,7 @@ CurrencyLatestRatesResponse response = client.currencyLatestRates(request);
 <dl>
 <dd>
 
-**base:** `Optional&lt;String&gt;` — Base currency for rate calculations _(optional)_
+**symbols:** `Optional<String>` — Comma separated list of desired currency codes
     
 </dd>
 </dl>
@@ -6248,29 +8108,33 @@ CurrencyLatestRatesResponse response = client.currencyLatestRates(request);
 <dl>
 <dd>
 
-**updates:** `Optional&lt;CurrencyLatestRatesRequestUpdates&gt;` — Exchange rates update period (1d=daily, 1h=hourly, 10m=10 minutes, 1m=1 minute) _(optional)_
+**updates:** `Optional<CurrencyLatestRatesRequestUpdates>` — Exchange rates update period (1d=daily, 1h=hourly, 10m=10 minutes, 1m=1 minute)
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.currencyHistoricalRates(request) -> CurrencyHistoricalRatesResponse</code></summary>
+<details><summary><code>client.currencyHistoricalRates() -> CurrencyHistoricalRatesResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Get historical exchange rates for any specific date
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6279,19 +8143,20 @@ Get historical exchange rates for any specific date
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.CurrencyHistoricalRatesRequest;
-import com.apifreaks.sdk.types.CurrencyHistoricalRatesResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-CurrencyHistoricalRatesRequest request = CurrencyHistoricalRatesRequest.builder()
+client.currencyHistoricalRates(
+    CurrencyHistoricalRatesRequest
+        .builder()
         .apiKey("apiKey")
-        .date("2024-01-01")
-        .build();
-CurrencyHistoricalRatesResponse response = client.currencyHistoricalRates(request);
+        .date("2023-01-15")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6303,7 +8168,7 @@ CurrencyHistoricalRatesResponse response = client.currencyHistoricalRates(reques
 <dl>
 <dd>
 
-**symbols:** `Optional&lt;List<String&gt;&gt;` — Comma separated list of desired currency codes _(optional)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -6311,7 +8176,7 @@ CurrencyHistoricalRatesResponse response = client.currencyHistoricalRates(reques
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**format:** `Optional<CurrencyHistoricalRatesRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -6319,7 +8184,7 @@ CurrencyHistoricalRatesResponse response = client.currencyHistoricalRates(reques
 <dl>
 <dd>
 
-**format:** `Optional&lt;CurrencyHistoricalRatesRequestFormat&gt;` — Format of the response. _(optional)_
+**base:** `Optional<String>` — Base currency for rate calculations
     
 </dd>
 </dl>
@@ -6327,7 +8192,7 @@ CurrencyHistoricalRatesResponse response = client.currencyHistoricalRates(reques
 <dl>
 <dd>
 
-**base:** `Optional&lt;String&gt;` — Base currency for rate calculations _(optional)_
+**symbols:** `Optional<String>` — Comma separated list of desired currency codes
     
 </dd>
 </dl>
@@ -6335,29 +8200,33 @@ CurrencyHistoricalRatesResponse response = client.currencyHistoricalRates(reques
 <dl>
 <dd>
 
-**date:** `String` — Specific date in YYYY-MM-DD format _(required)_
+**date:** `String` — Specific date in YYYY-MM-DD format
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.currencyConvertLatest(request) -> CurrencyConvertLatestResponse</code></summary>
+<details><summary><code>client.currencyConvertLatest() -> CurrencyConvertLatestResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Convert amount between currencies using the latest exchange rates
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6366,20 +8235,21 @@ Convert amount between currencies using the latest exchange rates
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.CurrencyConvertLatestRequest;
-import com.apifreaks.sdk.types.CurrencyConvertLatestResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-CurrencyConvertLatestRequest request = CurrencyConvertLatestRequest.builder()
+client.currencyConvertLatest(
+    CurrencyConvertLatestRequest
+        .builder()
         .apiKey("apiKey")
-        .from("USD")
-        .to("EUR")
-        .build();
-CurrencyConvertLatestResponse response = client.currencyConvertLatest(request);
+        .from("from")
+        .to("to")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6391,7 +8261,7 @@ CurrencyConvertLatestResponse response = client.currencyConvertLatest(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -6399,7 +8269,7 @@ CurrencyConvertLatestResponse response = client.currencyConvertLatest(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;CurrencyConvertLatestRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<CurrencyConvertLatestRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -6407,7 +8277,7 @@ CurrencyConvertLatestResponse response = client.currencyConvertLatest(request);
 <dl>
 <dd>
 
-**from:** `String` — Source currency code _(required)_
+**from:** `String` — Source currency code
     
 </dd>
 </dl>
@@ -6415,7 +8285,7 @@ CurrencyConvertLatestResponse response = client.currencyConvertLatest(request);
 <dl>
 <dd>
 
-**to:** `String` — Target currency code _(required)_
+**to:** `String` — Target currency code
     
 </dd>
 </dl>
@@ -6423,7 +8293,7 @@ CurrencyConvertLatestResponse response = client.currencyConvertLatest(request);
 <dl>
 <dd>
 
-**amount:** `Optional&lt;String&gt;` — Amount to convert _(optional)_
+**amount:** `Optional<Double>` — Amount to convert
     
 </dd>
 </dl>
@@ -6431,29 +8301,33 @@ CurrencyConvertLatestResponse response = client.currencyConvertLatest(request);
 <dl>
 <dd>
 
-**updates:** `Optional&lt;CurrencyConvertLatestRequestUpdates&gt;` — Exchange rates update period (1d=daily, 1h=hourly, 10m=10 minutes, 1m=1 minute) _(optional)_
+**updates:** `Optional<CurrencyConvertLatestRequestUpdates>` — Exchange rates update period (1d=daily, 1h=hourly, 10m=10 minutes, 1m=1 minute)
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.currencyConvertHistorical(request) -> CurrencyConvertHistoricalResponse</code></summary>
+<details><summary><code>client.currencyConvertHistorical() -> CurrencyConvertHistoricalResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Convert amount between currencies using historical rates
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6462,21 +8336,22 @@ Convert amount between currencies using historical rates
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.CurrencyConvertHistoricalRequest;
-import com.apifreaks.sdk.types.CurrencyConvertHistoricalResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-CurrencyConvertHistoricalRequest request = CurrencyConvertHistoricalRequest.builder()
+client.currencyConvertHistorical(
+    CurrencyConvertHistoricalRequest
+        .builder()
         .apiKey("apiKey")
-        .from("USD")
-        .to("EUR")
-        .date("2024-01-01")
-        .build();
-CurrencyConvertHistoricalResponse response = client.currencyConvertHistorical(request);
+        .from("from")
+        .to("to")
+        .date("2023-01-15")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6488,7 +8363,7 @@ CurrencyConvertHistoricalResponse response = client.currencyConvertHistorical(re
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -6496,7 +8371,7 @@ CurrencyConvertHistoricalResponse response = client.currencyConvertHistorical(re
 <dl>
 <dd>
 
-**format:** `Optional&lt;CurrencyConvertHistoricalRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<CurrencyConvertHistoricalRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -6504,7 +8379,7 @@ CurrencyConvertHistoricalResponse response = client.currencyConvertHistorical(re
 <dl>
 <dd>
 
-**from:** `String` — From currency symbol _(required)_
+**from:** `String` — From currency symbol
     
 </dd>
 </dl>
@@ -6512,7 +8387,7 @@ CurrencyConvertHistoricalResponse response = client.currencyConvertHistorical(re
 <dl>
 <dd>
 
-**to:** `String` — To currency symbol _(required)_
+**to:** `String` — To currency symbol
     
 </dd>
 </dl>
@@ -6520,7 +8395,7 @@ CurrencyConvertHistoricalResponse response = client.currencyConvertHistorical(re
 <dl>
 <dd>
 
-**amount:** `Optional&lt;String&gt;` — The Amount to be converted _(optional)_
+**amount:** `Optional<Double>` — The Amount to be converted
     
 </dd>
 </dl>
@@ -6528,29 +8403,33 @@ CurrencyConvertHistoricalResponse response = client.currencyConvertHistorical(re
 <dl>
 <dd>
 
-**date:** `String` — specific date (format YYYY-MM-DD) of which exchange rates is used. _(required)_
+**date:** `String` — specific date (format YYYY-MM-DD) of which exchange rates is used.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.currencyTimeSeries(request) -> CurrencyTimeSeriesResponse</code></summary>
+<details><summary><code>client.currencyTimeSeries() -> CurrencyTimeSeriesResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Get exchange rates for a time range
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6559,19 +8438,20 @@ Get exchange rates for a time range
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.CurrencyTimeSeriesRequest;
-import com.apifreaks.sdk.types.CurrencyTimeSeriesResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-CurrencyTimeSeriesRequest request = CurrencyTimeSeriesRequest.builder()
+client.currencyTimeSeries(
+    CurrencyTimeSeriesRequest
+        .builder()
         .apiKey("apiKey")
-        .startDate("startDate")
-        .build();
-CurrencyTimeSeriesResponse response = client.currencyTimeSeries(request);
+        .startDate("2023-01-15")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6583,7 +8463,7 @@ CurrencyTimeSeriesResponse response = client.currencyTimeSeries(request);
 <dl>
 <dd>
 
-**symbols:** `Optional&lt;List<String&gt;&gt;` — comma separated list of desired currencies/ commodities symbols _(optional)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -6591,7 +8471,7 @@ CurrencyTimeSeriesResponse response = client.currencyTimeSeries(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**format:** `Optional<CurrencyTimeSeriesRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -6599,7 +8479,7 @@ CurrencyTimeSeriesResponse response = client.currencyTimeSeries(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;CurrencyTimeSeriesRequestFormat&gt;` — Format of the response. _(optional)_
+**startDate:** `String` — Start date (format YYYY-MM-DD) of the preferred time frame
     
 </dd>
 </dl>
@@ -6607,7 +8487,7 @@ CurrencyTimeSeriesResponse response = client.currencyTimeSeries(request);
 <dl>
 <dd>
 
-**startDate:** `String` — Start date (format YYYY-MM-DD) of the preferred time frame _(required)_
+**endDate:** `Optional<String>` — End date (format YYYY-MM-DD) of the preferred time frame
     
 </dd>
 </dl>
@@ -6615,7 +8495,7 @@ CurrencyTimeSeriesResponse response = client.currencyTimeSeries(request);
 <dl>
 <dd>
 
-**endDate:** `Optional&lt;String&gt;` — End date (format YYYY-MM-DD) of the preferred time frame _(optional)_
+**base:** `Optional<String>` — Base currency
     
 </dd>
 </dl>
@@ -6623,29 +8503,33 @@ CurrencyTimeSeriesResponse response = client.currencyTimeSeries(request);
 <dl>
 <dd>
 
-**base:** `Optional&lt;String&gt;` — Base currency _(optional)_
+**symbols:** `Optional<String>` — comma separated list of desired currencies/ commodities symbols
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.currencyFluctuation(request) -> CurrencyFluctuationResponse</code></summary>
+<details><summary><code>client.currencyFluctuation() -> CurrencyFluctuationResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Get currency fluctuation data for a time period
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6654,19 +8538,21 @@ Get currency fluctuation data for a time period
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.CurrencyFluctuationRequest;
-import com.apifreaks.sdk.types.CurrencyFluctuationResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-CurrencyFluctuationRequest request = CurrencyFluctuationRequest.builder()
+client.currencyFluctuation(
+    CurrencyFluctuationRequest
+        .builder()
         .apiKey("apiKey")
-        .startDate("startDate")
-        .build();
-CurrencyFluctuationResponse response = client.currencyFluctuation(request);
+        .startDate("2023-01-15")
+        .base("USD")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6678,7 +8564,7 @@ CurrencyFluctuationResponse response = client.currencyFluctuation(request);
 <dl>
 <dd>
 
-**symbols:** `Optional&lt;List<String&gt;&gt;` — comma separated list of desired currencies/ commodities symbols _(optional)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -6686,7 +8572,7 @@ CurrencyFluctuationResponse response = client.currencyFluctuation(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**format:** `Optional<CurrencyFluctuationRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -6694,7 +8580,7 @@ CurrencyFluctuationResponse response = client.currencyFluctuation(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;CurrencyFluctuationRequestFormat&gt;` — Format of the response. _(optional)_
+**startDate:** `String` — Start date (format YYYY-MM-DD) of the preferred time frame
     
 </dd>
 </dl>
@@ -6702,7 +8588,7 @@ CurrencyFluctuationResponse response = client.currencyFluctuation(request);
 <dl>
 <dd>
 
-**startDate:** `String` — Start date (format YYYY-MM-DD) of the preferred time frame _(required)_
+**endDate:** `Optional<String>` — End date (format YYYY-MM-DD) of the preferred time frame
     
 </dd>
 </dl>
@@ -6710,7 +8596,7 @@ CurrencyFluctuationResponse response = client.currencyFluctuation(request);
 <dl>
 <dd>
 
-**endDate:** `Optional&lt;String&gt;` — End date (format YYYY-MM-DD) of the preferred time frame _(optional)_
+**base:** `Optional<String>` — Base currency
     
 </dd>
 </dl>
@@ -6718,29 +8604,33 @@ CurrencyFluctuationResponse response = client.currencyFluctuation(request);
 <dl>
 <dd>
 
-**base:** `Optional&lt;String&gt;` — Base currency _(optional)_
+**symbols:** `Optional<String>` — comma separated list of desired currencies/ commodities symbols
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.currencyConvertByIp(request) -> CurrencyConvertByIpResponse</code></summary>
+<details><summary><code>client.currencyConvertByIp() -> CurrencyConvertByIpResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Convert amount using user's location
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6749,19 +8639,20 @@ Convert amount using user's location
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.CurrencyConvertByIpRequest;
-import com.apifreaks.sdk.types.CurrencyConvertByIpResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-CurrencyConvertByIpRequest request = CurrencyConvertByIpRequest.builder()
+client.currencyConvertByIp(
+    CurrencyConvertByIpRequest
+        .builder()
         .apiKey("apiKey")
-        .from("USD")
-        .build();
-CurrencyConvertByIpResponse response = client.currencyConvertByIp(request);
+        .from("from")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6773,7 +8664,7 @@ CurrencyConvertByIpResponse response = client.currencyConvertByIp(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -6781,7 +8672,7 @@ CurrencyConvertByIpResponse response = client.currencyConvertByIp(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;CurrencyConvertByIpRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<CurrencyConvertByIpRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -6789,7 +8680,7 @@ CurrencyConvertByIpResponse response = client.currencyConvertByIp(request);
 <dl>
 <dd>
 
-**updates:** `Optional&lt;CurrencyConvertByIpRequestUpdates&gt;` — Exchange rates update period (1d=daily, 1h=hourly, 10m=10 minutes, 1m=1 minute) _(optional)_
+**updates:** `Optional<CurrencyConvertByIpRequestUpdates>` — Exchange rates update period (1d=daily, 1h=hourly, 10m=10 minutes, 1m=1 minute)
     
 </dd>
 </dl>
@@ -6797,7 +8688,7 @@ CurrencyConvertByIpResponse response = client.currencyConvertByIp(request);
 <dl>
 <dd>
 
-**from:** `String` — From currency symbol _(required)_
+**from:** `String` — From currency symbol
     
 </dd>
 </dl>
@@ -6805,7 +8696,7 @@ CurrencyConvertByIpResponse response = client.currencyConvertByIp(request);
 <dl>
 <dd>
 
-**ip:** `Optional&lt;String&gt;` — IPv4 or IPv6 geolocated currency _(optional)_
+**ip:** `Optional<String>` — IPv4 or IPv6 geolocated currency
     
 </dd>
 </dl>
@@ -6813,29 +8704,33 @@ CurrencyConvertByIpResponse response = client.currencyConvertByIp(request);
 <dl>
 <dd>
 
-**amount:** `Optional&lt;String&gt;` — Amount to convert _(optional)_
+**amount:** `Optional<Double>` — Amount to convert
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.currencySupported(request) -> CurrencySupportedResponse</code></summary>
+<details><summary><code>client.currencySupported() -> CurrencySupportedResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Get list of all supported currencies with their metadata
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6844,18 +8739,19 @@ Get list of all supported currencies with their metadata
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.CurrencySupportedRequest;
-import com.apifreaks.sdk.types.CurrencySupportedResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-CurrencySupportedRequest request = CurrencySupportedRequest.builder()
+client.currencySupported(
+    CurrencySupportedRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-CurrencySupportedResponse response = client.currencySupported(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6867,7 +8763,7 @@ CurrencySupportedResponse response = client.currencySupported(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -6875,29 +8771,33 @@ CurrencySupportedResponse response = client.currencySupported(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;CurrencySupportedRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<CurrencySupportedRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.currencySymbols(request) -> CurrencySymbolsResponse</code></summary>
+<details><summary><code>client.currencySymbols() -> CurrencySymbolsResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Get currency symbols and codes
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6906,18 +8806,19 @@ Get currency symbols and codes
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.CurrencySymbolsRequest;
-import com.apifreaks.sdk.types.CurrencySymbolsResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-CurrencySymbolsRequest request = CurrencySymbolsRequest.builder()
+client.currencySymbols(
+    CurrencySymbolsRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-CurrencySymbolsResponse response = client.currencySymbols(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6929,7 +8830,7 @@ CurrencySymbolsResponse response = client.currencySymbols(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -6937,29 +8838,33 @@ CurrencySymbolsResponse response = client.currencySymbols(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;CurrencySymbolsRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<CurrencySymbolsRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.currencyHistoricalLimits(request) -> CurrencyHistoricalLimitsResponse</code></summary>
+<details><summary><code>client.currencyHistoricalLimits() -> CurrencyHistoricalLimitsResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Get information about historical data availability and limits
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6968,18 +8873,19 @@ Get information about historical data availability and limits
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.CurrencyHistoricalLimitsRequest;
-import com.apifreaks.sdk.types.CurrencyHistoricalLimitsResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-CurrencyHistoricalLimitsRequest request = CurrencyHistoricalLimitsRequest.builder()
+client.currencyHistoricalLimits(
+    CurrencyHistoricalLimitsRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-CurrencyHistoricalLimitsResponse response = client.currencyHistoricalLimits(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6991,7 +8897,7 @@ CurrencyHistoricalLimitsResponse response = client.currencyHistoricalLimits(requ
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -6999,29 +8905,33 @@ CurrencyHistoricalLimitsResponse response = client.currencyHistoricalLimits(requ
 <dl>
 <dd>
 
-**format:** `Optional&lt;CurrencyHistoricalLimitsRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<CurrencyHistoricalLimitsRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.commodityLatestRates(request) -> CommodityLatestRatesResponse</code></summary>
+<details><summary><code>client.commodityLatestRates() -> CommodityLatestRatesResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Get live commodity rates with customizable update frequency
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7030,20 +8940,23 @@ Get live commodity rates with customizable update frequency
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.CommodityLatestRatesRequest;
-import com.apifreaks.sdk.types.CommodityLatestRatesResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-CommodityLatestRatesRequest request = CommodityLatestRatesRequest.builder()
+client.commodityLatestRates(
+    CommodityLatestRatesRequest
+        .builder()
         .apiKey("apiKey")
-        .updates(null)
-        .symbols(java.util.List.of("XAU"))
-        .build();
-CommodityLatestRatesResponse response = client.commodityLatestRates(request);
+        .updates(CommodityLatestRatesRequestUpdates.TEN_M)
+        .symbols(
+            Arrays.asList("symbols")
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7055,7 +8968,7 @@ CommodityLatestRatesResponse response = client.commodityLatestRates(request);
 <dl>
 <dd>
 
-**symbols:** `List&lt;String&gt;` — Comma separated list of desired commodities symbols (e.g. XAU,XAG,WTI,BRENT) _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -7063,7 +8976,7 @@ CommodityLatestRatesResponse response = client.commodityLatestRates(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**format:** `Optional<CommodityLatestRatesRequestFormat>` — Format of the Response
     
 </dd>
 </dl>
@@ -7071,7 +8984,7 @@ CommodityLatestRatesResponse response = client.commodityLatestRates(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;CommodityLatestRatesRequestFormat&gt;` — Format of the Response _(optional)_
+**symbols:** `Optional<String>` — Comma separated list of desired commodities symbols *(e.g. XAU,XAG,WTI,BRENT)* **Required**
     
 </dd>
 </dl>
@@ -7079,7 +8992,7 @@ CommodityLatestRatesResponse response = client.commodityLatestRates(request);
 <dl>
 <dd>
 
-**updates:** `CommodityLatestRatesRequestUpdates` — Exchange rates update period. Possible values are: (1) 10m - 10 minute update (2) 1m - 1 minute update Required _(required)_
+**updates:** `CommodityLatestRatesRequestUpdates` — Exchange rates update period. Possible values are: (1) `10m` - 10 minute update (2) `1m` - 1 minute update **Required**
     
 </dd>
 </dl>
@@ -7087,29 +9000,33 @@ CommodityLatestRatesResponse response = client.commodityLatestRates(request);
 <dl>
 <dd>
 
-**quote:** `Optional&lt;String&gt;` — Specifies the target currency for the exchange rate; default quote currency is the market currency of commodity (e.g. USD, EUR, INR) _(optional)_
+**quote:** `Optional<String>` — Specifies the target currency for the exchange rate; default quote currency is the market currency of commodity *(e.g. USD, EUR, INR)*
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.commodityHistoricalRates(request) -> CommodityHistoricalRatesResponse</code></summary>
+<details><summary><code>client.commodityHistoricalRates() -> CommodityHistoricalRatesResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Get historical commodity rates for a specific date
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7118,20 +9035,23 @@ Get historical commodity rates for a specific date
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.CommodityHistoricalRatesRequest;
-import com.apifreaks.sdk.types.CommodityHistoricalRatesResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-CommodityHistoricalRatesRequest request = CommodityHistoricalRatesRequest.builder()
+client.commodityHistoricalRates(
+    CommodityHistoricalRatesRequest
+        .builder()
         .apiKey("apiKey")
-        .date("2024-01-01")
-        .symbols(java.util.List.of("XAU"))
-        .build();
-CommodityHistoricalRatesResponse response = client.commodityHistoricalRates(request);
+        .date("2023-01-15")
+        .symbols(
+            Arrays.asList("symbols")
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7143,7 +9063,7 @@ CommodityHistoricalRatesResponse response = client.commodityHistoricalRates(requ
 <dl>
 <dd>
 
-**symbols:** `List&lt;String&gt;` — Comma-separated list of commodity symbols _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -7151,7 +9071,7 @@ CommodityHistoricalRatesResponse response = client.commodityHistoricalRates(requ
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**format:** `Optional<CommodityHistoricalRatesRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -7159,7 +9079,7 @@ CommodityHistoricalRatesResponse response = client.commodityHistoricalRates(requ
 <dl>
 <dd>
 
-**format:** `Optional&lt;CommodityHistoricalRatesRequestFormat&gt;` — Format of the response. _(optional)_
+**date:** `String` — Historical date (YYYY-MM-DD)
     
 </dd>
 </dl>
@@ -7167,29 +9087,33 @@ CommodityHistoricalRatesResponse response = client.commodityHistoricalRates(requ
 <dl>
 <dd>
 
-**date:** `String` — Historical date (YYYY-MM-DD) _(required)_
+**symbols:** `Optional<String>` — Comma-separated list of commodity symbols
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.commodityFluctuation(request) -> CommodityFluctuationResponse</code></summary>
+<details><summary><code>client.commodityFluctuation() -> CommodityFluctuationResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Get commodity price fluctuation data for a time period
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7198,21 +9122,24 @@ Get commodity price fluctuation data for a time period
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.CommodityFluctuationRequest;
-import com.apifreaks.sdk.types.CommodityFluctuationResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-CommodityFluctuationRequest request = CommodityFluctuationRequest.builder()
+client.commodityFluctuation(
+    CommodityFluctuationRequest
+        .builder()
         .apiKey("apiKey")
-        .startDate("startDate")
-        .endDate("endDate")
-        .symbols(java.util.List.of("XAU"))
-        .build();
-CommodityFluctuationResponse response = client.commodityFluctuation(request);
+        .startDate("2023-01-15")
+        .endDate("2023-01-15")
+        .symbols(
+            Arrays.asList("symbols")
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7224,7 +9151,7 @@ CommodityFluctuationResponse response = client.commodityFluctuation(request);
 <dl>
 <dd>
 
-**symbols:** `List&lt;String&gt;` — Comma-separated list of commodity symbols _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -7232,7 +9159,7 @@ CommodityFluctuationResponse response = client.commodityFluctuation(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**format:** `Optional<CommodityFluctuationRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -7240,7 +9167,7 @@ CommodityFluctuationResponse response = client.commodityFluctuation(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;CommodityFluctuationRequestFormat&gt;` — Format of the response. _(optional)_
+**symbols:** `Optional<String>` — Comma-separated list of commodity symbols
     
 </dd>
 </dl>
@@ -7248,7 +9175,7 @@ CommodityFluctuationResponse response = client.commodityFluctuation(request);
 <dl>
 <dd>
 
-**startDate:** `String` — Start date (YYYY-MM-DD) _(required)_
+**startDate:** `String` — Start date (YYYY-MM-DD)
     
 </dd>
 </dl>
@@ -7256,29 +9183,33 @@ CommodityFluctuationResponse response = client.commodityFluctuation(request);
 <dl>
 <dd>
 
-**endDate:** `String` — End date (YYYY-MM-DD) _(required)_
+**endDate:** `String` — End date (YYYY-MM-DD)
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.commodityTimeSeries(request) -> CommodityTimeSeriesResponse</code></summary>
+<details><summary><code>client.commodityTimeSeries() -> CommodityTimeSeriesResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Get commodity rates for a time range
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7287,21 +9218,24 @@ Get commodity rates for a time range
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.CommodityTimeSeriesRequest;
-import com.apifreaks.sdk.types.CommodityTimeSeriesResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-CommodityTimeSeriesRequest request = CommodityTimeSeriesRequest.builder()
+client.commodityTimeSeries(
+    CommodityTimeSeriesRequest
+        .builder()
         .apiKey("apiKey")
-        .startDate("startDate")
-        .endDate("endDate")
-        .symbols(java.util.List.of("XAU"))
-        .build();
-CommodityTimeSeriesResponse response = client.commodityTimeSeries(request);
+        .startDate("2023-01-15")
+        .endDate("2023-01-15")
+        .symbols(
+            Arrays.asList("symbols")
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7313,7 +9247,7 @@ CommodityTimeSeriesResponse response = client.commodityTimeSeries(request);
 <dl>
 <dd>
 
-**symbols:** `List&lt;String&gt;` — Comma-separated list of commodity symbols _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -7321,7 +9255,7 @@ CommodityTimeSeriesResponse response = client.commodityTimeSeries(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**format:** `Optional<CommodityTimeSeriesRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -7329,7 +9263,7 @@ CommodityTimeSeriesResponse response = client.commodityTimeSeries(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;CommodityTimeSeriesRequestFormat&gt;` — Format of the response. _(optional)_
+**symbols:** `Optional<String>` — Comma-separated list of commodity symbols
     
 </dd>
 </dl>
@@ -7337,7 +9271,7 @@ CommodityTimeSeriesResponse response = client.commodityTimeSeries(request);
 <dl>
 <dd>
 
-**startDate:** `String` — Start date (YYYY-MM-DD) _(required)_
+**startDate:** `String` — Start date (YYYY-MM-DD)
     
 </dd>
 </dl>
@@ -7345,29 +9279,33 @@ CommodityTimeSeriesResponse response = client.commodityTimeSeries(request);
 <dl>
 <dd>
 
-**endDate:** `String` — End date (YYYY-MM-DD) _(required)_
+**endDate:** `String` — End date (YYYY-MM-DD)
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.commoditySymbols(request) -> CommoditySymbolsResponse</code></summary>
+<details><summary><code>client.commoditySymbols() -> CommoditySymbolsResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Get list of supported commodities
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7376,18 +9314,19 @@ Get list of supported commodities
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.CommoditySymbolsRequest;
-import com.apifreaks.sdk.types.CommoditySymbolsResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-CommoditySymbolsRequest request = CommoditySymbolsRequest.builder()
+client.commoditySymbols(
+    CommoditySymbolsRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-CommoditySymbolsResponse response = client.commoditySymbols(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7399,7 +9338,7 @@ CommoditySymbolsResponse response = client.commoditySymbols(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -7407,29 +9346,33 @@ CommoditySymbolsResponse response = client.commoditySymbols(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;CommoditySymbolsRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<CommoditySymbolsRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.vatSupportedCountries(request) -> VatSupportedCountriesResponse</code></summary>
+<details><summary><code>client.vatSupportedCountries() -> VatSupportedCountriesResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Retrieves a list of supported countries.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7438,18 +9381,19 @@ Retrieves a list of supported countries.
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.VatSupportedCountriesRequest;
-import com.apifreaks.sdk.types.VatSupportedCountriesResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-VatSupportedCountriesRequest request = VatSupportedCountriesRequest.builder()
+client.vatSupportedCountries(
+    VatSupportedCountriesRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-VatSupportedCountriesResponse response = client.vatSupportedCountries(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7461,7 +9405,7 @@ VatSupportedCountriesResponse response = client.vatSupportedCountries(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -7469,7 +9413,7 @@ VatSupportedCountriesResponse response = client.vatSupportedCountries(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;VatSupportedCountriesRequestFormat&gt;` — Format of the response. Default is JSON. _(optional)_
+**format:** `Optional<VatSupportedCountriesRequestFormat>` — Format of the response. Default is JSON.
     
 </dd>
 </dl>
@@ -7477,29 +9421,33 @@ VatSupportedCountriesResponse response = client.vatSupportedCountries(request);
 <dl>
 <dd>
 
-**type:** `Optional&lt;VatSupportedCountriesRequestType&gt;` — Type of supported country. Supported values: IBAN, SWIFT, VAT. By default, it returns all supported countries for all types. _(optional)_
+**type:** `Optional<VatSupportedCountriesRequestType>` — Which list to return: VAT (`VAT_Supported_Countries_And_States`), IBAN (`IBAN_Supported_Countries`) or SWIFT (`SWIFT_Supported_Countries`). Each value returns only its own list. If omitted (or unknown), all three lists are returned.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.vatRateByIp(request) -> List<VatRateByIpResponseItem></code></summary>
+<details><summary><code>client.vatRateByIp() -> List&amp;lt;VatRateByIpResponseItem&amp;gt;</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Fetches VAT rate based on the specified or originating IP address.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7508,19 +9456,19 @@ Fetches VAT rate based on the specified or originating IP address.
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.VatRateByIpRequest;
-import java.util.List;
-import com.apifreaks.sdk.types.VatRateByIpResponseItem;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-VatRateByIpRequest request = VatRateByIpRequest.builder()
+client.vatRateByIp(
+    VatRateByIpRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-List<VatRateByIpResponseItem> response = client.vatRateByIp(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7532,7 +9480,7 @@ List<VatRateByIpResponseItem> response = client.vatRateByIp(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -7540,7 +9488,7 @@ List<VatRateByIpResponseItem> response = client.vatRateByIp(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;VatRateByIpRequestFormat&gt;` — Specify the desired response format. Options: 'json' (default) or 'xml'. _(optional)_
+**format:** `Optional<VatRateByIpRequestFormat>` — Specify the desired response format. Options: 'json' (default) or 'xml'.
     
 </dd>
 </dl>
@@ -7548,29 +9496,33 @@ List<VatRateByIpResponseItem> response = client.vatRateByIp(request);
 <dl>
 <dd>
 
-**ipAddress:** `Optional&lt;String&gt;` — IPv4 or IPv6 address to look up VAT rate for. If omitted, the originating IP address will be used. _(optional)_
+**ipAddress:** `Optional<String>` — IPv4 or IPv6 address to look up VAT rate for. If omitted, the originating IP address will be used.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.vatRateByCountry(request) -> List<VatRateByCountryResponseItem></code></summary>
+<details><summary><code>client.vatRateByCountry() -> List&amp;lt;VatRateByCountryResponseItem&amp;gt;</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Fetches VAT rates for a single country or state provided via query parameters.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7579,20 +9531,20 @@ Fetches VAT rates for a single country or state provided via query parameters.
 <dl>
 <dd>
 
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.VatRateByCountryRequest;
-import java.util.List;
-import com.apifreaks.sdk.types.VatRateByCountryResponseItem;
+<dl>
+<dd>
 
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-VatRateByCountryRequest request = VatRateByCountryRequest.builder()
+```java
+client.vatRateByCountry(
+    VatRateByCountryRequest
+        .builder()
         .apiKey("apiKey")
         .country("country")
-        .build();
-List<VatRateByCountryResponseItem> response = client.vatRateByCountry(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7604,7 +9556,7 @@ List<VatRateByCountryResponseItem> response = client.vatRateByCountry(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -7612,7 +9564,7 @@ List<VatRateByCountryResponseItem> response = client.vatRateByCountry(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;VatRateByCountryRequestFormat&gt;` — Specify the desired response format. Options: 'json' (default) or 'xml'. _(optional)_
+**format:** `Optional<VatRateByCountryRequestFormat>` — Specify the desired response format. Options: 'json' (default) or 'xml'.
     
 </dd>
 </dl>
@@ -7620,7 +9572,7 @@ List<VatRateByCountryResponseItem> response = client.vatRateByCountry(request);
 <dl>
 <dd>
 
-**country:** `String` — Country identifier in Alpha-2 (PK), Alpha-3 (PAK), or full name (Pakistan). Combine with the optional &quot;state&quot; query for sub-national VAT; values are case-insensitive and may use underscores instead of spaces. _(required)_
+**country:** `String` — Country identifier in Alpha-2 (PK), Alpha-3 (PAK), or full name (Pakistan). Combine with the optional "state" query for sub-national VAT; values are case-insensitive and may use underscores instead of spaces.
     
 </dd>
 </dl>
@@ -7628,19 +9580,19 @@ List<VatRateByCountryResponseItem> response = client.vatRateByCountry(request);
 <dl>
 <dd>
 
-**state:** `Optional&lt;String&gt;` — Optional state or region in Alpha-2 (NY) or full name (New_York). Use with &quot;country&quot; for state-level VAT; values are case-insensitive and may use underscores. _(optional)_
+**state:** `Optional<String>` — Optional state or region in Alpha-2 (NY) or full name (New_York). Use with "country" for state-level VAT; values are case-insensitive and may use underscores.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.bulkVatRateByCountry(request) -> BulkVatRateByCountryResponse</code></summary>
+<details><summary><code>client.bulkVatRateByCountry(request) -> List&amp;lt;BulkVatRateByCountryResponseItem&amp;gt;</code></summary>
 <dl>
 <dd>
 
@@ -7649,8 +9601,12 @@ List<VatRateByCountryResponseItem> response = client.vatRateByCountry(request);
 <dl>
 <dd>
 
-Retrieves VAT details for multiple countries or country-state combinations in a single request. Maximum of <code>100</code> entries per request are allowed.
+<dl>
+<dd>
 
+Retrieves VAT details for multiple countries or country-state combinations in a single request. Maximum of `100` entries per request are allowed.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7659,19 +9615,32 @@ Retrieves VAT details for multiple countries or country-state combinations in a 
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.BulkVatRateByCountryRequest;
-import com.apifreaks.sdk.types.BulkVatRateByCountryResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-BulkVatRateByCountryRequest request = BulkVatRateByCountryRequest.builder()
+client.bulkVatRateByCountry(
+    BulkVatRateByCountryRequest
+        .builder()
         .apiKey("apiKey")
-        .countries(java.util.List.of())
-        .build();
-BulkVatRateByCountryResponse response = client.bulkVatRateByCountry(request);
+        .countries(
+            Arrays.asList(
+                BulkVatRateByCountryRequestCountriesItem
+                    .builder()
+                    .country("PAK")
+                    .build(),
+                BulkVatRateByCountryRequestCountriesItem
+                    .builder()
+                    .country("United_States")
+                    .state("New_York")
+                    .build()
+            )
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7683,7 +9652,7 @@ BulkVatRateByCountryResponse response = client.bulkVatRateByCountry(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -7691,7 +9660,7 @@ BulkVatRateByCountryResponse response = client.bulkVatRateByCountry(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;BulkVatRateByCountryRequestFormat&gt;` — No description provided. _(optional)_
+**format:** `Optional<BulkVatRateByCountryRequestFormat>` — Specify the desired response format. Options: 'json' (default) or 'xml'.
     
 </dd>
 </dl>
@@ -7699,29 +9668,33 @@ BulkVatRateByCountryResponse response = client.bulkVatRateByCountry(request);
 <dl>
 <dd>
 
-**countries:** `List<BulkVatRateByCountryRequestCountriesItem&gt;` — Specify the desired response format. Options: 'json' (default) or 'xml'. _(required)_
+**countries:** `List<BulkVatRateByCountryRequestCountriesItem>` 
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.vatValidate(request) -> VatValidateResponse</code></summary>
+<details><summary><code>client.vatValidate() -> VatValidateResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Validates an EU or UK VAT number and returns registration status details.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7730,19 +9703,20 @@ Validates an EU or UK VAT number and returns registration status details.
 <dl>
 <dd>
 
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.VatValidateRequest;
-import com.apifreaks.sdk.types.VatValidateResponse;
+<dl>
+<dd>
 
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-VatValidateRequest request = VatValidateRequest.builder()
+```java
+client.vatValidate(
+    VatValidateRequest
+        .builder()
         .apiKey("apiKey")
         .vatNumber("vatNumber")
-        .build();
-VatValidateResponse response = client.vatValidate(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7754,7 +9728,7 @@ VatValidateResponse response = client.vatValidate(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -7762,7 +9736,7 @@ VatValidateResponse response = client.vatValidate(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;VatValidateRequestFormat&gt;` — Specify the desired response format. Options: 'json' (default) or 'xml'. _(optional)_
+**format:** `Optional<VatValidateRequestFormat>` — Specify the desired response format. Options: 'json' (default) or 'xml'.
     
 </dd>
 </dl>
@@ -7770,7 +9744,7 @@ VatValidateResponse response = client.vatValidate(request);
 <dl>
 <dd>
 
-**vatNumber:** `String` — EU or UK VAT number to validate. _(required)_
+**vatNumber:** `String` — EU or UK VAT number to validate.
     
 </dd>
 </dl>
@@ -7778,29 +9752,33 @@ VatValidateResponse response = client.vatValidate(request);
 <dl>
 <dd>
 
-**requesterVatNumber:** `Optional&lt;String&gt;` — Requester EU or UK VAT number. _(optional)_
+**requesterVatNumber:** `Optional<String>` — Requester EU or UK VAT number.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.ibanValidate(request) -> IbanValidateResponse</code></summary>
+<details><summary><code>client.ibanValidate() -> IbanValidateResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Checks an IBAN for structural validity, checksum accuracy, and bank metadata.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7809,19 +9787,20 @@ Checks an IBAN for structural validity, checksum accuracy, and bank metadata.
 <dl>
 <dd>
 
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.IbanValidateRequest;
-import com.apifreaks.sdk.types.IbanValidateResponse;
+<dl>
+<dd>
 
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-IbanValidateRequest request = IbanValidateRequest.builder()
+```java
+client.ibanValidate(
+    IbanValidateRequest
+        .builder()
         .apiKey("apiKey")
         .iban("iban")
-        .build();
-IbanValidateResponse response = client.ibanValidate(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7833,7 +9812,7 @@ IbanValidateResponse response = client.ibanValidate(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -7841,7 +9820,7 @@ IbanValidateResponse response = client.ibanValidate(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;IbanValidateRequestFormat&gt;` — Specify the desired response format. Options: 'json' (default) or 'xml'. _(optional)_
+**format:** `Optional<IbanValidateRequestFormat>` — Specify the desired response format. Options: 'json' (default) or 'xml'.
     
 </dd>
 </dl>
@@ -7849,29 +9828,33 @@ IbanValidateResponse response = client.ibanValidate(request);
 <dl>
 <dd>
 
-**iban:** `String` — IBAN to validate. _(required)_
+**iban:** `String` — IBAN to validate.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.swiftCodeFind(request) -> List<String></code></summary>
+<details><summary><code>client.swiftCodeFind() -> List&amp;lt;String&amp;gt;</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Fetches SWIFT codes for a given country, bank, and city.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7880,18 +9863,19 @@ Fetches SWIFT codes for a given country, bank, and city.
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.SwiftCodeFindRequest;
-import java.util.List;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-SwiftCodeFindRequest request = SwiftCodeFindRequest.builder()
+client.swiftCodeFind(
+    SwiftCodeFindRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-List<String> response = client.swiftCodeFind(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7903,7 +9887,7 @@ List<String> response = client.swiftCodeFind(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -7911,7 +9895,7 @@ List<String> response = client.swiftCodeFind(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;SwiftCodeFindRequestFormat&gt;` — Specify the desired response format. Options: 'json' (default) or 'xml'. _(optional)_
+**format:** `Optional<SwiftCodeFindRequestFormat>` — Specify the desired response format. Options: 'json' (default) or 'xml'.
     
 </dd>
 </dl>
@@ -7919,7 +9903,7 @@ List<String> response = client.swiftCodeFind(request);
 <dl>
 <dd>
 
-**country:** `Optional&lt;String&gt;` — Country name (accepts full name, e.g., Pakistan, United States). If only the country parameter is supplied, lists all banks in the country. _(optional)_
+**country:** `Optional<String>` — Country name (accepts full name, e.g., Pakistan, United States). If only the country parameter is supplied, lists all banks in the country.
     
 </dd>
 </dl>
@@ -7927,7 +9911,7 @@ List<String> response = client.swiftCodeFind(request);
 <dl>
 <dd>
 
-**bank:** `Optional&lt;String&gt;` — Bank name (upper case) used to filter SWIFT codes. Should be used together with the country parameter. If only country and bank are provided (without city), returns the list of cities for that bank. _(optional)_
+**bank:** `Optional<String>` — Bank name (upper case) used to filter SWIFT codes. Should be used together with the country parameter. If only country and bank are provided (without city), returns the list of cities for that bank.
     
 </dd>
 </dl>
@@ -7935,19 +9919,19 @@ List<String> response = client.swiftCodeFind(request);
 <dl>
 <dd>
 
-**city:** `Optional&lt;String&gt;` — Gives SWIFT codes for a bank. Optionally specify the city (upper case) to narrow results to a specific city for that bank. _(optional)_
+**city:** `Optional<String>` — Gives SWIFT codes for a bank. Optionally specify the city (upper case) to narrow results to a specific city for that bank.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.swiftCodeLookup(request) -> SwiftCodeLookupResponse</code></summary>
+<details><summary><code>client.swiftCodeLookup() -> SwiftCodeLookupResponse</code></summary>
 <dl>
 <dd>
 
@@ -7956,8 +9940,12 @@ List<String> response = client.swiftCodeFind(request);
 <dl>
 <dd>
 
-Fetches detailed information about a SWIFT code.
+<dl>
+<dd>
 
+Fetches detailed information about a SWIFT code.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7966,19 +9954,20 @@ Fetches detailed information about a SWIFT code.
 <dl>
 <dd>
 
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.SwiftCodeLookupRequest;
-import com.apifreaks.sdk.types.SwiftCodeLookupResponse;
+<dl>
+<dd>
 
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-SwiftCodeLookupRequest request = SwiftCodeLookupRequest.builder()
+```java
+client.swiftCodeLookup(
+    SwiftCodeLookupRequest
+        .builder()
         .apiKey("apiKey")
         .swiftCode("swiftCode")
-        .build();
-SwiftCodeLookupResponse response = client.swiftCodeLookup(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7990,7 +9979,7 @@ SwiftCodeLookupResponse response = client.swiftCodeLookup(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -7998,7 +9987,7 @@ SwiftCodeLookupResponse response = client.swiftCodeLookup(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;SwiftCodeLookupRequestFormat&gt;` — Specify the desired response format. Options: 'json' (default) or 'xml'. _(optional)_
+**format:** `Optional<SwiftCodeLookupRequestFormat>` — Specify the desired response format. Options: 'json' (default) or 'xml'.
     
 </dd>
 </dl>
@@ -8006,13 +9995,83 @@ SwiftCodeLookupResponse response = client.swiftCodeLookup(request);
 <dl>
 <dd>
 
-**swiftCode:** `String` — SWIFT/BIC code to lookup (must be 8 or 11 characters). _(required)_
+**swiftCode:** `String` — SWIFT/BIC code to lookup (must be 8 or 11 characters).
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.zipcodeLookup() -> ZipcodeLookupResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.zipcodeLookup(
+    ZipcodeLookupRequest
+        .builder()
+        .apiKey("apiKey")
+        .code("code")
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
 
+<dl>
+<dd>
+
+**format:** `Optional<ZipcodeLookupRequestFormat>` — Format of the response.
+    
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**code:** `String` — Comma separated list of postal / zip codes. Max. 100 values.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**country:** `Optional<String>` — Country code in ISO 3166-1 alpha-2 format. If not provided, search results will be returned from all countries.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
 
 </dd>
 </dl>
@@ -8027,8 +10086,12 @@ SwiftCodeLookupResponse response = client.swiftCodeLookup(request);
 <dl>
 <dd>
 
-Validates a bulk of ZIP/postal codes and returns result for each. Maximum <code>100</code> ZIP/postal codes per request.
+<dl>
+<dd>
 
+Validates a bulk of ZIP/postal codes and returns result for each. Maximum `100` ZIP/postal codes per request.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8037,19 +10100,22 @@ Validates a bulk of ZIP/postal codes and returns result for each. Maximum <code>
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.BulkZipcodeLookupRequest;
-import com.apifreaks.sdk.types.BulkZipcodeLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-BulkZipcodeLookupRequest request = BulkZipcodeLookupRequest.builder()
+client.bulkZipcodeLookup(
+    BulkZipcodeLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .codes(java.util.List.of("value"))
-        .build();
-BulkZipcodeLookupResponse response = client.bulkZipcodeLookup(request);
+        .codes(
+            Arrays.asList("codes")
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8061,7 +10127,7 @@ BulkZipcodeLookupResponse response = client.bulkZipcodeLookup(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -8069,7 +10135,7 @@ BulkZipcodeLookupResponse response = client.bulkZipcodeLookup(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;BulkZipcodeLookupRequestFormat&gt;` — No description provided. _(optional)_
+**format:** `Optional<BulkZipcodeLookupRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -8077,7 +10143,7 @@ BulkZipcodeLookupResponse response = client.bulkZipcodeLookup(request);
 <dl>
 <dd>
 
-**codes:** `List<String&gt;` — Comma separated list of postal / zip codes. Max. 100 values. _(required)_
+**codes:** `List<String>` — Comma separated list of postal / zip codes. Max. 100 values.
     
 </dd>
 </dl>
@@ -8085,13 +10151,296 @@ BulkZipcodeLookupResponse response = client.bulkZipcodeLookup(request);
 <dl>
 <dd>
 
-**country:** `Optional&lt;String&gt;` — Country code in ISO 3166-1 alpha-2 format. If not provided, search results will be returned from all countries. _(optional)_
+**country:** `Optional<String>` — Country code in ISO 3166-1 alpha-2 format. If not provided, search results will be returned from all countries.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.zipcodeSearchByCity() -> ZipcodeSearchByCityResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.zipcodeSearchByCity(
+    ZipcodeSearchByCityRequest
+        .builder()
+        .apiKey("apiKey")
+        .city("city")
+        .country("country")
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
 
+<dl>
+<dd>
+
+**format:** `Optional<ZipcodeSearchByCityRequestFormat>` — Format of the response.
+    
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**city:** `String` — Name of the city in which we want to find zipcodes in.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**country:** `String` — Country code in ISO 3166-1 alpha-2 format.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**stateName:** `Optional<String>` — Name of the state or province associated with the country.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `Optional<Integer>` — Page number to retrieve paginated results.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.zipcodeSearchByRegion() -> ZipcodeSearchByRegionResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.zipcodeSearchByRegion(
+    ZipcodeSearchByRegionRequest
+        .builder()
+        .apiKey("apiKey")
+        .country("country")
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<ZipcodeSearchByRegionRequestFormat>` — Format of the response.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**country:** `String` — Country code in ISO 3166-1 alpha-2 format.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**region:** `Optional<String>` — Name of the region, state or province associated with the country. Either region or region_code is required; region_code takes priority if both are given.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `Optional<Integer>` — Page no. to retrieve paginated results.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**regionCode:** `Optional<String>` — ISO code of the region, state, or province associated with the country. Either region or region_code is required. region_code takes priority if both are given.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.zipcodeSearchByRadius() -> ZipcodeSearchByRadiusResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.zipcodeSearchByRadius(
+    ZipcodeSearchByRadiusRequest
+        .builder()
+        .apiKey("apiKey")
+        .radius(1.1f)
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<ZipcodeSearchByRadiusRequestFormat>` — Format of the response.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**code:** `Optional<String>` — Postal/Zip code to be used as the center point for the search.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lat:** `Optional<Float>` — Latitude coordinate for the base location.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**long_:** `Optional<Float>` — Longitude coordinate for the base location.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**country:** `Optional<String>` — Country code in ISO 3166-1 alpha-2 format. Required only when using the code parameter.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**radius:** `Float` — Search radius for the query. The maximum allowed values are: - 100 km - 100 mi - 109361 yd - 100000 m - 328084 ft - 3937007.75 in
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**unit:** `Optional<ZipcodeSearchByRadiusRequestUnit>` — Supported distance units are m, km, mi, ft, yd, in.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `Optional<Integer>` — Page no. to retrieve paginated results.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
 
 </dd>
 </dl>
@@ -8106,8 +10455,12 @@ BulkZipcodeLookupResponse response = client.bulkZipcodeLookup(request);
 <dl>
 <dd>
 
-Get distance between postal codes. Maximum <code>100</code> postal codes per request.
+<dl>
+<dd>
 
+Get distance between postal codes. Maximum `100` postal codes per request.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8116,20 +10469,23 @@ Get distance between postal codes. Maximum <code>100</code> postal codes per req
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.ZipcodeDistanceRequest;
-import com.apifreaks.sdk.types.ZipcodeDistanceResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-ZipcodeDistanceRequest request = ZipcodeDistanceRequest.builder()
+client.zipcodeDistance(
+    ZipcodeDistanceRequest
+        .builder()
         .apiKey("apiKey")
-        .compare(java.util.List.of("value"))
         .country("country")
-        .build();
-ZipcodeDistanceResponse response = client.zipcodeDistance(request);
+        .compare(
+            Arrays.asList("compare")
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8141,7 +10497,7 @@ ZipcodeDistanceResponse response = client.zipcodeDistance(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -8149,7 +10505,7 @@ ZipcodeDistanceResponse response = client.zipcodeDistance(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;ZipcodeDistanceRequestFormat&gt;` — No description provided. _(optional)_
+**format:** `Optional<ZipcodeDistanceRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -8157,7 +10513,7 @@ ZipcodeDistanceResponse response = client.zipcodeDistance(request);
 <dl>
 <dd>
 
-**compare:** `List<String&gt;` — Comma separated list of postal / zip codes with which base point is compared w.r.t. Max 100 zip codes can be provided. _(required)_
+**compare:** `List<String>` — Comma separated list of postal / zip codes with which base point is compared w.r.t. Max 100 zip codes can be provided.
     
 </dd>
 </dl>
@@ -8165,7 +10521,7 @@ ZipcodeDistanceResponse response = client.zipcodeDistance(request);
 <dl>
 <dd>
 
-**code:** `Optional&lt;String&gt;` — Postal/Zip code to be used as the base point. _(optional)_
+**code:** `Optional<String>` — Postal/Zip code to be used as the base point.
     
 </dd>
 </dl>
@@ -8173,7 +10529,7 @@ ZipcodeDistanceResponse response = client.zipcodeDistance(request);
 <dl>
 <dd>
 
-**lat:** `Optional&lt;Double&gt;` — Latitude coordinate for the base location. _(optional)_
+**lat:** `Optional<Double>` — Latitude coordinate for the base location.
     
 </dd>
 </dl>
@@ -8181,7 +10537,7 @@ ZipcodeDistanceResponse response = client.zipcodeDistance(request);
 <dl>
 <dd>
 
-**long_:** `Optional&lt;Double&gt;` — No description provided. _(optional)_
+**long_:** `Optional<Double>` — Longitude coordinate for the base location.
     
 </dd>
 </dl>
@@ -8189,7 +10545,7 @@ ZipcodeDistanceResponse response = client.zipcodeDistance(request);
 <dl>
 <dd>
 
-**country:** `String` — Country code in ISO 3166-1 alpha-2 format. _(required)_
+**country:** `String` — Country code in ISO 3166-1 alpha-2 format.
     
 </dd>
 </dl>
@@ -8197,13 +10553,13 @@ ZipcodeDistanceResponse response = client.zipcodeDistance(request);
 <dl>
 <dd>
 
-**unit:** `Optional&lt;ZipcodeDistanceRequestUnit&gt;` — Supported distance units are m, km, mi, ft, yd, in. _(optional)_
+**unit:** `Optional<ZipcodeDistanceRequestUnit>` — Supported distance units are m, km, mi, ft, yd, in.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
@@ -8218,8 +10574,12 @@ ZipcodeDistanceResponse response = client.zipcodeDistance(request);
 <dl>
 <dd>
 
-Get matching ZIP/postal code pairs within a specified distance. Maximum <code>100</code> postal codes per request.
+<dl>
+<dd>
 
+Get matching ZIP/postal code pairs within a specified distance. Maximum `100` postal codes per request.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8228,20 +10588,23 @@ Get matching ZIP/postal code pairs within a specified distance. Maximum <code>10
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.ZipcodeDistanceMatchRequest;
-import com.apifreaks.sdk.types.ZipcodeDistanceMatchResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-ZipcodeDistanceMatchRequest request = ZipcodeDistanceMatchRequest.builder()
+client.zipcodeDistanceMatch(
+    ZipcodeDistanceMatchRequest
+        .builder()
         .apiKey("apiKey")
-        .codes(java.util.List.of("value"))
         .country("country")
-        .build();
-ZipcodeDistanceMatchResponse response = client.zipcodeDistanceMatch(request);
+        .codes(
+            Arrays.asList("codes")
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8253,7 +10616,7 @@ ZipcodeDistanceMatchResponse response = client.zipcodeDistanceMatch(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -8261,7 +10624,7 @@ ZipcodeDistanceMatchResponse response = client.zipcodeDistanceMatch(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;ZipcodeDistanceMatchRequestFormat&gt;` — No description provided. _(optional)_
+**format:** `Optional<ZipcodeDistanceMatchRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -8269,7 +10632,7 @@ ZipcodeDistanceMatchResponse response = client.zipcodeDistanceMatch(request);
 <dl>
 <dd>
 
-**codes:** `List<String&gt;` — Comma-separated list of postal/zip codes. Maximum 100 values allowed. _(required)_
+**codes:** `List<String>` — Comma-separated list of postal/zip codes. Maximum 100 values allowed.
     
 </dd>
 </dl>
@@ -8277,7 +10640,7 @@ ZipcodeDistanceMatchResponse response = client.zipcodeDistanceMatch(request);
 <dl>
 <dd>
 
-**country:** `String` — Country code in ISO 3166-1 alpha-2 format. _(required)_
+**country:** `String` — Country code in ISO 3166-1 alpha-2 format.
     
 </dd>
 </dl>
@@ -8285,7 +10648,7 @@ ZipcodeDistanceMatchResponse response = client.zipcodeDistanceMatch(request);
 <dl>
 <dd>
 
-**distance:** `Optional&lt;Float&gt;` — Maximum allowed distance between postal code pairs. _(optional)_
+**distance:** `Optional<Float>` — Maximum allowed distance between postal code pairs.
     
 </dd>
 </dl>
@@ -8293,19 +10656,19 @@ ZipcodeDistanceMatchResponse response = client.zipcodeDistanceMatch(request);
 <dl>
 <dd>
 
-**unit:** `Optional&lt;ZipcodeDistanceMatchRequestUnit&gt;` — Supported distance units are m, km, mi, ft, yd, in. _(optional)_
+**unit:** `Optional<ZipcodeDistanceMatchRequestUnit>` — Supported distance units are m, km, mi, ft, yd, in.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.currentWeather(request) -> CurrentWeatherResponse</code></summary>
+<details><summary><code>client.currentWeather() -> CurrentWeatherResponse</code></summary>
 <dl>
 <dd>
 
@@ -8314,8 +10677,12 @@ ZipcodeDistanceMatchResponse response = client.zipcodeDistanceMatch(request);
 <dl>
 <dd>
 
-Get current weather data including temperature, humidity, precipitation, wind conditions, atmospheric pressure, and air quality for any location. Accepts city names, coordinates, or IP addresses. Also includes astronomy data and timezone-aware timestamps.
+<dl>
+<dd>
 
+Get current weather data including temperature, humidity, precipitation, wind conditions, atmospheric pressure, and air quality for any location. Accepts city names, coordinates, or IP addresses. Also includes astronomy data and timezone-aware timestamps.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8324,18 +10691,19 @@ Get current weather data including temperature, humidity, precipitation, wind co
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.CurrentWeatherRequest;
-import com.apifreaks.sdk.types.CurrentWeatherResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-CurrentWeatherRequest request = CurrentWeatherRequest.builder()
+client.currentWeather(
+    CurrentWeatherRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-CurrentWeatherResponse response = client.currentWeather(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8347,7 +10715,7 @@ CurrentWeatherResponse response = client.currentWeather(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -8355,7 +10723,7 @@ CurrentWeatherResponse response = client.currentWeather(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;CurrentWeatherRequestFormat&gt;` — Response format returned by the API. _(optional)_
+**format:** `Optional<CurrentWeatherRequestFormat>` — Response format returned by the API. Only JSON is supported.
     
 </dd>
 </dl>
@@ -8363,7 +10731,7 @@ CurrentWeatherResponse response = client.currentWeather(request);
 <dl>
 <dd>
 
-**location:** `Optional&lt;String&gt;` — City name, place name, or full address. _(optional)_
+**location:** `Optional<String>` — City name, place name, or full address.
     
 </dd>
 </dl>
@@ -8371,7 +10739,7 @@ CurrentWeatherResponse response = client.currentWeather(request);
 <dl>
 <dd>
 
-**lat:** `Optional&lt;Double&gt;` — Latitude of the location. _(optional)_
+**lat:** `Optional<Double>` — Latitude of the location.
     
 </dd>
 </dl>
@@ -8379,7 +10747,7 @@ CurrentWeatherResponse response = client.currentWeather(request);
 <dl>
 <dd>
 
-**long_:** `Optional&lt;Double&gt;` — No description provided. _(optional)_
+**long_:** `Optional<Double>` — Longitude of the location.
     
 </dd>
 </dl>
@@ -8387,7 +10755,7 @@ CurrentWeatherResponse response = client.currentWeather(request);
 <dl>
 <dd>
 
-**ip:** `Optional&lt;String&gt;` — IP(v4 or v6) address for location inference. _(optional)_
+**ip:** `Optional<String>` — IP(v4 or v6) address for location inference.
     
 </dd>
 </dl>
@@ -8395,13 +10763,13 @@ CurrentWeatherResponse response = client.currentWeather(request);
 <dl>
 <dd>
 
-**timezone:** `Optional&lt;String&gt;` — Timezone for the results. _(optional)_
+**timezone:** `Optional<String>` — Timezone for the results.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
@@ -8416,8 +10784,12 @@ CurrentWeatherResponse response = client.currentWeather(request);
 <dl>
 <dd>
 
-Retrieve current weather conditions for up to <code>50 locations</code> in a single request. A maximum of 50 locations (city names, IP addresses, or geographic coordinates) can be included in the request body.
+<dl>
+<dd>
 
+Retrieve current weather conditions for up to `50 locations` in a single request. A maximum of 50 locations (city names, IP addresses, or geographic coordinates) can be included in the request body.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8426,19 +10798,40 @@ Retrieve current weather conditions for up to <code>50 locations</code> in a sin
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.BulkCurrentWeatherRequest;
-import com.apifreaks.sdk.types.BulkCurrentWeatherResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-BulkCurrentWeatherRequest request = BulkCurrentWeatherRequest.builder()
+client.bulkCurrentWeather(
+    BulkCurrentWeatherRequest
+        .builder()
         .apiKey("apiKey")
-        .locations(java.util.List.of("London"))
-        .build();
-BulkCurrentWeatherResponse response = client.bulkCurrentWeather(request);
+        .locations(
+            Arrays.asList(
+                BulkCurrentWeatherRequestLocationsItem
+                    .builder()
+                    .location("lahore")
+                    .build(),
+                BulkCurrentWeatherRequestLocationsItem
+                    .builder()
+                    .lat(32.5)
+                    .long_(74.5)
+                    .build(),
+                BulkCurrentWeatherRequestLocationsItem
+                    .builder()
+                    .ip("8.8.8.8")
+                    .build(),
+                BulkCurrentWeatherRequestLocationsItem
+                    .builder()
+                    .location("seoul")
+                    .build()
+            )
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8450,7 +10843,7 @@ BulkCurrentWeatherResponse response = client.bulkCurrentWeather(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -8458,7 +10851,7 @@ BulkCurrentWeatherResponse response = client.bulkCurrentWeather(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;BulkCurrentWeatherRequestFormat&gt;` — No description provided. _(optional)_
+**format:** `Optional<BulkCurrentWeatherRequestFormat>` — Response format returned by the API. Only JSON is supported.
     
 </dd>
 </dl>
@@ -8466,7 +10859,7 @@ BulkCurrentWeatherResponse response = client.bulkCurrentWeather(request);
 <dl>
 <dd>
 
-**timezone:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**timezone:** `Optional<String>` — Timezone for the results.
     
 </dd>
 </dl>
@@ -8474,29 +10867,33 @@ BulkCurrentWeatherResponse response = client.bulkCurrentWeather(request);
 <dl>
 <dd>
 
-**locations:** `List<BulkCurrentWeatherRequestLocationsItem&gt;` — Array of locations to fetch weather data for _(required)_
+**locations:** `List<BulkCurrentWeatherRequestLocationsItem>` — Array of locations to fetch weather data for
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.weatherForecast(request) -> WeatherForecastResponse</code></summary>
+<details><summary><code>client.weatherForecast() -> WeatherForecastResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Access comprehensive weather forecasts with customizable precision - choose from daily overviews, hourly breakdowns, or even minute-by-minute data. Configure your date ranges or use the default 7-day forecast for standard weather planning.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8505,18 +10902,19 @@ Access comprehensive weather forecasts with customizable precision - choose from
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.WeatherForecastRequest;
-import com.apifreaks.sdk.types.WeatherForecastResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-WeatherForecastRequest request = WeatherForecastRequest.builder()
+client.weatherForecast(
+    WeatherForecastRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-WeatherForecastResponse response = client.weatherForecast(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8528,7 +10926,7 @@ WeatherForecastResponse response = client.weatherForecast(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -8536,7 +10934,7 @@ WeatherForecastResponse response = client.weatherForecast(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;WeatherForecastRequestFormat&gt;` — Response format returned by the API. _(optional)_
+**format:** `Optional<WeatherForecastRequestFormat>` — Response format returned by the API. Only JSON is supported.
     
 </dd>
 </dl>
@@ -8544,7 +10942,7 @@ WeatherForecastResponse response = client.weatherForecast(request);
 <dl>
 <dd>
 
-**startDate:** `Optional&lt;String&gt;` — Start date for the forecast in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between startDate and endDate must not exceed 16 days. _(optional)_
+**startDate:** `Optional<String>` — Start date for the forecast in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between startDate and endDate must not exceed 16 days.
     
 </dd>
 </dl>
@@ -8552,7 +10950,7 @@ WeatherForecastResponse response = client.weatherForecast(request);
 <dl>
 <dd>
 
-**endDate:** `Optional&lt;String&gt;` — End date for the forecast in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between startDate and endDate must not exceed 16 days. _(optional)_
+**endDate:** `Optional<String>` — End date for the forecast in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between startDate and endDate must not exceed 16 days.
     
 </dd>
 </dl>
@@ -8560,7 +10958,7 @@ WeatherForecastResponse response = client.weatherForecast(request);
 <dl>
 <dd>
 
-**forecastDays:** `Optional&lt;Integer&gt;` — Number of days for the forecast, from 1 to 16. Default is 7. Maximum value is 16. _(optional)_
+**forecastDays:** `Optional<Integer>` — Number of days for the forecast, from 1 to 16. Default is 7. Maximum value is 16.
     
 </dd>
 </dl>
@@ -8568,7 +10966,7 @@ WeatherForecastResponse response = client.weatherForecast(request);
 <dl>
 <dd>
 
-**location:** `Optional&lt;String&gt;` — City name, place name, or full address. _(optional)_
+**location:** `Optional<String>` — City name, place name, or full address.
     
 </dd>
 </dl>
@@ -8576,7 +10974,7 @@ WeatherForecastResponse response = client.weatherForecast(request);
 <dl>
 <dd>
 
-**lat:** `Optional&lt;Double&gt;` — Latitude of the location. _(optional)_
+**lat:** `Optional<Double>` — Latitude of the location.
     
 </dd>
 </dl>
@@ -8584,7 +10982,7 @@ WeatherForecastResponse response = client.weatherForecast(request);
 <dl>
 <dd>
 
-**long_:** `Optional&lt;Double&gt;` — No description provided. _(optional)_
+**long_:** `Optional<Double>` — Longitude of the location.
     
 </dd>
 </dl>
@@ -8592,7 +10990,7 @@ WeatherForecastResponse response = client.weatherForecast(request);
 <dl>
 <dd>
 
-**ip:** `Optional&lt;String&gt;` — IP(v4 or v6) address for location inference. _(optional)_
+**ip:** `Optional<String>` — IP(v4 or v6) address for location inference.
     
 </dd>
 </dl>
@@ -8600,7 +10998,7 @@ WeatherForecastResponse response = client.weatherForecast(request);
 <dl>
 <dd>
 
-**precision:** `Optional&lt;WeatherForecastRequestPrecision&gt;` — Precision of the forecast data. _(optional)_
+**precision:** `Optional<WeatherForecastRequestPrecision>` — Precision of the forecast data.
     
 </dd>
 </dl>
@@ -8608,29 +11006,33 @@ WeatherForecastResponse response = client.weatherForecast(request);
 <dl>
 <dd>
 
-**timezone:** `Optional&lt;String&gt;` — Timezone for the results. _(optional)_
+**timezone:** `Optional<String>` — Timezone for the results.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.historicalWeather(request) -> HistoricalWeatherResponse</code></summary>
+<details><summary><code>client.historicalWeather() -> HistoricalWeatherResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Access past weather conditions for specific dates with records going back to 1940. Retrieve comprehensive historical data with both daily and hourly precision options.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8639,19 +11041,20 @@ Access past weather conditions for specific dates with records going back to 194
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.HistoricalWeatherRequest;
-import com.apifreaks.sdk.types.HistoricalWeatherResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-HistoricalWeatherRequest request = HistoricalWeatherRequest.builder()
+client.historicalWeather(
+    HistoricalWeatherRequest
+        .builder()
         .apiKey("apiKey")
-        .date("2024-01-01")
-        .build();
-HistoricalWeatherResponse response = client.historicalWeather(request);
+        .date("2023-01-15")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8663,7 +11066,7 @@ HistoricalWeatherResponse response = client.historicalWeather(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -8671,7 +11074,7 @@ HistoricalWeatherResponse response = client.historicalWeather(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;HistoricalWeatherRequestFormat&gt;` — Response format returned by the API. _(optional)_
+**format:** `Optional<HistoricalWeatherRequestFormat>` — Response format returned by the API. Only JSON is supported.
     
 </dd>
 </dl>
@@ -8679,7 +11082,7 @@ HistoricalWeatherResponse response = client.historicalWeather(request);
 <dl>
 <dd>
 
-**date:** `String` — Specific date for which to fetch weather data in YYYY-MM-DD format. Historical dates must be past dates only. Current or future dates are not allowed for historical data. Data available from 1940 onwards. _(required)_
+**date:** `String` — Specific date for which to fetch weather data in YYYY-MM-DD format. Historical dates must be past dates only. Current or future dates are not allowed for historical data. Data available from 1940 onwards.
     
 </dd>
 </dl>
@@ -8687,7 +11090,7 @@ HistoricalWeatherResponse response = client.historicalWeather(request);
 <dl>
 <dd>
 
-**location:** `Optional&lt;String&gt;` — City name, place name, or full address. _(optional)_
+**location:** `Optional<String>` — City name, place name, or full address.
     
 </dd>
 </dl>
@@ -8695,7 +11098,7 @@ HistoricalWeatherResponse response = client.historicalWeather(request);
 <dl>
 <dd>
 
-**lat:** `Optional&lt;Double&gt;` — Latitude of the location. _(optional)_
+**lat:** `Optional<Double>` — Latitude of the location.
     
 </dd>
 </dl>
@@ -8703,7 +11106,7 @@ HistoricalWeatherResponse response = client.historicalWeather(request);
 <dl>
 <dd>
 
-**long_:** `Optional&lt;Double&gt;` — No description provided. _(optional)_
+**long_:** `Optional<Double>` — Longitude of the location.
     
 </dd>
 </dl>
@@ -8711,7 +11114,7 @@ HistoricalWeatherResponse response = client.historicalWeather(request);
 <dl>
 <dd>
 
-**ip:** `Optional&lt;String&gt;` — IP(v4 or v6) address for location inference. _(optional)_
+**ip:** `Optional<String>` — IP(v4 or v6) address for location inference.
     
 </dd>
 </dl>
@@ -8719,7 +11122,7 @@ HistoricalWeatherResponse response = client.historicalWeather(request);
 <dl>
 <dd>
 
-**precision:** `Optional&lt;HistoricalWeatherRequestPrecision&gt;` — Precision of the historical data. Note: 'daily' returns daily aggregates, 'hourly' returns hourly data. _(optional)_
+**precision:** `Optional<HistoricalWeatherRequestPrecision>` — Precision of the historical data. **Note:** 'daily' returns daily aggregates, 'hourly' returns hourly data.
     
 </dd>
 </dl>
@@ -8727,29 +11130,33 @@ HistoricalWeatherResponse response = client.historicalWeather(request);
 <dl>
 <dd>
 
-**timezone:** `Optional&lt;String&gt;` — Timezone for the results. _(optional)_
+**timezone:** `Optional<String>` — Timezone for the results.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.weatherTimeSeries(request) -> WeatherTimeSeriesResponse</code></summary>
+<details><summary><code>client.weatherTimeSeries() -> WeatherTimeSeriesResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Pull historical weather information for date ranges up to 90 days (daily data) or 7 days (hourly data). Get consistent formatting across your specified date range with reliable historical weather patterns.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8758,20 +11165,21 @@ Pull historical weather information for date ranges up to 90 days (daily data) o
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.WeatherTimeSeriesRequest;
-import com.apifreaks.sdk.types.WeatherTimeSeriesResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-WeatherTimeSeriesRequest request = WeatherTimeSeriesRequest.builder()
+client.weatherTimeSeries(
+    WeatherTimeSeriesRequest
+        .builder()
         .apiKey("apiKey")
-        .startDate("startDate")
-        .endDate("endDate")
-        .build();
-WeatherTimeSeriesResponse response = client.weatherTimeSeries(request);
+        .startDate("2023-01-15")
+        .endDate("2023-01-15")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8783,7 +11191,7 @@ WeatherTimeSeriesResponse response = client.weatherTimeSeries(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -8791,7 +11199,7 @@ WeatherTimeSeriesResponse response = client.weatherTimeSeries(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;WeatherTimeSeriesRequestFormat&gt;` — Response format returned by the API. _(optional)_
+**format:** `Optional<WeatherTimeSeriesRequestFormat>` — Response format returned by the API. Only JSON is supported.
     
 </dd>
 </dl>
@@ -8799,7 +11207,7 @@ WeatherTimeSeriesResponse response = client.weatherTimeSeries(request);
 <dl>
 <dd>
 
-**startDate:** `String` — Starting date for the data in YYYY-MM-DD format. Historical dates must be past dates only. Current or future dates are not allowed for historical data. Data available from 1940 onwards. For precision=daily, the difference between endDate and startDate must not exceed 90 days. For precision=hourly, the difference must not exceed 7 days. _(required)_
+**startDate:** `String` — Starting date for the data in YYYY-MM-DD format. Historical dates must be past dates only. Current or future dates are not allowed for historical data. Data available from 1940 onwards. For precision=daily, the difference between endDate and startDate must not exceed 90 days. For precision=hourly, the difference must not exceed 7 days.
     
 </dd>
 </dl>
@@ -8807,7 +11215,7 @@ WeatherTimeSeriesResponse response = client.weatherTimeSeries(request);
 <dl>
 <dd>
 
-**endDate:** `String` — End date for the data in YYYY-MM-DD format. Historical dates must be past dates only. Current or future dates are not allowed for historical data. Data available from 1940 onwards. For precision=daily, the difference between endDate and startDate must not exceed 90 days. For precision=hourly, the difference must not exceed 7 days. _(required)_
+**endDate:** `String` — End date for the data in YYYY-MM-DD format. Historical dates must be past dates only. Current or future dates are not allowed for historical data. Data available from 1940 onwards. For precision=daily, the difference between endDate and startDate must not exceed 90 days. For precision=hourly, the difference must not exceed 7 days.
     
 </dd>
 </dl>
@@ -8815,7 +11223,7 @@ WeatherTimeSeriesResponse response = client.weatherTimeSeries(request);
 <dl>
 <dd>
 
-**location:** `Optional&lt;String&gt;` — City name, place name, or full address. _(optional)_
+**location:** `Optional<String>` — City name, place name, or full address.
     
 </dd>
 </dl>
@@ -8823,7 +11231,7 @@ WeatherTimeSeriesResponse response = client.weatherTimeSeries(request);
 <dl>
 <dd>
 
-**lat:** `Optional&lt;Double&gt;` — Latitude of the location. _(optional)_
+**lat:** `Optional<Double>` — Latitude of the location.
     
 </dd>
 </dl>
@@ -8831,7 +11239,7 @@ WeatherTimeSeriesResponse response = client.weatherTimeSeries(request);
 <dl>
 <dd>
 
-**long_:** `Optional&lt;Double&gt;` — No description provided. _(optional)_
+**long_:** `Optional<Double>` — Longitude of the location.
     
 </dd>
 </dl>
@@ -8839,7 +11247,7 @@ WeatherTimeSeriesResponse response = client.weatherTimeSeries(request);
 <dl>
 <dd>
 
-**ip:** `Optional&lt;String&gt;` — IP(v4 or v6) address for location inference. _(optional)_
+**ip:** `Optional<String>` — IP(v4 or v6) address for location inference.
     
 </dd>
 </dl>
@@ -8847,7 +11255,7 @@ WeatherTimeSeriesResponse response = client.weatherTimeSeries(request);
 <dl>
 <dd>
 
-**precision:** `Optional&lt;WeatherTimeSeriesRequestPrecision&gt;` — Precision of the data. _(optional)_
+**precision:** `Optional<WeatherTimeSeriesRequestPrecision>` — Precision of the data.
     
 </dd>
 </dl>
@@ -8855,29 +11263,33 @@ WeatherTimeSeriesResponse response = client.weatherTimeSeries(request);
 <dl>
 <dd>
 
-**timezone:** `Optional&lt;String&gt;` — Timezone for the results. _(optional)_
+**timezone:** `Optional<String>` — Timezone for the results.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.marineWeather(request) -> MarineWeatherResponse</code></summary>
+<details><summary><code>client.marineWeather() -> MarineWeatherResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Provides hourly forecasts of marine conditions including wave heights, wave directions, wave periods, swell info, sea surface temperatures, and ocean currents. Supports multiple geographical points and returns daily max wave statistics for up to 7 days. Ideal for maritime planning, navigation, and coastal activities.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8886,18 +11298,19 @@ Provides hourly forecasts of marine conditions including wave heights, wave dire
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.MarineWeatherRequest;
-import com.apifreaks.sdk.types.MarineWeatherResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-MarineWeatherRequest request = MarineWeatherRequest.builder()
+client.marineWeather(
+    MarineWeatherRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-MarineWeatherResponse response = client.marineWeather(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8909,7 +11322,7 @@ MarineWeatherResponse response = client.marineWeather(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -8917,7 +11330,7 @@ MarineWeatherResponse response = client.marineWeather(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;MarineWeatherRequestFormat&gt;` — Response format returned by the API. _(optional)_
+**format:** `Optional<MarineWeatherRequestFormat>` — Response format returned by the API. Only JSON is supported.
     
 </dd>
 </dl>
@@ -8925,7 +11338,7 @@ MarineWeatherResponse response = client.marineWeather(request);
 <dl>
 <dd>
 
-**startDate:** `Optional&lt;String&gt;` — Starting date for marine forecast data in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between endDate and startDate must not exceed 16 days. _(optional)_
+**startDate:** `Optional<String>` — Starting date for marine forecast data in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between endDate and startDate must not exceed 16 days.
     
 </dd>
 </dl>
@@ -8933,7 +11346,7 @@ MarineWeatherResponse response = client.marineWeather(request);
 <dl>
 <dd>
 
-**endDate:** `Optional&lt;String&gt;` — End date for marine forecast data in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between endDate and startDate must not exceed 16 days. _(optional)_
+**endDate:** `Optional<String>` — End date for marine forecast data in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between endDate and startDate must not exceed 16 days.
     
 </dd>
 </dl>
@@ -8941,7 +11354,7 @@ MarineWeatherResponse response = client.marineWeather(request);
 <dl>
 <dd>
 
-**location:** `Optional&lt;String&gt;` — City name, place name, or full address. _(optional)_
+**location:** `Optional<String>` — City name, place name, or full address.
     
 </dd>
 </dl>
@@ -8949,7 +11362,7 @@ MarineWeatherResponse response = client.marineWeather(request);
 <dl>
 <dd>
 
-**lat:** `Optional&lt;Double&gt;` — Latitude of the location. _(optional)_
+**lat:** `Optional<Double>` — Latitude of the location.
     
 </dd>
 </dl>
@@ -8957,7 +11370,7 @@ MarineWeatherResponse response = client.marineWeather(request);
 <dl>
 <dd>
 
-**long_:** `Optional&lt;Double&gt;` — No description provided. _(optional)_
+**long_:** `Optional<Double>` — Longitude of the location.
     
 </dd>
 </dl>
@@ -8965,7 +11378,7 @@ MarineWeatherResponse response = client.marineWeather(request);
 <dl>
 <dd>
 
-**ip:** `Optional&lt;String&gt;` — IP(v4 or v6) address for location inference. _(optional)_
+**ip:** `Optional<String>` — IP(v4 or v6) address for location inference.
     
 </dd>
 </dl>
@@ -8973,7 +11386,7 @@ MarineWeatherResponse response = client.marineWeather(request);
 <dl>
 <dd>
 
-**precision:** `Optional&lt;MarineWeatherRequestPrecision&gt;` — Precision of the marine data. _(optional)_
+**precision:** `Optional<MarineWeatherRequestPrecision>` — Precision of the marine data.
     
 </dd>
 </dl>
@@ -8981,29 +11394,33 @@ MarineWeatherResponse response = client.marineWeather(request);
 <dl>
 <dd>
 
-**timezone:** `Optional&lt;String&gt;` — Timezone for the results. _(optional)_
+**timezone:** `Optional<String>` — Timezone for the results.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.airQuality(request) -> AirQualityResponse</code></summary>
+<details><summary><code>client.airQuality() -> AirQualityResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Monitor and predict air quality conditions using European and US AQI standards. Track pollutant concentrations including PM10, PM2.5, carbon monoxide, nitrogen dioxide, sulfur dioxide, ozone, and dust particles. Get current readings plus hourly forecasts up to 5 days ahead, complete with UV index and aerosol measurements for comprehensive air quality assessment.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9012,18 +11429,19 @@ Monitor and predict air quality conditions using European and US AQI standards. 
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.AirQualityRequest;
-import com.apifreaks.sdk.types.AirQualityResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-AirQualityRequest request = AirQualityRequest.builder()
+client.airQuality(
+    AirQualityRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-AirQualityResponse response = client.airQuality(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9035,7 +11453,7 @@ AirQualityResponse response = client.airQuality(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -9043,7 +11461,7 @@ AirQualityResponse response = client.airQuality(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;AirQualityRequestFormat&gt;` — Response format returned by the API. _(optional)_
+**format:** `Optional<AirQualityRequestFormat>` — Response format returned by the API. Only JSON is supported.
     
 </dd>
 </dl>
@@ -9051,7 +11469,7 @@ AirQualityResponse response = client.airQuality(request);
 <dl>
 <dd>
 
-**startDate:** `Optional&lt;String&gt;` — Starting date for AQI forecast data in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between endDate and startDate must not exceed 5 days. _(optional)_
+**startDate:** `Optional<String>` — Starting date for AQI forecast data in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between endDate and startDate must not exceed 5 days.
     
 </dd>
 </dl>
@@ -9059,7 +11477,7 @@ AirQualityResponse response = client.airQuality(request);
 <dl>
 <dd>
 
-**endDate:** `Optional&lt;String&gt;` — End date for AQI forecast data in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between endDate and startDate must not exceed 5 days. _(optional)_
+**endDate:** `Optional<String>` — End date for AQI forecast data in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between endDate and startDate must not exceed 5 days.
     
 </dd>
 </dl>
@@ -9067,7 +11485,7 @@ AirQualityResponse response = client.airQuality(request);
 <dl>
 <dd>
 
-**location:** `Optional&lt;String&gt;` — City name, place name, or full address. _(optional)_
+**location:** `Optional<String>` — City name, place name, or full address.
     
 </dd>
 </dl>
@@ -9075,7 +11493,7 @@ AirQualityResponse response = client.airQuality(request);
 <dl>
 <dd>
 
-**lat:** `Optional&lt;Double&gt;` — Latitude of the location. _(optional)_
+**lat:** `Optional<Double>` — Latitude of the location.
     
 </dd>
 </dl>
@@ -9083,7 +11501,7 @@ AirQualityResponse response = client.airQuality(request);
 <dl>
 <dd>
 
-**long_:** `Optional&lt;Double&gt;` — No description provided. _(optional)_
+**long_:** `Optional<Double>` — Longitude of the location.
     
 </dd>
 </dl>
@@ -9091,7 +11509,7 @@ AirQualityResponse response = client.airQuality(request);
 <dl>
 <dd>
 
-**ip:** `Optional&lt;String&gt;` — IP(v4 or v6) address for location inference. _(optional)_
+**ip:** `Optional<String>` — IP(v4 or v6) address for location inference.
     
 </dd>
 </dl>
@@ -9099,7 +11517,7 @@ AirQualityResponse response = client.airQuality(request);
 <dl>
 <dd>
 
-**precision:** `Optional&lt;AirQualityRequestPrecision&gt;` — Only hourly precision is supported; returns hourly AQI data for the selected date range. _(optional)_
+**precision:** `Optional<AirQualityRequestPrecision>` — Only hourly precision is supported; returns hourly AQI data for the selected date range.
     
 </dd>
 </dl>
@@ -9107,29 +11525,33 @@ AirQualityResponse response = client.airQuality(request);
 <dl>
 <dd>
 
-**timezone:** `Optional&lt;String&gt;` — Timezone for the results. _(optional)_
+**timezone:** `Optional<String>` — Timezone for the results.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.floodForecast(request) -> FloodForecastResponse</code></summary>
+<details><summary><code>client.floodForecast() -> FloodForecastResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Provides flood forecast data for a given location, including river discharge metrics such as mean, median, maximum, minimum, and percentile values (p25, p75). Requires a startDate and endDate, with the date range limited to 16 days. Location can be specified using city name, latitude/longitude, or IP address.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9138,20 +11560,21 @@ Provides flood forecast data for a given location, including river discharge met
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.FloodForecastRequest;
-import com.apifreaks.sdk.types.FloodForecastResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-FloodForecastRequest request = FloodForecastRequest.builder()
+client.floodForecast(
+    FloodForecastRequest
+        .builder()
         .apiKey("apiKey")
-        .startDate("startDate")
-        .endDate("endDate")
-        .build();
-FloodForecastResponse response = client.floodForecast(request);
+        .startDate("2023-01-15")
+        .endDate("2023-01-15")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9163,7 +11586,7 @@ FloodForecastResponse response = client.floodForecast(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -9171,7 +11594,7 @@ FloodForecastResponse response = client.floodForecast(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;FloodForecastRequestFormat&gt;` — Response format returned by the API. _(optional)_
+**format:** `Optional<FloodForecastRequestFormat>` — Response format returned by the API. Only JSON is supported.
     
 </dd>
 </dl>
@@ -9179,7 +11602,7 @@ FloodForecastResponse response = client.floodForecast(request);
 <dl>
 <dd>
 
-**startDate:** `String` — Starting date for flood forecast data in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between endDate and startDate must not exceed 16 days. _(required)_
+**startDate:** `String` — Starting date for flood forecast data in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between endDate and startDate must not exceed 16 days.
     
 </dd>
 </dl>
@@ -9187,7 +11610,7 @@ FloodForecastResponse response = client.floodForecast(request);
 <dl>
 <dd>
 
-**endDate:** `String` — End date for flood forecast data in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between endDate and startDate must not exceed 16 days. _(required)_
+**endDate:** `String` — End date for flood forecast data in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between endDate and startDate must not exceed 16 days.
     
 </dd>
 </dl>
@@ -9195,7 +11618,7 @@ FloodForecastResponse response = client.floodForecast(request);
 <dl>
 <dd>
 
-**location:** `Optional&lt;String&gt;` — City name, place name, or full address. _(optional)_
+**location:** `Optional<String>` — City name, place name, or full address.
     
 </dd>
 </dl>
@@ -9203,7 +11626,7 @@ FloodForecastResponse response = client.floodForecast(request);
 <dl>
 <dd>
 
-**lat:** `Optional&lt;Double&gt;` — Latitude of the location. _(optional)_
+**lat:** `Optional<Double>` — Latitude of the location.
     
 </dd>
 </dl>
@@ -9211,7 +11634,7 @@ FloodForecastResponse response = client.floodForecast(request);
 <dl>
 <dd>
 
-**long_:** `Optional&lt;Double&gt;` — No description provided. _(optional)_
+**long_:** `Optional<Double>` — Longitude of the location.
     
 </dd>
 </dl>
@@ -9219,7 +11642,7 @@ FloodForecastResponse response = client.floodForecast(request);
 <dl>
 <dd>
 
-**ip:** `Optional&lt;String&gt;` — IP(v4 or v6) address for location inference. _(optional)_
+**ip:** `Optional<String>` — IP(v4 or v6) address for location inference.
     
 </dd>
 </dl>
@@ -9227,7 +11650,7 @@ FloodForecastResponse response = client.floodForecast(request);
 <dl>
 <dd>
 
-**precision:** `Optional&lt;FloodForecastRequestPrecision&gt;` — Only daily precision is supported; returns flood forecast data for the selected date range. _(optional)_
+**precision:** `Optional<FloodForecastRequestPrecision>` — Only daily precision is supported; returns flood forecast data for the selected date range.
     
 </dd>
 </dl>
@@ -9235,29 +11658,33 @@ FloodForecastResponse response = client.floodForecast(request);
 <dl>
 <dd>
 
-**timezone:** `Optional&lt;String&gt;` — Timezone for the results. _(optional)_
+**timezone:** `Optional<String>` — Timezone for the results.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.getCountries(request) -> GetCountriesResponse</code></summary>
+<details><summary><code>client.getCountries() -> GetCountriesResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Retrieve countries, optionally filtered by region or subregion.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9266,18 +11693,19 @@ Retrieve countries, optionally filtered by region or subregion.
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.GetCountriesRequest;
-import com.apifreaks.sdk.types.GetCountriesResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-GetCountriesRequest request = GetCountriesRequest.builder()
+client.getCountries(
+    GetCountriesRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-GetCountriesResponse response = client.getCountries(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9289,7 +11717,7 @@ GetCountriesResponse response = client.getCountries(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -9297,7 +11725,7 @@ GetCountriesResponse response = client.getCountries(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;GetCountriesRequestFormat&gt;` — Format of the response _(optional)_
+**format:** `Optional<GetCountriesRequestFormat>` — Format of the response
     
 </dd>
 </dl>
@@ -9305,7 +11733,7 @@ GetCountriesResponse response = client.getCountries(request);
 <dl>
 <dd>
 
-**region:** `Optional&lt;String&gt;` — Optional filter to return countries within a specific region from the region endpoint. _(optional)_
+**region:** `Optional<String>` — Optional filter to return countries within a specific region from the region endpoint.
     
 </dd>
 </dl>
@@ -9313,29 +11741,209 @@ GetCountriesResponse response = client.getCountries(request);
 <dl>
 <dd>
 
-**subregion:** `Optional&lt;String&gt;` — Optional filter to return countries within a specific subregion from the subregion endpoint. _(optional)_
+**subregion:** `Optional<String>` — Optional filter to return countries within a specific subregion from the subregion endpoint.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.getAdminLevels(request) -> GetAdminLevelsResponse</code></summary>
+<details><summary><code>client.getCountryDetails() -> GetCountryDetailsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.getCountryDetails(
+    GetCountryDetailsRequest
+        .builder()
+        .apiKey("apiKey")
+        .country("country")
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<GetCountryDetailsRequestFormat>` — Format of the response
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**country:** `String` — Country code in ISO 3166-1 alpha-2 format.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.getRegions() -> GetRegionsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.getRegions(
+    GetRegionsRequest
+        .builder()
+        .apiKey("apiKey")
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<GetRegionsRequestFormat>` — Format of the response
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.getSubregions() -> GetSubregionsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```java
+client.getSubregions(
+    GetSubregionsRequest
+        .builder()
+        .apiKey("apiKey")
+        .build()
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**apiKey:** `String` — Your API key
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `Optional<GetSubregionsRequestFormat>` — Format of the response
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**region:** `Optional<String>` — Name of the region. If omitted, all subregions are returned.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.getAdminLevels() -> GetAdminLevelsResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Retrieve administrative units based on ISO 3166-1 alpha-2 country code.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9344,19 +11952,20 @@ Retrieve administrative units based on ISO 3166-1 alpha-2 country code.
 <dl>
 <dd>
 
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.GetAdminLevelsRequest;
-import com.apifreaks.sdk.types.GetAdminLevelsResponse;
+<dl>
+<dd>
 
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-GetAdminLevelsRequest request = GetAdminLevelsRequest.builder()
+```java
+client.getAdminLevels(
+    GetAdminLevelsRequest
+        .builder()
         .apiKey("apiKey")
         .country("country")
-        .build();
-GetAdminLevelsResponse response = client.getAdminLevels(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9368,7 +11977,7 @@ GetAdminLevelsResponse response = client.getAdminLevels(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -9376,7 +11985,7 @@ GetAdminLevelsResponse response = client.getAdminLevels(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;GetAdminLevelsRequestFormat&gt;` — Format of the response _(optional)_
+**format:** `Optional<GetAdminLevelsRequestFormat>` — Format of the response
     
 </dd>
 </dl>
@@ -9384,29 +11993,33 @@ GetAdminLevelsResponse response = client.getAdminLevels(request);
 <dl>
 <dd>
 
-**country:** `String` — Country code in ISO 3166-1 alpha-2 format _(required)_
+**country:** `String` — Country code in ISO 3166-1 alpha-2 format
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.getAdminUnits(request) -> GetAdminUnitsResponse</code></summary>
+<details><summary><code>client.getAdminUnits() -> GetAdminUnitsResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Retrieve administrative divisions for a given country using ISO 3166-1 alpha-2 country codes. You can optionally filter by administrative levels.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9415,19 +12028,20 @@ Retrieve administrative divisions for a given country using ISO 3166-1 alpha-2 c
 <dl>
 <dd>
 
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.GetAdminUnitsRequest;
-import com.apifreaks.sdk.types.GetAdminUnitsResponse;
+<dl>
+<dd>
 
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-GetAdminUnitsRequest request = GetAdminUnitsRequest.builder()
+```java
+client.getAdminUnits(
+    GetAdminUnitsRequest
+        .builder()
         .apiKey("apiKey")
         .country("country")
-        .build();
-GetAdminUnitsResponse response = client.getAdminUnits(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9439,7 +12053,7 @@ GetAdminUnitsResponse response = client.getAdminUnits(request);
 <dl>
 <dd>
 
-**adminLevels:** `Optional&lt;List<String&gt;&gt;` — Comma-separated list to filter results by one or more administrative levels. _(optional)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -9447,7 +12061,7 @@ GetAdminUnitsResponse response = client.getAdminUnits(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**format:** `Optional<GetAdminUnitsRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -9455,7 +12069,7 @@ GetAdminUnitsResponse response = client.getAdminUnits(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;GetAdminUnitsRequestFormat&gt;` — Format of the response. _(optional)_
+**country:** `String` — Country code in ISO 3166-1 alpha-2 format.
     
 </dd>
 </dl>
@@ -9463,29 +12077,33 @@ GetAdminUnitsResponse response = client.getAdminUnits(request);
 <dl>
 <dd>
 
-**country:** `String` — Country code in ISO 3166-1 alpha-2 format. _(required)_
+**adminLevel:** `Optional<String>` — Filter results by one or more administrative level names (e.g. `land`, `state`, `province`), sent as a comma-separated list. Use the admin levels endpoint to list the levels a country has.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.getAdminUnitDetails(request) -> GetAdminUnitDetailsResponse</code></summary>
+<details><summary><code>client.getAdminUnitDetails() -> GetAdminUnitDetailsResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Retrieve detailed administrative unit information by country and optionally filtered by admin code.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9494,20 +12112,21 @@ Retrieve detailed administrative unit information by country and optionally filt
 <dl>
 <dd>
 
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.GetAdminUnitDetailsRequest;
-import com.apifreaks.sdk.types.GetAdminUnitDetailsResponse;
+<dl>
+<dd>
 
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-GetAdminUnitDetailsRequest request = GetAdminUnitDetailsRequest.builder()
+```java
+client.getAdminUnitDetails(
+    GetAdminUnitDetailsRequest
+        .builder()
         .apiKey("apiKey")
         .country("country")
-        .adminUnit("adminUnit")
-        .build();
-GetAdminUnitDetailsResponse response = client.getAdminUnitDetails(request);
+        .adminUnit("admin_unit")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9519,7 +12138,7 @@ GetAdminUnitDetailsResponse response = client.getAdminUnitDetails(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -9527,7 +12146,7 @@ GetAdminUnitDetailsResponse response = client.getAdminUnitDetails(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;GetAdminUnitDetailsRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<GetAdminUnitDetailsRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -9535,7 +12154,7 @@ GetAdminUnitDetailsResponse response = client.getAdminUnitDetails(request);
 <dl>
 <dd>
 
-**country:** `String` — Country code in ISO 3166-1 alpha-2 format. _(required)_
+**country:** `String` — Country code in ISO 3166-1 alpha-2 format.
     
 </dd>
 </dl>
@@ -9543,29 +12162,33 @@ GetAdminUnitDetailsResponse response = client.getAdminUnitDetails(request);
 <dl>
 <dd>
 
-**adminUnit:** `String` — Optional admin code to fetch details for a specific administrative unit. _(required)_
+**adminUnit:** `String` — Optional admin code to fetch details for a specific administrative unit.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.getCities(request) -> GetCitiesResponse</code></summary>
+<details><summary><code>client.getCities() -> GetCitiesResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Retrieve a list of cities within a country, optionally filtered by an administrative unit code.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9574,19 +12197,20 @@ Retrieve a list of cities within a country, optionally filtered by an administra
 <dl>
 <dd>
 
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.GetCitiesRequest;
-import com.apifreaks.sdk.types.GetCitiesResponse;
+<dl>
+<dd>
 
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-GetCitiesRequest request = GetCitiesRequest.builder()
+```java
+client.getCities(
+    GetCitiesRequest
+        .builder()
         .apiKey("apiKey")
         .country("country")
-        .build();
-GetCitiesResponse response = client.getCities(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9598,7 +12222,7 @@ GetCitiesResponse response = client.getCities(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -9606,7 +12230,7 @@ GetCitiesResponse response = client.getCities(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;GetCitiesRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<GetCitiesRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -9614,7 +12238,7 @@ GetCitiesResponse response = client.getCities(request);
 <dl>
 <dd>
 
-**country:** `String` — Country code in ISO 3166-1 alpha-2 format. _(required)_
+**country:** `String` — Country code in ISO 3166-1 alpha-2 format.
     
 </dd>
 </dl>
@@ -9622,29 +12246,33 @@ GetCitiesResponse response = client.getCities(request);
 <dl>
 <dd>
 
-**adminUnit:** `Optional&lt;String&gt;` — Administrative unit code used to filter cities within a specific region. _(optional)_
+**adminUnit:** `Optional<String>` — Administrative unit code used to filter cities within a specific region.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.getSupportedFlags(request) -> List<GetSupportedFlagsResponseItem></code></summary>
+<details><summary><code>client.getSupportedFlags() -> GetSupportedFlagsResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Get list of all supported flags with their metadata
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9653,19 +12281,19 @@ Get list of all supported flags with their metadata
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.GetSupportedFlagsRequest;
-import java.util.List;
-import com.apifreaks.sdk.types.GetSupportedFlagsResponseItem;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-GetSupportedFlagsRequest request = GetSupportedFlagsRequest.builder()
+client.getSupportedFlags(
+    GetSupportedFlagsRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-List<GetSupportedFlagsResponseItem> response = client.getSupportedFlags(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9677,29 +12305,33 @@ List<GetSupportedFlagsResponseItem> response = client.getSupportedFlags(request)
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.getFlags(request) -> InputStream</code></summary>
+<details><summary><code>client.getFlags() -> InputStream</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Retrieve the flag for a specific country
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9708,21 +12340,22 @@ Retrieve the flag for a specific country
 <dl>
 <dd>
 
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.GetFlagsRequest;
-import java.io.InputStream;
+<dl>
+<dd>
 
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-GetFlagsRequest request = GetFlagsRequest.builder()
+```java
+client.getFlags(
+    GetFlagsRequest
+        .builder()
         .apiKey("apiKey")
         .name("name")
-        .shape(null)
-        .type("A")
-        .build();
-InputStream response = client.getFlags(request);
+        .shape(GetFlagsRequestShape.FLAT)
+        .type(GetFlagsRequestType.COUNTRY)
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9734,7 +12367,7 @@ InputStream response = client.getFlags(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -9742,7 +12375,7 @@ InputStream response = client.getFlags(request);
 <dl>
 <dd>
 
-**name:** `String` — Country code in ISO 3166-1 alpha-2 format. _(required)_
+**name:** `String` — Country code in ISO 3166-1 alpha-2 format.
     
 </dd>
 </dl>
@@ -9750,7 +12383,7 @@ InputStream response = client.getFlags(request);
 <dl>
 <dd>
 
-**shape:** `GetFlagsRequestShape` — Flag shape. One of: 'flat' or 'round'. _(required)_
+**shape:** `GetFlagsRequestShape` — Flag shape. One of: `'flat'` or `'round'`.
     
 </dd>
 </dl>
@@ -9758,7 +12391,7 @@ InputStream response = client.getFlags(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;GetFlagsRequestFormat&gt;` — Flag format. Applicable only for PNG or WEBP formats. Default is png. _(optional)_
+**format:** `Optional<GetFlagsRequestFormat>` — Flag format. Applicable only for PNG or WEBP formats. Default is png.
     
 </dd>
 </dl>
@@ -9766,7 +12399,7 @@ InputStream response = client.getFlags(request);
 <dl>
 <dd>
 
-**size:** `Optional&lt;GetFlagsRequestSize&gt;` — Flag size in pixels. Valid options: 16px, 24px, 32px, 48px, 64px. Applicable only for PNG or WEBP formats. _(optional)_
+**size:** `Optional<GetFlagsRequestSize>` — Flag size in pixels. Valid options: `16px`, `24px`, `32px`, `48px`, `64px`. Applicable only for PNG or WEBP formats.
     
 </dd>
 </dl>
@@ -9774,19 +12407,19 @@ InputStream response = client.getFlags(request);
 <dl>
 <dd>
 
-**type:** `GetFlagsRequestType` — Type of flag. One of: country or organization. _(required)_
+**type:** `GetFlagsRequestType` — Type of flag. One of: `country` or `organization`.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.timezoneLookup(request) -> TimezoneLookupResponse</code></summary>
+<details><summary><code>client.timezoneLookup() -> TimezoneLookupResponse</code></summary>
 <dl>
 <dd>
 
@@ -9795,8 +12428,12 @@ InputStream response = client.getFlags(request);
 <dl>
 <dd>
 
-Retrieve current time, date, and timezone-related information by specifying a timezone name, location address, location coordinates, IP address, or use the client IP address if no parameter is passed.
+<dl>
+<dd>
 
+Retrieve current time, date, and timezone-related information by specifying a timezone name, location address, location coordinates, IP address, or use the client IP address if no parameter is passed.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9805,18 +12442,19 @@ Retrieve current time, date, and timezone-related information by specifying a ti
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.TimezoneLookupRequest;
-import com.apifreaks.sdk.types.TimezoneLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-TimezoneLookupRequest request = TimezoneLookupRequest.builder()
+client.timezoneLookup(
+    TimezoneLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-TimezoneLookupResponse response = client.timezoneLookup(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9828,7 +12466,7 @@ TimezoneLookupResponse response = client.timezoneLookup(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -9836,7 +12474,7 @@ TimezoneLookupResponse response = client.timezoneLookup(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;TimezoneLookupRequestFormat&gt;` — Format of the response _(optional)_
+**format:** `Optional<TimezoneLookupRequestFormat>` — Format of the response
     
 </dd>
 </dl>
@@ -9844,7 +12482,7 @@ TimezoneLookupResponse response = client.timezoneLookup(request);
 <dl>
 <dd>
 
-**ip:** `Optional&lt;String&gt;` — IPv4 or IPv6 address to extract timezone information. _(optional)_
+**ip:** `Optional<String>` — IPv4 or IPv6 address to extract timezone information.
     
 </dd>
 </dl>
@@ -9852,7 +12490,7 @@ TimezoneLookupResponse response = client.timezoneLookup(request);
 <dl>
 <dd>
 
-**tz:** `Optional&lt;String&gt;` — Timezone name (e.g., &quot;Asia/Kolkata&quot;) to retrieve information directly. _(optional)_
+**tz:** `Optional<String>` — Timezone name (e.g., "Asia/Kolkata") to retrieve information directly.
     
 </dd>
 </dl>
@@ -9860,7 +12498,7 @@ TimezoneLookupResponse response = client.timezoneLookup(request);
 <dl>
 <dd>
 
-**location:** `Optional&lt;String&gt;` — Location string (preferably city and country) to extract timezone. _(optional)_
+**location:** `Optional<String>` — Location string (preferably city and country) to extract timezone.
     
 </dd>
 </dl>
@@ -9868,7 +12506,7 @@ TimezoneLookupResponse response = client.timezoneLookup(request);
 <dl>
 <dd>
 
-**lat:** `Optional&lt;Float&gt;` — Latitude for geolocation lookup. _(optional)_
+**lat:** `Optional<Float>` — Latitude for geolocation lookup.
     
 </dd>
 </dl>
@@ -9876,7 +12514,7 @@ TimezoneLookupResponse response = client.timezoneLookup(request);
 <dl>
 <dd>
 
-**long_:** `Optional&lt;Float&gt;` — No description provided. _(optional)_
+**long_:** `Optional<Float>` — Longitude for geolocation lookup.
     
 </dd>
 </dl>
@@ -9884,7 +12522,7 @@ TimezoneLookupResponse response = client.timezoneLookup(request);
 <dl>
 <dd>
 
-**lang:** `Optional&lt;TimezoneLookupRequestLang&gt;` — Language code for response localization (default is &quot;en&quot;). _(optional)_
+**lang:** `Optional<TimezoneLookupRequestLang>` — Language code for response localization (default is "en").
     
 </dd>
 </dl>
@@ -9892,7 +12530,7 @@ TimezoneLookupResponse response = client.timezoneLookup(request);
 <dl>
 <dd>
 
-**iataCode:** `Optional&lt;String&gt;` — 3-letter IATA airport code (e.g., JFK). _(optional)_
+**iataCode:** `Optional<String>` — 3-letter IATA airport code (e.g., JFK).
     
 </dd>
 </dl>
@@ -9900,7 +12538,7 @@ TimezoneLookupResponse response = client.timezoneLookup(request);
 <dl>
 <dd>
 
-**icaoCode:** `Optional&lt;String&gt;` — 4-letter ICAO airport code (e.g., KJFK). _(optional)_
+**icaoCode:** `Optional<String>` — 4-letter ICAO airport code (e.g., KJFK).
     
 </dd>
 </dl>
@@ -9908,19 +12546,19 @@ TimezoneLookupResponse response = client.timezoneLookup(request);
 <dl>
 <dd>
 
-**loCode:** `Optional&lt;String&gt;` — 5-letter UN/LO city code. _(optional)_
+**loCode:** `Optional<String>` — 5-letter UN/LO city code.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.timezoneLookupV2(request) -> TimezoneLookupResponse</code></summary>
+<details><summary><code>client.timezoneConvert() -> TimezoneConvertResponse</code></summary>
 <dl>
 <dd>
 
@@ -9928,145 +12566,13 @@ TimezoneLookupResponse response = client.timezoneLookup(request);
 
 <dl>
 <dd>
-
-> **v2.0 endpoint** — maps to `/v2.0/geolocation/timezone`. Uses the same request and response types as the v1 `timezoneLookup` method.
-
-Retrieve current time, date, and timezone-related information by specifying a timezone name, location address, location coordinates, IP address, or use the client IP address if no parameter is passed.
-
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.TimezoneLookupRequest;
-import com.apifreaks.sdk.types.TimezoneLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-TimezoneLookupRequest request = TimezoneLookupRequest.builder()
-        .apiKey("apiKey")
-        .build();
-TimezoneLookupResponse response = client.timezoneLookupV2(request);
-```
-
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**apiKey:** `String` — Your API key _(required)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**format:** `Optional&lt;TimezoneLookupRequestFormat&gt;` — Format of the response _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**ip:** `Optional&lt;String&gt;` — IPv4 or IPv6 address to extract timezone information. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**tz:** `Optional&lt;String&gt;` — Timezone name (e.g., &quot;Asia/Kolkata&quot;) to retrieve information directly. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**location:** `Optional&lt;String&gt;` — Location string (preferably city and country) to extract timezone. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**lat:** `Optional&lt;Float&gt;` — Latitude for geolocation lookup. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**long_:** `Optional&lt;Float&gt;` — No description provided. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**lang:** `Optional&lt;TimezoneLookupRequestLang&gt;` — Language code for response localization (default is &quot;en&quot;). _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**iataCode:** `Optional&lt;String&gt;` — 3-letter IATA airport code (e.g., JFK). _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**icaoCode:** `Optional&lt;String&gt;` — 4-letter ICAO airport code (e.g., KJFK). _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**loCode:** `Optional&lt;String&gt;` — 5-letter UN/LO city code. _(optional)_
-    
-</dd>
-</dl>
-
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.timezoneConvert(request) -> TimezoneConvertResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
 
 <dl>
 <dd>
 
 Converts a given time from one timezone to another using various input types like timezone name, coordinates, location, or codes.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10075,18 +12581,19 @@ Converts a given time from one timezone to another using various input types lik
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.TimezoneConvertRequest;
-import com.apifreaks.sdk.types.TimezoneConvertResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-TimezoneConvertRequest request = TimezoneConvertRequest.builder()
+client.timezoneConvert(
+    TimezoneConvertRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-TimezoneConvertResponse response = client.timezoneConvert(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10098,7 +12605,7 @@ TimezoneConvertResponse response = client.timezoneConvert(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -10106,7 +12613,7 @@ TimezoneConvertResponse response = client.timezoneConvert(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;TimezoneConvertRequestFormat&gt;` — Format of the response . _(optional)_
+**format:** `Optional<TimezoneConvertRequestFormat>` — Format of the response .
     
 </dd>
 </dl>
@@ -10114,7 +12621,7 @@ TimezoneConvertResponse response = client.timezoneConvert(request);
 <dl>
 <dd>
 
-**time:** `Optional&lt;String&gt;` — Time to convert in yyyy-MM-dd HH:mm or yyyy-MM-dd HH:mm:ss format. _(optional)_
+**time:** `Optional<String>` — Time to convert in `yyyy-MM-dd HH:mm` or `yyyy-MM-dd HH:mm:ss` format.
     
 </dd>
 </dl>
@@ -10122,7 +12629,7 @@ TimezoneConvertResponse response = client.timezoneConvert(request);
 <dl>
 <dd>
 
-**tzFrom:** `Optional&lt;String&gt;` — Source timezone name (e.g., Asia/Kolkata). _(optional)_
+**tzFrom:** `Optional<String>` — Source timezone name (e.g., `Asia/Kolkata`).
     
 </dd>
 </dl>
@@ -10130,7 +12637,7 @@ TimezoneConvertResponse response = client.timezoneConvert(request);
 <dl>
 <dd>
 
-**tzTo:** `Optional&lt;String&gt;` — Target timezone name (e.g., America/New_York). _(optional)_
+**tzTo:** `Optional<String>` — Target timezone name (e.g., `America/New_York`).
     
 </dd>
 </dl>
@@ -10138,7 +12645,7 @@ TimezoneConvertResponse response = client.timezoneConvert(request);
 <dl>
 <dd>
 
-**latFrom:** `Optional&lt;Double&gt;` — Latitude of source location. _(optional)_
+**latFrom:** `Optional<Double>` — Latitude of source location.
     
 </dd>
 </dl>
@@ -10146,7 +12653,7 @@ TimezoneConvertResponse response = client.timezoneConvert(request);
 <dl>
 <dd>
 
-**longFrom:** `Optional&lt;Double&gt;` — Longitude of source location. _(optional)_
+**longFrom:** `Optional<Double>` — Longitude of source location.
     
 </dd>
 </dl>
@@ -10154,7 +12661,7 @@ TimezoneConvertResponse response = client.timezoneConvert(request);
 <dl>
 <dd>
 
-**latTo:** `Optional&lt;Double&gt;` — Latitude of target location. _(optional)_
+**latTo:** `Optional<Double>` — Latitude of target location.
     
 </dd>
 </dl>
@@ -10162,7 +12669,7 @@ TimezoneConvertResponse response = client.timezoneConvert(request);
 <dl>
 <dd>
 
-**longTo:** `Optional&lt;Double&gt;` — Longitude of target location. _(optional)_
+**longTo:** `Optional<Double>` — Longitude of target location.
     
 </dd>
 </dl>
@@ -10170,7 +12677,7 @@ TimezoneConvertResponse response = client.timezoneConvert(request);
 <dl>
 <dd>
 
-**locationFrom:** `Optional&lt;String&gt;` — From location (city/country). _(optional)_
+**locationFrom:** `Optional<String>` — From location (city/country).
     
 </dd>
 </dl>
@@ -10178,7 +12685,7 @@ TimezoneConvertResponse response = client.timezoneConvert(request);
 <dl>
 <dd>
 
-**locationTo:** `Optional&lt;String&gt;` — To location (city/country). _(optional)_
+**locationTo:** `Optional<String>` — To location (city/country).
     
 </dd>
 </dl>
@@ -10186,7 +12693,7 @@ TimezoneConvertResponse response = client.timezoneConvert(request);
 <dl>
 <dd>
 
-**iataFrom:** `Optional&lt;String&gt;` — From IATA airport code (e.g., JFK). _(optional)_
+**iataFrom:** `Optional<String>` — From IATA airport code (e.g., JFK).
     
 </dd>
 </dl>
@@ -10194,7 +12701,7 @@ TimezoneConvertResponse response = client.timezoneConvert(request);
 <dl>
 <dd>
 
-**iataTo:** `Optional&lt;String&gt;` — To IATA airport code. _(optional)_
+**iataTo:** `Optional<String>` — To IATA airport code.
     
 </dd>
 </dl>
@@ -10202,7 +12709,7 @@ TimezoneConvertResponse response = client.timezoneConvert(request);
 <dl>
 <dd>
 
-**icaoFrom:** `Optional&lt;String&gt;` — From ICAO airport code (e.g., KJFK). _(optional)_
+**icaoFrom:** `Optional<String>` — From ICAO airport code (e.g., KJFK).
     
 </dd>
 </dl>
@@ -10210,7 +12717,7 @@ TimezoneConvertResponse response = client.timezoneConvert(request);
 <dl>
 <dd>
 
-**icaoTo:** `Optional&lt;String&gt;` — To ICAO airport code. _(optional)_
+**icaoTo:** `Optional<String>` — To ICAO airport code.
     
 </dd>
 </dl>
@@ -10218,7 +12725,7 @@ TimezoneConvertResponse response = client.timezoneConvert(request);
 <dl>
 <dd>
 
-**locodeFrom:** `Optional&lt;String&gt;` — From UN/LO CODE. _(optional)_
+**locodeFrom:** `Optional<String>` — From UN/LO CODE.
     
 </dd>
 </dl>
@@ -10226,29 +12733,33 @@ TimezoneConvertResponse response = client.timezoneConvert(request);
 <dl>
 <dd>
 
-**locodeTo:** `Optional&lt;String&gt;` — To UN/LO CODE. _(optional)_
+**locodeTo:** `Optional<String>` — To UN/LO CODE.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.userAgentLookup(request) -> UserAgentLookupResponse</code></summary>
+<details><summary><code>client.userAgentLookup() -> UserAgentLookupResponse</code></summary>
 <dl>
 <dd>
 
 #### 📝 Description
+
+<dl>
+<dd>
 
 <dl>
 <dd>
 
 Parse User Agent string to get detailed browser, device, and operating system information
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10257,19 +12768,20 @@ Parse User Agent string to get detailed browser, device, and operating system in
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.UserAgentLookupRequest;
-import com.apifreaks.sdk.types.UserAgentLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-UserAgentLookupRequest request = UserAgentLookupRequest.builder()
+client.userAgentLookup(
+    UserAgentLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .userAgent("Mozilla/5.0")
-        .build();
-UserAgentLookupResponse response = client.userAgentLookup(request);
+        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10281,7 +12793,7 @@ UserAgentLookupResponse response = client.userAgentLookup(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -10289,7 +12801,7 @@ UserAgentLookupResponse response = client.userAgentLookup(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;UserAgentLookupRequestFormat&gt;` — Format of the response _(optional)_
+**userAgent:** `String` — The User-Agent string to parse, sent as the `User-Agent` HTTP header.
     
 </dd>
 </dl>
@@ -10297,19 +12809,19 @@ UserAgentLookupResponse response = client.userAgentLookup(request);
 <dl>
 <dd>
 
-**user_agent:** `String` — The User-Agent string to parse, sent as the User-Agent header _(required)_
+**format:** `Optional<UserAgentLookupRequestFormat>` — Format of the response
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.bulkUserAgentLookup(request) -> List<BulkUserAgentLookupResponseItem></code></summary>
+<details><summary><code>client.bulkUserAgentLookup(request) -> List&amp;lt;BulkUserAgentLookupResponseItem&amp;gt;</code></summary>
 <dl>
 <dd>
 
@@ -10318,8 +12830,12 @@ UserAgentLookupResponse response = client.userAgentLookup(request);
 <dl>
 <dd>
 
-Parse up to <code>50,000 User-Agent strings</code> at once in a single request.
+<dl>
+<dd>
 
+Parse up to `20000 User-Agent strings` at once in a single request; exceeding that returns a 413, not a 400.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10328,20 +12844,22 @@ Parse up to <code>50,000 User-Agent strings</code> at once in a single request.
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.BulkUserAgentLookupRequest;
-import java.util.List;
-import com.apifreaks.sdk.types.BulkUserAgentLookupResponseItem;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-BulkUserAgentLookupRequest request = BulkUserAgentLookupRequest.builder()
+client.bulkUserAgentLookup(
+    BulkUserAgentLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .uaStrings(java.util.List.of("value"))
-        .build();
-List<BulkUserAgentLookupResponseItem> response = client.bulkUserAgentLookup(request);
+        .uaStrings(
+            Arrays.asList("uaStrings")
+        )
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10353,7 +12871,7 @@ List<BulkUserAgentLookupResponseItem> response = client.bulkUserAgentLookup(requ
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -10361,7 +12879,7 @@ List<BulkUserAgentLookupResponseItem> response = client.bulkUserAgentLookup(requ
 <dl>
 <dd>
 
-**format:** `Optional&lt;BulkUserAgentLookupRequestFormat&gt;` — No description provided. _(optional)_
+**format:** `Optional<BulkUserAgentLookupRequestFormat>` — Format of the response
     
 </dd>
 </dl>
@@ -10369,13 +12887,13 @@ List<BulkUserAgentLookupResponseItem> response = client.bulkUserAgentLookup(requ
 <dl>
 <dd>
 
-**uaStrings:** `List<String&gt;` — List of user agent strings to parse _(required)_
+**uaStrings:** `List<String>` — Array of User-Agent strings to parse. Maximum 20000 strings per request — exceeding that returns a 413.
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
@@ -10390,8 +12908,20 @@ List<BulkUserAgentLookupResponseItem> response = client.bulkUserAgentLookup(requ
 <dl>
 <dd>
 
-Perform Optical Character Recognition (OCR) on images, PDFs, or ZIP archives. Supports two models: <code>mini-ocr-v1</code> for CAPTCHA-optimized OCR and <code>ocr-v1</code> for general-purpose document text extraction. Supports zonal OCR to extract text from specific regions of an image. <p><strong>Notes:</strong></p> <ul> <li>The <code>zone</code> query parameter cannot be given with .pdf and .zip types as it can only be applied to single image query.</li> <li>The <code>page_range</code> query parameter cannot be given in any other type except .pdf types.</li> <li>PDFs containing images in them are allowed only for processing.</li> <li>The <code>mini-ocr-v1</code> model doesn’t support the following query parameters: <ul> <li><code>page_range</code> (.pdf types)</li> <li><code>zone</code></li> </ul> </li> </ul>
+<dl>
+<dd>
 
+Perform Optical Character Recognition (OCR) on images, PDFs, or ZIP archives. Supports two models: `mini-ocr-v1` for CAPTCHA-optimized OCR and `ocr-v1` for general-purpose document text extraction. Supports zonal OCR to extract text from specific regions of an image.
+
+**Notes:**
+- The `zone` query parameter cannot be given with .pdf and .zip types as it can only be applied to single image query.
+- The `page_range` query parameter cannot be given in any other type except .pdf types.
+- PDFs containing images in them are allowed only for processing.
+- The `mini-ocr-v1` model doesn’t support the following query parameters:
+    - `page_range` (.pdf types)
+    - `zone`
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10400,20 +12930,21 @@ Perform Optical Character Recognition (OCR) on images, PDFs, or ZIP archives. Su
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.OcrPredictRequest;
-import com.apifreaks.sdk.types.OcrPredictResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-OcrPredictRequest request = OcrPredictRequest.builder()
+client.ocrPredict(
+    Optional.of(new File("image.png")),
+    OcrPredictRequest
+        .builder()
         .apiKey("apiKey")
-        .model(null)
-        .ocrPredictRequestModel(null)
-        .build();
-OcrPredictResponse response = client.ocrPredict(request);
+        .model(OcrPredictRequestModel.MINI_OCR_V1)
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10425,7 +12956,7 @@ OcrPredictResponse response = client.ocrPredict(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -10433,7 +12964,7 @@ OcrPredictResponse response = client.ocrPredict(request);
 <dl>
 <dd>
 
-**url:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**model:** `OcrPredictRequestModel` — OCR model to use. `mini-ocr-v1` for CAPTCHA OCR, `ocr-v1` for general OCR.
     
 </dd>
 </dl>
@@ -10441,7 +12972,7 @@ OcrPredictResponse response = client.ocrPredict(request);
 <dl>
 <dd>
 
-**model:** `OcrPredictRequestModel` — No description provided. _(required)_
+**url:** `Optional<String>` — URL of the image or PDF (required if `file` is not uploaded).
     
 </dd>
 </dl>
@@ -10449,7 +12980,7 @@ OcrPredictResponse response = client.ocrPredict(request);
 <dl>
 <dd>
 
-**pageRange:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**pageRange:** `Optional<String>` — Specify page range for multi-page PDFs (e.g., '1,3,5-10' or 'allpages'). **Note:** This parameter can only be used with .pdf file types.
     
 </dd>
 </dl>
@@ -10457,7 +12988,7 @@ OcrPredictResponse response = client.ocrPredict(request);
 <dl>
 <dd>
 
-**zone:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**zone:** `Optional<String>` — Define OCR zones using coordinates (top:left:height:width). Multiple zones can be defined using commas. Only available for model 'ocr-v1'. **Note:** This parameter cannot be used with .pdf and .zip file types as it can only be applied to single image queries.
     
 </dd>
 </dl>
@@ -10465,53 +12996,13 @@ OcrPredictResponse response = client.ocrPredict(request);
 <dl>
 <dd>
 
-**newLine:** `Optional&lt;Integer&gt;` — No description provided. _(optional)_
+**newLine:** `Optional<Integer>` — Set to 1 to split output text into individual lines (default: 0). This changes the shape of `OCRText` (see the response).
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**ocrPredictRequestUrl:** `Optional&lt;String&gt;` — URL of the image or PDF (required if file not provided) _(optional)_
-    
 </dd>
 </dl>
 
-<dl>
-<dd>
-
-**ocrPredictRequestModel:** `OcrPredictRequestModel` — OCR model to use. mini-ocr-v1 for CAPTCHA OCR, ocr-v1 for general OCR _(required)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**ocrPredictRequestPageRange:** `Optional&lt;String&gt;` — Specify page range for multi-page PDFs (e.g., '1,3,5-10' or 'allpages'). Note: This parameter can only be used with .pdf file types. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**ocrPredictRequestZone:** `Optional&lt;String&gt;` — Define OCR zones using coordinates (top:left:height:width). Multiple zones can be defined using commas. Only available for model 'ocr-v1'. Note: This parameter cannot be used with .pdf and .zip file types as it can only be applied to single image queries. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**ocrPredictRequestNewLine:** `Optional&lt;Integer&gt;` — Set to 1 to split output text into individual lines (default: 0) _(optional)_
-    
-</dd>
-</dl>
-
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -10526,8 +13017,12 @@ OcrPredictResponse response = client.ocrPredict(request);
 <dl>
 <dd>
 
-Analyze text for grammar errors and return the exact words flagged as grammatically incorrect with zero-based word positions.
+<dl>
+<dd>
 
+Analyze text for grammar errors and return the exact words flagged as grammatically incorrect with zero-based word positions.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10536,19 +13031,20 @@ Analyze text for grammar errors and return the exact words flagged as grammatica
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.GrammarDetectRequest;
-import com.apifreaks.sdk.types.GrammarDetectResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-GrammarDetectRequest request = GrammarDetectRequest.builder()
+client.grammarDetect(
+    GrammarDetectRequest
+        .builder()
         .apiKey("apiKey")
-        .text("This is sample text.")
-        .build();
-GrammarDetectResponse response = client.grammarDetect(request);
+        .text("The global mental is health crisis is now a serious and compelex problem. It need quick and ongoing action from policymakers, healthcare workers, and the whole society.")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10560,7 +13056,7 @@ GrammarDetectResponse response = client.grammarDetect(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -10568,13 +13064,13 @@ GrammarDetectResponse response = client.grammarDetect(request);
 <dl>
 <dd>
 
-**text:** `String` — Text to analyze for grammar errors _(required)_
+**text:** `String` — Text to analyze for grammar errors
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
@@ -10589,8 +13085,12 @@ GrammarDetectResponse response = client.grammarDetect(request);
 <dl>
 <dd>
 
-Submit text with grammatical issues and receive a clean grammar-corrected result for proofreading and content workflows.
+<dl>
+<dd>
 
+Submit text with grammatical issues and receive a clean grammar-corrected result for proofreading and content workflows.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10599,19 +13099,20 @@ Submit text with grammatical issues and receive a clean grammar-corrected result
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.GrammarCorrectRequest;
-import com.apifreaks.sdk.types.GrammarCorrectResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-GrammarCorrectRequest request = GrammarCorrectRequest.builder()
+client.grammarCorrect(
+    GrammarCorrectRequest
+        .builder()
         .apiKey("apiKey")
-        .text("This is sample text.")
-        .build();
-GrammarCorrectResponse response = client.grammarCorrect(request);
+        .text("The global mental is health crisis is now a serious and compelex problem. It need quick and ongoing action from policymakers, healthcare workers, and the whole society.")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10623,7 +13124,7 @@ GrammarCorrectResponse response = client.grammarCorrect(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -10631,13 +13132,13 @@ GrammarCorrectResponse response = client.grammarCorrect(request);
 <dl>
 <dd>
 
-**text:** `String` — Text to correct _(required)_
+**text:** `String` — Text to correct
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
@@ -10652,8 +13153,12 @@ GrammarCorrectResponse response = client.grammarCorrect(request);
 <dl>
 <dd>
 
-Analyze text and return weak, vague, or filler words with zero-based word positions to help writers produce clearer and more concise content.
+<dl>
+<dd>
 
+Analyze text and return weak, vague, or filler words with zero-based word positions to help writers produce clearer and more concise content.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10662,19 +13167,20 @@ Analyze text and return weak, vague, or filler words with zero-based word positi
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.WeakWordsDetectRequest;
-import com.apifreaks.sdk.types.WeakWordsDetectResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-WeakWordsDetectRequest request = WeakWordsDetectRequest.builder()
+client.weakWordsDetect(
+    WeakWordsDetectRequest
+        .builder()
         .apiKey("apiKey")
-        .text("This is sample text.")
-        .build();
-WeakWordsDetectResponse response = client.weakWordsDetect(request);
+        .text("Many people cannot get the support they need to handle their conditions well.")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10686,7 +13192,7 @@ WeakWordsDetectResponse response = client.weakWordsDetect(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -10694,13 +13200,13 @@ WeakWordsDetectResponse response = client.weakWordsDetect(request);
 <dl>
 <dd>
 
-**text:** `String` — Text to analyze for weak words _(required)_
+**text:** `String` — Text to analyze for weak words
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
@@ -10715,8 +13221,12 @@ WeakWordsDetectResponse response = client.weakWordsDetect(request);
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 Analyze text readability using industry-standard formulas including Flesch Reading Ease, Flesch-Kincaid Grade Level, Gunning Fog Index, SMOG Index, Coleman-Liau Index, and Automated Readability Index.
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10725,19 +13235,20 @@ Analyze text readability using industry-standard formulas including Flesch Readi
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.ReadabilityScoreRequest;
-import com.apifreaks.sdk.types.ReadabilityScoreResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-ReadabilityScoreRequest request = ReadabilityScoreRequest.builder()
+client.readabilityScore(
+    ReadabilityScoreRequest
+        .builder()
         .apiKey("apiKey")
-        .text("This is sample text.")
-        .build();
-ReadabilityScoreResponse response = client.readabilityScore(request);
+        .text("The global mental is health crisis is now a serious and compelex problem. It needs quick and ongoing action from policymakers, healthcare workers, and the whole society.")
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10749,7 +13260,7 @@ ReadabilityScoreResponse response = client.readabilityScore(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — No description provided. _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -10757,7 +13268,7 @@ ReadabilityScoreResponse response = client.readabilityScore(request);
 <dl>
 <dd>
 
-**target:** `Optional&lt;ReadabilityScoreRequestTarget&gt;` — No description provided. _(optional)_
+**target:** `Optional<ReadabilityScoreRequestTarget>` — Target audience used to tune sentence difficulty levels
     
 </dd>
 </dl>
@@ -10765,7 +13276,7 @@ ReadabilityScoreResponse response = client.readabilityScore(request);
 <dl>
 <dd>
 
-**exclude:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**exclude:** `Optional<String>` — Comma-separated response sections to omit. Possible values are readability_scores, sentence_readability, readability_grade
     
 </dd>
 </dl>
@@ -10773,19 +13284,19 @@ ReadabilityScoreResponse response = client.readabilityScore(request);
 <dl>
 <dd>
 
-**text:** `String` — Text to analyze for readability _(required)_
+**text:** `String` — Text to analyze for readability
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.astronomyLookup(request) -> AstronomyLookupResponse</code></summary>
+<details><summary><code>client.astronomyLookup() -> AstronomyLookupResponse</code></summary>
 <dl>
 <dd>
 
@@ -10794,8 +13305,12 @@ ReadabilityScoreResponse response = client.readabilityScore(request);
 <dl>
 <dd>
 
-Retrieve sunrise and sunset times, current position of the moon, and other related information by specifying a location address, location coordinates, IP address, or using the client IP address if no parameter is passed.
+<dl>
+<dd>
 
+Retrieve sunrise and sunset times, current position of the moon, and other related information by specifying a location address, location coordinates, IP address, or using the client IP address if no parameter is passed.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10804,18 +13319,19 @@ Retrieve sunrise and sunset times, current position of the moon, and other relat
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.AstronomyLookupRequest;
-import com.apifreaks.sdk.types.AstronomyLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-AstronomyLookupRequest request = AstronomyLookupRequest.builder()
+client.astronomyLookup(
+    AstronomyLookupRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-AstronomyLookupResponse response = client.astronomyLookup(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10827,7 +13343,7 @@ AstronomyLookupResponse response = client.astronomyLookup(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -10835,7 +13351,7 @@ AstronomyLookupResponse response = client.astronomyLookup(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;AstronomyLookupRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<AstronomyLookupRequestFormat>` — Format of the response.
     
 </dd>
 </dl>
@@ -10843,7 +13359,7 @@ AstronomyLookupResponse response = client.astronomyLookup(request);
 <dl>
 <dd>
 
-**location:** `Optional&lt;String&gt;` — Location name or address _(optional)_
+**location:** `Optional<String>` — Location name or address
     
 </dd>
 </dl>
@@ -10851,7 +13367,7 @@ AstronomyLookupResponse response = client.astronomyLookup(request);
 <dl>
 <dd>
 
-**lat:** `Optional&lt;Float&gt;` — Latitude for location coordinates _(optional)_
+**lat:** `Optional<Float>` — Latitude for location coordinates
     
 </dd>
 </dl>
@@ -10859,7 +13375,7 @@ AstronomyLookupResponse response = client.astronomyLookup(request);
 <dl>
 <dd>
 
-**long_:** `Optional&lt;Float&gt;` — No description provided. _(optional)_
+**long_:** `Optional<Float>` — Longitude for location coordinates
     
 </dd>
 </dl>
@@ -10867,7 +13383,7 @@ AstronomyLookupResponse response = client.astronomyLookup(request);
 <dl>
 <dd>
 
-**ip:** `Optional&lt;String&gt;` — IP address for location detection _(optional)_
+**ip:** `Optional<String>` — IP address for location detection
     
 </dd>
 </dl>
@@ -10875,7 +13391,7 @@ AstronomyLookupResponse response = client.astronomyLookup(request);
 <dl>
 <dd>
 
-**lang:** `Optional&lt;String&gt;` — IP address for location detection _(optional)_
+**lang:** `Optional<String>` 
     
 </dd>
 </dl>
@@ -10883,7 +13399,7 @@ AstronomyLookupResponse response = client.astronomyLookup(request);
 <dl>
 <dd>
 
-**date:** `Optional&lt;String&gt;` — Date for astronomy data (YYYY-MM-DD) _(optional)_
+**date:** `Optional<String>` — Date for astronomy data (YYYY-MM-DD)
     
 </dd>
 </dl>
@@ -10891,7 +13407,7 @@ AstronomyLookupResponse response = client.astronomyLookup(request);
 <dl>
 <dd>
 
-**elevation:** `Optional&lt;Double&gt;` — Timezone of the location for which astronomy data is required _(optional)_
+**elevation:** `Optional<Double>` — Timezone of the location for which astronomy data is required
     
 </dd>
 </dl>
@@ -10899,19 +13415,19 @@ AstronomyLookupResponse response = client.astronomyLookup(request);
 <dl>
 <dd>
 
-**timeZone:** `Optional&lt;String&gt;` — No description provided. _(optional)_
+**timeZone:** `Optional<String>` — 
     
 </dd>
 </dl>
-
 </dd>
 </dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.astronomyLookupV2(request) -> AstronomyLookupResponse</code></summary>
+<details><summary><code>client.getCreditsUsage() -> GetCreditsUsageResponse</code></summary>
 <dl>
 <dd>
 
@@ -10920,10 +13436,12 @@ AstronomyLookupResponse response = client.astronomyLookup(request);
 <dl>
 <dd>
 
-> **v2.0 endpoint** — maps to `/v2.0/geolocation/astronomy`. Uses the same request and response types as the v1 `astronomyLookup` method.
+<dl>
+<dd>
 
-Retrieve sunrise and sunset times, current position of the moon, and other related information by specifying a location address, location coordinates, IP address, or using the client IP address if no parameter is passed.
-
+Returns subscription, subscription-surcharge, and one-off credit balances for the authenticated organization's account.
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10932,18 +13450,19 @@ Retrieve sunrise and sunset times, current position of the moon, and other relat
 <dl>
 <dd>
 
+<dl>
+<dd>
+
 ```java
-import com.apifreaks.sdk.ApifreaksApiClient;
-import com.apifreaks.sdk.requests.AstronomyLookupRequest;
-import com.apifreaks.sdk.types.AstronomyLookupResponse;
-
-ApifreaksApiClient client = ApifreaksApiClient.builder().build();
-AstronomyLookupRequest request = AstronomyLookupRequest.builder()
+client.getCreditsUsage(
+    GetCreditsUsageRequest
+        .builder()
         .apiKey("apiKey")
-        .build();
-AstronomyLookupResponse response = client.astronomyLookupV2(request);
+        .build()
+);
 ```
-
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10955,7 +13474,7 @@ AstronomyLookupResponse response = client.astronomyLookupV2(request);
 <dl>
 <dd>
 
-**apiKey:** `String` — Your API key _(required)_
+**apiKey:** `String` — Your API key
     
 </dd>
 </dl>
@@ -10963,77 +13482,13 @@ AstronomyLookupResponse response = client.astronomyLookupV2(request);
 <dl>
 <dd>
 
-**format:** `Optional&lt;AstronomyLookupRequestFormat&gt;` — Format of the response. _(optional)_
+**format:** `Optional<GetCreditsUsageRequestFormat>` — Format of the response. Possible values: json, xml.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**location:** `Optional&lt;String&gt;` — Location name or address _(optional)_
-    
 </dd>
 </dl>
 
-<dl>
-<dd>
-
-**lat:** `Optional&lt;Float&gt;` — Latitude for location coordinates _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**long_:** `Optional&lt;Float&gt;` — No description provided. _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**ip:** `Optional&lt;String&gt;` — IP address for location detection _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**lang:** `Optional&lt;String&gt;` — IP address for location detection _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**date:** `Optional&lt;String&gt;` — Date for astronomy data (YYYY-MM-DD) _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**elevation:** `Optional&lt;Double&gt;` — Timezone of the location for which astronomy data is required _(optional)_
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**timeZone:** `Optional&lt;String&gt;` — No description provided. _(optional)_
-    
-</dd>
-</dl>
-
-</dd>
-</dl>
 
 </dd>
 </dl>

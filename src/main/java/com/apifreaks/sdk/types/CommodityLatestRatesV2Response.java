@@ -37,16 +37,20 @@ public final class CommodityLatestRatesV2Response {
 
   private final Optional<String> warning;
 
+  private final Optional<Map<String, CommodityLatestRatesV2ResponseUnresolvedValue>> unresolved;
+
   private final Map<String, Object> additionalProperties;
 
   private CommodityLatestRatesV2Response(boolean success, int timestamp, Map<String, Double> rates,
       Map<String, CommodityLatestRatesV2ResponseMetadataValue> metadata, Optional<String> warning,
+      Optional<Map<String, CommodityLatestRatesV2ResponseUnresolvedValue>> unresolved,
       Map<String, Object> additionalProperties) {
     this.success = success;
     this.timestamp = timestamp;
     this.rates = rates;
     this.metadata = metadata;
     this.warning = warning;
+    this.unresolved = unresolved;
     this.additionalProperties = additionalProperties;
   }
 
@@ -90,6 +94,14 @@ public final class CommodityLatestRatesV2Response {
     return warning;
   }
 
+  /**
+   * @return Present only on a 206 Partial Content response, when some requested symbols could not be resolved. Map of each unresolved symbol to a detail message and optional close-match suggestions.
+   */
+  @JsonProperty("unresolved")
+  public Optional<Map<String, CommodityLatestRatesV2ResponseUnresolvedValue>> getUnresolved() {
+    return unresolved;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -102,12 +114,12 @@ public final class CommodityLatestRatesV2Response {
   }
 
   private boolean equalTo(CommodityLatestRatesV2Response other) {
-    return success == other.success && timestamp == other.timestamp && rates.equals(other.rates) && metadata.equals(other.metadata) && warning.equals(other.warning);
+    return success == other.success && timestamp == other.timestamp && rates.equals(other.rates) && metadata.equals(other.metadata) && warning.equals(other.warning) && unresolved.equals(other.unresolved);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.success, this.timestamp, this.rates, this.metadata, this.warning);
+    return Objects.hash(this.success, this.timestamp, this.rates, this.metadata, this.warning, this.unresolved);
   }
 
   @java.lang.Override
@@ -166,6 +178,14 @@ public final class CommodityLatestRatesV2Response {
     _FinalStage warning(Optional<String> warning);
 
     _FinalStage warning(String warning);
+
+    /**
+     * <p>Present only on a 206 Partial Content response, when some requested symbols could not be resolved. Map of each unresolved symbol to a detail message and optional close-match suggestions.</p>
+     */
+    _FinalStage unresolved(
+        Optional<Map<String, CommodityLatestRatesV2ResponseUnresolvedValue>> unresolved);
+
+    _FinalStage unresolved(Map<String, CommodityLatestRatesV2ResponseUnresolvedValue> unresolved);
   }
 
   @JsonIgnoreProperties(
@@ -176,13 +196,14 @@ public final class CommodityLatestRatesV2Response {
 
     private int timestamp;
 
+    private Optional<Map<String, CommodityLatestRatesV2ResponseUnresolvedValue>> unresolved = Optional.empty();
+
     private Optional<String> warning = Optional.empty();
 
     private Map<String, CommodityLatestRatesV2ResponseMetadataValue> metadata = new LinkedHashMap<>();
 
     private Map<String, Double> rates = new LinkedHashMap<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -195,11 +216,11 @@ public final class CommodityLatestRatesV2Response {
       rates(other.getRates());
       metadata(other.getMetadata());
       warning(other.getWarning());
+      unresolved(other.getUnresolved());
       return this;
     }
 
     /**
-     * <p>API request success indicator. &quot;true&quot; for successful requests.</p>
      * <p>API request success indicator. &quot;true&quot; for successful requests.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -212,13 +233,37 @@ public final class CommodityLatestRatesV2Response {
 
     /**
      * <p>Unix timestamp (seconds) indicating when the response was generated.</p>
-     * <p>Unix timestamp (seconds) indicating when the response was generated.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("timestamp")
     public _FinalStage timestamp(int timestamp) {
       this.timestamp = timestamp;
+      return this;
+    }
+
+    /**
+     * <p>Present only on a 206 Partial Content response, when some requested symbols could not be resolved. Map of each unresolved symbol to a detail message and optional close-match suggestions.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage unresolved(
+        Map<String, CommodityLatestRatesV2ResponseUnresolvedValue> unresolved) {
+      this.unresolved = Optional.ofNullable(unresolved);
+      return this;
+    }
+
+    /**
+     * <p>Present only on a 206 Partial Content response, when some requested symbols could not be resolved. Map of each unresolved symbol to a detail message and optional close-match suggestions.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "unresolved",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage unresolved(
+        Optional<Map<String, CommodityLatestRatesV2ResponseUnresolvedValue>> unresolved) {
+      this.unresolved = unresolved;
       return this;
     }
 
@@ -324,7 +369,15 @@ public final class CommodityLatestRatesV2Response {
 
     @java.lang.Override
     public CommodityLatestRatesV2Response build() {
-      return new CommodityLatestRatesV2Response(success, timestamp, rates, metadata, warning, additionalProperties);
+      return new CommodityLatestRatesV2Response(success, timestamp, rates, metadata, warning, unresolved, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("success") || key.equalsIgnoreCase("timestamp") || key.equalsIgnoreCase("rates") || key.equalsIgnoreCase("metadata") || key.equalsIgnoreCase("warning") || key.equalsIgnoreCase("unresolved")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

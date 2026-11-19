@@ -153,7 +153,6 @@ public final class CommodityFluctuationResponseRatesValue {
 
     private double changePercent;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -170,7 +169,6 @@ public final class CommodityFluctuationResponseRatesValue {
 
     /**
      * <p>The price of the commodity on the start date of the interval.</p>
-     * <p>The price of the commodity on the start date of the interval.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -181,7 +179,6 @@ public final class CommodityFluctuationResponseRatesValue {
     }
 
     /**
-     * <p>The price of the commodity on the end date of the interval.</p>
      * <p>The price of the commodity on the end date of the interval.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -194,7 +191,6 @@ public final class CommodityFluctuationResponseRatesValue {
 
     /**
      * <p>The absolute price difference between the end and start date. May be positive or negative.</p>
-     * <p>The absolute price difference between the end and start date. May be positive or negative.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -205,7 +201,6 @@ public final class CommodityFluctuationResponseRatesValue {
     }
 
     /**
-     * <p>The percentage change in price from start to end date. May be positive or negative.</p>
      * <p>The percentage change in price from start to end date. May be positive or negative.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -219,6 +214,14 @@ public final class CommodityFluctuationResponseRatesValue {
     @java.lang.Override
     public CommodityFluctuationResponseRatesValue build() {
       return new CommodityFluctuationResponseRatesValue(startRate, endRate, change, changePercent, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("startRate") || key.equalsIgnoreCase("endRate") || key.equalsIgnoreCase("change") || key.equalsIgnoreCase("changePercent")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -138,7 +138,6 @@ public final class DomainDnsReverseResponse {
 
     private List<DomainDnsReverseResponseReverseDnsRecordsItem> reverseDnsRecords = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -207,6 +206,14 @@ public final class DomainDnsReverseResponse {
     @java.lang.Override
     public DomainDnsReverseResponse build() {
       return new DomainDnsReverseResponse(totalRecords, totalPages, currentPage, reverseDnsRecords, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("totalRecords") || key.equalsIgnoreCase("totalPages") || key.equalsIgnoreCase("currentPage") || key.equalsIgnoreCase("reverseDnsRecords")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

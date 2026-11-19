@@ -5,21 +5,21 @@
 package com.apifreaks.sdk.errors;
 
 import com.apifreaks.sdk.core.ApifreaksApiApiException;
-import java.lang.Object;
+import com.apifreaks.sdk.types.UnauthorizedErrorBody;
 import okhttp3.Response;
 
 public final class UnauthorizedError extends ApifreaksApiApiException {
   /**
    * The body of the response that triggered the exception.
    */
-  private final Object body;
+  private final UnauthorizedErrorBody body;
 
-  public UnauthorizedError(Object body) {
+  public UnauthorizedError(UnauthorizedErrorBody body) {
     super("UnauthorizedError", 401, body);
     this.body = body;
   }
 
-  public UnauthorizedError(Object body, Response rawResponse) {
+  public UnauthorizedError(UnauthorizedErrorBody body, Response rawResponse) {
     super("UnauthorizedError", 401, body, rawResponse);
     this.body = body;
   }
@@ -28,7 +28,7 @@ public final class UnauthorizedError extends ApifreaksApiApiException {
    * @return the body
    */
   @java.lang.Override
-  public Object body() {
+  public UnauthorizedErrorBody body() {
     return this.body;
   }
 }

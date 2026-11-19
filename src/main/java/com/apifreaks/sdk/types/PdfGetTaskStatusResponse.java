@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
-import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,7 @@ public final class PdfGetTaskStatusResponse {
 
   private final String status;
 
-  private final OffsetDateTime createdAt;
+  private final String createdAt;
 
   private final Optional<String> zipOutputUrl;
 
@@ -48,14 +47,16 @@ public final class PdfGetTaskStatusResponse {
 
   private final Optional<String> message;
 
-  private final Optional<OffsetDateTime> expiresAt;
+  private final Optional<String> expiresAt;
+
+  private final Optional<String> zipFileUrl;
 
   private final Map<String, Object> additionalProperties;
 
-  private PdfGetTaskStatusResponse(String taskId, String status, OffsetDateTime createdAt,
+  private PdfGetTaskStatusResponse(String taskId, String status, String createdAt,
       Optional<String> zipOutputUrl, Optional<String> zipFileId, Optional<List<String>> outputUrls,
       Optional<List<String>> outputIds, Optional<List<String>> inputIds, Optional<String> error,
-      Optional<String> message, Optional<OffsetDateTime> expiresAt,
+      Optional<String> message, Optional<String> expiresAt, Optional<String> zipFileUrl,
       Map<String, Object> additionalProperties) {
     this.taskId = taskId;
     this.status = status;
@@ -68,6 +69,7 @@ public final class PdfGetTaskStatusResponse {
     this.error = error;
     this.message = message;
     this.expiresAt = expiresAt;
+    this.zipFileUrl = zipFileUrl;
     this.additionalProperties = additionalProperties;
   }
 
@@ -91,12 +93,12 @@ public final class PdfGetTaskStatusResponse {
    * @return The timestamp when the task status was created, formatted as 'yyyy-MM-dd HH:mm:ss'.
    */
   @JsonProperty("createdAt")
-  public OffsetDateTime getCreatedAt() {
+  public String getCreatedAt() {
     return createdAt;
   }
 
   /**
-   * @return The URL to download all output files as a single ZIP archive. This is present only when the task status is 'COMPLETED'.
+   * @return Deprecated: the API returns this field as <code>zipFileUrl</code>; read <code>zipFileUrl</code> instead.
    */
   @JsonProperty("zipOutputUrl")
   public Optional<String> getZipOutputUrl() {
@@ -155,8 +157,16 @@ public final class PdfGetTaskStatusResponse {
    * @return The timestamp when the task status will expire and be removed from the system, formatted as 'yyyy-MM-dd HH:mm:ss'.
    */
   @JsonProperty("expiresAt")
-  public Optional<OffsetDateTime> getExpiresAt() {
+  public Optional<String> getExpiresAt() {
     return expiresAt;
+  }
+
+  /**
+   * @return URL to download all output files as a ZIP archive; present only on completed tasks.
+   */
+  @JsonProperty("zipFileUrl")
+  public Optional<String> getZipFileUrl() {
+    return zipFileUrl;
   }
 
   @java.lang.Override
@@ -171,12 +181,12 @@ public final class PdfGetTaskStatusResponse {
   }
 
   private boolean equalTo(PdfGetTaskStatusResponse other) {
-    return taskId.equals(other.taskId) && status.equals(other.status) && createdAt.equals(other.createdAt) && zipOutputUrl.equals(other.zipOutputUrl) && zipFileId.equals(other.zipFileId) && outputUrls.equals(other.outputUrls) && outputIds.equals(other.outputIds) && inputIds.equals(other.inputIds) && error.equals(other.error) && message.equals(other.message) && expiresAt.equals(other.expiresAt);
+    return taskId.equals(other.taskId) && status.equals(other.status) && createdAt.equals(other.createdAt) && zipOutputUrl.equals(other.zipOutputUrl) && zipFileId.equals(other.zipFileId) && outputUrls.equals(other.outputUrls) && outputIds.equals(other.outputIds) && inputIds.equals(other.inputIds) && error.equals(other.error) && message.equals(other.message) && expiresAt.equals(other.expiresAt) && zipFileUrl.equals(other.zipFileUrl);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.taskId, this.status, this.createdAt, this.zipOutputUrl, this.zipFileId, this.outputUrls, this.outputIds, this.inputIds, this.error, this.message, this.expiresAt);
+    return Objects.hash(this.taskId, this.status, this.createdAt, this.zipOutputUrl, this.zipFileId, this.outputUrls, this.outputIds, this.inputIds, this.error, this.message, this.expiresAt, this.zipFileUrl);
   }
 
   @java.lang.Override
@@ -208,7 +218,7 @@ public final class PdfGetTaskStatusResponse {
     /**
      * <p>The timestamp when the task status was created, formatted as 'yyyy-MM-dd HH:mm:ss'.</p>
      */
-    _FinalStage createdAt(@NotNull OffsetDateTime createdAt);
+    _FinalStage createdAt(@NotNull String createdAt);
   }
 
   public interface _FinalStage {
@@ -219,7 +229,7 @@ public final class PdfGetTaskStatusResponse {
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
 
     /**
-     * <p>The URL to download all output files as a single ZIP archive. This is present only when the task status is 'COMPLETED'.</p>
+     * <p>Deprecated: the API returns this field as <code>zipFileUrl</code>; read <code>zipFileUrl</code> instead.</p>
      */
     _FinalStage zipOutputUrl(Optional<String> zipOutputUrl);
 
@@ -270,9 +280,16 @@ public final class PdfGetTaskStatusResponse {
     /**
      * <p>The timestamp when the task status will expire and be removed from the system, formatted as 'yyyy-MM-dd HH:mm:ss'.</p>
      */
-    _FinalStage expiresAt(Optional<OffsetDateTime> expiresAt);
+    _FinalStage expiresAt(Optional<String> expiresAt);
 
-    _FinalStage expiresAt(OffsetDateTime expiresAt);
+    _FinalStage expiresAt(String expiresAt);
+
+    /**
+     * <p>URL to download all output files as a ZIP archive; present only on completed tasks.</p>
+     */
+    _FinalStage zipFileUrl(Optional<String> zipFileUrl);
+
+    _FinalStage zipFileUrl(String zipFileUrl);
   }
 
   @JsonIgnoreProperties(
@@ -283,9 +300,11 @@ public final class PdfGetTaskStatusResponse {
 
     private String status;
 
-    private OffsetDateTime createdAt;
+    private String createdAt;
 
-    private Optional<OffsetDateTime> expiresAt = Optional.empty();
+    private Optional<String> zipFileUrl = Optional.empty();
+
+    private Optional<String> expiresAt = Optional.empty();
 
     private Optional<String> message = Optional.empty();
 
@@ -301,7 +320,6 @@ public final class PdfGetTaskStatusResponse {
 
     private Optional<String> zipOutputUrl = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -320,11 +338,11 @@ public final class PdfGetTaskStatusResponse {
       error(other.getError());
       message(other.getMessage());
       expiresAt(other.getExpiresAt());
+      zipFileUrl(other.getZipFileUrl());
       return this;
     }
 
     /**
-     * <p>The unique identifier of the PDF processing task.</p>
      * <p>The unique identifier of the PDF processing task.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -337,7 +355,6 @@ public final class PdfGetTaskStatusResponse {
 
     /**
      * <p>The current status of the task (e.g., 'queued', 'processing', 'completed', 'failed').</p>
-     * <p>The current status of the task (e.g., 'queued', 'processing', 'completed', 'failed').</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -349,13 +366,35 @@ public final class PdfGetTaskStatusResponse {
 
     /**
      * <p>The timestamp when the task status was created, formatted as 'yyyy-MM-dd HH:mm:ss'.</p>
-     * <p>The timestamp when the task status was created, formatted as 'yyyy-MM-dd HH:mm:ss'.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("createdAt")
-    public _FinalStage createdAt(@NotNull OffsetDateTime createdAt) {
+    public _FinalStage createdAt(@NotNull String createdAt) {
       this.createdAt = Objects.requireNonNull(createdAt, "createdAt must not be null");
+      return this;
+    }
+
+    /**
+     * <p>URL to download all output files as a ZIP archive; present only on completed tasks.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage zipFileUrl(String zipFileUrl) {
+      this.zipFileUrl = Optional.ofNullable(zipFileUrl);
+      return this;
+    }
+
+    /**
+     * <p>URL to download all output files as a ZIP archive; present only on completed tasks.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "zipFileUrl",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage zipFileUrl(Optional<String> zipFileUrl) {
+      this.zipFileUrl = zipFileUrl;
       return this;
     }
 
@@ -364,7 +403,7 @@ public final class PdfGetTaskStatusResponse {
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage expiresAt(OffsetDateTime expiresAt) {
+    public _FinalStage expiresAt(String expiresAt) {
       this.expiresAt = Optional.ofNullable(expiresAt);
       return this;
     }
@@ -377,7 +416,7 @@ public final class PdfGetTaskStatusResponse {
         value = "expiresAt",
         nulls = Nulls.SKIP
     )
-    public _FinalStage expiresAt(Optional<OffsetDateTime> expiresAt) {
+    public _FinalStage expiresAt(Optional<String> expiresAt) {
       this.expiresAt = expiresAt;
       return this;
     }
@@ -521,7 +560,7 @@ public final class PdfGetTaskStatusResponse {
     }
 
     /**
-     * <p>The URL to download all output files as a single ZIP archive. This is present only when the task status is 'COMPLETED'.</p>
+     * <p>Deprecated: the API returns this field as <code>zipFileUrl</code>; read <code>zipFileUrl</code> instead.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -531,7 +570,7 @@ public final class PdfGetTaskStatusResponse {
     }
 
     /**
-     * <p>The URL to download all output files as a single ZIP archive. This is present only when the task status is 'COMPLETED'.</p>
+     * <p>Deprecated: the API returns this field as <code>zipFileUrl</code>; read <code>zipFileUrl</code> instead.</p>
      */
     @java.lang.Override
     @JsonSetter(
@@ -545,7 +584,15 @@ public final class PdfGetTaskStatusResponse {
 
     @java.lang.Override
     public PdfGetTaskStatusResponse build() {
-      return new PdfGetTaskStatusResponse(taskId, status, createdAt, zipOutputUrl, zipFileId, outputUrls, outputIds, inputIds, error, message, expiresAt, additionalProperties);
+      return new PdfGetTaskStatusResponse(taskId, status, createdAt, zipOutputUrl, zipFileId, outputUrls, outputIds, inputIds, error, message, expiresAt, zipFileUrl, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("taskId") || key.equalsIgnoreCase("status") || key.equalsIgnoreCase("createdAt") || key.equalsIgnoreCase("zipOutputUrl") || key.equalsIgnoreCase("zipFileId") || key.equalsIgnoreCase("outputUrls") || key.equalsIgnoreCase("outputIds") || key.equalsIgnoreCase("inputIds") || key.equalsIgnoreCase("error") || key.equalsIgnoreCase("message") || key.equalsIgnoreCase("expiresAt") || key.equalsIgnoreCase("zipFileUrl")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

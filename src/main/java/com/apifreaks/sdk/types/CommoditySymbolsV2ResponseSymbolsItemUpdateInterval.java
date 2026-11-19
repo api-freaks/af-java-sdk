@@ -10,6 +10,8 @@ import java.lang.Object;
 import java.lang.String;
 
 public final class CommoditySymbolsV2ResponseSymbolsItemUpdateInterval {
+  public static final CommoditySymbolsV2ResponseSymbolsItemUpdateInterval PER6MONTHS = new CommoditySymbolsV2ResponseSymbolsItemUpdateInterval(Value.PER6MONTHS, "PER_6_MONTHS");
+
   public static final CommoditySymbolsV2ResponseSymbolsItemUpdateInterval PER_SECOND = new CommoditySymbolsV2ResponseSymbolsItemUpdateInterval(Value.PER_SECOND, "PER_SECOND");
 
   public static final CommoditySymbolsV2ResponseSymbolsItemUpdateInterval PER_MINUTE = new CommoditySymbolsV2ResponseSymbolsItemUpdateInterval(Value.PER_MINUTE, "PER_MINUTE");
@@ -56,6 +58,8 @@ public final class CommoditySymbolsV2ResponseSymbolsItemUpdateInterval {
 
   public <T> T visit(Visitor<T> visitor) {
     switch (value) {
+      case PER6MONTHS:
+        return visitor.visitPer6Months();
       case PER_SECOND:
         return visitor.visitPerSecond();
       case PER_MINUTE:
@@ -81,6 +85,8 @@ public final class CommoditySymbolsV2ResponseSymbolsItemUpdateInterval {
   )
   public static CommoditySymbolsV2ResponseSymbolsItemUpdateInterval valueOf(String value) {
     switch (value) {
+      case "PER_6_MONTHS":
+        return PER6MONTHS;
       case "PER_SECOND":
         return PER_SECOND;
       case "PER_MINUTE":
@@ -115,6 +121,8 @@ public final class CommoditySymbolsV2ResponseSymbolsItemUpdateInterval {
 
     PER_MONTH,
 
+    PER6MONTHS,
+
     UNKNOWN
   }
 
@@ -132,6 +140,8 @@ public final class CommoditySymbolsV2ResponseSymbolsItemUpdateInterval {
     T visitPerWeek();
 
     T visitPerMonth();
+
+    T visitPer6Months();
 
     T visitUnknown(String unknownType);
   }

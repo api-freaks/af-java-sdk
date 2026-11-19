@@ -233,7 +233,6 @@ public final class EmailValidateResponse {
 
     private Optional<String> name = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -371,6 +370,14 @@ public final class EmailValidateResponse {
     @java.lang.Override
     public EmailValidateResponse build() {
       return new EmailValidateResponse(success, email, name, reason, validEmail, validSyntax, domain, account, dns, ip, address, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("success") || key.equalsIgnoreCase("email") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("reason") || key.equalsIgnoreCase("validEmail") || key.equalsIgnoreCase("validSyntax") || key.equalsIgnoreCase("domain") || key.equalsIgnoreCase("account") || key.equalsIgnoreCase("dns") || key.equalsIgnoreCase("ip") || key.equalsIgnoreCase("address")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

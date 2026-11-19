@@ -137,7 +137,6 @@ public final class PdfGetFileStatusRequest {
 
     private Optional<PdfGetFileStatusRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -153,7 +152,6 @@ public final class PdfGetFileStatusRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -164,7 +162,6 @@ public final class PdfGetFileStatusRequest {
     }
 
     /**
-     * <p>The unique ID of the file whose status is requested.</p>
      * <p>The unique ID of the file whose status is requested.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -201,6 +198,14 @@ public final class PdfGetFileStatusRequest {
     @java.lang.Override
     public PdfGetFileStatusRequest build() {
       return new PdfGetFileStatusRequest(apiKey, format, fileId, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("file_id")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

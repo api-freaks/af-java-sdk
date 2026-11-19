@@ -227,7 +227,6 @@ public final class DomainReputationResponseEmailDeliverability {
 
     private List<DomainReputationResponseEmailDeliverabilityIssuesItem> issues = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -247,7 +246,6 @@ public final class DomainReputationResponseEmailDeliverability {
 
     /**
      * <p>Overall email deliverability score out of 100.</p>
-     * <p>Overall email deliverability score out of 100.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -258,7 +256,6 @@ public final class DomainReputationResponseEmailDeliverability {
     }
 
     /**
-     * <p>Letter / word grade summarizing the deliverability score.</p>
      * <p>Letter / word grade summarizing the deliverability score.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -271,7 +268,6 @@ public final class DomainReputationResponseEmailDeliverability {
 
     /**
      * <p>Indicates whether the domain is configured to receive email.</p>
-     * <p>Indicates whether the domain is configured to receive email.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -282,7 +278,6 @@ public final class DomainReputationResponseEmailDeliverability {
     }
 
     /**
-     * <p>Email authentication mechanisms configured for the domain.</p>
      * <p>Email authentication mechanisms configured for the domain.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -296,7 +291,6 @@ public final class DomainReputationResponseEmailDeliverability {
 
     /**
      * <p>Mail server infrastructure backing the domain.</p>
-     * <p>Mail server infrastructure backing the domain.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -308,7 +302,6 @@ public final class DomainReputationResponseEmailDeliverability {
     }
 
     /**
-     * <p>Reputation and trust signals related to the domain's email sending history.</p>
      * <p>Reputation and trust signals related to the domain's email sending history.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -362,6 +355,14 @@ public final class DomainReputationResponseEmailDeliverability {
     @java.lang.Override
     public DomainReputationResponseEmailDeliverability build() {
       return new DomainReputationResponseEmailDeliverability(score, grade, canReceiveEmail, authentication, infrastructure, reputation, issues, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("score") || key.equalsIgnoreCase("grade") || key.equalsIgnoreCase("can_receive_email") || key.equalsIgnoreCase("authentication") || key.equalsIgnoreCase("infrastructure") || key.equalsIgnoreCase("reputation") || key.equalsIgnoreCase("issues")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -79,7 +79,6 @@ public final class GrammarDetectResponse {
   public static final class Builder {
     private List<GrammarDetectResponseGrammarErrorsItem> grammarErrors = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -119,6 +118,14 @@ public final class GrammarDetectResponse {
 
     public GrammarDetectResponse build() {
       return new GrammarDetectResponse(grammarErrors, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("grammar_errors")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

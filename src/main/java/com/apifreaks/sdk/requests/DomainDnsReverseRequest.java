@@ -219,7 +219,6 @@ public final class DomainDnsReverseRequest {
 
     private Optional<DomainDnsReverseRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -237,7 +236,6 @@ public final class DomainDnsReverseRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -259,16 +257,6 @@ public final class DomainDnsReverseRequest {
      * <li>SPF/TXT: Target verification strings</li>
      * <li>CNAME: Target hostname</li>
      * </ul>
-     * <p>The type of reverse DNS lookup to perform. Determines how the value parameter is interpreted:</p>
-     * <ul>
-     * <li>A: IPv4 CIDR block</li>
-     * <li>AAAA: IPv6 CIDR block</li>
-     * <li>MX: Mail provider domain</li>
-     * <li>NS: Name server provider hostname</li>
-     * <li>SOA: SOA record admin domain</li>
-     * <li>SPF/TXT: Target verification strings</li>
-     * <li>CNAME: Target hostname</li>
-     * </ul>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -279,7 +267,6 @@ public final class DomainDnsReverseRequest {
     }
 
     /**
-     * <p>Provide an IP or CIDR for A/AAAA lookups, or a hostname/selector for MX, NS, SOA, SPF, TXT, and CNAME queries. Wildcard regex patterns are also supported (e.g., mail.google.com, m*.google.com, _spf.g*.com, s*.g*.com).</p>
      * <p>Provide an IP or CIDR for A/AAAA lookups, or a hostname/selector for MX, NS, SOA, SPF, TXT, and CNAME queries. Wildcard regex patterns are also supported (e.g., mail.google.com, m*.google.com, _spf.g*.com, s*.g*.com).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -362,6 +349,14 @@ public final class DomainDnsReverseRequest {
     @java.lang.Override
     public DomainDnsReverseRequest build() {
       return new DomainDnsReverseRequest(apiKey, format, type, value, exact, page, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("value") || key.equalsIgnoreCase("exact") || key.equalsIgnoreCase("page")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -261,7 +261,6 @@ public final class DomainWhoisLookupResponse {
 
     private Optional<DomainWhoisLookupResponseRegistryData> registryData = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -554,6 +553,14 @@ public final class DomainWhoisLookupResponse {
 
     public DomainWhoisLookupResponse build() {
       return new DomainWhoisLookupResponse(status, domainName, queryTime, whoisServer, domainRegistered, createDate, updateDate, expiryDate, domainRegistrar, resellerContact, registrantContact, administrativeContact, technicalContact, billingContact, nameServers, domainStatus, whoisRawDomain, registryData, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("status") || key.equalsIgnoreCase("domain_name") || key.equalsIgnoreCase("query_time") || key.equalsIgnoreCase("whois_server") || key.equalsIgnoreCase("domain_registered") || key.equalsIgnoreCase("create_date") || key.equalsIgnoreCase("update_date") || key.equalsIgnoreCase("expiry_date") || key.equalsIgnoreCase("domain_registrar") || key.equalsIgnoreCase("reseller_contact") || key.equalsIgnoreCase("registrant_contact") || key.equalsIgnoreCase("administrative_contact") || key.equalsIgnoreCase("technical_contact") || key.equalsIgnoreCase("billing_contact") || key.equalsIgnoreCase("name_servers") || key.equalsIgnoreCase("domain_status") || key.equalsIgnoreCase("whois_raw_domain") || key.equalsIgnoreCase("registry_data")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

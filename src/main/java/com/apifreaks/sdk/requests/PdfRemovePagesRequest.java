@@ -261,7 +261,6 @@ public final class PdfRemovePagesRequest {
 
     private Optional<String> webhookAuthorization = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -283,7 +282,6 @@ public final class PdfRemovePagesRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -294,7 +292,6 @@ public final class PdfRemovePagesRequest {
     }
 
     /**
-     * <p>Specifies which pages to remove from the PDF. Accepts individual page numbers (e.g., '1,7') and/or ascending page ranges (e.g., '3-5'). Use commas to separate entries and hyphens for ranges. Reverse ranges (e.g., '5-3') are not allowed. Alternatively, you may provide only one of the following keywords: 'even' (removes all even-numbered pages), 'odd' (removes all odd-numbered pages), or 'last' (removes only the last page). The keyword 'all' is not supported for this operation. Examples: '1,3-5', 'even'. Mixing special keywords with specific pages/ranges is not allowed.</p>
      * <p>Specifies which pages to remove from the PDF. Accepts individual page numbers (e.g., '1,7') and/or ascending page ranges (e.g., '3-5'). Use commas to separate entries and hyphens for ranges. Reverse ranges (e.g., '5-3') are not allowed. Alternatively, you may provide only one of the following keywords: 'even' (removes all even-numbered pages), 'odd' (removes all odd-numbered pages), or 'last' (removes only the last page). The keyword 'all' is not supported for this operation. Examples: '1,3-5', 'even'. Mixing special keywords with specific pages/ranges is not allowed.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -465,6 +462,14 @@ public final class PdfRemovePagesRequest {
     @java.lang.Override
     public PdfRemovePagesRequest build() {
       return new PdfRemovePagesRequest(webhookAuthorization, apiKey, format, fileId, destroy, output, pages, webhookUrl, webhookFailureNotification, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("file_id") || key.equalsIgnoreCase("destroy") || key.equalsIgnoreCase("output") || key.equalsIgnoreCase("pages") || key.equalsIgnoreCase("webhook_url") || key.equalsIgnoreCase("webhook_failure_notification")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -152,7 +152,6 @@ public final class ReadabilityScoreResponseReadabilityScores {
 
     private Optional<ReadabilityScoreResponseReadabilityScoresAutomatedReadabilityIndex> automatedReadabilityIndex = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -282,6 +281,14 @@ public final class ReadabilityScoreResponseReadabilityScores {
 
     public ReadabilityScoreResponseReadabilityScores build() {
       return new ReadabilityScoreResponseReadabilityScores(fleschReadingEase, fleschKincaidGrade, gunningFog, smogIndex, colemanLiauIndex, automatedReadabilityIndex, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("flesch_reading_ease") || key.equalsIgnoreCase("flesch_kincaid_grade") || key.equalsIgnoreCase("gunning_fog") || key.equalsIgnoreCase("smog_index") || key.equalsIgnoreCase("coleman_liau_index") || key.equalsIgnoreCase("automated_readability_index")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -272,7 +272,6 @@ public final class AstronomyLookupRequest {
 
     private Optional<AstronomyLookupRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -294,7 +293,6 @@ public final class AstronomyLookupRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -504,6 +502,14 @@ public final class AstronomyLookupRequest {
     @java.lang.Override
     public AstronomyLookupRequest build() {
       return new AstronomyLookupRequest(apiKey, format, location, lat, long_, ip, lang, date, elevation, timeZone, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("location") || key.equalsIgnoreCase("lat") || key.equalsIgnoreCase("long") || key.equalsIgnoreCase("ip") || key.equalsIgnoreCase("lang") || key.equalsIgnoreCase("date") || key.equalsIgnoreCase("elevation") || key.equalsIgnoreCase("time_zone")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

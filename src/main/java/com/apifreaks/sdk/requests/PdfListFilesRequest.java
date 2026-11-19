@@ -117,7 +117,6 @@ public final class PdfListFilesRequest {
 
     private Optional<PdfListFilesRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -131,7 +130,6 @@ public final class PdfListFilesRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -168,6 +166,14 @@ public final class PdfListFilesRequest {
     @java.lang.Override
     public PdfListFilesRequest build() {
       return new PdfListFilesRequest(apiKey, format, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

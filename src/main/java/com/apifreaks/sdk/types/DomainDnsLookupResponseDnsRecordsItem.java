@@ -43,9 +43,9 @@ public final class DomainDnsLookupResponseDnsRecordsItem {
     if(this.type == 0) {
       return visitor.visit((DomainDnsLookupResponseDnsRecordsItemAddress) this.value);
     } else if(this.type == 1) {
-      return visitor.visit((DomainDnsLookupResponseDnsRecordsItemOne) this.value);
-    } else if(this.type == 2) {
       return visitor.visit((DomainDnsLookupResponseDnsRecordsItemPriority) this.value);
+    } else if(this.type == 2) {
+      return visitor.visit((DomainDnsLookupResponseDnsRecordsItemOne) this.value);
     } else if(this.type == 3) {
       return visitor.visit((DomainDnsLookupResponseDnsRecordsItemSingleName) this.value);
     } else if(this.type == 4) {
@@ -82,12 +82,12 @@ public final class DomainDnsLookupResponseDnsRecordsItem {
   }
 
   public static DomainDnsLookupResponseDnsRecordsItem of(
-      DomainDnsLookupResponseDnsRecordsItemOne value) {
+      DomainDnsLookupResponseDnsRecordsItemPriority value) {
     return new DomainDnsLookupResponseDnsRecordsItem(value, 1);
   }
 
   public static DomainDnsLookupResponseDnsRecordsItem of(
-      DomainDnsLookupResponseDnsRecordsItemPriority value) {
+      DomainDnsLookupResponseDnsRecordsItemOne value) {
     return new DomainDnsLookupResponseDnsRecordsItem(value, 2);
   }
 
@@ -109,9 +109,9 @@ public final class DomainDnsLookupResponseDnsRecordsItem {
   public interface Visitor<T> {
     T visit(DomainDnsLookupResponseDnsRecordsItemAddress value);
 
-    T visit(DomainDnsLookupResponseDnsRecordsItemOne value);
-
     T visit(DomainDnsLookupResponseDnsRecordsItemPriority value);
+
+    T visit(DomainDnsLookupResponseDnsRecordsItemOne value);
 
     T visit(DomainDnsLookupResponseDnsRecordsItemSingleName value);
 
@@ -135,15 +135,15 @@ public final class DomainDnsLookupResponseDnsRecordsItem {
         } catch(RuntimeException e) {
         }
       }
-      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("name") && ((Map<?, ?>) value).containsKey("type") && ((Map<?, ?>) value).containsKey("dnsType") && ((Map<?, ?>) value).containsKey("ttl") && ((Map<?, ?>) value).containsKey("rawText") && ((Map<?, ?>) value).containsKey("rRsetType") && ((Map<?, ?>) value).containsKey("target")) {
-        try {
-          return of(ObjectMappers.JSON_MAPPER.convertValue(value, DomainDnsLookupResponseDnsRecordsItemOne.class));
-        } catch(RuntimeException e) {
-        }
-      }
       if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("name") && ((Map<?, ?>) value).containsKey("type") && ((Map<?, ?>) value).containsKey("dnsType") && ((Map<?, ?>) value).containsKey("ttl") && ((Map<?, ?>) value).containsKey("rawText") && ((Map<?, ?>) value).containsKey("rRsetType") && ((Map<?, ?>) value).containsKey("target") && ((Map<?, ?>) value).containsKey("priority")) {
         try {
           return of(ObjectMappers.JSON_MAPPER.convertValue(value, DomainDnsLookupResponseDnsRecordsItemPriority.class));
+        } catch(RuntimeException e) {
+        }
+      }
+      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("name") && ((Map<?, ?>) value).containsKey("type") && ((Map<?, ?>) value).containsKey("dnsType") && ((Map<?, ?>) value).containsKey("ttl") && ((Map<?, ?>) value).containsKey("rawText") && ((Map<?, ?>) value).containsKey("rRsetType") && ((Map<?, ?>) value).containsKey("target")) {
+        try {
+          return of(ObjectMappers.JSON_MAPPER.convertValue(value, DomainDnsLookupResponseDnsRecordsItemOne.class));
         } catch(RuntimeException e) {
         }
       }

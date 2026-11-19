@@ -4,19 +4,24 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.Nullable;
+import com.apifreaks.sdk.core.NullableNonemptyFilter;
 import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
@@ -26,11 +31,11 @@ import org.jetbrains.annotations.NotNull;
 public final class CurrencySupportedResponseSupportedCurrenciesMapValue {
   private final String currencyCode;
 
-  private final String currencyName;
+  private final Optional<String> currencyName;
 
-  private final String countryCode;
+  private final Optional<String> countryCode;
 
-  private final String countryName;
+  private final Optional<String> countryName;
 
   private final CurrencySupportedResponseSupportedCurrenciesMapValueStatus status;
 
@@ -43,7 +48,7 @@ public final class CurrencySupportedResponseSupportedCurrenciesMapValue {
   private final Map<String, Object> additionalProperties;
 
   private CurrencySupportedResponseSupportedCurrenciesMapValue(String currencyCode,
-      String currencyName, String countryCode, String countryName,
+      Optional<String> currencyName, Optional<String> countryCode, Optional<String> countryName,
       CurrencySupportedResponseSupportedCurrenciesMapValueStatus status, String availableFrom,
       String availableUntil, String icon, Map<String, Object> additionalProperties) {
     this.currencyCode = currencyCode;
@@ -62,18 +67,36 @@ public final class CurrencySupportedResponseSupportedCurrenciesMapValue {
     return currencyCode;
   }
 
-  @JsonProperty("currencyName")
-  public String getCurrencyName() {
+  /**
+   * @return Currency name; null for some entries (e.g. crypto tokens).
+   */
+  @JsonIgnore
+  public Optional<String> getCurrencyName() {
+    if (currencyName == null) {
+      return Optional.empty();
+    }
     return currencyName;
   }
 
-  @JsonProperty("countryCode")
-  public String getCountryCode() {
+  /**
+   * @return Country code; null for currencies not tied to a country.
+   */
+  @JsonIgnore
+  public Optional<String> getCountryCode() {
+    if (countryCode == null) {
+      return Optional.empty();
+    }
     return countryCode;
   }
 
-  @JsonProperty("countryName")
-  public String getCountryName() {
+  /**
+   * @return Country name; null for currencies not tied to a country.
+   */
+  @JsonIgnore
+  public Optional<String> getCountryName() {
+    if (countryName == null) {
+      return Optional.empty();
+    }
     return countryName;
   }
 
@@ -95,6 +118,33 @@ public final class CurrencySupportedResponseSupportedCurrenciesMapValue {
   @JsonProperty("icon")
   public String getIcon() {
     return icon;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("currencyName")
+  private Optional<String> _getCurrencyName() {
+    return currencyName;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("countryCode")
+  private Optional<String> _getCountryCode() {
+    return countryCode;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("countryName")
+  private Optional<String> _getCountryName() {
+    return countryName;
   }
 
   @java.lang.Override
@@ -127,21 +177,9 @@ public final class CurrencySupportedResponseSupportedCurrenciesMapValue {
   }
 
   public interface CurrencyCodeStage {
-    CurrencyNameStage currencyCode(@NotNull String currencyCode);
+    StatusStage currencyCode(@NotNull String currencyCode);
 
     Builder from(CurrencySupportedResponseSupportedCurrenciesMapValue other);
-  }
-
-  public interface CurrencyNameStage {
-    CountryCodeStage currencyName(@NotNull String currencyName);
-  }
-
-  public interface CountryCodeStage {
-    CountryNameStage countryCode(@NotNull String countryCode);
-  }
-
-  public interface CountryNameStage {
-    StatusStage countryName(@NotNull String countryName);
   }
 
   public interface StatusStage {
@@ -167,19 +205,40 @@ public final class CurrencySupportedResponseSupportedCurrenciesMapValue {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
+
+    /**
+     * <p>Currency name; null for some entries (e.g. crypto tokens).</p>
+     */
+    _FinalStage currencyName(Optional<String> currencyName);
+
+    _FinalStage currencyName(String currencyName);
+
+    _FinalStage currencyName(Nullable<String> currencyName);
+
+    /**
+     * <p>Country code; null for currencies not tied to a country.</p>
+     */
+    _FinalStage countryCode(Optional<String> countryCode);
+
+    _FinalStage countryCode(String countryCode);
+
+    _FinalStage countryCode(Nullable<String> countryCode);
+
+    /**
+     * <p>Country name; null for currencies not tied to a country.</p>
+     */
+    _FinalStage countryName(Optional<String> countryName);
+
+    _FinalStage countryName(String countryName);
+
+    _FinalStage countryName(Nullable<String> countryName);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements CurrencyCodeStage, CurrencyNameStage, CountryCodeStage, CountryNameStage, StatusStage, AvailableFromStage, AvailableUntilStage, IconStage, _FinalStage {
+  public static final class Builder implements CurrencyCodeStage, StatusStage, AvailableFromStage, AvailableUntilStage, IconStage, _FinalStage {
     private String currencyCode;
-
-    private String currencyName;
-
-    private String countryCode;
-
-    private String countryName;
 
     private CurrencySupportedResponseSupportedCurrenciesMapValueStatus status;
 
@@ -189,7 +248,12 @@ public final class CurrencySupportedResponseSupportedCurrenciesMapValue {
 
     private String icon;
 
-    @JsonAnySetter
+    private Optional<String> countryName = Optional.empty();
+
+    private Optional<String> countryCode = Optional.empty();
+
+    private Optional<String> currencyName = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -210,29 +274,8 @@ public final class CurrencySupportedResponseSupportedCurrenciesMapValue {
 
     @java.lang.Override
     @JsonSetter("currencyCode")
-    public CurrencyNameStage currencyCode(@NotNull String currencyCode) {
+    public StatusStage currencyCode(@NotNull String currencyCode) {
       this.currencyCode = Objects.requireNonNull(currencyCode, "currencyCode must not be null");
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter("currencyName")
-    public CountryCodeStage currencyName(@NotNull String currencyName) {
-      this.currencyName = Objects.requireNonNull(currencyName, "currencyName must not be null");
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter("countryCode")
-    public CountryNameStage countryCode(@NotNull String countryCode) {
-      this.countryCode = Objects.requireNonNull(countryCode, "countryCode must not be null");
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter("countryName")
-    public StatusStage countryName(@NotNull String countryName) {
-      this.countryName = Objects.requireNonNull(countryName, "countryName must not be null");
       return this;
     }
 
@@ -265,9 +308,140 @@ public final class CurrencySupportedResponseSupportedCurrenciesMapValue {
       return this;
     }
 
+    /**
+     * <p>Country name; null for currencies not tied to a country.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage countryName(Nullable<String> countryName) {
+      if (countryName.isNull()) {
+        this.countryName = null;
+      }
+      else if (countryName.isEmpty()) {
+        this.countryName = Optional.empty();
+      }
+      else {
+        this.countryName = Optional.of(countryName.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Country name; null for currencies not tied to a country.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage countryName(String countryName) {
+      this.countryName = Optional.ofNullable(countryName);
+      return this;
+    }
+
+    /**
+     * <p>Country name; null for currencies not tied to a country.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "countryName",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage countryName(Optional<String> countryName) {
+      this.countryName = countryName;
+      return this;
+    }
+
+    /**
+     * <p>Country code; null for currencies not tied to a country.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage countryCode(Nullable<String> countryCode) {
+      if (countryCode.isNull()) {
+        this.countryCode = null;
+      }
+      else if (countryCode.isEmpty()) {
+        this.countryCode = Optional.empty();
+      }
+      else {
+        this.countryCode = Optional.of(countryCode.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Country code; null for currencies not tied to a country.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage countryCode(String countryCode) {
+      this.countryCode = Optional.ofNullable(countryCode);
+      return this;
+    }
+
+    /**
+     * <p>Country code; null for currencies not tied to a country.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "countryCode",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage countryCode(Optional<String> countryCode) {
+      this.countryCode = countryCode;
+      return this;
+    }
+
+    /**
+     * <p>Currency name; null for some entries (e.g. crypto tokens).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage currencyName(Nullable<String> currencyName) {
+      if (currencyName.isNull()) {
+        this.currencyName = null;
+      }
+      else if (currencyName.isEmpty()) {
+        this.currencyName = Optional.empty();
+      }
+      else {
+        this.currencyName = Optional.of(currencyName.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Currency name; null for some entries (e.g. crypto tokens).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage currencyName(String currencyName) {
+      this.currencyName = Optional.ofNullable(currencyName);
+      return this;
+    }
+
+    /**
+     * <p>Currency name; null for some entries (e.g. crypto tokens).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "currencyName",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage currencyName(Optional<String> currencyName) {
+      this.currencyName = currencyName;
+      return this;
+    }
+
     @java.lang.Override
     public CurrencySupportedResponseSupportedCurrenciesMapValue build() {
       return new CurrencySupportedResponseSupportedCurrenciesMapValue(currencyCode, currencyName, countryCode, countryName, status, availableFrom, availableUntil, icon, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("currencyCode") || key.equalsIgnoreCase("currencyName") || key.equalsIgnoreCase("countryCode") || key.equalsIgnoreCase("countryName") || key.equalsIgnoreCase("status") || key.equalsIgnoreCase("availableFrom") || key.equalsIgnoreCase("availableUntil") || key.equalsIgnoreCase("icon")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

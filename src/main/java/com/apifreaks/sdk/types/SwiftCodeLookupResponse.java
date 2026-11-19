@@ -4,19 +4,24 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.Nullable;
+import com.apifreaks.sdk.core.NullableNonemptyFilter;
 import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
@@ -38,10 +43,17 @@ public final class SwiftCodeLookupResponse {
 
   private final String country;
 
+  private final Optional<String> branchName;
+
+  private final Optional<String> institType;
+
+  private final Optional<String> postalCode;
+
   private final Map<String, Object> additionalProperties;
 
   private SwiftCodeLookupResponse(String swiftCode, String countryCode, String bankAddress,
-      String bankCode, String bankName, String city, String country,
+      String bankCode, String bankName, String city, String country, Optional<String> branchName,
+      Optional<String> institType, Optional<String> postalCode,
       Map<String, Object> additionalProperties) {
     this.swiftCode = swiftCode;
     this.countryCode = countryCode;
@@ -50,6 +62,9 @@ public final class SwiftCodeLookupResponse {
     this.bankName = bankName;
     this.city = city;
     this.country = country;
+    this.branchName = branchName;
+    this.institType = institType;
+    this.postalCode = postalCode;
     this.additionalProperties = additionalProperties;
   }
 
@@ -88,6 +103,54 @@ public final class SwiftCodeLookupResponse {
     return country;
   }
 
+  /**
+   * @return Name of the branch or office. Null when not resolvable.
+   */
+  @JsonIgnore
+  public Optional<String> getBranchName() {
+    if (branchName == null) {
+      return Optional.empty();
+    }
+    return branchName;
+  }
+
+  /**
+   * @return Type of institution: &quot;FIIN&quot; (financial institution) or &quot;NFIN&quot; (non-financial institution).
+   */
+  @JsonProperty("institType")
+  public Optional<String> getInstitType() {
+    return institType;
+  }
+
+  /**
+   * @return Postal/ZIP code of the bank branch. Null when not resolvable.
+   */
+  @JsonIgnore
+  public Optional<String> getPostalCode() {
+    if (postalCode == null) {
+      return Optional.empty();
+    }
+    return postalCode;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("branchName")
+  private Optional<String> _getBranchName() {
+    return branchName;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("postalCode")
+  private Optional<String> _getPostalCode() {
+    return postalCode;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -100,12 +163,12 @@ public final class SwiftCodeLookupResponse {
   }
 
   private boolean equalTo(SwiftCodeLookupResponse other) {
-    return swiftCode.equals(other.swiftCode) && countryCode.equals(other.countryCode) && bankAddress.equals(other.bankAddress) && bankCode.equals(other.bankCode) && bankName.equals(other.bankName) && city.equals(other.city) && country.equals(other.country);
+    return swiftCode.equals(other.swiftCode) && countryCode.equals(other.countryCode) && bankAddress.equals(other.bankAddress) && bankCode.equals(other.bankCode) && bankName.equals(other.bankName) && city.equals(other.city) && country.equals(other.country) && branchName.equals(other.branchName) && institType.equals(other.institType) && postalCode.equals(other.postalCode);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.swiftCode, this.countryCode, this.bankAddress, this.bankCode, this.bankName, this.city, this.country);
+    return Objects.hash(this.swiftCode, this.countryCode, this.bankAddress, this.bankCode, this.bankName, this.city, this.country, this.branchName, this.institType, this.postalCode);
   }
 
   @java.lang.Override
@@ -153,6 +216,31 @@ public final class SwiftCodeLookupResponse {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
+
+    /**
+     * <p>Name of the branch or office. Null when not resolvable.</p>
+     */
+    _FinalStage branchName(Optional<String> branchName);
+
+    _FinalStage branchName(String branchName);
+
+    _FinalStage branchName(Nullable<String> branchName);
+
+    /**
+     * <p>Type of institution: &quot;FIIN&quot; (financial institution) or &quot;NFIN&quot; (non-financial institution).</p>
+     */
+    _FinalStage institType(Optional<String> institType);
+
+    _FinalStage institType(String institType);
+
+    /**
+     * <p>Postal/ZIP code of the bank branch. Null when not resolvable.</p>
+     */
+    _FinalStage postalCode(Optional<String> postalCode);
+
+    _FinalStage postalCode(String postalCode);
+
+    _FinalStage postalCode(Nullable<String> postalCode);
   }
 
   @JsonIgnoreProperties(
@@ -173,7 +261,12 @@ public final class SwiftCodeLookupResponse {
 
     private String country;
 
-    @JsonAnySetter
+    private Optional<String> postalCode = Optional.empty();
+
+    private Optional<String> institType = Optional.empty();
+
+    private Optional<String> branchName = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -188,6 +281,9 @@ public final class SwiftCodeLookupResponse {
       bankName(other.getBankName());
       city(other.getCity());
       country(other.getCountry());
+      branchName(other.getBranchName());
+      institType(other.getInstitType());
+      postalCode(other.getPostalCode());
       return this;
     }
 
@@ -240,9 +336,122 @@ public final class SwiftCodeLookupResponse {
       return this;
     }
 
+    /**
+     * <p>Postal/ZIP code of the bank branch. Null when not resolvable.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage postalCode(Nullable<String> postalCode) {
+      if (postalCode.isNull()) {
+        this.postalCode = null;
+      }
+      else if (postalCode.isEmpty()) {
+        this.postalCode = Optional.empty();
+      }
+      else {
+        this.postalCode = Optional.of(postalCode.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Postal/ZIP code of the bank branch. Null when not resolvable.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage postalCode(String postalCode) {
+      this.postalCode = Optional.ofNullable(postalCode);
+      return this;
+    }
+
+    /**
+     * <p>Postal/ZIP code of the bank branch. Null when not resolvable.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "postalCode",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage postalCode(Optional<String> postalCode) {
+      this.postalCode = postalCode;
+      return this;
+    }
+
+    /**
+     * <p>Type of institution: &quot;FIIN&quot; (financial institution) or &quot;NFIN&quot; (non-financial institution).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage institType(String institType) {
+      this.institType = Optional.ofNullable(institType);
+      return this;
+    }
+
+    /**
+     * <p>Type of institution: &quot;FIIN&quot; (financial institution) or &quot;NFIN&quot; (non-financial institution).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "institType",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage institType(Optional<String> institType) {
+      this.institType = institType;
+      return this;
+    }
+
+    /**
+     * <p>Name of the branch or office. Null when not resolvable.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage branchName(Nullable<String> branchName) {
+      if (branchName.isNull()) {
+        this.branchName = null;
+      }
+      else if (branchName.isEmpty()) {
+        this.branchName = Optional.empty();
+      }
+      else {
+        this.branchName = Optional.of(branchName.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Name of the branch or office. Null when not resolvable.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage branchName(String branchName) {
+      this.branchName = Optional.ofNullable(branchName);
+      return this;
+    }
+
+    /**
+     * <p>Name of the branch or office. Null when not resolvable.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "branchName",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage branchName(Optional<String> branchName) {
+      this.branchName = branchName;
+      return this;
+    }
+
     @java.lang.Override
     public SwiftCodeLookupResponse build() {
-      return new SwiftCodeLookupResponse(swiftCode, countryCode, bankAddress, bankCode, bankName, city, country, additionalProperties);
+      return new SwiftCodeLookupResponse(swiftCode, countryCode, bankAddress, bankCode, bankName, city, country, branchName, institType, postalCode, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("swiftCode") || key.equalsIgnoreCase("countryCode") || key.equalsIgnoreCase("bankAddress") || key.equalsIgnoreCase("bankCode") || key.equalsIgnoreCase("bankName") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("branchName") || key.equalsIgnoreCase("institType") || key.equalsIgnoreCase("postalCode")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

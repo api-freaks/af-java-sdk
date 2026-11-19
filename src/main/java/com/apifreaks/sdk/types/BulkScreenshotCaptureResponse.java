@@ -123,7 +123,6 @@ public final class BulkScreenshotCaptureResponse {
 
     private List<BulkScreenshotCaptureResponseResultsItem> results = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -181,6 +180,14 @@ public final class BulkScreenshotCaptureResponse {
     @java.lang.Override
     public BulkScreenshotCaptureResponse build() {
       return new BulkScreenshotCaptureResponse(status, metaData, results, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("status") || key.equalsIgnoreCase("meta_data") || key.equalsIgnoreCase("results")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

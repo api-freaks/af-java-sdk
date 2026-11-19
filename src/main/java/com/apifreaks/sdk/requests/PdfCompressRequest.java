@@ -263,7 +263,6 @@ public final class PdfCompressRequest {
 
     private Optional<String> webhookAuthorization = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -285,7 +284,6 @@ public final class PdfCompressRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -296,7 +294,6 @@ public final class PdfCompressRequest {
     }
 
     /**
-     * <p>Controls how aggressively the PDF is compressed. Lower levels preserve more quality, while higher levels reduce file size more.</p>
      * <p>Controls how aggressively the PDF is compressed. Lower levels preserve more quality, while higher levels reduce file size more.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -468,6 +465,14 @@ public final class PdfCompressRequest {
     @java.lang.Override
     public PdfCompressRequest build() {
       return new PdfCompressRequest(webhookAuthorization, apiKey, format, fileId, output, compressionLevel, destroy, webhookUrl, webhookFailureNotification, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("file_id") || key.equalsIgnoreCase("output") || key.equalsIgnoreCase("compression_level") || key.equalsIgnoreCase("destroy") || key.equalsIgnoreCase("webhook_url") || key.equalsIgnoreCase("webhook_failure_notification")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

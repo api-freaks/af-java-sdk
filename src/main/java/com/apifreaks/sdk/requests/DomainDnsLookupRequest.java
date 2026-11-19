@@ -53,7 +53,7 @@ public final class DomainDnsLookupRequest {
   }
 
   /**
-   * @return A comma-separated list of DNS record types for lookup. Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all. When ipAddress is provided, type must be &quot;all&quot;.
+   * @return DNS record types to look up, sent as a comma-separated list (e.g. <code>A,MX</code>). Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, PTR, or all. When ipAddress is provided, use &quot;all&quot; or &quot;PTR&quot;.
    */
   @JsonProperty("type")
   public Optional<List<String>> getType() {
@@ -77,7 +77,7 @@ public final class DomainDnsLookupRequest {
   }
 
   /**
-   * @return Hostname or URL whose DNS records are required.
+   * @return Hostname or URL whose DNS records are required. Give either <code>host-name</code> or <code>ipAddress</code>.
    */
   @JsonProperty("host-name")
   public Optional<String> getHostName() {
@@ -85,7 +85,7 @@ public final class DomainDnsLookupRequest {
   }
 
   /**
-   * @return The IP address for requested DNS's PTR record. 'type' parameter must be set to 'all'.
+   * @return The IP address whose PTR (reverse DNS) record is required. Give either <code>host-name</code> or <code>ipAddress</code>; with <code>ipAddress</code>, set <code>type</code> to <code>all</code> or <code>PTR</code>.
    */
   @JsonProperty("ipAddress")
   public Optional<String> getIpAddress() {
@@ -138,7 +138,7 @@ public final class DomainDnsLookupRequest {
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
 
     /**
-     * <p>A comma-separated list of DNS record types for lookup. Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all. When ipAddress is provided, type must be &quot;all&quot;.</p>
+     * <p>DNS record types to look up, sent as a comma-separated list (e.g. <code>A,MX</code>). Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, PTR, or all. When ipAddress is provided, use &quot;all&quot; or &quot;PTR&quot;.</p>
      */
     _FinalStage type(Optional<List<String>> type);
 
@@ -154,14 +154,14 @@ public final class DomainDnsLookupRequest {
     _FinalStage format(DomainDnsLookupRequestFormat format);
 
     /**
-     * <p>Hostname or URL whose DNS records are required.</p>
+     * <p>Hostname or URL whose DNS records are required. Give either <code>host-name</code> or <code>ipAddress</code>.</p>
      */
     _FinalStage hostName(Optional<String> hostName);
 
     _FinalStage hostName(String hostName);
 
     /**
-     * <p>The IP address for requested DNS's PTR record. 'type' parameter must be set to 'all'.</p>
+     * <p>The IP address whose PTR (reverse DNS) record is required. Give either <code>host-name</code> or <code>ipAddress</code>; with <code>ipAddress</code>, set <code>type</code> to <code>all</code> or <code>PTR</code>.</p>
      */
     _FinalStage ipAddress(Optional<String> ipAddress);
 
@@ -182,7 +182,6 @@ public final class DomainDnsLookupRequest {
 
     private Optional<List<String>> type = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -200,7 +199,6 @@ public final class DomainDnsLookupRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -211,7 +209,7 @@ public final class DomainDnsLookupRequest {
     }
 
     /**
-     * <p>The IP address for requested DNS's PTR record. 'type' parameter must be set to 'all'.</p>
+     * <p>The IP address whose PTR (reverse DNS) record is required. Give either <code>host-name</code> or <code>ipAddress</code>; with <code>ipAddress</code>, set <code>type</code> to <code>all</code> or <code>PTR</code>.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -221,7 +219,7 @@ public final class DomainDnsLookupRequest {
     }
 
     /**
-     * <p>The IP address for requested DNS's PTR record. 'type' parameter must be set to 'all'.</p>
+     * <p>The IP address whose PTR (reverse DNS) record is required. Give either <code>host-name</code> or <code>ipAddress</code>; with <code>ipAddress</code>, set <code>type</code> to <code>all</code> or <code>PTR</code>.</p>
      */
     @java.lang.Override
     @JsonSetter(
@@ -234,7 +232,7 @@ public final class DomainDnsLookupRequest {
     }
 
     /**
-     * <p>Hostname or URL whose DNS records are required.</p>
+     * <p>Hostname or URL whose DNS records are required. Give either <code>host-name</code> or <code>ipAddress</code>.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -244,7 +242,7 @@ public final class DomainDnsLookupRequest {
     }
 
     /**
-     * <p>Hostname or URL whose DNS records are required.</p>
+     * <p>Hostname or URL whose DNS records are required. Give either <code>host-name</code> or <code>ipAddress</code>.</p>
      */
     @java.lang.Override
     @JsonSetter(
@@ -286,7 +284,7 @@ public final class DomainDnsLookupRequest {
     }
 
     /**
-     * <p>A comma-separated list of DNS record types for lookup. Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all. When ipAddress is provided, type must be &quot;all&quot;.</p>
+     * <p>DNS record types to look up, sent as a comma-separated list (e.g. <code>A,MX</code>). Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, PTR, or all. When ipAddress is provided, use &quot;all&quot; or &quot;PTR&quot;.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -296,7 +294,7 @@ public final class DomainDnsLookupRequest {
     }
 
     /**
-     * <p>A comma-separated list of DNS record types for lookup. Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all. When ipAddress is provided, type must be &quot;all&quot;.</p>
+     * <p>DNS record types to look up, sent as a comma-separated list (e.g. <code>A,MX</code>). Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, PTR, or all. When ipAddress is provided, use &quot;all&quot; or &quot;PTR&quot;.</p>
      */
     @java.lang.Override
     @JsonSetter(
@@ -311,6 +309,14 @@ public final class DomainDnsLookupRequest {
     @java.lang.Override
     public DomainDnsLookupRequest build() {
       return new DomainDnsLookupRequest(type, apiKey, format, hostName, ipAddress, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("type") || key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("host-name") || key.equalsIgnoreCase("ipAddress")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

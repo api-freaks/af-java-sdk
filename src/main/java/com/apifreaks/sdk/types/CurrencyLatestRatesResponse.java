@@ -138,7 +138,6 @@ public final class CurrencyLatestRatesResponse {
 
     private Map<String, String> rates = new LinkedHashMap<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -154,7 +153,6 @@ public final class CurrencyLatestRatesResponse {
 
     /**
      * <p>For the latest currencies exchange rates endpoint, it is the date and time with timezone (UTC) at which these rates were recorded. For historical currencies exchange rates endpoint, it is the specific date in YYYY-MM-DD format.</p>
-     * <p>For the latest currencies exchange rates endpoint, it is the date and time with timezone (UTC) at which these rates were recorded. For historical currencies exchange rates endpoint, it is the specific date in YYYY-MM-DD format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -165,7 +163,6 @@ public final class CurrencyLatestRatesResponse {
     }
 
     /**
-     * <p>Base currency used for calculating exchange rates.</p>
      * <p>Base currency used for calculating exchange rates.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -217,6 +214,14 @@ public final class CurrencyLatestRatesResponse {
     @java.lang.Override
     public CurrencyLatestRatesResponse build() {
       return new CurrencyLatestRatesResponse(date, base, rates, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("date") || key.equalsIgnoreCase("base") || key.equalsIgnoreCase("rates")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

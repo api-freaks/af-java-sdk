@@ -165,7 +165,6 @@ public final class BulkDomainAvailabilityCheckRequest {
 
     private Optional<BulkDomainAvailabilityCheckRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -181,7 +180,6 @@ public final class BulkDomainAvailabilityCheckRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -279,6 +277,14 @@ public final class BulkDomainAvailabilityCheckRequest {
     @java.lang.Override
     public BulkDomainAvailabilityCheckRequest build() {
       return new BulkDomainAvailabilityCheckRequest(apiKey, format, source, domainNames, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("domainNames")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

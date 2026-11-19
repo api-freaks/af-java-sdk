@@ -336,7 +336,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAstronomy {
 
     private String moonStatus;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -362,7 +361,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAstronomy {
 
     /**
      * <p>Calendar date in YYYY-MM-DD format for the astronomical data.</p>
-     * <p>Calendar date in YYYY-MM-DD format for the astronomical data.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -373,7 +371,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAstronomy {
     }
 
     /**
-     * <p>Time of true solar midnight in HH:MM format.</p>
      * <p>Time of true solar midnight in HH:MM format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -386,7 +383,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAstronomy {
 
     /**
      * <p>Time when astronomical twilight ends and dawn begins in HH:MM format.</p>
-     * <p>Time when astronomical twilight ends and dawn begins in HH:MM format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -397,7 +393,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAstronomy {
     }
 
     /**
-     * <p>Time when the Sun becomes visible above the horizon in HH:MM format.</p>
      * <p>Time when the Sun becomes visible above the horizon in HH:MM format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -410,7 +405,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAstronomy {
 
     /**
      * <p>Time when the Sun reaches its highest point in the sky in HH:MM format.</p>
-     * <p>Time when the Sun reaches its highest point in the sky in HH:MM format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -421,7 +415,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAstronomy {
     }
 
     /**
-     * <p>Time when the Sun disappears below the horizon in HH:MM format.</p>
      * <p>Time when the Sun disappears below the horizon in HH:MM format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -434,7 +427,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAstronomy {
 
     /**
      * <p>Time when astronomical twilight begins and night starts in HH:MM format.</p>
-     * <p>Time when astronomical twilight begins and night starts in HH:MM format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -445,7 +437,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAstronomy {
     }
 
     /**
-     * <p>Total duration of daylight in HH:MM format.</p>
      * <p>Total duration of daylight in HH:MM format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -458,7 +449,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAstronomy {
 
     /**
      * <p>Current position of the Sun relative to the horizon (above_horizon, below_horizon, or -).</p>
-     * <p>Current position of the Sun relative to the horizon (above_horizon, below_horizon, or -).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -469,7 +459,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAstronomy {
     }
 
     /**
-     * <p>Current lunar phase (NEW_MOON, WAXING_CRESCENT, FULL_MOON, WANING_GIBBOUS, etc.).</p>
      * <p>Current lunar phase (NEW_MOON, WAXING_CRESCENT, FULL_MOON, WANING_GIBBOUS, etc.).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -482,7 +471,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAstronomy {
 
     /**
      * <p>Time when the Moon becomes visible above the horizon in HH:MM format.</p>
-     * <p>Time when the Moon becomes visible above the horizon in HH:MM format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -494,7 +482,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAstronomy {
 
     /**
      * <p>Time when the Moon disappears below the horizon in HH:MM format.</p>
-     * <p>Time when the Moon disappears below the horizon in HH:MM format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -505,7 +492,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAstronomy {
     }
 
     /**
-     * <p>Current visibility status of the Moon (visible, not_visible, or -).</p>
      * <p>Current visibility status of the Moon (visible, not_visible, or -).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -519,6 +505,14 @@ public final class BulkCurrentWeatherResponseBulkItemCurrentAstronomy {
     @java.lang.Override
     public BulkCurrentWeatherResponseBulkItemCurrentAstronomy build() {
       return new BulkCurrentWeatherResponseBulkItemCurrentAstronomy(date, midNight, nightEnd, sunrise, solarNoon, sunset, nightBegin, dayLength, sunStatus, moonPhase, moonrise, moonset, moonStatus, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("date") || key.equalsIgnoreCase("mid_night") || key.equalsIgnoreCase("night_end") || key.equalsIgnoreCase("sunrise") || key.equalsIgnoreCase("solar_noon") || key.equalsIgnoreCase("sunset") || key.equalsIgnoreCase("night_begin") || key.equalsIgnoreCase("day_length") || key.equalsIgnoreCase("sun_status") || key.equalsIgnoreCase("moon_phase") || key.equalsIgnoreCase("moonrise") || key.equalsIgnoreCase("moonset") || key.equalsIgnoreCase("moon_status")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

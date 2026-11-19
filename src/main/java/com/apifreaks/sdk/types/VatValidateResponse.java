@@ -177,7 +177,6 @@ public final class VatValidateResponse {
 
     private Optional<String> requesterCountryCode = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -265,6 +264,14 @@ public final class VatValidateResponse {
     @java.lang.Override
     public VatValidateResponse build() {
       return new VatValidateResponse(countryCode, vatNumber, requesterCountryCode, requesterVatNumber, requestedAt, validation, company, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("country_code") || key.equalsIgnoreCase("vat_number") || key.equalsIgnoreCase("requester_country_code") || key.equalsIgnoreCase("requester_vat_number") || key.equalsIgnoreCase("requested_at") || key.equalsIgnoreCase("validation") || key.equalsIgnoreCase("company")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

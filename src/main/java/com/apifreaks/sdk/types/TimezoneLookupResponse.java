@@ -149,7 +149,6 @@ public final class TimezoneLookupResponse {
 
     private Optional<String> ip = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -240,6 +239,14 @@ public final class TimezoneLookupResponse {
     @java.lang.Override
     public TimezoneLookupResponse build() {
       return new TimezoneLookupResponse(ip, location, timeZone, airportDetails, loCodeDetails, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("ip") || key.equalsIgnoreCase("location") || key.equalsIgnoreCase("time_zone") || key.equalsIgnoreCase("airport_details") || key.equalsIgnoreCase("lo_code_details")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

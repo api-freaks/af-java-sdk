@@ -138,7 +138,6 @@ public final class UserAgentLookupRequest {
 
     private Optional<UserAgentLookupRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -153,7 +152,6 @@ public final class UserAgentLookupRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -200,6 +198,14 @@ public final class UserAgentLookupRequest {
     @java.lang.Override
     public UserAgentLookupRequest build() {
       return new UserAgentLookupRequest(apiKey, userAgent, format, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

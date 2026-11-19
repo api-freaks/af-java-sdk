@@ -80,7 +80,6 @@ public final class AirQualityResponseForecastValue {
   public static final class Builder {
     private Optional<List<AirQualityResponseForecastValueHourlyItem>> hourly = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -110,6 +109,14 @@ public final class AirQualityResponseForecastValue {
 
     public AirQualityResponseForecastValue build() {
       return new AirQualityResponseForecastValue(hourly, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("hourly")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -41,11 +41,11 @@ public final class HistoricalWeatherResponseLocation {
   @SuppressWarnings("unchecked")
   public <T> T visit(Visitor<T> visitor) {
     if(this.type == 0) {
-      return visitor.visit((HistoricalWeatherResponseLocationZero) this.value);
-    } else if(this.type == 1) {
       return visitor.visit((HistoricalWeatherResponseLocationContinentCode) this.value);
-    } else if(this.type == 2) {
+    } else if(this.type == 1) {
       return visitor.visit((HistoricalWeatherResponseLocationCity) this.value);
+    } else if(this.type == 2) {
+      return visitor.visit((HistoricalWeatherResponseLocationZero) this.value);
     }
     throw new IllegalStateException("Failed to visit value. This should never happen.");
   }
@@ -70,25 +70,25 @@ public final class HistoricalWeatherResponseLocation {
     return this.value.toString();
   }
 
-  public static HistoricalWeatherResponseLocation of(HistoricalWeatherResponseLocationZero value) {
+  public static HistoricalWeatherResponseLocation of(
+      HistoricalWeatherResponseLocationContinentCode value) {
     return new HistoricalWeatherResponseLocation(value, 0);
   }
 
-  public static HistoricalWeatherResponseLocation of(
-      HistoricalWeatherResponseLocationContinentCode value) {
+  public static HistoricalWeatherResponseLocation of(HistoricalWeatherResponseLocationCity value) {
     return new HistoricalWeatherResponseLocation(value, 1);
   }
 
-  public static HistoricalWeatherResponseLocation of(HistoricalWeatherResponseLocationCity value) {
+  public static HistoricalWeatherResponseLocation of(HistoricalWeatherResponseLocationZero value) {
     return new HistoricalWeatherResponseLocation(value, 2);
   }
 
   public interface Visitor<T> {
-    T visit(HistoricalWeatherResponseLocationZero value);
-
     T visit(HistoricalWeatherResponseLocationContinentCode value);
 
     T visit(HistoricalWeatherResponseLocationCity value);
+
+    T visit(HistoricalWeatherResponseLocationZero value);
   }
 
   static final class Deserializer extends StdDeserializer<HistoricalWeatherResponseLocation> {
@@ -100,12 +100,6 @@ public final class HistoricalWeatherResponseLocation {
     public HistoricalWeatherResponseLocation deserialize(JsonParser p,
         DeserializationContext context) throws IOException {
       Object value = p.readValueAs(Object.class);
-      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("latitude") && ((Map<?, ?>) value).containsKey("longitude") && ((Map<?, ?>) value).containsKey("country_name") && ((Map<?, ?>) value).containsKey("state_prov") && ((Map<?, ?>) value).containsKey("city") && ((Map<?, ?>) value).containsKey("timezone") && ((Map<?, ?>) value).containsKey("timezone_abbreviation")) {
-        try {
-          return of(ObjectMappers.JSON_MAPPER.convertValue(value, HistoricalWeatherResponseLocationZero.class));
-        } catch(RuntimeException e) {
-        }
-      }
       if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("continent_code") && ((Map<?, ?>) value).containsKey("continent_name") && ((Map<?, ?>) value).containsKey("country_code2") && ((Map<?, ?>) value).containsKey("country_code3") && ((Map<?, ?>) value).containsKey("country_name") && ((Map<?, ?>) value).containsKey("country_name_official") && ((Map<?, ?>) value).containsKey("state_prov") && ((Map<?, ?>) value).containsKey("city") && ((Map<?, ?>) value).containsKey("latitude") && ((Map<?, ?>) value).containsKey("longitude") && ((Map<?, ?>) value).containsKey("timezone") && ((Map<?, ?>) value).containsKey("timezone_abbreviation")) {
         try {
           return of(ObjectMappers.JSON_MAPPER.convertValue(value, HistoricalWeatherResponseLocationContinentCode.class));
@@ -115,6 +109,12 @@ public final class HistoricalWeatherResponseLocation {
       if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("location_string") && ((Map<?, ?>) value).containsKey("country_name") && ((Map<?, ?>) value).containsKey("state_prov") && ((Map<?, ?>) value).containsKey("city") && ((Map<?, ?>) value).containsKey("latitude") && ((Map<?, ?>) value).containsKey("longitude") && ((Map<?, ?>) value).containsKey("timezone") && ((Map<?, ?>) value).containsKey("timezone_abbreviation")) {
         try {
           return of(ObjectMappers.JSON_MAPPER.convertValue(value, HistoricalWeatherResponseLocationCity.class));
+        } catch(RuntimeException e) {
+        }
+      }
+      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("latitude") && ((Map<?, ?>) value).containsKey("longitude") && ((Map<?, ?>) value).containsKey("country_name") && ((Map<?, ?>) value).containsKey("state_prov") && ((Map<?, ?>) value).containsKey("city") && ((Map<?, ?>) value).containsKey("timezone") && ((Map<?, ?>) value).containsKey("timezone_abbreviation")) {
+        try {
+          return of(ObjectMappers.JSON_MAPPER.convertValue(value, HistoricalWeatherResponseLocationZero.class));
         } catch(RuntimeException e) {
         }
       }

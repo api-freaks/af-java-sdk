@@ -128,7 +128,6 @@ public final class BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDat
 
     private Optional<String> phoneNumber = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -231,6 +230,14 @@ public final class BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDat
 
     public BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDataDomainRegistrar build() {
       return new BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDataDomainRegistrar(ianaId, registrarName, whoisServer, websiteUrl, emailAddress, phoneNumber, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("iana_id") || key.equalsIgnoreCase("registrar_name") || key.equalsIgnoreCase("whois_server") || key.equalsIgnoreCase("website_url") || key.equalsIgnoreCase("email_address") || key.equalsIgnoreCase("phone_number")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

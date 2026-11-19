@@ -11,12 +11,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
@@ -28,44 +30,71 @@ public final class GetAdminUnitDetailsResponse {
 
   private final String adminCode;
 
+  private final Optional<String> adminIso31662;
+
   private final String adminLevel;
 
-  private final String isoAlpha2;
+  private final String countryIso31662;
 
   private final String countryName;
 
   private final Map<String, Object> additionalProperties;
 
-  private GetAdminUnitDetailsResponse(String name, String adminCode, String adminLevel,
-      String isoAlpha2, String countryName, Map<String, Object> additionalProperties) {
+  private GetAdminUnitDetailsResponse(String name, String adminCode, Optional<String> adminIso31662,
+      String adminLevel, String countryIso31662, String countryName,
+      Map<String, Object> additionalProperties) {
     this.name = name;
     this.adminCode = adminCode;
+    this.adminIso31662 = adminIso31662;
     this.adminLevel = adminLevel;
-    this.isoAlpha2 = isoAlpha2;
+    this.countryIso31662 = countryIso31662;
     this.countryName = countryName;
     this.additionalProperties = additionalProperties;
   }
 
+  /**
+   * @return Name of the administrative unit.
+   */
   @JsonProperty("name")
   public String getName() {
     return name;
   }
 
+  /**
+   * @return Administrative code of the unit.
+   */
   @JsonProperty("admin_code")
   public String getAdminCode() {
     return adminCode;
   }
 
+  /**
+   * @return The unit's full ISO 3166-2 code, formed as {country}-{admin_code} (e.g. US-CA, DE-BY).
+   */
+  @JsonProperty("admin_iso3166_2")
+  public Optional<String> getAdminIso31662() {
+    return adminIso31662;
+  }
+
+  /**
+   * @return Level or type of the administrative unit (e.g. land, province, state).
+   */
   @JsonProperty("admin_level")
   public String getAdminLevel() {
     return adminLevel;
   }
 
-  @JsonProperty("iso_alpha_2")
-  public String getIsoAlpha2() {
-    return isoAlpha2;
+  /**
+   * @return Country code in ISO 3166-1 alpha-2 format.
+   */
+  @JsonProperty("country_iso3166_2")
+  public String getCountryIso31662() {
+    return countryIso31662;
   }
 
+  /**
+   * @return Name of the country.
+   */
   @JsonProperty("country_name")
   public String getCountryName() {
     return countryName;
@@ -83,12 +112,12 @@ public final class GetAdminUnitDetailsResponse {
   }
 
   private boolean equalTo(GetAdminUnitDetailsResponse other) {
-    return name.equals(other.name) && adminCode.equals(other.adminCode) && adminLevel.equals(other.adminLevel) && isoAlpha2.equals(other.isoAlpha2) && countryName.equals(other.countryName);
+    return name.equals(other.name) && adminCode.equals(other.adminCode) && adminIso31662.equals(other.adminIso31662) && adminLevel.equals(other.adminLevel) && countryIso31662.equals(other.countryIso31662) && countryName.equals(other.countryName);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.name, this.adminCode, this.adminLevel, this.isoAlpha2, this.countryName);
+    return Objects.hash(this.name, this.adminCode, this.adminIso31662, this.adminLevel, this.countryIso31662, this.countryName);
   }
 
   @java.lang.Override
@@ -101,24 +130,39 @@ public final class GetAdminUnitDetailsResponse {
   }
 
   public interface NameStage {
+    /**
+     * <p>Name of the administrative unit.</p>
+     */
     AdminCodeStage name(@NotNull String name);
 
     Builder from(GetAdminUnitDetailsResponse other);
   }
 
   public interface AdminCodeStage {
+    /**
+     * <p>Administrative code of the unit.</p>
+     */
     AdminLevelStage adminCode(@NotNull String adminCode);
   }
 
   public interface AdminLevelStage {
-    IsoAlpha2Stage adminLevel(@NotNull String adminLevel);
+    /**
+     * <p>Level or type of the administrative unit (e.g. land, province, state).</p>
+     */
+    CountryIso31662Stage adminLevel(@NotNull String adminLevel);
   }
 
-  public interface IsoAlpha2Stage {
-    CountryNameStage isoAlpha2(@NotNull String isoAlpha2);
+  public interface CountryIso31662Stage {
+    /**
+     * <p>Country code in ISO 3166-1 alpha-2 format.</p>
+     */
+    CountryNameStage countryIso31662(@NotNull String countryIso31662);
   }
 
   public interface CountryNameStage {
+    /**
+     * <p>Name of the country.</p>
+     */
     _FinalStage countryName(@NotNull String countryName);
   }
 
@@ -128,23 +172,31 @@ public final class GetAdminUnitDetailsResponse {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
+
+    /**
+     * <p>The unit's full ISO 3166-2 code, formed as {country}-{admin_code} (e.g. US-CA, DE-BY).</p>
+     */
+    _FinalStage adminIso31662(Optional<String> adminIso31662);
+
+    _FinalStage adminIso31662(String adminIso31662);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements NameStage, AdminCodeStage, AdminLevelStage, IsoAlpha2Stage, CountryNameStage, _FinalStage {
+  public static final class Builder implements NameStage, AdminCodeStage, AdminLevelStage, CountryIso31662Stage, CountryNameStage, _FinalStage {
     private String name;
 
     private String adminCode;
 
     private String adminLevel;
 
-    private String isoAlpha2;
+    private String countryIso31662;
 
     private String countryName;
 
-    @JsonAnySetter
+    private Optional<String> adminIso31662 = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -154,12 +206,17 @@ public final class GetAdminUnitDetailsResponse {
     public Builder from(GetAdminUnitDetailsResponse other) {
       name(other.getName());
       adminCode(other.getAdminCode());
+      adminIso31662(other.getAdminIso31662());
       adminLevel(other.getAdminLevel());
-      isoAlpha2(other.getIsoAlpha2());
+      countryIso31662(other.getCountryIso31662());
       countryName(other.getCountryName());
       return this;
     }
 
+    /**
+     * <p>Name of the administrative unit.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
     @java.lang.Override
     @JsonSetter("name")
     public AdminCodeStage name(@NotNull String name) {
@@ -167,6 +224,10 @@ public final class GetAdminUnitDetailsResponse {
       return this;
     }
 
+    /**
+     * <p>Administrative code of the unit.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
     @java.lang.Override
     @JsonSetter("admin_code")
     public AdminLevelStage adminCode(@NotNull String adminCode) {
@@ -174,20 +235,32 @@ public final class GetAdminUnitDetailsResponse {
       return this;
     }
 
+    /**
+     * <p>Level or type of the administrative unit (e.g. land, province, state).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
     @java.lang.Override
     @JsonSetter("admin_level")
-    public IsoAlpha2Stage adminLevel(@NotNull String adminLevel) {
+    public CountryIso31662Stage adminLevel(@NotNull String adminLevel) {
       this.adminLevel = Objects.requireNonNull(adminLevel, "adminLevel must not be null");
       return this;
     }
 
+    /**
+     * <p>Country code in ISO 3166-1 alpha-2 format.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
     @java.lang.Override
-    @JsonSetter("iso_alpha_2")
-    public CountryNameStage isoAlpha2(@NotNull String isoAlpha2) {
-      this.isoAlpha2 = Objects.requireNonNull(isoAlpha2, "isoAlpha2 must not be null");
+    @JsonSetter("country_iso3166_2")
+    public CountryNameStage countryIso31662(@NotNull String countryIso31662) {
+      this.countryIso31662 = Objects.requireNonNull(countryIso31662, "countryIso31662 must not be null");
       return this;
     }
 
+    /**
+     * <p>Name of the country.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
     @java.lang.Override
     @JsonSetter("country_name")
     public _FinalStage countryName(@NotNull String countryName) {
@@ -195,9 +268,40 @@ public final class GetAdminUnitDetailsResponse {
       return this;
     }
 
+    /**
+     * <p>The unit's full ISO 3166-2 code, formed as {country}-{admin_code} (e.g. US-CA, DE-BY).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage adminIso31662(String adminIso31662) {
+      this.adminIso31662 = Optional.ofNullable(adminIso31662);
+      return this;
+    }
+
+    /**
+     * <p>The unit's full ISO 3166-2 code, formed as {country}-{admin_code} (e.g. US-CA, DE-BY).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "admin_iso3166_2",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage adminIso31662(Optional<String> adminIso31662) {
+      this.adminIso31662 = adminIso31662;
+      return this;
+    }
+
     @java.lang.Override
     public GetAdminUnitDetailsResponse build() {
-      return new GetAdminUnitDetailsResponse(name, adminCode, adminLevel, isoAlpha2, countryName, additionalProperties);
+      return new GetAdminUnitDetailsResponse(name, adminCode, adminIso31662, adminLevel, countryIso31662, countryName, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("admin_code") || key.equalsIgnoreCase("admin_iso3166_2") || key.equalsIgnoreCase("admin_level") || key.equalsIgnoreCase("country_iso3166_2") || key.equalsIgnoreCase("country_name")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

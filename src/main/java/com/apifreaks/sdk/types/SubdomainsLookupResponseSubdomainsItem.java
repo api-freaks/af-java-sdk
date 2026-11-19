@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 public final class SubdomainsLookupResponseSubdomainsItem {
   private final String subdomain;
 
-  private final String firstSeen;
+  private final Optional<String> firstSeen;
 
   private final Optional<String> lastSeen;
 
@@ -36,7 +36,7 @@ public final class SubdomainsLookupResponseSubdomainsItem {
 
   private final Map<String, Object> additionalProperties;
 
-  private SubdomainsLookupResponseSubdomainsItem(String subdomain, String firstSeen,
+  private SubdomainsLookupResponseSubdomainsItem(String subdomain, Optional<String> firstSeen,
       Optional<String> lastSeen, Optional<String> inactiveFrom,
       Map<String, Object> additionalProperties) {
     this.subdomain = subdomain;
@@ -52,7 +52,7 @@ public final class SubdomainsLookupResponseSubdomainsItem {
   }
 
   @JsonProperty("first_seen")
-  public String getFirstSeen() {
+  public Optional<String> getFirstSeen() {
     return firstSeen;
   }
 
@@ -99,13 +99,9 @@ public final class SubdomainsLookupResponseSubdomainsItem {
   }
 
   public interface SubdomainStage {
-    FirstSeenStage subdomain(@NotNull String subdomain);
+    _FinalStage subdomain(@NotNull String subdomain);
 
     Builder from(SubdomainsLookupResponseSubdomainsItem other);
-  }
-
-  public interface FirstSeenStage {
-    _FinalStage firstSeen(@NotNull String firstSeen);
   }
 
   public interface _FinalStage {
@@ -114,6 +110,10 @@ public final class SubdomainsLookupResponseSubdomainsItem {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
+
+    _FinalStage firstSeen(Optional<String> firstSeen);
+
+    _FinalStage firstSeen(String firstSeen);
 
     _FinalStage lastSeen(Optional<String> lastSeen);
 
@@ -130,16 +130,15 @@ public final class SubdomainsLookupResponseSubdomainsItem {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements SubdomainStage, FirstSeenStage, _FinalStage {
+  public static final class Builder implements SubdomainStage, _FinalStage {
     private String subdomain;
-
-    private String firstSeen;
 
     private Optional<String> inactiveFrom = Optional.empty();
 
     private Optional<String> lastSeen = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<String> firstSeen = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -156,15 +155,8 @@ public final class SubdomainsLookupResponseSubdomainsItem {
 
     @java.lang.Override
     @JsonSetter("subdomain")
-    public FirstSeenStage subdomain(@NotNull String subdomain) {
+    public _FinalStage subdomain(@NotNull String subdomain) {
       this.subdomain = Objects.requireNonNull(subdomain, "subdomain must not be null");
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter("first_seen")
-    public _FinalStage firstSeen(@NotNull String firstSeen) {
-      this.firstSeen = Objects.requireNonNull(firstSeen, "firstSeen must not be null");
       return this;
     }
 
@@ -208,8 +200,32 @@ public final class SubdomainsLookupResponseSubdomainsItem {
     }
 
     @java.lang.Override
+    public _FinalStage firstSeen(String firstSeen) {
+      this.firstSeen = Optional.ofNullable(firstSeen);
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter(
+        value = "first_seen",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage firstSeen(Optional<String> firstSeen) {
+      this.firstSeen = firstSeen;
+      return this;
+    }
+
+    @java.lang.Override
     public SubdomainsLookupResponseSubdomainsItem build() {
       return new SubdomainsLookupResponseSubdomainsItem(subdomain, firstSeen, lastSeen, inactiveFrom, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("subdomain") || key.equalsIgnoreCase("first_seen") || key.equalsIgnoreCase("last_seen") || key.equalsIgnoreCase("inactive_from")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

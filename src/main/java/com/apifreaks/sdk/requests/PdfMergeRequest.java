@@ -245,7 +245,6 @@ public final class PdfMergeRequest {
 
     private Optional<List<String>> fileId = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -265,7 +264,6 @@ public final class PdfMergeRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -442,6 +440,14 @@ public final class PdfMergeRequest {
     @java.lang.Override
     public PdfMergeRequest build() {
       return new PdfMergeRequest(fileId, webhookAuthorization, apiKey, format, destroy, output, webhookUrl, webhookFailureNotification, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("file_id") || key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("destroy") || key.equalsIgnoreCase("output") || key.equalsIgnoreCase("webhook_url") || key.equalsIgnoreCase("webhook_failure_notification")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

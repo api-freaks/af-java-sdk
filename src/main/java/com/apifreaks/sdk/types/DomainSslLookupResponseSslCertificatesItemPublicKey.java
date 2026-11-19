@@ -116,7 +116,6 @@ public final class DomainSslLookupResponseSslCertificatesItemPublicKey {
 
     private String pemRaw;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -154,6 +153,14 @@ public final class DomainSslLookupResponseSslCertificatesItemPublicKey {
     @java.lang.Override
     public DomainSslLookupResponseSslCertificatesItemPublicKey build() {
       return new DomainSslLookupResponseSslCertificatesItemPublicKey(keySize, keyAlgorithm, pemRaw, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("keySize") || key.equalsIgnoreCase("keyAlgorithm") || key.equalsIgnoreCase("pemRaw")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

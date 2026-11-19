@@ -117,7 +117,6 @@ public final class CommoditySymbolsRequest {
 
     private Optional<CommoditySymbolsRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -131,7 +130,6 @@ public final class CommoditySymbolsRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -168,6 +166,14 @@ public final class CommoditySymbolsRequest {
     @java.lang.Override
     public CommoditySymbolsRequest build() {
       return new CommoditySymbolsRequest(apiKey, format, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

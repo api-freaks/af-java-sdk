@@ -104,7 +104,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseCurrency {
 
     private Optional<String> symbol = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -170,6 +169,14 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseCurrency {
 
     public BulkGeolocationLookupV2ResponseItemAbuseCurrency build() {
       return new BulkGeolocationLookupV2ResponseItemAbuseCurrency(code, name, symbol, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("code") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("symbol")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

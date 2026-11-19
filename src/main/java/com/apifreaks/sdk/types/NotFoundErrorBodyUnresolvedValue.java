@@ -92,7 +92,6 @@ public final class NotFoundErrorBodyUnresolvedValue {
 
     private Optional<List<String>> suggestions = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -140,6 +139,14 @@ public final class NotFoundErrorBodyUnresolvedValue {
 
     public NotFoundErrorBodyUnresolvedValue build() {
       return new NotFoundErrorBodyUnresolvedValue(message, suggestions, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("message") || key.equalsIgnoreCase("suggestions")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

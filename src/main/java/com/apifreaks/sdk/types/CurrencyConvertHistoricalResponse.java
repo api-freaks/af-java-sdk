@@ -194,7 +194,6 @@ public final class CurrencyConvertHistoricalResponse {
 
     private String convertedAmount;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -213,7 +212,6 @@ public final class CurrencyConvertHistoricalResponse {
 
     /**
      * <p>For the latest rates converter, it is the date and time with timezone (UTC) when the rate was recorded. For historical converter, it is the date provided in the input (format: YYYY-MM-DD).</p>
-     * <p>For the latest rates converter, it is the date and time with timezone (UTC) when the rate was recorded. For historical converter, it is the date provided in the input (format: YYYY-MM-DD).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -224,7 +222,6 @@ public final class CurrencyConvertHistoricalResponse {
     }
 
     /**
-     * <p>Base currency code (the currency being converted from).</p>
      * <p>Base currency code (the currency being converted from).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -237,7 +234,6 @@ public final class CurrencyConvertHistoricalResponse {
 
     /**
      * <p>Desired currency code (the currency to convert to).</p>
-     * <p>Desired currency code (the currency to convert to).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -248,7 +244,6 @@ public final class CurrencyConvertHistoricalResponse {
     }
 
     /**
-     * <p>Conversion rate from base currency to desired currency.</p>
      * <p>Conversion rate from base currency to desired currency.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -261,7 +256,6 @@ public final class CurrencyConvertHistoricalResponse {
 
     /**
      * <p>The amount in base currency to be converted.</p>
-     * <p>The amount in base currency to be converted.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -272,7 +266,6 @@ public final class CurrencyConvertHistoricalResponse {
     }
 
     /**
-     * <p>The result of the conversion in the desired currency.</p>
      * <p>The result of the conversion in the desired currency.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -286,6 +279,14 @@ public final class CurrencyConvertHistoricalResponse {
     @java.lang.Override
     public CurrencyConvertHistoricalResponse build() {
       return new CurrencyConvertHistoricalResponse(date, from, to, rate, givenAmount, convertedAmount, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("date") || key.equalsIgnoreCase("from") || key.equalsIgnoreCase("to") || key.equalsIgnoreCase("rate") || key.equalsIgnoreCase("givenAmount") || key.equalsIgnoreCase("convertedAmount")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

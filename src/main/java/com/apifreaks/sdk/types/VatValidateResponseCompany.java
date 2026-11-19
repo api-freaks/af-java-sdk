@@ -102,7 +102,6 @@ public final class VatValidateResponseCompany {
 
     private String companyAddress;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -132,6 +131,14 @@ public final class VatValidateResponseCompany {
     @java.lang.Override
     public VatValidateResponseCompany build() {
       return new VatValidateResponseCompany(companyName, companyAddress, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("company_name") || key.equalsIgnoreCase("company_address")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

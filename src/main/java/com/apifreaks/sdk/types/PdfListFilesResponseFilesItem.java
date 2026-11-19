@@ -148,7 +148,6 @@ public final class PdfListFilesResponseFilesItem {
 
     private Optional<String> fileType = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -229,6 +228,14 @@ public final class PdfListFilesResponseFilesItem {
     @java.lang.Override
     public PdfListFilesResponseFilesItem build() {
       return new PdfListFilesResponseFilesItem(fileId, fileName, fileType, fileCreationTime, fileDeletionTime, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("fileId") || key.equalsIgnoreCase("fileName") || key.equalsIgnoreCase("fileType") || key.equalsIgnoreCase("fileCreationTime") || key.equalsIgnoreCase("fileDeletionTime")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

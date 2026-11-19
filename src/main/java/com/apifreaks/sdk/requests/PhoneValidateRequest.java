@@ -179,7 +179,6 @@ public final class PhoneValidateRequest {
 
     private Optional<PhoneValidateRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -197,7 +196,6 @@ public final class PhoneValidateRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -208,7 +206,6 @@ public final class PhoneValidateRequest {
     }
 
     /**
-     * <p>Phone number to validate. Accepts international format (+14155552671), local format (4155552671) with region, or IDD format (0014155552671) with dialer_region.</p>
      * <p>Phone number to validate. Accepts international format (+14155552671), local format (4155552671) with region, or IDD format (0014155552671) with dialer_region.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -291,6 +288,14 @@ public final class PhoneValidateRequest {
     @java.lang.Override
     public PhoneValidateRequest build() {
       return new PhoneValidateRequest(apiKey, format, number, region, dialerRegion, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("number") || key.equalsIgnoreCase("region") || key.equalsIgnoreCase("dialer_region")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

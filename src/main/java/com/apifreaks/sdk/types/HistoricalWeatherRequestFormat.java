@@ -10,8 +10,6 @@ import java.lang.Object;
 import java.lang.String;
 
 public final class HistoricalWeatherRequestFormat {
-  public static final HistoricalWeatherRequestFormat XML = new HistoricalWeatherRequestFormat(Value.XML, "xml");
-
   public static final HistoricalWeatherRequestFormat JSON = new HistoricalWeatherRequestFormat(Value.JSON, "json");
 
   private final Value value;
@@ -46,8 +44,6 @@ public final class HistoricalWeatherRequestFormat {
 
   public <T> T visit(Visitor<T> visitor) {
     switch (value) {
-      case XML:
-        return visitor.visitXml();
       case JSON:
         return visitor.visitJson();
       case UNKNOWN:
@@ -61,8 +57,6 @@ public final class HistoricalWeatherRequestFormat {
   )
   public static HistoricalWeatherRequestFormat valueOf(String value) {
     switch (value) {
-      case "xml":
-        return XML;
       case "json":
         return JSON;
       default:
@@ -73,15 +67,11 @@ public final class HistoricalWeatherRequestFormat {
   public enum Value {
     JSON,
 
-    XML,
-
     UNKNOWN
   }
 
   public interface Visitor<T> {
     T visitJson();
-
-    T visitXml();
 
     T visitUnknown(String unknownType);
   }

@@ -441,7 +441,6 @@ public final class MarineWeatherResponseLocationContinentCode {
 
     private Optional<Boolean> isEu = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -472,7 +471,6 @@ public final class MarineWeatherResponseLocationContinentCode {
 
     /**
      * <p>Two-letter continent code (e.g., NA for North America, EU for Europe, AS for Asia).</p>
-     * <p>Two-letter continent code (e.g., NA for North America, EU for Europe, AS for Asia).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -483,7 +481,6 @@ public final class MarineWeatherResponseLocationContinentCode {
     }
 
     /**
-     * <p>Full name of the continent where the IP address is registered.</p>
      * <p>Full name of the continent where the IP address is registered.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -496,7 +493,6 @@ public final class MarineWeatherResponseLocationContinentCode {
 
     /**
      * <p>ISO 3166-1 alpha-2 two-letter country code (e.g., US, GB, FR).</p>
-     * <p>ISO 3166-1 alpha-2 two-letter country code (e.g., US, GB, FR).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -507,7 +503,6 @@ public final class MarineWeatherResponseLocationContinentCode {
     }
 
     /**
-     * <p>ISO 3166-1 alpha-3 three-letter country code (e.g., USA, GBR, FRA).</p>
      * <p>ISO 3166-1 alpha-3 three-letter country code (e.g., USA, GBR, FRA).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -520,7 +515,6 @@ public final class MarineWeatherResponseLocationContinentCode {
 
     /**
      * <p>Common name of the country associated with the IP address.</p>
-     * <p>Common name of the country associated with the IP address.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -531,7 +525,6 @@ public final class MarineWeatherResponseLocationContinentCode {
     }
 
     /**
-     * <p>Official long-form country name as recognized internationally (e.g., United States of America).</p>
      * <p>Official long-form country name as recognized internationally (e.g., United States of America).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -544,7 +537,6 @@ public final class MarineWeatherResponseLocationContinentCode {
 
     /**
      * <p>State, province, or primary administrative division associated with the IP location.</p>
-     * <p>State, province, or primary administrative division associated with the IP location.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -555,7 +547,6 @@ public final class MarineWeatherResponseLocationContinentCode {
     }
 
     /**
-     * <p>City or urban area name where the IP address is geographically registered.</p>
      * <p>City or urban area name where the IP address is geographically registered.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -568,7 +559,6 @@ public final class MarineWeatherResponseLocationContinentCode {
 
     /**
      * <p>Geographic latitude in decimal degrees for the IP geolocation, ranging from -90 to +90.</p>
-     * <p>Geographic latitude in decimal degrees for the IP geolocation, ranging from -90 to +90.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -579,7 +569,6 @@ public final class MarineWeatherResponseLocationContinentCode {
     }
 
     /**
-     * <p>Geographic longitude in decimal degrees for the IP geolocation, ranging from -180 to +180.</p>
      * <p>Geographic longitude in decimal degrees for the IP geolocation, ranging from -180 to +180.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -592,7 +581,6 @@ public final class MarineWeatherResponseLocationContinentCode {
 
     /**
      * <p>IANA timezone database identifier for the IP location (e.g., America/Chicago, Asia/Tokyo).</p>
-     * <p>IANA timezone database identifier for the IP location (e.g., America/Chicago, Asia/Tokyo).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -603,7 +591,6 @@ public final class MarineWeatherResponseLocationContinentCode {
     }
 
     /**
-     * <p>Current timezone abbreviation based on local offset (e.g., CST, JST, UTC).</p>
      * <p>Current timezone abbreviation based on local offset (e.g., CST, JST, UTC).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -755,6 +742,14 @@ public final class MarineWeatherResponseLocationContinentCode {
     @java.lang.Override
     public MarineWeatherResponseLocationContinentCode build() {
       return new MarineWeatherResponseLocationContinentCode(continentCode, continentName, countryCode2, countryCode3, countryName, countryNameOfficial, isEu, stateProv, stateCode, district, city, zipcode, latitude, longitude, locality, elevation, timezone, timezoneAbbreviation, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("continent_code") || key.equalsIgnoreCase("continent_name") || key.equalsIgnoreCase("country_code2") || key.equalsIgnoreCase("country_code3") || key.equalsIgnoreCase("country_name") || key.equalsIgnoreCase("country_name_official") || key.equalsIgnoreCase("is_eu") || key.equalsIgnoreCase("state_prov") || key.equalsIgnoreCase("state_code") || key.equalsIgnoreCase("district") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("zipcode") || key.equalsIgnoreCase("latitude") || key.equalsIgnoreCase("longitude") || key.equalsIgnoreCase("locality") || key.equalsIgnoreCase("elevation") || key.equalsIgnoreCase("timezone") || key.equalsIgnoreCase("timezone_abbreviation")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

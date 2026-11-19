@@ -55,8 +55,7 @@ public final class BulkDomainDnsLookupRequest {
   }
 
   /**
-   * @return A comma-separated list of DNS record types for lookup.
-   * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all
+   * @return DNS record types to look up, sent as a comma-separated list (e.g. <code>A,MX</code>). Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all.
    */
   @JsonIgnore
   public Optional<List<String>> getType() {
@@ -141,8 +140,7 @@ public final class BulkDomainDnsLookupRequest {
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
 
     /**
-     * <p>A comma-separated list of DNS record types for lookup.
-     * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all</p>
+     * <p>DNS record types to look up, sent as a comma-separated list (e.g. <code>A,MX</code>). Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all.</p>
      */
     _FinalStage type(Optional<List<String>> type);
 
@@ -188,7 +186,6 @@ public final class BulkDomainDnsLookupRequest {
 
     private Optional<List<String>> type = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -205,7 +202,6 @@ public final class BulkDomainDnsLookupRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -307,8 +303,7 @@ public final class BulkDomainDnsLookupRequest {
     }
 
     /**
-     * <p>A comma-separated list of DNS record types for lookup.
-     * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all</p>
+     * <p>DNS record types to look up, sent as a comma-separated list (e.g. <code>A,MX</code>). Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -318,8 +313,7 @@ public final class BulkDomainDnsLookupRequest {
     }
 
     /**
-     * <p>A comma-separated list of DNS record types for lookup.
-     * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all</p>
+     * <p>DNS record types to look up, sent as a comma-separated list (e.g. <code>A,MX</code>). Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all.</p>
      */
     @java.lang.Override
     @JsonSetter(
@@ -334,6 +328,14 @@ public final class BulkDomainDnsLookupRequest {
     @java.lang.Override
     public BulkDomainDnsLookupRequest build() {
       return new BulkDomainDnsLookupRequest(type, apiKey, format, domainNames, ipAddresses, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("domainNames") || key.equalsIgnoreCase("ipAddresses")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

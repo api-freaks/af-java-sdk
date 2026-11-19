@@ -154,7 +154,6 @@ public final class DomainReputationResponseRiskCategoryPivotMatchesItem {
 
     private float confidence;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -171,7 +170,6 @@ public final class DomainReputationResponseRiskCategoryPivotMatchesItem {
 
     /**
      * <p>Pivot value (e.g. a nameserver or email address).</p>
-     * <p>Pivot value (e.g. a nameserver or email address).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -182,7 +180,6 @@ public final class DomainReputationResponseRiskCategoryPivotMatchesItem {
     }
 
     /**
-     * <p>Type of pivot.</p>
      * <p>Type of pivot.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -195,7 +192,6 @@ public final class DomainReputationResponseRiskCategoryPivotMatchesItem {
 
     /**
      * <p>Total number of threats related to this pivot.</p>
-     * <p>Total number of threats related to this pivot.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -206,7 +202,6 @@ public final class DomainReputationResponseRiskCategoryPivotMatchesItem {
     }
 
     /**
-     * <p>Confidence score for the pivot match (0-1).</p>
      * <p>Confidence score for the pivot match (0-1).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -220,6 +215,14 @@ public final class DomainReputationResponseRiskCategoryPivotMatchesItem {
     @java.lang.Override
     public DomainReputationResponseRiskCategoryPivotMatchesItem build() {
       return new DomainReputationResponseRiskCategoryPivotMatchesItem(pivot, pivotType, totalRelatedThreats, confidence, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("pivot") || key.equalsIgnoreCase("pivot_type") || key.equalsIgnoreCase("total_related_threats") || key.equalsIgnoreCase("confidence")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

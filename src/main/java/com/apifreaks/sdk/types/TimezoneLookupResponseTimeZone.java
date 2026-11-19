@@ -74,6 +74,10 @@ public final class TimezoneLookupResponseTimeZone {
 
   private final Optional<TimezoneLookupResponseTimeZoneDstEnd> dstEnd;
 
+  private final Optional<String> dstTzAbbreviation;
+
+  private final Optional<String> dstTzFullName;
+
   private final Map<String, Object> additionalProperties;
 
   private TimezoneLookupResponseTimeZone(String name, double offset, double offsetWithDst,
@@ -82,8 +86,8 @@ public final class TimezoneLookupResponseTimeZone {
       String yearAbbr, String currentTzAbbreviation, String currentTzFullName,
       String standardTzAbbreviation, String standardTzFullName, boolean isDst, double dstSavings,
       boolean dstExists, Optional<TimezoneLookupResponseTimeZoneDstStart> dstStart,
-      Optional<TimezoneLookupResponseTimeZoneDstEnd> dstEnd,
-      Map<String, Object> additionalProperties) {
+      Optional<TimezoneLookupResponseTimeZoneDstEnd> dstEnd, Optional<String> dstTzAbbreviation,
+      Optional<String> dstTzFullName, Map<String, Object> additionalProperties) {
     this.name = name;
     this.offset = offset;
     this.offsetWithDst = offsetWithDst;
@@ -108,6 +112,8 @@ public final class TimezoneLookupResponseTimeZone {
     this.dstExists = dstExists;
     this.dstStart = dstStart;
     this.dstEnd = dstEnd;
+    this.dstTzAbbreviation = dstTzAbbreviation;
+    this.dstTzFullName = dstTzFullName;
     this.additionalProperties = additionalProperties;
   }
 
@@ -231,6 +237,22 @@ public final class TimezoneLookupResponseTimeZone {
     return dstEnd;
   }
 
+  /**
+   * @return Abbreviation of the DST time zone. Always present as a key; holds an empty string when dst_exists is false.
+   */
+  @JsonProperty("dst_tz_abbreviation")
+  public Optional<String> getDstTzAbbreviation() {
+    return dstTzAbbreviation;
+  }
+
+  /**
+   * @return Full name of the DST time zone. Always present as a key; holds an empty string when dst_exists is false.
+   */
+  @JsonProperty("dst_tz_full_name")
+  public Optional<String> getDstTzFullName() {
+    return dstTzFullName;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -243,12 +265,12 @@ public final class TimezoneLookupResponseTimeZone {
   }
 
   private boolean equalTo(TimezoneLookupResponseTimeZone other) {
-    return name.equals(other.name) && offset == other.offset && offsetWithDst == other.offsetWithDst && date.equals(other.date) && dateTime.equals(other.dateTime) && dateTimeTxt.equals(other.dateTimeTxt) && dateTimeWti.equals(other.dateTimeWti) && dateTimeYmd.equals(other.dateTimeYmd) && dateTimeUnix == other.dateTimeUnix && time24.equals(other.time24) && time12.equals(other.time12) && week == other.week && month == other.month && year == other.year && yearAbbr.equals(other.yearAbbr) && currentTzAbbreviation.equals(other.currentTzAbbreviation) && currentTzFullName.equals(other.currentTzFullName) && standardTzAbbreviation.equals(other.standardTzAbbreviation) && standardTzFullName.equals(other.standardTzFullName) && isDst == other.isDst && dstSavings == other.dstSavings && dstExists == other.dstExists && dstStart.equals(other.dstStart) && dstEnd.equals(other.dstEnd);
+    return name.equals(other.name) && offset == other.offset && offsetWithDst == other.offsetWithDst && date.equals(other.date) && dateTime.equals(other.dateTime) && dateTimeTxt.equals(other.dateTimeTxt) && dateTimeWti.equals(other.dateTimeWti) && dateTimeYmd.equals(other.dateTimeYmd) && dateTimeUnix == other.dateTimeUnix && time24.equals(other.time24) && time12.equals(other.time12) && week == other.week && month == other.month && year == other.year && yearAbbr.equals(other.yearAbbr) && currentTzAbbreviation.equals(other.currentTzAbbreviation) && currentTzFullName.equals(other.currentTzFullName) && standardTzAbbreviation.equals(other.standardTzAbbreviation) && standardTzFullName.equals(other.standardTzFullName) && isDst == other.isDst && dstSavings == other.dstSavings && dstExists == other.dstExists && dstStart.equals(other.dstStart) && dstEnd.equals(other.dstEnd) && dstTzAbbreviation.equals(other.dstTzAbbreviation) && dstTzFullName.equals(other.dstTzFullName);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.name, this.offset, this.offsetWithDst, this.date, this.dateTime, this.dateTimeTxt, this.dateTimeWti, this.dateTimeYmd, this.dateTimeUnix, this.time24, this.time12, this.week, this.month, this.year, this.yearAbbr, this.currentTzAbbreviation, this.currentTzFullName, this.standardTzAbbreviation, this.standardTzFullName, this.isDst, this.dstSavings, this.dstExists, this.dstStart, this.dstEnd);
+    return Objects.hash(this.name, this.offset, this.offsetWithDst, this.date, this.dateTime, this.dateTimeTxt, this.dateTimeWti, this.dateTimeYmd, this.dateTimeUnix, this.time24, this.time12, this.week, this.month, this.year, this.yearAbbr, this.currentTzAbbreviation, this.currentTzFullName, this.standardTzAbbreviation, this.standardTzFullName, this.isDst, this.dstSavings, this.dstExists, this.dstStart, this.dstEnd, this.dstTzAbbreviation, this.dstTzFullName);
   }
 
   @java.lang.Override
@@ -364,6 +386,20 @@ public final class TimezoneLookupResponseTimeZone {
     _FinalStage dstEnd(Optional<TimezoneLookupResponseTimeZoneDstEnd> dstEnd);
 
     _FinalStage dstEnd(TimezoneLookupResponseTimeZoneDstEnd dstEnd);
+
+    /**
+     * <p>Abbreviation of the DST time zone. Always present as a key; holds an empty string when dst_exists is false.</p>
+     */
+    _FinalStage dstTzAbbreviation(Optional<String> dstTzAbbreviation);
+
+    _FinalStage dstTzAbbreviation(String dstTzAbbreviation);
+
+    /**
+     * <p>Full name of the DST time zone. Always present as a key; holds an empty string when dst_exists is false.</p>
+     */
+    _FinalStage dstTzFullName(Optional<String> dstTzFullName);
+
+    _FinalStage dstTzFullName(String dstTzFullName);
   }
 
   @JsonIgnoreProperties(
@@ -414,11 +450,14 @@ public final class TimezoneLookupResponseTimeZone {
 
     private boolean dstExists;
 
+    private Optional<String> dstTzFullName = Optional.empty();
+
+    private Optional<String> dstTzAbbreviation = Optional.empty();
+
     private Optional<TimezoneLookupResponseTimeZoneDstEnd> dstEnd = Optional.empty();
 
     private Optional<TimezoneLookupResponseTimeZoneDstStart> dstStart = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -450,6 +489,8 @@ public final class TimezoneLookupResponseTimeZone {
       dstExists(other.getDstExists());
       dstStart(other.getDstStart());
       dstEnd(other.getDstEnd());
+      dstTzAbbreviation(other.getDstTzAbbreviation());
+      dstTzFullName(other.getDstTzFullName());
       return this;
     }
 
@@ -607,6 +648,52 @@ public final class TimezoneLookupResponseTimeZone {
       return this;
     }
 
+    /**
+     * <p>Full name of the DST time zone. Always present as a key; holds an empty string when dst_exists is false.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage dstTzFullName(String dstTzFullName) {
+      this.dstTzFullName = Optional.ofNullable(dstTzFullName);
+      return this;
+    }
+
+    /**
+     * <p>Full name of the DST time zone. Always present as a key; holds an empty string when dst_exists is false.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "dst_tz_full_name",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage dstTzFullName(Optional<String> dstTzFullName) {
+      this.dstTzFullName = dstTzFullName;
+      return this;
+    }
+
+    /**
+     * <p>Abbreviation of the DST time zone. Always present as a key; holds an empty string when dst_exists is false.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage dstTzAbbreviation(String dstTzAbbreviation) {
+      this.dstTzAbbreviation = Optional.ofNullable(dstTzAbbreviation);
+      return this;
+    }
+
+    /**
+     * <p>Abbreviation of the DST time zone. Always present as a key; holds an empty string when dst_exists is false.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "dst_tz_abbreviation",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage dstTzAbbreviation(Optional<String> dstTzAbbreviation) {
+      this.dstTzAbbreviation = dstTzAbbreviation;
+      return this;
+    }
+
     @java.lang.Override
     public _FinalStage dstEnd(TimezoneLookupResponseTimeZoneDstEnd dstEnd) {
       this.dstEnd = Optional.ofNullable(dstEnd);
@@ -641,7 +728,15 @@ public final class TimezoneLookupResponseTimeZone {
 
     @java.lang.Override
     public TimezoneLookupResponseTimeZone build() {
-      return new TimezoneLookupResponseTimeZone(name, offset, offsetWithDst, date, dateTime, dateTimeTxt, dateTimeWti, dateTimeYmd, dateTimeUnix, time24, time12, week, month, year, yearAbbr, currentTzAbbreviation, currentTzFullName, standardTzAbbreviation, standardTzFullName, isDst, dstSavings, dstExists, dstStart, dstEnd, additionalProperties);
+      return new TimezoneLookupResponseTimeZone(name, offset, offsetWithDst, date, dateTime, dateTimeTxt, dateTimeWti, dateTimeYmd, dateTimeUnix, time24, time12, week, month, year, yearAbbr, currentTzAbbreviation, currentTzFullName, standardTzAbbreviation, standardTzFullName, isDst, dstSavings, dstExists, dstStart, dstEnd, dstTzAbbreviation, dstTzFullName, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("offset") || key.equalsIgnoreCase("offset_with_dst") || key.equalsIgnoreCase("date") || key.equalsIgnoreCase("date_time") || key.equalsIgnoreCase("date_time_txt") || key.equalsIgnoreCase("date_time_wti") || key.equalsIgnoreCase("date_time_ymd") || key.equalsIgnoreCase("date_time_unix") || key.equalsIgnoreCase("time_24") || key.equalsIgnoreCase("time_12") || key.equalsIgnoreCase("week") || key.equalsIgnoreCase("month") || key.equalsIgnoreCase("year") || key.equalsIgnoreCase("year_abbr") || key.equalsIgnoreCase("current_tz_abbreviation") || key.equalsIgnoreCase("current_tz_full_name") || key.equalsIgnoreCase("standard_tz_abbreviation") || key.equalsIgnoreCase("standard_tz_full_name") || key.equalsIgnoreCase("is_dst") || key.equalsIgnoreCase("dst_savings") || key.equalsIgnoreCase("dst_exists") || key.equalsIgnoreCase("dst_start") || key.equalsIgnoreCase("dst_end") || key.equalsIgnoreCase("dst_tz_abbreviation") || key.equalsIgnoreCase("dst_tz_full_name")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

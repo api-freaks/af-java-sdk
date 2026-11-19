@@ -153,7 +153,6 @@ public final class CommodityTimeSeriesResponseRatesValueValue {
 
     private double close;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -170,7 +169,6 @@ public final class CommodityTimeSeriesResponseRatesValueValue {
 
     /**
      * <p>Opening price of the commodity on the given date.</p>
-     * <p>Opening price of the commodity on the given date.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -181,7 +179,6 @@ public final class CommodityTimeSeriesResponseRatesValueValue {
     }
 
     /**
-     * <p>Highest price of the commodity on the given date.</p>
      * <p>Highest price of the commodity on the given date.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -194,7 +191,6 @@ public final class CommodityTimeSeriesResponseRatesValueValue {
 
     /**
      * <p>Lowest price of the commodity on the given date.</p>
-     * <p>Lowest price of the commodity on the given date.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -205,7 +201,6 @@ public final class CommodityTimeSeriesResponseRatesValueValue {
     }
 
     /**
-     * <p>Closing price of the commodity on the given date.</p>
      * <p>Closing price of the commodity on the given date.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -219,6 +214,14 @@ public final class CommodityTimeSeriesResponseRatesValueValue {
     @java.lang.Override
     public CommodityTimeSeriesResponseRatesValueValue build() {
       return new CommodityTimeSeriesResponseRatesValueValue(open, high, low, close, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("open") || key.equalsIgnoreCase("high") || key.equalsIgnoreCase("low") || key.equalsIgnoreCase("close")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

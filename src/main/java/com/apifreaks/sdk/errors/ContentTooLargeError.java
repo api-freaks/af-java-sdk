@@ -5,21 +5,21 @@
 package com.apifreaks.sdk.errors;
 
 import com.apifreaks.sdk.core.ApifreaksApiApiException;
-import java.lang.Object;
+import com.apifreaks.sdk.types.ContentTooLargeErrorBody;
 import okhttp3.Response;
 
 public final class ContentTooLargeError extends ApifreaksApiApiException {
   /**
    * The body of the response that triggered the exception.
    */
-  private final Object body;
+  private final ContentTooLargeErrorBody body;
 
-  public ContentTooLargeError(Object body) {
+  public ContentTooLargeError(ContentTooLargeErrorBody body) {
     super("ContentTooLargeError", 413, body);
     this.body = body;
   }
 
-  public ContentTooLargeError(Object body, Response rawResponse) {
+  public ContentTooLargeError(ContentTooLargeErrorBody body, Response rawResponse) {
     super("ContentTooLargeError", 413, body, rawResponse);
     this.body = body;
   }
@@ -28,7 +28,7 @@ public final class ContentTooLargeError extends ApifreaksApiApiException {
    * @return the body
    */
   @java.lang.Override
-  public Object body() {
+  public ContentTooLargeErrorBody body() {
     return this.body;
   }
 }

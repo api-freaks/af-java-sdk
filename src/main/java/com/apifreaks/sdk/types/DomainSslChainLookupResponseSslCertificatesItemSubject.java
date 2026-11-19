@@ -248,7 +248,6 @@ public final class DomainSslChainLookupResponseSslCertificatesItemSubject {
 
     private Optional<String> organization = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -457,6 +456,14 @@ public final class DomainSslChainLookupResponseSslCertificatesItemSubject {
     @java.lang.Override
     public DomainSslChainLookupResponseSslCertificatesItemSubject build() {
       return new DomainSslChainLookupResponseSslCertificatesItemSubject(commonName, organization, organizationalUnit, locality, state, country, incCountry, incState, businessCategory, street, postalCode, serialNumber, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("commonName") || key.equalsIgnoreCase("organization") || key.equalsIgnoreCase("organizationalUnit") || key.equalsIgnoreCase("locality") || key.equalsIgnoreCase("state") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("incCountry") || key.equalsIgnoreCase("incState") || key.equalsIgnoreCase("businessCategory") || key.equalsIgnoreCase("street") || key.equalsIgnoreCase("postalCode") || key.equalsIgnoreCase("serialNumber")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

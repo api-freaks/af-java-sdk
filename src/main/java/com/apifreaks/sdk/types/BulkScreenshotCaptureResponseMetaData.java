@@ -115,7 +115,6 @@ public final class BulkScreenshotCaptureResponseMetaData {
 
     private int failedUrls;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -153,6 +152,14 @@ public final class BulkScreenshotCaptureResponseMetaData {
     @java.lang.Override
     public BulkScreenshotCaptureResponseMetaData build() {
       return new BulkScreenshotCaptureResponseMetaData(totalUrls, successfulUrls, failedUrls, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("total_urls") || key.equalsIgnoreCase("successful_urls") || key.equalsIgnoreCase("failed_urls")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

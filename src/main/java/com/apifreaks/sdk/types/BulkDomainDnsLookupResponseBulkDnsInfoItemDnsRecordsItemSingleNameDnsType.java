@@ -12,6 +12,8 @@ import java.lang.String;
 public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingleNameDnsType {
   public static final BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingleNameDnsType NS = new BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingleNameDnsType(Value.NS, "NS");
 
+  public static final BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingleNameDnsType PTR = new BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingleNameDnsType(Value.PTR, "PTR");
+
   private final Value value;
 
   private final String string;
@@ -47,6 +49,8 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingl
     switch (value) {
       case NS:
         return visitor.visitNs();
+      case PTR:
+        return visitor.visitPtr();
       case UNKNOWN:
       default:
         return visitor.visitUnknown(string);
@@ -61,6 +65,8 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingl
     switch (value) {
       case "NS":
         return NS;
+      case "PTR":
+        return PTR;
       default:
         return new BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingleNameDnsType(Value.UNKNOWN, value);
     }
@@ -69,11 +75,15 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingl
   public enum Value {
     NS,
 
+    PTR,
+
     UNKNOWN
   }
 
   public interface Visitor<T> {
     T visitNs();
+
+    T visitPtr();
 
     T visitUnknown(String unknownType);
   }

@@ -177,7 +177,6 @@ public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemError {
 
     private Optional<String> error = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -195,7 +194,6 @@ public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemError {
 
     /**
      * <p>Always false for a per-item error.</p>
-     * <p>Always false for a per-item error.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -206,7 +204,6 @@ public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemError {
     }
 
     /**
-     * <p>Domain name that this error applies to.</p>
      * <p>Domain name that this error applies to.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -219,7 +216,6 @@ public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemError {
 
     /**
      * <p>HTTP-equivalent status code for this item's failure (e.g. 403 for an unsupported extension).</p>
-     * <p>HTTP-equivalent status code for this item's failure (e.g. 403 for an unsupported extension).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -230,7 +226,6 @@ public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemError {
     }
 
     /**
-     * <p>Human-readable reason this domain could not be resolved.</p>
      * <p>Human-readable reason this domain could not be resolved.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -267,6 +262,14 @@ public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemError {
     @java.lang.Override
     public BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemError build() {
       return new BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemError(status, domainName, statusCode, error, message, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("status") || key.equalsIgnoreCase("domain_name") || key.equalsIgnoreCase("status_code") || key.equalsIgnoreCase("error") || key.equalsIgnoreCase("message")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

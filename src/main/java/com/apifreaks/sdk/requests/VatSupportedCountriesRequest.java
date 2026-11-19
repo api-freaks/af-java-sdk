@@ -62,7 +62,7 @@ public final class VatSupportedCountriesRequest {
   }
 
   /**
-   * @return Type of supported country. Supported values: IBAN, SWIFT, VAT. By default, it returns all supported countries for all types.
+   * @return Which list to return: VAT (<code>VAT_Supported_Countries_And_States</code>), IBAN (<code>IBAN_Supported_Countries</code>) or SWIFT (<code>SWIFT_Supported_Countries</code>). Each value returns only its own list. If omitted (or unknown), all three lists are returned.
    */
   @JsonProperty("type")
   public Optional<VatSupportedCountriesRequestType> getType() {
@@ -122,7 +122,7 @@ public final class VatSupportedCountriesRequest {
     _FinalStage format(VatSupportedCountriesRequestFormat format);
 
     /**
-     * <p>Type of supported country. Supported values: IBAN, SWIFT, VAT. By default, it returns all supported countries for all types.</p>
+     * <p>Which list to return: VAT (<code>VAT_Supported_Countries_And_States</code>), IBAN (<code>IBAN_Supported_Countries</code>) or SWIFT (<code>SWIFT_Supported_Countries</code>). Each value returns only its own list. If omitted (or unknown), all three lists are returned.</p>
      */
     _FinalStage type(Optional<VatSupportedCountriesRequestType> type);
 
@@ -139,7 +139,6 @@ public final class VatSupportedCountriesRequest {
 
     private Optional<VatSupportedCountriesRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -155,7 +154,6 @@ public final class VatSupportedCountriesRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -166,7 +164,7 @@ public final class VatSupportedCountriesRequest {
     }
 
     /**
-     * <p>Type of supported country. Supported values: IBAN, SWIFT, VAT. By default, it returns all supported countries for all types.</p>
+     * <p>Which list to return: VAT (<code>VAT_Supported_Countries_And_States</code>), IBAN (<code>IBAN_Supported_Countries</code>) or SWIFT (<code>SWIFT_Supported_Countries</code>). Each value returns only its own list. If omitted (or unknown), all three lists are returned.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -176,7 +174,7 @@ public final class VatSupportedCountriesRequest {
     }
 
     /**
-     * <p>Type of supported country. Supported values: IBAN, SWIFT, VAT. By default, it returns all supported countries for all types.</p>
+     * <p>Which list to return: VAT (<code>VAT_Supported_Countries_And_States</code>), IBAN (<code>IBAN_Supported_Countries</code>) or SWIFT (<code>SWIFT_Supported_Countries</code>). Each value returns only its own list. If omitted (or unknown), all three lists are returned.</p>
      */
     @java.lang.Override
     @JsonSetter(
@@ -214,6 +212,14 @@ public final class VatSupportedCountriesRequest {
     @java.lang.Override
     public VatSupportedCountriesRequest build() {
       return new VatSupportedCountriesRequest(apiKey, format, type, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("type")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

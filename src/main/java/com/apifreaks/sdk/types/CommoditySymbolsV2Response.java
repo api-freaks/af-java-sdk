@@ -119,7 +119,6 @@ public final class CommoditySymbolsV2Response {
 
     private List<CommoditySymbolsV2ResponseSymbolsItem> symbols = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -133,7 +132,6 @@ public final class CommoditySymbolsV2Response {
     }
 
     /**
-     * <p>API request success indicator. &quot;true&quot; for successful requests.</p>
      * <p>API request success indicator. &quot;true&quot; for successful requests.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -185,6 +183,14 @@ public final class CommoditySymbolsV2Response {
     @java.lang.Override
     public CommoditySymbolsV2Response build() {
       return new CommoditySymbolsV2Response(success, symbols, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("success") || key.equalsIgnoreCase("symbols")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

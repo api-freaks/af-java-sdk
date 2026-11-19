@@ -261,7 +261,6 @@ public final class PdfDecryptRequest {
 
     private Optional<String> webhookAuthorization = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -283,7 +282,6 @@ public final class PdfDecryptRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -294,7 +292,6 @@ public final class PdfDecryptRequest {
     }
 
     /**
-     * <p>The password to unlock the input file if it is protected. Either the owner password or user password can be provided. The owner password takes precedence. Password Length should be between 6 and 128 characters.</p>
      * <p>The password to unlock the input file if it is protected. Either the owner password or user password can be provided. The owner password takes precedence. Password Length should be between 6 and 128 characters.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -465,6 +462,14 @@ public final class PdfDecryptRequest {
     @java.lang.Override
     public PdfDecryptRequest build() {
       return new PdfDecryptRequest(webhookAuthorization, apiKey, format, fileId, destroy, output, filePassword, webhookUrl, webhookFailureNotification, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("file_id") || key.equalsIgnoreCase("destroy") || key.equalsIgnoreCase("output") || key.equalsIgnoreCase("file_password") || key.equalsIgnoreCase("webhook_url") || key.equalsIgnoreCase("webhook_failure_notification")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

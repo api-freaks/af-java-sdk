@@ -34,20 +34,24 @@ public final class ZipcodeSearchByRegionRequest {
 
   private final String country;
 
-  private final String region;
+  private final Optional<String> region;
 
   private final Optional<Integer> page;
+
+  private final Optional<String> regionCode;
 
   private final Map<String, Object> additionalProperties;
 
   private ZipcodeSearchByRegionRequest(String apiKey,
-      Optional<ZipcodeSearchByRegionRequestFormat> format, String country, String region,
-      Optional<Integer> page, Map<String, Object> additionalProperties) {
+      Optional<ZipcodeSearchByRegionRequestFormat> format, String country, Optional<String> region,
+      Optional<Integer> page, Optional<String> regionCode,
+      Map<String, Object> additionalProperties) {
     this.apiKey = apiKey;
     this.format = format;
     this.country = country;
     this.region = region;
     this.page = page;
+    this.regionCode = regionCode;
     this.additionalProperties = additionalProperties;
   }
 
@@ -76,10 +80,10 @@ public final class ZipcodeSearchByRegionRequest {
   }
 
   /**
-   * @return Name of the region, state or province associated with the country.
+   * @return Name of the region, state or province associated with the country. Either region or region_code is required; region_code takes priority if both are given.
    */
   @JsonProperty("region")
-  public String getRegion() {
+  public Optional<String> getRegion() {
     return region;
   }
 
@@ -89,6 +93,14 @@ public final class ZipcodeSearchByRegionRequest {
   @JsonProperty("page")
   public Optional<Integer> getPage() {
     return page;
+  }
+
+  /**
+   * @return ISO code of the region, state, or province associated with the country. Either region or region_code is required. region_code takes priority if both are given.
+   */
+  @JsonProperty("region_code")
+  public Optional<String> getRegionCode() {
+    return regionCode;
   }
 
   @java.lang.Override
@@ -103,12 +115,12 @@ public final class ZipcodeSearchByRegionRequest {
   }
 
   private boolean equalTo(ZipcodeSearchByRegionRequest other) {
-    return apiKey.equals(other.apiKey) && format.equals(other.format) && country.equals(other.country) && region.equals(other.region) && page.equals(other.page);
+    return apiKey.equals(other.apiKey) && format.equals(other.format) && country.equals(other.country) && region.equals(other.region) && page.equals(other.page) && regionCode.equals(other.regionCode);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.apiKey, this.format, this.country, this.region, this.page);
+    return Objects.hash(this.apiKey, this.format, this.country, this.region, this.page, this.regionCode);
   }
 
   @java.lang.Override
@@ -133,14 +145,7 @@ public final class ZipcodeSearchByRegionRequest {
     /**
      * <p>Country code in ISO 3166-1 alpha-2 format.</p>
      */
-    RegionStage country(@NotNull String country);
-  }
-
-  public interface RegionStage {
-    /**
-     * <p>Name of the region, state or province associated with the country.</p>
-     */
-    _FinalStage region(@NotNull String region);
+    _FinalStage country(@NotNull String country);
   }
 
   public interface _FinalStage {
@@ -158,28 +163,43 @@ public final class ZipcodeSearchByRegionRequest {
     _FinalStage format(ZipcodeSearchByRegionRequestFormat format);
 
     /**
+     * <p>Name of the region, state or province associated with the country. Either region or region_code is required; region_code takes priority if both are given.</p>
+     */
+    _FinalStage region(Optional<String> region);
+
+    _FinalStage region(String region);
+
+    /**
      * <p>Page no. to retrieve paginated results.</p>
      */
     _FinalStage page(Optional<Integer> page);
 
     _FinalStage page(Integer page);
+
+    /**
+     * <p>ISO code of the region, state, or province associated with the country. Either region or region_code is required. region_code takes priority if both are given.</p>
+     */
+    _FinalStage regionCode(Optional<String> regionCode);
+
+    _FinalStage regionCode(String regionCode);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements ApiKeyStage, CountryStage, RegionStage, _FinalStage {
+  public static final class Builder implements ApiKeyStage, CountryStage, _FinalStage {
     private String apiKey;
 
     private String country;
 
-    private String region;
+    private Optional<String> regionCode = Optional.empty();
 
     private Optional<Integer> page = Optional.empty();
 
+    private Optional<String> region = Optional.empty();
+
     private Optional<ZipcodeSearchByRegionRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -192,11 +212,11 @@ public final class ZipcodeSearchByRegionRequest {
       country(other.getCountry());
       region(other.getRegion());
       page(other.getPage());
+      regionCode(other.getRegionCode());
       return this;
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -209,25 +229,35 @@ public final class ZipcodeSearchByRegionRequest {
 
     /**
      * <p>Country code in ISO 3166-1 alpha-2 format.</p>
-     * <p>Country code in ISO 3166-1 alpha-2 format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("country")
-    public RegionStage country(@NotNull String country) {
+    public _FinalStage country(@NotNull String country) {
       this.country = Objects.requireNonNull(country, "country must not be null");
       return this;
     }
 
     /**
-     * <p>Name of the region, state or province associated with the country.</p>
-     * <p>Name of the region, state or province associated with the country.</p>
+     * <p>ISO code of the region, state, or province associated with the country. Either region or region_code is required. region_code takes priority if both are given.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    @JsonSetter("region")
-    public _FinalStage region(@NotNull String region) {
-      this.region = Objects.requireNonNull(region, "region must not be null");
+    public _FinalStage regionCode(String regionCode) {
+      this.regionCode = Optional.ofNullable(regionCode);
+      return this;
+    }
+
+    /**
+     * <p>ISO code of the region, state, or province associated with the country. Either region or region_code is required. region_code takes priority if both are given.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "region_code",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage regionCode(Optional<String> regionCode) {
+      this.regionCode = regionCode;
       return this;
     }
 
@@ -251,6 +281,29 @@ public final class ZipcodeSearchByRegionRequest {
     )
     public _FinalStage page(Optional<Integer> page) {
       this.page = page;
+      return this;
+    }
+
+    /**
+     * <p>Name of the region, state or province associated with the country. Either region or region_code is required; region_code takes priority if both are given.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage region(String region) {
+      this.region = Optional.ofNullable(region);
+      return this;
+    }
+
+    /**
+     * <p>Name of the region, state or province associated with the country. Either region or region_code is required; region_code takes priority if both are given.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "region",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage region(Optional<String> region) {
+      this.region = region;
       return this;
     }
 
@@ -279,7 +332,15 @@ public final class ZipcodeSearchByRegionRequest {
 
     @java.lang.Override
     public ZipcodeSearchByRegionRequest build() {
-      return new ZipcodeSearchByRegionRequest(apiKey, format, country, region, page, additionalProperties);
+      return new ZipcodeSearchByRegionRequest(apiKey, format, country, region, page, regionCode, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("region") || key.equalsIgnoreCase("page") || key.equalsIgnoreCase("region_code")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

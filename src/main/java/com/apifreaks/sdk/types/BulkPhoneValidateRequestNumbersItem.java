@@ -136,7 +136,6 @@ public final class BulkPhoneValidateRequestNumbersItem {
 
     private Optional<String> region = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -151,7 +150,6 @@ public final class BulkPhoneValidateRequestNumbersItem {
     }
 
     /**
-     * <p>Phone number to validate.</p>
      * <p>Phone number to validate.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -211,6 +209,14 @@ public final class BulkPhoneValidateRequestNumbersItem {
     @java.lang.Override
     public BulkPhoneValidateRequestNumbersItem build() {
       return new BulkPhoneValidateRequestNumbersItem(number, region, dialerRegion, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("number") || key.equalsIgnoreCase("region") || key.equalsIgnoreCase("dialer_region")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -76,7 +76,6 @@ public final class GetAdminUnitsResponse {
   public static final class Builder {
     private List<GetAdminUnitsResponseAdminUnitsItem> adminUnits = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -113,6 +112,14 @@ public final class GetAdminUnitsResponse {
 
     public GetAdminUnitsResponse build() {
       return new GetAdminUnitsResponse(adminUnits, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("admin_units")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

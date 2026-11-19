@@ -106,7 +106,6 @@ public final class MarineWeatherResponse {
 
     private Optional<Map<String, MarineWeatherResponseForecastValue>> forecast = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -172,6 +171,14 @@ public final class MarineWeatherResponse {
 
     public MarineWeatherResponse build() {
       return new MarineWeatherResponse(location, current, forecast, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("location") || key.equalsIgnoreCase("current") || key.equalsIgnoreCase("forecast")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
@@ -32,14 +33,18 @@ public final class CommodityHistoricalRatesV2Response {
 
   private final Map<String, CommodityHistoricalRatesV2ResponseRatesValue> rates;
 
+  private final Optional<Map<String, CommodityHistoricalRatesV2ResponseUnresolvedValue>> unresolved;
+
   private final Map<String, Object> additionalProperties;
 
   private CommodityHistoricalRatesV2Response(boolean success, String date,
       Map<String, CommodityHistoricalRatesV2ResponseRatesValue> rates,
+      Optional<Map<String, CommodityHistoricalRatesV2ResponseUnresolvedValue>> unresolved,
       Map<String, Object> additionalProperties) {
     this.success = success;
     this.date = date;
     this.rates = rates;
+    this.unresolved = unresolved;
     this.additionalProperties = additionalProperties;
   }
 
@@ -67,6 +72,14 @@ public final class CommodityHistoricalRatesV2Response {
     return rates;
   }
 
+  /**
+   * @return Present only on a 206 Partial Content response, when some requested symbols could not be resolved. Map of each unresolved symbol to a detail message and optional close-match suggestions.
+   */
+  @JsonProperty("unresolved")
+  public Optional<Map<String, CommodityHistoricalRatesV2ResponseUnresolvedValue>> getUnresolved() {
+    return unresolved;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -79,12 +92,12 @@ public final class CommodityHistoricalRatesV2Response {
   }
 
   private boolean equalTo(CommodityHistoricalRatesV2Response other) {
-    return success == other.success && date.equals(other.date) && rates.equals(other.rates);
+    return success == other.success && date.equals(other.date) && rates.equals(other.rates) && unresolved.equals(other.unresolved);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.success, this.date, this.rates);
+    return Objects.hash(this.success, this.date, this.rates, this.unresolved);
   }
 
   @java.lang.Override
@@ -127,6 +140,15 @@ public final class CommodityHistoricalRatesV2Response {
     _FinalStage putAllRates(Map<String, CommodityHistoricalRatesV2ResponseRatesValue> rates);
 
     _FinalStage rates(String key, CommodityHistoricalRatesV2ResponseRatesValue value);
+
+    /**
+     * <p>Present only on a 206 Partial Content response, when some requested symbols could not be resolved. Map of each unresolved symbol to a detail message and optional close-match suggestions.</p>
+     */
+    _FinalStage unresolved(
+        Optional<Map<String, CommodityHistoricalRatesV2ResponseUnresolvedValue>> unresolved);
+
+    _FinalStage unresolved(
+        Map<String, CommodityHistoricalRatesV2ResponseUnresolvedValue> unresolved);
   }
 
   @JsonIgnoreProperties(
@@ -137,9 +159,10 @@ public final class CommodityHistoricalRatesV2Response {
 
     private String date;
 
+    private Optional<Map<String, CommodityHistoricalRatesV2ResponseUnresolvedValue>> unresolved = Optional.empty();
+
     private Map<String, CommodityHistoricalRatesV2ResponseRatesValue> rates = new LinkedHashMap<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -150,11 +173,11 @@ public final class CommodityHistoricalRatesV2Response {
       success(other.getSuccess());
       date(other.getDate());
       rates(other.getRates());
+      unresolved(other.getUnresolved());
       return this;
     }
 
     /**
-     * <p>API request success indicator. &quot;true&quot; for successful requests.</p>
      * <p>API request success indicator. &quot;true&quot; for successful requests.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -167,13 +190,37 @@ public final class CommodityHistoricalRatesV2Response {
 
     /**
      * <p>Date for which the user requested the commodity price. Format: YYYY-MM-DD.</p>
-     * <p>Date for which the user requested the commodity price. Format: YYYY-MM-DD.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("date")
     public _FinalStage date(@NotNull String date) {
       this.date = Objects.requireNonNull(date, "date must not be null");
+      return this;
+    }
+
+    /**
+     * <p>Present only on a 206 Partial Content response, when some requested symbols could not be resolved. Map of each unresolved symbol to a detail message and optional close-match suggestions.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage unresolved(
+        Map<String, CommodityHistoricalRatesV2ResponseUnresolvedValue> unresolved) {
+      this.unresolved = Optional.ofNullable(unresolved);
+      return this;
+    }
+
+    /**
+     * <p>Present only on a 206 Partial Content response, when some requested symbols could not be resolved. Map of each unresolved symbol to a detail message and optional close-match suggestions.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "unresolved",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage unresolved(
+        Optional<Map<String, CommodityHistoricalRatesV2ResponseUnresolvedValue>> unresolved) {
+      this.unresolved = unresolved;
       return this;
     }
 
@@ -218,7 +265,15 @@ public final class CommodityHistoricalRatesV2Response {
 
     @java.lang.Override
     public CommodityHistoricalRatesV2Response build() {
-      return new CommodityHistoricalRatesV2Response(success, date, rates, additionalProperties);
+      return new CommodityHistoricalRatesV2Response(success, date, rates, unresolved, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("success") || key.equalsIgnoreCase("date") || key.equalsIgnoreCase("rates") || key.equalsIgnoreCase("unresolved")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -116,7 +116,6 @@ public final class AsnWhoisLookupResponseUpstreamsItem {
 
     private String country;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -154,6 +153,14 @@ public final class AsnWhoisLookupResponseUpstreamsItem {
     @java.lang.Override
     public AsnWhoisLookupResponseUpstreamsItem build() {
       return new AsnWhoisLookupResponseUpstreamsItem(asNumber, description, country, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("asNumber") || key.equalsIgnoreCase("description") || key.equalsIgnoreCase("country")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

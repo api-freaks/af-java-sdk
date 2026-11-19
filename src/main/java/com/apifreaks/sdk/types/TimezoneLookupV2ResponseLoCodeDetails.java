@@ -171,7 +171,6 @@ public final class TimezoneLookupV2ResponseLoCodeDetails {
 
     private Optional<String> longitude = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -327,6 +326,14 @@ public final class TimezoneLookupV2ResponseLoCodeDetails {
 
     public TimezoneLookupV2ResponseLoCodeDetails build() {
       return new TimezoneLookupV2ResponseLoCodeDetails(loCode, city, stateCode, countryCode, countryName, locationType, latitude, longitude, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("lo_code") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("state_code") || key.equalsIgnoreCase("country_code") || key.equalsIgnoreCase("country_name") || key.equalsIgnoreCase("location_type") || key.equalsIgnoreCase("latitude") || key.equalsIgnoreCase("longitude")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

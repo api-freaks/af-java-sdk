@@ -178,7 +178,6 @@ public final class DomainDnsLookupResponseDnsRecordsItemStrings {
 
     private List<String> strings = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -268,6 +267,14 @@ public final class DomainDnsLookupResponseDnsRecordsItemStrings {
     @java.lang.Override
     public DomainDnsLookupResponseDnsRecordsItemStrings build() {
       return new DomainDnsLookupResponseDnsRecordsItemStrings(name, type, dnsType, ttl, rawText, rRsetType, strings, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("dnsType") || key.equalsIgnoreCase("ttl") || key.equalsIgnoreCase("rawText") || key.equalsIgnoreCase("rRsetType") || key.equalsIgnoreCase("strings")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

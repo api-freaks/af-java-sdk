@@ -79,7 +79,6 @@ public final class FloodForecastResponseForecastValue {
   public static final class Builder {
     private Optional<FloodForecastResponseForecastValueDaily> daily = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -109,6 +108,14 @@ public final class FloodForecastResponseForecastValue {
 
     public FloodForecastResponseForecastValue build() {
       return new FloodForecastResponseForecastValue(daily, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("daily")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -151,7 +151,6 @@ public final class AsnWhoisLookupResponseParsedWhoisResponseAbuseContactsItem {
 
     private List<String> email = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -243,6 +242,14 @@ public final class AsnWhoisLookupResponseParsedWhoisResponseAbuseContactsItem {
     @java.lang.Override
     public AsnWhoisLookupResponseParsedWhoisResponseAbuseContactsItem build() {
       return new AsnWhoisLookupResponseParsedWhoisResponseAbuseContactsItem(handle, name, email, phone, source, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("handle") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("email") || key.equalsIgnoreCase("phone") || key.equalsIgnoreCase("source")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -540,7 +540,6 @@ public final class DomainWhoisLookupV2Response {
 
     private Optional<String> whoisServer = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -575,7 +574,6 @@ public final class DomainWhoisLookupV2Response {
 
     /**
      * <p>true if the request was successfully processed.</p>
-     * <p>true if the request was successfully processed.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -586,7 +584,6 @@ public final class DomainWhoisLookupV2Response {
     }
 
     /**
-     * <p>Domain name that was queried.</p>
      * <p>Domain name that was queried.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -599,7 +596,6 @@ public final class DomainWhoisLookupV2Response {
 
     /**
      * <p>Timestamp when the WHOIS query was executed.</p>
-     * <p>Timestamp when the WHOIS query was executed.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -610,7 +606,6 @@ public final class DomainWhoisLookupV2Response {
     }
 
     /**
-     * <p>Domain registration status; 'restricted' means the registry withholds registration details.</p>
      * <p>Domain registration status; 'restricted' means the registry withholds registration details.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -1051,6 +1046,14 @@ public final class DomainWhoisLookupV2Response {
     @java.lang.Override
     public DomainWhoisLookupV2Response build() {
       return new DomainWhoisLookupV2Response(status, domainName, queryTime, whoisServer, domainRegistered, secureDns, domainHandle, createDate, updateDate, expiryDate, domainRegistrar, resellerContact, registrantContact, administrativeContact, technicalContact, billingContact, abuseContact, eligibilityInfo, nameServers, domainStatus, whoisRawDomain, registryData, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("status") || key.equalsIgnoreCase("domain_name") || key.equalsIgnoreCase("query_time") || key.equalsIgnoreCase("whois_server") || key.equalsIgnoreCase("domain_registered") || key.equalsIgnoreCase("secure_dns") || key.equalsIgnoreCase("domain_handle") || key.equalsIgnoreCase("create_date") || key.equalsIgnoreCase("update_date") || key.equalsIgnoreCase("expiry_date") || key.equalsIgnoreCase("domain_registrar") || key.equalsIgnoreCase("reseller_contact") || key.equalsIgnoreCase("registrant_contact") || key.equalsIgnoreCase("administrative_contact") || key.equalsIgnoreCase("technical_contact") || key.equalsIgnoreCase("billing_contact") || key.equalsIgnoreCase("abuse_contact") || key.equalsIgnoreCase("eligibility_info") || key.equalsIgnoreCase("name_servers") || key.equalsIgnoreCase("domain_status") || key.equalsIgnoreCase("whois_raw_domain") || key.equalsIgnoreCase("registry_data")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

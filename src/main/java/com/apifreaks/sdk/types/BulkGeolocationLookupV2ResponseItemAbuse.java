@@ -349,7 +349,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuse {
 
     private Optional<String> domain = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -374,7 +373,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuse {
     }
 
     /**
-     * <p>The IP address used for the lookup (IPv4 or IPv6).</p>
      * <p>The IP address used for the lookup (IPv4 or IPv6).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -671,6 +669,14 @@ public final class BulkGeolocationLookupV2ResponseItemAbuse {
     @java.lang.Override
     public BulkGeolocationLookupV2ResponseItemAbuse build() {
       return new BulkGeolocationLookupV2ResponseItemAbuse(ip, domain, hostname, location, countryMetadata, network, asn, company, currency, security, abuse, timeZone, userAgent, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("ip") || key.equalsIgnoreCase("domain") || key.equalsIgnoreCase("hostname") || key.equalsIgnoreCase("location") || key.equalsIgnoreCase("country_metadata") || key.equalsIgnoreCase("network") || key.equalsIgnoreCase("asn") || key.equalsIgnoreCase("company") || key.equalsIgnoreCase("currency") || key.equalsIgnoreCase("security") || key.equalsIgnoreCase("abuse") || key.equalsIgnoreCase("time_zone") || key.equalsIgnoreCase("user_agent")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

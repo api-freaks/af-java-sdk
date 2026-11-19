@@ -157,7 +157,6 @@ public final class VatRateByCountryRequest {
 
     private Optional<VatRateByCountryRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -174,7 +173,6 @@ public final class VatRateByCountryRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -185,7 +183,6 @@ public final class VatRateByCountryRequest {
     }
 
     /**
-     * <p>Country identifier in Alpha-2 (PK), Alpha-3 (PAK), or full name (Pakistan). Combine with the optional &quot;state&quot; query for sub-national VAT; values are case-insensitive and may use underscores instead of spaces.</p>
      * <p>Country identifier in Alpha-2 (PK), Alpha-3 (PAK), or full name (Pakistan). Combine with the optional &quot;state&quot; query for sub-national VAT; values are case-insensitive and may use underscores instead of spaces.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -245,6 +242,14 @@ public final class VatRateByCountryRequest {
     @java.lang.Override
     public VatRateByCountryRequest build() {
       return new VatRateByCountryRequest(apiKey, format, country, state, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("state")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

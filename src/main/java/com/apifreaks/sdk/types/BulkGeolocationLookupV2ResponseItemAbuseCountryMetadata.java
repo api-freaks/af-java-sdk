@@ -139,7 +139,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseCountryMetadata {
 
     private List<String> languages = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -155,7 +154,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseCountryMetadata {
 
     /**
      * <p>Calling code/Dialing code of the country.</p>
-     * <p>Calling code/Dialing code of the country.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -166,7 +164,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseCountryMetadata {
     }
 
     /**
-     * <p>Top Level Domain Name (TLD) of the country, which is also called ccTLD.</p>
      * <p>Top Level Domain Name (TLD) of the country, which is also called ccTLD.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -218,6 +215,14 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseCountryMetadata {
     @java.lang.Override
     public BulkGeolocationLookupV2ResponseItemAbuseCountryMetadata build() {
       return new BulkGeolocationLookupV2ResponseItemAbuseCountryMetadata(callingCode, tld, languages, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("calling_code") || key.equalsIgnoreCase("tld") || key.equalsIgnoreCase("languages")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

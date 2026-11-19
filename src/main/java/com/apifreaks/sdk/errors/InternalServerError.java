@@ -5,21 +5,21 @@
 package com.apifreaks.sdk.errors;
 
 import com.apifreaks.sdk.core.ApifreaksApiApiException;
-import java.lang.Object;
+import com.apifreaks.sdk.types.InternalServerErrorBody;
 import okhttp3.Response;
 
 public final class InternalServerError extends ApifreaksApiApiException {
   /**
    * The body of the response that triggered the exception.
    */
-  private final Object body;
+  private final InternalServerErrorBody body;
 
-  public InternalServerError(Object body) {
+  public InternalServerError(InternalServerErrorBody body) {
     super("InternalServerError", 500, body);
     this.body = body;
   }
 
-  public InternalServerError(Object body, Response rawResponse) {
+  public InternalServerError(InternalServerErrorBody body, Response rawResponse) {
     super("InternalServerError", 500, body, rawResponse);
     this.body = body;
   }
@@ -28,7 +28,7 @@ public final class InternalServerError extends ApifreaksApiApiException {
    * @return the body
    */
   @java.lang.Override
-  public Object body() {
+  public InternalServerErrorBody body() {
     return this.body;
   }
 }

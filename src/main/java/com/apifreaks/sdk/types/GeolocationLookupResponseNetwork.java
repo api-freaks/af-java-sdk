@@ -99,7 +99,6 @@ public final class GeolocationLookupResponseNetwork {
 
     private Optional<GeolocationLookupResponseNetworkCompany> company = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -159,6 +158,14 @@ public final class GeolocationLookupResponseNetwork {
 
     public GeolocationLookupResponseNetwork build() {
       return new GeolocationLookupResponseNetwork(asn, connectionType, company, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("asn") || key.equalsIgnoreCase("connection_type") || key.equalsIgnoreCase("company")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -144,7 +144,6 @@ public final class DomainSslLookupResponse {
 
     private List<DomainSslLookupResponseSslCertificatesItem> sslCertificates = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -167,7 +166,6 @@ public final class DomainSslLookupResponse {
     }
 
     /**
-     * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
      * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -227,6 +225,14 @@ public final class DomainSslLookupResponse {
     @java.lang.Override
     public DomainSslLookupResponse build() {
       return new DomainSslLookupResponse(domainName, queryTime, sslCertificates, sslRaw, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("domainName") || key.equalsIgnoreCase("queryTime") || key.equalsIgnoreCase("sslCertificates") || key.equalsIgnoreCase("sslRaw")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

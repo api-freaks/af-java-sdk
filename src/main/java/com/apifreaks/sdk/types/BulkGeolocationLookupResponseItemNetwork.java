@@ -100,7 +100,6 @@ public final class BulkGeolocationLookupResponseItemNetwork {
 
     private Optional<BulkGeolocationLookupResponseItemNetworkCompany> company = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -160,6 +159,14 @@ public final class BulkGeolocationLookupResponseItemNetwork {
 
     public BulkGeolocationLookupResponseItemNetwork build() {
       return new BulkGeolocationLookupResponseItemNetwork(asn, connectionType, company, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("asn") || key.equalsIgnoreCase("connection_type") || key.equalsIgnoreCase("company")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

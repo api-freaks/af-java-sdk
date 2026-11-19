@@ -231,7 +231,6 @@ public final class TimezoneLookupResponseLocation {
 
     private Optional<String> zipcode = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -483,6 +482,14 @@ public final class TimezoneLookupResponseLocation {
 
     public TimezoneLookupResponseLocation build() {
       return new TimezoneLookupResponseLocation(locationString, countryName, stateProv, city, locality, latitude, longitude, continentCode, continentName, countryCode2, countryCode3, countryNameOfficial, isEu, stateCode, district, zipcode, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("location_string") || key.equalsIgnoreCase("country_name") || key.equalsIgnoreCase("state_prov") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("locality") || key.equalsIgnoreCase("latitude") || key.equalsIgnoreCase("longitude") || key.equalsIgnoreCase("continent_code") || key.equalsIgnoreCase("continent_name") || key.equalsIgnoreCase("country_code2") || key.equalsIgnoreCase("country_code3") || key.equalsIgnoreCase("country_name_official") || key.equalsIgnoreCase("is_eu") || key.equalsIgnoreCase("state_code") || key.equalsIgnoreCase("district") || key.equalsIgnoreCase("zipcode")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -196,7 +196,6 @@ public final class DomainReputationResponseTrustSignalsSignalsNeutralItem {
 
     private float confidence;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -215,7 +214,6 @@ public final class DomainReputationResponseTrustSignalsSignalsNeutralItem {
 
     /**
      * <p>Signal code identifier (e.g. valid_ssl, dmarc_missing).</p>
-     * <p>Signal code identifier (e.g. valid_ssl, dmarc_missing).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -227,7 +225,6 @@ public final class DomainReputationResponseTrustSignalsSignalsNeutralItem {
 
     /**
      * <p>Weight assigned to the signal.</p>
-     * <p>Weight assigned to the signal.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -238,7 +235,6 @@ public final class DomainReputationResponseTrustSignalsSignalsNeutralItem {
     }
 
     /**
-     * <p>Polarity of the signal.</p>
      * <p>Polarity of the signal.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -252,7 +248,6 @@ public final class DomainReputationResponseTrustSignalsSignalsNeutralItem {
 
     /**
      * <p>Category the signal belongs to (e.g. ssl_certificate).</p>
-     * <p>Category the signal belongs to (e.g. ssl_certificate).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -264,7 +259,6 @@ public final class DomainReputationResponseTrustSignalsSignalsNeutralItem {
 
     /**
      * <p>Evidence supporting the signal.</p>
-     * <p>Evidence supporting the signal.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -275,7 +269,6 @@ public final class DomainReputationResponseTrustSignalsSignalsNeutralItem {
     }
 
     /**
-     * <p>Confidence score for the signal (0-1).</p>
      * <p>Confidence score for the signal (0-1).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -289,6 +282,14 @@ public final class DomainReputationResponseTrustSignalsSignalsNeutralItem {
     @java.lang.Override
     public DomainReputationResponseTrustSignalsSignalsNeutralItem build() {
       return new DomainReputationResponseTrustSignalsSignalsNeutralItem(code, weight, polarity, category, evidence, confidence, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("code") || key.equalsIgnoreCase("weight") || key.equalsIgnoreCase("polarity") || key.equalsIgnoreCase("category") || key.equalsIgnoreCase("evidence") || key.equalsIgnoreCase("confidence")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

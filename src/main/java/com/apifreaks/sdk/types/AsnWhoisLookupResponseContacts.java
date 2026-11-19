@@ -86,7 +86,6 @@ public final class AsnWhoisLookupResponseContacts {
 
     private List<String> abuseContacts = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -148,6 +147,14 @@ public final class AsnWhoisLookupResponseContacts {
 
     public AsnWhoisLookupResponseContacts build() {
       return new AsnWhoisLookupResponseContacts(emailContacts, abuseContacts, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("emailContacts") || key.equalsIgnoreCase("abuseContacts")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

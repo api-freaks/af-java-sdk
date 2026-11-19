@@ -76,7 +76,6 @@ public final class GetAdminLevelsResponse {
   public static final class Builder {
     private List<String> adminLevels = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -113,6 +112,14 @@ public final class GetAdminLevelsResponse {
 
     public GetAdminLevelsResponse build() {
       return new GetAdminLevelsResponse(adminLevels, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("admin_levels")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

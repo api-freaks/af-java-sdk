@@ -41,11 +41,11 @@ public final class FloodForecastResponseLocation {
   @SuppressWarnings("unchecked")
   public <T> T visit(Visitor<T> visitor) {
     if(this.type == 0) {
-      return visitor.visit((FloodForecastResponseLocationZero) this.value);
-    } else if(this.type == 1) {
       return visitor.visit((FloodForecastResponseLocationContinentCode) this.value);
-    } else if(this.type == 2) {
+    } else if(this.type == 1) {
       return visitor.visit((FloodForecastResponseLocationCity) this.value);
+    } else if(this.type == 2) {
+      return visitor.visit((FloodForecastResponseLocationZero) this.value);
     }
     throw new IllegalStateException("Failed to visit value. This should never happen.");
   }
@@ -70,24 +70,24 @@ public final class FloodForecastResponseLocation {
     return this.value.toString();
   }
 
-  public static FloodForecastResponseLocation of(FloodForecastResponseLocationZero value) {
+  public static FloodForecastResponseLocation of(FloodForecastResponseLocationContinentCode value) {
     return new FloodForecastResponseLocation(value, 0);
   }
 
-  public static FloodForecastResponseLocation of(FloodForecastResponseLocationContinentCode value) {
+  public static FloodForecastResponseLocation of(FloodForecastResponseLocationCity value) {
     return new FloodForecastResponseLocation(value, 1);
   }
 
-  public static FloodForecastResponseLocation of(FloodForecastResponseLocationCity value) {
+  public static FloodForecastResponseLocation of(FloodForecastResponseLocationZero value) {
     return new FloodForecastResponseLocation(value, 2);
   }
 
   public interface Visitor<T> {
-    T visit(FloodForecastResponseLocationZero value);
-
     T visit(FloodForecastResponseLocationContinentCode value);
 
     T visit(FloodForecastResponseLocationCity value);
+
+    T visit(FloodForecastResponseLocationZero value);
   }
 
   static final class Deserializer extends StdDeserializer<FloodForecastResponseLocation> {
@@ -99,12 +99,6 @@ public final class FloodForecastResponseLocation {
     public FloodForecastResponseLocation deserialize(JsonParser p, DeserializationContext context)
         throws IOException {
       Object value = p.readValueAs(Object.class);
-      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("latitude") && ((Map<?, ?>) value).containsKey("longitude") && ((Map<?, ?>) value).containsKey("country_name") && ((Map<?, ?>) value).containsKey("state_prov") && ((Map<?, ?>) value).containsKey("city") && ((Map<?, ?>) value).containsKey("timezone") && ((Map<?, ?>) value).containsKey("timezone_abbreviation")) {
-        try {
-          return of(ObjectMappers.JSON_MAPPER.convertValue(value, FloodForecastResponseLocationZero.class));
-        } catch(RuntimeException e) {
-        }
-      }
       if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("continent_code") && ((Map<?, ?>) value).containsKey("continent_name") && ((Map<?, ?>) value).containsKey("country_code2") && ((Map<?, ?>) value).containsKey("country_code3") && ((Map<?, ?>) value).containsKey("country_name") && ((Map<?, ?>) value).containsKey("country_name_official") && ((Map<?, ?>) value).containsKey("state_prov") && ((Map<?, ?>) value).containsKey("city") && ((Map<?, ?>) value).containsKey("latitude") && ((Map<?, ?>) value).containsKey("longitude") && ((Map<?, ?>) value).containsKey("timezone") && ((Map<?, ?>) value).containsKey("timezone_abbreviation")) {
         try {
           return of(ObjectMappers.JSON_MAPPER.convertValue(value, FloodForecastResponseLocationContinentCode.class));
@@ -114,6 +108,12 @@ public final class FloodForecastResponseLocation {
       if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("location_string") && ((Map<?, ?>) value).containsKey("country_name") && ((Map<?, ?>) value).containsKey("state_prov") && ((Map<?, ?>) value).containsKey("city") && ((Map<?, ?>) value).containsKey("latitude") && ((Map<?, ?>) value).containsKey("longitude") && ((Map<?, ?>) value).containsKey("timezone") && ((Map<?, ?>) value).containsKey("timezone_abbreviation")) {
         try {
           return of(ObjectMappers.JSON_MAPPER.convertValue(value, FloodForecastResponseLocationCity.class));
+        } catch(RuntimeException e) {
+        }
+      }
+      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("latitude") && ((Map<?, ?>) value).containsKey("longitude") && ((Map<?, ?>) value).containsKey("country_name") && ((Map<?, ?>) value).containsKey("state_prov") && ((Map<?, ?>) value).containsKey("city") && ((Map<?, ?>) value).containsKey("timezone") && ((Map<?, ?>) value).containsKey("timezone_abbreviation")) {
+        try {
+          return of(ObjectMappers.JSON_MAPPER.convertValue(value, FloodForecastResponseLocationZero.class));
         } catch(RuntimeException e) {
         }
       }

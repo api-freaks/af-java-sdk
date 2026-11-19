@@ -4,9 +4,12 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.Nullable;
+import com.apifreaks.sdk.core.NullableNonemptyFilter;
 import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -35,7 +38,7 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
 
   private final String createdAt;
 
-  private final String format;
+  private final Optional<String> format;
 
   private final String ttl;
 
@@ -172,7 +175,7 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
   private final Map<String, Object> additionalProperties;
 
   private BulkScreenshotCaptureResponseResultsItemUrl(String screenshot, String url,
-      String createdAt, String format, String ttl, Optional<String> fileType,
+      String createdAt, Optional<String> format, String ttl, Optional<String> fileType,
       Optional<String> extractedHtml, Optional<Boolean> omitBackground,
       Optional<Boolean> destroyScreenshot, Optional<Boolean> failOnError,
       Optional<String> longitude, Optional<String> latitude, Optional<String> proxy,
@@ -287,7 +290,7 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
   }
 
   @JsonProperty("format")
-  public String getFormat() {
+  public Optional<String> getFormat() {
     return format;
   }
 
@@ -616,8 +619,20 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
     return clip;
   }
 
-  @JsonProperty("sizes")
+  @JsonIgnore
   public Optional<List<Map<String, Object>>> getSizes() {
+    if (sizes == null) {
+      return Optional.empty();
+    }
+    return sizes;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("sizes")
+  private Optional<List<Map<String, Object>>> _getSizes() {
     return sizes;
   }
 
@@ -661,11 +676,7 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
   }
 
   public interface CreatedAtStage {
-    FormatStage createdAt(@NotNull String createdAt);
-  }
-
-  public interface FormatStage {
-    TtlStage format(@NotNull String format);
+    TtlStage createdAt(@NotNull String createdAt);
   }
 
   public interface TtlStage {
@@ -678,6 +689,10 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
+
+    _FinalStage format(Optional<String> format);
+
+    _FinalStage format(String format);
 
     _FinalStage fileType(Optional<String> fileType);
 
@@ -938,19 +953,19 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
     _FinalStage sizes(Optional<List<Map<String, Object>>> sizes);
 
     _FinalStage sizes(List<Map<String, Object>> sizes);
+
+    _FinalStage sizes(Nullable<List<Map<String, Object>>> sizes);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements ScreenshotStage, UrlStage, CreatedAtStage, FormatStage, TtlStage, _FinalStage {
+  public static final class Builder implements ScreenshotStage, UrlStage, CreatedAtStage, TtlStage, _FinalStage {
     private String screenshot;
 
     private String url;
 
     private String createdAt;
-
-    private String format;
 
     private String ttl;
 
@@ -1084,7 +1099,8 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
 
     private Optional<String> fileType = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<String> format = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -1181,15 +1197,8 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
 
     @java.lang.Override
     @JsonSetter("created_at")
-    public FormatStage createdAt(@NotNull String createdAt) {
+    public TtlStage createdAt(@NotNull String createdAt) {
       this.createdAt = Objects.requireNonNull(createdAt, "createdAt must not be null");
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter("format")
-    public TtlStage format(@NotNull String format) {
-      this.format = Objects.requireNonNull(format, "format must not be null");
       return this;
     }
 
@@ -1197,6 +1206,20 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
     @JsonSetter("ttl")
     public _FinalStage ttl(@NotNull String ttl) {
       this.ttl = Objects.requireNonNull(ttl, "ttl must not be null");
+      return this;
+    }
+
+    @java.lang.Override
+    public _FinalStage sizes(Nullable<List<Map<String, Object>>> sizes) {
+      if (sizes.isNull()) {
+        this.sizes = null;
+      }
+      else if (sizes.isEmpty()) {
+        this.sizes = Optional.empty();
+      }
+      else {
+        this.sizes = Optional.of(sizes.get());
+      }
       return this;
     }
 
@@ -2241,8 +2264,32 @@ public final class BulkScreenshotCaptureResponseResultsItemUrl {
     }
 
     @java.lang.Override
+    public _FinalStage format(String format) {
+      this.format = Optional.ofNullable(format);
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter(
+        value = "format",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage format(Optional<String> format) {
+      this.format = format;
+      return this;
+    }
+
+    @java.lang.Override
     public BulkScreenshotCaptureResponseResultsItemUrl build() {
       return new BulkScreenshotCaptureResponseResultsItemUrl(screenshot, url, createdAt, format, ttl, fileType, extractedHtml, omitBackground, destroyScreenshot, failOnError, longitude, latitude, proxy, noCookieBanners, blockAds, headers, cookies, scrollToElement, selector, blurSelector, removeSelector, css, cssUrl, js, jsUrl, userAgent, acceptLanguages, delay, thumbnailWidth, output, fresh, enableCaching, lazyLoad, fullPage, retina, height, width, customHtml, blockChatWidgets, blockJs, blockStylesheets, blockImages, blockMedia, blockFont, blockTextTrack, blockXhr, blockFetch, blockEventSource, blockWebSocket, blockManifest, blockSpecificRequests, adjustTop, imageQuality, extractHtml, extractText, darkMode, blockTracking, waitForEvent, grayscale, resultFileName, enableIncognito, timeout, scrollingScreenshot, multipleScrolling, scrollSpeed, duration, scrollBack, startImmediately, clip, sizes, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("screenshot") || key.equalsIgnoreCase("url") || key.equalsIgnoreCase("created_at") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("ttl") || key.equalsIgnoreCase("file_type") || key.equalsIgnoreCase("extracted_html") || key.equalsIgnoreCase("omit_background") || key.equalsIgnoreCase("destroy_screenshot") || key.equalsIgnoreCase("fail_on_error") || key.equalsIgnoreCase("longitude") || key.equalsIgnoreCase("latitude") || key.equalsIgnoreCase("proxy") || key.equalsIgnoreCase("no_cookie_banners") || key.equalsIgnoreCase("block_ads") || key.equalsIgnoreCase("headers") || key.equalsIgnoreCase("cookies") || key.equalsIgnoreCase("scroll_to_element") || key.equalsIgnoreCase("selector") || key.equalsIgnoreCase("blur_selector") || key.equalsIgnoreCase("remove_selector") || key.equalsIgnoreCase("css") || key.equalsIgnoreCase("css_url") || key.equalsIgnoreCase("js") || key.equalsIgnoreCase("js_url") || key.equalsIgnoreCase("user_agent") || key.equalsIgnoreCase("accept_languages") || key.equalsIgnoreCase("delay") || key.equalsIgnoreCase("thumbnail_width") || key.equalsIgnoreCase("output") || key.equalsIgnoreCase("fresh") || key.equalsIgnoreCase("enable_caching") || key.equalsIgnoreCase("lazy_load") || key.equalsIgnoreCase("full_page") || key.equalsIgnoreCase("retina") || key.equalsIgnoreCase("height") || key.equalsIgnoreCase("width") || key.equalsIgnoreCase("custom_html") || key.equalsIgnoreCase("block_chat_widgets") || key.equalsIgnoreCase("block_js") || key.equalsIgnoreCase("block_stylesheets") || key.equalsIgnoreCase("block_images") || key.equalsIgnoreCase("block_media") || key.equalsIgnoreCase("block_font") || key.equalsIgnoreCase("block_text_track") || key.equalsIgnoreCase("block_xhr") || key.equalsIgnoreCase("block_fetch") || key.equalsIgnoreCase("block_event_source") || key.equalsIgnoreCase("block_web_socket") || key.equalsIgnoreCase("block_manifest") || key.equalsIgnoreCase("block_specific_requests") || key.equalsIgnoreCase("adjust_top") || key.equalsIgnoreCase("image_quality") || key.equalsIgnoreCase("extract_html") || key.equalsIgnoreCase("extract_text") || key.equalsIgnoreCase("dark_mode") || key.equalsIgnoreCase("block_tracking") || key.equalsIgnoreCase("wait_for_event") || key.equalsIgnoreCase("grayscale") || key.equalsIgnoreCase("result_file_name") || key.equalsIgnoreCase("enable_incognito") || key.equalsIgnoreCase("timeout") || key.equalsIgnoreCase("scrolling_screenshot") || key.equalsIgnoreCase("multiple_scrolling") || key.equalsIgnoreCase("scroll_speed") || key.equalsIgnoreCase("duration") || key.equalsIgnoreCase("scroll_back") || key.equalsIgnoreCase("start_immediately") || key.equalsIgnoreCase("clip") || key.equalsIgnoreCase("sizes")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

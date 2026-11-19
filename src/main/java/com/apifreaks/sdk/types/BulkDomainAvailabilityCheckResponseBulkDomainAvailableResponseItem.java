@@ -98,7 +98,6 @@ public final class BulkDomainAvailabilityCheckResponseBulkDomainAvailableRespons
 
     private Optional<Boolean> status = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -155,6 +154,14 @@ public final class BulkDomainAvailabilityCheckResponseBulkDomainAvailableRespons
 
     public BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem build() {
       return new BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem(domain, domainAvailability, status, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("domain") || key.equalsIgnoreCase("domainAvailability") || key.equalsIgnoreCase("status")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

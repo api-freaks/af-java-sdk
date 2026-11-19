@@ -171,7 +171,6 @@ public final class DomainTyposquattingResponseDomainsItem {
 
     private Optional<String> createDate = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -195,7 +194,6 @@ public final class DomainTyposquattingResponseDomainsItem {
     }
 
     /**
-     * <p>Indicates whether the domain has dropped out of the registry and become available to register again.</p>
      * <p>Indicates whether the domain has dropped out of the registry and become available to register again.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -278,6 +276,14 @@ public final class DomainTyposquattingResponseDomainsItem {
     @java.lang.Override
     public DomainTyposquattingResponseDomainsItem build() {
       return new DomainTyposquattingResponseDomainsItem(domainName, createDate, expiryDate, lastSeen, isDropped, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("domainName") || key.equalsIgnoreCase("createDate") || key.equalsIgnoreCase("expiryDate") || key.equalsIgnoreCase("lastSeen") || key.equalsIgnoreCase("isDropped")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

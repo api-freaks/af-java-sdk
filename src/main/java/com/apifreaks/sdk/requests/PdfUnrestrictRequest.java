@@ -43,7 +43,7 @@ public final class PdfUnrestrictRequest {
 
   private final String filePassword;
 
-  private final Optional<String> userPassword;
+  private final String userPassword;
 
   private final Optional<String> ownerPassword;
 
@@ -55,8 +55,8 @@ public final class PdfUnrestrictRequest {
 
   private PdfUnrestrictRequest(Optional<String> webhookAuthorization, String apiKey,
       Optional<PdfUnrestrictRequestFormat> format, Optional<String> fileId,
-      Optional<Boolean> destroy, Optional<String> output, String filePassword,
-      Optional<String> userPassword, Optional<String> ownerPassword, Optional<String> webhookUrl,
+      Optional<Boolean> destroy, Optional<String> output, String filePassword, String userPassword,
+      Optional<String> ownerPassword, Optional<String> webhookUrl,
       Optional<Boolean> webhookFailureNotification, Map<String, Object> additionalProperties) {
     this.webhookAuthorization = webhookAuthorization;
     this.apiKey = apiKey;
@@ -132,7 +132,7 @@ public final class PdfUnrestrictRequest {
    * @return Sets the user password for the PDF file. Password Length should be between 6 and 128 characters.
    */
   @JsonProperty("user_password")
-  public Optional<String> getUserPassword() {
+  public String getUserPassword() {
     return userPassword;
   }
 
@@ -202,7 +202,14 @@ public final class PdfUnrestrictRequest {
     /**
      * <p>The password to unlock the input file. Either the owner password or user password can be provided. The owner password takes precedence. Password Length should be between 6 and 128 characters.</p>
      */
-    _FinalStage filePassword(@NotNull String filePassword);
+    UserPasswordStage filePassword(@NotNull String filePassword);
+  }
+
+  public interface UserPasswordStage {
+    /**
+     * <p>Sets the user password for the PDF file. Password Length should be between 6 and 128 characters.</p>
+     */
+    _FinalStage userPassword(@NotNull String userPassword);
   }
 
   public interface _FinalStage {
@@ -248,13 +255,6 @@ public final class PdfUnrestrictRequest {
     _FinalStage output(String output);
 
     /**
-     * <p>Sets the user password for the PDF file. Password Length should be between 6 and 128 characters.</p>
-     */
-    _FinalStage userPassword(Optional<String> userPassword);
-
-    _FinalStage userPassword(String userPassword);
-
-    /**
      * <p>Sets the owner password for the PDF file. If the owner password is not provided, the <code>user_password</code> will also be used as the owner password. Password Length should be between 6 and 128 characters.</p>
      */
     _FinalStage ownerPassword(Optional<String> ownerPassword);
@@ -279,18 +279,18 @@ public final class PdfUnrestrictRequest {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements ApiKeyStage, FilePasswordStage, _FinalStage {
+  public static final class Builder implements ApiKeyStage, FilePasswordStage, UserPasswordStage, _FinalStage {
     private String apiKey;
 
     private String filePassword;
+
+    private String userPassword;
 
     private Optional<Boolean> webhookFailureNotification = Optional.empty();
 
     private Optional<String> webhookUrl = Optional.empty();
 
     private Optional<String> ownerPassword = Optional.empty();
-
-    private Optional<String> userPassword = Optional.empty();
 
     private Optional<String> output = Optional.empty();
 
@@ -302,7 +302,6 @@ public final class PdfUnrestrictRequest {
 
     private Optional<String> webhookAuthorization = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -326,7 +325,6 @@ public final class PdfUnrestrictRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -338,13 +336,23 @@ public final class PdfUnrestrictRequest {
 
     /**
      * <p>The password to unlock the input file. Either the owner password or user password can be provided. The owner password takes precedence. Password Length should be between 6 and 128 characters.</p>
-     * <p>The password to unlock the input file. Either the owner password or user password can be provided. The owner password takes precedence. Password Length should be between 6 and 128 characters.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("file_password")
-    public _FinalStage filePassword(@NotNull String filePassword) {
+    public UserPasswordStage filePassword(@NotNull String filePassword) {
       this.filePassword = Objects.requireNonNull(filePassword, "filePassword must not be null");
+      return this;
+    }
+
+    /**
+     * <p>Sets the user password for the PDF file. Password Length should be between 6 and 128 characters.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    @JsonSetter("user_password")
+    public _FinalStage userPassword(@NotNull String userPassword) {
+      this.userPassword = Objects.requireNonNull(userPassword, "userPassword must not be null");
       return this;
     }
 
@@ -414,29 +422,6 @@ public final class PdfUnrestrictRequest {
     )
     public _FinalStage ownerPassword(Optional<String> ownerPassword) {
       this.ownerPassword = ownerPassword;
-      return this;
-    }
-
-    /**
-     * <p>Sets the user password for the PDF file. Password Length should be between 6 and 128 characters.</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    public _FinalStage userPassword(String userPassword) {
-      this.userPassword = Optional.ofNullable(userPassword);
-      return this;
-    }
-
-    /**
-     * <p>Sets the user password for the PDF file. Password Length should be between 6 and 128 characters.</p>
-     */
-    @java.lang.Override
-    @JsonSetter(
-        value = "user_password",
-        nulls = Nulls.SKIP
-    )
-    public _FinalStage userPassword(Optional<String> userPassword) {
-      this.userPassword = userPassword;
       return this;
     }
 
@@ -554,6 +539,14 @@ public final class PdfUnrestrictRequest {
     @java.lang.Override
     public PdfUnrestrictRequest build() {
       return new PdfUnrestrictRequest(webhookAuthorization, apiKey, format, fileId, destroy, output, filePassword, userPassword, ownerPassword, webhookUrl, webhookFailureNotification, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("file_id") || key.equalsIgnoreCase("destroy") || key.equalsIgnoreCase("output") || key.equalsIgnoreCase("file_password") || key.equalsIgnoreCase("user_password") || key.equalsIgnoreCase("owner_password") || key.equalsIgnoreCase("webhook_url") || key.equalsIgnoreCase("webhook_failure_notification")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

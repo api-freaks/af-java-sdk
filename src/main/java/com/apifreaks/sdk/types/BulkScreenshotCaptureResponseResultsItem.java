@@ -4,9 +4,12 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.Nullable;
+import com.apifreaks.sdk.core.NullableNonemptyFilter;
 import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -47,14 +50,29 @@ public final class BulkScreenshotCaptureResponseResultsItem {
     return status;
   }
 
-  @JsonProperty("error_message")
+  /**
+   * @return Error details for a failed URL; null when the capture succeeded.
+   */
+  @JsonIgnore
   public Optional<String> getErrorMessage() {
+    if (errorMessage == null) {
+      return Optional.empty();
+    }
     return errorMessage;
   }
 
   @JsonProperty("url")
   public BulkScreenshotCaptureResponseResultsItemUrl getUrl() {
     return url;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("error_message")
+  private Optional<String> _getErrorMessage() {
+    return errorMessage;
   }
 
   @java.lang.Override
@@ -103,9 +121,14 @@ public final class BulkScreenshotCaptureResponseResultsItem {
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
 
+    /**
+     * <p>Error details for a failed URL; null when the capture succeeded.</p>
+     */
     _FinalStage errorMessage(Optional<String> errorMessage);
 
     _FinalStage errorMessage(String errorMessage);
+
+    _FinalStage errorMessage(Nullable<String> errorMessage);
   }
 
   @JsonIgnoreProperties(
@@ -118,7 +141,6 @@ public final class BulkScreenshotCaptureResponseResultsItem {
 
     private Optional<String> errorMessage = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -146,12 +168,37 @@ public final class BulkScreenshotCaptureResponseResultsItem {
       return this;
     }
 
+    /**
+     * <p>Error details for a failed URL; null when the capture succeeded.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage errorMessage(Nullable<String> errorMessage) {
+      if (errorMessage.isNull()) {
+        this.errorMessage = null;
+      }
+      else if (errorMessage.isEmpty()) {
+        this.errorMessage = Optional.empty();
+      }
+      else {
+        this.errorMessage = Optional.of(errorMessage.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Error details for a failed URL; null when the capture succeeded.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
     @java.lang.Override
     public _FinalStage errorMessage(String errorMessage) {
       this.errorMessage = Optional.ofNullable(errorMessage);
       return this;
     }
 
+    /**
+     * <p>Error details for a failed URL; null when the capture succeeded.</p>
+     */
     @java.lang.Override
     @JsonSetter(
         value = "error_message",
@@ -165,6 +212,14 @@ public final class BulkScreenshotCaptureResponseResultsItem {
     @java.lang.Override
     public BulkScreenshotCaptureResponseResultsItem build() {
       return new BulkScreenshotCaptureResponseResultsItem(status, errorMessage, url, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("status") || key.equalsIgnoreCase("error_message") || key.equalsIgnoreCase("url")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

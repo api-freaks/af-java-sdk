@@ -86,7 +86,6 @@ public final class BulkIpSecurityLookupResponseItem {
 
     private Optional<BulkIpSecurityLookupResponseItemSecurity> security = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -128,6 +127,14 @@ public final class BulkIpSecurityLookupResponseItem {
 
     public BulkIpSecurityLookupResponseItem build() {
       return new BulkIpSecurityLookupResponseItem(ip, security, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("ip") || key.equalsIgnoreCase("security")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

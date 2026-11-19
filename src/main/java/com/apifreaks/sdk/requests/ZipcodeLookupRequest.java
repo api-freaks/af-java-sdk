@@ -157,7 +157,6 @@ public final class ZipcodeLookupRequest {
 
     private Optional<ZipcodeLookupRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -174,7 +173,6 @@ public final class ZipcodeLookupRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -185,7 +183,6 @@ public final class ZipcodeLookupRequest {
     }
 
     /**
-     * <p>Comma separated list of postal / zip codes. Max. 100 values.</p>
      * <p>Comma separated list of postal / zip codes. Max. 100 values.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -245,6 +242,14 @@ public final class ZipcodeLookupRequest {
     @java.lang.Override
     public ZipcodeLookupRequest build() {
       return new ZipcodeLookupRequest(apiKey, format, code, country, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("code") || key.equalsIgnoreCase("country")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

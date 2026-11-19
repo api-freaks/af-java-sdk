@@ -93,7 +93,6 @@ public final class DomainReputationResponseInput {
   public static final class Builder implements DomainStage, _FinalStage {
     private String domain;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -107,7 +106,6 @@ public final class DomainReputationResponseInput {
 
     /**
      * <p>Domain name being analyzed.</p>
-     * <p>Domain name being analyzed.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -120,6 +118,14 @@ public final class DomainReputationResponseInput {
     @java.lang.Override
     public DomainReputationResponseInput build() {
       return new DomainReputationResponseInput(domain, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("domain")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -212,7 +212,6 @@ public final class BulkGeolocationLookupResponseItemNetworkAsn {
 
     private Optional<String> rir = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -422,6 +421,14 @@ public final class BulkGeolocationLookupResponseItemNetworkAsn {
 
     public BulkGeolocationLookupResponseItemNetworkAsn build() {
       return new BulkGeolocationLookupResponseItemNetworkAsn(asNumber, organization, country, asnName, type, domain, dateAllocated, allocationStatus, numOfIpv4Routes, numOfIpv6Routes, rir, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("as_number") || key.equalsIgnoreCase("organization") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("asn_name") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("domain") || key.equalsIgnoreCase("date_allocated") || key.equalsIgnoreCase("allocation_status") || key.equalsIgnoreCase("num_of_ipv4_routes") || key.equalsIgnoreCase("num_of_ipv6_routes") || key.equalsIgnoreCase("rir")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

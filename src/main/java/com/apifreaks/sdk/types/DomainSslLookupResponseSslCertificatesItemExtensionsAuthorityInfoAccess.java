@@ -88,7 +88,6 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsAuthority
 
     private Optional<List<String>> ocsp = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -131,6 +130,14 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsAuthority
 
     public DomainSslLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess build() {
       return new DomainSslLookupResponseSslCertificatesItemExtensionsAuthorityInfoAccess(issuers, ocsp, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("issuers") || key.equalsIgnoreCase("ocsp")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

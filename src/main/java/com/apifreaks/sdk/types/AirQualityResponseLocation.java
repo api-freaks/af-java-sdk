@@ -41,11 +41,11 @@ public final class AirQualityResponseLocation {
   @SuppressWarnings("unchecked")
   public <T> T visit(Visitor<T> visitor) {
     if(this.type == 0) {
-      return visitor.visit((AirQualityResponseLocationZero) this.value);
-    } else if(this.type == 1) {
       return visitor.visit((AirQualityResponseLocationContinentCode) this.value);
-    } else if(this.type == 2) {
+    } else if(this.type == 1) {
       return visitor.visit((AirQualityResponseLocationCity) this.value);
+    } else if(this.type == 2) {
+      return visitor.visit((AirQualityResponseLocationZero) this.value);
     }
     throw new IllegalStateException("Failed to visit value. This should never happen.");
   }
@@ -70,24 +70,24 @@ public final class AirQualityResponseLocation {
     return this.value.toString();
   }
 
-  public static AirQualityResponseLocation of(AirQualityResponseLocationZero value) {
+  public static AirQualityResponseLocation of(AirQualityResponseLocationContinentCode value) {
     return new AirQualityResponseLocation(value, 0);
   }
 
-  public static AirQualityResponseLocation of(AirQualityResponseLocationContinentCode value) {
+  public static AirQualityResponseLocation of(AirQualityResponseLocationCity value) {
     return new AirQualityResponseLocation(value, 1);
   }
 
-  public static AirQualityResponseLocation of(AirQualityResponseLocationCity value) {
+  public static AirQualityResponseLocation of(AirQualityResponseLocationZero value) {
     return new AirQualityResponseLocation(value, 2);
   }
 
   public interface Visitor<T> {
-    T visit(AirQualityResponseLocationZero value);
-
     T visit(AirQualityResponseLocationContinentCode value);
 
     T visit(AirQualityResponseLocationCity value);
+
+    T visit(AirQualityResponseLocationZero value);
   }
 
   static final class Deserializer extends StdDeserializer<AirQualityResponseLocation> {
@@ -99,12 +99,6 @@ public final class AirQualityResponseLocation {
     public AirQualityResponseLocation deserialize(JsonParser p, DeserializationContext context)
         throws IOException {
       Object value = p.readValueAs(Object.class);
-      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("latitude") && ((Map<?, ?>) value).containsKey("longitude") && ((Map<?, ?>) value).containsKey("country_name") && ((Map<?, ?>) value).containsKey("state_prov") && ((Map<?, ?>) value).containsKey("city") && ((Map<?, ?>) value).containsKey("timezone") && ((Map<?, ?>) value).containsKey("timezone_abbreviation")) {
-        try {
-          return of(ObjectMappers.JSON_MAPPER.convertValue(value, AirQualityResponseLocationZero.class));
-        } catch(RuntimeException e) {
-        }
-      }
       if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("continent_code") && ((Map<?, ?>) value).containsKey("continent_name") && ((Map<?, ?>) value).containsKey("country_code2") && ((Map<?, ?>) value).containsKey("country_code3") && ((Map<?, ?>) value).containsKey("country_name") && ((Map<?, ?>) value).containsKey("country_name_official") && ((Map<?, ?>) value).containsKey("state_prov") && ((Map<?, ?>) value).containsKey("city") && ((Map<?, ?>) value).containsKey("latitude") && ((Map<?, ?>) value).containsKey("longitude") && ((Map<?, ?>) value).containsKey("timezone") && ((Map<?, ?>) value).containsKey("timezone_abbreviation")) {
         try {
           return of(ObjectMappers.JSON_MAPPER.convertValue(value, AirQualityResponseLocationContinentCode.class));
@@ -114,6 +108,12 @@ public final class AirQualityResponseLocation {
       if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("location_string") && ((Map<?, ?>) value).containsKey("country_name") && ((Map<?, ?>) value).containsKey("state_prov") && ((Map<?, ?>) value).containsKey("city") && ((Map<?, ?>) value).containsKey("latitude") && ((Map<?, ?>) value).containsKey("longitude") && ((Map<?, ?>) value).containsKey("timezone") && ((Map<?, ?>) value).containsKey("timezone_abbreviation")) {
         try {
           return of(ObjectMappers.JSON_MAPPER.convertValue(value, AirQualityResponseLocationCity.class));
+        } catch(RuntimeException e) {
+        }
+      }
+      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("latitude") && ((Map<?, ?>) value).containsKey("longitude") && ((Map<?, ?>) value).containsKey("country_name") && ((Map<?, ?>) value).containsKey("state_prov") && ((Map<?, ?>) value).containsKey("city") && ((Map<?, ?>) value).containsKey("timezone") && ((Map<?, ?>) value).containsKey("timezone_abbreviation")) {
+        try {
+          return of(ObjectMappers.JSON_MAPPER.convertValue(value, AirQualityResponseLocationZero.class));
         } catch(RuntimeException e) {
         }
       }

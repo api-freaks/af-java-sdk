@@ -127,7 +127,6 @@ public final class ZipcodeSearchByRadiusResponseResultsItem {
 
     private Optional<Float> distance = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -229,6 +228,14 @@ public final class ZipcodeSearchByRadiusResponseResultsItem {
 
     public ZipcodeSearchByRadiusResponseResultsItem build() {
       return new ZipcodeSearchByRadiusResponseResultsItem(code, region, regionCode, city, district, distance, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("code") || key.equalsIgnoreCase("region") || key.equalsIgnoreCase("region_code") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("district") || key.equalsIgnoreCase("distance")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -158,7 +158,6 @@ public final class ReadabilityScoreRequest {
 
     private Optional<ReadabilityScoreRequestTarget> target = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -175,7 +174,6 @@ public final class ReadabilityScoreRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -186,7 +184,6 @@ public final class ReadabilityScoreRequest {
     }
 
     /**
-     * <p>Text to analyze for readability</p>
      * <p>Text to analyze for readability</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -246,6 +243,14 @@ public final class ReadabilityScoreRequest {
     @java.lang.Override
     public ReadabilityScoreRequest build() {
       return new ReadabilityScoreRequest(apiKey, target, exclude, text, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("text")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

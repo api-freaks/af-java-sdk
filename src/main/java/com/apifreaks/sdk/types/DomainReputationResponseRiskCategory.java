@@ -64,7 +64,7 @@ public final class DomainReputationResponseRiskCategory {
   }
 
   /**
-   * @return Final verdict of the risk assessment.
+   * @return Final verdict of the risk assessment. <code>unknown</code> is returned when there is not enough data (e.g. the domain is not registered).
    */
   @JsonProperty("verdict")
   public DomainReputationResponseRiskCategoryVerdict getVerdict() {
@@ -162,7 +162,7 @@ public final class DomainReputationResponseRiskCategory {
 
   public interface VerdictStage {
     /**
-     * <p>Final verdict of the risk assessment.</p>
+     * <p>Final verdict of the risk assessment. <code>unknown</code> is returned when there is not enough data (e.g. the domain is not registered).</p>
      */
     ConfidenceStage verdict(@NotNull DomainReputationResponseRiskCategoryVerdict verdict);
 
@@ -247,7 +247,6 @@ public final class DomainReputationResponseRiskCategory {
 
     private Optional<String> primaryThreat = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -266,8 +265,7 @@ public final class DomainReputationResponseRiskCategory {
     }
 
     /**
-     * <p>Final verdict of the risk assessment.</p>
-     * <p>Final verdict of the risk assessment.</p>
+     * <p>Final verdict of the risk assessment. <code>unknown</code> is returned when there is not enough data (e.g. the domain is not registered).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -279,7 +277,6 @@ public final class DomainReputationResponseRiskCategory {
 
     /**
      * <p>Confidence score for the verdict (0-1).</p>
-     * <p>Confidence score for the verdict (0-1).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -290,7 +287,6 @@ public final class DomainReputationResponseRiskCategory {
     }
 
     /**
-     * <p>Severity level of the risk.</p>
      * <p>Severity level of the risk.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -463,6 +459,14 @@ public final class DomainReputationResponseRiskCategory {
     @java.lang.Override
     public DomainReputationResponseRiskCategory build() {
       return new DomainReputationResponseRiskCategory(verdict, confidence, primaryThreat, severity, threatTypes, sources, pivotMatches, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("verdict") || key.equalsIgnoreCase("confidence") || key.equalsIgnoreCase("primary_threat") || key.equalsIgnoreCase("severity") || key.equalsIgnoreCase("threat_types") || key.equalsIgnoreCase("sources") || key.equalsIgnoreCase("pivot_matches")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

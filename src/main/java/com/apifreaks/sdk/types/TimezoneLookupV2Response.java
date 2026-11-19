@@ -179,7 +179,6 @@ public final class TimezoneLookupV2Response {
 
     private Optional<String> ip = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -196,7 +195,6 @@ public final class TimezoneLookupV2Response {
     }
 
     /**
-     * <p>Timezone and date/time information for the location.</p>
      * <p>Timezone and date/time information for the location.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -304,6 +302,14 @@ public final class TimezoneLookupV2Response {
     @java.lang.Override
     public TimezoneLookupV2Response build() {
       return new TimezoneLookupV2Response(ip, timeZone, location, airportDetails, loCodeDetails, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("ip") || key.equalsIgnoreCase("time_zone") || key.equalsIgnoreCase("location") || key.equalsIgnoreCase("airport_details") || key.equalsIgnoreCase("lo_code_details")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

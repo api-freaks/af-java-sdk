@@ -412,7 +412,6 @@ public final class AsnWhoisLookupResponseParsedWhoisResponseAutNumsItem {
 
     private List<String> techContacts = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -785,6 +784,14 @@ public final class AsnWhoisLookupResponseParsedWhoisResponseAutNumsItem {
     @java.lang.Override
     public AsnWhoisLookupResponseParsedWhoisResponseAutNumsItem build() {
       return new AsnWhoisLookupResponseParsedWhoisResponseAutNumsItem(autNum, asHandle, asName, techContacts, abuseContacts, dateCreated, dateUpdated, source, description, country, status, memberOf, importVia, import_, mpImport, exportVia, export, mpExport, default_, mpDefault, organization, sponsoringOrganization, adminContacts, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("aut_num") || key.equalsIgnoreCase("as_handle") || key.equalsIgnoreCase("as_name") || key.equalsIgnoreCase("tech_contacts") || key.equalsIgnoreCase("abuse_contacts") || key.equalsIgnoreCase("date_created") || key.equalsIgnoreCase("date_updated") || key.equalsIgnoreCase("source") || key.equalsIgnoreCase("description") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("status") || key.equalsIgnoreCase("member_of") || key.equalsIgnoreCase("import_via") || key.equalsIgnoreCase("import") || key.equalsIgnoreCase("mp_import") || key.equalsIgnoreCase("export_via") || key.equalsIgnoreCase("export") || key.equalsIgnoreCase("mp_export") || key.equalsIgnoreCase("default") || key.equalsIgnoreCase("mp_default") || key.equalsIgnoreCase("organization") || key.equalsIgnoreCase("sponsoring_organization") || key.equalsIgnoreCase("admin_contacts")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

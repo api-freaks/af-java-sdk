@@ -41,11 +41,11 @@ public final class BulkCurrentWeatherResponseBulkItemLocation {
   @SuppressWarnings("unchecked")
   public <T> T visit(Visitor<T> visitor) {
     if(this.type == 0) {
-      return visitor.visit((BulkCurrentWeatherResponseBulkItemLocationZero) this.value);
-    } else if(this.type == 1) {
       return visitor.visit((BulkCurrentWeatherResponseBulkItemLocationContinentCode) this.value);
-    } else if(this.type == 2) {
+    } else if(this.type == 1) {
       return visitor.visit((BulkCurrentWeatherResponseBulkItemLocationCity) this.value);
+    } else if(this.type == 2) {
+      return visitor.visit((BulkCurrentWeatherResponseBulkItemLocationZero) this.value);
     }
     throw new IllegalStateException("Failed to visit value. This should never happen.");
   }
@@ -71,26 +71,26 @@ public final class BulkCurrentWeatherResponseBulkItemLocation {
   }
 
   public static BulkCurrentWeatherResponseBulkItemLocation of(
-      BulkCurrentWeatherResponseBulkItemLocationZero value) {
+      BulkCurrentWeatherResponseBulkItemLocationContinentCode value) {
     return new BulkCurrentWeatherResponseBulkItemLocation(value, 0);
   }
 
   public static BulkCurrentWeatherResponseBulkItemLocation of(
-      BulkCurrentWeatherResponseBulkItemLocationContinentCode value) {
+      BulkCurrentWeatherResponseBulkItemLocationCity value) {
     return new BulkCurrentWeatherResponseBulkItemLocation(value, 1);
   }
 
   public static BulkCurrentWeatherResponseBulkItemLocation of(
-      BulkCurrentWeatherResponseBulkItemLocationCity value) {
+      BulkCurrentWeatherResponseBulkItemLocationZero value) {
     return new BulkCurrentWeatherResponseBulkItemLocation(value, 2);
   }
 
   public interface Visitor<T> {
-    T visit(BulkCurrentWeatherResponseBulkItemLocationZero value);
-
     T visit(BulkCurrentWeatherResponseBulkItemLocationContinentCode value);
 
     T visit(BulkCurrentWeatherResponseBulkItemLocationCity value);
+
+    T visit(BulkCurrentWeatherResponseBulkItemLocationZero value);
   }
 
   static final class Deserializer extends StdDeserializer<BulkCurrentWeatherResponseBulkItemLocation> {
@@ -102,12 +102,6 @@ public final class BulkCurrentWeatherResponseBulkItemLocation {
     public BulkCurrentWeatherResponseBulkItemLocation deserialize(JsonParser p,
         DeserializationContext context) throws IOException {
       Object value = p.readValueAs(Object.class);
-      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("latitude") && ((Map<?, ?>) value).containsKey("longitude") && ((Map<?, ?>) value).containsKey("country_name") && ((Map<?, ?>) value).containsKey("state_prov") && ((Map<?, ?>) value).containsKey("city") && ((Map<?, ?>) value).containsKey("timezone") && ((Map<?, ?>) value).containsKey("timezone_abbreviation")) {
-        try {
-          return of(ObjectMappers.JSON_MAPPER.convertValue(value, BulkCurrentWeatherResponseBulkItemLocationZero.class));
-        } catch(RuntimeException e) {
-        }
-      }
       if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("continent_code") && ((Map<?, ?>) value).containsKey("continent_name") && ((Map<?, ?>) value).containsKey("country_code2") && ((Map<?, ?>) value).containsKey("country_code3") && ((Map<?, ?>) value).containsKey("country_name") && ((Map<?, ?>) value).containsKey("country_name_official") && ((Map<?, ?>) value).containsKey("state_prov") && ((Map<?, ?>) value).containsKey("city") && ((Map<?, ?>) value).containsKey("latitude") && ((Map<?, ?>) value).containsKey("longitude") && ((Map<?, ?>) value).containsKey("timezone") && ((Map<?, ?>) value).containsKey("timezone_abbreviation")) {
         try {
           return of(ObjectMappers.JSON_MAPPER.convertValue(value, BulkCurrentWeatherResponseBulkItemLocationContinentCode.class));
@@ -117,6 +111,12 @@ public final class BulkCurrentWeatherResponseBulkItemLocation {
       if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("location_string") && ((Map<?, ?>) value).containsKey("country_name") && ((Map<?, ?>) value).containsKey("state_prov") && ((Map<?, ?>) value).containsKey("city") && ((Map<?, ?>) value).containsKey("latitude") && ((Map<?, ?>) value).containsKey("longitude") && ((Map<?, ?>) value).containsKey("timezone") && ((Map<?, ?>) value).containsKey("timezone_abbreviation")) {
         try {
           return of(ObjectMappers.JSON_MAPPER.convertValue(value, BulkCurrentWeatherResponseBulkItemLocationCity.class));
+        } catch(RuntimeException e) {
+        }
+      }
+      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("latitude") && ((Map<?, ?>) value).containsKey("longitude") && ((Map<?, ?>) value).containsKey("country_name") && ((Map<?, ?>) value).containsKey("state_prov") && ((Map<?, ?>) value).containsKey("city") && ((Map<?, ?>) value).containsKey("timezone") && ((Map<?, ?>) value).containsKey("timezone_abbreviation")) {
+        try {
+          return of(ObjectMappers.JSON_MAPPER.convertValue(value, BulkCurrentWeatherResponseBulkItemLocationZero.class));
         } catch(RuntimeException e) {
         }
       }

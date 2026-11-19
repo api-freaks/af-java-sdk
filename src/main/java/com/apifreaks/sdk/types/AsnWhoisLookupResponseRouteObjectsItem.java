@@ -32,12 +32,12 @@ public final class AsnWhoisLookupResponseRouteObjectsItem {
 
   private final String isp;
 
-  private final int numberOfIps;
+  private final double numberOfIps;
 
   private final Map<String, Object> additionalProperties;
 
   private AsnWhoisLookupResponseRouteObjectsItem(String route, String origin, String originName,
-      String isp, int numberOfIps, Map<String, Object> additionalProperties) {
+      String isp, double numberOfIps, Map<String, Object> additionalProperties) {
     this.route = route;
     this.origin = origin;
     this.originName = originName;
@@ -66,8 +66,11 @@ public final class AsnWhoisLookupResponseRouteObjectsItem {
     return isp;
   }
 
+  /**
+   * @return Number of IP addresses in the route. IPv6 routes exceed the 64-bit integer range, so this is a floating-point number.
+   */
   @JsonProperty("numberOfIps")
-  public int getNumberOfIps() {
+  public double getNumberOfIps() {
     return numberOfIps;
   }
 
@@ -119,7 +122,10 @@ public final class AsnWhoisLookupResponseRouteObjectsItem {
   }
 
   public interface NumberOfIpsStage {
-    _FinalStage numberOfIps(int numberOfIps);
+    /**
+     * <p>Number of IP addresses in the route. IPv6 routes exceed the 64-bit integer range, so this is a floating-point number.</p>
+     */
+    _FinalStage numberOfIps(double numberOfIps);
   }
 
   public interface _FinalStage {
@@ -142,9 +148,8 @@ public final class AsnWhoisLookupResponseRouteObjectsItem {
 
     private String isp;
 
-    private int numberOfIps;
+    private double numberOfIps;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -188,9 +193,13 @@ public final class AsnWhoisLookupResponseRouteObjectsItem {
       return this;
     }
 
+    /**
+     * <p>Number of IP addresses in the route. IPv6 routes exceed the 64-bit integer range, so this is a floating-point number.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
     @java.lang.Override
     @JsonSetter("numberOfIps")
-    public _FinalStage numberOfIps(int numberOfIps) {
+    public _FinalStage numberOfIps(double numberOfIps) {
       this.numberOfIps = numberOfIps;
       return this;
     }
@@ -198,6 +207,14 @@ public final class AsnWhoisLookupResponseRouteObjectsItem {
     @java.lang.Override
     public AsnWhoisLookupResponseRouteObjectsItem build() {
       return new AsnWhoisLookupResponseRouteObjectsItem(route, origin, originName, isp, numberOfIps, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("route") || key.equalsIgnoreCase("origin") || key.equalsIgnoreCase("originName") || key.equalsIgnoreCase("isp") || key.equalsIgnoreCase("numberOfIps")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -10,8 +10,6 @@ import java.lang.Object;
 import java.lang.String;
 
 public final class FloodForecastRequestFormat {
-  public static final FloodForecastRequestFormat XML = new FloodForecastRequestFormat(Value.XML, "xml");
-
   public static final FloodForecastRequestFormat JSON = new FloodForecastRequestFormat(Value.JSON, "json");
 
   private final Value value;
@@ -46,8 +44,6 @@ public final class FloodForecastRequestFormat {
 
   public <T> T visit(Visitor<T> visitor) {
     switch (value) {
-      case XML:
-        return visitor.visitXml();
       case JSON:
         return visitor.visitJson();
       case UNKNOWN:
@@ -61,8 +57,6 @@ public final class FloodForecastRequestFormat {
   )
   public static FloodForecastRequestFormat valueOf(String value) {
     switch (value) {
-      case "xml":
-        return XML;
       case "json":
         return JSON;
       default:
@@ -73,15 +67,11 @@ public final class FloodForecastRequestFormat {
   public enum Value {
     JSON,
 
-    XML,
-
     UNKNOWN
   }
 
   public interface Visitor<T> {
     T visitJson();
-
-    T visitXml();
 
     T visitUnknown(String unknownType);
   }

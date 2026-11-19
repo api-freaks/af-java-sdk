@@ -11,12 +11,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import java.lang.Boolean;
+import java.lang.Float;
+import java.lang.Integer;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
@@ -26,17 +31,1034 @@ import org.jetbrains.annotations.NotNull;
 public final class BulkScreenshotCaptureRequestUrlsItem {
   private final String url;
 
+  private final Optional<String> acceptLanguages;
+
+  private final Optional<Integer> adjustTop;
+
+  private final Optional<Boolean> blockAds;
+
+  private final Optional<Boolean> blockChatWidgets;
+
+  private final Optional<Boolean> blockEventSource;
+
+  private final Optional<Boolean> blockFetch;
+
+  private final Optional<Boolean> blockFont;
+
+  private final Optional<Boolean> blockImages;
+
+  private final Optional<Boolean> blockJs;
+
+  private final Optional<Boolean> blockManifest;
+
+  private final Optional<Boolean> blockMedia;
+
+  private final Optional<String> blockSpecificRequests;
+
+  private final Optional<Boolean> blockStylesheets;
+
+  private final Optional<Boolean> blockTextTrack;
+
+  private final Optional<Boolean> blockTracking;
+
+  private final Optional<Boolean> blockWebSocket;
+
+  private final Optional<Boolean> blockXhr;
+
+  private final Optional<String> blurSelector;
+
+  private final Optional<String> captchaError;
+
+  private final Optional<String> captchaImage;
+
+  private final Optional<String> captchaInput;
+
+  private final Optional<String> captchaRefresh;
+
+  private final Optional<Integer> captchaRetries;
+
+  private final Optional<String> captchaSubmit;
+
+  private final Optional<Boolean> classicProxy;
+
+  private final Optional<Integer> clickRecursion;
+
+  private final Optional<Integer> clipHeight;
+
+  private final Optional<Integer> clipWidth;
+
+  private final Optional<Integer> clipX;
+
+  private final Optional<Integer> clipY;
+
+  private final Optional<String> cookies;
+
+  private final Optional<String> country;
+
+  private final Optional<String> css;
+
+  private final Optional<String> cssUrl;
+
+  private final Optional<String> customHtml;
+
+  private final Optional<Boolean> darkMode;
+
+  private final Optional<Integer> delay;
+
+  private final Optional<Boolean> destroyScreenshot;
+
+  private final Optional<Integer> duration;
+
+  private final Optional<Boolean> enableCaching;
+
+  private final Optional<Boolean> enableIncognito;
+
+  private final Optional<Boolean> extractHtml;
+
+  private final Optional<Boolean> extractMarkdown;
+
+  private final Optional<Boolean> extractText;
+
+  private final Optional<Boolean> failOnError;
+
+  private final Optional<BulkScreenshotCaptureRequestUrlsItemFileType> fileType;
+
+  private final Optional<BulkScreenshotCaptureRequestUrlsItemFormat> format;
+
+  private final Optional<Boolean> fresh;
+
+  private final Optional<Boolean> fullPage;
+
+  private final Optional<Boolean> getImageUrls;
+
+  private final Optional<Boolean> gpu;
+
+  private final Optional<Integer> grayscale;
+
+  private final Optional<String> headers;
+
+  private final Optional<Integer> height;
+
+  private final Optional<Integer> imageQuality;
+
+  private final Optional<String> js;
+
+  private final Optional<String> jsUrl;
+
+  private final Optional<Float> latitude;
+
+  private final Optional<Boolean> lazyLoad;
+
+  private final Optional<Float> longitude;
+
+  private final Optional<String> markdown;
+
+  private final Optional<Boolean> noCookieBanners;
+
+  private final Optional<BulkScreenshotCaptureRequestUrlsItemOcrModel> ocrModel;
+
+  private final Optional<Boolean> omitBackground;
+
+  private final Optional<BulkScreenshotCaptureRequestUrlsItemOutput> output;
+
+  private final Optional<BulkScreenshotCaptureRequestUrlsItemPdfOptions> pdfOptions;
+
+  private final Optional<Boolean> premiumProxy;
+
+  private final Optional<String> proxy;
+
+  private final Optional<String> removeSelector;
+
+  private final Optional<String> resultFileName;
+
+  private final Optional<Boolean> retina;
+
+  private final Optional<Boolean> scrollBack;
+
+  private final Optional<Integer> scrollDelay;
+
+  private final Optional<BulkScreenshotCaptureRequestUrlsItemScrollSpeed> scrollSpeed;
+
+  private final Optional<String> scrollToElement;
+
+  private final Optional<Boolean> scrollingScreenshot;
+
+  private final Optional<String> selector;
+
+  private final Optional<String> selectorToClick;
+
+  private final Optional<Boolean> solveCaptcha;
+
+  private final Optional<Boolean> startImmediately;
+
+  private final Optional<Boolean> stealth;
+
+  private final Optional<Integer> thumbnailWidth;
+
+  private final Optional<Integer> timeout;
+
+  private final Optional<String> timezone;
+
+  private final Optional<Integer> ttl;
+
+  private final Optional<String> userAgent;
+
+  private final Optional<Boolean> video;
+
+  private final Optional<BulkScreenshotCaptureRequestUrlsItemWaitForEvent> waitForEvent;
+
+  private final Optional<Integer> width;
+
   private final Map<String, Object> additionalProperties;
 
-  private BulkScreenshotCaptureRequestUrlsItem(String url,
-      Map<String, Object> additionalProperties) {
+  private BulkScreenshotCaptureRequestUrlsItem(String url, Optional<String> acceptLanguages,
+      Optional<Integer> adjustTop, Optional<Boolean> blockAds, Optional<Boolean> blockChatWidgets,
+      Optional<Boolean> blockEventSource, Optional<Boolean> blockFetch, Optional<Boolean> blockFont,
+      Optional<Boolean> blockImages, Optional<Boolean> blockJs, Optional<Boolean> blockManifest,
+      Optional<Boolean> blockMedia, Optional<String> blockSpecificRequests,
+      Optional<Boolean> blockStylesheets, Optional<Boolean> blockTextTrack,
+      Optional<Boolean> blockTracking, Optional<Boolean> blockWebSocket, Optional<Boolean> blockXhr,
+      Optional<String> blurSelector, Optional<String> captchaError, Optional<String> captchaImage,
+      Optional<String> captchaInput, Optional<String> captchaRefresh,
+      Optional<Integer> captchaRetries, Optional<String> captchaSubmit,
+      Optional<Boolean> classicProxy, Optional<Integer> clickRecursion,
+      Optional<Integer> clipHeight, Optional<Integer> clipWidth, Optional<Integer> clipX,
+      Optional<Integer> clipY, Optional<String> cookies, Optional<String> country,
+      Optional<String> css, Optional<String> cssUrl, Optional<String> customHtml,
+      Optional<Boolean> darkMode, Optional<Integer> delay, Optional<Boolean> destroyScreenshot,
+      Optional<Integer> duration, Optional<Boolean> enableCaching,
+      Optional<Boolean> enableIncognito, Optional<Boolean> extractHtml,
+      Optional<Boolean> extractMarkdown, Optional<Boolean> extractText,
+      Optional<Boolean> failOnError,
+      Optional<BulkScreenshotCaptureRequestUrlsItemFileType> fileType,
+      Optional<BulkScreenshotCaptureRequestUrlsItemFormat> format, Optional<Boolean> fresh,
+      Optional<Boolean> fullPage, Optional<Boolean> getImageUrls, Optional<Boolean> gpu,
+      Optional<Integer> grayscale, Optional<String> headers, Optional<Integer> height,
+      Optional<Integer> imageQuality, Optional<String> js, Optional<String> jsUrl,
+      Optional<Float> latitude, Optional<Boolean> lazyLoad, Optional<Float> longitude,
+      Optional<String> markdown, Optional<Boolean> noCookieBanners,
+      Optional<BulkScreenshotCaptureRequestUrlsItemOcrModel> ocrModel,
+      Optional<Boolean> omitBackground, Optional<BulkScreenshotCaptureRequestUrlsItemOutput> output,
+      Optional<BulkScreenshotCaptureRequestUrlsItemPdfOptions> pdfOptions,
+      Optional<Boolean> premiumProxy, Optional<String> proxy, Optional<String> removeSelector,
+      Optional<String> resultFileName, Optional<Boolean> retina, Optional<Boolean> scrollBack,
+      Optional<Integer> scrollDelay,
+      Optional<BulkScreenshotCaptureRequestUrlsItemScrollSpeed> scrollSpeed,
+      Optional<String> scrollToElement, Optional<Boolean> scrollingScreenshot,
+      Optional<String> selector, Optional<String> selectorToClick, Optional<Boolean> solveCaptcha,
+      Optional<Boolean> startImmediately, Optional<Boolean> stealth,
+      Optional<Integer> thumbnailWidth, Optional<Integer> timeout, Optional<String> timezone,
+      Optional<Integer> ttl, Optional<String> userAgent, Optional<Boolean> video,
+      Optional<BulkScreenshotCaptureRequestUrlsItemWaitForEvent> waitForEvent,
+      Optional<Integer> width, Map<String, Object> additionalProperties) {
     this.url = url;
+    this.acceptLanguages = acceptLanguages;
+    this.adjustTop = adjustTop;
+    this.blockAds = blockAds;
+    this.blockChatWidgets = blockChatWidgets;
+    this.blockEventSource = blockEventSource;
+    this.blockFetch = blockFetch;
+    this.blockFont = blockFont;
+    this.blockImages = blockImages;
+    this.blockJs = blockJs;
+    this.blockManifest = blockManifest;
+    this.blockMedia = blockMedia;
+    this.blockSpecificRequests = blockSpecificRequests;
+    this.blockStylesheets = blockStylesheets;
+    this.blockTextTrack = blockTextTrack;
+    this.blockTracking = blockTracking;
+    this.blockWebSocket = blockWebSocket;
+    this.blockXhr = blockXhr;
+    this.blurSelector = blurSelector;
+    this.captchaError = captchaError;
+    this.captchaImage = captchaImage;
+    this.captchaInput = captchaInput;
+    this.captchaRefresh = captchaRefresh;
+    this.captchaRetries = captchaRetries;
+    this.captchaSubmit = captchaSubmit;
+    this.classicProxy = classicProxy;
+    this.clickRecursion = clickRecursion;
+    this.clipHeight = clipHeight;
+    this.clipWidth = clipWidth;
+    this.clipX = clipX;
+    this.clipY = clipY;
+    this.cookies = cookies;
+    this.country = country;
+    this.css = css;
+    this.cssUrl = cssUrl;
+    this.customHtml = customHtml;
+    this.darkMode = darkMode;
+    this.delay = delay;
+    this.destroyScreenshot = destroyScreenshot;
+    this.duration = duration;
+    this.enableCaching = enableCaching;
+    this.enableIncognito = enableIncognito;
+    this.extractHtml = extractHtml;
+    this.extractMarkdown = extractMarkdown;
+    this.extractText = extractText;
+    this.failOnError = failOnError;
+    this.fileType = fileType;
+    this.format = format;
+    this.fresh = fresh;
+    this.fullPage = fullPage;
+    this.getImageUrls = getImageUrls;
+    this.gpu = gpu;
+    this.grayscale = grayscale;
+    this.headers = headers;
+    this.height = height;
+    this.imageQuality = imageQuality;
+    this.js = js;
+    this.jsUrl = jsUrl;
+    this.latitude = latitude;
+    this.lazyLoad = lazyLoad;
+    this.longitude = longitude;
+    this.markdown = markdown;
+    this.noCookieBanners = noCookieBanners;
+    this.ocrModel = ocrModel;
+    this.omitBackground = omitBackground;
+    this.output = output;
+    this.pdfOptions = pdfOptions;
+    this.premiumProxy = premiumProxy;
+    this.proxy = proxy;
+    this.removeSelector = removeSelector;
+    this.resultFileName = resultFileName;
+    this.retina = retina;
+    this.scrollBack = scrollBack;
+    this.scrollDelay = scrollDelay;
+    this.scrollSpeed = scrollSpeed;
+    this.scrollToElement = scrollToElement;
+    this.scrollingScreenshot = scrollingScreenshot;
+    this.selector = selector;
+    this.selectorToClick = selectorToClick;
+    this.solveCaptcha = solveCaptcha;
+    this.startImmediately = startImmediately;
+    this.stealth = stealth;
+    this.thumbnailWidth = thumbnailWidth;
+    this.timeout = timeout;
+    this.timezone = timezone;
+    this.ttl = ttl;
+    this.userAgent = userAgent;
+    this.video = video;
+    this.waitForEvent = waitForEvent;
+    this.width = width;
     this.additionalProperties = additionalProperties;
   }
 
   @JsonProperty("url")
   public String getUrl() {
     return url;
+  }
+
+  /**
+   * @return Sets the accepted languages for the HTTP request. This is sent as the Accept-Language header.
+   */
+  @JsonProperty("accept_languages")
+  public Optional<String> getAcceptLanguages() {
+    return acceptLanguages;
+  }
+
+  /**
+   * @return Initial vertical scroll position in pixels before capture. Use to position mid-page content in viewport. Not supported for PDF.
+   */
+  @JsonProperty("adjust_top")
+  public Optional<Integer> getAdjustTop() {
+    return adjustTop;
+  }
+
+  /**
+   * @return Blocks requests to known ad networks for cleaner, distraction-free screenshots.
+   */
+  @JsonProperty("block_ads")
+  public Optional<Boolean> getBlockAds() {
+    return blockAds;
+  }
+
+  /**
+   * @return Blocks live chat popups, support bubbles, and messaging interfaces.
+   */
+  @JsonProperty("block_chat_widgets")
+  public Optional<Boolean> getBlockChatWidgets() {
+    return blockChatWidgets;
+  }
+
+  /**
+   * @return Blocks EventSource (SSE) connections - prevents real-time data streams.
+   */
+  @JsonProperty("block_event_source")
+  public Optional<Boolean> getBlockEventSource() {
+    return blockEventSource;
+  }
+
+  /**
+   * @return Blocks all Fetch API requests - stops async data loading.
+   */
+  @JsonProperty("block_fetch")
+  public Optional<Boolean> getBlockFetch() {
+    return blockFetch;
+  }
+
+  /**
+   * @return Blocks external font files - page falls back to system defaults. Supported: woff, woff2, ttf, otf, eot.
+   */
+  @JsonProperty("block_font")
+  public Optional<Boolean> getBlockFont() {
+    return blockFont;
+  }
+
+  /**
+   * @return Blocks all image resources (jpg, png, gif, webp, svg, etc.) for faster rendering.
+   */
+  @JsonProperty("block_images")
+  public Optional<Boolean> getBlockImages() {
+    return blockImages;
+  }
+
+  /**
+   * @return Disables all JavaScript execution. Renders a static version of the page. Speeds up capture but may break dynamic content.
+   */
+  @JsonProperty("block_js")
+  public Optional<Boolean> getBlockJs() {
+    return blockJs;
+  }
+
+  /**
+   * @return Blocks manifest files (.json, .webmanifest) - disables PWA-related functionality.
+   */
+  @JsonProperty("block_manifest")
+  public Optional<Boolean> getBlockManifest() {
+    return blockManifest;
+  }
+
+  /**
+   * @return Blocks audio and video resources (mp3, mp4, webm, etc.) from loading.
+   */
+  @JsonProperty("block_media")
+  public Optional<Boolean> getBlockMedia() {
+    return blockMedia;
+  }
+
+  /**
+   * @return Fine-grained blocking of specific URLs or patterns. Separate multiple rules by comma, space, or newline. Default: empty.
+   */
+  @JsonProperty("block_specific_requests")
+  public Optional<String> getBlockSpecificRequests() {
+    return blockSpecificRequests;
+  }
+
+  /**
+   * @return Blocks all stylesheets - page renders as raw HTML without visual formatting.
+   */
+  @JsonProperty("block_stylesheets")
+  public Optional<Boolean> getBlockStylesheets() {
+    return blockStylesheets;
+  }
+
+  /**
+   * @return Blocks subtitles and caption overlays from loading.
+   */
+  @JsonProperty("block_text_track")
+  public Optional<Boolean> getBlockTextTrack() {
+    return blockTextTrack;
+  }
+
+  /**
+   * @return Blocks tracking scripts and analytics services for cleaner, privacy-oriented renders.
+   */
+  @JsonProperty("block_tracking")
+  public Optional<Boolean> getBlockTracking() {
+    return blockTracking;
+  }
+
+  /**
+   * @return Blocks WebSocket connections - prevents real-time bidirectional communication.
+   */
+  @JsonProperty("block_web_socket")
+  public Optional<Boolean> getBlockWebSocket() {
+    return blockWebSocket;
+  }
+
+  /**
+   * @return Blocks all XMLHttpRequest (AJAX) calls - prevents dynamic API-driven content.
+   */
+  @JsonProperty("block_xhr")
+  public Optional<Boolean> getBlockXhr() {
+    return blockXhr;
+  }
+
+  /**
+   * @return CSS selectors to blur before capture. Masks sensitive data like emails, payments, or personal info. Multiple selectors supported. Default: empty.
+   */
+  @JsonProperty("blur_selector")
+  public Optional<String> getBlurSelector() {
+    return blurSelector;
+  }
+
+  /**
+   * @return CSS selector of the message shown for a wrong answer. While it is visible, the solver tries again.
+   */
+  @JsonProperty("captcha_error")
+  public Optional<String> getCaptchaError() {
+    return captchaError;
+  }
+
+  /**
+   * @return CSS selector of the captcha picture. Required when solve_captcha is true.
+   */
+  @JsonProperty("captcha_image")
+  public Optional<String> getCaptchaImage() {
+    return captchaImage;
+  }
+
+  /**
+   * @return CSS selector of the box the answer is typed into. Required when solve_captcha is true.
+   */
+  @JsonProperty("captcha_input")
+  public Optional<String> getCaptchaInput() {
+    return captchaInput;
+  }
+
+  /**
+   * @return CSS selector of the control that loads a new captcha picture before the next try.
+   */
+  @JsonProperty("captcha_refresh")
+  public Optional<String> getCaptchaRefresh() {
+    return captchaRefresh;
+  }
+
+  /**
+   * @return Number of guesses the solver makes, from 1 to 5.
+   */
+  @JsonProperty("captcha_retries")
+  public Optional<Integer> getCaptchaRetries() {
+    return captchaRetries;
+  }
+
+  /**
+   * @return CSS selector of the button to click after the answer is typed.
+   */
+  @JsonProperty("captcha_submit")
+  public Optional<String> getCaptchaSubmit() {
+    return captchaSubmit;
+  }
+
+  /**
+   * @return Loads the page through a datacenter proxy. Adds 20 credits per request. Ignored when premium_proxy is true or a custom proxy is set.
+   */
+  @JsonProperty("classic_proxy")
+  public Optional<Boolean> getClassicProxy() {
+    return classicProxy;
+  }
+
+  /**
+   * @return Number of times to click the selector (when set via <code>selector_to_click</code>).
+   */
+  @JsonProperty("click_recursion")
+  public Optional<Integer> getClickRecursion() {
+    return clickRecursion;
+  }
+
+  /**
+   * @return Height of the clip area in pixels. Default: null.
+   */
+  @JsonProperty("clip[height]")
+  public Optional<Integer> getClipHeight() {
+    return clipHeight;
+  }
+
+  /**
+   * @return Width of the clip area in pixels. Default: null.
+   */
+  @JsonProperty("clip[width]")
+  public Optional<Integer> getClipWidth() {
+    return clipWidth;
+  }
+
+  /**
+   * @return X coordinate (in pixels) for the top-left corner of the clip area. Default: null.
+   */
+  @JsonProperty("clip[x]")
+  public Optional<Integer> getClipX() {
+    return clipX;
+  }
+
+  /**
+   * @return Y coordinate (in pixels) for the top-left corner of the clip area. Default: null.
+   */
+  @JsonProperty("clip[y]")
+  public Optional<Integer> getClipY() {
+    return clipY;
+  }
+
+  /**
+   * @return Cookies to include in the request before rendering. Supports single or multiple cookies. Example: <code>cookie=value; otherCookie=otherValue;</code>.
+   */
+  @JsonProperty("cookies")
+  public Optional<String> getCookies() {
+    return cookies;
+  }
+
+  /**
+   * @return Two-letter country code, such as US or DE, for the exit address of classic_proxy or premium_proxy. Ignored when you send your own proxy. Any two-letter code is sent, including one that is not listed. Classic proxy countries: BG, GE, DE, HN, MD, UA, GB, US. Premium proxy countries: AF, AL, DZ, AO, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BT, BO, BQ, BA, BW, BR, BN, BG, BF, BI, CV, KH, CM, CA, KY, CF, TD, CL, CN, CO, KM, CG, CR, CI, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, EC, EG, SV, GQ, EE, SZ, ET, FO, FJ, FI, FR, GF, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IL, IT, JM, JP, JE, JO, KZ, KE, XK, KW, KG, LA, LV, LB, LS, LR, LY, LT, MO, MG, MW, MY, MV, ML, MT, MQ, MR, MU, YT, MX, MD, MN, ME, MA, MZ, MM, NA, NP, NL, NC, NZ, NI, NE, NG, MK, NO, OM, PK, PS, PA, PG, PY, PE, PH, PL, PT, PR, QA, RE, RO, RU, RW, KN, LC, VC, WS, SA, SN, RS, SC, SL, SG, SK, SI, SB, SO, ZA, KR, SS, ES, LK, SD, SR, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TO, TT, TN, TR, TM, UG, UA, AE, GB, US, UY, UZ, VE, VN, YE, ZM, ZW.
+   */
+  @JsonProperty("country")
+  public Optional<String> getCountry() {
+    return country;
+  }
+
+  /**
+   * @return Allows injecting custom CSS code into the page before rendering. Pass the CSS code directly as a string.
+   */
+  @JsonProperty("css")
+  public Optional<String> getCss() {
+    return css;
+  }
+
+  /**
+   * @return Allows loading external CSS into the page. Provide a URL pointing to the CSS file.
+   */
+  @JsonProperty("css_url")
+  public Optional<String> getCssUrl() {
+    return cssUrl;
+  }
+
+  /**
+   * @return Custom HTML to render instead of loading a URL. Overrides the url option. Use for capturing specific HTML structures or dynamic content.
+   */
+  @JsonProperty("custom_html")
+  public Optional<String> getCustomHtml() {
+    return customHtml;
+  }
+
+  /**
+   * @return When set to <code>true</code>, websites that support prefers-color-scheme: dark will render in dark mode.
+   */
+  @JsonProperty("dark_mode")
+  public Optional<Boolean> getDarkMode() {
+    return darkMode;
+  }
+
+  /**
+   * @return Wait period in milliseconds before capture. Allows animations, API responses, and dynamic elements to finish rendering.
+   */
+  @JsonProperty("delay")
+  public Optional<Integer> getDelay() {
+    return delay;
+  }
+
+  /**
+   * @return If <code>true</code>, screenshot/PDF is not stored on server and must be downloaded immediately.
+   */
+  @JsonProperty("destroy_screenshot")
+  public Optional<Boolean> getDestroyScreenshot() {
+    return destroyScreenshot;
+  }
+
+  /**
+   * @return Duration of scrolling action in seconds (0-60). Higher = longer video. Default: null (full page scroll).
+   */
+  @JsonProperty("duration")
+  public Optional<Integer> getDuration() {
+    return duration;
+  }
+
+  /**
+   * @return Stores the render in cache for reuse on subsequent identical requests.
+   */
+  @JsonProperty("enable_caching")
+  public Optional<Boolean> getEnableCaching() {
+    return enableCaching;
+  }
+
+  /**
+   * @return Enables private/incognito browsing. Each render starts with a clean slate - no cookies, cache, or session data persisted.
+   */
+  @JsonProperty("enable_incognito")
+  public Optional<Boolean> getEnableIncognito() {
+    return enableIncognito;
+  }
+
+  /**
+   * @return <p>rendered HTML as a .html file (includes JS-executed DOM). Only available with output=json.</p>
+   */
+  @JsonProperty("extract_html")
+  public Optional<Boolean> getExtractHtml() {
+    return extractHtml;
+  }
+
+  /**
+   * @return Extracts rendered page content as a structured .md (Markdown) file. Preserves headings, lists, links. Only with output=json.
+   */
+  @JsonProperty("extract_markdown")
+  public Optional<Boolean> getExtractMarkdown() {
+    return extractMarkdown;
+  }
+
+  /**
+   * @return Strips all HTML and returns visible text as a .txt file. Ideal for text analysis, indexing, or AI pipelines. Only with output=json.
+   */
+  @JsonProperty("extract_text")
+  public Optional<Boolean> getExtractText() {
+    return extractText;
+  }
+
+  /**
+   * @return If <code>true</code>, returns an error when the target page responds with 4xx or 5xx status.
+   */
+  @JsonProperty("fail_on_error")
+  public Optional<Boolean> getFailOnError() {
+    return failOnError;
+  }
+
+  /**
+   * @return Output format. PNG (lossless, transparency), JPEG (compressed, smaller size), WebP (modern, efficient), PDF (document). For scrolling captures: MP4, GIF, WebM. Scrolling capture formats: WEBM (web-optimized), MP4 (widely compatible, default), GIF (short loops).
+   */
+  @JsonProperty("file_type")
+  public Optional<BulkScreenshotCaptureRequestUrlsItemFileType> getFileType() {
+    return fileType;
+  }
+
+  /**
+   * @return Response format: json (default).
+   */
+  @JsonProperty("format")
+  public Optional<BulkScreenshotCaptureRequestUrlsItemFormat> getFormat() {
+    return format;
+  }
+
+  /**
+   * @return If <code>true</code>, bypasses cache and captures a fresh render. If <code>false</code>, returns cached version when available.
+   */
+  @JsonProperty("fresh")
+  public Optional<Boolean> getFresh() {
+    return fresh;
+  }
+
+  /**
+   * @return Captures the entire webpage from top to bottom, including scrollable content outside the viewport. Ideal for long-form pages.
+   */
+  @JsonProperty("full_page")
+  public Optional<Boolean> getFullPage() {
+    return fullPage;
+  }
+
+  /**
+   * @return Extracts all image URLs from the rendered DOM and returns them in structured format. Only with output=json.
+   */
+  @JsonProperty("get_image_urls")
+  public Optional<Boolean> getGetImageUrls() {
+    return getImageUrls;
+  }
+
+  /**
+   * @return Renders the page with a GPU, including WebGL and canvas content. Adds 20 credits per request.
+   */
+  @JsonProperty("gpu")
+  public Optional<Boolean> getGpu() {
+    return gpu;
+  }
+
+  /**
+   * @return Applies a grayscale filter to the screenshot. Requires a value from 0 (no effect) to 100 (fully grayscale).
+   */
+  @JsonProperty("grayscale")
+  public Optional<Integer> getGrayscale() {
+    return grayscale;
+  }
+
+  /**
+   * @return Custom HTTP headers to include as key=value pairs. Use a semicolon to separate multiple headers (e.g., <code>key1=value1;key2=value2</code>).
+   */
+  @JsonProperty("headers")
+  public Optional<String> getHeaders() {
+    return headers;
+  }
+
+  /**
+   * @return Viewport height in pixels. Controls how much vertical area is visible. Max: 4320.
+   */
+  @JsonProperty("height")
+  public Optional<Integer> getHeight() {
+    return height;
+  }
+
+  /**
+   * @return Compression level for JPEG output (0-100). Lower = smaller file, higher = better quality. Only applies to JPEG.
+   */
+  @JsonProperty("image_quality")
+  public Optional<Integer> getImageQuality() {
+    return imageQuality;
+  }
+
+  /**
+   * @return Allows injecting custom JavaScript code into the page before rendering. Pass the JavaScript code directly as a string.
+   */
+  @JsonProperty("js")
+  public Optional<String> getJs() {
+    return js;
+  }
+
+  /**
+   * @return Allows loading external JavaScript into the page. Provide a URL pointing to the script file.
+   */
+  @JsonProperty("js_url")
+  public Optional<String> getJsUrl() {
+    return jsUrl;
+  }
+
+  /**
+   * @return Specify latitude for the browser Geolocation API. Provide a numeric value. Default: null (not set).
+   */
+  @JsonProperty("latitude")
+  public Optional<Float> getLatitude() {
+    return latitude;
+  }
+
+  /**
+   * @return Automatically scrolls the page to trigger lazy-loaded images and components. Ensures complete content capture.
+   */
+  @JsonProperty("lazy_load")
+  public Optional<Boolean> getLazyLoad() {
+    return lazyLoad;
+  }
+
+  /**
+   * @return Specify longitude for the browser Geolocation API. Provide a numeric value. Default: null (not set).
+   */
+  @JsonProperty("longitude")
+  public Optional<Float> getLongitude() {
+    return longitude;
+  }
+
+  /**
+   * @return Markdown to render instead of loading a URL. Works like custom_html, so you can capture a README or notes without hosting a page.
+   */
+  @JsonProperty("markdown")
+  public Optional<String> getMarkdown() {
+    return markdown;
+  }
+
+  /**
+   * @return Hides or blocks cookie consent banners and popups before capture.
+   */
+  @JsonProperty("no_cookie_banners")
+  public Optional<Boolean> getNoCookieBanners() {
+    return noCookieBanners;
+  }
+
+  /**
+   * @return Recognition model used by the captcha solver: mini-ocr-v1 (default) or ocr-v1.
+   */
+  @JsonProperty("ocr_model")
+  public Optional<BulkScreenshotCaptureRequestUrlsItemOcrModel> getOcrModel() {
+    return ocrModel;
+  }
+
+  /**
+   * @return Replaces simple white/plain backgrounds with transparency for a cut-out effect. Only works with PNG output.
+   */
+  @JsonProperty("omit_background")
+  public Optional<Boolean> getOmitBackground() {
+    return omitBackground;
+  }
+
+  /**
+   * @return Set the output format. <code>json</code> returns metadata with a hosted file URL. <code>image</code> streams the raw file bytes directly.
+   */
+  @JsonProperty("output")
+  public Optional<BulkScreenshotCaptureRequestUrlsItemOutput> getOutput() {
+    return output;
+  }
+
+  /**
+   * @return PDF output options. Applies when file_type is PDF.
+   */
+  @JsonProperty("pdf_options")
+  public Optional<BulkScreenshotCaptureRequestUrlsItemPdfOptions> getPdfOptions() {
+    return pdfOptions;
+  }
+
+  /**
+   * @return Loads the page through a residential proxy. Adds 200 credits per request. Used instead of classic_proxy.
+   */
+  @JsonProperty("premium_proxy")
+  public Optional<Boolean> getPremiumProxy() {
+    return premiumProxy;
+  }
+
+  /**
+   * @return Allows defining a proxy for the connection. Provide a JSON string with keys: server (include port number), username, and password.
+   */
+  @JsonProperty("proxy")
+  public Optional<String> getProxy() {
+    return proxy;
+  }
+
+  /**
+   * @return CSS selectors to remove before capture. Deletes matched elements from DOM. Ideal for cleaning ads, popups, sidebars. Multiple selectors supported. Default: empty.
+   */
+  @JsonProperty("remove_selector")
+  public Optional<String> getRemoveSelector() {
+    return removeSelector;
+  }
+
+  /**
+   * @return Custom name for the output file. Helps with organized storage and retrieval. Note: non-unique names may overwrite existing files.
+   */
+  @JsonProperty("result_file_name")
+  public Optional<String> getResultFileName() {
+    return resultFileName;
+  }
+
+  /**
+   * @return Captures at 2x resolution for sharper, high-DPI output. Increases file size.
+   */
+  @JsonProperty("retina")
+  public Optional<Boolean> getRetina() {
+    return retina;
+  }
+
+  /**
+   * @return If <code>true</code>, scrolls to bottom then back to top, creating a seamless loop.
+   */
+  @JsonProperty("scroll_back")
+  public Optional<Boolean> getScrollBack() {
+    return scrollBack;
+  }
+
+  /**
+   * @return Delay in milliseconds between scroll steps when <code>lazy_load</code> is enabled. Use higher values for heavy pages.
+   */
+  @JsonProperty("scroll_delay")
+  public Optional<Integer> getScrollDelay() {
+    return scrollDelay;
+  }
+
+  /**
+   * @return Scrolling speed: fast, normal (default), or slow. Affects render time and output pacing.
+   */
+  @JsonProperty("scroll_speed")
+  public Optional<BulkScreenshotCaptureRequestUrlsItemScrollSpeed> getScrollSpeed() {
+    return scrollSpeed;
+  }
+
+  /**
+   * @return Scrolls the page to bring the specified CSS selector into view before capture. Ideal for below-the-fold content. Default: empty.
+   */
+  @JsonProperty("scroll_to_element")
+  public Optional<String> getScrollToElement() {
+    return scrollToElement;
+  }
+
+  /**
+   * @return Enables scrolling screenshot mode to capture a video (webm, gif, mp4) of the webpage.
+   */
+  @JsonProperty("scrolling_screenshot")
+  public Optional<Boolean> getScrollingScreenshot() {
+    return scrollingScreenshot;
+  }
+
+  /**
+   * @return CSS selector to capture a specific element. Only that element is rendered. Falls back to full page if not found. Default: empty.
+   */
+  @JsonProperty("selector")
+  public Optional<String> getSelector() {
+    return selector;
+  }
+
+  /**
+   * @return CSS selector for an element to click before capturing the screenshot. Useful for opening dropdowns, modals, or triggering content.
+   */
+  @JsonProperty("selector_to_click")
+  public Optional<String> getSelectorToClick() {
+    return selectorToClick;
+  }
+
+  /**
+   * @return Solves a captcha made of text drawn in a picture, then takes the screenshot. Requires captcha_image and captcha_input. Adds 20 credits per request.
+   */
+  @JsonProperty("solve_captcha")
+  public Optional<Boolean> getSolveCaptcha() {
+    return solveCaptcha;
+  }
+
+  /**
+   * @return Starts recording immediately without waiting for full page load.
+   */
+  @JsonProperty("start_immediately")
+  public Optional<Boolean> getStartImmediately() {
+    return startImmediately;
+  }
+
+  /**
+   * @return Makes the browser look like a regular visitor for pages that block automated traffic. No extra credits.
+   */
+  @JsonProperty("stealth")
+  public Optional<Boolean> getStealth() {
+    return stealth;
+  }
+
+  /**
+   * @return Specifies the width of the thumbnail in pixels. Default value is 0 (meaning no specific value is set, and the screenshot is returned at its original resolution).
+   */
+  @JsonProperty("thumbnail_width")
+  public Optional<Integer> getThumbnailWidth() {
+    return thumbnailWidth;
+  }
+
+  /**
+   * @return Maximum wait in milliseconds for page load before aborting. Adjust for slow/heavy pages. Default: 100000 (100s).
+   */
+  @JsonProperty("timeout")
+  public Optional<Integer> getTimeout() {
+    return timeout;
+  }
+
+  /**
+   * @return IANA timezone the browser uses while rendering, such as Asia/Karachi or Europe/London. Useful for clocks and localized dates.
+   */
+  @JsonProperty("timezone")
+  public Optional<String> getTimezone() {
+    return timezone;
+  }
+
+  /**
+   * @return Time in seconds the render stays cached before auto-invalidation. Use higher values for static pages, lower for dynamic content. Default: 2592000 (30 days).
+   */
+  @JsonProperty("ttl")
+  public Optional<Integer> getTtl() {
+    return ttl;
+  }
+
+  /**
+   * @return Custom User-Agent string sent in the request headers.
+   */
+  @JsonProperty("user_agent")
+  public Optional<String> getUserAgent() {
+    return userAgent;
+  }
+
+  /**
+   * @return Records visible viewport only for a specified duration. Use with <code>duration</code> parameter. Ideal for dashboards and animations.
+   */
+  @JsonProperty("video")
+  public Optional<Boolean> getVideo() {
+    return video;
+  }
+
+  /**
+   * @return Controls when rendering starts based on page load lifecycle. <code>load</code> (all resources), <code>domcontentloaded</code> (HTML parsed), <code>networkidle</code> (no network activity for 500ms).
+   */
+  @JsonProperty("wait_for_event")
+  public Optional<BulkScreenshotCaptureRequestUrlsItemWaitForEvent> getWaitForEvent() {
+    return waitForEvent;
+  }
+
+  /**
+   * @return Viewport width in pixels. Simulates device screen sizes. Max: 7680.
+   */
+  @JsonProperty("width")
+  public Optional<Integer> getWidth() {
+    return width;
   }
 
   @java.lang.Override
@@ -51,12 +1073,12 @@ public final class BulkScreenshotCaptureRequestUrlsItem {
   }
 
   private boolean equalTo(BulkScreenshotCaptureRequestUrlsItem other) {
-    return url.equals(other.url);
+    return url.equals(other.url) && acceptLanguages.equals(other.acceptLanguages) && adjustTop.equals(other.adjustTop) && blockAds.equals(other.blockAds) && blockChatWidgets.equals(other.blockChatWidgets) && blockEventSource.equals(other.blockEventSource) && blockFetch.equals(other.blockFetch) && blockFont.equals(other.blockFont) && blockImages.equals(other.blockImages) && blockJs.equals(other.blockJs) && blockManifest.equals(other.blockManifest) && blockMedia.equals(other.blockMedia) && blockSpecificRequests.equals(other.blockSpecificRequests) && blockStylesheets.equals(other.blockStylesheets) && blockTextTrack.equals(other.blockTextTrack) && blockTracking.equals(other.blockTracking) && blockWebSocket.equals(other.blockWebSocket) && blockXhr.equals(other.blockXhr) && blurSelector.equals(other.blurSelector) && captchaError.equals(other.captchaError) && captchaImage.equals(other.captchaImage) && captchaInput.equals(other.captchaInput) && captchaRefresh.equals(other.captchaRefresh) && captchaRetries.equals(other.captchaRetries) && captchaSubmit.equals(other.captchaSubmit) && classicProxy.equals(other.classicProxy) && clickRecursion.equals(other.clickRecursion) && clipHeight.equals(other.clipHeight) && clipWidth.equals(other.clipWidth) && clipX.equals(other.clipX) && clipY.equals(other.clipY) && cookies.equals(other.cookies) && country.equals(other.country) && css.equals(other.css) && cssUrl.equals(other.cssUrl) && customHtml.equals(other.customHtml) && darkMode.equals(other.darkMode) && delay.equals(other.delay) && destroyScreenshot.equals(other.destroyScreenshot) && duration.equals(other.duration) && enableCaching.equals(other.enableCaching) && enableIncognito.equals(other.enableIncognito) && extractHtml.equals(other.extractHtml) && extractMarkdown.equals(other.extractMarkdown) && extractText.equals(other.extractText) && failOnError.equals(other.failOnError) && fileType.equals(other.fileType) && format.equals(other.format) && fresh.equals(other.fresh) && fullPage.equals(other.fullPage) && getImageUrls.equals(other.getImageUrls) && gpu.equals(other.gpu) && grayscale.equals(other.grayscale) && headers.equals(other.headers) && height.equals(other.height) && imageQuality.equals(other.imageQuality) && js.equals(other.js) && jsUrl.equals(other.jsUrl) && latitude.equals(other.latitude) && lazyLoad.equals(other.lazyLoad) && longitude.equals(other.longitude) && markdown.equals(other.markdown) && noCookieBanners.equals(other.noCookieBanners) && ocrModel.equals(other.ocrModel) && omitBackground.equals(other.omitBackground) && output.equals(other.output) && pdfOptions.equals(other.pdfOptions) && premiumProxy.equals(other.premiumProxy) && proxy.equals(other.proxy) && removeSelector.equals(other.removeSelector) && resultFileName.equals(other.resultFileName) && retina.equals(other.retina) && scrollBack.equals(other.scrollBack) && scrollDelay.equals(other.scrollDelay) && scrollSpeed.equals(other.scrollSpeed) && scrollToElement.equals(other.scrollToElement) && scrollingScreenshot.equals(other.scrollingScreenshot) && selector.equals(other.selector) && selectorToClick.equals(other.selectorToClick) && solveCaptcha.equals(other.solveCaptcha) && startImmediately.equals(other.startImmediately) && stealth.equals(other.stealth) && thumbnailWidth.equals(other.thumbnailWidth) && timeout.equals(other.timeout) && timezone.equals(other.timezone) && ttl.equals(other.ttl) && userAgent.equals(other.userAgent) && video.equals(other.video) && waitForEvent.equals(other.waitForEvent) && width.equals(other.width);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.url);
+    return Objects.hash(this.url, this.acceptLanguages, this.adjustTop, this.blockAds, this.blockChatWidgets, this.blockEventSource, this.blockFetch, this.blockFont, this.blockImages, this.blockJs, this.blockManifest, this.blockMedia, this.blockSpecificRequests, this.blockStylesheets, this.blockTextTrack, this.blockTracking, this.blockWebSocket, this.blockXhr, this.blurSelector, this.captchaError, this.captchaImage, this.captchaInput, this.captchaRefresh, this.captchaRetries, this.captchaSubmit, this.classicProxy, this.clickRecursion, this.clipHeight, this.clipWidth, this.clipX, this.clipY, this.cookies, this.country, this.css, this.cssUrl, this.customHtml, this.darkMode, this.delay, this.destroyScreenshot, this.duration, this.enableCaching, this.enableIncognito, this.extractHtml, this.extractMarkdown, this.extractText, this.failOnError, this.fileType, this.format, this.fresh, this.fullPage, this.getImageUrls, this.gpu, this.grayscale, this.headers, this.height, this.imageQuality, this.js, this.jsUrl, this.latitude, this.lazyLoad, this.longitude, this.markdown, this.noCookieBanners, this.ocrModel, this.omitBackground, this.output, this.pdfOptions, this.premiumProxy, this.proxy, this.removeSelector, this.resultFileName, this.retina, this.scrollBack, this.scrollDelay, this.scrollSpeed, this.scrollToElement, this.scrollingScreenshot, this.selector, this.selectorToClick, this.solveCaptcha, this.startImmediately, this.stealth, this.thumbnailWidth, this.timeout, this.timezone, this.ttl, this.userAgent, this.video, this.waitForEvent, this.width);
   }
 
   @java.lang.Override
@@ -80,6 +1102,630 @@ public final class BulkScreenshotCaptureRequestUrlsItem {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
+
+    /**
+     * <p>Sets the accepted languages for the HTTP request. This is sent as the Accept-Language header.</p>
+     */
+    _FinalStage acceptLanguages(Optional<String> acceptLanguages);
+
+    _FinalStage acceptLanguages(String acceptLanguages);
+
+    /**
+     * <p>Initial vertical scroll position in pixels before capture. Use to position mid-page content in viewport. Not supported for PDF.</p>
+     */
+    _FinalStage adjustTop(Optional<Integer> adjustTop);
+
+    _FinalStage adjustTop(Integer adjustTop);
+
+    /**
+     * <p>Blocks requests to known ad networks for cleaner, distraction-free screenshots.</p>
+     */
+    _FinalStage blockAds(Optional<Boolean> blockAds);
+
+    _FinalStage blockAds(Boolean blockAds);
+
+    /**
+     * <p>Blocks live chat popups, support bubbles, and messaging interfaces.</p>
+     */
+    _FinalStage blockChatWidgets(Optional<Boolean> blockChatWidgets);
+
+    _FinalStage blockChatWidgets(Boolean blockChatWidgets);
+
+    /**
+     * <p>Blocks EventSource (SSE) connections - prevents real-time data streams.</p>
+     */
+    _FinalStage blockEventSource(Optional<Boolean> blockEventSource);
+
+    _FinalStage blockEventSource(Boolean blockEventSource);
+
+    /**
+     * <p>Blocks all Fetch API requests - stops async data loading.</p>
+     */
+    _FinalStage blockFetch(Optional<Boolean> blockFetch);
+
+    _FinalStage blockFetch(Boolean blockFetch);
+
+    /**
+     * <p>Blocks external font files - page falls back to system defaults. Supported: woff, woff2, ttf, otf, eot.</p>
+     */
+    _FinalStage blockFont(Optional<Boolean> blockFont);
+
+    _FinalStage blockFont(Boolean blockFont);
+
+    /**
+     * <p>Blocks all image resources (jpg, png, gif, webp, svg, etc.) for faster rendering.</p>
+     */
+    _FinalStage blockImages(Optional<Boolean> blockImages);
+
+    _FinalStage blockImages(Boolean blockImages);
+
+    /**
+     * <p>Disables all JavaScript execution. Renders a static version of the page. Speeds up capture but may break dynamic content.</p>
+     */
+    _FinalStage blockJs(Optional<Boolean> blockJs);
+
+    _FinalStage blockJs(Boolean blockJs);
+
+    /**
+     * <p>Blocks manifest files (.json, .webmanifest) - disables PWA-related functionality.</p>
+     */
+    _FinalStage blockManifest(Optional<Boolean> blockManifest);
+
+    _FinalStage blockManifest(Boolean blockManifest);
+
+    /**
+     * <p>Blocks audio and video resources (mp3, mp4, webm, etc.) from loading.</p>
+     */
+    _FinalStage blockMedia(Optional<Boolean> blockMedia);
+
+    _FinalStage blockMedia(Boolean blockMedia);
+
+    /**
+     * <p>Fine-grained blocking of specific URLs or patterns. Separate multiple rules by comma, space, or newline. Default: empty.</p>
+     */
+    _FinalStage blockSpecificRequests(Optional<String> blockSpecificRequests);
+
+    _FinalStage blockSpecificRequests(String blockSpecificRequests);
+
+    /**
+     * <p>Blocks all stylesheets - page renders as raw HTML without visual formatting.</p>
+     */
+    _FinalStage blockStylesheets(Optional<Boolean> blockStylesheets);
+
+    _FinalStage blockStylesheets(Boolean blockStylesheets);
+
+    /**
+     * <p>Blocks subtitles and caption overlays from loading.</p>
+     */
+    _FinalStage blockTextTrack(Optional<Boolean> blockTextTrack);
+
+    _FinalStage blockTextTrack(Boolean blockTextTrack);
+
+    /**
+     * <p>Blocks tracking scripts and analytics services for cleaner, privacy-oriented renders.</p>
+     */
+    _FinalStage blockTracking(Optional<Boolean> blockTracking);
+
+    _FinalStage blockTracking(Boolean blockTracking);
+
+    /**
+     * <p>Blocks WebSocket connections - prevents real-time bidirectional communication.</p>
+     */
+    _FinalStage blockWebSocket(Optional<Boolean> blockWebSocket);
+
+    _FinalStage blockWebSocket(Boolean blockWebSocket);
+
+    /**
+     * <p>Blocks all XMLHttpRequest (AJAX) calls - prevents dynamic API-driven content.</p>
+     */
+    _FinalStage blockXhr(Optional<Boolean> blockXhr);
+
+    _FinalStage blockXhr(Boolean blockXhr);
+
+    /**
+     * <p>CSS selectors to blur before capture. Masks sensitive data like emails, payments, or personal info. Multiple selectors supported. Default: empty.</p>
+     */
+    _FinalStage blurSelector(Optional<String> blurSelector);
+
+    _FinalStage blurSelector(String blurSelector);
+
+    /**
+     * <p>CSS selector of the message shown for a wrong answer. While it is visible, the solver tries again.</p>
+     */
+    _FinalStage captchaError(Optional<String> captchaError);
+
+    _FinalStage captchaError(String captchaError);
+
+    /**
+     * <p>CSS selector of the captcha picture. Required when solve_captcha is true.</p>
+     */
+    _FinalStage captchaImage(Optional<String> captchaImage);
+
+    _FinalStage captchaImage(String captchaImage);
+
+    /**
+     * <p>CSS selector of the box the answer is typed into. Required when solve_captcha is true.</p>
+     */
+    _FinalStage captchaInput(Optional<String> captchaInput);
+
+    _FinalStage captchaInput(String captchaInput);
+
+    /**
+     * <p>CSS selector of the control that loads a new captcha picture before the next try.</p>
+     */
+    _FinalStage captchaRefresh(Optional<String> captchaRefresh);
+
+    _FinalStage captchaRefresh(String captchaRefresh);
+
+    /**
+     * <p>Number of guesses the solver makes, from 1 to 5.</p>
+     */
+    _FinalStage captchaRetries(Optional<Integer> captchaRetries);
+
+    _FinalStage captchaRetries(Integer captchaRetries);
+
+    /**
+     * <p>CSS selector of the button to click after the answer is typed.</p>
+     */
+    _FinalStage captchaSubmit(Optional<String> captchaSubmit);
+
+    _FinalStage captchaSubmit(String captchaSubmit);
+
+    /**
+     * <p>Loads the page through a datacenter proxy. Adds 20 credits per request. Ignored when premium_proxy is true or a custom proxy is set.</p>
+     */
+    _FinalStage classicProxy(Optional<Boolean> classicProxy);
+
+    _FinalStage classicProxy(Boolean classicProxy);
+
+    /**
+     * <p>Number of times to click the selector (when set via <code>selector_to_click</code>).</p>
+     */
+    _FinalStage clickRecursion(Optional<Integer> clickRecursion);
+
+    _FinalStage clickRecursion(Integer clickRecursion);
+
+    /**
+     * <p>Height of the clip area in pixels. Default: null.</p>
+     */
+    _FinalStage clipHeight(Optional<Integer> clipHeight);
+
+    _FinalStage clipHeight(Integer clipHeight);
+
+    /**
+     * <p>Width of the clip area in pixels. Default: null.</p>
+     */
+    _FinalStage clipWidth(Optional<Integer> clipWidth);
+
+    _FinalStage clipWidth(Integer clipWidth);
+
+    /**
+     * <p>X coordinate (in pixels) for the top-left corner of the clip area. Default: null.</p>
+     */
+    _FinalStage clipX(Optional<Integer> clipX);
+
+    _FinalStage clipX(Integer clipX);
+
+    /**
+     * <p>Y coordinate (in pixels) for the top-left corner of the clip area. Default: null.</p>
+     */
+    _FinalStage clipY(Optional<Integer> clipY);
+
+    _FinalStage clipY(Integer clipY);
+
+    /**
+     * <p>Cookies to include in the request before rendering. Supports single or multiple cookies. Example: <code>cookie=value; otherCookie=otherValue;</code>.</p>
+     */
+    _FinalStage cookies(Optional<String> cookies);
+
+    _FinalStage cookies(String cookies);
+
+    /**
+     * <p>Two-letter country code, such as US or DE, for the exit address of classic_proxy or premium_proxy. Ignored when you send your own proxy. Any two-letter code is sent, including one that is not listed. Classic proxy countries: BG, GE, DE, HN, MD, UA, GB, US. Premium proxy countries: AF, AL, DZ, AO, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BT, BO, BQ, BA, BW, BR, BN, BG, BF, BI, CV, KH, CM, CA, KY, CF, TD, CL, CN, CO, KM, CG, CR, CI, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, EC, EG, SV, GQ, EE, SZ, ET, FO, FJ, FI, FR, GF, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IL, IT, JM, JP, JE, JO, KZ, KE, XK, KW, KG, LA, LV, LB, LS, LR, LY, LT, MO, MG, MW, MY, MV, ML, MT, MQ, MR, MU, YT, MX, MD, MN, ME, MA, MZ, MM, NA, NP, NL, NC, NZ, NI, NE, NG, MK, NO, OM, PK, PS, PA, PG, PY, PE, PH, PL, PT, PR, QA, RE, RO, RU, RW, KN, LC, VC, WS, SA, SN, RS, SC, SL, SG, SK, SI, SB, SO, ZA, KR, SS, ES, LK, SD, SR, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TO, TT, TN, TR, TM, UG, UA, AE, GB, US, UY, UZ, VE, VN, YE, ZM, ZW.</p>
+     */
+    _FinalStage country(Optional<String> country);
+
+    _FinalStage country(String country);
+
+    /**
+     * <p>Allows injecting custom CSS code into the page before rendering. Pass the CSS code directly as a string.</p>
+     */
+    _FinalStage css(Optional<String> css);
+
+    _FinalStage css(String css);
+
+    /**
+     * <p>Allows loading external CSS into the page. Provide a URL pointing to the CSS file.</p>
+     */
+    _FinalStage cssUrl(Optional<String> cssUrl);
+
+    _FinalStage cssUrl(String cssUrl);
+
+    /**
+     * <p>Custom HTML to render instead of loading a URL. Overrides the url option. Use for capturing specific HTML structures or dynamic content.</p>
+     */
+    _FinalStage customHtml(Optional<String> customHtml);
+
+    _FinalStage customHtml(String customHtml);
+
+    /**
+     * <p>When set to <code>true</code>, websites that support prefers-color-scheme: dark will render in dark mode.</p>
+     */
+    _FinalStage darkMode(Optional<Boolean> darkMode);
+
+    _FinalStage darkMode(Boolean darkMode);
+
+    /**
+     * <p>Wait period in milliseconds before capture. Allows animations, API responses, and dynamic elements to finish rendering.</p>
+     */
+    _FinalStage delay(Optional<Integer> delay);
+
+    _FinalStage delay(Integer delay);
+
+    /**
+     * <p>If <code>true</code>, screenshot/PDF is not stored on server and must be downloaded immediately.</p>
+     */
+    _FinalStage destroyScreenshot(Optional<Boolean> destroyScreenshot);
+
+    _FinalStage destroyScreenshot(Boolean destroyScreenshot);
+
+    /**
+     * <p>Duration of scrolling action in seconds (0-60). Higher = longer video. Default: null (full page scroll).</p>
+     */
+    _FinalStage duration(Optional<Integer> duration);
+
+    _FinalStage duration(Integer duration);
+
+    /**
+     * <p>Stores the render in cache for reuse on subsequent identical requests.</p>
+     */
+    _FinalStage enableCaching(Optional<Boolean> enableCaching);
+
+    _FinalStage enableCaching(Boolean enableCaching);
+
+    /**
+     * <p>Enables private/incognito browsing. Each render starts with a clean slate - no cookies, cache, or session data persisted.</p>
+     */
+    _FinalStage enableIncognito(Optional<Boolean> enableIncognito);
+
+    _FinalStage enableIncognito(Boolean enableIncognito);
+
+    /**
+     * <p>Returns rendered HTML as a .html file (includes JS-executed DOM). Only available with output=json.</p>
+     */
+    _FinalStage extractHtml(Optional<Boolean> extractHtml);
+
+    _FinalStage extractHtml(Boolean extractHtml);
+
+    /**
+     * <p>Extracts rendered page content as a structured .md (Markdown) file. Preserves headings, lists, links. Only with output=json.</p>
+     */
+    _FinalStage extractMarkdown(Optional<Boolean> extractMarkdown);
+
+    _FinalStage extractMarkdown(Boolean extractMarkdown);
+
+    /**
+     * <p>Strips all HTML and returns visible text as a .txt file. Ideal for text analysis, indexing, or AI pipelines. Only with output=json.</p>
+     */
+    _FinalStage extractText(Optional<Boolean> extractText);
+
+    _FinalStage extractText(Boolean extractText);
+
+    /**
+     * <p>If <code>true</code>, returns an error when the target page responds with 4xx or 5xx status.</p>
+     */
+    _FinalStage failOnError(Optional<Boolean> failOnError);
+
+    _FinalStage failOnError(Boolean failOnError);
+
+    /**
+     * <p>Output format. PNG (lossless, transparency), JPEG (compressed, smaller size), WebP (modern, efficient), PDF (document). For scrolling captures: MP4, GIF, WebM. Scrolling capture formats: WEBM (web-optimized), MP4 (widely compatible, default), GIF (short loops).</p>
+     */
+    _FinalStage fileType(Optional<BulkScreenshotCaptureRequestUrlsItemFileType> fileType);
+
+    _FinalStage fileType(BulkScreenshotCaptureRequestUrlsItemFileType fileType);
+
+    /**
+     * <p>Response format: json (default).</p>
+     */
+    _FinalStage format(Optional<BulkScreenshotCaptureRequestUrlsItemFormat> format);
+
+    _FinalStage format(BulkScreenshotCaptureRequestUrlsItemFormat format);
+
+    /**
+     * <p>If <code>true</code>, bypasses cache and captures a fresh render. If <code>false</code>, returns cached version when available.</p>
+     */
+    _FinalStage fresh(Optional<Boolean> fresh);
+
+    _FinalStage fresh(Boolean fresh);
+
+    /**
+     * <p>Captures the entire webpage from top to bottom, including scrollable content outside the viewport. Ideal for long-form pages.</p>
+     */
+    _FinalStage fullPage(Optional<Boolean> fullPage);
+
+    _FinalStage fullPage(Boolean fullPage);
+
+    /**
+     * <p>Extracts all image URLs from the rendered DOM and returns them in structured format. Only with output=json.</p>
+     */
+    _FinalStage getImageUrls(Optional<Boolean> getImageUrls);
+
+    _FinalStage getImageUrls(Boolean getImageUrls);
+
+    /**
+     * <p>Renders the page with a GPU, including WebGL and canvas content. Adds 20 credits per request.</p>
+     */
+    _FinalStage gpu(Optional<Boolean> gpu);
+
+    _FinalStage gpu(Boolean gpu);
+
+    /**
+     * <p>Applies a grayscale filter to the screenshot. Requires a value from 0 (no effect) to 100 (fully grayscale).</p>
+     */
+    _FinalStage grayscale(Optional<Integer> grayscale);
+
+    _FinalStage grayscale(Integer grayscale);
+
+    /**
+     * <p>Custom HTTP headers to include as key=value pairs. Use a semicolon to separate multiple headers (e.g., <code>key1=value1;key2=value2</code>).</p>
+     */
+    _FinalStage headers(Optional<String> headers);
+
+    _FinalStage headers(String headers);
+
+    /**
+     * <p>Viewport height in pixels. Controls how much vertical area is visible. Max: 4320.</p>
+     */
+    _FinalStage height(Optional<Integer> height);
+
+    _FinalStage height(Integer height);
+
+    /**
+     * <p>Compression level for JPEG output (0-100). Lower = smaller file, higher = better quality. Only applies to JPEG.</p>
+     */
+    _FinalStage imageQuality(Optional<Integer> imageQuality);
+
+    _FinalStage imageQuality(Integer imageQuality);
+
+    /**
+     * <p>Allows injecting custom JavaScript code into the page before rendering. Pass the JavaScript code directly as a string.</p>
+     */
+    _FinalStage js(Optional<String> js);
+
+    _FinalStage js(String js);
+
+    /**
+     * <p>Allows loading external JavaScript into the page. Provide a URL pointing to the script file.</p>
+     */
+    _FinalStage jsUrl(Optional<String> jsUrl);
+
+    _FinalStage jsUrl(String jsUrl);
+
+    /**
+     * <p>Specify latitude for the browser Geolocation API. Provide a numeric value. Default: null (not set).</p>
+     */
+    _FinalStage latitude(Optional<Float> latitude);
+
+    _FinalStage latitude(Float latitude);
+
+    /**
+     * <p>Automatically scrolls the page to trigger lazy-loaded images and components. Ensures complete content capture.</p>
+     */
+    _FinalStage lazyLoad(Optional<Boolean> lazyLoad);
+
+    _FinalStage lazyLoad(Boolean lazyLoad);
+
+    /**
+     * <p>Specify longitude for the browser Geolocation API. Provide a numeric value. Default: null (not set).</p>
+     */
+    _FinalStage longitude(Optional<Float> longitude);
+
+    _FinalStage longitude(Float longitude);
+
+    /**
+     * <p>Markdown to render instead of loading a URL. Works like custom_html, so you can capture a README or notes without hosting a page.</p>
+     */
+    _FinalStage markdown(Optional<String> markdown);
+
+    _FinalStage markdown(String markdown);
+
+    /**
+     * <p>Hides or blocks cookie consent banners and popups before capture.</p>
+     */
+    _FinalStage noCookieBanners(Optional<Boolean> noCookieBanners);
+
+    _FinalStage noCookieBanners(Boolean noCookieBanners);
+
+    /**
+     * <p>Recognition model used by the captcha solver: mini-ocr-v1 (default) or ocr-v1.</p>
+     */
+    _FinalStage ocrModel(Optional<BulkScreenshotCaptureRequestUrlsItemOcrModel> ocrModel);
+
+    _FinalStage ocrModel(BulkScreenshotCaptureRequestUrlsItemOcrModel ocrModel);
+
+    /**
+     * <p>Replaces simple white/plain backgrounds with transparency for a cut-out effect. Only works with PNG output.</p>
+     */
+    _FinalStage omitBackground(Optional<Boolean> omitBackground);
+
+    _FinalStage omitBackground(Boolean omitBackground);
+
+    /**
+     * <p>Set the output format. <code>json</code> returns metadata with a hosted file URL. <code>image</code> streams the raw file bytes directly.</p>
+     */
+    _FinalStage output(Optional<BulkScreenshotCaptureRequestUrlsItemOutput> output);
+
+    _FinalStage output(BulkScreenshotCaptureRequestUrlsItemOutput output);
+
+    /**
+     * <p>PDF output options. Applies when file_type is PDF.</p>
+     */
+    _FinalStage pdfOptions(Optional<BulkScreenshotCaptureRequestUrlsItemPdfOptions> pdfOptions);
+
+    _FinalStage pdfOptions(BulkScreenshotCaptureRequestUrlsItemPdfOptions pdfOptions);
+
+    /**
+     * <p>Loads the page through a residential proxy. Adds 200 credits per request. Used instead of classic_proxy.</p>
+     */
+    _FinalStage premiumProxy(Optional<Boolean> premiumProxy);
+
+    _FinalStage premiumProxy(Boolean premiumProxy);
+
+    /**
+     * <p>Allows defining a proxy for the connection. Provide a JSON string with keys: server (include port number), username, and password.</p>
+     */
+    _FinalStage proxy(Optional<String> proxy);
+
+    _FinalStage proxy(String proxy);
+
+    /**
+     * <p>CSS selectors to remove before capture. Deletes matched elements from DOM. Ideal for cleaning ads, popups, sidebars. Multiple selectors supported. Default: empty.</p>
+     */
+    _FinalStage removeSelector(Optional<String> removeSelector);
+
+    _FinalStage removeSelector(String removeSelector);
+
+    /**
+     * <p>Custom name for the output file. Helps with organized storage and retrieval. Note: non-unique names may overwrite existing files.</p>
+     */
+    _FinalStage resultFileName(Optional<String> resultFileName);
+
+    _FinalStage resultFileName(String resultFileName);
+
+    /**
+     * <p>Captures at 2x resolution for sharper, high-DPI output. Increases file size.</p>
+     */
+    _FinalStage retina(Optional<Boolean> retina);
+
+    _FinalStage retina(Boolean retina);
+
+    /**
+     * <p>If <code>true</code>, scrolls to bottom then back to top, creating a seamless loop.</p>
+     */
+    _FinalStage scrollBack(Optional<Boolean> scrollBack);
+
+    _FinalStage scrollBack(Boolean scrollBack);
+
+    /**
+     * <p>Delay in milliseconds between scroll steps when <code>lazy_load</code> is enabled. Use higher values for heavy pages.</p>
+     */
+    _FinalStage scrollDelay(Optional<Integer> scrollDelay);
+
+    _FinalStage scrollDelay(Integer scrollDelay);
+
+    /**
+     * <p>Scrolling speed: fast, normal (default), or slow. Affects render time and output pacing.</p>
+     */
+    _FinalStage scrollSpeed(Optional<BulkScreenshotCaptureRequestUrlsItemScrollSpeed> scrollSpeed);
+
+    _FinalStage scrollSpeed(BulkScreenshotCaptureRequestUrlsItemScrollSpeed scrollSpeed);
+
+    /**
+     * <p>Scrolls the page to bring the specified CSS selector into view before capture. Ideal for below-the-fold content. Default: empty.</p>
+     */
+    _FinalStage scrollToElement(Optional<String> scrollToElement);
+
+    _FinalStage scrollToElement(String scrollToElement);
+
+    /**
+     * <p>Enables scrolling screenshot mode to capture a video (webm, gif, mp4) of the webpage.</p>
+     */
+    _FinalStage scrollingScreenshot(Optional<Boolean> scrollingScreenshot);
+
+    _FinalStage scrollingScreenshot(Boolean scrollingScreenshot);
+
+    /**
+     * <p>CSS selector to capture a specific element. Only that element is rendered. Falls back to full page if not found. Default: empty.</p>
+     */
+    _FinalStage selector(Optional<String> selector);
+
+    _FinalStage selector(String selector);
+
+    /**
+     * <p>CSS selector for an element to click before capturing the screenshot. Useful for opening dropdowns, modals, or triggering content.</p>
+     */
+    _FinalStage selectorToClick(Optional<String> selectorToClick);
+
+    _FinalStage selectorToClick(String selectorToClick);
+
+    /**
+     * <p>Solves a captcha made of text drawn in a picture, then takes the screenshot. Requires captcha_image and captcha_input. Adds 20 credits per request.</p>
+     */
+    _FinalStage solveCaptcha(Optional<Boolean> solveCaptcha);
+
+    _FinalStage solveCaptcha(Boolean solveCaptcha);
+
+    /**
+     * <p>Starts recording immediately without waiting for full page load.</p>
+     */
+    _FinalStage startImmediately(Optional<Boolean> startImmediately);
+
+    _FinalStage startImmediately(Boolean startImmediately);
+
+    /**
+     * <p>Makes the browser look like a regular visitor for pages that block automated traffic. No extra credits.</p>
+     */
+    _FinalStage stealth(Optional<Boolean> stealth);
+
+    _FinalStage stealth(Boolean stealth);
+
+    /**
+     * <p>Specifies the width of the thumbnail in pixels. Default value is 0 (meaning no specific value is set, and the screenshot is returned at its original resolution).</p>
+     */
+    _FinalStage thumbnailWidth(Optional<Integer> thumbnailWidth);
+
+    _FinalStage thumbnailWidth(Integer thumbnailWidth);
+
+    /**
+     * <p>Maximum wait in milliseconds for page load before aborting. Adjust for slow/heavy pages. Default: 100000 (100s).</p>
+     */
+    _FinalStage timeout(Optional<Integer> timeout);
+
+    _FinalStage timeout(Integer timeout);
+
+    /**
+     * <p>IANA timezone the browser uses while rendering, such as Asia/Karachi or Europe/London. Useful for clocks and localized dates.</p>
+     */
+    _FinalStage timezone(Optional<String> timezone);
+
+    _FinalStage timezone(String timezone);
+
+    /**
+     * <p>Time in seconds the render stays cached before auto-invalidation. Use higher values for static pages, lower for dynamic content. Default: 2592000 (30 days).</p>
+     */
+    _FinalStage ttl(Optional<Integer> ttl);
+
+    _FinalStage ttl(Integer ttl);
+
+    /**
+     * <p>Custom User-Agent string sent in the request headers.</p>
+     */
+    _FinalStage userAgent(Optional<String> userAgent);
+
+    _FinalStage userAgent(String userAgent);
+
+    /**
+     * <p>Records visible viewport only for a specified duration. Use with <code>duration</code> parameter. Ideal for dashboards and animations.</p>
+     */
+    _FinalStage video(Optional<Boolean> video);
+
+    _FinalStage video(Boolean video);
+
+    /**
+     * <p>Controls when rendering starts based on page load lifecycle. <code>load</code> (all resources), <code>domcontentloaded</code> (HTML parsed), <code>networkidle</code> (no network activity for 500ms).</p>
+     */
+    _FinalStage waitForEvent(
+        Optional<BulkScreenshotCaptureRequestUrlsItemWaitForEvent> waitForEvent);
+
+    _FinalStage waitForEvent(BulkScreenshotCaptureRequestUrlsItemWaitForEvent waitForEvent);
+
+    /**
+     * <p>Viewport width in pixels. Simulates device screen sizes. Max: 7680.</p>
+     */
+    _FinalStage width(Optional<Integer> width);
+
+    _FinalStage width(Integer width);
   }
 
   @JsonIgnoreProperties(
@@ -88,7 +1734,184 @@ public final class BulkScreenshotCaptureRequestUrlsItem {
   public static final class Builder implements UrlStage, _FinalStage {
     private String url;
 
-    @JsonAnySetter
+    private Optional<Integer> width = Optional.empty();
+
+    private Optional<BulkScreenshotCaptureRequestUrlsItemWaitForEvent> waitForEvent = Optional.empty();
+
+    private Optional<Boolean> video = Optional.empty();
+
+    private Optional<String> userAgent = Optional.empty();
+
+    private Optional<Integer> ttl = Optional.empty();
+
+    private Optional<String> timezone = Optional.empty();
+
+    private Optional<Integer> timeout = Optional.empty();
+
+    private Optional<Integer> thumbnailWidth = Optional.empty();
+
+    private Optional<Boolean> stealth = Optional.empty();
+
+    private Optional<Boolean> startImmediately = Optional.empty();
+
+    private Optional<Boolean> solveCaptcha = Optional.empty();
+
+    private Optional<String> selectorToClick = Optional.empty();
+
+    private Optional<String> selector = Optional.empty();
+
+    private Optional<Boolean> scrollingScreenshot = Optional.empty();
+
+    private Optional<String> scrollToElement = Optional.empty();
+
+    private Optional<BulkScreenshotCaptureRequestUrlsItemScrollSpeed> scrollSpeed = Optional.empty();
+
+    private Optional<Integer> scrollDelay = Optional.empty();
+
+    private Optional<Boolean> scrollBack = Optional.empty();
+
+    private Optional<Boolean> retina = Optional.empty();
+
+    private Optional<String> resultFileName = Optional.empty();
+
+    private Optional<String> removeSelector = Optional.empty();
+
+    private Optional<String> proxy = Optional.empty();
+
+    private Optional<Boolean> premiumProxy = Optional.empty();
+
+    private Optional<BulkScreenshotCaptureRequestUrlsItemPdfOptions> pdfOptions = Optional.empty();
+
+    private Optional<BulkScreenshotCaptureRequestUrlsItemOutput> output = Optional.empty();
+
+    private Optional<Boolean> omitBackground = Optional.empty();
+
+    private Optional<BulkScreenshotCaptureRequestUrlsItemOcrModel> ocrModel = Optional.empty();
+
+    private Optional<Boolean> noCookieBanners = Optional.empty();
+
+    private Optional<String> markdown = Optional.empty();
+
+    private Optional<Float> longitude = Optional.empty();
+
+    private Optional<Boolean> lazyLoad = Optional.empty();
+
+    private Optional<Float> latitude = Optional.empty();
+
+    private Optional<String> jsUrl = Optional.empty();
+
+    private Optional<String> js = Optional.empty();
+
+    private Optional<Integer> imageQuality = Optional.empty();
+
+    private Optional<Integer> height = Optional.empty();
+
+    private Optional<String> headers = Optional.empty();
+
+    private Optional<Integer> grayscale = Optional.empty();
+
+    private Optional<Boolean> gpu = Optional.empty();
+
+    private Optional<Boolean> getImageUrls = Optional.empty();
+
+    private Optional<Boolean> fullPage = Optional.empty();
+
+    private Optional<Boolean> fresh = Optional.empty();
+
+    private Optional<BulkScreenshotCaptureRequestUrlsItemFormat> format = Optional.empty();
+
+    private Optional<BulkScreenshotCaptureRequestUrlsItemFileType> fileType = Optional.empty();
+
+    private Optional<Boolean> failOnError = Optional.empty();
+
+    private Optional<Boolean> extractText = Optional.empty();
+
+    private Optional<Boolean> extractMarkdown = Optional.empty();
+
+    private Optional<Boolean> extractHtml = Optional.empty();
+
+    private Optional<Boolean> enableIncognito = Optional.empty();
+
+    private Optional<Boolean> enableCaching = Optional.empty();
+
+    private Optional<Integer> duration = Optional.empty();
+
+    private Optional<Boolean> destroyScreenshot = Optional.empty();
+
+    private Optional<Integer> delay = Optional.empty();
+
+    private Optional<Boolean> darkMode = Optional.empty();
+
+    private Optional<String> customHtml = Optional.empty();
+
+    private Optional<String> cssUrl = Optional.empty();
+
+    private Optional<String> css = Optional.empty();
+
+    private Optional<String> country = Optional.empty();
+
+    private Optional<String> cookies = Optional.empty();
+
+    private Optional<Integer> clipY = Optional.empty();
+
+    private Optional<Integer> clipX = Optional.empty();
+
+    private Optional<Integer> clipWidth = Optional.empty();
+
+    private Optional<Integer> clipHeight = Optional.empty();
+
+    private Optional<Integer> clickRecursion = Optional.empty();
+
+    private Optional<Boolean> classicProxy = Optional.empty();
+
+    private Optional<String> captchaSubmit = Optional.empty();
+
+    private Optional<Integer> captchaRetries = Optional.empty();
+
+    private Optional<String> captchaRefresh = Optional.empty();
+
+    private Optional<String> captchaInput = Optional.empty();
+
+    private Optional<String> captchaImage = Optional.empty();
+
+    private Optional<String> captchaError = Optional.empty();
+
+    private Optional<String> blurSelector = Optional.empty();
+
+    private Optional<Boolean> blockXhr = Optional.empty();
+
+    private Optional<Boolean> blockWebSocket = Optional.empty();
+
+    private Optional<Boolean> blockTracking = Optional.empty();
+
+    private Optional<Boolean> blockTextTrack = Optional.empty();
+
+    private Optional<Boolean> blockStylesheets = Optional.empty();
+
+    private Optional<String> blockSpecificRequests = Optional.empty();
+
+    private Optional<Boolean> blockMedia = Optional.empty();
+
+    private Optional<Boolean> blockManifest = Optional.empty();
+
+    private Optional<Boolean> blockJs = Optional.empty();
+
+    private Optional<Boolean> blockImages = Optional.empty();
+
+    private Optional<Boolean> blockFont = Optional.empty();
+
+    private Optional<Boolean> blockFetch = Optional.empty();
+
+    private Optional<Boolean> blockEventSource = Optional.empty();
+
+    private Optional<Boolean> blockChatWidgets = Optional.empty();
+
+    private Optional<Boolean> blockAds = Optional.empty();
+
+    private Optional<Integer> adjustTop = Optional.empty();
+
+    private Optional<String> acceptLanguages = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -97,6 +1920,95 @@ public final class BulkScreenshotCaptureRequestUrlsItem {
     @java.lang.Override
     public Builder from(BulkScreenshotCaptureRequestUrlsItem other) {
       url(other.getUrl());
+      acceptLanguages(other.getAcceptLanguages());
+      adjustTop(other.getAdjustTop());
+      blockAds(other.getBlockAds());
+      blockChatWidgets(other.getBlockChatWidgets());
+      blockEventSource(other.getBlockEventSource());
+      blockFetch(other.getBlockFetch());
+      blockFont(other.getBlockFont());
+      blockImages(other.getBlockImages());
+      blockJs(other.getBlockJs());
+      blockManifest(other.getBlockManifest());
+      blockMedia(other.getBlockMedia());
+      blockSpecificRequests(other.getBlockSpecificRequests());
+      blockStylesheets(other.getBlockStylesheets());
+      blockTextTrack(other.getBlockTextTrack());
+      blockTracking(other.getBlockTracking());
+      blockWebSocket(other.getBlockWebSocket());
+      blockXhr(other.getBlockXhr());
+      blurSelector(other.getBlurSelector());
+      captchaError(other.getCaptchaError());
+      captchaImage(other.getCaptchaImage());
+      captchaInput(other.getCaptchaInput());
+      captchaRefresh(other.getCaptchaRefresh());
+      captchaRetries(other.getCaptchaRetries());
+      captchaSubmit(other.getCaptchaSubmit());
+      classicProxy(other.getClassicProxy());
+      clickRecursion(other.getClickRecursion());
+      clipHeight(other.getClipHeight());
+      clipWidth(other.getClipWidth());
+      clipX(other.getClipX());
+      clipY(other.getClipY());
+      cookies(other.getCookies());
+      country(other.getCountry());
+      css(other.getCss());
+      cssUrl(other.getCssUrl());
+      customHtml(other.getCustomHtml());
+      darkMode(other.getDarkMode());
+      delay(other.getDelay());
+      destroyScreenshot(other.getDestroyScreenshot());
+      duration(other.getDuration());
+      enableCaching(other.getEnableCaching());
+      enableIncognito(other.getEnableIncognito());
+      extractHtml(other.getExtractHtml());
+      extractMarkdown(other.getExtractMarkdown());
+      extractText(other.getExtractText());
+      failOnError(other.getFailOnError());
+      fileType(other.getFileType());
+      format(other.getFormat());
+      fresh(other.getFresh());
+      fullPage(other.getFullPage());
+      getImageUrls(other.getGetImageUrls());
+      gpu(other.getGpu());
+      grayscale(other.getGrayscale());
+      headers(other.getHeaders());
+      height(other.getHeight());
+      imageQuality(other.getImageQuality());
+      js(other.getJs());
+      jsUrl(other.getJsUrl());
+      latitude(other.getLatitude());
+      lazyLoad(other.getLazyLoad());
+      longitude(other.getLongitude());
+      markdown(other.getMarkdown());
+      noCookieBanners(other.getNoCookieBanners());
+      ocrModel(other.getOcrModel());
+      omitBackground(other.getOmitBackground());
+      output(other.getOutput());
+      pdfOptions(other.getPdfOptions());
+      premiumProxy(other.getPremiumProxy());
+      proxy(other.getProxy());
+      removeSelector(other.getRemoveSelector());
+      resultFileName(other.getResultFileName());
+      retina(other.getRetina());
+      scrollBack(other.getScrollBack());
+      scrollDelay(other.getScrollDelay());
+      scrollSpeed(other.getScrollSpeed());
+      scrollToElement(other.getScrollToElement());
+      scrollingScreenshot(other.getScrollingScreenshot());
+      selector(other.getSelector());
+      selectorToClick(other.getSelectorToClick());
+      solveCaptcha(other.getSolveCaptcha());
+      startImmediately(other.getStartImmediately());
+      stealth(other.getStealth());
+      thumbnailWidth(other.getThumbnailWidth());
+      timeout(other.getTimeout());
+      timezone(other.getTimezone());
+      ttl(other.getTtl());
+      userAgent(other.getUserAgent());
+      video(other.getVideo());
+      waitForEvent(other.getWaitForEvent());
+      width(other.getWidth());
       return this;
     }
 
@@ -107,9 +2019,2067 @@ public final class BulkScreenshotCaptureRequestUrlsItem {
       return this;
     }
 
+    /**
+     * <p>Viewport width in pixels. Simulates device screen sizes. Max: 7680.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage width(Integer width) {
+      this.width = Optional.ofNullable(width);
+      return this;
+    }
+
+    /**
+     * <p>Viewport width in pixels. Simulates device screen sizes. Max: 7680.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "width",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage width(Optional<Integer> width) {
+      this.width = width;
+      return this;
+    }
+
+    /**
+     * <p>Controls when rendering starts based on page load lifecycle. <code>load</code> (all resources), <code>domcontentloaded</code> (HTML parsed), <code>networkidle</code> (no network activity for 500ms).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage waitForEvent(BulkScreenshotCaptureRequestUrlsItemWaitForEvent waitForEvent) {
+      this.waitForEvent = Optional.ofNullable(waitForEvent);
+      return this;
+    }
+
+    /**
+     * <p>Controls when rendering starts based on page load lifecycle. <code>load</code> (all resources), <code>domcontentloaded</code> (HTML parsed), <code>networkidle</code> (no network activity for 500ms).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "wait_for_event",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage waitForEvent(
+        Optional<BulkScreenshotCaptureRequestUrlsItemWaitForEvent> waitForEvent) {
+      this.waitForEvent = waitForEvent;
+      return this;
+    }
+
+    /**
+     * <p>Records visible viewport only for a specified duration. Use with <code>duration</code> parameter. Ideal for dashboards and animations.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage video(Boolean video) {
+      this.video = Optional.ofNullable(video);
+      return this;
+    }
+
+    /**
+     * <p>Records visible viewport only for a specified duration. Use with <code>duration</code> parameter. Ideal for dashboards and animations.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "video",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage video(Optional<Boolean> video) {
+      this.video = video;
+      return this;
+    }
+
+    /**
+     * <p>Custom User-Agent string sent in the request headers.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage userAgent(String userAgent) {
+      this.userAgent = Optional.ofNullable(userAgent);
+      return this;
+    }
+
+    /**
+     * <p>Custom User-Agent string sent in the request headers.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "user_agent",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage userAgent(Optional<String> userAgent) {
+      this.userAgent = userAgent;
+      return this;
+    }
+
+    /**
+     * <p>Time in seconds the render stays cached before auto-invalidation. Use higher values for static pages, lower for dynamic content. Default: 2592000 (30 days).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage ttl(Integer ttl) {
+      this.ttl = Optional.ofNullable(ttl);
+      return this;
+    }
+
+    /**
+     * <p>Time in seconds the render stays cached before auto-invalidation. Use higher values for static pages, lower for dynamic content. Default: 2592000 (30 days).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "ttl",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage ttl(Optional<Integer> ttl) {
+      this.ttl = ttl;
+      return this;
+    }
+
+    /**
+     * <p>IANA timezone the browser uses while rendering, such as Asia/Karachi or Europe/London. Useful for clocks and localized dates.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage timezone(String timezone) {
+      this.timezone = Optional.ofNullable(timezone);
+      return this;
+    }
+
+    /**
+     * <p>IANA timezone the browser uses while rendering, such as Asia/Karachi or Europe/London. Useful for clocks and localized dates.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "timezone",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage timezone(Optional<String> timezone) {
+      this.timezone = timezone;
+      return this;
+    }
+
+    /**
+     * <p>Maximum wait in milliseconds for page load before aborting. Adjust for slow/heavy pages. Default: 100000 (100s).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage timeout(Integer timeout) {
+      this.timeout = Optional.ofNullable(timeout);
+      return this;
+    }
+
+    /**
+     * <p>Maximum wait in milliseconds for page load before aborting. Adjust for slow/heavy pages. Default: 100000 (100s).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "timeout",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage timeout(Optional<Integer> timeout) {
+      this.timeout = timeout;
+      return this;
+    }
+
+    /**
+     * <p>Specifies the width of the thumbnail in pixels. Default value is 0 (meaning no specific value is set, and the screenshot is returned at its original resolution).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage thumbnailWidth(Integer thumbnailWidth) {
+      this.thumbnailWidth = Optional.ofNullable(thumbnailWidth);
+      return this;
+    }
+
+    /**
+     * <p>Specifies the width of the thumbnail in pixels. Default value is 0 (meaning no specific value is set, and the screenshot is returned at its original resolution).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "thumbnail_width",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage thumbnailWidth(Optional<Integer> thumbnailWidth) {
+      this.thumbnailWidth = thumbnailWidth;
+      return this;
+    }
+
+    /**
+     * <p>Makes the browser look like a regular visitor for pages that block automated traffic. No extra credits.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage stealth(Boolean stealth) {
+      this.stealth = Optional.ofNullable(stealth);
+      return this;
+    }
+
+    /**
+     * <p>Makes the browser look like a regular visitor for pages that block automated traffic. No extra credits.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "stealth",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage stealth(Optional<Boolean> stealth) {
+      this.stealth = stealth;
+      return this;
+    }
+
+    /**
+     * <p>Starts recording immediately without waiting for full page load.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage startImmediately(Boolean startImmediately) {
+      this.startImmediately = Optional.ofNullable(startImmediately);
+      return this;
+    }
+
+    /**
+     * <p>Starts recording immediately without waiting for full page load.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "start_immediately",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage startImmediately(Optional<Boolean> startImmediately) {
+      this.startImmediately = startImmediately;
+      return this;
+    }
+
+    /**
+     * <p>Solves a captcha made of text drawn in a picture, then takes the screenshot. Requires captcha_image and captcha_input. Adds 20 credits per request.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage solveCaptcha(Boolean solveCaptcha) {
+      this.solveCaptcha = Optional.ofNullable(solveCaptcha);
+      return this;
+    }
+
+    /**
+     * <p>Solves a captcha made of text drawn in a picture, then takes the screenshot. Requires captcha_image and captcha_input. Adds 20 credits per request.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "solve_captcha",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage solveCaptcha(Optional<Boolean> solveCaptcha) {
+      this.solveCaptcha = solveCaptcha;
+      return this;
+    }
+
+    /**
+     * <p>CSS selector for an element to click before capturing the screenshot. Useful for opening dropdowns, modals, or triggering content.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage selectorToClick(String selectorToClick) {
+      this.selectorToClick = Optional.ofNullable(selectorToClick);
+      return this;
+    }
+
+    /**
+     * <p>CSS selector for an element to click before capturing the screenshot. Useful for opening dropdowns, modals, or triggering content.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "selector_to_click",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage selectorToClick(Optional<String> selectorToClick) {
+      this.selectorToClick = selectorToClick;
+      return this;
+    }
+
+    /**
+     * <p>CSS selector to capture a specific element. Only that element is rendered. Falls back to full page if not found. Default: empty.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage selector(String selector) {
+      this.selector = Optional.ofNullable(selector);
+      return this;
+    }
+
+    /**
+     * <p>CSS selector to capture a specific element. Only that element is rendered. Falls back to full page if not found. Default: empty.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "selector",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage selector(Optional<String> selector) {
+      this.selector = selector;
+      return this;
+    }
+
+    /**
+     * <p>Enables scrolling screenshot mode to capture a video (webm, gif, mp4) of the webpage.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage scrollingScreenshot(Boolean scrollingScreenshot) {
+      this.scrollingScreenshot = Optional.ofNullable(scrollingScreenshot);
+      return this;
+    }
+
+    /**
+     * <p>Enables scrolling screenshot mode to capture a video (webm, gif, mp4) of the webpage.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "scrolling_screenshot",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage scrollingScreenshot(Optional<Boolean> scrollingScreenshot) {
+      this.scrollingScreenshot = scrollingScreenshot;
+      return this;
+    }
+
+    /**
+     * <p>Scrolls the page to bring the specified CSS selector into view before capture. Ideal for below-the-fold content. Default: empty.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage scrollToElement(String scrollToElement) {
+      this.scrollToElement = Optional.ofNullable(scrollToElement);
+      return this;
+    }
+
+    /**
+     * <p>Scrolls the page to bring the specified CSS selector into view before capture. Ideal for below-the-fold content. Default: empty.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "scroll_to_element",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage scrollToElement(Optional<String> scrollToElement) {
+      this.scrollToElement = scrollToElement;
+      return this;
+    }
+
+    /**
+     * <p>Scrolling speed: fast, normal (default), or slow. Affects render time and output pacing.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage scrollSpeed(BulkScreenshotCaptureRequestUrlsItemScrollSpeed scrollSpeed) {
+      this.scrollSpeed = Optional.ofNullable(scrollSpeed);
+      return this;
+    }
+
+    /**
+     * <p>Scrolling speed: fast, normal (default), or slow. Affects render time and output pacing.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "scroll_speed",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage scrollSpeed(
+        Optional<BulkScreenshotCaptureRequestUrlsItemScrollSpeed> scrollSpeed) {
+      this.scrollSpeed = scrollSpeed;
+      return this;
+    }
+
+    /**
+     * <p>Delay in milliseconds between scroll steps when <code>lazy_load</code> is enabled. Use higher values for heavy pages.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage scrollDelay(Integer scrollDelay) {
+      this.scrollDelay = Optional.ofNullable(scrollDelay);
+      return this;
+    }
+
+    /**
+     * <p>Delay in milliseconds between scroll steps when <code>lazy_load</code> is enabled. Use higher values for heavy pages.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "scroll_delay",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage scrollDelay(Optional<Integer> scrollDelay) {
+      this.scrollDelay = scrollDelay;
+      return this;
+    }
+
+    /**
+     * <p>If <code>true</code>, scrolls to bottom then back to top, creating a seamless loop.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage scrollBack(Boolean scrollBack) {
+      this.scrollBack = Optional.ofNullable(scrollBack);
+      return this;
+    }
+
+    /**
+     * <p>If <code>true</code>, scrolls to bottom then back to top, creating a seamless loop.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "scroll_back",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage scrollBack(Optional<Boolean> scrollBack) {
+      this.scrollBack = scrollBack;
+      return this;
+    }
+
+    /**
+     * <p>Captures at 2x resolution for sharper, high-DPI output. Increases file size.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage retina(Boolean retina) {
+      this.retina = Optional.ofNullable(retina);
+      return this;
+    }
+
+    /**
+     * <p>Captures at 2x resolution for sharper, high-DPI output. Increases file size.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "retina",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage retina(Optional<Boolean> retina) {
+      this.retina = retina;
+      return this;
+    }
+
+    /**
+     * <p>Custom name for the output file. Helps with organized storage and retrieval. Note: non-unique names may overwrite existing files.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage resultFileName(String resultFileName) {
+      this.resultFileName = Optional.ofNullable(resultFileName);
+      return this;
+    }
+
+    /**
+     * <p>Custom name for the output file. Helps with organized storage and retrieval. Note: non-unique names may overwrite existing files.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "result_file_name",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage resultFileName(Optional<String> resultFileName) {
+      this.resultFileName = resultFileName;
+      return this;
+    }
+
+    /**
+     * <p>CSS selectors to remove before capture. Deletes matched elements from DOM. Ideal for cleaning ads, popups, sidebars. Multiple selectors supported. Default: empty.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage removeSelector(String removeSelector) {
+      this.removeSelector = Optional.ofNullable(removeSelector);
+      return this;
+    }
+
+    /**
+     * <p>CSS selectors to remove before capture. Deletes matched elements from DOM. Ideal for cleaning ads, popups, sidebars. Multiple selectors supported. Default: empty.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "remove_selector",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage removeSelector(Optional<String> removeSelector) {
+      this.removeSelector = removeSelector;
+      return this;
+    }
+
+    /**
+     * <p>Allows defining a proxy for the connection. Provide a JSON string with keys: server (include port number), username, and password.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage proxy(String proxy) {
+      this.proxy = Optional.ofNullable(proxy);
+      return this;
+    }
+
+    /**
+     * <p>Allows defining a proxy for the connection. Provide a JSON string with keys: server (include port number), username, and password.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "proxy",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage proxy(Optional<String> proxy) {
+      this.proxy = proxy;
+      return this;
+    }
+
+    /**
+     * <p>Loads the page through a residential proxy. Adds 200 credits per request. Used instead of classic_proxy.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage premiumProxy(Boolean premiumProxy) {
+      this.premiumProxy = Optional.ofNullable(premiumProxy);
+      return this;
+    }
+
+    /**
+     * <p>Loads the page through a residential proxy. Adds 200 credits per request. Used instead of classic_proxy.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "premium_proxy",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage premiumProxy(Optional<Boolean> premiumProxy) {
+      this.premiumProxy = premiumProxy;
+      return this;
+    }
+
+    /**
+     * <p>PDF output options. Applies when file_type is PDF.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage pdfOptions(BulkScreenshotCaptureRequestUrlsItemPdfOptions pdfOptions) {
+      this.pdfOptions = Optional.ofNullable(pdfOptions);
+      return this;
+    }
+
+    /**
+     * <p>PDF output options. Applies when file_type is PDF.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "pdf_options",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage pdfOptions(
+        Optional<BulkScreenshotCaptureRequestUrlsItemPdfOptions> pdfOptions) {
+      this.pdfOptions = pdfOptions;
+      return this;
+    }
+
+    /**
+     * <p>Set the output format. <code>json</code> returns metadata with a hosted file URL. <code>image</code> streams the raw file bytes directly.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage output(BulkScreenshotCaptureRequestUrlsItemOutput output) {
+      this.output = Optional.ofNullable(output);
+      return this;
+    }
+
+    /**
+     * <p>Set the output format. <code>json</code> returns metadata with a hosted file URL. <code>image</code> streams the raw file bytes directly.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "output",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage output(Optional<BulkScreenshotCaptureRequestUrlsItemOutput> output) {
+      this.output = output;
+      return this;
+    }
+
+    /**
+     * <p>Replaces simple white/plain backgrounds with transparency for a cut-out effect. Only works with PNG output.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage omitBackground(Boolean omitBackground) {
+      this.omitBackground = Optional.ofNullable(omitBackground);
+      return this;
+    }
+
+    /**
+     * <p>Replaces simple white/plain backgrounds with transparency for a cut-out effect. Only works with PNG output.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "omit_background",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage omitBackground(Optional<Boolean> omitBackground) {
+      this.omitBackground = omitBackground;
+      return this;
+    }
+
+    /**
+     * <p>Recognition model used by the captcha solver: mini-ocr-v1 (default) or ocr-v1.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage ocrModel(BulkScreenshotCaptureRequestUrlsItemOcrModel ocrModel) {
+      this.ocrModel = Optional.ofNullable(ocrModel);
+      return this;
+    }
+
+    /**
+     * <p>Recognition model used by the captcha solver: mini-ocr-v1 (default) or ocr-v1.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "ocr_model",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage ocrModel(Optional<BulkScreenshotCaptureRequestUrlsItemOcrModel> ocrModel) {
+      this.ocrModel = ocrModel;
+      return this;
+    }
+
+    /**
+     * <p>Hides or blocks cookie consent banners and popups before capture.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage noCookieBanners(Boolean noCookieBanners) {
+      this.noCookieBanners = Optional.ofNullable(noCookieBanners);
+      return this;
+    }
+
+    /**
+     * <p>Hides or blocks cookie consent banners and popups before capture.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "no_cookie_banners",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage noCookieBanners(Optional<Boolean> noCookieBanners) {
+      this.noCookieBanners = noCookieBanners;
+      return this;
+    }
+
+    /**
+     * <p>Markdown to render instead of loading a URL. Works like custom_html, so you can capture a README or notes without hosting a page.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage markdown(String markdown) {
+      this.markdown = Optional.ofNullable(markdown);
+      return this;
+    }
+
+    /**
+     * <p>Markdown to render instead of loading a URL. Works like custom_html, so you can capture a README or notes without hosting a page.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "markdown",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage markdown(Optional<String> markdown) {
+      this.markdown = markdown;
+      return this;
+    }
+
+    /**
+     * <p>Specify longitude for the browser Geolocation API. Provide a numeric value. Default: null (not set).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage longitude(Float longitude) {
+      this.longitude = Optional.ofNullable(longitude);
+      return this;
+    }
+
+    /**
+     * <p>Specify longitude for the browser Geolocation API. Provide a numeric value. Default: null (not set).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "longitude",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage longitude(Optional<Float> longitude) {
+      this.longitude = longitude;
+      return this;
+    }
+
+    /**
+     * <p>Automatically scrolls the page to trigger lazy-loaded images and components. Ensures complete content capture.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage lazyLoad(Boolean lazyLoad) {
+      this.lazyLoad = Optional.ofNullable(lazyLoad);
+      return this;
+    }
+
+    /**
+     * <p>Automatically scrolls the page to trigger lazy-loaded images and components. Ensures complete content capture.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "lazy_load",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage lazyLoad(Optional<Boolean> lazyLoad) {
+      this.lazyLoad = lazyLoad;
+      return this;
+    }
+
+    /**
+     * <p>Specify latitude for the browser Geolocation API. Provide a numeric value. Default: null (not set).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage latitude(Float latitude) {
+      this.latitude = Optional.ofNullable(latitude);
+      return this;
+    }
+
+    /**
+     * <p>Specify latitude for the browser Geolocation API. Provide a numeric value. Default: null (not set).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "latitude",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage latitude(Optional<Float> latitude) {
+      this.latitude = latitude;
+      return this;
+    }
+
+    /**
+     * <p>Allows loading external JavaScript into the page. Provide a URL pointing to the script file.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage jsUrl(String jsUrl) {
+      this.jsUrl = Optional.ofNullable(jsUrl);
+      return this;
+    }
+
+    /**
+     * <p>Allows loading external JavaScript into the page. Provide a URL pointing to the script file.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "js_url",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage jsUrl(Optional<String> jsUrl) {
+      this.jsUrl = jsUrl;
+      return this;
+    }
+
+    /**
+     * <p>Allows injecting custom JavaScript code into the page before rendering. Pass the JavaScript code directly as a string.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage js(String js) {
+      this.js = Optional.ofNullable(js);
+      return this;
+    }
+
+    /**
+     * <p>Allows injecting custom JavaScript code into the page before rendering. Pass the JavaScript code directly as a string.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "js",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage js(Optional<String> js) {
+      this.js = js;
+      return this;
+    }
+
+    /**
+     * <p>Compression level for JPEG output (0-100). Lower = smaller file, higher = better quality. Only applies to JPEG.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage imageQuality(Integer imageQuality) {
+      this.imageQuality = Optional.ofNullable(imageQuality);
+      return this;
+    }
+
+    /**
+     * <p>Compression level for JPEG output (0-100). Lower = smaller file, higher = better quality. Only applies to JPEG.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "image_quality",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage imageQuality(Optional<Integer> imageQuality) {
+      this.imageQuality = imageQuality;
+      return this;
+    }
+
+    /**
+     * <p>Viewport height in pixels. Controls how much vertical area is visible. Max: 4320.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage height(Integer height) {
+      this.height = Optional.ofNullable(height);
+      return this;
+    }
+
+    /**
+     * <p>Viewport height in pixels. Controls how much vertical area is visible. Max: 4320.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "height",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage height(Optional<Integer> height) {
+      this.height = height;
+      return this;
+    }
+
+    /**
+     * <p>Custom HTTP headers to include as key=value pairs. Use a semicolon to separate multiple headers (e.g., <code>key1=value1;key2=value2</code>).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage headers(String headers) {
+      this.headers = Optional.ofNullable(headers);
+      return this;
+    }
+
+    /**
+     * <p>Custom HTTP headers to include as key=value pairs. Use a semicolon to separate multiple headers (e.g., <code>key1=value1;key2=value2</code>).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "headers",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage headers(Optional<String> headers) {
+      this.headers = headers;
+      return this;
+    }
+
+    /**
+     * <p>Applies a grayscale filter to the screenshot. Requires a value from 0 (no effect) to 100 (fully grayscale).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage grayscale(Integer grayscale) {
+      this.grayscale = Optional.ofNullable(grayscale);
+      return this;
+    }
+
+    /**
+     * <p>Applies a grayscale filter to the screenshot. Requires a value from 0 (no effect) to 100 (fully grayscale).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "grayscale",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage grayscale(Optional<Integer> grayscale) {
+      this.grayscale = grayscale;
+      return this;
+    }
+
+    /**
+     * <p>Renders the page with a GPU, including WebGL and canvas content. Adds 20 credits per request.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage gpu(Boolean gpu) {
+      this.gpu = Optional.ofNullable(gpu);
+      return this;
+    }
+
+    /**
+     * <p>Renders the page with a GPU, including WebGL and canvas content. Adds 20 credits per request.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "gpu",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage gpu(Optional<Boolean> gpu) {
+      this.gpu = gpu;
+      return this;
+    }
+
+    /**
+     * <p>Extracts all image URLs from the rendered DOM and returns them in structured format. Only with output=json.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage getImageUrls(Boolean getImageUrls) {
+      this.getImageUrls = Optional.ofNullable(getImageUrls);
+      return this;
+    }
+
+    /**
+     * <p>Extracts all image URLs from the rendered DOM and returns them in structured format. Only with output=json.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "get_image_urls",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage getImageUrls(Optional<Boolean> getImageUrls) {
+      this.getImageUrls = getImageUrls;
+      return this;
+    }
+
+    /**
+     * <p>Captures the entire webpage from top to bottom, including scrollable content outside the viewport. Ideal for long-form pages.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage fullPage(Boolean fullPage) {
+      this.fullPage = Optional.ofNullable(fullPage);
+      return this;
+    }
+
+    /**
+     * <p>Captures the entire webpage from top to bottom, including scrollable content outside the viewport. Ideal for long-form pages.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "full_page",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage fullPage(Optional<Boolean> fullPage) {
+      this.fullPage = fullPage;
+      return this;
+    }
+
+    /**
+     * <p>If <code>true</code>, bypasses cache and captures a fresh render. If <code>false</code>, returns cached version when available.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage fresh(Boolean fresh) {
+      this.fresh = Optional.ofNullable(fresh);
+      return this;
+    }
+
+    /**
+     * <p>If <code>true</code>, bypasses cache and captures a fresh render. If <code>false</code>, returns cached version when available.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "fresh",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage fresh(Optional<Boolean> fresh) {
+      this.fresh = fresh;
+      return this;
+    }
+
+    /**
+     * <p>Response format: json (default).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage format(BulkScreenshotCaptureRequestUrlsItemFormat format) {
+      this.format = Optional.ofNullable(format);
+      return this;
+    }
+
+    /**
+     * <p>Response format: json (default).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "format",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage format(Optional<BulkScreenshotCaptureRequestUrlsItemFormat> format) {
+      this.format = format;
+      return this;
+    }
+
+    /**
+     * <p>Output format. PNG (lossless, transparency), JPEG (compressed, smaller size), WebP (modern, efficient), PDF (document). For scrolling captures: MP4, GIF, WebM. Scrolling capture formats: WEBM (web-optimized), MP4 (widely compatible, default), GIF (short loops).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage fileType(BulkScreenshotCaptureRequestUrlsItemFileType fileType) {
+      this.fileType = Optional.ofNullable(fileType);
+      return this;
+    }
+
+    /**
+     * <p>Output format. PNG (lossless, transparency), JPEG (compressed, smaller size), WebP (modern, efficient), PDF (document). For scrolling captures: MP4, GIF, WebM. Scrolling capture formats: WEBM (web-optimized), MP4 (widely compatible, default), GIF (short loops).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "file_type",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage fileType(Optional<BulkScreenshotCaptureRequestUrlsItemFileType> fileType) {
+      this.fileType = fileType;
+      return this;
+    }
+
+    /**
+     * <p>If <code>true</code>, returns an error when the target page responds with 4xx or 5xx status.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage failOnError(Boolean failOnError) {
+      this.failOnError = Optional.ofNullable(failOnError);
+      return this;
+    }
+
+    /**
+     * <p>If <code>true</code>, returns an error when the target page responds with 4xx or 5xx status.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "fail_on_error",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage failOnError(Optional<Boolean> failOnError) {
+      this.failOnError = failOnError;
+      return this;
+    }
+
+    /**
+     * <p>Strips all HTML and returns visible text as a .txt file. Ideal for text analysis, indexing, or AI pipelines. Only with output=json.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage extractText(Boolean extractText) {
+      this.extractText = Optional.ofNullable(extractText);
+      return this;
+    }
+
+    /**
+     * <p>Strips all HTML and returns visible text as a .txt file. Ideal for text analysis, indexing, or AI pipelines. Only with output=json.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "extract_text",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage extractText(Optional<Boolean> extractText) {
+      this.extractText = extractText;
+      return this;
+    }
+
+    /**
+     * <p>Extracts rendered page content as a structured .md (Markdown) file. Preserves headings, lists, links. Only with output=json.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage extractMarkdown(Boolean extractMarkdown) {
+      this.extractMarkdown = Optional.ofNullable(extractMarkdown);
+      return this;
+    }
+
+    /**
+     * <p>Extracts rendered page content as a structured .md (Markdown) file. Preserves headings, lists, links. Only with output=json.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "extract_markdown",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage extractMarkdown(Optional<Boolean> extractMarkdown) {
+      this.extractMarkdown = extractMarkdown;
+      return this;
+    }
+
+    /**
+     * <p>Returns rendered HTML as a .html file (includes JS-executed DOM). Only available with output=json.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage extractHtml(Boolean extractHtml) {
+      this.extractHtml = Optional.ofNullable(extractHtml);
+      return this;
+    }
+
+    /**
+     * <p>Returns rendered HTML as a .html file (includes JS-executed DOM). Only available with output=json.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "extract_html",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage extractHtml(Optional<Boolean> extractHtml) {
+      this.extractHtml = extractHtml;
+      return this;
+    }
+
+    /**
+     * <p>Enables private/incognito browsing. Each render starts with a clean slate - no cookies, cache, or session data persisted.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage enableIncognito(Boolean enableIncognito) {
+      this.enableIncognito = Optional.ofNullable(enableIncognito);
+      return this;
+    }
+
+    /**
+     * <p>Enables private/incognito browsing. Each render starts with a clean slate - no cookies, cache, or session data persisted.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "enable_incognito",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage enableIncognito(Optional<Boolean> enableIncognito) {
+      this.enableIncognito = enableIncognito;
+      return this;
+    }
+
+    /**
+     * <p>Stores the render in cache for reuse on subsequent identical requests.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage enableCaching(Boolean enableCaching) {
+      this.enableCaching = Optional.ofNullable(enableCaching);
+      return this;
+    }
+
+    /**
+     * <p>Stores the render in cache for reuse on subsequent identical requests.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "enable_caching",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage enableCaching(Optional<Boolean> enableCaching) {
+      this.enableCaching = enableCaching;
+      return this;
+    }
+
+    /**
+     * <p>Duration of scrolling action in seconds (0-60). Higher = longer video. Default: null (full page scroll).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage duration(Integer duration) {
+      this.duration = Optional.ofNullable(duration);
+      return this;
+    }
+
+    /**
+     * <p>Duration of scrolling action in seconds (0-60). Higher = longer video. Default: null (full page scroll).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "duration",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage duration(Optional<Integer> duration) {
+      this.duration = duration;
+      return this;
+    }
+
+    /**
+     * <p>If <code>true</code>, screenshot/PDF is not stored on server and must be downloaded immediately.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage destroyScreenshot(Boolean destroyScreenshot) {
+      this.destroyScreenshot = Optional.ofNullable(destroyScreenshot);
+      return this;
+    }
+
+    /**
+     * <p>If <code>true</code>, screenshot/PDF is not stored on server and must be downloaded immediately.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "destroy_screenshot",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage destroyScreenshot(Optional<Boolean> destroyScreenshot) {
+      this.destroyScreenshot = destroyScreenshot;
+      return this;
+    }
+
+    /**
+     * <p>Wait period in milliseconds before capture. Allows animations, API responses, and dynamic elements to finish rendering.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage delay(Integer delay) {
+      this.delay = Optional.ofNullable(delay);
+      return this;
+    }
+
+    /**
+     * <p>Wait period in milliseconds before capture. Allows animations, API responses, and dynamic elements to finish rendering.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "delay",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage delay(Optional<Integer> delay) {
+      this.delay = delay;
+      return this;
+    }
+
+    /**
+     * <p>When set to <code>true</code>, websites that support prefers-color-scheme: dark will render in dark mode.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage darkMode(Boolean darkMode) {
+      this.darkMode = Optional.ofNullable(darkMode);
+      return this;
+    }
+
+    /**
+     * <p>When set to <code>true</code>, websites that support prefers-color-scheme: dark will render in dark mode.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "dark_mode",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage darkMode(Optional<Boolean> darkMode) {
+      this.darkMode = darkMode;
+      return this;
+    }
+
+    /**
+     * <p>Custom HTML to render instead of loading a URL. Overrides the url option. Use for capturing specific HTML structures or dynamic content.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage customHtml(String customHtml) {
+      this.customHtml = Optional.ofNullable(customHtml);
+      return this;
+    }
+
+    /**
+     * <p>Custom HTML to render instead of loading a URL. Overrides the url option. Use for capturing specific HTML structures or dynamic content.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "custom_html",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage customHtml(Optional<String> customHtml) {
+      this.customHtml = customHtml;
+      return this;
+    }
+
+    /**
+     * <p>Allows loading external CSS into the page. Provide a URL pointing to the CSS file.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage cssUrl(String cssUrl) {
+      this.cssUrl = Optional.ofNullable(cssUrl);
+      return this;
+    }
+
+    /**
+     * <p>Allows loading external CSS into the page. Provide a URL pointing to the CSS file.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "css_url",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage cssUrl(Optional<String> cssUrl) {
+      this.cssUrl = cssUrl;
+      return this;
+    }
+
+    /**
+     * <p>Allows injecting custom CSS code into the page before rendering. Pass the CSS code directly as a string.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage css(String css) {
+      this.css = Optional.ofNullable(css);
+      return this;
+    }
+
+    /**
+     * <p>Allows injecting custom CSS code into the page before rendering. Pass the CSS code directly as a string.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "css",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage css(Optional<String> css) {
+      this.css = css;
+      return this;
+    }
+
+    /**
+     * <p>Two-letter country code, such as US or DE, for the exit address of classic_proxy or premium_proxy. Ignored when you send your own proxy. Any two-letter code is sent, including one that is not listed. Classic proxy countries: BG, GE, DE, HN, MD, UA, GB, US. Premium proxy countries: AF, AL, DZ, AO, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BT, BO, BQ, BA, BW, BR, BN, BG, BF, BI, CV, KH, CM, CA, KY, CF, TD, CL, CN, CO, KM, CG, CR, CI, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, EC, EG, SV, GQ, EE, SZ, ET, FO, FJ, FI, FR, GF, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IL, IT, JM, JP, JE, JO, KZ, KE, XK, KW, KG, LA, LV, LB, LS, LR, LY, LT, MO, MG, MW, MY, MV, ML, MT, MQ, MR, MU, YT, MX, MD, MN, ME, MA, MZ, MM, NA, NP, NL, NC, NZ, NI, NE, NG, MK, NO, OM, PK, PS, PA, PG, PY, PE, PH, PL, PT, PR, QA, RE, RO, RU, RW, KN, LC, VC, WS, SA, SN, RS, SC, SL, SG, SK, SI, SB, SO, ZA, KR, SS, ES, LK, SD, SR, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TO, TT, TN, TR, TM, UG, UA, AE, GB, US, UY, UZ, VE, VN, YE, ZM, ZW.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage country(String country) {
+      this.country = Optional.ofNullable(country);
+      return this;
+    }
+
+    /**
+     * <p>Two-letter country code, such as US or DE, for the exit address of classic_proxy or premium_proxy. Ignored when you send your own proxy. Any two-letter code is sent, including one that is not listed. Classic proxy countries: BG, GE, DE, HN, MD, UA, GB, US. Premium proxy countries: AF, AL, DZ, AO, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BT, BO, BQ, BA, BW, BR, BN, BG, BF, BI, CV, KH, CM, CA, KY, CF, TD, CL, CN, CO, KM, CG, CR, CI, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, EC, EG, SV, GQ, EE, SZ, ET, FO, FJ, FI, FR, GF, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IL, IT, JM, JP, JE, JO, KZ, KE, XK, KW, KG, LA, LV, LB, LS, LR, LY, LT, MO, MG, MW, MY, MV, ML, MT, MQ, MR, MU, YT, MX, MD, MN, ME, MA, MZ, MM, NA, NP, NL, NC, NZ, NI, NE, NG, MK, NO, OM, PK, PS, PA, PG, PY, PE, PH, PL, PT, PR, QA, RE, RO, RU, RW, KN, LC, VC, WS, SA, SN, RS, SC, SL, SG, SK, SI, SB, SO, ZA, KR, SS, ES, LK, SD, SR, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TO, TT, TN, TR, TM, UG, UA, AE, GB, US, UY, UZ, VE, VN, YE, ZM, ZW.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "country",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage country(Optional<String> country) {
+      this.country = country;
+      return this;
+    }
+
+    /**
+     * <p>Cookies to include in the request before rendering. Supports single or multiple cookies. Example: <code>cookie=value; otherCookie=otherValue;</code>.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage cookies(String cookies) {
+      this.cookies = Optional.ofNullable(cookies);
+      return this;
+    }
+
+    /**
+     * <p>Cookies to include in the request before rendering. Supports single or multiple cookies. Example: <code>cookie=value; otherCookie=otherValue;</code>.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "cookies",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage cookies(Optional<String> cookies) {
+      this.cookies = cookies;
+      return this;
+    }
+
+    /**
+     * <p>Y coordinate (in pixels) for the top-left corner of the clip area. Default: null.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage clipY(Integer clipY) {
+      this.clipY = Optional.ofNullable(clipY);
+      return this;
+    }
+
+    /**
+     * <p>Y coordinate (in pixels) for the top-left corner of the clip area. Default: null.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "clip[y]",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage clipY(Optional<Integer> clipY) {
+      this.clipY = clipY;
+      return this;
+    }
+
+    /**
+     * <p>X coordinate (in pixels) for the top-left corner of the clip area. Default: null.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage clipX(Integer clipX) {
+      this.clipX = Optional.ofNullable(clipX);
+      return this;
+    }
+
+    /**
+     * <p>X coordinate (in pixels) for the top-left corner of the clip area. Default: null.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "clip[x]",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage clipX(Optional<Integer> clipX) {
+      this.clipX = clipX;
+      return this;
+    }
+
+    /**
+     * <p>Width of the clip area in pixels. Default: null.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage clipWidth(Integer clipWidth) {
+      this.clipWidth = Optional.ofNullable(clipWidth);
+      return this;
+    }
+
+    /**
+     * <p>Width of the clip area in pixels. Default: null.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "clip[width]",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage clipWidth(Optional<Integer> clipWidth) {
+      this.clipWidth = clipWidth;
+      return this;
+    }
+
+    /**
+     * <p>Height of the clip area in pixels. Default: null.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage clipHeight(Integer clipHeight) {
+      this.clipHeight = Optional.ofNullable(clipHeight);
+      return this;
+    }
+
+    /**
+     * <p>Height of the clip area in pixels. Default: null.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "clip[height]",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage clipHeight(Optional<Integer> clipHeight) {
+      this.clipHeight = clipHeight;
+      return this;
+    }
+
+    /**
+     * <p>Number of times to click the selector (when set via <code>selector_to_click</code>).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage clickRecursion(Integer clickRecursion) {
+      this.clickRecursion = Optional.ofNullable(clickRecursion);
+      return this;
+    }
+
+    /**
+     * <p>Number of times to click the selector (when set via <code>selector_to_click</code>).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "click_recursion",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage clickRecursion(Optional<Integer> clickRecursion) {
+      this.clickRecursion = clickRecursion;
+      return this;
+    }
+
+    /**
+     * <p>Loads the page through a datacenter proxy. Adds 20 credits per request. Ignored when premium_proxy is true or a custom proxy is set.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage classicProxy(Boolean classicProxy) {
+      this.classicProxy = Optional.ofNullable(classicProxy);
+      return this;
+    }
+
+    /**
+     * <p>Loads the page through a datacenter proxy. Adds 20 credits per request. Ignored when premium_proxy is true or a custom proxy is set.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "classic_proxy",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage classicProxy(Optional<Boolean> classicProxy) {
+      this.classicProxy = classicProxy;
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the button to click after the answer is typed.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage captchaSubmit(String captchaSubmit) {
+      this.captchaSubmit = Optional.ofNullable(captchaSubmit);
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the button to click after the answer is typed.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "captcha_submit",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage captchaSubmit(Optional<String> captchaSubmit) {
+      this.captchaSubmit = captchaSubmit;
+      return this;
+    }
+
+    /**
+     * <p>Number of guesses the solver makes, from 1 to 5.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage captchaRetries(Integer captchaRetries) {
+      this.captchaRetries = Optional.ofNullable(captchaRetries);
+      return this;
+    }
+
+    /**
+     * <p>Number of guesses the solver makes, from 1 to 5.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "captcha_retries",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage captchaRetries(Optional<Integer> captchaRetries) {
+      this.captchaRetries = captchaRetries;
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the control that loads a new captcha picture before the next try.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage captchaRefresh(String captchaRefresh) {
+      this.captchaRefresh = Optional.ofNullable(captchaRefresh);
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the control that loads a new captcha picture before the next try.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "captcha_refresh",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage captchaRefresh(Optional<String> captchaRefresh) {
+      this.captchaRefresh = captchaRefresh;
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the box the answer is typed into. Required when solve_captcha is true.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage captchaInput(String captchaInput) {
+      this.captchaInput = Optional.ofNullable(captchaInput);
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the box the answer is typed into. Required when solve_captcha is true.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "captcha_input",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage captchaInput(Optional<String> captchaInput) {
+      this.captchaInput = captchaInput;
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the captcha picture. Required when solve_captcha is true.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage captchaImage(String captchaImage) {
+      this.captchaImage = Optional.ofNullable(captchaImage);
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the captcha picture. Required when solve_captcha is true.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "captcha_image",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage captchaImage(Optional<String> captchaImage) {
+      this.captchaImage = captchaImage;
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the message shown for a wrong answer. While it is visible, the solver tries again.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage captchaError(String captchaError) {
+      this.captchaError = Optional.ofNullable(captchaError);
+      return this;
+    }
+
+    /**
+     * <p>CSS selector of the message shown for a wrong answer. While it is visible, the solver tries again.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "captcha_error",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage captchaError(Optional<String> captchaError) {
+      this.captchaError = captchaError;
+      return this;
+    }
+
+    /**
+     * <p>CSS selectors to blur before capture. Masks sensitive data like emails, payments, or personal info. Multiple selectors supported. Default: empty.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage blurSelector(String blurSelector) {
+      this.blurSelector = Optional.ofNullable(blurSelector);
+      return this;
+    }
+
+    /**
+     * <p>CSS selectors to blur before capture. Masks sensitive data like emails, payments, or personal info. Multiple selectors supported. Default: empty.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "blur_selector",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage blurSelector(Optional<String> blurSelector) {
+      this.blurSelector = blurSelector;
+      return this;
+    }
+
+    /**
+     * <p>Blocks all XMLHttpRequest (AJAX) calls - prevents dynamic API-driven content.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage blockXhr(Boolean blockXhr) {
+      this.blockXhr = Optional.ofNullable(blockXhr);
+      return this;
+    }
+
+    /**
+     * <p>Blocks all XMLHttpRequest (AJAX) calls - prevents dynamic API-driven content.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "block_xhr",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage blockXhr(Optional<Boolean> blockXhr) {
+      this.blockXhr = blockXhr;
+      return this;
+    }
+
+    /**
+     * <p>Blocks WebSocket connections - prevents real-time bidirectional communication.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage blockWebSocket(Boolean blockWebSocket) {
+      this.blockWebSocket = Optional.ofNullable(blockWebSocket);
+      return this;
+    }
+
+    /**
+     * <p>Blocks WebSocket connections - prevents real-time bidirectional communication.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "block_web_socket",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage blockWebSocket(Optional<Boolean> blockWebSocket) {
+      this.blockWebSocket = blockWebSocket;
+      return this;
+    }
+
+    /**
+     * <p>Blocks tracking scripts and analytics services for cleaner, privacy-oriented renders.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage blockTracking(Boolean blockTracking) {
+      this.blockTracking = Optional.ofNullable(blockTracking);
+      return this;
+    }
+
+    /**
+     * <p>Blocks tracking scripts and analytics services for cleaner, privacy-oriented renders.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "block_tracking",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage blockTracking(Optional<Boolean> blockTracking) {
+      this.blockTracking = blockTracking;
+      return this;
+    }
+
+    /**
+     * <p>Blocks subtitles and caption overlays from loading.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage blockTextTrack(Boolean blockTextTrack) {
+      this.blockTextTrack = Optional.ofNullable(blockTextTrack);
+      return this;
+    }
+
+    /**
+     * <p>Blocks subtitles and caption overlays from loading.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "block_text_track",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage blockTextTrack(Optional<Boolean> blockTextTrack) {
+      this.blockTextTrack = blockTextTrack;
+      return this;
+    }
+
+    /**
+     * <p>Blocks all stylesheets - page renders as raw HTML without visual formatting.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage blockStylesheets(Boolean blockStylesheets) {
+      this.blockStylesheets = Optional.ofNullable(blockStylesheets);
+      return this;
+    }
+
+    /**
+     * <p>Blocks all stylesheets - page renders as raw HTML without visual formatting.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "block_stylesheets",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage blockStylesheets(Optional<Boolean> blockStylesheets) {
+      this.blockStylesheets = blockStylesheets;
+      return this;
+    }
+
+    /**
+     * <p>Fine-grained blocking of specific URLs or patterns. Separate multiple rules by comma, space, or newline. Default: empty.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage blockSpecificRequests(String blockSpecificRequests) {
+      this.blockSpecificRequests = Optional.ofNullable(blockSpecificRequests);
+      return this;
+    }
+
+    /**
+     * <p>Fine-grained blocking of specific URLs or patterns. Separate multiple rules by comma, space, or newline. Default: empty.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "block_specific_requests",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage blockSpecificRequests(Optional<String> blockSpecificRequests) {
+      this.blockSpecificRequests = blockSpecificRequests;
+      return this;
+    }
+
+    /**
+     * <p>Blocks audio and video resources (mp3, mp4, webm, etc.) from loading.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage blockMedia(Boolean blockMedia) {
+      this.blockMedia = Optional.ofNullable(blockMedia);
+      return this;
+    }
+
+    /**
+     * <p>Blocks audio and video resources (mp3, mp4, webm, etc.) from loading.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "block_media",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage blockMedia(Optional<Boolean> blockMedia) {
+      this.blockMedia = blockMedia;
+      return this;
+    }
+
+    /**
+     * <p>Blocks manifest files (.json, .webmanifest) - disables PWA-related functionality.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage blockManifest(Boolean blockManifest) {
+      this.blockManifest = Optional.ofNullable(blockManifest);
+      return this;
+    }
+
+    /**
+     * <p>Blocks manifest files (.json, .webmanifest) - disables PWA-related functionality.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "block_manifest",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage blockManifest(Optional<Boolean> blockManifest) {
+      this.blockManifest = blockManifest;
+      return this;
+    }
+
+    /**
+     * <p>Disables all JavaScript execution. Renders a static version of the page. Speeds up capture but may break dynamic content.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage blockJs(Boolean blockJs) {
+      this.blockJs = Optional.ofNullable(blockJs);
+      return this;
+    }
+
+    /**
+     * <p>Disables all JavaScript execution. Renders a static version of the page. Speeds up capture but may break dynamic content.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "block_js",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage blockJs(Optional<Boolean> blockJs) {
+      this.blockJs = blockJs;
+      return this;
+    }
+
+    /**
+     * <p>Blocks all image resources (jpg, png, gif, webp, svg, etc.) for faster rendering.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage blockImages(Boolean blockImages) {
+      this.blockImages = Optional.ofNullable(blockImages);
+      return this;
+    }
+
+    /**
+     * <p>Blocks all image resources (jpg, png, gif, webp, svg, etc.) for faster rendering.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "block_images",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage blockImages(Optional<Boolean> blockImages) {
+      this.blockImages = blockImages;
+      return this;
+    }
+
+    /**
+     * <p>Blocks external font files - page falls back to system defaults. Supported: woff, woff2, ttf, otf, eot.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage blockFont(Boolean blockFont) {
+      this.blockFont = Optional.ofNullable(blockFont);
+      return this;
+    }
+
+    /**
+     * <p>Blocks external font files - page falls back to system defaults. Supported: woff, woff2, ttf, otf, eot.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "block_font",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage blockFont(Optional<Boolean> blockFont) {
+      this.blockFont = blockFont;
+      return this;
+    }
+
+    /**
+     * <p>Blocks all Fetch API requests - stops async data loading.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage blockFetch(Boolean blockFetch) {
+      this.blockFetch = Optional.ofNullable(blockFetch);
+      return this;
+    }
+
+    /**
+     * <p>Blocks all Fetch API requests - stops async data loading.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "block_fetch",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage blockFetch(Optional<Boolean> blockFetch) {
+      this.blockFetch = blockFetch;
+      return this;
+    }
+
+    /**
+     * <p>Blocks EventSource (SSE) connections - prevents real-time data streams.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage blockEventSource(Boolean blockEventSource) {
+      this.blockEventSource = Optional.ofNullable(blockEventSource);
+      return this;
+    }
+
+    /**
+     * <p>Blocks EventSource (SSE) connections - prevents real-time data streams.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "block_event_source",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage blockEventSource(Optional<Boolean> blockEventSource) {
+      this.blockEventSource = blockEventSource;
+      return this;
+    }
+
+    /**
+     * <p>Blocks live chat popups, support bubbles, and messaging interfaces.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage blockChatWidgets(Boolean blockChatWidgets) {
+      this.blockChatWidgets = Optional.ofNullable(blockChatWidgets);
+      return this;
+    }
+
+    /**
+     * <p>Blocks live chat popups, support bubbles, and messaging interfaces.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "block_chat_widgets",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage blockChatWidgets(Optional<Boolean> blockChatWidgets) {
+      this.blockChatWidgets = blockChatWidgets;
+      return this;
+    }
+
+    /**
+     * <p>Blocks requests to known ad networks for cleaner, distraction-free screenshots.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage blockAds(Boolean blockAds) {
+      this.blockAds = Optional.ofNullable(blockAds);
+      return this;
+    }
+
+    /**
+     * <p>Blocks requests to known ad networks for cleaner, distraction-free screenshots.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "block_ads",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage blockAds(Optional<Boolean> blockAds) {
+      this.blockAds = blockAds;
+      return this;
+    }
+
+    /**
+     * <p>Initial vertical scroll position in pixels before capture. Use to position mid-page content in viewport. Not supported for PDF.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage adjustTop(Integer adjustTop) {
+      this.adjustTop = Optional.ofNullable(adjustTop);
+      return this;
+    }
+
+    /**
+     * <p>Initial vertical scroll position in pixels before capture. Use to position mid-page content in viewport. Not supported for PDF.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "adjust_top",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage adjustTop(Optional<Integer> adjustTop) {
+      this.adjustTop = adjustTop;
+      return this;
+    }
+
+    /**
+     * <p>Sets the accepted languages for the HTTP request. This is sent as the Accept-Language header.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage acceptLanguages(String acceptLanguages) {
+      this.acceptLanguages = Optional.ofNullable(acceptLanguages);
+      return this;
+    }
+
+    /**
+     * <p>Sets the accepted languages for the HTTP request. This is sent as the Accept-Language header.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "accept_languages",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage acceptLanguages(Optional<String> acceptLanguages) {
+      this.acceptLanguages = acceptLanguages;
+      return this;
+    }
+
     @java.lang.Override
     public BulkScreenshotCaptureRequestUrlsItem build() {
-      return new BulkScreenshotCaptureRequestUrlsItem(url, additionalProperties);
+      return new BulkScreenshotCaptureRequestUrlsItem(url, acceptLanguages, adjustTop, blockAds, blockChatWidgets, blockEventSource, blockFetch, blockFont, blockImages, blockJs, blockManifest, blockMedia, blockSpecificRequests, blockStylesheets, blockTextTrack, blockTracking, blockWebSocket, blockXhr, blurSelector, captchaError, captchaImage, captchaInput, captchaRefresh, captchaRetries, captchaSubmit, classicProxy, clickRecursion, clipHeight, clipWidth, clipX, clipY, cookies, country, css, cssUrl, customHtml, darkMode, delay, destroyScreenshot, duration, enableCaching, enableIncognito, extractHtml, extractMarkdown, extractText, failOnError, fileType, format, fresh, fullPage, getImageUrls, gpu, grayscale, headers, height, imageQuality, js, jsUrl, latitude, lazyLoad, longitude, markdown, noCookieBanners, ocrModel, omitBackground, output, pdfOptions, premiumProxy, proxy, removeSelector, resultFileName, retina, scrollBack, scrollDelay, scrollSpeed, scrollToElement, scrollingScreenshot, selector, selectorToClick, solveCaptcha, startImmediately, stealth, thumbnailWidth, timeout, timezone, ttl, userAgent, video, waitForEvent, width, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("url") || key.equalsIgnoreCase("accept_languages") || key.equalsIgnoreCase("adjust_top") || key.equalsIgnoreCase("block_ads") || key.equalsIgnoreCase("block_chat_widgets") || key.equalsIgnoreCase("block_event_source") || key.equalsIgnoreCase("block_fetch") || key.equalsIgnoreCase("block_font") || key.equalsIgnoreCase("block_images") || key.equalsIgnoreCase("block_js") || key.equalsIgnoreCase("block_manifest") || key.equalsIgnoreCase("block_media") || key.equalsIgnoreCase("block_specific_requests") || key.equalsIgnoreCase("block_stylesheets") || key.equalsIgnoreCase("block_text_track") || key.equalsIgnoreCase("block_tracking") || key.equalsIgnoreCase("block_web_socket") || key.equalsIgnoreCase("block_xhr") || key.equalsIgnoreCase("blur_selector") || key.equalsIgnoreCase("captcha_error") || key.equalsIgnoreCase("captcha_image") || key.equalsIgnoreCase("captcha_input") || key.equalsIgnoreCase("captcha_refresh") || key.equalsIgnoreCase("captcha_retries") || key.equalsIgnoreCase("captcha_submit") || key.equalsIgnoreCase("classic_proxy") || key.equalsIgnoreCase("click_recursion") || key.equalsIgnoreCase("clip[height]") || key.equalsIgnoreCase("clip[width]") || key.equalsIgnoreCase("clip[x]") || key.equalsIgnoreCase("clip[y]") || key.equalsIgnoreCase("cookies") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("css") || key.equalsIgnoreCase("css_url") || key.equalsIgnoreCase("custom_html") || key.equalsIgnoreCase("dark_mode") || key.equalsIgnoreCase("delay") || key.equalsIgnoreCase("destroy_screenshot") || key.equalsIgnoreCase("duration") || key.equalsIgnoreCase("enable_caching") || key.equalsIgnoreCase("enable_incognito") || key.equalsIgnoreCase("extract_html") || key.equalsIgnoreCase("extract_markdown") || key.equalsIgnoreCase("extract_text") || key.equalsIgnoreCase("fail_on_error") || key.equalsIgnoreCase("file_type") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("fresh") || key.equalsIgnoreCase("full_page") || key.equalsIgnoreCase("get_image_urls") || key.equalsIgnoreCase("gpu") || key.equalsIgnoreCase("grayscale") || key.equalsIgnoreCase("headers") || key.equalsIgnoreCase("height") || key.equalsIgnoreCase("image_quality") || key.equalsIgnoreCase("js") || key.equalsIgnoreCase("js_url") || key.equalsIgnoreCase("latitude") || key.equalsIgnoreCase("lazy_load") || key.equalsIgnoreCase("longitude") || key.equalsIgnoreCase("markdown") || key.equalsIgnoreCase("no_cookie_banners") || key.equalsIgnoreCase("ocr_model") || key.equalsIgnoreCase("omit_background") || key.equalsIgnoreCase("output") || key.equalsIgnoreCase("pdf_options") || key.equalsIgnoreCase("premium_proxy") || key.equalsIgnoreCase("proxy") || key.equalsIgnoreCase("remove_selector") || key.equalsIgnoreCase("result_file_name") || key.equalsIgnoreCase("retina") || key.equalsIgnoreCase("scroll_back") || key.equalsIgnoreCase("scroll_delay") || key.equalsIgnoreCase("scroll_speed") || key.equalsIgnoreCase("scroll_to_element") || key.equalsIgnoreCase("scrolling_screenshot") || key.equalsIgnoreCase("selector") || key.equalsIgnoreCase("selector_to_click") || key.equalsIgnoreCase("solve_captcha") || key.equalsIgnoreCase("start_immediately") || key.equalsIgnoreCase("stealth") || key.equalsIgnoreCase("thumbnail_width") || key.equalsIgnoreCase("timeout") || key.equalsIgnoreCase("timezone") || key.equalsIgnoreCase("ttl") || key.equalsIgnoreCase("user_agent") || key.equalsIgnoreCase("video") || key.equalsIgnoreCase("wait_for_event") || key.equalsIgnoreCase("width")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

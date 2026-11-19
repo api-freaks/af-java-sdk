@@ -104,7 +104,6 @@ public final class EmailValidateResponseAccount {
 
     private Optional<Boolean> fullMailBox = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -143,6 +142,14 @@ public final class EmailValidateResponseAccount {
     @java.lang.Override
     public EmailValidateResponseAccount build() {
       return new EmailValidateResponseAccount(role, fullMailBox, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("role") || key.equalsIgnoreCase("fullMailBox")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

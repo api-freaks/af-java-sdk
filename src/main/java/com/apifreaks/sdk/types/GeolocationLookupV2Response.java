@@ -347,7 +347,6 @@ public final class GeolocationLookupV2Response {
 
     private Optional<String> domain = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -372,7 +371,6 @@ public final class GeolocationLookupV2Response {
     }
 
     /**
-     * <p>The IP address used for the lookup (IPv4 or IPv6).</p>
      * <p>The IP address used for the lookup (IPv4 or IPv6).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -663,6 +661,14 @@ public final class GeolocationLookupV2Response {
     @java.lang.Override
     public GeolocationLookupV2Response build() {
       return new GeolocationLookupV2Response(ip, domain, hostname, location, countryMetadata, network, asn, company, currency, security, abuse, timeZone, userAgent, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("ip") || key.equalsIgnoreCase("domain") || key.equalsIgnoreCase("hostname") || key.equalsIgnoreCase("location") || key.equalsIgnoreCase("country_metadata") || key.equalsIgnoreCase("network") || key.equalsIgnoreCase("asn") || key.equalsIgnoreCase("company") || key.equalsIgnoreCase("currency") || key.equalsIgnoreCase("security") || key.equalsIgnoreCase("abuse") || key.equalsIgnoreCase("time_zone") || key.equalsIgnoreCase("user_agent")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

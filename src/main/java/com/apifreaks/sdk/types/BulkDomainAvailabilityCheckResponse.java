@@ -28,19 +28,32 @@ import java.util.Optional;
 public final class BulkDomainAvailabilityCheckResponse {
   private final Optional<List<BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem>> bulkDomainAvailableResponse;
 
+  private final Optional<List<BulkDomainAvailabilityCheckResponseBulkDomainAvailabilityResponseItem>> bulkDomainAvailabilityResponse;
+
   private final Map<String, Object> additionalProperties;
 
   private BulkDomainAvailabilityCheckResponse(
       Optional<List<BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem>> bulkDomainAvailableResponse,
+      Optional<List<BulkDomainAvailabilityCheckResponseBulkDomainAvailabilityResponseItem>> bulkDomainAvailabilityResponse,
       Map<String, Object> additionalProperties) {
     this.bulkDomainAvailableResponse = bulkDomainAvailableResponse;
+    this.bulkDomainAvailabilityResponse = bulkDomainAvailabilityResponse;
     this.additionalProperties = additionalProperties;
   }
 
+  /**
+   * @return Deprecated: the API returns this field as <code>bulk_domain_availability_response</code>; read <code>bulk_domain_availability_response</code> instead.
+   */
   @JsonProperty("bulk_domain_available_response")
   public Optional<List<BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem>> getBulkDomainAvailableResponse(
       ) {
     return bulkDomainAvailableResponse;
+  }
+
+  @JsonProperty("bulk_domain_availability_response")
+  public Optional<List<BulkDomainAvailabilityCheckResponseBulkDomainAvailabilityResponseItem>> getBulkDomainAvailabilityResponse(
+      ) {
+    return bulkDomainAvailabilityResponse;
   }
 
   @java.lang.Override
@@ -55,12 +68,12 @@ public final class BulkDomainAvailabilityCheckResponse {
   }
 
   private boolean equalTo(BulkDomainAvailabilityCheckResponse other) {
-    return bulkDomainAvailableResponse.equals(other.bulkDomainAvailableResponse);
+    return bulkDomainAvailableResponse.equals(other.bulkDomainAvailableResponse) && bulkDomainAvailabilityResponse.equals(other.bulkDomainAvailabilityResponse);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.bulkDomainAvailableResponse);
+    return Objects.hash(this.bulkDomainAvailableResponse, this.bulkDomainAvailabilityResponse);
   }
 
   @java.lang.Override
@@ -78,7 +91,8 @@ public final class BulkDomainAvailabilityCheckResponse {
   public static final class Builder {
     private Optional<List<BulkDomainAvailabilityCheckResponseBulkDomainAvailableResponseItem>> bulkDomainAvailableResponse = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<List<BulkDomainAvailabilityCheckResponseBulkDomainAvailabilityResponseItem>> bulkDomainAvailabilityResponse = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -86,9 +100,13 @@ public final class BulkDomainAvailabilityCheckResponse {
 
     public Builder from(BulkDomainAvailabilityCheckResponse other) {
       bulkDomainAvailableResponse(other.getBulkDomainAvailableResponse());
+      bulkDomainAvailabilityResponse(other.getBulkDomainAvailabilityResponse());
       return this;
     }
 
+    /**
+     * <p>Deprecated: the API returns this field as <code>bulk_domain_availability_response</code>; read <code>bulk_domain_availability_response</code> instead.</p>
+     */
     @JsonSetter(
         value = "bulk_domain_available_response",
         nulls = Nulls.SKIP
@@ -105,8 +123,32 @@ public final class BulkDomainAvailabilityCheckResponse {
       return this;
     }
 
+    @JsonSetter(
+        value = "bulk_domain_availability_response",
+        nulls = Nulls.SKIP
+    )
+    public Builder bulkDomainAvailabilityResponse(
+        Optional<List<BulkDomainAvailabilityCheckResponseBulkDomainAvailabilityResponseItem>> bulkDomainAvailabilityResponse) {
+      this.bulkDomainAvailabilityResponse = bulkDomainAvailabilityResponse;
+      return this;
+    }
+
+    public Builder bulkDomainAvailabilityResponse(
+        List<BulkDomainAvailabilityCheckResponseBulkDomainAvailabilityResponseItem> bulkDomainAvailabilityResponse) {
+      this.bulkDomainAvailabilityResponse = Optional.ofNullable(bulkDomainAvailabilityResponse);
+      return this;
+    }
+
     public BulkDomainAvailabilityCheckResponse build() {
-      return new BulkDomainAvailabilityCheckResponse(bulkDomainAvailableResponse, additionalProperties);
+      return new BulkDomainAvailabilityCheckResponse(bulkDomainAvailableResponse, bulkDomainAvailabilityResponse, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("bulk_domain_available_response") || key.equalsIgnoreCase("bulk_domain_availability_response")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

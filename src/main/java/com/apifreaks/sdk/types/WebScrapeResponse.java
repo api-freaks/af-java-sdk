@@ -16,30 +16,30 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
     builder = WebScrapeResponse.Builder.class
 )
 public final class WebScrapeResponse {
-  private final Map<String, Object> extractedData;
+  private final Optional<Map<String, Object>> extractedData;
 
   private final Map<String, Object> additionalProperties;
 
-  private WebScrapeResponse(Map<String, Object> extractedData,
+  private WebScrapeResponse(Optional<Map<String, Object>> extractedData,
       Map<String, Object> additionalProperties) {
     this.extractedData = extractedData;
     this.additionalProperties = additionalProperties;
   }
 
   /**
-   * @return Extracted data based on the extract instructions
+   * @return Extracted data based on the extract instructions. Absent when nothing was extracted.
    */
   @JsonProperty("extractedData")
-  public Map<String, Object> getExtractedData() {
+  public Optional<Map<String, Object>> getExtractedData() {
     return extractedData;
   }
 
@@ -76,9 +76,8 @@ public final class WebScrapeResponse {
       ignoreUnknown = true
   )
   public static final class Builder {
-    private Map<String, Object> extractedData = new LinkedHashMap<>();
+    private Optional<Map<String, Object>> extractedData = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -90,34 +89,32 @@ public final class WebScrapeResponse {
     }
 
     /**
-     * <p>Extracted data based on the extract instructions</p>
+     * <p>Extracted data based on the extract instructions. Absent when nothing was extracted.</p>
      */
     @JsonSetter(
         value = "extractedData",
         nulls = Nulls.SKIP
     )
+    public Builder extractedData(Optional<Map<String, Object>> extractedData) {
+      this.extractedData = extractedData;
+      return this;
+    }
+
     public Builder extractedData(Map<String, Object> extractedData) {
-      this.extractedData.clear();
-      if (extractedData != null) {
-        this.extractedData.putAll(extractedData);
-      }
-      return this;
-    }
-
-    public Builder putAllExtractedData(Map<String, Object> extractedData) {
-      if (extractedData != null) {
-        this.extractedData.putAll(extractedData);
-      }
-      return this;
-    }
-
-    public Builder extractedData(String key, Object value) {
-      this.extractedData.put(key, value);
+      this.extractedData = Optional.ofNullable(extractedData);
       return this;
     }
 
     public WebScrapeResponse build() {
       return new WebScrapeResponse(extractedData, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("extractedData")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

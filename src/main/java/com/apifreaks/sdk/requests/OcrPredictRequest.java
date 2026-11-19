@@ -8,7 +8,6 @@ import com.apifreaks.sdk.core.ObjectMappers;
 import com.apifreaks.sdk.types.OcrPredictRequestModel;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -31,9 +30,9 @@ import org.jetbrains.annotations.NotNull;
 public final class OcrPredictRequest {
   private final String apiKey;
 
-  private final Optional<String> url;
-
   private final OcrPredictRequestModel model;
+
+  private final Optional<String> url;
 
   private final Optional<String> pageRange;
 
@@ -43,12 +42,12 @@ public final class OcrPredictRequest {
 
   private final Map<String, Object> additionalProperties;
 
-  private OcrPredictRequest(String apiKey, Optional<String> url, OcrPredictRequestModel model,
+  private OcrPredictRequest(String apiKey, OcrPredictRequestModel model, Optional<String> url,
       Optional<String> pageRange, Optional<String> zone, Optional<Integer> newLine,
       Map<String, Object> additionalProperties) {
     this.apiKey = apiKey;
-    this.url = url;
     this.model = model;
+    this.url = url;
     this.pageRange = pageRange;
     this.zone = zone;
     this.newLine = newLine;
@@ -58,25 +57,25 @@ public final class OcrPredictRequest {
   /**
    * @return Your API key
    */
-  @JsonIgnore
+  @JsonProperty("apiKey")
   public String getApiKey() {
     return apiKey;
   }
 
   /**
-   * @return URL of the image or PDF (required if <code>file</code> not provided)
-   */
-  @JsonProperty("url")
-  public Optional<String> getUrl() {
-    return url;
-  }
-
-  /**
-   * @return OCR model to use. <code>mini-ocr-v1</code> for CAPTCHA OCR, <code>ocr-v1</code> for general OCR
+   * @return OCR model to use. <code>mini-ocr-v1</code> for CAPTCHA OCR, <code>ocr-v1</code> for general OCR.
    */
   @JsonProperty("model")
   public OcrPredictRequestModel getModel() {
     return model;
+  }
+
+  /**
+   * @return URL of the image or PDF (required if <code>file</code> is not uploaded).
+   */
+  @JsonProperty("url")
+  public Optional<String> getUrl() {
+    return url;
   }
 
   /**
@@ -96,7 +95,7 @@ public final class OcrPredictRequest {
   }
 
   /**
-   * @return Set to 1 to split output text into individual lines (default: 0)
+   * @return Set to 1 to split output text into individual lines (default: 0). This changes the shape of <code>OCRText</code> (see the response).
    */
   @JsonProperty("new_line")
   public Optional<Integer> getNewLine() {
@@ -115,12 +114,12 @@ public final class OcrPredictRequest {
   }
 
   private boolean equalTo(OcrPredictRequest other) {
-    return apiKey.equals(other.apiKey) && url.equals(other.url) && model.equals(other.model) && pageRange.equals(other.pageRange) && zone.equals(other.zone) && newLine.equals(other.newLine);
+    return apiKey.equals(other.apiKey) && model.equals(other.model) && url.equals(other.url) && pageRange.equals(other.pageRange) && zone.equals(other.zone) && newLine.equals(other.newLine);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.apiKey, this.url, this.model, this.pageRange, this.zone, this.newLine);
+    return Objects.hash(this.apiKey, this.model, this.url, this.pageRange, this.zone, this.newLine);
   }
 
   @java.lang.Override
@@ -143,7 +142,7 @@ public final class OcrPredictRequest {
 
   public interface ModelStage {
     /**
-     * <p>OCR model to use. <code>mini-ocr-v1</code> for CAPTCHA OCR, <code>ocr-v1</code> for general OCR</p>
+     * <p>OCR model to use. <code>mini-ocr-v1</code> for CAPTCHA OCR, <code>ocr-v1</code> for general OCR.</p>
      */
     _FinalStage model(@NotNull OcrPredictRequestModel model);
   }
@@ -156,7 +155,7 @@ public final class OcrPredictRequest {
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
 
     /**
-     * <p>URL of the image or PDF (required if <code>file</code> not provided)</p>
+     * <p>URL of the image or PDF (required if <code>file</code> is not uploaded).</p>
      */
     _FinalStage url(Optional<String> url);
 
@@ -177,7 +176,7 @@ public final class OcrPredictRequest {
     _FinalStage zone(String zone);
 
     /**
-     * <p>Set to 1 to split output text into individual lines (default: 0)</p>
+     * <p>Set to 1 to split output text into individual lines (default: 0). This changes the shape of <code>OCRText</code> (see the response).</p>
      */
     _FinalStage newLine(Optional<Integer> newLine);
 
@@ -200,7 +199,6 @@ public final class OcrPredictRequest {
 
     private Optional<String> url = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -209,8 +207,8 @@ public final class OcrPredictRequest {
     @java.lang.Override
     public Builder from(OcrPredictRequest other) {
       apiKey(other.getApiKey());
-      url(other.getUrl());
       model(other.getModel());
+      url(other.getUrl());
       pageRange(other.getPageRange());
       zone(other.getZone());
       newLine(other.getNewLine());
@@ -218,7 +216,6 @@ public final class OcrPredictRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -230,8 +227,7 @@ public final class OcrPredictRequest {
     }
 
     /**
-     * <p>OCR model to use. <code>mini-ocr-v1</code> for CAPTCHA OCR, <code>ocr-v1</code> for general OCR</p>
-     * <p>OCR model to use. <code>mini-ocr-v1</code> for CAPTCHA OCR, <code>ocr-v1</code> for general OCR</p>
+     * <p>OCR model to use. <code>mini-ocr-v1</code> for CAPTCHA OCR, <code>ocr-v1</code> for general OCR.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -242,7 +238,7 @@ public final class OcrPredictRequest {
     }
 
     /**
-     * <p>Set to 1 to split output text into individual lines (default: 0)</p>
+     * <p>Set to 1 to split output text into individual lines (default: 0). This changes the shape of <code>OCRText</code> (see the response).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -252,7 +248,7 @@ public final class OcrPredictRequest {
     }
 
     /**
-     * <p>Set to 1 to split output text into individual lines (default: 0)</p>
+     * <p>Set to 1 to split output text into individual lines (default: 0). This changes the shape of <code>OCRText</code> (see the response).</p>
      */
     @java.lang.Override
     @JsonSetter(
@@ -311,7 +307,7 @@ public final class OcrPredictRequest {
     }
 
     /**
-     * <p>URL of the image or PDF (required if <code>file</code> not provided)</p>
+     * <p>URL of the image or PDF (required if <code>file</code> is not uploaded).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -321,7 +317,7 @@ public final class OcrPredictRequest {
     }
 
     /**
-     * <p>URL of the image or PDF (required if <code>file</code> not provided)</p>
+     * <p>URL of the image or PDF (required if <code>file</code> is not uploaded).</p>
      */
     @java.lang.Override
     @JsonSetter(
@@ -335,7 +331,15 @@ public final class OcrPredictRequest {
 
     @java.lang.Override
     public OcrPredictRequest build() {
-      return new OcrPredictRequest(apiKey, url, model, pageRange, zone, newLine, additionalProperties);
+      return new OcrPredictRequest(apiKey, model, url, pageRange, zone, newLine, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("model") || key.equalsIgnoreCase("url") || key.equalsIgnoreCase("page_range") || key.equalsIgnoreCase("zone") || key.equalsIgnoreCase("new_line")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -185,7 +185,6 @@ public final class DomainTyposquattingResponse {
 
     private Optional<String> nextPageToken = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -291,6 +290,14 @@ public final class DomainTyposquattingResponse {
     @java.lang.Override
     public DomainTyposquattingResponse build() {
       return new DomainTyposquattingResponse(status, totalRecords, currentPage, hasNextPage, totalPages, nextPageToken, domains, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("status") || key.equalsIgnoreCase("totalRecords") || key.equalsIgnoreCase("currentPage") || key.equalsIgnoreCase("hasNextPage") || key.equalsIgnoreCase("totalPages") || key.equalsIgnoreCase("nextPageToken") || key.equalsIgnoreCase("domains")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

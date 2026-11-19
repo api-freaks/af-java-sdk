@@ -79,7 +79,6 @@ public final class DomainReputationResponseEvidenceSummary {
   public static final class Builder {
     private List<String> whyFlagged = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -119,6 +118,14 @@ public final class DomainReputationResponseEvidenceSummary {
 
     public DomainReputationResponseEvidenceSummary build() {
       return new DomainReputationResponseEvidenceSummary(whyFlagged, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("why_flagged")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

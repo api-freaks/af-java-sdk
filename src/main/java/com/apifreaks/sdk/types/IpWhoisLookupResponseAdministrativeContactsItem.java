@@ -4,9 +4,12 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.Nullable;
+import com.apifreaks.sdk.core.NullableNonemptyFilter;
 import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,16 +39,77 @@ public final class IpWhoisLookupResponseAdministrativeContactsItem {
 
   private final Optional<String> source;
 
+  private final Optional<List<String>> abuseMailbox;
+
+  private final Optional<List<String>> address;
+
+  private final Optional<List<String>> adminContacts;
+
+  private final Optional<String> city;
+
+  private final Optional<String> country;
+
+  private final Optional<String> dateCreated;
+
+  private final Optional<String> dateUpdated;
+
+  private final Optional<String> district;
+
+  private final Optional<List<String>> faxNo;
+
+  private final Optional<List<String>> mntBy;
+
+  private final Optional<List<String>> mntRef;
+
+  private final Optional<List<String>> notify;
+
+  private final Optional<List<String>> organizations;
+
+  private final Optional<List<String>> remarks;
+
+  private final Optional<String> state;
+
+  private final Optional<String> street;
+
+  private final Optional<List<String>> techContacts;
+
+  private final Optional<String> zipCode;
+
   private final Map<String, Object> additionalProperties;
 
   private IpWhoisLookupResponseAdministrativeContactsItem(Optional<String> handle,
       Optional<String> name, Optional<List<String>> email, Optional<List<String>> phone,
-      Optional<String> source, Map<String, Object> additionalProperties) {
+      Optional<String> source, Optional<List<String>> abuseMailbox, Optional<List<String>> address,
+      Optional<List<String>> adminContacts, Optional<String> city, Optional<String> country,
+      Optional<String> dateCreated, Optional<String> dateUpdated, Optional<String> district,
+      Optional<List<String>> faxNo, Optional<List<String>> mntBy, Optional<List<String>> mntRef,
+      Optional<List<String>> notify, Optional<List<String>> organizations,
+      Optional<List<String>> remarks, Optional<String> state, Optional<String> street,
+      Optional<List<String>> techContacts, Optional<String> zipCode,
+      Map<String, Object> additionalProperties) {
     this.handle = handle;
     this.name = name;
     this.email = email;
     this.phone = phone;
     this.source = source;
+    this.abuseMailbox = abuseMailbox;
+    this.address = address;
+    this.adminContacts = adminContacts;
+    this.city = city;
+    this.country = country;
+    this.dateCreated = dateCreated;
+    this.dateUpdated = dateUpdated;
+    this.district = district;
+    this.faxNo = faxNo;
+    this.mntBy = mntBy;
+    this.mntRef = mntRef;
+    this.notify = notify;
+    this.organizations = organizations;
+    this.remarks = remarks;
+    this.state = state;
+    this.street = street;
+    this.techContacts = techContacts;
+    this.zipCode = zipCode;
     this.additionalProperties = additionalProperties;
   }
 
@@ -74,6 +138,366 @@ public final class IpWhoisLookupResponseAdministrativeContactsItem {
     return source;
   }
 
+  /**
+   * @return Abuse mailbox email addresses for this contact.
+   */
+  @JsonIgnore
+  public Optional<List<String>> getAbuseMailbox() {
+    if (abuseMailbox == null) {
+      return Optional.empty();
+    }
+    return abuseMailbox;
+  }
+
+  /**
+   * @return Address lines for this contact.
+   */
+  @JsonIgnore
+  public Optional<List<String>> getAddress() {
+    if (address == null) {
+      return Optional.empty();
+    }
+    return address;
+  }
+
+  /**
+   * @return Handles of admin persons or roles linked to this contact.
+   */
+  @JsonIgnore
+  public Optional<List<String>> getAdminContacts() {
+    if (adminContacts == null) {
+      return Optional.empty();
+    }
+    return adminContacts;
+  }
+
+  /**
+   * @return Parsed city from the address field.
+   */
+  @JsonIgnore
+  public Optional<String> getCity() {
+    if (city == null) {
+      return Optional.empty();
+    }
+    return city;
+  }
+
+  /**
+   * @return Parsed country from the address field.
+   */
+  @JsonIgnore
+  public Optional<String> getCountry() {
+    if (country == null) {
+      return Optional.empty();
+    }
+    return country;
+  }
+
+  /**
+   * @return Registration date of this contact object (YYYY-MM-DD).
+   */
+  @JsonIgnore
+  public Optional<String> getDateCreated() {
+    if (dateCreated == null) {
+      return Optional.empty();
+    }
+    return dateCreated;
+  }
+
+  /**
+   * @return Last update date of this contact object (YYYY-MM-DD).
+   */
+  @JsonIgnore
+  public Optional<String> getDateUpdated() {
+    if (dateUpdated == null) {
+      return Optional.empty();
+    }
+    return dateUpdated;
+  }
+
+  /**
+   * @return Parsed district from the address field.
+   */
+  @JsonIgnore
+  public Optional<String> getDistrict() {
+    if (district == null) {
+      return Optional.empty();
+    }
+    return district;
+  }
+
+  /**
+   * @return Fax numbers for this contact.
+   */
+  @JsonIgnore
+  public Optional<List<String>> getFaxNo() {
+    if (faxNo == null) {
+      return Optional.empty();
+    }
+    return faxNo;
+  }
+
+  /**
+   * @return Maintainer handles for this contact object.
+   */
+  @JsonIgnore
+  public Optional<List<String>> getMntBy() {
+    if (mntBy == null) {
+      return Optional.empty();
+    }
+    return mntBy;
+  }
+
+  /**
+   * @return Referenced maintainer handles for this contact object.
+   */
+  @JsonIgnore
+  public Optional<List<String>> getMntRef() {
+    if (mntRef == null) {
+      return Optional.empty();
+    }
+    return mntRef;
+  }
+
+  /**
+   * @return Notify email addresses for this contact object.
+   */
+  @JsonIgnore
+  public Optional<List<String>> getNotify() {
+    if (notify == null) {
+      return Optional.empty();
+    }
+    return notify;
+  }
+
+  /**
+   * @return Handles of organization objects managing this contact.
+   */
+  @JsonIgnore
+  public Optional<List<String>> getOrganizations() {
+    if (organizations == null) {
+      return Optional.empty();
+    }
+    return organizations;
+  }
+
+  /**
+   * @return Remarks for this contact object.
+   */
+  @JsonIgnore
+  public Optional<List<String>> getRemarks() {
+    if (remarks == null) {
+      return Optional.empty();
+    }
+    return remarks;
+  }
+
+  /**
+   * @return Parsed state from the address field.
+   */
+  @JsonIgnore
+  public Optional<String> getState() {
+    if (state == null) {
+      return Optional.empty();
+    }
+    return state;
+  }
+
+  /**
+   * @return Parsed street address from the address field.
+   */
+  @JsonIgnore
+  public Optional<String> getStreet() {
+    if (street == null) {
+      return Optional.empty();
+    }
+    return street;
+  }
+
+  /**
+   * @return Handles of technical persons or roles linked to this contact.
+   */
+  @JsonIgnore
+  public Optional<List<String>> getTechContacts() {
+    if (techContacts == null) {
+      return Optional.empty();
+    }
+    return techContacts;
+  }
+
+  /**
+   * @return Parsed ZIP code from the address field.
+   */
+  @JsonIgnore
+  public Optional<String> getZipCode() {
+    if (zipCode == null) {
+      return Optional.empty();
+    }
+    return zipCode;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("abuse_mailbox")
+  private Optional<List<String>> _getAbuseMailbox() {
+    return abuseMailbox;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("address")
+  private Optional<List<String>> _getAddress() {
+    return address;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("admin_contacts")
+  private Optional<List<String>> _getAdminContacts() {
+    return adminContacts;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("city")
+  private Optional<String> _getCity() {
+    return city;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("country")
+  private Optional<String> _getCountry() {
+    return country;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("date_created")
+  private Optional<String> _getDateCreated() {
+    return dateCreated;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("date_updated")
+  private Optional<String> _getDateUpdated() {
+    return dateUpdated;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("district")
+  private Optional<String> _getDistrict() {
+    return district;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("fax_no")
+  private Optional<List<String>> _getFaxNo() {
+    return faxNo;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("mnt_by")
+  private Optional<List<String>> _getMntBy() {
+    return mntBy;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("mnt_ref")
+  private Optional<List<String>> _getMntRef() {
+    return mntRef;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("notify")
+  private Optional<List<String>> _getNotify() {
+    return notify;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("organizations")
+  private Optional<List<String>> _getOrganizations() {
+    return organizations;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("remarks")
+  private Optional<List<String>> _getRemarks() {
+    return remarks;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("state")
+  private Optional<String> _getState() {
+    return state;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("street")
+  private Optional<String> _getStreet() {
+    return street;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("tech_contacts")
+  private Optional<List<String>> _getTechContacts() {
+    return techContacts;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("zip_code")
+  private Optional<String> _getZipCode() {
+    return zipCode;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -86,12 +510,12 @@ public final class IpWhoisLookupResponseAdministrativeContactsItem {
   }
 
   private boolean equalTo(IpWhoisLookupResponseAdministrativeContactsItem other) {
-    return handle.equals(other.handle) && name.equals(other.name) && email.equals(other.email) && phone.equals(other.phone) && source.equals(other.source);
+    return handle.equals(other.handle) && name.equals(other.name) && email.equals(other.email) && phone.equals(other.phone) && source.equals(other.source) && abuseMailbox.equals(other.abuseMailbox) && address.equals(other.address) && adminContacts.equals(other.adminContacts) && city.equals(other.city) && country.equals(other.country) && dateCreated.equals(other.dateCreated) && dateUpdated.equals(other.dateUpdated) && district.equals(other.district) && faxNo.equals(other.faxNo) && mntBy.equals(other.mntBy) && mntRef.equals(other.mntRef) && notify.equals(other.notify) && organizations.equals(other.organizations) && remarks.equals(other.remarks) && state.equals(other.state) && street.equals(other.street) && techContacts.equals(other.techContacts) && zipCode.equals(other.zipCode);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.handle, this.name, this.email, this.phone, this.source);
+    return Objects.hash(this.handle, this.name, this.email, this.phone, this.source, this.abuseMailbox, this.address, this.adminContacts, this.city, this.country, this.dateCreated, this.dateUpdated, this.district, this.faxNo, this.mntBy, this.mntRef, this.notify, this.organizations, this.remarks, this.state, this.street, this.techContacts, this.zipCode);
   }
 
   @java.lang.Override
@@ -117,7 +541,42 @@ public final class IpWhoisLookupResponseAdministrativeContactsItem {
 
     private Optional<String> source = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<List<String>> abuseMailbox = Optional.empty();
+
+    private Optional<List<String>> address = Optional.empty();
+
+    private Optional<List<String>> adminContacts = Optional.empty();
+
+    private Optional<String> city = Optional.empty();
+
+    private Optional<String> country = Optional.empty();
+
+    private Optional<String> dateCreated = Optional.empty();
+
+    private Optional<String> dateUpdated = Optional.empty();
+
+    private Optional<String> district = Optional.empty();
+
+    private Optional<List<String>> faxNo = Optional.empty();
+
+    private Optional<List<String>> mntBy = Optional.empty();
+
+    private Optional<List<String>> mntRef = Optional.empty();
+
+    private Optional<List<String>> notify = Optional.empty();
+
+    private Optional<List<String>> organizations = Optional.empty();
+
+    private Optional<List<String>> remarks = Optional.empty();
+
+    private Optional<String> state = Optional.empty();
+
+    private Optional<String> street = Optional.empty();
+
+    private Optional<List<String>> techContacts = Optional.empty();
+
+    private Optional<String> zipCode = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -129,6 +588,24 @@ public final class IpWhoisLookupResponseAdministrativeContactsItem {
       email(other.getEmail());
       phone(other.getPhone());
       source(other.getSource());
+      abuseMailbox(other.getAbuseMailbox());
+      address(other.getAddress());
+      adminContacts(other.getAdminContacts());
+      city(other.getCity());
+      country(other.getCountry());
+      dateCreated(other.getDateCreated());
+      dateUpdated(other.getDateUpdated());
+      district(other.getDistrict());
+      faxNo(other.getFaxNo());
+      mntBy(other.getMntBy());
+      mntRef(other.getMntRef());
+      notify(other.getNotify());
+      organizations(other.getOrganizations());
+      remarks(other.getRemarks());
+      state(other.getState());
+      street(other.getStreet());
+      techContacts(other.getTechContacts());
+      zipCode(other.getZipCode());
       return this;
     }
 
@@ -202,8 +679,556 @@ public final class IpWhoisLookupResponseAdministrativeContactsItem {
       return this;
     }
 
+    /**
+     * <p>Abuse mailbox email addresses for this contact.</p>
+     */
+    @JsonSetter(
+        value = "abuse_mailbox",
+        nulls = Nulls.SKIP
+    )
+    public Builder abuseMailbox(Optional<List<String>> abuseMailbox) {
+      this.abuseMailbox = abuseMailbox;
+      return this;
+    }
+
+    public Builder abuseMailbox(List<String> abuseMailbox) {
+      this.abuseMailbox = Optional.ofNullable(abuseMailbox);
+      return this;
+    }
+
+    public Builder abuseMailbox(Nullable<List<String>> abuseMailbox) {
+      if (abuseMailbox.isNull()) {
+        this.abuseMailbox = null;
+      }
+      else if (abuseMailbox.isEmpty()) {
+        this.abuseMailbox = Optional.empty();
+      }
+      else {
+        this.abuseMailbox = Optional.of(abuseMailbox.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Address lines for this contact.</p>
+     */
+    @JsonSetter(
+        value = "address",
+        nulls = Nulls.SKIP
+    )
+    public Builder address(Optional<List<String>> address) {
+      this.address = address;
+      return this;
+    }
+
+    public Builder address(List<String> address) {
+      this.address = Optional.ofNullable(address);
+      return this;
+    }
+
+    public Builder address(Nullable<List<String>> address) {
+      if (address.isNull()) {
+        this.address = null;
+      }
+      else if (address.isEmpty()) {
+        this.address = Optional.empty();
+      }
+      else {
+        this.address = Optional.of(address.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Handles of admin persons or roles linked to this contact.</p>
+     */
+    @JsonSetter(
+        value = "admin_contacts",
+        nulls = Nulls.SKIP
+    )
+    public Builder adminContacts(Optional<List<String>> adminContacts) {
+      this.adminContacts = adminContacts;
+      return this;
+    }
+
+    public Builder adminContacts(List<String> adminContacts) {
+      this.adminContacts = Optional.ofNullable(adminContacts);
+      return this;
+    }
+
+    public Builder adminContacts(Nullable<List<String>> adminContacts) {
+      if (adminContacts.isNull()) {
+        this.adminContacts = null;
+      }
+      else if (adminContacts.isEmpty()) {
+        this.adminContacts = Optional.empty();
+      }
+      else {
+        this.adminContacts = Optional.of(adminContacts.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Parsed city from the address field.</p>
+     */
+    @JsonSetter(
+        value = "city",
+        nulls = Nulls.SKIP
+    )
+    public Builder city(Optional<String> city) {
+      this.city = city;
+      return this;
+    }
+
+    public Builder city(String city) {
+      this.city = Optional.ofNullable(city);
+      return this;
+    }
+
+    public Builder city(Nullable<String> city) {
+      if (city.isNull()) {
+        this.city = null;
+      }
+      else if (city.isEmpty()) {
+        this.city = Optional.empty();
+      }
+      else {
+        this.city = Optional.of(city.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Parsed country from the address field.</p>
+     */
+    @JsonSetter(
+        value = "country",
+        nulls = Nulls.SKIP
+    )
+    public Builder country(Optional<String> country) {
+      this.country = country;
+      return this;
+    }
+
+    public Builder country(String country) {
+      this.country = Optional.ofNullable(country);
+      return this;
+    }
+
+    public Builder country(Nullable<String> country) {
+      if (country.isNull()) {
+        this.country = null;
+      }
+      else if (country.isEmpty()) {
+        this.country = Optional.empty();
+      }
+      else {
+        this.country = Optional.of(country.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Registration date of this contact object (YYYY-MM-DD).</p>
+     */
+    @JsonSetter(
+        value = "date_created",
+        nulls = Nulls.SKIP
+    )
+    public Builder dateCreated(Optional<String> dateCreated) {
+      this.dateCreated = dateCreated;
+      return this;
+    }
+
+    public Builder dateCreated(String dateCreated) {
+      this.dateCreated = Optional.ofNullable(dateCreated);
+      return this;
+    }
+
+    public Builder dateCreated(Nullable<String> dateCreated) {
+      if (dateCreated.isNull()) {
+        this.dateCreated = null;
+      }
+      else if (dateCreated.isEmpty()) {
+        this.dateCreated = Optional.empty();
+      }
+      else {
+        this.dateCreated = Optional.of(dateCreated.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Last update date of this contact object (YYYY-MM-DD).</p>
+     */
+    @JsonSetter(
+        value = "date_updated",
+        nulls = Nulls.SKIP
+    )
+    public Builder dateUpdated(Optional<String> dateUpdated) {
+      this.dateUpdated = dateUpdated;
+      return this;
+    }
+
+    public Builder dateUpdated(String dateUpdated) {
+      this.dateUpdated = Optional.ofNullable(dateUpdated);
+      return this;
+    }
+
+    public Builder dateUpdated(Nullable<String> dateUpdated) {
+      if (dateUpdated.isNull()) {
+        this.dateUpdated = null;
+      }
+      else if (dateUpdated.isEmpty()) {
+        this.dateUpdated = Optional.empty();
+      }
+      else {
+        this.dateUpdated = Optional.of(dateUpdated.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Parsed district from the address field.</p>
+     */
+    @JsonSetter(
+        value = "district",
+        nulls = Nulls.SKIP
+    )
+    public Builder district(Optional<String> district) {
+      this.district = district;
+      return this;
+    }
+
+    public Builder district(String district) {
+      this.district = Optional.ofNullable(district);
+      return this;
+    }
+
+    public Builder district(Nullable<String> district) {
+      if (district.isNull()) {
+        this.district = null;
+      }
+      else if (district.isEmpty()) {
+        this.district = Optional.empty();
+      }
+      else {
+        this.district = Optional.of(district.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Fax numbers for this contact.</p>
+     */
+    @JsonSetter(
+        value = "fax_no",
+        nulls = Nulls.SKIP
+    )
+    public Builder faxNo(Optional<List<String>> faxNo) {
+      this.faxNo = faxNo;
+      return this;
+    }
+
+    public Builder faxNo(List<String> faxNo) {
+      this.faxNo = Optional.ofNullable(faxNo);
+      return this;
+    }
+
+    public Builder faxNo(Nullable<List<String>> faxNo) {
+      if (faxNo.isNull()) {
+        this.faxNo = null;
+      }
+      else if (faxNo.isEmpty()) {
+        this.faxNo = Optional.empty();
+      }
+      else {
+        this.faxNo = Optional.of(faxNo.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Maintainer handles for this contact object.</p>
+     */
+    @JsonSetter(
+        value = "mnt_by",
+        nulls = Nulls.SKIP
+    )
+    public Builder mntBy(Optional<List<String>> mntBy) {
+      this.mntBy = mntBy;
+      return this;
+    }
+
+    public Builder mntBy(List<String> mntBy) {
+      this.mntBy = Optional.ofNullable(mntBy);
+      return this;
+    }
+
+    public Builder mntBy(Nullable<List<String>> mntBy) {
+      if (mntBy.isNull()) {
+        this.mntBy = null;
+      }
+      else if (mntBy.isEmpty()) {
+        this.mntBy = Optional.empty();
+      }
+      else {
+        this.mntBy = Optional.of(mntBy.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Referenced maintainer handles for this contact object.</p>
+     */
+    @JsonSetter(
+        value = "mnt_ref",
+        nulls = Nulls.SKIP
+    )
+    public Builder mntRef(Optional<List<String>> mntRef) {
+      this.mntRef = mntRef;
+      return this;
+    }
+
+    public Builder mntRef(List<String> mntRef) {
+      this.mntRef = Optional.ofNullable(mntRef);
+      return this;
+    }
+
+    public Builder mntRef(Nullable<List<String>> mntRef) {
+      if (mntRef.isNull()) {
+        this.mntRef = null;
+      }
+      else if (mntRef.isEmpty()) {
+        this.mntRef = Optional.empty();
+      }
+      else {
+        this.mntRef = Optional.of(mntRef.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Notify email addresses for this contact object.</p>
+     */
+    @JsonSetter(
+        value = "notify",
+        nulls = Nulls.SKIP
+    )
+    public Builder notify(Optional<List<String>> notify) {
+      this.notify = notify;
+      return this;
+    }
+
+    public Builder notify(List<String> notify) {
+      this.notify = Optional.ofNullable(notify);
+      return this;
+    }
+
+    public Builder notify(Nullable<List<String>> notify) {
+      if (notify.isNull()) {
+        this.notify = null;
+      }
+      else if (notify.isEmpty()) {
+        this.notify = Optional.empty();
+      }
+      else {
+        this.notify = Optional.of(notify.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Handles of organization objects managing this contact.</p>
+     */
+    @JsonSetter(
+        value = "organizations",
+        nulls = Nulls.SKIP
+    )
+    public Builder organizations(Optional<List<String>> organizations) {
+      this.organizations = organizations;
+      return this;
+    }
+
+    public Builder organizations(List<String> organizations) {
+      this.organizations = Optional.ofNullable(organizations);
+      return this;
+    }
+
+    public Builder organizations(Nullable<List<String>> organizations) {
+      if (organizations.isNull()) {
+        this.organizations = null;
+      }
+      else if (organizations.isEmpty()) {
+        this.organizations = Optional.empty();
+      }
+      else {
+        this.organizations = Optional.of(organizations.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Remarks for this contact object.</p>
+     */
+    @JsonSetter(
+        value = "remarks",
+        nulls = Nulls.SKIP
+    )
+    public Builder remarks(Optional<List<String>> remarks) {
+      this.remarks = remarks;
+      return this;
+    }
+
+    public Builder remarks(List<String> remarks) {
+      this.remarks = Optional.ofNullable(remarks);
+      return this;
+    }
+
+    public Builder remarks(Nullable<List<String>> remarks) {
+      if (remarks.isNull()) {
+        this.remarks = null;
+      }
+      else if (remarks.isEmpty()) {
+        this.remarks = Optional.empty();
+      }
+      else {
+        this.remarks = Optional.of(remarks.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Parsed state from the address field.</p>
+     */
+    @JsonSetter(
+        value = "state",
+        nulls = Nulls.SKIP
+    )
+    public Builder state(Optional<String> state) {
+      this.state = state;
+      return this;
+    }
+
+    public Builder state(String state) {
+      this.state = Optional.ofNullable(state);
+      return this;
+    }
+
+    public Builder state(Nullable<String> state) {
+      if (state.isNull()) {
+        this.state = null;
+      }
+      else if (state.isEmpty()) {
+        this.state = Optional.empty();
+      }
+      else {
+        this.state = Optional.of(state.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Parsed street address from the address field.</p>
+     */
+    @JsonSetter(
+        value = "street",
+        nulls = Nulls.SKIP
+    )
+    public Builder street(Optional<String> street) {
+      this.street = street;
+      return this;
+    }
+
+    public Builder street(String street) {
+      this.street = Optional.ofNullable(street);
+      return this;
+    }
+
+    public Builder street(Nullable<String> street) {
+      if (street.isNull()) {
+        this.street = null;
+      }
+      else if (street.isEmpty()) {
+        this.street = Optional.empty();
+      }
+      else {
+        this.street = Optional.of(street.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Handles of technical persons or roles linked to this contact.</p>
+     */
+    @JsonSetter(
+        value = "tech_contacts",
+        nulls = Nulls.SKIP
+    )
+    public Builder techContacts(Optional<List<String>> techContacts) {
+      this.techContacts = techContacts;
+      return this;
+    }
+
+    public Builder techContacts(List<String> techContacts) {
+      this.techContacts = Optional.ofNullable(techContacts);
+      return this;
+    }
+
+    public Builder techContacts(Nullable<List<String>> techContacts) {
+      if (techContacts.isNull()) {
+        this.techContacts = null;
+      }
+      else if (techContacts.isEmpty()) {
+        this.techContacts = Optional.empty();
+      }
+      else {
+        this.techContacts = Optional.of(techContacts.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Parsed ZIP code from the address field.</p>
+     */
+    @JsonSetter(
+        value = "zip_code",
+        nulls = Nulls.SKIP
+    )
+    public Builder zipCode(Optional<String> zipCode) {
+      this.zipCode = zipCode;
+      return this;
+    }
+
+    public Builder zipCode(String zipCode) {
+      this.zipCode = Optional.ofNullable(zipCode);
+      return this;
+    }
+
+    public Builder zipCode(Nullable<String> zipCode) {
+      if (zipCode.isNull()) {
+        this.zipCode = null;
+      }
+      else if (zipCode.isEmpty()) {
+        this.zipCode = Optional.empty();
+      }
+      else {
+        this.zipCode = Optional.of(zipCode.get());
+      }
+      return this;
+    }
+
     public IpWhoisLookupResponseAdministrativeContactsItem build() {
-      return new IpWhoisLookupResponseAdministrativeContactsItem(handle, name, email, phone, source, additionalProperties);
+      return new IpWhoisLookupResponseAdministrativeContactsItem(handle, name, email, phone, source, abuseMailbox, address, adminContacts, city, country, dateCreated, dateUpdated, district, faxNo, mntBy, mntRef, notify, organizations, remarks, state, street, techContacts, zipCode, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("handle") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("email") || key.equalsIgnoreCase("phone") || key.equalsIgnoreCase("source") || key.equalsIgnoreCase("abuse_mailbox") || key.equalsIgnoreCase("address") || key.equalsIgnoreCase("admin_contacts") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("date_created") || key.equalsIgnoreCase("date_updated") || key.equalsIgnoreCase("district") || key.equalsIgnoreCase("fax_no") || key.equalsIgnoreCase("mnt_by") || key.equalsIgnoreCase("mnt_ref") || key.equalsIgnoreCase("notify") || key.equalsIgnoreCase("organizations") || key.equalsIgnoreCase("remarks") || key.equalsIgnoreCase("state") || key.equalsIgnoreCase("street") || key.equalsIgnoreCase("tech_contacts") || key.equalsIgnoreCase("zip_code")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -92,7 +92,6 @@ public final class WeatherTimeSeriesResponse {
 
     private Optional<Map<String, WeatherTimeSeriesResponseHistoricalValue>> historical = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -141,6 +140,14 @@ public final class WeatherTimeSeriesResponse {
 
     public WeatherTimeSeriesResponse build() {
       return new WeatherTimeSeriesResponse(location, historical, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("location") || key.equalsIgnoreCase("historical")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

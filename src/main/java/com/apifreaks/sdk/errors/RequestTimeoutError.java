@@ -5,21 +5,21 @@
 package com.apifreaks.sdk.errors;
 
 import com.apifreaks.sdk.core.ApifreaksApiApiException;
-import java.lang.Object;
+import com.apifreaks.sdk.types.RequestTimeoutErrorBody;
 import okhttp3.Response;
 
 public final class RequestTimeoutError extends ApifreaksApiApiException {
   /**
    * The body of the response that triggered the exception.
    */
-  private final Object body;
+  private final RequestTimeoutErrorBody body;
 
-  public RequestTimeoutError(Object body) {
+  public RequestTimeoutError(RequestTimeoutErrorBody body) {
     super("RequestTimeoutError", 408, body);
     this.body = body;
   }
 
-  public RequestTimeoutError(Object body, Response rawResponse) {
+  public RequestTimeoutError(RequestTimeoutErrorBody body, Response rawResponse) {
     super("RequestTimeoutError", 408, body, rawResponse);
     this.body = body;
   }
@@ -28,7 +28,7 @@ public final class RequestTimeoutError extends ApifreaksApiApiException {
    * @return the body
    */
   @java.lang.Override
-  public Object body() {
+  public RequestTimeoutErrorBody body() {
     return this.body;
   }
 }

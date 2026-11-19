@@ -184,7 +184,6 @@ public final class CurrencyLatestRatesRequest {
 
     private Optional<List<String>> symbols = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -201,7 +200,6 @@ public final class CurrencyLatestRatesRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -313,6 +311,14 @@ public final class CurrencyLatestRatesRequest {
     @java.lang.Override
     public CurrencyLatestRatesRequest build() {
       return new CurrencyLatestRatesRequest(symbols, apiKey, format, base, updates, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("symbols") || key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("base") || key.equalsIgnoreCase("updates")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

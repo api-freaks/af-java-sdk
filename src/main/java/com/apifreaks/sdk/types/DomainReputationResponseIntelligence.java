@@ -278,7 +278,6 @@ public final class DomainReputationResponseIntelligence {
 
     private List<DomainReputationResponseIntelligenceRelatedIocsItem> relatedIocs = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -299,7 +298,6 @@ public final class DomainReputationResponseIntelligence {
 
     /**
      * <p>Type of the indicator of compromise (e.g. domain).</p>
-     * <p>Type of the indicator of compromise (e.g. domain).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -310,7 +308,6 @@ public final class DomainReputationResponseIntelligence {
     }
 
     /**
-     * <p>Value of the indicator of compromise.</p>
      * <p>Value of the indicator of compromise.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -323,7 +320,6 @@ public final class DomainReputationResponseIntelligence {
 
     /**
      * <p>STIX 2.1 pattern representation of the IOC, ready to wrap into an Indicator object.</p>
-     * <p>STIX 2.1 pattern representation of the IOC, ready to wrap into an Indicator object.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -334,7 +330,6 @@ public final class DomainReputationResponseIntelligence {
     }
 
     /**
-     * <p>Recommended action based on the assessment.</p>
      * <p>Recommended action based on the assessment.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -510,6 +505,14 @@ public final class DomainReputationResponseIntelligence {
     @java.lang.Override
     public DomainReputationResponseIntelligence build() {
       return new DomainReputationResponseIntelligence(iocType, iocValue, relatedIocs, feedTags, stixPattern, recommendedAction, firstSeen, lastSeen, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("ioc_type") || key.equalsIgnoreCase("ioc_value") || key.equalsIgnoreCase("related_iocs") || key.equalsIgnoreCase("feed_tags") || key.equalsIgnoreCase("stix_pattern") || key.equalsIgnoreCase("recommended_action") || key.equalsIgnoreCase("first_seen") || key.equalsIgnoreCase("last_seen")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

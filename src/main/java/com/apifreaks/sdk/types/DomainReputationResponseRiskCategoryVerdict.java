@@ -12,6 +12,8 @@ import java.lang.String;
 public final class DomainReputationResponseRiskCategoryVerdict {
   public static final DomainReputationResponseRiskCategoryVerdict SAFE = new DomainReputationResponseRiskCategoryVerdict(Value.SAFE, "safe");
 
+  public static final DomainReputationResponseRiskCategoryVerdict UNKNOWN = new DomainReputationResponseRiskCategoryVerdict(Value.UNKNOWN, "unknown");
+
   public static final DomainReputationResponseRiskCategoryVerdict SUSPICIOUS = new DomainReputationResponseRiskCategoryVerdict(Value.SUSPICIOUS, "suspicious");
 
   private final Value value;
@@ -48,9 +50,11 @@ public final class DomainReputationResponseRiskCategoryVerdict {
     switch (value) {
       case SAFE:
         return visitor.visitSafe();
+      case UNKNOWN:
+        return visitor.visitUnknown();
       case SUSPICIOUS:
         return visitor.visitSuspicious();
-      case UNKNOWN:
+      case _UNKNOWN:
       default:
         return visitor.visitUnknown(string);
     }
@@ -63,10 +67,12 @@ public final class DomainReputationResponseRiskCategoryVerdict {
     switch (value) {
       case "safe":
         return SAFE;
+      case "unknown":
+        return UNKNOWN;
       case "suspicious":
         return SUSPICIOUS;
       default:
-        return new DomainReputationResponseRiskCategoryVerdict(Value.UNKNOWN, value);
+        return new DomainReputationResponseRiskCategoryVerdict(Value._UNKNOWN, value);
     }
   }
 
@@ -75,13 +81,17 @@ public final class DomainReputationResponseRiskCategoryVerdict {
 
     SUSPICIOUS,
 
-    UNKNOWN
+    UNKNOWN,
+
+    _UNKNOWN
   }
 
   public interface Visitor<T> {
     T visitSafe();
 
     T visitSuspicious();
+
+    T visitUnknown();
 
     T visitUnknown(String unknownType);
   }

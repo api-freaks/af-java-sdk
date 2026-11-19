@@ -258,7 +258,6 @@ public final class BulkCurrentWeatherResponseBulkItemLocationZero {
 
     private Optional<String> locality = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -280,7 +279,6 @@ public final class BulkCurrentWeatherResponseBulkItemLocationZero {
 
     /**
      * <p>Geographic latitude coordinate in decimal degrees, ranging from -90 (South Pole) to +90 (North Pole).</p>
-     * <p>Geographic latitude coordinate in decimal degrees, ranging from -90 (South Pole) to +90 (North Pole).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -291,7 +289,6 @@ public final class BulkCurrentWeatherResponseBulkItemLocationZero {
     }
 
     /**
-     * <p>Geographic longitude coordinate in decimal degrees, ranging from -180 (West) to +180 (East).</p>
      * <p>Geographic longitude coordinate in decimal degrees, ranging from -180 (West) to +180 (East).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -304,7 +301,6 @@ public final class BulkCurrentWeatherResponseBulkItemLocationZero {
 
     /**
      * <p>Full name of the country corresponding to the provided coordinates.</p>
-     * <p>Full name of the country corresponding to the provided coordinates.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -315,7 +311,6 @@ public final class BulkCurrentWeatherResponseBulkItemLocationZero {
     }
 
     /**
-     * <p>State, province, or primary administrative division name for the location.</p>
      * <p>State, province, or primary administrative division name for the location.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -328,7 +323,6 @@ public final class BulkCurrentWeatherResponseBulkItemLocationZero {
 
     /**
      * <p>City or municipal area name associated with the coordinate location.</p>
-     * <p>City or municipal area name associated with the coordinate location.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -340,7 +334,6 @@ public final class BulkCurrentWeatherResponseBulkItemLocationZero {
 
     /**
      * <p>IANA timezone database identifier for the location (e.g., America/New_York, Europe/London).</p>
-     * <p>IANA timezone database identifier for the location (e.g., America/New_York, Europe/London).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -351,7 +344,6 @@ public final class BulkCurrentWeatherResponseBulkItemLocationZero {
     }
 
     /**
-     * <p>Abbreviated timezone representation based on current offset (e.g., EST, GMT, PST).</p>
      * <p>Abbreviated timezone representation based on current offset (e.g., EST, GMT, PST).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -411,6 +403,14 @@ public final class BulkCurrentWeatherResponseBulkItemLocationZero {
     @java.lang.Override
     public BulkCurrentWeatherResponseBulkItemLocationZero build() {
       return new BulkCurrentWeatherResponseBulkItemLocationZero(latitude, longitude, countryName, stateProv, city, locality, elevation, timezone, timezoneAbbreviation, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("latitude") || key.equalsIgnoreCase("longitude") || key.equalsIgnoreCase("country_name") || key.equalsIgnoreCase("state_prov") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("locality") || key.equalsIgnoreCase("elevation") || key.equalsIgnoreCase("timezone") || key.equalsIgnoreCase("timezone_abbreviation")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

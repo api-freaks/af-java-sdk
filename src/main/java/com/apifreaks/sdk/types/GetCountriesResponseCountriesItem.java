@@ -173,7 +173,6 @@ public final class GetCountriesResponseCountriesItem {
 
     private String subregion;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -243,6 +242,14 @@ public final class GetCountriesResponseCountriesItem {
     @java.lang.Override
     public GetCountriesResponseCountriesItem build() {
       return new GetCountriesResponseCountriesItem(name, isoAlpha2, isoAlpha3, isoNumeric, capital, region, subregion, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("iso_alpha_2") || key.equalsIgnoreCase("iso_alpha_3") || key.equalsIgnoreCase("iso_numeric") || key.equalsIgnoreCase("capital") || key.equalsIgnoreCase("region") || key.equalsIgnoreCase("subregion")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

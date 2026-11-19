@@ -46,6 +46,30 @@ public class QueryStringMapper {
         }
     }
 
+    /**
+     * Adds an array query parameter as ONE comma-separated value ({@code key=a,b}), as
+     * OpenAPI {@code style: form, explode: false} requires. Added by
+     * af-sdk-generation/scripts/lib/fix_java_array_query_csv.py.
+     */
+    public static void addCommaSeparatedQueryParameter(HttpUrl.Builder httpUrl, String key, Object value) {
+        JsonNode valueNode = MAPPER.valueToTree(value);
+        if (!valueNode.isArray()) {
+            addQueryParameter(httpUrl, key, value, false);
+            return;
+        }
+        if (valueNode.size() == 0) {
+            return;
+        }
+        StringBuilder joined = new StringBuilder();
+        for (JsonNode element : valueNode) {
+            if (joined.length() > 0) {
+                joined.append(',');
+            }
+            joined.append(element.isTextual() ? element.textValue() : element.toString());
+        }
+        httpUrl.addQueryParameter(key, joined.toString());
+    }
+
     public static void addFormDataPart(
             MultipartBody.Builder multipartBody, String key, Object value, boolean arraysAsRepeats) {
         JsonNode valueNode = MAPPER.valueToTree(value);

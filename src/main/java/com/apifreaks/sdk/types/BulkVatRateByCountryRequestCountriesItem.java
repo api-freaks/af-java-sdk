@@ -116,7 +116,6 @@ public final class BulkVatRateByCountryRequestCountriesItem {
 
     private Optional<String> state = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -130,7 +129,6 @@ public final class BulkVatRateByCountryRequestCountriesItem {
     }
 
     /**
-     * <p>Country identifier in Alpha-2 (US), Alpha-3 (USA), or full name (United_States). Pair with &quot;state&quot; for regional lookup; values are case-insensitive and may use underscores.</p>
      * <p>Country identifier in Alpha-2 (US), Alpha-3 (USA), or full name (United_States). Pair with &quot;state&quot; for regional lookup; values are case-insensitive and may use underscores.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -167,6 +165,14 @@ public final class BulkVatRateByCountryRequestCountriesItem {
     @java.lang.Override
     public BulkVatRateByCountryRequestCountriesItem build() {
       return new BulkVatRateByCountryRequestCountriesItem(country, state, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("country") || key.equalsIgnoreCase("state")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -423,7 +423,6 @@ public final class TimezoneConvertRequest {
 
     private Optional<TimezoneConvertRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -452,7 +451,6 @@ public final class TimezoneConvertRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -834,6 +832,14 @@ public final class TimezoneConvertRequest {
     @java.lang.Override
     public TimezoneConvertRequest build() {
       return new TimezoneConvertRequest(apiKey, format, time, tzFrom, tzTo, latFrom, longFrom, latTo, longTo, locationFrom, locationTo, iataFrom, iataTo, icaoFrom, icaoTo, locodeFrom, locodeTo, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("time") || key.equalsIgnoreCase("tz_from") || key.equalsIgnoreCase("tz_to") || key.equalsIgnoreCase("lat_from") || key.equalsIgnoreCase("long_from") || key.equalsIgnoreCase("lat_to") || key.equalsIgnoreCase("long_to") || key.equalsIgnoreCase("location_from") || key.equalsIgnoreCase("location_to") || key.equalsIgnoreCase("iata_from") || key.equalsIgnoreCase("iata_to") || key.equalsIgnoreCase("icao_from") || key.equalsIgnoreCase("icao_to") || key.equalsIgnoreCase("locode_from") || key.equalsIgnoreCase("locode_to")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

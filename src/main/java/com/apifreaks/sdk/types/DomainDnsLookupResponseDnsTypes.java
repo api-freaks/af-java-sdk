@@ -42,11 +42,14 @@ public final class DomainDnsLookupResponseDnsTypes {
 
   private final Optional<Double> spf;
 
+  private final Optional<Double> ptr;
+
   private final Map<String, Object> additionalProperties;
 
   private DomainDnsLookupResponseDnsTypes(Optional<Double> a, Optional<Double> aaaa,
       Optional<Double> cname, Optional<Double> mx, Optional<Double> ns, Optional<Double> soa,
-      Optional<Double> txt, Optional<Double> spf, Map<String, Object> additionalProperties) {
+      Optional<Double> txt, Optional<Double> spf, Optional<Double> ptr,
+      Map<String, Object> additionalProperties) {
     this.a = a;
     this.aaaa = aaaa;
     this.cname = cname;
@@ -55,6 +58,7 @@ public final class DomainDnsLookupResponseDnsTypes {
     this.soa = soa;
     this.txt = txt;
     this.spf = spf;
+    this.ptr = ptr;
     this.additionalProperties = additionalProperties;
   }
 
@@ -98,6 +102,11 @@ public final class DomainDnsLookupResponseDnsTypes {
     return spf;
   }
 
+  @JsonProperty("PTR")
+  public Optional<Double> getPtr() {
+    return ptr;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -110,12 +119,12 @@ public final class DomainDnsLookupResponseDnsTypes {
   }
 
   private boolean equalTo(DomainDnsLookupResponseDnsTypes other) {
-    return a.equals(other.a) && aaaa.equals(other.aaaa) && cname.equals(other.cname) && mx.equals(other.mx) && ns.equals(other.ns) && soa.equals(other.soa) && txt.equals(other.txt) && spf.equals(other.spf);
+    return a.equals(other.a) && aaaa.equals(other.aaaa) && cname.equals(other.cname) && mx.equals(other.mx) && ns.equals(other.ns) && soa.equals(other.soa) && txt.equals(other.txt) && spf.equals(other.spf) && ptr.equals(other.ptr);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.a, this.aaaa, this.cname, this.mx, this.ns, this.soa, this.txt, this.spf);
+    return Objects.hash(this.a, this.aaaa, this.cname, this.mx, this.ns, this.soa, this.txt, this.spf, this.ptr);
   }
 
   @java.lang.Override
@@ -147,7 +156,8 @@ public final class DomainDnsLookupResponseDnsTypes {
 
     private Optional<Double> spf = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<Double> ptr = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -162,6 +172,7 @@ public final class DomainDnsLookupResponseDnsTypes {
       soa(other.getSoa());
       txt(other.getTxt());
       spf(other.getSpf());
+      ptr(other.getPtr());
       return this;
     }
 
@@ -277,8 +288,30 @@ public final class DomainDnsLookupResponseDnsTypes {
       return this;
     }
 
+    @JsonSetter(
+        value = "PTR",
+        nulls = Nulls.SKIP
+    )
+    public Builder ptr(Optional<Double> ptr) {
+      this.ptr = ptr;
+      return this;
+    }
+
+    public Builder ptr(Double ptr) {
+      this.ptr = Optional.ofNullable(ptr);
+      return this;
+    }
+
     public DomainDnsLookupResponseDnsTypes build() {
-      return new DomainDnsLookupResponseDnsTypes(a, aaaa, cname, mx, ns, soa, txt, spf, additionalProperties);
+      return new DomainDnsLookupResponseDnsTypes(a, aaaa, cname, mx, ns, soa, txt, spf, ptr, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("A") || key.equalsIgnoreCase("AAAA") || key.equalsIgnoreCase("CNAME") || key.equalsIgnoreCase("MX") || key.equalsIgnoreCase("NS") || key.equalsIgnoreCase("SOA") || key.equalsIgnoreCase("TXT") || key.equalsIgnoreCase("SPF") || key.equalsIgnoreCase("PTR")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

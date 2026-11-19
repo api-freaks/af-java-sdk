@@ -235,7 +235,6 @@ public final class BulkGeolocationLookupResponseItemTimeZone {
 
     private Optional<BulkGeolocationLookupResponseItemTimeZoneDstEnd> dstEnd = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -487,6 +486,14 @@ public final class BulkGeolocationLookupResponseItemTimeZone {
 
     public BulkGeolocationLookupResponseItemTimeZone build() {
       return new BulkGeolocationLookupResponseItemTimeZone(name, offset, offsetWithDst, currentTime, currentTimeUnix, currentTzAbbreviation, currentTzFullName, standardTzAbbreviation, standardTzFullName, isDst, dstSavings, dstExists, dstTzAbbreviation, dstTzFullName, dstStart, dstEnd, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("offset") || key.equalsIgnoreCase("offset_with_dst") || key.equalsIgnoreCase("current_time") || key.equalsIgnoreCase("current_time_unix") || key.equalsIgnoreCase("current_tz_abbreviation") || key.equalsIgnoreCase("current_tz_full_name") || key.equalsIgnoreCase("standard_tz_abbreviation") || key.equalsIgnoreCase("standard_tz_full_name") || key.equalsIgnoreCase("is_dst") || key.equalsIgnoreCase("dst_savings") || key.equalsIgnoreCase("dst_exists") || key.equalsIgnoreCase("dst_tz_abbreviation") || key.equalsIgnoreCase("dst_tz_full_name") || key.equalsIgnoreCase("dst_start") || key.equalsIgnoreCase("dst_end")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

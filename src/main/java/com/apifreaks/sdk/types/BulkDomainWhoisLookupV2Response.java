@@ -80,7 +80,6 @@ public final class BulkDomainWhoisLookupV2Response {
   public static final class Builder {
     private List<BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItem> bulkWhoisResponse = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -123,6 +122,14 @@ public final class BulkDomainWhoisLookupV2Response {
 
     public BulkDomainWhoisLookupV2Response build() {
       return new BulkDomainWhoisLookupV2Response(bulkWhoisResponse, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("bulk_whois_response")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {
