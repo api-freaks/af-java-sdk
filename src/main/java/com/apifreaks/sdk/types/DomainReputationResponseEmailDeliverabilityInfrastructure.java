@@ -4,9 +4,12 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.Nullable;
+import com.apifreaks.sdk.core.NullableNonemptyFilter;
 import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.jetbrains.annotations.NotNull;
+import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
@@ -31,14 +34,14 @@ public final class DomainReputationResponseEmailDeliverabilityInfrastructure {
 
   private final List<String> mxRecords;
 
-  private final String mxProvider;
+  private final Optional<String> mxProvider;
 
   private final boolean nullMx;
 
   private final Map<String, Object> additionalProperties;
 
   private DomainReputationResponseEmailDeliverabilityInfrastructure(int mxCount,
-      List<String> mxRecords, String mxProvider, boolean nullMx,
+      List<String> mxRecords, Optional<String> mxProvider, boolean nullMx,
       Map<String, Object> additionalProperties) {
     this.mxCount = mxCount;
     this.mxRecords = mxRecords;
@@ -66,8 +69,11 @@ public final class DomainReputationResponseEmailDeliverabilityInfrastructure {
   /**
    * @return Email hosting provider inferred from the MX records.
    */
-  @JsonProperty("mx_provider")
-  public String getMxProvider() {
+  @JsonIgnore
+  public Optional<String> getMxProvider() {
+    if (mxProvider == null) {
+      return Optional.empty();
+    }
     return mxProvider;
   }
 
@@ -77,6 +83,15 @@ public final class DomainReputationResponseEmailDeliverabilityInfrastructure {
   @JsonProperty("null_mx")
   public boolean getNullMx() {
     return nullMx;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("mx_provider")
+  private Optional<String> _getMxProvider() {
+    return mxProvider;
   }
 
   @java.lang.Override
@@ -112,16 +127,9 @@ public final class DomainReputationResponseEmailDeliverabilityInfrastructure {
     /**
      * <p>Number of MX records found for the domain.</p>
      */
-    MxProviderStage mxCount(int mxCount);
+    NullMxStage mxCount(int mxCount);
 
     Builder from(DomainReputationResponseEmailDeliverabilityInfrastructure other);
-  }
-
-  public interface MxProviderStage {
-    /**
-     * <p>Email hosting provider inferred from the MX records.</p>
-     */
-    NullMxStage mxProvider(@NotNull String mxProvider);
   }
 
   public interface NullMxStage {
@@ -146,21 +154,29 @@ public final class DomainReputationResponseEmailDeliverabilityInfrastructure {
     _FinalStage addMxRecords(String mxRecords);
 
     _FinalStage addAllMxRecords(List<String> mxRecords);
+
+    /**
+     * <p>Email hosting provider inferred from the MX records.</p>
+     */
+    _FinalStage mxProvider(Optional<String> mxProvider);
+
+    _FinalStage mxProvider(String mxProvider);
+
+    _FinalStage mxProvider(Nullable<String> mxProvider);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements MxCountStage, MxProviderStage, NullMxStage, _FinalStage {
+  public static final class Builder implements MxCountStage, NullMxStage, _FinalStage {
     private int mxCount;
-
-    private String mxProvider;
 
     private boolean nullMx;
 
+    private Optional<String> mxProvider = Optional.empty();
+
     private List<String> mxRecords = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -177,30 +193,16 @@ public final class DomainReputationResponseEmailDeliverabilityInfrastructure {
 
     /**
      * <p>Number of MX records found for the domain.</p>
-     * <p>Number of MX records found for the domain.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("mx_count")
-    public MxProviderStage mxCount(int mxCount) {
+    public NullMxStage mxCount(int mxCount) {
       this.mxCount = mxCount;
       return this;
     }
 
     /**
-     * <p>Email hosting provider inferred from the MX records.</p>
-     * <p>Email hosting provider inferred from the MX records.</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    @JsonSetter("mx_provider")
-    public NullMxStage mxProvider(@NotNull String mxProvider) {
-      this.mxProvider = Objects.requireNonNull(mxProvider, "mxProvider must not be null");
-      return this;
-    }
-
-    /**
-     * <p>Indicates whether the domain explicitly declines email via a null MX record.</p>
      * <p>Indicates whether the domain explicitly declines email via a null MX record.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -208,6 +210,47 @@ public final class DomainReputationResponseEmailDeliverabilityInfrastructure {
     @JsonSetter("null_mx")
     public _FinalStage nullMx(boolean nullMx) {
       this.nullMx = nullMx;
+      return this;
+    }
+
+    /**
+     * <p>Email hosting provider inferred from the MX records.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage mxProvider(Nullable<String> mxProvider) {
+      if (mxProvider.isNull()) {
+        this.mxProvider = null;
+      }
+      else if (mxProvider.isEmpty()) {
+        this.mxProvider = Optional.empty();
+      }
+      else {
+        this.mxProvider = Optional.of(mxProvider.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Email hosting provider inferred from the MX records.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage mxProvider(String mxProvider) {
+      this.mxProvider = Optional.ofNullable(mxProvider);
+      return this;
+    }
+
+    /**
+     * <p>Email hosting provider inferred from the MX records.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "mx_provider",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage mxProvider(Optional<String> mxProvider) {
+      this.mxProvider = mxProvider;
       return this;
     }
 
@@ -252,6 +295,14 @@ public final class DomainReputationResponseEmailDeliverabilityInfrastructure {
     @java.lang.Override
     public DomainReputationResponseEmailDeliverabilityInfrastructure build() {
       return new DomainReputationResponseEmailDeliverabilityInfrastructure(mxCount, mxRecords, mxProvider, nullMx, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("mx_count") || key.equalsIgnoreCase("mx_records") || key.equalsIgnoreCase("mx_provider") || key.equalsIgnoreCase("null_mx")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

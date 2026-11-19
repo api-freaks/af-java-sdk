@@ -104,7 +104,6 @@ public final class PhoneValidateResponseRawInput {
 
     private Optional<String> dialerRegion = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -170,6 +169,14 @@ public final class PhoneValidateResponseRawInput {
 
     public PhoneValidateResponseRawInput build() {
       return new PhoneValidateResponseRawInput(number, region, dialerRegion, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("number") || key.equalsIgnoreCase("region") || key.equalsIgnoreCase("dialer_region")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

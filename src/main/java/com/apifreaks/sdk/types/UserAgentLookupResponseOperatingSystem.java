@@ -194,7 +194,6 @@ public final class UserAgentLookupResponseOperatingSystem {
 
     private String build;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -211,7 +210,6 @@ public final class UserAgentLookupResponseOperatingSystem {
     }
 
     /**
-     * <p>Operating system name or the base software name that runs on the hardware.</p>
      * <p>Operating system name or the base software name that runs on the hardware.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -234,17 +232,6 @@ public final class UserAgentLookupResponseOperatingSystem {
      * <li>Anonymized</li>
      * <li>Unknown</li>
      * </ol>
-     * <p>Operating system type. Possible values:</p>
-     * <ol>
-     * <li>Desktop</li>
-     * <li>Mobile</li>
-     * <li>Game Console</li>
-     * <li>Embedded</li>
-     * <li>Cloud</li>
-     * <li>Hacker</li>
-     * <li>Anonymized</li>
-     * <li>Unknown</li>
-     * </ol>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -255,7 +242,6 @@ public final class UserAgentLookupResponseOperatingSystem {
     }
 
     /**
-     * <p>Operating system version</p>
      * <p>Operating system version</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -268,7 +254,6 @@ public final class UserAgentLookupResponseOperatingSystem {
 
     /**
      * <p>Operating system version major</p>
-     * <p>Operating system version major</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -279,7 +264,6 @@ public final class UserAgentLookupResponseOperatingSystem {
     }
 
     /**
-     * <p>Operating system build</p>
      * <p>Operating system build</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -293,6 +277,14 @@ public final class UserAgentLookupResponseOperatingSystem {
     @java.lang.Override
     public UserAgentLookupResponseOperatingSystem build() {
       return new UserAgentLookupResponseOperatingSystem(name, type, version, versionMajor, build, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("version") || key.equalsIgnoreCase("version_major") || key.equalsIgnoreCase("build")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -8,7 +8,6 @@ import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
@@ -19,7 +18,6 @@ import java.lang.Object;
 import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Map;
 import java.util.Objects;
 
 @JsonDeserialize(
@@ -46,8 +44,6 @@ public final class WebScrapeRequestProxy {
       return visitor.visit((boolean) this.value);
     } else if(this.type == 1) {
       return visitor.visit((String) this.value);
-    } else if(this.type == 2) {
-      return visitor.visit((Map<String, Object>) this.value);
     }
     throw new IllegalStateException("Failed to visit value. This should never happen.");
   }
@@ -80,16 +76,10 @@ public final class WebScrapeRequestProxy {
     return new WebScrapeRequestProxy(value, 1);
   }
 
-  public static WebScrapeRequestProxy of(Map<String, Object> value) {
-    return new WebScrapeRequestProxy(value, 2);
-  }
-
   public interface Visitor<T> {
     T visit(boolean value);
 
     T visit(String value);
-
-    T visit(Map<String, Object> value);
   }
 
   static final class Deserializer extends StdDeserializer<WebScrapeRequestProxy> {
@@ -106,10 +96,6 @@ public final class WebScrapeRequestProxy {
       }
       try {
         return of(ObjectMappers.JSON_MAPPER.convertValue(value, String.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, new TypeReference<Map<String, Object>>() {}));
       } catch(RuntimeException e) {
       }
       throw new JsonParseException(p, "Failed to deserialize");

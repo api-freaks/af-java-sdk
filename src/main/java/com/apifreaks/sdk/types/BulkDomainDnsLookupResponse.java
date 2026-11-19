@@ -76,7 +76,6 @@ public final class BulkDomainDnsLookupResponse {
   public static final class Builder {
     private List<BulkDomainDnsLookupResponseBulkDnsInfoItem> bulkDnsInfo = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -113,6 +112,14 @@ public final class BulkDomainDnsLookupResponse {
 
     public BulkDomainDnsLookupResponse build() {
       return new BulkDomainDnsLookupResponse(bulkDnsInfo, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("bulk_dns_info")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

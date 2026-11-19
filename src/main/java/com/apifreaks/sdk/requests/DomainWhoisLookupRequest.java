@@ -137,7 +137,6 @@ public final class DomainWhoisLookupRequest {
 
     private Optional<DomainWhoisLookupRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -153,7 +152,6 @@ public final class DomainWhoisLookupRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -164,7 +162,6 @@ public final class DomainWhoisLookupRequest {
     }
 
     /**
-     * <p>Domain name for WHOIS lookup</p>
      * <p>Domain name for WHOIS lookup</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -201,6 +198,14 @@ public final class DomainWhoisLookupRequest {
     @java.lang.Override
     public DomainWhoisLookupRequest build() {
       return new DomainWhoisLookupRequest(apiKey, format, domainName, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("domainName")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

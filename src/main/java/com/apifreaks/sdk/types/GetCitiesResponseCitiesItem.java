@@ -145,7 +145,6 @@ public final class GetCitiesResponseCitiesItem {
 
     private String isoAlpha2;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -199,6 +198,14 @@ public final class GetCitiesResponseCitiesItem {
     @java.lang.Override
     public GetCitiesResponseCitiesItem build() {
       return new GetCitiesResponseCitiesItem(name, latitude, longitude, adminUnit, isoAlpha2, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("latitude") || key.equalsIgnoreCase("longitude") || key.equalsIgnoreCase("admin_unit") || key.equalsIgnoreCase("iso_alpha_2")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -138,7 +138,6 @@ public final class DomainReputationResponseEmailDeliverabilityAuthentication {
 
     private DomainReputationResponseEmailDeliverabilityAuthenticationDmarc dmarc;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -154,7 +153,6 @@ public final class DomainReputationResponseEmailDeliverabilityAuthentication {
 
     /**
      * <p>Sender Policy Framework configuration.</p>
-     * <p>Sender Policy Framework configuration.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -167,7 +165,6 @@ public final class DomainReputationResponseEmailDeliverabilityAuthentication {
 
     /**
      * <p>DomainKeys Identified Mail configuration.</p>
-     * <p>DomainKeys Identified Mail configuration.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -179,7 +176,6 @@ public final class DomainReputationResponseEmailDeliverabilityAuthentication {
     }
 
     /**
-     * <p>Domain-based Message Authentication, Reporting and Conformance configuration.</p>
      * <p>Domain-based Message Authentication, Reporting and Conformance configuration.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -194,6 +190,14 @@ public final class DomainReputationResponseEmailDeliverabilityAuthentication {
     @java.lang.Override
     public DomainReputationResponseEmailDeliverabilityAuthentication build() {
       return new DomainReputationResponseEmailDeliverabilityAuthentication(spf, dkim, dmarc, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("spf") || key.equalsIgnoreCase("dkim") || key.equalsIgnoreCase("dmarc")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

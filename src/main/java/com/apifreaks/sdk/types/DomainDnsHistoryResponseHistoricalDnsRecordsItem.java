@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import java.lang.Boolean;
 import java.lang.Object;
 import java.lang.String;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
@@ -31,7 +33,7 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
 
   private final String domainName;
 
-  private final boolean domainRegistered;
+  private final Optional<Boolean> domainRegistered;
 
   private final DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsTypes dnsTypes;
 
@@ -40,7 +42,8 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
   private final Map<String, Object> additionalProperties;
 
   private DomainDnsHistoryResponseHistoricalDnsRecordsItem(String queryTime, String domainName,
-      boolean domainRegistered, DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsTypes dnsTypes,
+      Optional<Boolean> domainRegistered,
+      DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsTypes dnsTypes,
       List<DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItem> dnsRecords,
       Map<String, Object> additionalProperties) {
     this.queryTime = queryTime;
@@ -65,7 +68,7 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
   }
 
   @JsonProperty("domainRegistered")
-  public boolean getDomainRegistered() {
+  public Optional<Boolean> getDomainRegistered() {
     return domainRegistered;
   }
 
@@ -91,7 +94,7 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
   }
 
   private boolean equalTo(DomainDnsHistoryResponseHistoricalDnsRecordsItem other) {
-    return queryTime.equals(other.queryTime) && domainName.equals(other.domainName) && domainRegistered == other.domainRegistered && dnsTypes.equals(other.dnsTypes) && dnsRecords.equals(other.dnsRecords);
+    return queryTime.equals(other.queryTime) && domainName.equals(other.domainName) && domainRegistered.equals(other.domainRegistered) && dnsTypes.equals(other.dnsTypes) && dnsRecords.equals(other.dnsRecords);
   }
 
   @java.lang.Override
@@ -118,11 +121,7 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
   }
 
   public interface DomainNameStage {
-    DomainRegisteredStage domainName(@NotNull String domainName);
-  }
-
-  public interface DomainRegisteredStage {
-    DnsTypesStage domainRegistered(boolean domainRegistered);
+    DnsTypesStage domainName(@NotNull String domainName);
   }
 
   public interface DnsTypesStage {
@@ -137,6 +136,10 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
 
+    _FinalStage domainRegistered(Optional<Boolean> domainRegistered);
+
+    _FinalStage domainRegistered(Boolean domainRegistered);
+
     _FinalStage dnsRecords(
         List<DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItem> dnsRecords);
 
@@ -150,18 +153,17 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements QueryTimeStage, DomainNameStage, DomainRegisteredStage, DnsTypesStage, _FinalStage {
+  public static final class Builder implements QueryTimeStage, DomainNameStage, DnsTypesStage, _FinalStage {
     private String queryTime;
 
     private String domainName;
-
-    private boolean domainRegistered;
 
     private DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsTypes dnsTypes;
 
     private List<DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItem> dnsRecords = new ArrayList<>();
 
-    @JsonAnySetter
+    private Optional<Boolean> domainRegistered = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -179,7 +181,6 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
 
     /**
      * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
-     * <p>Timestamp when the query was executed (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -191,15 +192,8 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
 
     @java.lang.Override
     @JsonSetter("domainName")
-    public DomainRegisteredStage domainName(@NotNull String domainName) {
+    public DnsTypesStage domainName(@NotNull String domainName) {
       this.domainName = Objects.requireNonNull(domainName, "domainName must not be null");
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter("domainRegistered")
-    public DnsTypesStage domainRegistered(boolean domainRegistered) {
-      this.domainRegistered = domainRegistered;
       return this;
     }
 
@@ -242,8 +236,32 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItem {
     }
 
     @java.lang.Override
+    public _FinalStage domainRegistered(Boolean domainRegistered) {
+      this.domainRegistered = Optional.ofNullable(domainRegistered);
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter(
+        value = "domainRegistered",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage domainRegistered(Optional<Boolean> domainRegistered) {
+      this.domainRegistered = domainRegistered;
+      return this;
+    }
+
+    @java.lang.Override
     public DomainDnsHistoryResponseHistoricalDnsRecordsItem build() {
       return new DomainDnsHistoryResponseHistoricalDnsRecordsItem(queryTime, domainName, domainRegistered, dnsTypes, dnsRecords, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("queryTime") || key.equalsIgnoreCase("domainName") || key.equalsIgnoreCase("domainRegistered") || key.equalsIgnoreCase("dnsTypes") || key.equalsIgnoreCase("dnsRecords")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

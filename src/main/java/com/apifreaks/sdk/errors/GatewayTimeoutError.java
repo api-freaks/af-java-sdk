@@ -5,21 +5,21 @@
 package com.apifreaks.sdk.errors;
 
 import com.apifreaks.sdk.core.ApifreaksApiApiException;
-import java.lang.Object;
+import com.apifreaks.sdk.types.GatewayTimeoutErrorBody;
 import okhttp3.Response;
 
 public final class GatewayTimeoutError extends ApifreaksApiApiException {
   /**
    * The body of the response that triggered the exception.
    */
-  private final Object body;
+  private final GatewayTimeoutErrorBody body;
 
-  public GatewayTimeoutError(Object body) {
+  public GatewayTimeoutError(GatewayTimeoutErrorBody body) {
     super("GatewayTimeoutError", 504, body);
     this.body = body;
   }
 
-  public GatewayTimeoutError(Object body, Response rawResponse) {
+  public GatewayTimeoutError(GatewayTimeoutErrorBody body, Response rawResponse) {
     super("GatewayTimeoutError", 504, body, rawResponse);
     this.body = body;
   }
@@ -28,7 +28,7 @@ public final class GatewayTimeoutError extends ApifreaksApiApiException {
    * @return the body
    */
   @java.lang.Override
-  public Object body() {
+  public GatewayTimeoutErrorBody body() {
     return this.body;
   }
 }

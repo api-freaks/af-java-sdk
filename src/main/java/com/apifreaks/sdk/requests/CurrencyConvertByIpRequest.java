@@ -201,7 +201,6 @@ public final class CurrencyConvertByIpRequest {
 
     private Optional<CurrencyConvertByIpRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -220,7 +219,6 @@ public final class CurrencyConvertByIpRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -231,7 +229,6 @@ public final class CurrencyConvertByIpRequest {
     }
 
     /**
-     * <p>From currency symbol</p>
      * <p>From currency symbol</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -337,6 +334,14 @@ public final class CurrencyConvertByIpRequest {
     @java.lang.Override
     public CurrencyConvertByIpRequest build() {
       return new CurrencyConvertByIpRequest(apiKey, format, updates, from, ip, amount, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("updates") || key.equalsIgnoreCase("from") || key.equalsIgnoreCase("ip") || key.equalsIgnoreCase("amount")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

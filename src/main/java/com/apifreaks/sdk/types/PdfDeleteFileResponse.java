@@ -134,7 +134,6 @@ public final class PdfDeleteFileResponse {
 
     private String message;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -150,7 +149,6 @@ public final class PdfDeleteFileResponse {
 
     /**
      * <p>The unique identifier of the file.</p>
-     * <p>The unique identifier of the file.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -162,7 +160,6 @@ public final class PdfDeleteFileResponse {
 
     /**
      * <p>Indicates whether the file deletion request was successful.</p>
-     * <p>Indicates whether the file deletion request was successful.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -173,7 +170,6 @@ public final class PdfDeleteFileResponse {
     }
 
     /**
-     * <p>A message indicating the result of the file deletion request.</p>
      * <p>A message indicating the result of the file deletion request.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -187,6 +183,14 @@ public final class PdfDeleteFileResponse {
     @java.lang.Override
     public PdfDeleteFileResponse build() {
       return new PdfDeleteFileResponse(fileId, success, message, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("fileId") || key.equalsIgnoreCase("success") || key.equalsIgnoreCase("message")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

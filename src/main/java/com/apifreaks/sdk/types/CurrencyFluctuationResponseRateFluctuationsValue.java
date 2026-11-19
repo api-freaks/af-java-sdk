@@ -154,7 +154,6 @@ public final class CurrencyFluctuationResponseRateFluctuationsValue {
 
     private String percentChange;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -171,7 +170,6 @@ public final class CurrencyFluctuationResponseRateFluctuationsValue {
 
     /**
      * <p>Starting rate of the currency during the interval.</p>
-     * <p>Starting rate of the currency during the interval.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -182,7 +180,6 @@ public final class CurrencyFluctuationResponseRateFluctuationsValue {
     }
 
     /**
-     * <p>Ending rate of the currency during the interval.</p>
      * <p>Ending rate of the currency during the interval.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -195,7 +192,6 @@ public final class CurrencyFluctuationResponseRateFluctuationsValue {
 
     /**
      * <p>Absolute change in currency rate over the interval.</p>
-     * <p>Absolute change in currency rate over the interval.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -206,7 +202,6 @@ public final class CurrencyFluctuationResponseRateFluctuationsValue {
     }
 
     /**
-     * <p>Percentage change in currency rate over the interval.</p>
      * <p>Percentage change in currency rate over the interval.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -220,6 +215,14 @@ public final class CurrencyFluctuationResponseRateFluctuationsValue {
     @java.lang.Override
     public CurrencyFluctuationResponseRateFluctuationsValue build() {
       return new CurrencyFluctuationResponseRateFluctuationsValue(startRate, endRate, change, percentChange, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("startRate") || key.equalsIgnoreCase("endRate") || key.equalsIgnoreCase("change") || key.equalsIgnoreCase("percentChange")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -5,21 +5,21 @@
 package com.apifreaks.sdk.errors;
 
 import com.apifreaks.sdk.core.ApifreaksApiApiException;
-import java.lang.Object;
+import com.apifreaks.sdk.types.LockedErrorBody;
 import okhttp3.Response;
 
 public final class LockedError extends ApifreaksApiApiException {
   /**
    * The body of the response that triggered the exception.
    */
-  private final Object body;
+  private final LockedErrorBody body;
 
-  public LockedError(Object body) {
+  public LockedError(LockedErrorBody body) {
     super("LockedError", 423, body);
     this.body = body;
   }
 
-  public LockedError(Object body, Response rawResponse) {
+  public LockedError(LockedErrorBody body, Response rawResponse) {
     super("LockedError", 423, body, rawResponse);
     this.body = body;
   }
@@ -28,7 +28,7 @@ public final class LockedError extends ApifreaksApiApiException {
    * @return the body
    */
   @java.lang.Override
-  public Object body() {
+  public LockedErrorBody body() {
     return this.body;
   }
 }

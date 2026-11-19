@@ -115,7 +115,7 @@ public final class WebScrapeRequest {
   }
 
   /**
-   * @return Use proxy for requests
+   * @return Use a proxy for the request. Pass true/false to toggle the default proxy pool, or a proxy URL string to use a specific proxy.
    */
   @JsonProperty("proxy")
   public Optional<WebScrapeRequestProxy> getProxy() {
@@ -242,7 +242,7 @@ public final class WebScrapeRequest {
     _FinalStage jsEnabled(Boolean jsEnabled);
 
     /**
-     * <p>Use proxy for requests</p>
+     * <p>Use a proxy for the request. Pass true/false to toggle the default proxy pool, or a proxy URL string to use a specific proxy.</p>
      */
     _FinalStage proxy(Optional<WebScrapeRequestProxy> proxy);
 
@@ -307,7 +307,6 @@ public final class WebScrapeRequest {
 
     private Optional<WebScrapeRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -331,7 +330,6 @@ public final class WebScrapeRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -342,7 +340,6 @@ public final class WebScrapeRequest {
     }
 
     /**
-     * <p>Target URL to scrape</p>
      * <p>Target URL to scrape</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -461,7 +458,7 @@ public final class WebScrapeRequest {
     }
 
     /**
-     * <p>Use proxy for requests</p>
+     * <p>Use a proxy for the request. Pass true/false to toggle the default proxy pool, or a proxy URL string to use a specific proxy.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -471,7 +468,7 @@ public final class WebScrapeRequest {
     }
 
     /**
-     * <p>Use proxy for requests</p>
+     * <p>Use a proxy for the request. Pass true/false to toggle the default proxy pool, or a proxy URL string to use a specific proxy.</p>
      */
     @java.lang.Override
     @JsonSetter(
@@ -557,6 +554,14 @@ public final class WebScrapeRequest {
     @java.lang.Override
     public WebScrapeRequest build() {
       return new WebScrapeRequest(apiKey, format, url, text, jsEnabled, proxy, sslIgnore, windowSize, adBlock, captcha, body, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("url") || key.equalsIgnoreCase("text") || key.equalsIgnoreCase("jsEnabled") || key.equalsIgnoreCase("proxy") || key.equalsIgnoreCase("sslIgnore") || key.equalsIgnoreCase("windowSize") || key.equalsIgnoreCase("adBlock") || key.equalsIgnoreCase("captcha") || key.equalsIgnoreCase("body")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

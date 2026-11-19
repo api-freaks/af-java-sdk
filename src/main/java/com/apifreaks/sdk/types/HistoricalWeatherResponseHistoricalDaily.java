@@ -457,7 +457,6 @@ public final class HistoricalWeatherResponseHistoricalDaily {
 
     private Optional<Double> surfacePressureMean = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -991,6 +990,14 @@ public final class HistoricalWeatherResponseHistoricalDaily {
 
     public HistoricalWeatherResponseHistoricalDaily build() {
       return new HistoricalWeatherResponseHistoricalDaily(timestamp, weatherCode, temperature2MMean, temperature2MMax, temperature2MMin, apparentTemperatureMean, apparentTemperatureMax, apparentTemperatureMin, precipitationSum, rainSum, snowfallSum, windSpeed10MMax, windGusts10MMax, windSpeed10MMean, windSpeed10MMin, windGusts10MMin, windGusts10MMean, windDirection10MDominant, shortwaveRadiationSum, et0FaoEvapotranspirationSum, cloudCoverMean, dewPoint2MMean, dewPoint2MMax, dewPoint2MMin, relativeHumidity2MMean, relativeHumidity2MMax, relativeHumidity2MMin, pressureMslMean, surfacePressureMean, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("timestamp") || key.equalsIgnoreCase("weather_code") || key.equalsIgnoreCase("temperature_2m_mean") || key.equalsIgnoreCase("temperature_2m_max") || key.equalsIgnoreCase("temperature_2m_min") || key.equalsIgnoreCase("apparent_temperature_mean") || key.equalsIgnoreCase("apparent_temperature_max") || key.equalsIgnoreCase("apparent_temperature_min") || key.equalsIgnoreCase("precipitation_sum") || key.equalsIgnoreCase("rain_sum") || key.equalsIgnoreCase("snowfall_sum") || key.equalsIgnoreCase("wind_speed_10m_max") || key.equalsIgnoreCase("wind_gusts_10m_max") || key.equalsIgnoreCase("wind_speed_10m_mean") || key.equalsIgnoreCase("wind_speed_10m_min") || key.equalsIgnoreCase("wind_gusts_10m_min") || key.equalsIgnoreCase("wind_gusts_10m_mean") || key.equalsIgnoreCase("wind_direction_10m_dominant") || key.equalsIgnoreCase("shortwave_radiation_sum") || key.equalsIgnoreCase("et0_fao_evapotranspiration_sum") || key.equalsIgnoreCase("cloud_cover_mean") || key.equalsIgnoreCase("dew_point_2m_mean") || key.equalsIgnoreCase("dew_point_2m_max") || key.equalsIgnoreCase("dew_point_2m_min") || key.equalsIgnoreCase("relative_humidity_2m_mean") || key.equalsIgnoreCase("relative_humidity_2m_max") || key.equalsIgnoreCase("relative_humidity_2m_min") || key.equalsIgnoreCase("pressure_msl_mean") || key.equalsIgnoreCase("surface_pressure_mean")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

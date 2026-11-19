@@ -43,9 +43,9 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsIte
     if(this.type == 0) {
       return visitor.visit((DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemAddress) this.value);
     } else if(this.type == 1) {
-      return visitor.visit((DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemOne) this.value);
-    } else if(this.type == 2) {
       return visitor.visit((DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemPriority) this.value);
+    } else if(this.type == 2) {
+      return visitor.visit((DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemOne) this.value);
     } else if(this.type == 3) {
       return visitor.visit((DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemSingleName) this.value);
     } else if(this.type == 4) {
@@ -82,12 +82,12 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsIte
   }
 
   public static DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItem of(
-      DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemOne value) {
+      DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemPriority value) {
     return new DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItem(value, 1);
   }
 
   public static DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItem of(
-      DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemPriority value) {
+      DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemOne value) {
     return new DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItem(value, 2);
   }
 
@@ -109,9 +109,9 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsIte
   public interface Visitor<T> {
     T visit(DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemAddress value);
 
-    T visit(DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemOne value);
-
     T visit(DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemPriority value);
+
+    T visit(DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemOne value);
 
     T visit(DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemSingleName value);
 
@@ -135,15 +135,15 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsIte
         } catch(RuntimeException e) {
         }
       }
-      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("name") && ((Map<?, ?>) value).containsKey("type") && ((Map<?, ?>) value).containsKey("dnsType") && ((Map<?, ?>) value).containsKey("ttl") && ((Map<?, ?>) value).containsKey("rawText") && ((Map<?, ?>) value).containsKey("rRsetType") && ((Map<?, ?>) value).containsKey("target")) {
-        try {
-          return of(ObjectMappers.JSON_MAPPER.convertValue(value, DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemOne.class));
-        } catch(RuntimeException e) {
-        }
-      }
       if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("name") && ((Map<?, ?>) value).containsKey("type") && ((Map<?, ?>) value).containsKey("dnsType") && ((Map<?, ?>) value).containsKey("ttl") && ((Map<?, ?>) value).containsKey("rawText") && ((Map<?, ?>) value).containsKey("rRsetType") && ((Map<?, ?>) value).containsKey("target") && ((Map<?, ?>) value).containsKey("priority")) {
         try {
           return of(ObjectMappers.JSON_MAPPER.convertValue(value, DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemPriority.class));
+        } catch(RuntimeException e) {
+        }
+      }
+      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("name") && ((Map<?, ?>) value).containsKey("type") && ((Map<?, ?>) value).containsKey("dnsType") && ((Map<?, ?>) value).containsKey("ttl") && ((Map<?, ?>) value).containsKey("rawText") && ((Map<?, ?>) value).containsKey("rRsetType") && ((Map<?, ?>) value).containsKey("target")) {
+        try {
+          return of(ObjectMappers.JSON_MAPPER.convertValue(value, DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemOne.class));
         } catch(RuntimeException e) {
         }
       }

@@ -11,12 +11,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import java.lang.Boolean;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
@@ -32,14 +35,14 @@ public final class BulkEmailValidateResponseEmailResponseItemDomain {
 
   private final boolean free;
 
-  private final boolean catchAll;
+  private final Optional<Boolean> catchAll;
 
   private final boolean validDomain;
 
   private final Map<String, Object> additionalProperties;
 
   private BulkEmailValidateResponseEmailResponseItemDomain(String name, boolean disposable,
-      boolean spam, boolean free, boolean catchAll, boolean validDomain,
+      boolean spam, boolean free, Optional<Boolean> catchAll, boolean validDomain,
       Map<String, Object> additionalProperties) {
     this.name = name;
     this.disposable = disposable;
@@ -71,7 +74,7 @@ public final class BulkEmailValidateResponseEmailResponseItemDomain {
   }
 
   @JsonProperty("catchAll")
-  public boolean getCatchAll() {
+  public Optional<Boolean> getCatchAll() {
     return catchAll;
   }
 
@@ -92,7 +95,7 @@ public final class BulkEmailValidateResponseEmailResponseItemDomain {
   }
 
   private boolean equalTo(BulkEmailValidateResponseEmailResponseItemDomain other) {
-    return name.equals(other.name) && disposable == other.disposable && spam == other.spam && free == other.free && catchAll == other.catchAll && validDomain == other.validDomain;
+    return name.equals(other.name) && disposable == other.disposable && spam == other.spam && free == other.free && catchAll.equals(other.catchAll) && validDomain == other.validDomain;
   }
 
   @java.lang.Override
@@ -124,11 +127,7 @@ public final class BulkEmailValidateResponseEmailResponseItemDomain {
   }
 
   public interface FreeStage {
-    CatchAllStage free(boolean free);
-  }
-
-  public interface CatchAllStage {
-    ValidDomainStage catchAll(boolean catchAll);
+    ValidDomainStage free(boolean free);
   }
 
   public interface ValidDomainStage {
@@ -141,12 +140,16 @@ public final class BulkEmailValidateResponseEmailResponseItemDomain {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
+
+    _FinalStage catchAll(Optional<Boolean> catchAll);
+
+    _FinalStage catchAll(Boolean catchAll);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements NameStage, DisposableStage, SpamStage, FreeStage, CatchAllStage, ValidDomainStage, _FinalStage {
+  public static final class Builder implements NameStage, DisposableStage, SpamStage, FreeStage, ValidDomainStage, _FinalStage {
     private String name;
 
     private boolean disposable;
@@ -155,11 +158,10 @@ public final class BulkEmailValidateResponseEmailResponseItemDomain {
 
     private boolean free;
 
-    private boolean catchAll;
-
     private boolean validDomain;
 
-    @JsonAnySetter
+    private Optional<Boolean> catchAll = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -199,15 +201,8 @@ public final class BulkEmailValidateResponseEmailResponseItemDomain {
 
     @java.lang.Override
     @JsonSetter("free")
-    public CatchAllStage free(boolean free) {
+    public ValidDomainStage free(boolean free) {
       this.free = free;
-      return this;
-    }
-
-    @java.lang.Override
-    @JsonSetter("catchAll")
-    public ValidDomainStage catchAll(boolean catchAll) {
-      this.catchAll = catchAll;
       return this;
     }
 
@@ -219,8 +214,32 @@ public final class BulkEmailValidateResponseEmailResponseItemDomain {
     }
 
     @java.lang.Override
+    public _FinalStage catchAll(Boolean catchAll) {
+      this.catchAll = Optional.ofNullable(catchAll);
+      return this;
+    }
+
+    @java.lang.Override
+    @JsonSetter(
+        value = "catchAll",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage catchAll(Optional<Boolean> catchAll) {
+      this.catchAll = catchAll;
+      return this;
+    }
+
+    @java.lang.Override
     public BulkEmailValidateResponseEmailResponseItemDomain build() {
       return new BulkEmailValidateResponseEmailResponseItemDomain(name, disposable, spam, free, catchAll, validDomain, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("disposable") || key.equalsIgnoreCase("spam") || key.equalsIgnoreCase("free") || key.equalsIgnoreCase("catchAll") || key.equalsIgnoreCase("validDomain")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

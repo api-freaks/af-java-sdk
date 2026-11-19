@@ -225,7 +225,6 @@ public final class TimezoneLookupV2ResponseAirportDetails {
 
     private Optional<String> faaCode = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -453,6 +452,14 @@ public final class TimezoneLookupV2ResponseAirportDetails {
 
     public TimezoneLookupV2ResponseAirportDetails build() {
       return new TimezoneLookupV2ResponseAirportDetails(type, name, latitude, longitude, elevationFt, continentCode, countryCode, stateCode, city, iataCode, icaoCode, faaCode, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("type") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("latitude") || key.equalsIgnoreCase("longitude") || key.equalsIgnoreCase("elevation_ft") || key.equalsIgnoreCase("continent_code") || key.equalsIgnoreCase("country_code") || key.equalsIgnoreCase("state_code") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("iata_code") || key.equalsIgnoreCase("icao_code") || key.equalsIgnoreCase("faa_code")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

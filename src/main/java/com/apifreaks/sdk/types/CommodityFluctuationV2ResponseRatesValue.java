@@ -153,7 +153,6 @@ public final class CommodityFluctuationV2ResponseRatesValue {
 
     private float changePercent;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -170,7 +169,6 @@ public final class CommodityFluctuationV2ResponseRatesValue {
 
     /**
      * <p>Price of the commodity on the start date.</p>
-     * <p>Price of the commodity on the start date.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -181,7 +179,6 @@ public final class CommodityFluctuationV2ResponseRatesValue {
     }
 
     /**
-     * <p>Price of the commodity on the end date.</p>
      * <p>Price of the commodity on the end date.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -194,7 +191,6 @@ public final class CommodityFluctuationV2ResponseRatesValue {
 
     /**
      * <p>Absolute price difference between end and start dates. May be negative.</p>
-     * <p>Absolute price difference between end and start dates. May be negative.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -205,7 +201,6 @@ public final class CommodityFluctuationV2ResponseRatesValue {
     }
 
     /**
-     * <p>Percentage price change from start to end date. May be negative.</p>
      * <p>Percentage price change from start to end date. May be negative.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -219,6 +214,14 @@ public final class CommodityFluctuationV2ResponseRatesValue {
     @java.lang.Override
     public CommodityFluctuationV2ResponseRatesValue build() {
       return new CommodityFluctuationV2ResponseRatesValue(startRate, endRate, change, changePercent, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("startRate") || key.equalsIgnoreCase("endRate") || key.equalsIgnoreCase("change") || key.equalsIgnoreCase("changePercent")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

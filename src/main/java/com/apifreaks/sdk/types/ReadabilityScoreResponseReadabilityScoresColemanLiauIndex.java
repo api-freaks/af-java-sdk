@@ -92,7 +92,6 @@ public final class ReadabilityScoreResponseReadabilityScoresColemanLiauIndex {
 
     private Optional<String> level = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -140,6 +139,14 @@ public final class ReadabilityScoreResponseReadabilityScoresColemanLiauIndex {
 
     public ReadabilityScoreResponseReadabilityScoresColemanLiauIndex build() {
       return new ReadabilityScoreResponseReadabilityScoresColemanLiauIndex(score, level, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("score") || key.equalsIgnoreCase("level")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

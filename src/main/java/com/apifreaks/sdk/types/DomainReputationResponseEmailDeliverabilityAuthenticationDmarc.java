@@ -4,20 +4,24 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.Nullable;
+import com.apifreaks.sdk.core.NullableNonemptyFilter;
 import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import org.jetbrains.annotations.NotNull;
+import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
@@ -26,14 +30,15 @@ import org.jetbrains.annotations.NotNull;
 public final class DomainReputationResponseEmailDeliverabilityAuthenticationDmarc {
   private final boolean present;
 
-  private final String policy;
+  private final Optional<String> policy;
 
   private final boolean reportingConfigured;
 
   private final Map<String, Object> additionalProperties;
 
   private DomainReputationResponseEmailDeliverabilityAuthenticationDmarc(boolean present,
-      String policy, boolean reportingConfigured, Map<String, Object> additionalProperties) {
+      Optional<String> policy, boolean reportingConfigured,
+      Map<String, Object> additionalProperties) {
     this.present = present;
     this.policy = policy;
     this.reportingConfigured = reportingConfigured;
@@ -51,8 +56,11 @@ public final class DomainReputationResponseEmailDeliverabilityAuthenticationDmar
   /**
    * @return DMARC enforcement policy applied to failing messages (e.g. none, quarantine, reject).
    */
-  @JsonProperty("policy")
-  public String getPolicy() {
+  @JsonIgnore
+  public Optional<String> getPolicy() {
+    if (policy == null) {
+      return Optional.empty();
+    }
     return policy;
   }
 
@@ -62,6 +70,15 @@ public final class DomainReputationResponseEmailDeliverabilityAuthenticationDmar
   @JsonProperty("reporting_configured")
   public boolean getReportingConfigured() {
     return reportingConfigured;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("policy")
+  private Optional<String> _getPolicy() {
+    return policy;
   }
 
   @java.lang.Override
@@ -97,16 +114,9 @@ public final class DomainReputationResponseEmailDeliverabilityAuthenticationDmar
     /**
      * <p>Indicates whether a DMARC record was found.</p>
      */
-    PolicyStage present(boolean present);
+    ReportingConfiguredStage present(boolean present);
 
     Builder from(DomainReputationResponseEmailDeliverabilityAuthenticationDmarc other);
-  }
-
-  public interface PolicyStage {
-    /**
-     * <p>DMARC enforcement policy applied to failing messages (e.g. none, quarantine, reject).</p>
-     */
-    ReportingConfiguredStage policy(@NotNull String policy);
   }
 
   public interface ReportingConfiguredStage {
@@ -122,19 +132,27 @@ public final class DomainReputationResponseEmailDeliverabilityAuthenticationDmar
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
+
+    /**
+     * <p>DMARC enforcement policy applied to failing messages (e.g. none, quarantine, reject).</p>
+     */
+    _FinalStage policy(Optional<String> policy);
+
+    _FinalStage policy(String policy);
+
+    _FinalStage policy(Nullable<String> policy);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements PresentStage, PolicyStage, ReportingConfiguredStage, _FinalStage {
+  public static final class Builder implements PresentStage, ReportingConfiguredStage, _FinalStage {
     private boolean present;
-
-    private String policy;
 
     private boolean reportingConfigured;
 
-    @JsonAnySetter
+    private Optional<String> policy = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -150,30 +168,16 @@ public final class DomainReputationResponseEmailDeliverabilityAuthenticationDmar
 
     /**
      * <p>Indicates whether a DMARC record was found.</p>
-     * <p>Indicates whether a DMARC record was found.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("present")
-    public PolicyStage present(boolean present) {
+    public ReportingConfiguredStage present(boolean present) {
       this.present = present;
       return this;
     }
 
     /**
-     * <p>DMARC enforcement policy applied to failing messages (e.g. none, quarantine, reject).</p>
-     * <p>DMARC enforcement policy applied to failing messages (e.g. none, quarantine, reject).</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    @JsonSetter("policy")
-    public ReportingConfiguredStage policy(@NotNull String policy) {
-      this.policy = Objects.requireNonNull(policy, "policy must not be null");
-      return this;
-    }
-
-    /**
-     * <p>Indicates whether DMARC aggregate / forensic reporting addresses are configured.</p>
      * <p>Indicates whether DMARC aggregate / forensic reporting addresses are configured.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -184,9 +188,58 @@ public final class DomainReputationResponseEmailDeliverabilityAuthenticationDmar
       return this;
     }
 
+    /**
+     * <p>DMARC enforcement policy applied to failing messages (e.g. none, quarantine, reject).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage policy(Nullable<String> policy) {
+      if (policy.isNull()) {
+        this.policy = null;
+      }
+      else if (policy.isEmpty()) {
+        this.policy = Optional.empty();
+      }
+      else {
+        this.policy = Optional.of(policy.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>DMARC enforcement policy applied to failing messages (e.g. none, quarantine, reject).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage policy(String policy) {
+      this.policy = Optional.ofNullable(policy);
+      return this;
+    }
+
+    /**
+     * <p>DMARC enforcement policy applied to failing messages (e.g. none, quarantine, reject).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "policy",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage policy(Optional<String> policy) {
+      this.policy = policy;
+      return this;
+    }
+
     @java.lang.Override
     public DomainReputationResponseEmailDeliverabilityAuthenticationDmarc build() {
       return new DomainReputationResponseEmailDeliverabilityAuthenticationDmarc(present, policy, reportingConfigured, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("present") || key.equalsIgnoreCase("policy") || key.equalsIgnoreCase("reporting_configured")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

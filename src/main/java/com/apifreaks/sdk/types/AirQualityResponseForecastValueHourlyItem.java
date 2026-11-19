@@ -226,7 +226,6 @@ public final class AirQualityResponseForecastValueHourlyItem {
 
     private Optional<Double> uvIndexClearSky = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -454,6 +453,14 @@ public final class AirQualityResponseForecastValueHourlyItem {
 
     public AirQualityResponseForecastValueHourlyItem build() {
       return new AirQualityResponseForecastValueHourlyItem(timestamp, pm10, carbonMonoxide, pm25, carbonDioxide, nitrogenDioxide, sulphurDioxide, ozone, dust, uvIndex, aerosolOpticalDepth, uvIndexClearSky, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("timestamp") || key.equalsIgnoreCase("pm10") || key.equalsIgnoreCase("carbon_monoxide") || key.equalsIgnoreCase("pm2_5") || key.equalsIgnoreCase("carbon_dioxide") || key.equalsIgnoreCase("nitrogen_dioxide") || key.equalsIgnoreCase("sulphur_dioxide") || key.equalsIgnoreCase("ozone") || key.equalsIgnoreCase("dust") || key.equalsIgnoreCase("uv_index") || key.equalsIgnoreCase("aerosol_optical_depth") || key.equalsIgnoreCase("uv_index_clear_sky")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

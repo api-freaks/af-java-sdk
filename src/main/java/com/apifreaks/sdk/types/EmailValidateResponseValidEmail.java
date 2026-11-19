@@ -12,6 +12,16 @@ import java.lang.String;
 public final class EmailValidateResponseValidEmail {
   public static final EmailValidateResponseValidEmail INVALID = new EmailValidateResponseValidEmail(Value.INVALID, "invalid");
 
+  public static final EmailValidateResponseValidEmail APP_SERVER_BLOCKED = new EmailValidateResponseValidEmail(Value.APP_SERVER_BLOCKED, "app_server_blocked");
+
+  public static final EmailValidateResponseValidEmail INVALID_EMAIL = new EmailValidateResponseValidEmail(Value.INVALID_EMAIL, "INVALID_EMAIL");
+
+  public static final EmailValidateResponseValidEmail ACCEPT_ALL = new EmailValidateResponseValidEmail(Value.ACCEPT_ALL, "accept_all");
+
+  public static final EmailValidateResponseValidEmail UNKNOWN = new EmailValidateResponseValidEmail(Value.UNKNOWN, "unknown");
+
+  public static final EmailValidateResponseValidEmail RISKY = new EmailValidateResponseValidEmail(Value.RISKY, "risky");
+
   public static final EmailValidateResponseValidEmail VALID = new EmailValidateResponseValidEmail(Value.VALID, "valid");
 
   private final Value value;
@@ -48,9 +58,19 @@ public final class EmailValidateResponseValidEmail {
     switch (value) {
       case INVALID:
         return visitor.visitInvalid();
+      case APP_SERVER_BLOCKED:
+        return visitor.visitAppServerBlocked();
+      case INVALID_EMAIL:
+        return visitor.visitInvalidEmail();
+      case ACCEPT_ALL:
+        return visitor.visitAcceptAll();
+      case UNKNOWN:
+        return visitor.visitUnknown();
+      case RISKY:
+        return visitor.visitRisky();
       case VALID:
         return visitor.visitValid();
-      case UNKNOWN:
+      case _UNKNOWN:
       default:
         return visitor.visitUnknown(string);
     }
@@ -63,25 +83,55 @@ public final class EmailValidateResponseValidEmail {
     switch (value) {
       case "invalid":
         return INVALID;
+      case "app_server_blocked":
+        return APP_SERVER_BLOCKED;
+      case "INVALID_EMAIL":
+        return INVALID_EMAIL;
+      case "accept_all":
+        return ACCEPT_ALL;
+      case "unknown":
+        return UNKNOWN;
+      case "risky":
+        return RISKY;
       case "valid":
         return VALID;
       default:
-        return new EmailValidateResponseValidEmail(Value.UNKNOWN, value);
+        return new EmailValidateResponseValidEmail(Value._UNKNOWN, value);
     }
   }
 
   public enum Value {
     VALID,
 
+    ACCEPT_ALL,
+
     INVALID,
 
-    UNKNOWN
+    INVALID_EMAIL,
+
+    UNKNOWN,
+
+    RISKY,
+
+    APP_SERVER_BLOCKED,
+
+    _UNKNOWN
   }
 
   public interface Visitor<T> {
     T visitValid();
 
+    T visitAcceptAll();
+
     T visitInvalid();
+
+    T visitInvalidEmail();
+
+    T visitUnknown();
+
+    T visitRisky();
+
+    T visitAppServerBlocked();
 
     T visitUnknown(String unknownType);
   }

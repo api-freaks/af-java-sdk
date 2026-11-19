@@ -57,6 +57,10 @@ public final class BulkPhoneValidateResponseItem {
 
   private final Optional<Boolean> canBeInternationallyDialled;
 
+  private final Optional<String> error;
+
+  private final Optional<String> message;
+
   private final Map<String, Object> additionalProperties;
 
   private BulkPhoneValidateResponseItem(Optional<BulkPhoneValidateResponseItemRawInput> rawInput,
@@ -66,7 +70,7 @@ public final class BulkPhoneValidateResponseItem {
       Optional<BulkPhoneValidateResponseItemLineType> lineType,
       Optional<BulkPhoneValidateResponseItemFormats> formats, Optional<Integer> areaCodeLength,
       Optional<Integer> ndcLength, Optional<Boolean> canBeInternationallyDialled,
-      Map<String, Object> additionalProperties) {
+      Optional<String> error, Optional<String> message, Map<String, Object> additionalProperties) {
     this.rawInput = rawInput;
     this.possible = possible;
     this.valid = valid;
@@ -81,6 +85,8 @@ public final class BulkPhoneValidateResponseItem {
     this.areaCodeLength = areaCodeLength;
     this.ndcLength = ndcLength;
     this.canBeInternationallyDialled = canBeInternationallyDialled;
+    this.error = error;
+    this.message = message;
     this.additionalProperties = additionalProperties;
   }
 
@@ -196,6 +202,22 @@ public final class BulkPhoneValidateResponseItem {
     return canBeInternationallyDialled;
   }
 
+  /**
+   * @return Short error category. Present only when this item failed validation (e.g. malformed number, conflicting region parameters).
+   */
+  @JsonProperty("error")
+  public Optional<String> getError() {
+    return error;
+  }
+
+  /**
+   * @return Human-readable reason for failure. Present only when this item failed validation.
+   */
+  @JsonProperty("message")
+  public Optional<String> getMessage() {
+    return message;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -208,12 +230,12 @@ public final class BulkPhoneValidateResponseItem {
   }
 
   private boolean equalTo(BulkPhoneValidateResponseItem other) {
-    return rawInput.equals(other.rawInput) && possible.equals(other.possible) && valid.equals(other.valid) && countryPrefix.equals(other.countryPrefix) && nationalNumber.equals(other.nationalNumber) && countryCode.equals(other.countryCode) && carrier.equals(other.carrier) && location.equals(other.location) && timeZones.equals(other.timeZones) && lineType.equals(other.lineType) && formats.equals(other.formats) && areaCodeLength.equals(other.areaCodeLength) && ndcLength.equals(other.ndcLength) && canBeInternationallyDialled.equals(other.canBeInternationallyDialled);
+    return rawInput.equals(other.rawInput) && possible.equals(other.possible) && valid.equals(other.valid) && countryPrefix.equals(other.countryPrefix) && nationalNumber.equals(other.nationalNumber) && countryCode.equals(other.countryCode) && carrier.equals(other.carrier) && location.equals(other.location) && timeZones.equals(other.timeZones) && lineType.equals(other.lineType) && formats.equals(other.formats) && areaCodeLength.equals(other.areaCodeLength) && ndcLength.equals(other.ndcLength) && canBeInternationallyDialled.equals(other.canBeInternationallyDialled) && error.equals(other.error) && message.equals(other.message);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.rawInput, this.possible, this.valid, this.countryPrefix, this.nationalNumber, this.countryCode, this.carrier, this.location, this.timeZones, this.lineType, this.formats, this.areaCodeLength, this.ndcLength, this.canBeInternationallyDialled);
+    return Objects.hash(this.rawInput, this.possible, this.valid, this.countryPrefix, this.nationalNumber, this.countryCode, this.carrier, this.location, this.timeZones, this.lineType, this.formats, this.areaCodeLength, this.ndcLength, this.canBeInternationallyDialled, this.error, this.message);
   }
 
   @java.lang.Override
@@ -257,7 +279,10 @@ public final class BulkPhoneValidateResponseItem {
 
     private Optional<Boolean> canBeInternationallyDialled = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<String> error = Optional.empty();
+
+    private Optional<String> message = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -278,6 +303,8 @@ public final class BulkPhoneValidateResponseItem {
       areaCodeLength(other.getAreaCodeLength());
       ndcLength(other.getNdcLength());
       canBeInternationallyDialled(other.getCanBeInternationallyDialled());
+      error(other.getError());
+      message(other.getMessage());
       return this;
     }
 
@@ -519,8 +546,50 @@ public final class BulkPhoneValidateResponseItem {
       return this;
     }
 
+    /**
+     * <p>Short error category. Present only when this item failed validation (e.g. malformed number, conflicting region parameters).</p>
+     */
+    @JsonSetter(
+        value = "error",
+        nulls = Nulls.SKIP
+    )
+    public Builder error(Optional<String> error) {
+      this.error = error;
+      return this;
+    }
+
+    public Builder error(String error) {
+      this.error = Optional.ofNullable(error);
+      return this;
+    }
+
+    /**
+     * <p>Human-readable reason for failure. Present only when this item failed validation.</p>
+     */
+    @JsonSetter(
+        value = "message",
+        nulls = Nulls.SKIP
+    )
+    public Builder message(Optional<String> message) {
+      this.message = message;
+      return this;
+    }
+
+    public Builder message(String message) {
+      this.message = Optional.ofNullable(message);
+      return this;
+    }
+
     public BulkPhoneValidateResponseItem build() {
-      return new BulkPhoneValidateResponseItem(rawInput, possible, valid, countryPrefix, nationalNumber, countryCode, carrier, location, timeZones, lineType, formats, areaCodeLength, ndcLength, canBeInternationallyDialled, additionalProperties);
+      return new BulkPhoneValidateResponseItem(rawInput, possible, valid, countryPrefix, nationalNumber, countryCode, carrier, location, timeZones, lineType, formats, areaCodeLength, ndcLength, canBeInternationallyDialled, error, message, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("raw_input") || key.equalsIgnoreCase("possible") || key.equalsIgnoreCase("valid") || key.equalsIgnoreCase("country_prefix") || key.equalsIgnoreCase("national_number") || key.equalsIgnoreCase("country_code") || key.equalsIgnoreCase("carrier") || key.equalsIgnoreCase("location") || key.equalsIgnoreCase("time_zones") || key.equalsIgnoreCase("line_type") || key.equalsIgnoreCase("formats") || key.equalsIgnoreCase("area_code_length") || key.equalsIgnoreCase("ndc_length") || key.equalsIgnoreCase("can_be_internationally_dialled") || key.equalsIgnoreCase("error") || key.equalsIgnoreCase("message")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

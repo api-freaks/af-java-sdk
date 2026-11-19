@@ -31,20 +31,20 @@ Add this dependency to your `pom.xml`:
 <dependency>
     <groupId>com.apifreaks</groupId>
     <artifactId>sdk</artifactId>
-    <version>1.0.1</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```gradle
-implementation "com.apifreaks:sdk:1.0.2"
+implementation "com.apifreaks:sdk:1.2.0"
 ```
 
 For Kotlin DSL:
 
 ```kotlin
-implementation("com.apifreaks:sdk:1.0.2")
+implementation("com.apifreaks:sdk:1.2.0")
 ```
 
 ## Reference
@@ -123,6 +123,13 @@ try {
     System.out.println("Unexpected error: " + e.getMessage());
 }
 ```
+
+If a successful (2xx) response can't be parsed into the SDK's response type, the SDK throws
+`ApifreaksApiDeserializationException`, a subclass of `ApifreaksApiApiException`. Its `statusCode()` and
+`body()` hold the HTTP status and the raw response text, and `getCause()` holds the parser error.
+Network failures throw the base `ApifreaksApiException` with the message "Network error executing HTTP request".
+
+> **Note:** `getCreditsUsage` requires an organization admin API key. Other keys get a 403 (`ForbiddenError`).
 
 ## Request Types
 
@@ -246,3 +253,12 @@ a proof of concept, but know that we will not be able to merge it as-is. We sugg
 an issue first to discuss with us!
 
 On the other hand, contributions to the README are always very welcome!
+
+### Building locally
+
+The release build signs artifacts with GPG. To build and install the SDK into your local Maven
+repository without a signing key, skip that step:
+
+```sh
+mvn install -Dgpg.skip
+```

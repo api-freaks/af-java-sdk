@@ -11,6 +11,7 @@ import com.apifreaks.sdk.requests.AsnWhoisLookupRequest;
 import com.apifreaks.sdk.requests.AstronomyLookupRequest;
 import com.apifreaks.sdk.requests.AstronomyLookupV2Request;
 import com.apifreaks.sdk.requests.BulkCurrentWeatherRequest;
+import com.apifreaks.sdk.requests.BulkDisposableEmailCheckV2Request;
 import com.apifreaks.sdk.requests.BulkDomainAvailabilityCheckRequest;
 import com.apifreaks.sdk.requests.BulkDomainDnsLookupRequest;
 import com.apifreaks.sdk.requests.BulkDomainWhoisLookupRequest;
@@ -19,6 +20,7 @@ import com.apifreaks.sdk.requests.BulkEmailValidateRequest;
 import com.apifreaks.sdk.requests.BulkGeolocationLookupRequest;
 import com.apifreaks.sdk.requests.BulkGeolocationLookupV2Request;
 import com.apifreaks.sdk.requests.BulkIpSecurityLookupRequest;
+import com.apifreaks.sdk.requests.BulkPdfGenerateFromTemplateRequest;
 import com.apifreaks.sdk.requests.BulkPhoneValidateRequest;
 import com.apifreaks.sdk.requests.BulkScreenshotCaptureRequest;
 import com.apifreaks.sdk.requests.BulkUserAgentLookupRequest;
@@ -28,6 +30,7 @@ import com.apifreaks.sdk.requests.CommodityFluctuationRequest;
 import com.apifreaks.sdk.requests.CommodityFluctuationV2Request;
 import com.apifreaks.sdk.requests.CommodityHistoricalRatesRequest;
 import com.apifreaks.sdk.requests.CommodityHistoricalRatesV2Request;
+import com.apifreaks.sdk.requests.CommodityIntradayRatesV2Request;
 import com.apifreaks.sdk.requests.CommodityLatestRatesRequest;
 import com.apifreaks.sdk.requests.CommodityLatestRatesV2Request;
 import com.apifreaks.sdk.requests.CommoditySymbolsRequest;
@@ -45,6 +48,7 @@ import com.apifreaks.sdk.requests.CurrencySupportedRequest;
 import com.apifreaks.sdk.requests.CurrencySymbolsRequest;
 import com.apifreaks.sdk.requests.CurrencyTimeSeriesRequest;
 import com.apifreaks.sdk.requests.CurrentWeatherRequest;
+import com.apifreaks.sdk.requests.DisposableEmailCheckV2Request;
 import com.apifreaks.sdk.requests.DomainAvailabilityCheckRequest;
 import com.apifreaks.sdk.requests.DomainAvailabilitySuggestionsRequest;
 import com.apifreaks.sdk.requests.DomainDnsHistoryRequest;
@@ -70,6 +74,7 @@ import com.apifreaks.sdk.requests.GetAdminUnitsRequest;
 import com.apifreaks.sdk.requests.GetCitiesRequest;
 import com.apifreaks.sdk.requests.GetCountriesRequest;
 import com.apifreaks.sdk.requests.GetCountryDetailsRequest;
+import com.apifreaks.sdk.requests.GetCreditsUsageRequest;
 import com.apifreaks.sdk.requests.GetFlagsRequest;
 import com.apifreaks.sdk.requests.GetRegionsRequest;
 import com.apifreaks.sdk.requests.GetSubregionsRequest;
@@ -93,6 +98,7 @@ import com.apifreaks.sdk.requests.PdfDeleteFileRequest;
 import com.apifreaks.sdk.requests.PdfDownloadResourceRequest;
 import com.apifreaks.sdk.requests.PdfEncryptRequest;
 import com.apifreaks.sdk.requests.PdfExtractPagesRequest;
+import com.apifreaks.sdk.requests.PdfGenerateFromTemplateRequest;
 import com.apifreaks.sdk.requests.PdfGetFileStatusRequest;
 import com.apifreaks.sdk.requests.PdfGetTaskStatusRequest;
 import com.apifreaks.sdk.requests.PdfLinearizeRequest;
@@ -134,6 +140,7 @@ import com.apifreaks.sdk.types.AsnWhoisLookupResponse;
 import com.apifreaks.sdk.types.AstronomyLookupResponse;
 import com.apifreaks.sdk.types.AstronomyLookupV2Response;
 import com.apifreaks.sdk.types.BulkCurrentWeatherResponse;
+import com.apifreaks.sdk.types.BulkDisposableEmailCheckV2Response;
 import com.apifreaks.sdk.types.BulkDomainAvailabilityCheckResponse;
 import com.apifreaks.sdk.types.BulkDomainDnsLookupResponse;
 import com.apifreaks.sdk.types.BulkDomainWhoisLookupResponse;
@@ -142,15 +149,17 @@ import com.apifreaks.sdk.types.BulkEmailValidateResponse;
 import com.apifreaks.sdk.types.BulkGeolocationLookupResponseItem;
 import com.apifreaks.sdk.types.BulkGeolocationLookupV2ResponseItem;
 import com.apifreaks.sdk.types.BulkIpSecurityLookupResponseItem;
+import com.apifreaks.sdk.types.BulkPdfGenerateFromTemplateResponseItem;
 import com.apifreaks.sdk.types.BulkPhoneValidateResponseItem;
 import com.apifreaks.sdk.types.BulkScreenshotCaptureResponse;
 import com.apifreaks.sdk.types.BulkUserAgentLookupResponseItem;
-import com.apifreaks.sdk.types.BulkVatRateByCountryResponse;
+import com.apifreaks.sdk.types.BulkVatRateByCountryResponseItem;
 import com.apifreaks.sdk.types.BulkZipcodeLookupResponse;
 import com.apifreaks.sdk.types.CommodityFluctuationResponse;
 import com.apifreaks.sdk.types.CommodityFluctuationV2Response;
 import com.apifreaks.sdk.types.CommodityHistoricalRatesResponse;
 import com.apifreaks.sdk.types.CommodityHistoricalRatesV2Response;
+import com.apifreaks.sdk.types.CommodityIntradayRatesV2Response;
 import com.apifreaks.sdk.types.CommodityLatestRatesResponse;
 import com.apifreaks.sdk.types.CommodityLatestRatesV2Response;
 import com.apifreaks.sdk.types.CommoditySymbolsResponse;
@@ -168,6 +177,7 @@ import com.apifreaks.sdk.types.CurrencySupportedResponse;
 import com.apifreaks.sdk.types.CurrencySymbolsResponse;
 import com.apifreaks.sdk.types.CurrencyTimeSeriesResponse;
 import com.apifreaks.sdk.types.CurrentWeatherResponse;
+import com.apifreaks.sdk.types.DisposableEmailCheckV2Response;
 import com.apifreaks.sdk.types.DomainAvailabilityCheckResponse;
 import com.apifreaks.sdk.types.DomainAvailabilitySuggestionsResponse;
 import com.apifreaks.sdk.types.DomainDnsHistoryResponse;
@@ -193,9 +203,10 @@ import com.apifreaks.sdk.types.GetAdminUnitsResponse;
 import com.apifreaks.sdk.types.GetCitiesResponse;
 import com.apifreaks.sdk.types.GetCountriesResponse;
 import com.apifreaks.sdk.types.GetCountryDetailsResponse;
+import com.apifreaks.sdk.types.GetCreditsUsageResponse;
 import com.apifreaks.sdk.types.GetRegionsResponse;
 import com.apifreaks.sdk.types.GetSubregionsResponse;
-import com.apifreaks.sdk.types.GetSupportedFlagsResponseItem;
+import com.apifreaks.sdk.types.GetSupportedFlagsResponse;
 import com.apifreaks.sdk.types.GrammarCorrectResponse;
 import com.apifreaks.sdk.types.GrammarDetectResponse;
 import com.apifreaks.sdk.types.HistoricalWeatherResponse;
@@ -214,6 +225,7 @@ import com.apifreaks.sdk.types.PdfDecryptResponse;
 import com.apifreaks.sdk.types.PdfDeleteFileResponse;
 import com.apifreaks.sdk.types.PdfEncryptResponse;
 import com.apifreaks.sdk.types.PdfExtractPagesResponse;
+import com.apifreaks.sdk.types.PdfGenerateFromTemplateResponse;
 import com.apifreaks.sdk.types.PdfGetFileStatusResponse;
 import com.apifreaks.sdk.types.PdfGetTaskStatusResponse;
 import com.apifreaks.sdk.types.PdfLinearizeResponse;
@@ -228,6 +240,7 @@ import com.apifreaks.sdk.types.PdfUploadBinaryResponse;
 import com.apifreaks.sdk.types.PdfUploadResourcesResponse;
 import com.apifreaks.sdk.types.PhoneValidateResponse;
 import com.apifreaks.sdk.types.ReadabilityScoreResponse;
+import com.apifreaks.sdk.types.ScreenshotCaptureResponse;
 import com.apifreaks.sdk.types.SubdomainsLookupResponse;
 import com.apifreaks.sdk.types.SwiftCodeLookupResponse;
 import com.apifreaks.sdk.types.TimezoneConvertResponse;
@@ -250,11 +263,13 @@ import com.apifreaks.sdk.types.ZipcodeSearchByRadiusResponse;
 import com.apifreaks.sdk.types.ZipcodeSearchByRegionResponse;
 import java.io.File;
 import java.io.InputStream;
+import java.lang.AutoCloseable;
+import java.lang.Override;
 import java.lang.String;
 import java.util.List;
 import java.util.Optional;
 
-public class ApifreaksApiClient {
+public class ApifreaksApiClient implements AutoCloseable {
   protected final ClientOptions clientOptions;
 
   private final RawApifreaksApiClient rawClient;
@@ -569,6 +584,38 @@ public class ApifreaksApiClient {
   public BulkEmailValidateResponse bulkEmailValidate(BulkEmailValidateRequest request,
       RequestOptions requestOptions) {
     return this.rawClient.bulkEmailValidate(request, requestOptions).body();
+  }
+
+  /**
+   * Validates email syntax and checks the domain for disposable, free, spam, and role-account signals, plus MX/A DNS records. Send the email (and optionally an ip) as a JSON request body. When an ip is included, the response also carries geolocation and security data for it.
+   */
+  public DisposableEmailCheckV2Response disposableEmailCheckV2(
+      DisposableEmailCheckV2Request request) {
+    return this.rawClient.disposableEmailCheckV2(request).body();
+  }
+
+  /**
+   * Validates email syntax and checks the domain for disposable, free, spam, and role-account signals, plus MX/A DNS records. Send the email (and optionally an ip) as a JSON request body. When an ip is included, the response also carries geolocation and security data for it.
+   */
+  public DisposableEmailCheckV2Response disposableEmailCheckV2(
+      DisposableEmailCheckV2Request request, RequestOptions requestOptions) {
+    return this.rawClient.disposableEmailCheckV2(request, requestOptions).body();
+  }
+
+  /**
+   * Checks a bulk of email addresses (each with an optional ip) and returns a disposable email check result for each, in the same order as the request. Maximum <code>100</code> entries per request.
+   */
+  public BulkDisposableEmailCheckV2Response bulkDisposableEmailCheckV2(
+      BulkDisposableEmailCheckV2Request request) {
+    return this.rawClient.bulkDisposableEmailCheckV2(request).body();
+  }
+
+  /**
+   * Checks a bulk of email addresses (each with an optional ip) and returns a disposable email check result for each, in the same order as the request. Maximum <code>100</code> entries per request.
+   */
+  public BulkDisposableEmailCheckV2Response bulkDisposableEmailCheckV2(
+      BulkDisposableEmailCheckV2Request request, RequestOptions requestOptions) {
+    return this.rawClient.bulkDisposableEmailCheckV2(request, requestOptions).body();
   }
 
   /**
@@ -899,6 +946,22 @@ public class ApifreaksApiClient {
   }
 
   /**
+   * Returns the prices of one commodity through a UTC day at the requested interval, keyed by UTC timestamp. Each request costs a flat 50 credits however many points it returns.
+   */
+  public CommodityIntradayRatesV2Response commodityIntradayRatesV2(
+      CommodityIntradayRatesV2Request request) {
+    return this.rawClient.commodityIntradayRatesV2(request).body();
+  }
+
+  /**
+   * Returns the prices of one commodity through a UTC day at the requested interval, keyed by UTC timestamp. Each request costs a flat 50 credits however many points it returns.
+   */
+  public CommodityIntradayRatesV2Response commodityIntradayRatesV2(
+      CommodityIntradayRatesV2Request request, RequestOptions requestOptions) {
+    return this.rawClient.commodityIntradayRatesV2(request, requestOptions).body();
+  }
+
+  /**
    * This API merges multiple PDF files into a single PDF, in the order they are provided
    */
   public PdfMergeResponse pdfMerge(Optional<File> file, PdfMergeRequest request) {
@@ -911,6 +974,23 @@ public class ApifreaksApiClient {
   public PdfMergeResponse pdfMerge(Optional<File> file, PdfMergeRequest request,
       RequestOptions requestOptions) {
     return this.rawClient.pdfMerge(file, request, requestOptions).body();
+  }
+
+  /**
+   * This API merges multiple PDF files into a single PDF, in the order they are provided
+   * @param files the PDF files to merge, sent as repeated {@code file} parts in this order
+   */
+  public PdfMergeResponse pdfMerge(List<File> files, PdfMergeRequest request) {
+    return this.rawClient.pdfMerge(files, request).body();
+  }
+
+  /**
+   * This API merges multiple PDF files into a single PDF, in the order they are provided
+   * @param files the PDF files to merge, sent as repeated {@code file} parts in this order
+   */
+  public PdfMergeResponse pdfMerge(List<File> files, PdfMergeRequest request,
+      RequestOptions requestOptions) {
+    return this.rawClient.pdfMerge(files, request, requestOptions).body();
   }
 
   /**
@@ -1251,10 +1331,42 @@ public class ApifreaksApiClient {
   }
 
   /**
+   * Renders the template identified by template_id with the JSON data supplied in the request body (or fetched from data_url). Returns a hosted URL for the generated PDF. Provide either a request body or a data_url; one of the two is required. The keys of the data object are the fields you bound when you designed the template in the APIFreaks PDF Template Builder, so the exact shape is up to you. Pin the version parameter to a specific template version (e.g. version=v2) so later design changes never touch what is already live; omit it to use the latest version.
+   */
+  public PdfGenerateFromTemplateResponse pdfGenerateFromTemplate(
+      PdfGenerateFromTemplateRequest request) {
+    return this.rawClient.pdfGenerateFromTemplate(request).body();
+  }
+
+  /**
+   * Renders the template identified by template_id with the JSON data supplied in the request body (or fetched from data_url). Returns a hosted URL for the generated PDF. Provide either a request body or a data_url; one of the two is required. The keys of the data object are the fields you bound when you designed the template in the APIFreaks PDF Template Builder, so the exact shape is up to you. Pin the version parameter to a specific template version (e.g. version=v2) so later design changes never touch what is already live; omit it to use the latest version.
+   */
+  public PdfGenerateFromTemplateResponse pdfGenerateFromTemplate(
+      PdfGenerateFromTemplateRequest request, RequestOptions requestOptions) {
+    return this.rawClient.pdfGenerateFromTemplate(request, requestOptions).body();
+  }
+
+  /**
+   * Upload a CSV file where each row is one record. The API generates one PDF per row and returns an array of results, each with its own pdf_url. Rows are processed independently, so a failure in one row does not block the rest of the batch. The response gives a row-by-row breakdown of which PDFs succeeded and which failed.
+   */
+  public List<BulkPdfGenerateFromTemplateResponseItem> bulkPdfGenerateFromTemplate(File file,
+      BulkPdfGenerateFromTemplateRequest request) {
+    return this.rawClient.bulkPdfGenerateFromTemplate(file, request).body();
+  }
+
+  /**
+   * Upload a CSV file where each row is one record. The API generates one PDF per row and returns an array of results, each with its own pdf_url. Rows are processed independently, so a failure in one row does not block the rest of the batch. The response gives a row-by-row breakdown of which PDFs succeeded and which failed.
+   */
+  public List<BulkPdfGenerateFromTemplateResponseItem> bulkPdfGenerateFromTemplate(File file,
+      BulkPdfGenerateFromTemplateRequest request, RequestOptions requestOptions) {
+    return this.rawClient.bulkPdfGenerateFromTemplate(file, request, requestOptions).body();
+  }
+
+  /**
    * Capture full-page screenshots and videos of websites with advanced options like device simulation, custom code injection, cookie banner blocking, and scrollable content recording.
    * Supports multiple output formats including JSON, image, GIF, MP4, and WebM.
    */
-  public InputStream screenshotCapture(ScreenshotCaptureRequest request) {
+  public ScreenshotCaptureResponse screenshotCapture(ScreenshotCaptureRequest request) {
     return this.rawClient.screenshotCapture(request).body();
   }
 
@@ -1262,7 +1374,7 @@ public class ApifreaksApiClient {
    * Capture full-page screenshots and videos of websites with advanced options like device simulation, custom code injection, cookie banner blocking, and scrollable content recording.
    * Supports multiple output formats including JSON, image, GIF, MP4, and WebM.
    */
-  public InputStream screenshotCapture(ScreenshotCaptureRequest request,
+  public ScreenshotCaptureResponse screenshotCapture(ScreenshotCaptureRequest request,
       RequestOptions requestOptions) {
     return this.rawClient.screenshotCapture(request, requestOptions).body();
   }
@@ -1561,15 +1673,16 @@ public class ApifreaksApiClient {
   /**
    * Retrieves VAT details for multiple countries or country-state combinations in a single request. Maximum of <code>100</code> entries per request are allowed.
    */
-  public BulkVatRateByCountryResponse bulkVatRateByCountry(BulkVatRateByCountryRequest request) {
+  public List<BulkVatRateByCountryResponseItem> bulkVatRateByCountry(
+      BulkVatRateByCountryRequest request) {
     return this.rawClient.bulkVatRateByCountry(request).body();
   }
 
   /**
    * Retrieves VAT details for multiple countries or country-state combinations in a single request. Maximum of <code>100</code> entries per request are allowed.
    */
-  public BulkVatRateByCountryResponse bulkVatRateByCountry(BulkVatRateByCountryRequest request,
-      RequestOptions requestOptions) {
+  public List<BulkVatRateByCountryResponseItem> bulkVatRateByCountry(
+      BulkVatRateByCountryRequest request, RequestOptions requestOptions) {
     return this.rawClient.bulkVatRateByCountry(request, requestOptions).body();
   }
 
@@ -1935,14 +2048,14 @@ public class ApifreaksApiClient {
   /**
    * Get list of all supported flags with their metadata
    */
-  public List<GetSupportedFlagsResponseItem> getSupportedFlags(GetSupportedFlagsRequest request) {
+  public GetSupportedFlagsResponse getSupportedFlags(GetSupportedFlagsRequest request) {
     return this.rawClient.getSupportedFlags(request).body();
   }
 
   /**
    * Get list of all supported flags with their metadata
    */
-  public List<GetSupportedFlagsResponseItem> getSupportedFlags(GetSupportedFlagsRequest request,
+  public GetSupportedFlagsResponse getSupportedFlags(GetSupportedFlagsRequest request,
       RequestOptions requestOptions) {
     return this.rawClient.getSupportedFlags(request, requestOptions).body();
   }
@@ -2037,8 +2150,8 @@ public class ApifreaksApiClient {
    * </li>
    * </ul>
    */
-  public OcrPredictResponse ocrPredict(OcrPredictRequest request) {
-    return this.rawClient.ocrPredict(request).body();
+  public OcrPredictResponse ocrPredict(Optional<File> file, OcrPredictRequest request) {
+    return this.rawClient.ocrPredict(file, request).body();
   }
 
   /**
@@ -2056,8 +2169,9 @@ public class ApifreaksApiClient {
    * </li>
    * </ul>
    */
-  public OcrPredictResponse ocrPredict(OcrPredictRequest request, RequestOptions requestOptions) {
-    return this.rawClient.ocrPredict(request, requestOptions).body();
+  public OcrPredictResponse ocrPredict(Optional<File> file, OcrPredictRequest request,
+      RequestOptions requestOptions) {
+    return this.rawClient.ocrPredict(file, request, requestOptions).body();
   }
 
   /**
@@ -2133,6 +2247,31 @@ public class ApifreaksApiClient {
   public AstronomyLookupResponse astronomyLookup(AstronomyLookupRequest request,
       RequestOptions requestOptions) {
     return this.rawClient.astronomyLookup(request, requestOptions).body();
+  }
+
+  /**
+   * Returns subscription, subscription-surcharge, and one-off credit balances for the authenticated organization's account.
+   */
+  public GetCreditsUsageResponse getCreditsUsage(GetCreditsUsageRequest request) {
+    return this.rawClient.getCreditsUsage(request).body();
+  }
+
+  /**
+   * Returns subscription, subscription-surcharge, and one-off credit balances for the authenticated organization's account.
+   */
+  public GetCreditsUsageResponse getCreditsUsage(GetCreditsUsageRequest request,
+      RequestOptions requestOptions) {
+    return this.rawClient.getCreditsUsage(request, requestOptions).body();
+  }
+
+  /**
+   * Releases resources owned by this client: any WebSocket clients still connected through
+   * it are disconnected first, then the SDK-owned HTTP client is shut down. See
+   * {@code ClientOptions.close()} for what is and is not released.
+   */
+  @Override
+  public void close() {
+    this.clientOptions.close();
   }
 
   public static ApifreaksApiClientBuilder builder() {

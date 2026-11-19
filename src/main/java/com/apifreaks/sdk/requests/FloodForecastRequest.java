@@ -78,7 +78,7 @@ public final class FloodForecastRequest {
   }
 
   /**
-   * @return Response format returned by the API.
+   * @return Response format returned by the API. Only JSON is supported.
    */
   @JsonProperty("format")
   public Optional<FloodForecastRequestFormat> getFormat() {
@@ -209,7 +209,7 @@ public final class FloodForecastRequest {
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
 
     /**
-     * <p>Response format returned by the API.</p>
+     * <p>Response format returned by the API. Only JSON is supported.</p>
      */
     _FinalStage format(Optional<FloodForecastRequestFormat> format);
 
@@ -282,7 +282,6 @@ public final class FloodForecastRequest {
 
     private Optional<FloodForecastRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -305,7 +304,6 @@ public final class FloodForecastRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -317,7 +315,6 @@ public final class FloodForecastRequest {
 
     /**
      * <p>Starting date for flood forecast data in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between endDate and startDate must not exceed 16 days.</p>
-     * <p>Starting date for flood forecast data in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between endDate and startDate must not exceed 16 days.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -328,7 +325,6 @@ public final class FloodForecastRequest {
     }
 
     /**
-     * <p>End date for flood forecast data in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between endDate and startDate must not exceed 16 days.</p>
      * <p>End date for flood forecast data in YYYY-MM-DD format. Forecast dates must be current or future dates only. Past dates are not allowed for forecast data. The difference between endDate and startDate must not exceed 16 days.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -478,7 +474,7 @@ public final class FloodForecastRequest {
     }
 
     /**
-     * <p>Response format returned by the API.</p>
+     * <p>Response format returned by the API. Only JSON is supported.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -488,7 +484,7 @@ public final class FloodForecastRequest {
     }
 
     /**
-     * <p>Response format returned by the API.</p>
+     * <p>Response format returned by the API. Only JSON is supported.</p>
      */
     @java.lang.Override
     @JsonSetter(
@@ -503,6 +499,14 @@ public final class FloodForecastRequest {
     @java.lang.Override
     public FloodForecastRequest build() {
       return new FloodForecastRequest(apiKey, format, startDate, endDate, location, lat, long_, ip, precision, timezone, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("startDate") || key.equalsIgnoreCase("endDate") || key.equalsIgnoreCase("location") || key.equalsIgnoreCase("lat") || key.equalsIgnoreCase("long") || key.equalsIgnoreCase("ip") || key.equalsIgnoreCase("precision") || key.equalsIgnoreCase("timezone")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

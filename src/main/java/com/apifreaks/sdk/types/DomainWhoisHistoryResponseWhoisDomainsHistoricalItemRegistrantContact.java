@@ -49,6 +49,10 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistran
 
   private final Optional<String> mailingaddress;
 
+  private final Optional<String> emailAddress;
+
+  private final Optional<String> mailingAddress;
+
   private final Map<String, Object> additionalProperties;
 
   private DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistrantContact(
@@ -56,6 +60,7 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistran
       Optional<String> city, Optional<String> state, Optional<String> zipCode,
       Optional<String> countryName, Optional<String> countryCode, Optional<String> emailaddress,
       Optional<String> phone, Optional<String> fax, Optional<String> mailingaddress,
+      Optional<String> emailAddress, Optional<String> mailingAddress,
       Map<String, Object> additionalProperties) {
     this.name = name;
     this.company = company;
@@ -69,6 +74,8 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistran
     this.phone = phone;
     this.fax = fax;
     this.mailingaddress = mailingaddress;
+    this.emailAddress = emailAddress;
+    this.mailingAddress = mailingAddress;
     this.additionalProperties = additionalProperties;
   }
 
@@ -112,6 +119,9 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistran
     return countryCode;
   }
 
+  /**
+   * @return Deprecated: the API returns this field as <code>email_address</code>; read <code>email_address</code> instead.
+   */
   @JsonProperty("emailaddress")
   public Optional<String> getEmailaddress() {
     return emailaddress;
@@ -127,9 +137,22 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistran
     return fax;
   }
 
+  /**
+   * @return Deprecated: the API returns this field as <code>mailing_address</code>; read <code>mailing_address</code> instead.
+   */
   @JsonProperty("mailingaddress")
   public Optional<String> getMailingaddress() {
     return mailingaddress;
+  }
+
+  @JsonProperty("email_address")
+  public Optional<String> getEmailAddress() {
+    return emailAddress;
+  }
+
+  @JsonProperty("mailing_address")
+  public Optional<String> getMailingAddress() {
+    return mailingAddress;
   }
 
   @java.lang.Override
@@ -145,12 +168,12 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistran
 
   private boolean equalTo(
       DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistrantContact other) {
-    return name.equals(other.name) && company.equals(other.company) && street.equals(other.street) && city.equals(other.city) && state.equals(other.state) && zipCode.equals(other.zipCode) && countryName.equals(other.countryName) && countryCode.equals(other.countryCode) && emailaddress.equals(other.emailaddress) && phone.equals(other.phone) && fax.equals(other.fax) && mailingaddress.equals(other.mailingaddress);
+    return name.equals(other.name) && company.equals(other.company) && street.equals(other.street) && city.equals(other.city) && state.equals(other.state) && zipCode.equals(other.zipCode) && countryName.equals(other.countryName) && countryCode.equals(other.countryCode) && emailaddress.equals(other.emailaddress) && phone.equals(other.phone) && fax.equals(other.fax) && mailingaddress.equals(other.mailingaddress) && emailAddress.equals(other.emailAddress) && mailingAddress.equals(other.mailingAddress);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.name, this.company, this.street, this.city, this.state, this.zipCode, this.countryName, this.countryCode, this.emailaddress, this.phone, this.fax, this.mailingaddress);
+    return Objects.hash(this.name, this.company, this.street, this.city, this.state, this.zipCode, this.countryName, this.countryCode, this.emailaddress, this.phone, this.fax, this.mailingaddress, this.emailAddress, this.mailingAddress);
   }
 
   @java.lang.Override
@@ -190,7 +213,10 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistran
 
     private Optional<String> mailingaddress = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<String> emailAddress = Optional.empty();
+
+    private Optional<String> mailingAddress = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -210,6 +236,8 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistran
       phone(other.getPhone());
       fax(other.getFax());
       mailingaddress(other.getMailingaddress());
+      emailAddress(other.getEmailAddress());
+      mailingAddress(other.getMailingAddress());
       return this;
     }
 
@@ -325,6 +353,9 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistran
       return this;
     }
 
+    /**
+     * <p>Deprecated: the API returns this field as <code>email_address</code>; read <code>email_address</code> instead.</p>
+     */
     @JsonSetter(
         value = "emailaddress",
         nulls = Nulls.SKIP
@@ -367,6 +398,9 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistran
       return this;
     }
 
+    /**
+     * <p>Deprecated: the API returns this field as <code>mailing_address</code>; read <code>mailing_address</code> instead.</p>
+     */
     @JsonSetter(
         value = "mailingaddress",
         nulls = Nulls.SKIP
@@ -381,8 +415,44 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistran
       return this;
     }
 
+    @JsonSetter(
+        value = "email_address",
+        nulls = Nulls.SKIP
+    )
+    public Builder emailAddress(Optional<String> emailAddress) {
+      this.emailAddress = emailAddress;
+      return this;
+    }
+
+    public Builder emailAddress(String emailAddress) {
+      this.emailAddress = Optional.ofNullable(emailAddress);
+      return this;
+    }
+
+    @JsonSetter(
+        value = "mailing_address",
+        nulls = Nulls.SKIP
+    )
+    public Builder mailingAddress(Optional<String> mailingAddress) {
+      this.mailingAddress = mailingAddress;
+      return this;
+    }
+
+    public Builder mailingAddress(String mailingAddress) {
+      this.mailingAddress = Optional.ofNullable(mailingAddress);
+      return this;
+    }
+
     public DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistrantContact build() {
-      return new DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistrantContact(name, company, street, city, state, zipCode, countryName, countryCode, emailaddress, phone, fax, mailingaddress, additionalProperties);
+      return new DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistrantContact(name, company, street, city, state, zipCode, countryName, countryCode, emailaddress, phone, fax, mailingaddress, emailAddress, mailingAddress, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("company") || key.equalsIgnoreCase("street") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("state") || key.equalsIgnoreCase("zip_code") || key.equalsIgnoreCase("country_name") || key.equalsIgnoreCase("country_code") || key.equalsIgnoreCase("emailaddress") || key.equalsIgnoreCase("phone") || key.equalsIgnoreCase("fax") || key.equalsIgnoreCase("mailingaddress") || key.equalsIgnoreCase("email_address") || key.equalsIgnoreCase("mailing_address")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

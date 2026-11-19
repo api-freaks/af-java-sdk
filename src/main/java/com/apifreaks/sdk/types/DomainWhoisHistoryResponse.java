@@ -158,7 +158,6 @@ public final class DomainWhoisHistoryResponse {
 
     private List<DomainWhoisHistoryResponseWhoisDomainsHistoricalItem> whoisDomainsHistorical = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -175,7 +174,6 @@ public final class DomainWhoisHistoryResponse {
 
     /**
      * <p>Determines whether the request was successfully processed or not.</p>
-     * <p>Determines whether the request was successfully processed or not.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -187,7 +185,6 @@ public final class DomainWhoisHistoryResponse {
 
     /**
      * <p>Indicates that this response contains historical data.</p>
-     * <p>Indicates that this response contains historical data.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -198,7 +195,6 @@ public final class DomainWhoisHistoryResponse {
     }
 
     /**
-     * <p>Shows the total number of records found for the queried domain.</p>
      * <p>Shows the total number of records found for the queried domain.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -242,6 +238,14 @@ public final class DomainWhoisHistoryResponse {
     @java.lang.Override
     public DomainWhoisHistoryResponse build() {
       return new DomainWhoisHistoryResponse(status, whois, totalRecords, whoisDomainsHistorical, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("status") || key.equalsIgnoreCase("whois") || key.equalsIgnoreCase("total_records") || key.equalsIgnoreCase("whois_domains_historical")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

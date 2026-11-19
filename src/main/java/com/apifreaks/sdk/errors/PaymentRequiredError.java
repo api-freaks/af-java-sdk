@@ -5,21 +5,21 @@
 package com.apifreaks.sdk.errors;
 
 import com.apifreaks.sdk.core.ApifreaksApiApiException;
-import java.lang.Object;
+import com.apifreaks.sdk.types.PaymentRequiredErrorBody;
 import okhttp3.Response;
 
 public final class PaymentRequiredError extends ApifreaksApiApiException {
   /**
    * The body of the response that triggered the exception.
    */
-  private final Object body;
+  private final PaymentRequiredErrorBody body;
 
-  public PaymentRequiredError(Object body) {
+  public PaymentRequiredError(PaymentRequiredErrorBody body) {
     super("PaymentRequiredError", 402, body);
     this.body = body;
   }
 
-  public PaymentRequiredError(Object body, Response rawResponse) {
+  public PaymentRequiredError(PaymentRequiredErrorBody body, Response rawResponse) {
     super("PaymentRequiredError", 402, body, rawResponse);
     this.body = body;
   }
@@ -28,7 +28,7 @@ public final class PaymentRequiredError extends ApifreaksApiApiException {
    * @return the body
    */
   @java.lang.Override
-  public Object body() {
+  public PaymentRequiredErrorBody body() {
     return this.body;
   }
 }

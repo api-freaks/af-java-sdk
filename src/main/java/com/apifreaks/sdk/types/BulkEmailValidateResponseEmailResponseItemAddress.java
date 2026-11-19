@@ -98,7 +98,6 @@ public final class BulkEmailValidateResponseEmailResponseItemAddress {
 
     private Optional<Boolean> validIpAddress = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -157,6 +156,14 @@ public final class BulkEmailValidateResponseEmailResponseItemAddress {
 
     public BulkEmailValidateResponseEmailResponseItemAddress build() {
       return new BulkEmailValidateResponseEmailResponseItemAddress(security, location, validIpAddress, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("security") || key.equalsIgnoreCase("location") || key.equalsIgnoreCase("validIpAddress")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

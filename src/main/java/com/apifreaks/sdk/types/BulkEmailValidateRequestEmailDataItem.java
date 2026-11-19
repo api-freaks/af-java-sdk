@@ -136,7 +136,6 @@ public final class BulkEmailValidateRequestEmailDataItem {
 
     private Optional<String> name = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -151,7 +150,6 @@ public final class BulkEmailValidateRequestEmailDataItem {
     }
 
     /**
-     * <p>Email address to validate</p>
      * <p>Email address to validate</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -211,6 +209,14 @@ public final class BulkEmailValidateRequestEmailDataItem {
     @java.lang.Override
     public BulkEmailValidateRequestEmailDataItem build() {
       return new BulkEmailValidateRequestEmailDataItem(email, name, ip, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("email") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("ip")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

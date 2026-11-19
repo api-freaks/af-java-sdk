@@ -76,7 +76,6 @@ public final class GetCountriesResponse {
   public static final class Builder {
     private List<GetCountriesResponseCountriesItem> countries = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -113,6 +112,14 @@ public final class GetCountriesResponse {
 
     public GetCountriesResponse build() {
       return new GetCountriesResponse(countries, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("countries")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

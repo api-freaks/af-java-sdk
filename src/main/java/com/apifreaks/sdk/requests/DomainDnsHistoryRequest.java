@@ -54,8 +54,7 @@ public final class DomainDnsHistoryRequest {
   }
 
   /**
-   * @return A comma-separated list of DNS record types for lookup.
-   * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all
+   * @return DNS record types to look up, sent as a comma-separated list (e.g. <code>A,MX</code>). Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all.
    */
   @JsonProperty("type")
   public Optional<List<String>> getType() {
@@ -147,8 +146,7 @@ public final class DomainDnsHistoryRequest {
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
 
     /**
-     * <p>A comma-separated list of DNS record types for lookup.
-     * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all</p>
+     * <p>DNS record types to look up, sent as a comma-separated list (e.g. <code>A,MX</code>). Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all.</p>
      */
     _FinalStage type(Optional<List<String>> type);
 
@@ -185,7 +183,6 @@ public final class DomainDnsHistoryRequest {
 
     private Optional<List<String>> type = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -203,7 +200,6 @@ public final class DomainDnsHistoryRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -214,7 +210,6 @@ public final class DomainDnsHistoryRequest {
     }
 
     /**
-     * <p>Hostname or URL whose historical DNS records are required</p>
      * <p>Hostname or URL whose historical DNS records are required</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -278,8 +273,7 @@ public final class DomainDnsHistoryRequest {
     }
 
     /**
-     * <p>A comma-separated list of DNS record types for lookup.
-     * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all</p>
+     * <p>DNS record types to look up, sent as a comma-separated list (e.g. <code>A,MX</code>). Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -289,8 +283,7 @@ public final class DomainDnsHistoryRequest {
     }
 
     /**
-     * <p>A comma-separated list of DNS record types for lookup.
-     * Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all</p>
+     * <p>DNS record types to look up, sent as a comma-separated list (e.g. <code>A,MX</code>). Possible values: A, AAAA, MX, NS, SOA, SPF, TXT, CNAME, or all.</p>
      */
     @java.lang.Override
     @JsonSetter(
@@ -305,6 +298,14 @@ public final class DomainDnsHistoryRequest {
     @java.lang.Override
     public DomainDnsHistoryRequest build() {
       return new DomainDnsHistoryRequest(type, apiKey, format, hostName, page, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("type") || key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("host-name") || key.equalsIgnoreCase("page")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

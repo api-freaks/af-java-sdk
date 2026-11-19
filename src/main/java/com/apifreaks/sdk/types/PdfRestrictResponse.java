@@ -105,7 +105,6 @@ public final class PdfRestrictResponse {
 
     private Optional<List<String>> inputIds = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -144,6 +143,14 @@ public final class PdfRestrictResponse {
     @java.lang.Override
     public PdfRestrictResponse build() {
       return new PdfRestrictResponse(taskId, inputIds, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("taskId") || key.equalsIgnoreCase("inputIds")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

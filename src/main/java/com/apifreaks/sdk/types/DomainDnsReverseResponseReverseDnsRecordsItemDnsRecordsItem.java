@@ -43,9 +43,9 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItem {
     if(this.type == 0) {
       return visitor.visit((DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItemAddress) this.value);
     } else if(this.type == 1) {
-      return visitor.visit((DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItemOne) this.value);
-    } else if(this.type == 2) {
       return visitor.visit((DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItemPriority) this.value);
+    } else if(this.type == 2) {
+      return visitor.visit((DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItemOne) this.value);
     } else if(this.type == 3) {
       return visitor.visit((DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItemSingleName) this.value);
     } else if(this.type == 4) {
@@ -82,12 +82,12 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItem {
   }
 
   public static DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItem of(
-      DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItemOne value) {
+      DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItemPriority value) {
     return new DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItem(value, 1);
   }
 
   public static DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItem of(
-      DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItemPriority value) {
+      DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItemOne value) {
     return new DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItem(value, 2);
   }
 
@@ -109,9 +109,9 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItem {
   public interface Visitor<T> {
     T visit(DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItemAddress value);
 
-    T visit(DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItemOne value);
-
     T visit(DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItemPriority value);
+
+    T visit(DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItemOne value);
 
     T visit(DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItemSingleName value);
 
@@ -135,15 +135,15 @@ public final class DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItem {
         } catch(RuntimeException e) {
         }
       }
-      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("name") && ((Map<?, ?>) value).containsKey("type") && ((Map<?, ?>) value).containsKey("dnsType") && ((Map<?, ?>) value).containsKey("ttl") && ((Map<?, ?>) value).containsKey("rawText") && ((Map<?, ?>) value).containsKey("rRsetType") && ((Map<?, ?>) value).containsKey("target")) {
-        try {
-          return of(ObjectMappers.JSON_MAPPER.convertValue(value, DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItemOne.class));
-        } catch(RuntimeException e) {
-        }
-      }
       if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("name") && ((Map<?, ?>) value).containsKey("type") && ((Map<?, ?>) value).containsKey("dnsType") && ((Map<?, ?>) value).containsKey("ttl") && ((Map<?, ?>) value).containsKey("rawText") && ((Map<?, ?>) value).containsKey("rRsetType") && ((Map<?, ?>) value).containsKey("target") && ((Map<?, ?>) value).containsKey("priority")) {
         try {
           return of(ObjectMappers.JSON_MAPPER.convertValue(value, DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItemPriority.class));
+        } catch(RuntimeException e) {
+        }
+      }
+      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("name") && ((Map<?, ?>) value).containsKey("type") && ((Map<?, ?>) value).containsKey("dnsType") && ((Map<?, ?>) value).containsKey("ttl") && ((Map<?, ?>) value).containsKey("rawText") && ((Map<?, ?>) value).containsKey("rRsetType") && ((Map<?, ?>) value).containsKey("target")) {
+        try {
+          return of(ObjectMappers.JSON_MAPPER.convertValue(value, DomainDnsReverseResponseReverseDnsRecordsItemDnsRecordsItemOne.class));
         } catch(RuntimeException e) {
         }
       }

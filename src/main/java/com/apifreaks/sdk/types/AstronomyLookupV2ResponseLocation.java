@@ -422,7 +422,6 @@ public final class AstronomyLookupV2ResponseLocation {
 
     private Optional<String> locationString = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -452,7 +451,6 @@ public final class AstronomyLookupV2ResponseLocation {
 
     /**
      * <p>The geographic latitude of the location. Present in all lookup modes.</p>
-     * <p>The geographic latitude of the location. Present in all lookup modes.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -463,7 +461,6 @@ public final class AstronomyLookupV2ResponseLocation {
     }
 
     /**
-     * <p>The geographic longitude of the location. Present in all lookup modes.</p>
      * <p>The geographic longitude of the location. Present in all lookup modes.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -822,6 +819,14 @@ public final class AstronomyLookupV2ResponseLocation {
     @java.lang.Override
     public AstronomyLookupV2ResponseLocation build() {
       return new AstronomyLookupV2ResponseLocation(locationString, continentCode, continentName, countryCode2, countryCode3, countryName, countryNameOfficial, isEu, stateProv, stateCode, district, city, zipcode, latitude, longitude, locality, elevation, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("location_string") || key.equalsIgnoreCase("continent_code") || key.equalsIgnoreCase("continent_name") || key.equalsIgnoreCase("country_code2") || key.equalsIgnoreCase("country_code3") || key.equalsIgnoreCase("country_name") || key.equalsIgnoreCase("country_name_official") || key.equalsIgnoreCase("is_eu") || key.equalsIgnoreCase("state_prov") || key.equalsIgnoreCase("state_code") || key.equalsIgnoreCase("district") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("zipcode") || key.equalsIgnoreCase("latitude") || key.equalsIgnoreCase("longitude") || key.equalsIgnoreCase("locality") || key.equalsIgnoreCase("elevation")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

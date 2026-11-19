@@ -4,9 +4,12 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.Nullable;
+import com.apifreaks.sdk.core.NullableNonemptyFilter;
 import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -49,6 +52,10 @@ public final class IpWhoisLookupResponse {
 
   private final Optional<String> whoisRawResponse;
 
+  private final Optional<List<IpWhoisLookupResponseRoutesItem>> routes;
+
+  private final Optional<String> rWhoisRawResponse;
+
   private final Map<String, Object> additionalProperties;
 
   private IpWhoisLookupResponse(Optional<Boolean> status, Optional<String> ipAddress,
@@ -59,7 +66,8 @@ public final class IpWhoisLookupResponse {
       Optional<List<IpWhoisLookupResponseTechnicalContactsItem>> technicalContacts,
       Optional<List<IpWhoisLookupResponseAbuseContactsItem>> abuseContacts,
       Optional<List<IpWhoisLookupResponseAdministrativeContactsItem>> administrativeContacts,
-      Optional<String> whoisRawResponse, Map<String, Object> additionalProperties) {
+      Optional<String> whoisRawResponse, Optional<List<IpWhoisLookupResponseRoutesItem>> routes,
+      Optional<String> rWhoisRawResponse, Map<String, Object> additionalProperties) {
     this.status = status;
     this.ipAddress = ipAddress;
     this.queryTime = queryTime;
@@ -71,6 +79,8 @@ public final class IpWhoisLookupResponse {
     this.abuseContacts = abuseContacts;
     this.administrativeContacts = administrativeContacts;
     this.whoisRawResponse = whoisRawResponse;
+    this.routes = routes;
+    this.rWhoisRawResponse = rWhoisRawResponse;
     this.additionalProperties = additionalProperties;
   }
 
@@ -130,6 +140,34 @@ public final class IpWhoisLookupResponse {
     return whoisRawResponse;
   }
 
+  /**
+   * @return BGP route objects announced by this IP's network.
+   */
+  @JsonProperty("routes")
+  public Optional<List<IpWhoisLookupResponseRoutesItem>> getRoutes() {
+    return routes;
+  }
+
+  /**
+   * @return WHOIS response from the rwhois server, if available.
+   */
+  @JsonIgnore
+  public Optional<String> getRWhoisRawResponse() {
+    if (rWhoisRawResponse == null) {
+      return Optional.empty();
+    }
+    return rWhoisRawResponse;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("r_whois_raw_response")
+  private Optional<String> _getRWhoisRawResponse() {
+    return rWhoisRawResponse;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -142,12 +180,12 @@ public final class IpWhoisLookupResponse {
   }
 
   private boolean equalTo(IpWhoisLookupResponse other) {
-    return status.equals(other.status) && ipAddress.equals(other.ipAddress) && queryTime.equals(other.queryTime) && whoisServer.equals(other.whoisServer) && inetNums.equals(other.inetNums) && irt.equals(other.irt) && organization.equals(other.organization) && technicalContacts.equals(other.technicalContacts) && abuseContacts.equals(other.abuseContacts) && administrativeContacts.equals(other.administrativeContacts) && whoisRawResponse.equals(other.whoisRawResponse);
+    return status.equals(other.status) && ipAddress.equals(other.ipAddress) && queryTime.equals(other.queryTime) && whoisServer.equals(other.whoisServer) && inetNums.equals(other.inetNums) && irt.equals(other.irt) && organization.equals(other.organization) && technicalContacts.equals(other.technicalContacts) && abuseContacts.equals(other.abuseContacts) && administrativeContacts.equals(other.administrativeContacts) && whoisRawResponse.equals(other.whoisRawResponse) && routes.equals(other.routes) && rWhoisRawResponse.equals(other.rWhoisRawResponse);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.status, this.ipAddress, this.queryTime, this.whoisServer, this.inetNums, this.irt, this.organization, this.technicalContacts, this.abuseContacts, this.administrativeContacts, this.whoisRawResponse);
+    return Objects.hash(this.status, this.ipAddress, this.queryTime, this.whoisServer, this.inetNums, this.irt, this.organization, this.technicalContacts, this.abuseContacts, this.administrativeContacts, this.whoisRawResponse, this.routes, this.rWhoisRawResponse);
   }
 
   @java.lang.Override
@@ -185,7 +223,10 @@ public final class IpWhoisLookupResponse {
 
     private Optional<String> whoisRawResponse = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<List<IpWhoisLookupResponseRoutesItem>> routes = Optional.empty();
+
+    private Optional<String> rWhoisRawResponse = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -203,6 +244,8 @@ public final class IpWhoisLookupResponse {
       abuseContacts(other.getAbuseContacts());
       administrativeContacts(other.getAdministrativeContacts());
       whoisRawResponse(other.getWhoisRawResponse());
+      routes(other.getRoutes());
+      rWhoisRawResponse(other.getRWhoisRawResponse());
       return this;
     }
 
@@ -365,8 +408,63 @@ public final class IpWhoisLookupResponse {
       return this;
     }
 
+    /**
+     * <p>BGP route objects announced by this IP's network.</p>
+     */
+    @JsonSetter(
+        value = "routes",
+        nulls = Nulls.SKIP
+    )
+    public Builder routes(Optional<List<IpWhoisLookupResponseRoutesItem>> routes) {
+      this.routes = routes;
+      return this;
+    }
+
+    public Builder routes(List<IpWhoisLookupResponseRoutesItem> routes) {
+      this.routes = Optional.ofNullable(routes);
+      return this;
+    }
+
+    /**
+     * <p>WHOIS response from the rwhois server, if available.</p>
+     */
+    @JsonSetter(
+        value = "r_whois_raw_response",
+        nulls = Nulls.SKIP
+    )
+    public Builder rWhoisRawResponse(Optional<String> rWhoisRawResponse) {
+      this.rWhoisRawResponse = rWhoisRawResponse;
+      return this;
+    }
+
+    public Builder rWhoisRawResponse(String rWhoisRawResponse) {
+      this.rWhoisRawResponse = Optional.ofNullable(rWhoisRawResponse);
+      return this;
+    }
+
+    public Builder rWhoisRawResponse(Nullable<String> rWhoisRawResponse) {
+      if (rWhoisRawResponse.isNull()) {
+        this.rWhoisRawResponse = null;
+      }
+      else if (rWhoisRawResponse.isEmpty()) {
+        this.rWhoisRawResponse = Optional.empty();
+      }
+      else {
+        this.rWhoisRawResponse = Optional.of(rWhoisRawResponse.get());
+      }
+      return this;
+    }
+
     public IpWhoisLookupResponse build() {
-      return new IpWhoisLookupResponse(status, ipAddress, queryTime, whoisServer, inetNums, irt, organization, technicalContacts, abuseContacts, administrativeContacts, whoisRawResponse, additionalProperties);
+      return new IpWhoisLookupResponse(status, ipAddress, queryTime, whoisServer, inetNums, irt, organization, technicalContacts, abuseContacts, administrativeContacts, whoisRawResponse, routes, rWhoisRawResponse, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("status") || key.equalsIgnoreCase("ip_address") || key.equalsIgnoreCase("query_time") || key.equalsIgnoreCase("whois_server") || key.equalsIgnoreCase("inet_nums") || key.equalsIgnoreCase("irt") || key.equalsIgnoreCase("organization") || key.equalsIgnoreCase("technical_contacts") || key.equalsIgnoreCase("abuse_contacts") || key.equalsIgnoreCase("administrative_contacts") || key.equalsIgnoreCase("whois_raw_response") || key.equalsIgnoreCase("routes") || key.equalsIgnoreCase("r_whois_raw_response")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -179,7 +179,6 @@ public final class GeocoderReverseRequest {
 
     private Optional<String> acceptLanguage = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -197,7 +196,6 @@ public final class GeocoderReverseRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -209,7 +207,6 @@ public final class GeocoderReverseRequest {
 
     /**
      * <p>WGS84 latitude value ranging from -90 to 90.</p>
-     * <p>WGS84 latitude value ranging from -90 to 90.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -220,7 +217,6 @@ public final class GeocoderReverseRequest {
     }
 
     /**
-     * <p>WGS84 longitude value ranging from -180 to 180.</p>
      * <p>WGS84 longitude value ranging from -180 to 180.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -276,6 +272,14 @@ public final class GeocoderReverseRequest {
     @java.lang.Override
     public GeocoderReverseRequest build() {
       return new GeocoderReverseRequest(acceptLanguage, apiKey, format, lat, lon, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("lat") || key.equalsIgnoreCase("lon")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

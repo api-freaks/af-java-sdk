@@ -118,7 +118,6 @@ public final class AstronomyLookupResponse {
 
     private Optional<String> ip = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -165,6 +164,14 @@ public final class AstronomyLookupResponse {
     @java.lang.Override
     public AstronomyLookupResponse build() {
       return new AstronomyLookupResponse(ip, location, astronomy, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("ip") || key.equalsIgnoreCase("location") || key.equalsIgnoreCase("astronomy")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

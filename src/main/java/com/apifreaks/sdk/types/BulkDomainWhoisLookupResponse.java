@@ -77,7 +77,6 @@ public final class BulkDomainWhoisLookupResponse {
   public static final class Builder {
     private Optional<List<BulkDomainWhoisLookupResponseBulkWhoisResponseItem>> bulkWhoisResponse = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -106,6 +105,14 @@ public final class BulkDomainWhoisLookupResponse {
 
     public BulkDomainWhoisLookupResponse build() {
       return new BulkDomainWhoisLookupResponse(bulkWhoisResponse, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("bulk_whois_response")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

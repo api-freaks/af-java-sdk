@@ -226,7 +226,6 @@ public final class BulkGeolocationLookupV2Request {
 
     private Optional<BulkGeolocationLookupV2RequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -245,7 +244,6 @@ public final class BulkGeolocationLookupV2Request {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -412,6 +410,14 @@ public final class BulkGeolocationLookupV2Request {
     @java.lang.Override
     public BulkGeolocationLookupV2Request build() {
       return new BulkGeolocationLookupV2Request(apiKey, format, lang, fields, excludes, include, ips, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("ips")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

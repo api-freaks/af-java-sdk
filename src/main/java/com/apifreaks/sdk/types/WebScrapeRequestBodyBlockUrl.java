@@ -62,7 +62,7 @@ public final class WebScrapeRequestBodyBlockUrl {
   }
 
   /**
-   * @return An ordered list of step-by-step scraping instructions to be executed in the browser.
+   * @return An ordered list of step-by-step scraping instructions to be executed in the browser. Each item is one Instruction object, with exactly one action field set.
    */
   @JsonProperty("instructions")
   public List<WebScrapeRequestBodyBlockUrlInstructionsItem> getInstructions() {
@@ -108,7 +108,6 @@ public final class WebScrapeRequestBodyBlockUrl {
 
     private List<WebScrapeRequestBodyBlockUrlInstructionsItem> instructions = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -156,7 +155,7 @@ public final class WebScrapeRequestBodyBlockUrl {
     }
 
     /**
-     * <p>An ordered list of step-by-step scraping instructions to be executed in the browser.</p>
+     * <p>An ordered list of step-by-step scraping instructions to be executed in the browser. Each item is one Instruction object, with exactly one action field set.</p>
      */
     @JsonSetter(
         value = "instructions",
@@ -185,6 +184,14 @@ public final class WebScrapeRequestBodyBlockUrl {
 
     public WebScrapeRequestBodyBlockUrl build() {
       return new WebScrapeRequestBodyBlockUrl(blockUrl, cookies, instructions, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("blockUrl") || key.equalsIgnoreCase("cookies") || key.equalsIgnoreCase("instructions")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

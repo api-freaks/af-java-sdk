@@ -214,7 +214,6 @@ public final class DomainReputationResponseDgaScoreFeatures {
 
     private boolean tldInKnownDgaSet;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -234,7 +233,6 @@ public final class DomainReputationResponseDgaScoreFeatures {
 
     /**
      * <p>Length of the domain name.</p>
-     * <p>Length of the domain name.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -245,7 +243,6 @@ public final class DomainReputationResponseDgaScoreFeatures {
     }
 
     /**
-     * <p>Ratio of vowels to consonants in the domain.</p>
      * <p>Ratio of vowels to consonants in the domain.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -258,7 +255,6 @@ public final class DomainReputationResponseDgaScoreFeatures {
 
     /**
      * <p>N-gram perplexity score of the domain string.</p>
-     * <p>N-gram perplexity score of the domain string.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -269,7 +265,6 @@ public final class DomainReputationResponseDgaScoreFeatures {
     }
 
     /**
-     * <p>Shannon entropy of the domain string.</p>
      * <p>Shannon entropy of the domain string.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -282,7 +277,6 @@ public final class DomainReputationResponseDgaScoreFeatures {
 
     /**
      * <p>Ratio of digits to letters in the domain.</p>
-     * <p>Ratio of digits to letters in the domain.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -294,7 +288,6 @@ public final class DomainReputationResponseDgaScoreFeatures {
 
     /**
      * <p>Maximum consecutive consonant streak in the domain.</p>
-     * <p>Maximum consecutive consonant streak in the domain.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -305,7 +298,6 @@ public final class DomainReputationResponseDgaScoreFeatures {
     }
 
     /**
-     * <p>Indicates if the TLD belongs to a known DGA set.</p>
      * <p>Indicates if the TLD belongs to a known DGA set.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -319,6 +311,14 @@ public final class DomainReputationResponseDgaScoreFeatures {
     @java.lang.Override
     public DomainReputationResponseDgaScoreFeatures build() {
       return new DomainReputationResponseDgaScoreFeatures(domainLength, vowelConsonantRatio, ngramPerplexity, shannonEntropy, digitLetterRatio, consonantStreakMax, tldInKnownDgaSet, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("domain_length") || key.equalsIgnoreCase("vowel_consonant_ratio") || key.equalsIgnoreCase("ngram_perplexity") || key.equalsIgnoreCase("shannon_entropy") || key.equalsIgnoreCase("digit_letter_ratio") || key.equalsIgnoreCase("consonant_streak_max") || key.equalsIgnoreCase("tld_in_known_dga_set")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -194,7 +194,6 @@ public final class UserAgentLookupResponseDevice {
 
     private String cpu;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -210,7 +209,6 @@ public final class UserAgentLookupResponseDevice {
     }
 
     /**
-     * <p>Device name or the hardware that was used</p>
      * <p>Device name or the hardware that was used</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -243,27 +241,6 @@ public final class UserAgentLookupResponseDevice {
      * <li>Anonymized</li>
      * <li>Unknown</li>
      * </ol>
-     * <p>Device type or the hardware type. Possible values:</p>
-     * <ol>
-     * <li>Desktop</li>
-     * <li>Mobile</li>
-     * <li>Tablet</li>
-     * <li>Phone</li>
-     * <li>Watch</li>
-     * <li>Virtual Reality</li>
-     * <li>eReader</li>
-     * <li>Set-top box</li>
-     * <li>TV</li>
-     * <li>Game Console</li>
-     * <li>Handheld Game Console</li>
-     * <li>Voice</li>
-     * <li>Robot</li>
-     * <li>Robot Mobile</li>
-     * <li>Robot Imitator</li>
-     * <li>Hacker</li>
-     * <li>Anonymized</li>
-     * <li>Unknown</li>
-     * </ol>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -275,7 +252,6 @@ public final class UserAgentLookupResponseDevice {
 
     /**
      * <p>Device brand or the hardware brand name</p>
-     * <p>Device brand or the hardware brand name</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -286,7 +262,6 @@ public final class UserAgentLookupResponseDevice {
     }
 
     /**
-     * <p>Device's CPU model or machine CPU</p>
      * <p>Device's CPU model or machine CPU</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -300,6 +275,14 @@ public final class UserAgentLookupResponseDevice {
     @java.lang.Override
     public UserAgentLookupResponseDevice build() {
       return new UserAgentLookupResponseDevice(name, type, brand, cpu, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("brand") || key.equalsIgnoreCase("cpu")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

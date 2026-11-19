@@ -106,7 +106,6 @@ public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseCont
 
     private Optional<String> type = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -173,6 +172,14 @@ public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseCont
 
     public BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseContactEligibilityInfo build() {
       return new BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseContactEligibilityInfo(id, name, type, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("id") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

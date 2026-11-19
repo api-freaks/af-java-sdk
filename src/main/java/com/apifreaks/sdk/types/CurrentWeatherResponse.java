@@ -114,7 +114,6 @@ public final class CurrentWeatherResponse {
 
     private CurrentWeatherResponseCurrent current;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -129,7 +128,6 @@ public final class CurrentWeatherResponse {
 
     /**
      * <p>Location information</p>
-     * <p>Location information</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -140,7 +138,6 @@ public final class CurrentWeatherResponse {
     }
 
     /**
-     * <p>Current weather data</p>
      * <p>Current weather data</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -154,6 +151,14 @@ public final class CurrentWeatherResponse {
     @java.lang.Override
     public CurrentWeatherResponse build() {
       return new CurrentWeatherResponse(location, current, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("location") || key.equalsIgnoreCase("current")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -4,9 +4,12 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.Nullable;
+import com.apifreaks.sdk.core.NullableNonemptyFilter;
 import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -54,6 +57,10 @@ public final class MarineWeatherResponseCurrent {
 
   private final Optional<Double> oceanCurrentDirection;
 
+  private final Optional<Double> swellWavePeakPeriod;
+
+  private final Optional<Double> windWavePeakPeriod;
+
   private final Map<String, Object> additionalProperties;
 
   private MarineWeatherResponseCurrent(Optional<String> timestamp, Optional<Double> waveHeight,
@@ -62,7 +69,8 @@ public final class MarineWeatherResponseCurrent {
       Optional<Double> swellWaveHeight, Optional<Double> swellWaveDirection,
       Optional<Double> swellWavePeriod, Optional<Double> seaLevelHeightMsl,
       Optional<Double> seaSurfaceTemperature, Optional<Double> oceanCurrentVelocity,
-      Optional<Double> oceanCurrentDirection, Map<String, Object> additionalProperties) {
+      Optional<Double> oceanCurrentDirection, Optional<Double> swellWavePeakPeriod,
+      Optional<Double> windWavePeakPeriod, Map<String, Object> additionalProperties) {
     this.timestamp = timestamp;
     this.waveHeight = waveHeight;
     this.waveDirection = waveDirection;
@@ -77,6 +85,8 @@ public final class MarineWeatherResponseCurrent {
     this.seaSurfaceTemperature = seaSurfaceTemperature;
     this.oceanCurrentVelocity = oceanCurrentVelocity;
     this.oceanCurrentDirection = oceanCurrentDirection;
+    this.swellWavePeakPeriod = swellWavePeakPeriod;
+    this.windWavePeakPeriod = windWavePeakPeriod;
     this.additionalProperties = additionalProperties;
   }
 
@@ -192,6 +202,46 @@ public final class MarineWeatherResponseCurrent {
     return oceanCurrentDirection;
   }
 
+  /**
+   * @return Peak period of swell waves in seconds. Frequently null even at locations with other wave data present.
+   */
+  @JsonIgnore
+  public Optional<Double> getSwellWavePeakPeriod() {
+    if (swellWavePeakPeriod == null) {
+      return Optional.empty();
+    }
+    return swellWavePeakPeriod;
+  }
+
+  /**
+   * @return Peak period of locally generated wind waves in seconds. Frequently null even at locations with other wave data present.
+   */
+  @JsonIgnore
+  public Optional<Double> getWindWavePeakPeriod() {
+    if (windWavePeakPeriod == null) {
+      return Optional.empty();
+    }
+    return windWavePeakPeriod;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("swell_wave_peak_period")
+  private Optional<Double> _getSwellWavePeakPeriod() {
+    return swellWavePeakPeriod;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("wind_wave_peak_period")
+  private Optional<Double> _getWindWavePeakPeriod() {
+    return windWavePeakPeriod;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -204,12 +254,12 @@ public final class MarineWeatherResponseCurrent {
   }
 
   private boolean equalTo(MarineWeatherResponseCurrent other) {
-    return timestamp.equals(other.timestamp) && waveHeight.equals(other.waveHeight) && waveDirection.equals(other.waveDirection) && wavePeriod.equals(other.wavePeriod) && windWaveHeight.equals(other.windWaveHeight) && windWaveDirection.equals(other.windWaveDirection) && windWavePeriod.equals(other.windWavePeriod) && swellWaveHeight.equals(other.swellWaveHeight) && swellWaveDirection.equals(other.swellWaveDirection) && swellWavePeriod.equals(other.swellWavePeriod) && seaLevelHeightMsl.equals(other.seaLevelHeightMsl) && seaSurfaceTemperature.equals(other.seaSurfaceTemperature) && oceanCurrentVelocity.equals(other.oceanCurrentVelocity) && oceanCurrentDirection.equals(other.oceanCurrentDirection);
+    return timestamp.equals(other.timestamp) && waveHeight.equals(other.waveHeight) && waveDirection.equals(other.waveDirection) && wavePeriod.equals(other.wavePeriod) && windWaveHeight.equals(other.windWaveHeight) && windWaveDirection.equals(other.windWaveDirection) && windWavePeriod.equals(other.windWavePeriod) && swellWaveHeight.equals(other.swellWaveHeight) && swellWaveDirection.equals(other.swellWaveDirection) && swellWavePeriod.equals(other.swellWavePeriod) && seaLevelHeightMsl.equals(other.seaLevelHeightMsl) && seaSurfaceTemperature.equals(other.seaSurfaceTemperature) && oceanCurrentVelocity.equals(other.oceanCurrentVelocity) && oceanCurrentDirection.equals(other.oceanCurrentDirection) && swellWavePeakPeriod.equals(other.swellWavePeakPeriod) && windWavePeakPeriod.equals(other.windWavePeakPeriod);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.timestamp, this.waveHeight, this.waveDirection, this.wavePeriod, this.windWaveHeight, this.windWaveDirection, this.windWavePeriod, this.swellWaveHeight, this.swellWaveDirection, this.swellWavePeriod, this.seaLevelHeightMsl, this.seaSurfaceTemperature, this.oceanCurrentVelocity, this.oceanCurrentDirection);
+    return Objects.hash(this.timestamp, this.waveHeight, this.waveDirection, this.wavePeriod, this.windWaveHeight, this.windWaveDirection, this.windWavePeriod, this.swellWaveHeight, this.swellWaveDirection, this.swellWavePeriod, this.seaLevelHeightMsl, this.seaSurfaceTemperature, this.oceanCurrentVelocity, this.oceanCurrentDirection, this.swellWavePeakPeriod, this.windWavePeakPeriod);
   }
 
   @java.lang.Override
@@ -253,7 +303,10 @@ public final class MarineWeatherResponseCurrent {
 
     private Optional<Double> oceanCurrentDirection = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<Double> swellWavePeakPeriod = Optional.empty();
+
+    private Optional<Double> windWavePeakPeriod = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -274,6 +327,8 @@ public final class MarineWeatherResponseCurrent {
       seaSurfaceTemperature(other.getSeaSurfaceTemperature());
       oceanCurrentVelocity(other.getOceanCurrentVelocity());
       oceanCurrentDirection(other.getOceanCurrentDirection());
+      swellWavePeakPeriod(other.getSwellWavePeakPeriod());
+      windWavePeakPeriod(other.getWindWavePeakPeriod());
       return this;
     }
 
@@ -515,8 +570,76 @@ public final class MarineWeatherResponseCurrent {
       return this;
     }
 
+    /**
+     * <p>Peak period of swell waves in seconds. Frequently null even at locations with other wave data present.</p>
+     */
+    @JsonSetter(
+        value = "swell_wave_peak_period",
+        nulls = Nulls.SKIP
+    )
+    public Builder swellWavePeakPeriod(Optional<Double> swellWavePeakPeriod) {
+      this.swellWavePeakPeriod = swellWavePeakPeriod;
+      return this;
+    }
+
+    public Builder swellWavePeakPeriod(Double swellWavePeakPeriod) {
+      this.swellWavePeakPeriod = Optional.ofNullable(swellWavePeakPeriod);
+      return this;
+    }
+
+    public Builder swellWavePeakPeriod(Nullable<Double> swellWavePeakPeriod) {
+      if (swellWavePeakPeriod.isNull()) {
+        this.swellWavePeakPeriod = null;
+      }
+      else if (swellWavePeakPeriod.isEmpty()) {
+        this.swellWavePeakPeriod = Optional.empty();
+      }
+      else {
+        this.swellWavePeakPeriod = Optional.of(swellWavePeakPeriod.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Peak period of locally generated wind waves in seconds. Frequently null even at locations with other wave data present.</p>
+     */
+    @JsonSetter(
+        value = "wind_wave_peak_period",
+        nulls = Nulls.SKIP
+    )
+    public Builder windWavePeakPeriod(Optional<Double> windWavePeakPeriod) {
+      this.windWavePeakPeriod = windWavePeakPeriod;
+      return this;
+    }
+
+    public Builder windWavePeakPeriod(Double windWavePeakPeriod) {
+      this.windWavePeakPeriod = Optional.ofNullable(windWavePeakPeriod);
+      return this;
+    }
+
+    public Builder windWavePeakPeriod(Nullable<Double> windWavePeakPeriod) {
+      if (windWavePeakPeriod.isNull()) {
+        this.windWavePeakPeriod = null;
+      }
+      else if (windWavePeakPeriod.isEmpty()) {
+        this.windWavePeakPeriod = Optional.empty();
+      }
+      else {
+        this.windWavePeakPeriod = Optional.of(windWavePeakPeriod.get());
+      }
+      return this;
+    }
+
     public MarineWeatherResponseCurrent build() {
-      return new MarineWeatherResponseCurrent(timestamp, waveHeight, waveDirection, wavePeriod, windWaveHeight, windWaveDirection, windWavePeriod, swellWaveHeight, swellWaveDirection, swellWavePeriod, seaLevelHeightMsl, seaSurfaceTemperature, oceanCurrentVelocity, oceanCurrentDirection, additionalProperties);
+      return new MarineWeatherResponseCurrent(timestamp, waveHeight, waveDirection, wavePeriod, windWaveHeight, windWaveDirection, windWavePeriod, swellWaveHeight, swellWaveDirection, swellWavePeriod, seaLevelHeightMsl, seaSurfaceTemperature, oceanCurrentVelocity, oceanCurrentDirection, swellWavePeakPeriod, windWavePeakPeriod, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("timestamp") || key.equalsIgnoreCase("wave_height") || key.equalsIgnoreCase("wave_direction") || key.equalsIgnoreCase("wave_period") || key.equalsIgnoreCase("wind_wave_height") || key.equalsIgnoreCase("wind_wave_direction") || key.equalsIgnoreCase("wind_wave_period") || key.equalsIgnoreCase("swell_wave_height") || key.equalsIgnoreCase("swell_wave_direction") || key.equalsIgnoreCase("swell_wave_period") || key.equalsIgnoreCase("sea_level_height_msl") || key.equalsIgnoreCase("sea_surface_temperature") || key.equalsIgnoreCase("ocean_current_velocity") || key.equalsIgnoreCase("ocean_current_direction") || key.equalsIgnoreCase("swell_wave_peak_period") || key.equalsIgnoreCase("wind_wave_peak_period")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

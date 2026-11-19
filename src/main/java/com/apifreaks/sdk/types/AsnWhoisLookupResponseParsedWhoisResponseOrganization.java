@@ -190,7 +190,6 @@ public final class AsnWhoisLookupResponseParsedWhoisResponseOrganization {
 
     private Optional<String> source = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -382,6 +381,14 @@ public final class AsnWhoisLookupResponseParsedWhoisResponseOrganization {
 
     public AsnWhoisLookupResponseParsedWhoisResponseOrganization build() {
       return new AsnWhoisLookupResponseParsedWhoisResponseOrganization(handle, name, address, street, city, state, zipCode, country, addressCountry, dateCreated, dateUpdated, source, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("handle") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("address") || key.equalsIgnoreCase("street") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("state") || key.equalsIgnoreCase("zip_code") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("addressCountry") || key.equalsIgnoreCase("date_created") || key.equalsIgnoreCase("date_updated") || key.equalsIgnoreCase("source")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

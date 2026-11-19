@@ -4,9 +4,12 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.Nullable;
+import com.apifreaks.sdk.core.NullableNonemptyFilter;
 import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -78,6 +81,14 @@ public final class IpWhoisLookupResponseIrt {
 
   private final Optional<String> source;
 
+  private final Optional<List<IpWhoisLookupResponseIrtAbuseContactsItem>> abuseContacts;
+
+  private final Optional<List<IpWhoisLookupResponseIrtAdministrativeContactsItem>> administrativeContacts;
+
+  private final Optional<IpWhoisLookupResponseIrtOrganization> organization;
+
+  private final Optional<List<IpWhoisLookupResponseIrtTechnicalContactsItem>> technicalContacts;
+
   private final Map<String, Object> additionalProperties;
 
   private IpWhoisLookupResponseIrt(Optional<String> handle, Optional<List<String>> address,
@@ -91,6 +102,10 @@ public final class IpWhoisLookupResponseIrt {
       Optional<List<String>> auth, Optional<List<String>> notify, Optional<List<String>> irtNfy,
       Optional<List<String>> mntBy, Optional<List<String>> mntRef, Optional<String> dateCreated,
       Optional<String> dateUpdated, Optional<String> source,
+      Optional<List<IpWhoisLookupResponseIrtAbuseContactsItem>> abuseContacts,
+      Optional<List<IpWhoisLookupResponseIrtAdministrativeContactsItem>> administrativeContacts,
+      Optional<IpWhoisLookupResponseIrtOrganization> organization,
+      Optional<List<IpWhoisLookupResponseIrtTechnicalContactsItem>> technicalContacts,
       Map<String, Object> additionalProperties) {
     this.handle = handle;
     this.address = address;
@@ -118,6 +133,10 @@ public final class IpWhoisLookupResponseIrt {
     this.dateCreated = dateCreated;
     this.dateUpdated = dateUpdated;
     this.source = source;
+    this.abuseContacts = abuseContacts;
+    this.administrativeContacts = administrativeContacts;
+    this.organization = organization;
+    this.technicalContacts = technicalContacts;
     this.additionalProperties = additionalProperties;
   }
 
@@ -251,6 +270,76 @@ public final class IpWhoisLookupResponseIrt {
     return source;
   }
 
+  /**
+   * @return Abuse contacts linked to this IRT.
+   */
+  @JsonIgnore
+  public Optional<List<IpWhoisLookupResponseIrtAbuseContactsItem>> getAbuseContacts() {
+    if (abuseContacts == null) {
+      return Optional.empty();
+    }
+    return abuseContacts;
+  }
+
+  /**
+   * @return Administrative contacts linked to this IRT.
+   */
+  @JsonIgnore
+  public Optional<List<IpWhoisLookupResponseIrtAdministrativeContactsItem>> getAdministrativeContacts(
+      ) {
+    if (administrativeContacts == null) {
+      return Optional.empty();
+    }
+    return administrativeContacts;
+  }
+
+  /**
+   * @return Organization object containing the registrant's handle, name, address, contact details, and linked admin/tech/abuse contacts.
+   */
+  @JsonProperty("organization")
+  public Optional<IpWhoisLookupResponseIrtOrganization> getOrganization() {
+    return organization;
+  }
+
+  /**
+   * @return Technical contacts linked to this IRT.
+   */
+  @JsonIgnore
+  public Optional<List<IpWhoisLookupResponseIrtTechnicalContactsItem>> getTechnicalContacts() {
+    if (technicalContacts == null) {
+      return Optional.empty();
+    }
+    return technicalContacts;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("abuse_contacts")
+  private Optional<List<IpWhoisLookupResponseIrtAbuseContactsItem>> _getAbuseContacts() {
+    return abuseContacts;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("administrative_contacts")
+  private Optional<List<IpWhoisLookupResponseIrtAdministrativeContactsItem>> _getAdministrativeContacts(
+      ) {
+    return administrativeContacts;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("technical_contacts")
+  private Optional<List<IpWhoisLookupResponseIrtTechnicalContactsItem>> _getTechnicalContacts() {
+    return technicalContacts;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -263,12 +352,12 @@ public final class IpWhoisLookupResponseIrt {
   }
 
   private boolean equalTo(IpWhoisLookupResponseIrt other) {
-    return handle.equals(other.handle) && address.equals(other.address) && street.equals(other.street) && city.equals(other.city) && district.equals(other.district) && state.equals(other.state) && zipCode.equals(other.zipCode) && country.equals(other.country) && email.equals(other.email) && abuseMailbox.equals(other.abuseMailbox) && phone.equals(other.phone) && faxNo.equals(other.faxNo) && organizations.equals(other.organizations) && adminContacts.equals(other.adminContacts) && techContacts.equals(other.techContacts) && remarks.equals(other.remarks) && signature.equals(other.signature) && encryption.equals(other.encryption) && auth.equals(other.auth) && notify.equals(other.notify) && irtNfy.equals(other.irtNfy) && mntBy.equals(other.mntBy) && mntRef.equals(other.mntRef) && dateCreated.equals(other.dateCreated) && dateUpdated.equals(other.dateUpdated) && source.equals(other.source);
+    return handle.equals(other.handle) && address.equals(other.address) && street.equals(other.street) && city.equals(other.city) && district.equals(other.district) && state.equals(other.state) && zipCode.equals(other.zipCode) && country.equals(other.country) && email.equals(other.email) && abuseMailbox.equals(other.abuseMailbox) && phone.equals(other.phone) && faxNo.equals(other.faxNo) && organizations.equals(other.organizations) && adminContacts.equals(other.adminContacts) && techContacts.equals(other.techContacts) && remarks.equals(other.remarks) && signature.equals(other.signature) && encryption.equals(other.encryption) && auth.equals(other.auth) && notify.equals(other.notify) && irtNfy.equals(other.irtNfy) && mntBy.equals(other.mntBy) && mntRef.equals(other.mntRef) && dateCreated.equals(other.dateCreated) && dateUpdated.equals(other.dateUpdated) && source.equals(other.source) && abuseContacts.equals(other.abuseContacts) && administrativeContacts.equals(other.administrativeContacts) && organization.equals(other.organization) && technicalContacts.equals(other.technicalContacts);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.handle, this.address, this.street, this.city, this.district, this.state, this.zipCode, this.country, this.email, this.abuseMailbox, this.phone, this.faxNo, this.organizations, this.adminContacts, this.techContacts, this.remarks, this.signature, this.encryption, this.auth, this.notify, this.irtNfy, this.mntBy, this.mntRef, this.dateCreated, this.dateUpdated, this.source);
+    return Objects.hash(this.handle, this.address, this.street, this.city, this.district, this.state, this.zipCode, this.country, this.email, this.abuseMailbox, this.phone, this.faxNo, this.organizations, this.adminContacts, this.techContacts, this.remarks, this.signature, this.encryption, this.auth, this.notify, this.irtNfy, this.mntBy, this.mntRef, this.dateCreated, this.dateUpdated, this.source, this.abuseContacts, this.administrativeContacts, this.organization, this.technicalContacts);
   }
 
   @java.lang.Override
@@ -336,7 +425,14 @@ public final class IpWhoisLookupResponseIrt {
 
     private Optional<String> source = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<List<IpWhoisLookupResponseIrtAbuseContactsItem>> abuseContacts = Optional.empty();
+
+    private Optional<List<IpWhoisLookupResponseIrtAdministrativeContactsItem>> administrativeContacts = Optional.empty();
+
+    private Optional<IpWhoisLookupResponseIrtOrganization> organization = Optional.empty();
+
+    private Optional<List<IpWhoisLookupResponseIrtTechnicalContactsItem>> technicalContacts = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -369,6 +465,10 @@ public final class IpWhoisLookupResponseIrt {
       dateCreated(other.getDateCreated());
       dateUpdated(other.getDateUpdated());
       source(other.getSource());
+      abuseContacts(other.getAbuseContacts());
+      administrativeContacts(other.getAdministrativeContacts());
+      organization(other.getOrganization());
+      technicalContacts(other.getTechnicalContacts());
       return this;
     }
 
@@ -736,8 +836,131 @@ public final class IpWhoisLookupResponseIrt {
       return this;
     }
 
+    /**
+     * <p>Abuse contacts linked to this IRT.</p>
+     */
+    @JsonSetter(
+        value = "abuse_contacts",
+        nulls = Nulls.SKIP
+    )
+    public Builder abuseContacts(
+        Optional<List<IpWhoisLookupResponseIrtAbuseContactsItem>> abuseContacts) {
+      this.abuseContacts = abuseContacts;
+      return this;
+    }
+
+    public Builder abuseContacts(List<IpWhoisLookupResponseIrtAbuseContactsItem> abuseContacts) {
+      this.abuseContacts = Optional.ofNullable(abuseContacts);
+      return this;
+    }
+
+    public Builder abuseContacts(
+        Nullable<List<IpWhoisLookupResponseIrtAbuseContactsItem>> abuseContacts) {
+      if (abuseContacts.isNull()) {
+        this.abuseContacts = null;
+      }
+      else if (abuseContacts.isEmpty()) {
+        this.abuseContacts = Optional.empty();
+      }
+      else {
+        this.abuseContacts = Optional.of(abuseContacts.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Administrative contacts linked to this IRT.</p>
+     */
+    @JsonSetter(
+        value = "administrative_contacts",
+        nulls = Nulls.SKIP
+    )
+    public Builder administrativeContacts(
+        Optional<List<IpWhoisLookupResponseIrtAdministrativeContactsItem>> administrativeContacts) {
+      this.administrativeContacts = administrativeContacts;
+      return this;
+    }
+
+    public Builder administrativeContacts(
+        List<IpWhoisLookupResponseIrtAdministrativeContactsItem> administrativeContacts) {
+      this.administrativeContacts = Optional.ofNullable(administrativeContacts);
+      return this;
+    }
+
+    public Builder administrativeContacts(
+        Nullable<List<IpWhoisLookupResponseIrtAdministrativeContactsItem>> administrativeContacts) {
+      if (administrativeContacts.isNull()) {
+        this.administrativeContacts = null;
+      }
+      else if (administrativeContacts.isEmpty()) {
+        this.administrativeContacts = Optional.empty();
+      }
+      else {
+        this.administrativeContacts = Optional.of(administrativeContacts.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Organization object containing the registrant's handle, name, address, contact details, and linked admin/tech/abuse contacts.</p>
+     */
+    @JsonSetter(
+        value = "organization",
+        nulls = Nulls.SKIP
+    )
+    public Builder organization(Optional<IpWhoisLookupResponseIrtOrganization> organization) {
+      this.organization = organization;
+      return this;
+    }
+
+    public Builder organization(IpWhoisLookupResponseIrtOrganization organization) {
+      this.organization = Optional.ofNullable(organization);
+      return this;
+    }
+
+    /**
+     * <p>Technical contacts linked to this IRT.</p>
+     */
+    @JsonSetter(
+        value = "technical_contacts",
+        nulls = Nulls.SKIP
+    )
+    public Builder technicalContacts(
+        Optional<List<IpWhoisLookupResponseIrtTechnicalContactsItem>> technicalContacts) {
+      this.technicalContacts = technicalContacts;
+      return this;
+    }
+
+    public Builder technicalContacts(
+        List<IpWhoisLookupResponseIrtTechnicalContactsItem> technicalContacts) {
+      this.technicalContacts = Optional.ofNullable(technicalContacts);
+      return this;
+    }
+
+    public Builder technicalContacts(
+        Nullable<List<IpWhoisLookupResponseIrtTechnicalContactsItem>> technicalContacts) {
+      if (technicalContacts.isNull()) {
+        this.technicalContacts = null;
+      }
+      else if (technicalContacts.isEmpty()) {
+        this.technicalContacts = Optional.empty();
+      }
+      else {
+        this.technicalContacts = Optional.of(technicalContacts.get());
+      }
+      return this;
+    }
+
     public IpWhoisLookupResponseIrt build() {
-      return new IpWhoisLookupResponseIrt(handle, address, street, city, district, state, zipCode, country, email, abuseMailbox, phone, faxNo, organizations, adminContacts, techContacts, remarks, signature, encryption, auth, notify, irtNfy, mntBy, mntRef, dateCreated, dateUpdated, source, additionalProperties);
+      return new IpWhoisLookupResponseIrt(handle, address, street, city, district, state, zipCode, country, email, abuseMailbox, phone, faxNo, organizations, adminContacts, techContacts, remarks, signature, encryption, auth, notify, irtNfy, mntBy, mntRef, dateCreated, dateUpdated, source, abuseContacts, administrativeContacts, organization, technicalContacts, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("handle") || key.equalsIgnoreCase("address") || key.equalsIgnoreCase("street") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("district") || key.equalsIgnoreCase("state") || key.equalsIgnoreCase("zip_code") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("email") || key.equalsIgnoreCase("abuse_mailbox") || key.equalsIgnoreCase("phone") || key.equalsIgnoreCase("fax_no") || key.equalsIgnoreCase("organizations") || key.equalsIgnoreCase("admin_contacts") || key.equalsIgnoreCase("tech_contacts") || key.equalsIgnoreCase("remarks") || key.equalsIgnoreCase("signature") || key.equalsIgnoreCase("encryption") || key.equalsIgnoreCase("auth") || key.equalsIgnoreCase("notify") || key.equalsIgnoreCase("irt_nfy") || key.equalsIgnoreCase("mnt_by") || key.equalsIgnoreCase("mnt_ref") || key.equalsIgnoreCase("date_created") || key.equalsIgnoreCase("date_updated") || key.equalsIgnoreCase("source") || key.equalsIgnoreCase("abuse_contacts") || key.equalsIgnoreCase("administrative_contacts") || key.equalsIgnoreCase("organization") || key.equalsIgnoreCase("technical_contacts")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -84,7 +84,7 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingl
   }
 
   /**
-   * @return Name server for the domain
+   * @return The name server (NS records), or the host name the IP address resolves to (PTR records from IP address lookups).
    */
   @JsonProperty("singleName")
   public String getSingleName() {
@@ -150,7 +150,7 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingl
 
   public interface SingleNameStage {
     /**
-     * <p>Name server for the domain</p>
+     * <p>The name server (NS records), or the host name the IP address resolves to (PTR records from IP address lookups).</p>
      */
     _FinalStage singleName(@NotNull String singleName);
   }
@@ -181,7 +181,6 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingl
 
     private String singleName;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -243,8 +242,7 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingl
     }
 
     /**
-     * <p>Name server for the domain</p>
-     * <p>Name server for the domain</p>
+     * <p>The name server (NS records), or the host name the IP address resolves to (PTR records from IP address lookups).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -257,6 +255,14 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingl
     @java.lang.Override
     public BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingleName build() {
       return new BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemSingleName(name, type, dnsType, ttl, rawText, rRsetType, singleName, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("dnsType") || key.equalsIgnoreCase("ttl") || key.equalsIgnoreCase("rawText") || key.equalsIgnoreCase("rRsetType") || key.equalsIgnoreCase("singleName")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

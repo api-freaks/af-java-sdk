@@ -106,7 +106,6 @@ public final class OcrPredictResponse {
   public static final class Builder implements OcrTextStage, _FinalStage {
     private OcrPredictResponseOcrText ocrText;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -126,13 +125,6 @@ public final class OcrPredictResponse {
      * <li>Bulk/ZIP file, new_line=0: Array of strings (one per file)</li>
      * <li>Bulk/ZIP file, new_line=1: Array of arrays (each inner array contains lines for respective file)</li>
      * </ul>
-     * <p>Array containing extracted text. Structure varies based on input type and new_line parameter:</p>
-     * <ul>
-     * <li>Single file, new_line=0: Array with single string element</li>
-     * <li>Single file, new_line=1: Array of strings (one per line)</li>
-     * <li>Bulk/ZIP file, new_line=0: Array of strings (one per file)</li>
-     * <li>Bulk/ZIP file, new_line=1: Array of arrays (each inner array contains lines for respective file)</li>
-     * </ul>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -145,6 +137,14 @@ public final class OcrPredictResponse {
     @java.lang.Override
     public OcrPredictResponse build() {
       return new OcrPredictResponse(ocrText, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("OCRText")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

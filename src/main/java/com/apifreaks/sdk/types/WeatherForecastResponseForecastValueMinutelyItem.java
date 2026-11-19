@@ -309,7 +309,6 @@ public final class WeatherForecastResponseForecastValueMinutelyItem {
 
     private Optional<Double> globalTiltedIrradiance = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -645,6 +644,14 @@ public final class WeatherForecastResponseForecastValueMinutelyItem {
 
     public WeatherForecastResponseForecastValueMinutelyItem build() {
       return new WeatherForecastResponseForecastValueMinutelyItem(timestamp, temperature2M, relativeHumidity2M, dewPoint2M, apparentTemperature, precipitation, rain, snowfall, weatherCode, windSpeed10M, windDirection10M, windGusts10M, visibility, shortwaveRadiation, directRadiation, diffuseRadiation, directNormalIrradiance, globalTiltedIrradiance, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("timestamp") || key.equalsIgnoreCase("temperature_2m") || key.equalsIgnoreCase("relative_humidity_2m") || key.equalsIgnoreCase("dew_point_2m") || key.equalsIgnoreCase("apparent_temperature") || key.equalsIgnoreCase("precipitation") || key.equalsIgnoreCase("rain") || key.equalsIgnoreCase("snowfall") || key.equalsIgnoreCase("weather_code") || key.equalsIgnoreCase("wind_speed_10m") || key.equalsIgnoreCase("wind_direction_10m") || key.equalsIgnoreCase("wind_gusts_10m") || key.equalsIgnoreCase("visibility") || key.equalsIgnoreCase("shortwave_radiation") || key.equalsIgnoreCase("direct_radiation") || key.equalsIgnoreCase("diffuse_radiation") || key.equalsIgnoreCase("direct_normal_irradiance") || key.equalsIgnoreCase("global_tilted_irradiance")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

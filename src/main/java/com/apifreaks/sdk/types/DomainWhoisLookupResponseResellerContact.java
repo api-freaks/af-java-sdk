@@ -188,7 +188,6 @@ public final class DomainWhoisLookupResponseResellerContact {
 
     private Optional<String> mailingAddress = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -380,6 +379,14 @@ public final class DomainWhoisLookupResponseResellerContact {
 
     public DomainWhoisLookupResponseResellerContact build() {
       return new DomainWhoisLookupResponseResellerContact(name, company, street, city, state, zipCode, countryName, countryCode, emailAddress, phone, fax, mailingAddress, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("company") || key.equalsIgnoreCase("street") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("state") || key.equalsIgnoreCase("zip_code") || key.equalsIgnoreCase("country_name") || key.equalsIgnoreCase("country_code") || key.equalsIgnoreCase("email_address") || key.equalsIgnoreCase("phone") || key.equalsIgnoreCase("fax") || key.equalsIgnoreCase("mailing_address")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

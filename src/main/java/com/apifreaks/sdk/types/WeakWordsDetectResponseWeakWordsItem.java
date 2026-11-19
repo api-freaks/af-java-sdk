@@ -114,7 +114,6 @@ public final class WeakWordsDetectResponseWeakWordsItem {
 
     private int offset;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -129,7 +128,6 @@ public final class WeakWordsDetectResponseWeakWordsItem {
 
     /**
      * <p>The detected weak word</p>
-     * <p>The detected weak word</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -140,7 +138,6 @@ public final class WeakWordsDetectResponseWeakWordsItem {
     }
 
     /**
-     * <p>Zero-based word position in the input text</p>
      * <p>Zero-based word position in the input text</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -154,6 +151,14 @@ public final class WeakWordsDetectResponseWeakWordsItem {
     @java.lang.Override
     public WeakWordsDetectResponseWeakWordsItem build() {
       return new WeakWordsDetectResponseWeakWordsItem(word, offset, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("word") || key.equalsIgnoreCase("offset")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

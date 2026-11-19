@@ -159,7 +159,6 @@ public final class DomainSslChainLookupRequest {
 
     private Optional<DomainSslChainLookupRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -176,7 +175,6 @@ public final class DomainSslChainLookupRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -187,7 +185,6 @@ public final class DomainSslChainLookupRequest {
     }
 
     /**
-     * <p>Domain name or URL whose SSL certificate chain lookup is required</p>
      * <p>Domain name or URL whose SSL certificate chain lookup is required</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -247,6 +244,14 @@ public final class DomainSslChainLookupRequest {
     @java.lang.Override
     public DomainSslChainLookupRequest build() {
       return new DomainSslChainLookupRequest(apiKey, format, domainName, sslRaw, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("domainName") || key.equalsIgnoreCase("sslRaw")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

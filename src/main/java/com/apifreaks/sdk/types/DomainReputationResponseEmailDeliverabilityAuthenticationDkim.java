@@ -162,7 +162,6 @@ public final class DomainReputationResponseEmailDeliverabilityAuthenticationDkim
 
     private List<String> selectorsFound = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -179,7 +178,6 @@ public final class DomainReputationResponseEmailDeliverabilityAuthenticationDkim
 
     /**
      * <p>Indicates whether a DKIM record was found for any probed selector.</p>
-     * <p>Indicates whether a DKIM record was found for any probed selector.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -190,7 +188,6 @@ public final class DomainReputationResponseEmailDeliverabilityAuthenticationDkim
     }
 
     /**
-     * <p>Clarifying note about the limitations of DKIM selector probing.</p>
      * <p>Clarifying note about the limitations of DKIM selector probing.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -280,6 +277,14 @@ public final class DomainReputationResponseEmailDeliverabilityAuthenticationDkim
     @java.lang.Override
     public DomainReputationResponseEmailDeliverabilityAuthenticationDkim build() {
       return new DomainReputationResponseEmailDeliverabilityAuthenticationDkim(found, selectorsFound, providersDetected, note, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("found") || key.equalsIgnoreCase("selectors_found") || key.equalsIgnoreCase("providers_detected") || key.equalsIgnoreCase("note")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

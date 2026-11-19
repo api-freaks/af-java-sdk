@@ -32,14 +32,20 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseNetwork {
 
   private final Optional<Boolean> isAnycast;
 
+  private final Optional<String> cdnProviderName;
+
+  private final Optional<Boolean> isCdn;
+
   private final Map<String, Object> additionalProperties;
 
   private BulkGeolocationLookupV2ResponseItemAbuseNetwork(Optional<String> connectionType,
-      Optional<String> route, Optional<Boolean> isAnycast,
-      Map<String, Object> additionalProperties) {
+      Optional<String> route, Optional<Boolean> isAnycast, Optional<String> cdnProviderName,
+      Optional<Boolean> isCdn, Map<String, Object> additionalProperties) {
     this.connectionType = connectionType;
     this.route = route;
     this.isAnycast = isAnycast;
+    this.cdnProviderName = cdnProviderName;
+    this.isCdn = isCdn;
     this.additionalProperties = additionalProperties;
   }
 
@@ -67,6 +73,22 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseNetwork {
     return isAnycast;
   }
 
+  /**
+   * @return CDN provider name (e.g. Cloudflare) when is_cdn is true; empty otherwise.
+   */
+  @JsonProperty("cdn_provider_name")
+  public Optional<String> getCdnProviderName() {
+    return cdnProviderName;
+  }
+
+  /**
+   * @return true if the IP belongs to a content delivery network (CDN) or a cloud provider's network.
+   */
+  @JsonProperty("is_cdn")
+  public Optional<Boolean> getIsCdn() {
+    return isCdn;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -79,12 +101,12 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseNetwork {
   }
 
   private boolean equalTo(BulkGeolocationLookupV2ResponseItemAbuseNetwork other) {
-    return connectionType.equals(other.connectionType) && route.equals(other.route) && isAnycast.equals(other.isAnycast);
+    return connectionType.equals(other.connectionType) && route.equals(other.route) && isAnycast.equals(other.isAnycast) && cdnProviderName.equals(other.cdnProviderName) && isCdn.equals(other.isCdn);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.connectionType, this.route, this.isAnycast);
+    return Objects.hash(this.connectionType, this.route, this.isAnycast, this.cdnProviderName, this.isCdn);
   }
 
   @java.lang.Override
@@ -106,7 +128,10 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseNetwork {
 
     private Optional<Boolean> isAnycast = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<String> cdnProviderName = Optional.empty();
+
+    private Optional<Boolean> isCdn = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -116,6 +141,8 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseNetwork {
       connectionType(other.getConnectionType());
       route(other.getRoute());
       isAnycast(other.getIsAnycast());
+      cdnProviderName(other.getCdnProviderName());
+      isCdn(other.getIsCdn());
       return this;
     }
 
@@ -170,8 +197,50 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseNetwork {
       return this;
     }
 
+    /**
+     * <p>CDN provider name (e.g. Cloudflare) when is_cdn is true; empty otherwise.</p>
+     */
+    @JsonSetter(
+        value = "cdn_provider_name",
+        nulls = Nulls.SKIP
+    )
+    public Builder cdnProviderName(Optional<String> cdnProviderName) {
+      this.cdnProviderName = cdnProviderName;
+      return this;
+    }
+
+    public Builder cdnProviderName(String cdnProviderName) {
+      this.cdnProviderName = Optional.ofNullable(cdnProviderName);
+      return this;
+    }
+
+    /**
+     * <p>true if the IP belongs to a content delivery network (CDN) or a cloud provider's network.</p>
+     */
+    @JsonSetter(
+        value = "is_cdn",
+        nulls = Nulls.SKIP
+    )
+    public Builder isCdn(Optional<Boolean> isCdn) {
+      this.isCdn = isCdn;
+      return this;
+    }
+
+    public Builder isCdn(Boolean isCdn) {
+      this.isCdn = Optional.ofNullable(isCdn);
+      return this;
+    }
+
     public BulkGeolocationLookupV2ResponseItemAbuseNetwork build() {
-      return new BulkGeolocationLookupV2ResponseItemAbuseNetwork(connectionType, route, isAnycast, additionalProperties);
+      return new BulkGeolocationLookupV2ResponseItemAbuseNetwork(connectionType, route, isAnycast, cdnProviderName, isCdn, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("connection_type") || key.equalsIgnoreCase("route") || key.equalsIgnoreCase("is_anycast") || key.equalsIgnoreCase("cdn_provider_name") || key.equalsIgnoreCase("is_cdn")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

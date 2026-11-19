@@ -109,7 +109,6 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsSubj
 
     private Optional<List<String>> uris = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -183,6 +182,14 @@ public final class DomainSslChainLookupResponseSslCertificatesItemExtensionsSubj
     public DomainSslChainLookupResponseSslCertificatesItemExtensionsSubjectAlternativeNames build(
         ) {
       return new DomainSslChainLookupResponseSslCertificatesItemExtensionsSubjectAlternativeNames(dnsNames, emailAddresses, ipAddresses, uris, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("dnsNames") || key.equalsIgnoreCase("emailAddresses") || key.equalsIgnoreCase("ipAddresses") || key.equalsIgnoreCase("uris")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

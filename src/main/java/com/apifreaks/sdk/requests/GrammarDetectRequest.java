@@ -115,7 +115,6 @@ public final class GrammarDetectRequest {
 
     private String text;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -130,7 +129,6 @@ public final class GrammarDetectRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -141,7 +139,6 @@ public final class GrammarDetectRequest {
     }
 
     /**
-     * <p>Text to analyze for grammar errors</p>
      * <p>Text to analyze for grammar errors</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -155,6 +152,14 @@ public final class GrammarDetectRequest {
     @java.lang.Override
     public GrammarDetectRequest build() {
       return new GrammarDetectRequest(apiKey, text, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("text")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

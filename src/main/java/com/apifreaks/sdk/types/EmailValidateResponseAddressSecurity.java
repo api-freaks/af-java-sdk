@@ -230,7 +230,6 @@ public final class EmailValidateResponseAddressSecurity {
 
     private String cloudProvider;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -332,6 +331,14 @@ public final class EmailValidateResponseAddressSecurity {
     @java.lang.Override
     public EmailValidateResponseAddressSecurity build() {
       return new EmailValidateResponseAddressSecurity(threatScore, isTor, isProxy, proxyType, proxyProvider, isAnonymous, isKnownAttacker, isSpam, isBot, isCloudProvider, cloudProvider, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("threat_score") || key.equalsIgnoreCase("is_tor") || key.equalsIgnoreCase("is_proxy") || key.equalsIgnoreCase("proxy_type") || key.equalsIgnoreCase("proxy_provider") || key.equalsIgnoreCase("is_anonymous") || key.equalsIgnoreCase("is_known_attacker") || key.equalsIgnoreCase("is_spam") || key.equalsIgnoreCase("is_bot") || key.equalsIgnoreCase("is_cloud_provider") || key.equalsIgnoreCase("cloud_provider")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

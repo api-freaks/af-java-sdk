@@ -277,7 +277,6 @@ public final class AstronomyLookupV2ResponseAstronomyMorning {
 
     private String goldenHourEnd;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -300,7 +299,6 @@ public final class AstronomyLookupV2ResponseAstronomyMorning {
 
     /**
      * <p>The start time of astronomical twilight in the morning</p>
-     * <p>The start time of astronomical twilight in the morning</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -312,7 +310,6 @@ public final class AstronomyLookupV2ResponseAstronomyMorning {
     }
 
     /**
-     * <p>The end time of astronomical twilight in the morning</p>
      * <p>The end time of astronomical twilight in the morning</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -326,7 +323,6 @@ public final class AstronomyLookupV2ResponseAstronomyMorning {
 
     /**
      * <p>The start time of nautical twilight in the morning</p>
-     * <p>The start time of nautical twilight in the morning</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -337,7 +333,6 @@ public final class AstronomyLookupV2ResponseAstronomyMorning {
     }
 
     /**
-     * <p>The end time of nautical twilight in the morning</p>
      * <p>The end time of nautical twilight in the morning</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -350,7 +345,6 @@ public final class AstronomyLookupV2ResponseAstronomyMorning {
 
     /**
      * <p>The start time of civil twilight in the morning</p>
-     * <p>The start time of civil twilight in the morning</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -361,7 +355,6 @@ public final class AstronomyLookupV2ResponseAstronomyMorning {
     }
 
     /**
-     * <p>The end time of civil twilight in the morning</p>
      * <p>The end time of civil twilight in the morning</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -374,7 +367,6 @@ public final class AstronomyLookupV2ResponseAstronomyMorning {
 
     /**
      * <p>The beginning of the blue hour in the morning</p>
-     * <p>The beginning of the blue hour in the morning</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -385,7 +377,6 @@ public final class AstronomyLookupV2ResponseAstronomyMorning {
     }
 
     /**
-     * <p>The end of the blue hour in the morning</p>
      * <p>The end of the blue hour in the morning</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -398,7 +389,6 @@ public final class AstronomyLookupV2ResponseAstronomyMorning {
 
     /**
      * <p>The beginning of the golden hour in the morning</p>
-     * <p>The beginning of the golden hour in the morning</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -409,7 +399,6 @@ public final class AstronomyLookupV2ResponseAstronomyMorning {
     }
 
     /**
-     * <p>The end of the golden hour in the morning</p>
      * <p>The end of the golden hour in the morning</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -423,6 +412,14 @@ public final class AstronomyLookupV2ResponseAstronomyMorning {
     @java.lang.Override
     public AstronomyLookupV2ResponseAstronomyMorning build() {
       return new AstronomyLookupV2ResponseAstronomyMorning(astronomicalTwilightBegin, astronomicalTwilightEnd, nauticalTwilightBegin, nauticalTwilightEnd, civilTwilightBegin, civilTwilightEnd, blueHourBegin, blueHourEnd, goldenHourBegin, goldenHourEnd, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("astronomical_twilight_begin") || key.equalsIgnoreCase("astronomical_twilight_end") || key.equalsIgnoreCase("nautical_twilight_begin") || key.equalsIgnoreCase("nautical_twilight_end") || key.equalsIgnoreCase("civil_twilight_begin") || key.equalsIgnoreCase("civil_twilight_end") || key.equalsIgnoreCase("blue_hour_begin") || key.equalsIgnoreCase("blue_hour_end") || key.equalsIgnoreCase("golden_hour_begin") || key.equalsIgnoreCase("golden_hour_end")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

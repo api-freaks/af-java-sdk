@@ -148,7 +148,6 @@ public final class BulkZipcodeLookupResponseResultsItem {
 
     private Optional<Double> longitude = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -280,6 +279,14 @@ public final class BulkZipcodeLookupResponseResultsItem {
 
     public BulkZipcodeLookupResponseResultsItem build() {
       return new BulkZipcodeLookupResponseResultsItem(code, countryCode, region, regionCode, city, locality, latitude, longitude, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("code") || key.equalsIgnoreCase("country_code") || key.equalsIgnoreCase("region") || key.equalsIgnoreCase("region_code") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("locality") || key.equalsIgnoreCase("latitude") || key.equalsIgnoreCase("longitude")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -4,6 +4,7 @@
 
 package com.apifreaks.sdk;
 
+import com.apifreaks.sdk.core.ApifreaksApiHttpResponse;
 import com.apifreaks.sdk.core.ClientOptions;
 import com.apifreaks.sdk.core.RequestOptions;
 import com.apifreaks.sdk.requests.AirQualityRequest;
@@ -11,6 +12,7 @@ import com.apifreaks.sdk.requests.AsnWhoisLookupRequest;
 import com.apifreaks.sdk.requests.AstronomyLookupRequest;
 import com.apifreaks.sdk.requests.AstronomyLookupV2Request;
 import com.apifreaks.sdk.requests.BulkCurrentWeatherRequest;
+import com.apifreaks.sdk.requests.BulkDisposableEmailCheckV2Request;
 import com.apifreaks.sdk.requests.BulkDomainAvailabilityCheckRequest;
 import com.apifreaks.sdk.requests.BulkDomainDnsLookupRequest;
 import com.apifreaks.sdk.requests.BulkDomainWhoisLookupRequest;
@@ -19,6 +21,7 @@ import com.apifreaks.sdk.requests.BulkEmailValidateRequest;
 import com.apifreaks.sdk.requests.BulkGeolocationLookupRequest;
 import com.apifreaks.sdk.requests.BulkGeolocationLookupV2Request;
 import com.apifreaks.sdk.requests.BulkIpSecurityLookupRequest;
+import com.apifreaks.sdk.requests.BulkPdfGenerateFromTemplateRequest;
 import com.apifreaks.sdk.requests.BulkPhoneValidateRequest;
 import com.apifreaks.sdk.requests.BulkScreenshotCaptureRequest;
 import com.apifreaks.sdk.requests.BulkUserAgentLookupRequest;
@@ -28,6 +31,7 @@ import com.apifreaks.sdk.requests.CommodityFluctuationRequest;
 import com.apifreaks.sdk.requests.CommodityFluctuationV2Request;
 import com.apifreaks.sdk.requests.CommodityHistoricalRatesRequest;
 import com.apifreaks.sdk.requests.CommodityHistoricalRatesV2Request;
+import com.apifreaks.sdk.requests.CommodityIntradayRatesV2Request;
 import com.apifreaks.sdk.requests.CommodityLatestRatesRequest;
 import com.apifreaks.sdk.requests.CommodityLatestRatesV2Request;
 import com.apifreaks.sdk.requests.CommoditySymbolsRequest;
@@ -45,6 +49,7 @@ import com.apifreaks.sdk.requests.CurrencySupportedRequest;
 import com.apifreaks.sdk.requests.CurrencySymbolsRequest;
 import com.apifreaks.sdk.requests.CurrencyTimeSeriesRequest;
 import com.apifreaks.sdk.requests.CurrentWeatherRequest;
+import com.apifreaks.sdk.requests.DisposableEmailCheckV2Request;
 import com.apifreaks.sdk.requests.DomainAvailabilityCheckRequest;
 import com.apifreaks.sdk.requests.DomainAvailabilitySuggestionsRequest;
 import com.apifreaks.sdk.requests.DomainDnsHistoryRequest;
@@ -70,6 +75,7 @@ import com.apifreaks.sdk.requests.GetAdminUnitsRequest;
 import com.apifreaks.sdk.requests.GetCitiesRequest;
 import com.apifreaks.sdk.requests.GetCountriesRequest;
 import com.apifreaks.sdk.requests.GetCountryDetailsRequest;
+import com.apifreaks.sdk.requests.GetCreditsUsageRequest;
 import com.apifreaks.sdk.requests.GetFlagsRequest;
 import com.apifreaks.sdk.requests.GetRegionsRequest;
 import com.apifreaks.sdk.requests.GetSubregionsRequest;
@@ -93,6 +99,7 @@ import com.apifreaks.sdk.requests.PdfDeleteFileRequest;
 import com.apifreaks.sdk.requests.PdfDownloadResourceRequest;
 import com.apifreaks.sdk.requests.PdfEncryptRequest;
 import com.apifreaks.sdk.requests.PdfExtractPagesRequest;
+import com.apifreaks.sdk.requests.PdfGenerateFromTemplateRequest;
 import com.apifreaks.sdk.requests.PdfGetFileStatusRequest;
 import com.apifreaks.sdk.requests.PdfGetTaskStatusRequest;
 import com.apifreaks.sdk.requests.PdfLinearizeRequest;
@@ -134,6 +141,7 @@ import com.apifreaks.sdk.types.AsnWhoisLookupResponse;
 import com.apifreaks.sdk.types.AstronomyLookupResponse;
 import com.apifreaks.sdk.types.AstronomyLookupV2Response;
 import com.apifreaks.sdk.types.BulkCurrentWeatherResponse;
+import com.apifreaks.sdk.types.BulkDisposableEmailCheckV2Response;
 import com.apifreaks.sdk.types.BulkDomainAvailabilityCheckResponse;
 import com.apifreaks.sdk.types.BulkDomainDnsLookupResponse;
 import com.apifreaks.sdk.types.BulkDomainWhoisLookupResponse;
@@ -142,15 +150,17 @@ import com.apifreaks.sdk.types.BulkEmailValidateResponse;
 import com.apifreaks.sdk.types.BulkGeolocationLookupResponseItem;
 import com.apifreaks.sdk.types.BulkGeolocationLookupV2ResponseItem;
 import com.apifreaks.sdk.types.BulkIpSecurityLookupResponseItem;
+import com.apifreaks.sdk.types.BulkPdfGenerateFromTemplateResponseItem;
 import com.apifreaks.sdk.types.BulkPhoneValidateResponseItem;
 import com.apifreaks.sdk.types.BulkScreenshotCaptureResponse;
 import com.apifreaks.sdk.types.BulkUserAgentLookupResponseItem;
-import com.apifreaks.sdk.types.BulkVatRateByCountryResponse;
+import com.apifreaks.sdk.types.BulkVatRateByCountryResponseItem;
 import com.apifreaks.sdk.types.BulkZipcodeLookupResponse;
 import com.apifreaks.sdk.types.CommodityFluctuationResponse;
 import com.apifreaks.sdk.types.CommodityFluctuationV2Response;
 import com.apifreaks.sdk.types.CommodityHistoricalRatesResponse;
 import com.apifreaks.sdk.types.CommodityHistoricalRatesV2Response;
+import com.apifreaks.sdk.types.CommodityIntradayRatesV2Response;
 import com.apifreaks.sdk.types.CommodityLatestRatesResponse;
 import com.apifreaks.sdk.types.CommodityLatestRatesV2Response;
 import com.apifreaks.sdk.types.CommoditySymbolsResponse;
@@ -168,6 +178,7 @@ import com.apifreaks.sdk.types.CurrencySupportedResponse;
 import com.apifreaks.sdk.types.CurrencySymbolsResponse;
 import com.apifreaks.sdk.types.CurrencyTimeSeriesResponse;
 import com.apifreaks.sdk.types.CurrentWeatherResponse;
+import com.apifreaks.sdk.types.DisposableEmailCheckV2Response;
 import com.apifreaks.sdk.types.DomainAvailabilityCheckResponse;
 import com.apifreaks.sdk.types.DomainAvailabilitySuggestionsResponse;
 import com.apifreaks.sdk.types.DomainDnsHistoryResponse;
@@ -193,9 +204,10 @@ import com.apifreaks.sdk.types.GetAdminUnitsResponse;
 import com.apifreaks.sdk.types.GetCitiesResponse;
 import com.apifreaks.sdk.types.GetCountriesResponse;
 import com.apifreaks.sdk.types.GetCountryDetailsResponse;
+import com.apifreaks.sdk.types.GetCreditsUsageResponse;
 import com.apifreaks.sdk.types.GetRegionsResponse;
 import com.apifreaks.sdk.types.GetSubregionsResponse;
-import com.apifreaks.sdk.types.GetSupportedFlagsResponseItem;
+import com.apifreaks.sdk.types.GetSupportedFlagsResponse;
 import com.apifreaks.sdk.types.GrammarCorrectResponse;
 import com.apifreaks.sdk.types.GrammarDetectResponse;
 import com.apifreaks.sdk.types.HistoricalWeatherResponse;
@@ -214,6 +226,7 @@ import com.apifreaks.sdk.types.PdfDecryptResponse;
 import com.apifreaks.sdk.types.PdfDeleteFileResponse;
 import com.apifreaks.sdk.types.PdfEncryptResponse;
 import com.apifreaks.sdk.types.PdfExtractPagesResponse;
+import com.apifreaks.sdk.types.PdfGenerateFromTemplateResponse;
 import com.apifreaks.sdk.types.PdfGetFileStatusResponse;
 import com.apifreaks.sdk.types.PdfGetTaskStatusResponse;
 import com.apifreaks.sdk.types.PdfLinearizeResponse;
@@ -228,6 +241,7 @@ import com.apifreaks.sdk.types.PdfUploadBinaryResponse;
 import com.apifreaks.sdk.types.PdfUploadResourcesResponse;
 import com.apifreaks.sdk.types.PhoneValidateResponse;
 import com.apifreaks.sdk.types.ReadabilityScoreResponse;
+import com.apifreaks.sdk.types.ScreenshotCaptureResponse;
 import com.apifreaks.sdk.types.SubdomainsLookupResponse;
 import com.apifreaks.sdk.types.SwiftCodeLookupResponse;
 import com.apifreaks.sdk.types.TimezoneConvertResponse;
@@ -250,12 +264,14 @@ import com.apifreaks.sdk.types.ZipcodeSearchByRadiusResponse;
 import com.apifreaks.sdk.types.ZipcodeSearchByRegionResponse;
 import java.io.File;
 import java.io.InputStream;
+import java.lang.AutoCloseable;
+import java.lang.Override;
 import java.lang.String;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-public class AsyncApifreaksApiClient {
+public class AsyncApifreaksApiClient implements AutoCloseable {
   protected final ClientOptions clientOptions;
 
   private final AsyncRawApifreaksApiClient rawClient;
@@ -277,7 +293,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<GeolocationLookupResponse> geolocationLookup(
       GeolocationLookupRequest request) {
-    return this.rawClient.geolocationLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GeolocationLookupResponse>> rawFuture = this.rawClient.geolocationLookup(request);
+    CompletableFuture<GeolocationLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -285,7 +308,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<GeolocationLookupResponse> geolocationLookup(
       GeolocationLookupRequest request, RequestOptions requestOptions) {
-    return this.rawClient.geolocationLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GeolocationLookupResponse>> rawFuture = this.rawClient.geolocationLookup(request, requestOptions);
+    CompletableFuture<GeolocationLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -294,7 +324,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<List<BulkGeolocationLookupResponseItem>> bulkGeolocationLookup(
       BulkGeolocationLookupRequest request) {
-    return this.rawClient.bulkGeolocationLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<BulkGeolocationLookupResponseItem>>> rawFuture = this.rawClient.bulkGeolocationLookup(request);
+    CompletableFuture<List<BulkGeolocationLookupResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -303,7 +340,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<List<BulkGeolocationLookupResponseItem>> bulkGeolocationLookup(
       BulkGeolocationLookupRequest request, RequestOptions requestOptions) {
-    return this.rawClient.bulkGeolocationLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<BulkGeolocationLookupResponseItem>>> rawFuture = this.rawClient.bulkGeolocationLookup(request, requestOptions);
+    CompletableFuture<List<BulkGeolocationLookupResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -311,7 +355,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<IpSecurityLookupResponse> ipSecurityLookup(
       IpSecurityLookupRequest request) {
-    return this.rawClient.ipSecurityLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<IpSecurityLookupResponse>> rawFuture = this.rawClient.ipSecurityLookup(request);
+    CompletableFuture<IpSecurityLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -319,7 +370,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<IpSecurityLookupResponse> ipSecurityLookup(
       IpSecurityLookupRequest request, RequestOptions requestOptions) {
-    return this.rawClient.ipSecurityLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<IpSecurityLookupResponse>> rawFuture = this.rawClient.ipSecurityLookup(request, requestOptions);
+    CompletableFuture<IpSecurityLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -327,7 +385,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<List<BulkIpSecurityLookupResponseItem>> bulkIpSecurityLookup(
       BulkIpSecurityLookupRequest request) {
-    return this.rawClient.bulkIpSecurityLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<BulkIpSecurityLookupResponseItem>>> rawFuture = this.rawClient.bulkIpSecurityLookup(request);
+    CompletableFuture<List<BulkIpSecurityLookupResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -335,7 +400,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<List<BulkIpSecurityLookupResponseItem>> bulkIpSecurityLookup(
       BulkIpSecurityLookupRequest request, RequestOptions requestOptions) {
-    return this.rawClient.bulkIpSecurityLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<BulkIpSecurityLookupResponseItem>>> rawFuture = this.rawClient.bulkIpSecurityLookup(request, requestOptions);
+    CompletableFuture<List<BulkIpSecurityLookupResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -343,7 +415,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<List<GeocoderSearchResponseItem>> geocoderSearch(
       GeocoderSearchRequest request) {
-    return this.rawClient.geocoderSearch(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<GeocoderSearchResponseItem>>> rawFuture = this.rawClient.geocoderSearch(request);
+    CompletableFuture<List<GeocoderSearchResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -351,7 +430,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<List<GeocoderSearchResponseItem>> geocoderSearch(
       GeocoderSearchRequest request, RequestOptions requestOptions) {
-    return this.rawClient.geocoderSearch(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<GeocoderSearchResponseItem>>> rawFuture = this.rawClient.geocoderSearch(request, requestOptions);
+    CompletableFuture<List<GeocoderSearchResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -359,7 +445,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<GeocoderReverseResponse> geocoderReverse(
       GeocoderReverseRequest request) {
-    return this.rawClient.geocoderReverse(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GeocoderReverseResponse>> rawFuture = this.rawClient.geocoderReverse(request);
+    CompletableFuture<GeocoderReverseResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -367,7 +460,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<GeocoderReverseResponse> geocoderReverse(GeocoderReverseRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.geocoderReverse(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GeocoderReverseResponse>> rawFuture = this.rawClient.geocoderReverse(request, requestOptions);
+    CompletableFuture<GeocoderReverseResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -377,7 +477,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainWhoisLookupResponse> domainWhoisLookup(
       DomainWhoisLookupRequest request) {
-    return this.rawClient.domainWhoisLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainWhoisLookupResponse>> rawFuture = this.rawClient.domainWhoisLookup(request);
+    CompletableFuture<DomainWhoisLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -387,7 +494,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainWhoisLookupResponse> domainWhoisLookup(
       DomainWhoisLookupRequest request, RequestOptions requestOptions) {
-    return this.rawClient.domainWhoisLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainWhoisLookupResponse>> rawFuture = this.rawClient.domainWhoisLookup(request, requestOptions);
+    CompletableFuture<DomainWhoisLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -395,7 +509,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<BulkDomainWhoisLookupResponse> bulkDomainWhoisLookup(
       BulkDomainWhoisLookupRequest request) {
-    return this.rawClient.bulkDomainWhoisLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<BulkDomainWhoisLookupResponse>> rawFuture = this.rawClient.bulkDomainWhoisLookup(request);
+    CompletableFuture<BulkDomainWhoisLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -403,14 +524,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<BulkDomainWhoisLookupResponse> bulkDomainWhoisLookup(
       BulkDomainWhoisLookupRequest request, RequestOptions requestOptions) {
-    return this.rawClient.bulkDomainWhoisLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<BulkDomainWhoisLookupResponse>> rawFuture = this.rawClient.bulkDomainWhoisLookup(request, requestOptions);
+    CompletableFuture<BulkDomainWhoisLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Returns WHOIS registration details for a specified IP address (IPv4 or IPv6).
    */
   public CompletableFuture<IpWhoisLookupResponse> ipWhoisLookup(IpWhoisLookupRequest request) {
-    return this.rawClient.ipWhoisLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<IpWhoisLookupResponse>> rawFuture = this.rawClient.ipWhoisLookup(request);
+    CompletableFuture<IpWhoisLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -418,14 +553,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<IpWhoisLookupResponse> ipWhoisLookup(IpWhoisLookupRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.ipWhoisLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<IpWhoisLookupResponse>> rawFuture = this.rawClient.ipWhoisLookup(request, requestOptions);
+    CompletableFuture<IpWhoisLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Returns WHOIS registration details for a specified ASN, with or without the 'as' prefix.
    */
   public CompletableFuture<AsnWhoisLookupResponse> asnWhoisLookup(AsnWhoisLookupRequest request) {
-    return this.rawClient.asnWhoisLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<AsnWhoisLookupResponse>> rawFuture = this.rawClient.asnWhoisLookup(request);
+    CompletableFuture<AsnWhoisLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -433,7 +582,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<AsnWhoisLookupResponse> asnWhoisLookup(AsnWhoisLookupRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.asnWhoisLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<AsnWhoisLookupResponse>> rawFuture = this.rawClient.asnWhoisLookup(request, requestOptions);
+    CompletableFuture<AsnWhoisLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -442,7 +598,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainWhoisHistoryResponse> domainWhoisHistory(
       DomainWhoisHistoryRequest request) {
-    return this.rawClient.domainWhoisHistory(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainWhoisHistoryResponse>> rawFuture = this.rawClient.domainWhoisHistory(request);
+    CompletableFuture<DomainWhoisHistoryResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -451,7 +614,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainWhoisHistoryResponse> domainWhoisHistory(
       DomainWhoisHistoryRequest request, RequestOptions requestOptions) {
-    return this.rawClient.domainWhoisHistory(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainWhoisHistoryResponse>> rawFuture = this.rawClient.domainWhoisHistory(request, requestOptions);
+    CompletableFuture<DomainWhoisHistoryResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -459,7 +629,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainWhoisReverseResponse> domainWhoisReverse(
       DomainWhoisReverseRequest request) {
-    return this.rawClient.domainWhoisReverse(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainWhoisReverseResponse>> rawFuture = this.rawClient.domainWhoisReverse(request);
+    CompletableFuture<DomainWhoisReverseResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -467,7 +644,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainWhoisReverseResponse> domainWhoisReverse(
       DomainWhoisReverseRequest request, RequestOptions requestOptions) {
-    return this.rawClient.domainWhoisReverse(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainWhoisReverseResponse>> rawFuture = this.rawClient.domainWhoisReverse(request, requestOptions);
+    CompletableFuture<DomainWhoisReverseResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -475,7 +659,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainDnsLookupResponse> domainDnsLookup(
       DomainDnsLookupRequest request) {
-    return this.rawClient.domainDnsLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainDnsLookupResponse>> rawFuture = this.rawClient.domainDnsLookup(request);
+    CompletableFuture<DomainDnsLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -483,7 +674,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainDnsLookupResponse> domainDnsLookup(DomainDnsLookupRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.domainDnsLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainDnsLookupResponse>> rawFuture = this.rawClient.domainDnsLookup(request, requestOptions);
+    CompletableFuture<DomainDnsLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -492,7 +690,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<BulkDomainDnsLookupResponse> bulkDomainDnsLookup(
       BulkDomainDnsLookupRequest request) {
-    return this.rawClient.bulkDomainDnsLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<BulkDomainDnsLookupResponse>> rawFuture = this.rawClient.bulkDomainDnsLookup(request);
+    CompletableFuture<BulkDomainDnsLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -501,7 +706,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<BulkDomainDnsLookupResponse> bulkDomainDnsLookup(
       BulkDomainDnsLookupRequest request, RequestOptions requestOptions) {
-    return this.rawClient.bulkDomainDnsLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<BulkDomainDnsLookupResponse>> rawFuture = this.rawClient.bulkDomainDnsLookup(request, requestOptions);
+    CompletableFuture<BulkDomainDnsLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -510,7 +722,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainDnsHistoryResponse> domainDnsHistory(
       DomainDnsHistoryRequest request) {
-    return this.rawClient.domainDnsHistory(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainDnsHistoryResponse>> rawFuture = this.rawClient.domainDnsHistory(request);
+    CompletableFuture<DomainDnsHistoryResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -519,7 +738,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainDnsHistoryResponse> domainDnsHistory(
       DomainDnsHistoryRequest request, RequestOptions requestOptions) {
-    return this.rawClient.domainDnsHistory(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainDnsHistoryResponse>> rawFuture = this.rawClient.domainDnsHistory(request, requestOptions);
+    CompletableFuture<DomainDnsHistoryResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -527,7 +753,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainDnsReverseResponse> domainDnsReverse(
       DomainDnsReverseRequest request) {
-    return this.rawClient.domainDnsReverse(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainDnsReverseResponse>> rawFuture = this.rawClient.domainDnsReverse(request);
+    CompletableFuture<DomainDnsReverseResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -535,7 +768,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainDnsReverseResponse> domainDnsReverse(
       DomainDnsReverseRequest request, RequestOptions requestOptions) {
-    return this.rawClient.domainDnsReverse(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainDnsReverseResponse>> rawFuture = this.rawClient.domainDnsReverse(request, requestOptions);
+    CompletableFuture<DomainDnsReverseResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -543,7 +783,14 @@ public class AsyncApifreaksApiClient {
    * Supports various operations like form filling, clicking, data extraction, and CAPTCHA solving.
    */
   public CompletableFuture<WebScrapeResponse> webScrape(WebScrapeRequest request) {
-    return this.rawClient.webScrape(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<WebScrapeResponse>> rawFuture = this.rawClient.webScrape(request);
+    CompletableFuture<WebScrapeResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -552,14 +799,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<WebScrapeResponse> webScrape(WebScrapeRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.webScrape(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<WebScrapeResponse>> rawFuture = this.rawClient.webScrape(request, requestOptions);
+    CompletableFuture<WebScrapeResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Validates a single email address and returns result.
    */
   public CompletableFuture<EmailValidateResponse> emailValidate(EmailValidateRequest request) {
-    return this.rawClient.emailValidate(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<EmailValidateResponse>> rawFuture = this.rawClient.emailValidate(request);
+    CompletableFuture<EmailValidateResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -567,7 +828,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<EmailValidateResponse> emailValidate(EmailValidateRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.emailValidate(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<EmailValidateResponse>> rawFuture = this.rawClient.emailValidate(request, requestOptions);
+    CompletableFuture<EmailValidateResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -575,7 +843,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<BulkEmailValidateResponse> bulkEmailValidate(
       BulkEmailValidateRequest request) {
-    return this.rawClient.bulkEmailValidate(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<BulkEmailValidateResponse>> rawFuture = this.rawClient.bulkEmailValidate(request);
+    CompletableFuture<BulkEmailValidateResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -583,14 +858,88 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<BulkEmailValidateResponse> bulkEmailValidate(
       BulkEmailValidateRequest request, RequestOptions requestOptions) {
-    return this.rawClient.bulkEmailValidate(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<BulkEmailValidateResponse>> rawFuture = this.rawClient.bulkEmailValidate(request, requestOptions);
+    CompletableFuture<BulkEmailValidateResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
+  }
+
+  /**
+   * Validates email syntax and checks the domain for disposable, free, spam, and role-account signals, plus MX/A DNS records. Send the email (and optionally an ip) as a JSON request body. When an ip is included, the response also carries geolocation and security data for it.
+   */
+  public CompletableFuture<DisposableEmailCheckV2Response> disposableEmailCheckV2(
+      DisposableEmailCheckV2Request request) {
+    CompletableFuture<ApifreaksApiHttpResponse<DisposableEmailCheckV2Response>> rawFuture = this.rawClient.disposableEmailCheckV2(request);
+    CompletableFuture<DisposableEmailCheckV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
+  }
+
+  /**
+   * Validates email syntax and checks the domain for disposable, free, spam, and role-account signals, plus MX/A DNS records. Send the email (and optionally an ip) as a JSON request body. When an ip is included, the response also carries geolocation and security data for it.
+   */
+  public CompletableFuture<DisposableEmailCheckV2Response> disposableEmailCheckV2(
+      DisposableEmailCheckV2Request request, RequestOptions requestOptions) {
+    CompletableFuture<ApifreaksApiHttpResponse<DisposableEmailCheckV2Response>> rawFuture = this.rawClient.disposableEmailCheckV2(request, requestOptions);
+    CompletableFuture<DisposableEmailCheckV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
+  }
+
+  /**
+   * Checks a bulk of email addresses (each with an optional ip) and returns a disposable email check result for each, in the same order as the request. Maximum <code>100</code> entries per request.
+   */
+  public CompletableFuture<BulkDisposableEmailCheckV2Response> bulkDisposableEmailCheckV2(
+      BulkDisposableEmailCheckV2Request request) {
+    CompletableFuture<ApifreaksApiHttpResponse<BulkDisposableEmailCheckV2Response>> rawFuture = this.rawClient.bulkDisposableEmailCheckV2(request);
+    CompletableFuture<BulkDisposableEmailCheckV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
+  }
+
+  /**
+   * Checks a bulk of email addresses (each with an optional ip) and returns a disposable email check result for each, in the same order as the request. Maximum <code>100</code> entries per request.
+   */
+  public CompletableFuture<BulkDisposableEmailCheckV2Response> bulkDisposableEmailCheckV2(
+      BulkDisposableEmailCheckV2Request request, RequestOptions requestOptions) {
+    CompletableFuture<ApifreaksApiHttpResponse<BulkDisposableEmailCheckV2Response>> rawFuture = this.rawClient.bulkDisposableEmailCheckV2(request, requestOptions);
+    CompletableFuture<BulkDisposableEmailCheckV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Validates a single phone number and returns detailed metadata including carrier, line type, geolocation, time zones, and standardized formats.
    */
   public CompletableFuture<PhoneValidateResponse> phoneValidate(PhoneValidateRequest request) {
-    return this.rawClient.phoneValidate(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PhoneValidateResponse>> rawFuture = this.rawClient.phoneValidate(request);
+    CompletableFuture<PhoneValidateResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -598,7 +947,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PhoneValidateResponse> phoneValidate(PhoneValidateRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.phoneValidate(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PhoneValidateResponse>> rawFuture = this.rawClient.phoneValidate(request, requestOptions);
+    CompletableFuture<PhoneValidateResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -606,7 +962,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<List<BulkPhoneValidateResponseItem>> bulkPhoneValidate(
       BulkPhoneValidateRequest request) {
-    return this.rawClient.bulkPhoneValidate(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<BulkPhoneValidateResponseItem>>> rawFuture = this.rawClient.bulkPhoneValidate(request);
+    CompletableFuture<List<BulkPhoneValidateResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -614,7 +977,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<List<BulkPhoneValidateResponseItem>> bulkPhoneValidate(
       BulkPhoneValidateRequest request, RequestOptions requestOptions) {
-    return this.rawClient.bulkPhoneValidate(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<BulkPhoneValidateResponseItem>>> rawFuture = this.rawClient.bulkPhoneValidate(request, requestOptions);
+    CompletableFuture<List<BulkPhoneValidateResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -623,7 +993,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainSslLookupResponse> domainSslLookup(
       DomainSslLookupRequest request) {
-    return this.rawClient.domainSslLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainSslLookupResponse>> rawFuture = this.rawClient.domainSslLookup(request);
+    CompletableFuture<DomainSslLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -632,7 +1009,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainSslLookupResponse> domainSslLookup(DomainSslLookupRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.domainSslLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainSslLookupResponse>> rawFuture = this.rawClient.domainSslLookup(request, requestOptions);
+    CompletableFuture<DomainSslLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -641,7 +1025,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainSslChainLookupResponse> domainSslChainLookup(
       DomainSslChainLookupRequest request) {
-    return this.rawClient.domainSslChainLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainSslChainLookupResponse>> rawFuture = this.rawClient.domainSslChainLookup(request);
+    CompletableFuture<DomainSslChainLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -650,7 +1041,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainSslChainLookupResponse> domainSslChainLookup(
       DomainSslChainLookupRequest request, RequestOptions requestOptions) {
-    return this.rawClient.domainSslChainLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainSslChainLookupResponse>> rawFuture = this.rawClient.domainSslChainLookup(request, requestOptions);
+    CompletableFuture<DomainSslChainLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -658,7 +1056,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainAvailabilityCheckResponse> domainAvailabilityCheck(
       DomainAvailabilityCheckRequest request) {
-    return this.rawClient.domainAvailabilityCheck(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainAvailabilityCheckResponse>> rawFuture = this.rawClient.domainAvailabilityCheck(request);
+    CompletableFuture<DomainAvailabilityCheckResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -666,7 +1071,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainAvailabilityCheckResponse> domainAvailabilityCheck(
       DomainAvailabilityCheckRequest request, RequestOptions requestOptions) {
-    return this.rawClient.domainAvailabilityCheck(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainAvailabilityCheckResponse>> rawFuture = this.rawClient.domainAvailabilityCheck(request, requestOptions);
+    CompletableFuture<DomainAvailabilityCheckResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -674,7 +1086,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<BulkDomainAvailabilityCheckResponse> bulkDomainAvailabilityCheck(
       BulkDomainAvailabilityCheckRequest request) {
-    return this.rawClient.bulkDomainAvailabilityCheck(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<BulkDomainAvailabilityCheckResponse>> rawFuture = this.rawClient.bulkDomainAvailabilityCheck(request);
+    CompletableFuture<BulkDomainAvailabilityCheckResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -682,7 +1101,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<BulkDomainAvailabilityCheckResponse> bulkDomainAvailabilityCheck(
       BulkDomainAvailabilityCheckRequest request, RequestOptions requestOptions) {
-    return this.rawClient.bulkDomainAvailabilityCheck(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<BulkDomainAvailabilityCheckResponse>> rawFuture = this.rawClient.bulkDomainAvailabilityCheck(request, requestOptions);
+    CompletableFuture<BulkDomainAvailabilityCheckResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -690,7 +1116,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainAvailabilitySuggestionsResponse> domainAvailabilitySuggestions(
       DomainAvailabilitySuggestionsRequest request) {
-    return this.rawClient.domainAvailabilitySuggestions(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainAvailabilitySuggestionsResponse>> rawFuture = this.rawClient.domainAvailabilitySuggestions(request);
+    CompletableFuture<DomainAvailabilitySuggestionsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -698,7 +1131,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainAvailabilitySuggestionsResponse> domainAvailabilitySuggestions(
       DomainAvailabilitySuggestionsRequest request, RequestOptions requestOptions) {
-    return this.rawClient.domainAvailabilitySuggestions(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainAvailabilitySuggestionsResponse>> rawFuture = this.rawClient.domainAvailabilitySuggestions(request, requestOptions);
+    CompletableFuture<DomainAvailabilitySuggestionsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -706,7 +1146,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<SubdomainsLookupResponse> subdomainsLookup(
       SubdomainsLookupRequest request) {
-    return this.rawClient.subdomainsLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<SubdomainsLookupResponse>> rawFuture = this.rawClient.subdomainsLookup(request);
+    CompletableFuture<SubdomainsLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -714,7 +1161,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<SubdomainsLookupResponse> subdomainsLookup(
       SubdomainsLookupRequest request, RequestOptions requestOptions) {
-    return this.rawClient.subdomainsLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<SubdomainsLookupResponse>> rawFuture = this.rawClient.subdomainsLookup(request, requestOptions);
+    CompletableFuture<SubdomainsLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -722,7 +1176,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainTyposquattingResponse> domainTyposquatting(
       DomainTyposquattingRequest request) {
-    return this.rawClient.domainTyposquatting(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainTyposquattingResponse>> rawFuture = this.rawClient.domainTyposquatting(request);
+    CompletableFuture<DomainTyposquattingResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -730,7 +1191,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainTyposquattingResponse> domainTyposquatting(
       DomainTyposquattingRequest request, RequestOptions requestOptions) {
-    return this.rawClient.domainTyposquatting(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainTyposquattingResponse>> rawFuture = this.rawClient.domainTyposquatting(request, requestOptions);
+    CompletableFuture<DomainTyposquattingResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -738,7 +1206,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainReputationResponse> domainReputation(
       DomainReputationRequest request) {
-    return this.rawClient.domainReputation(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainReputationResponse>> rawFuture = this.rawClient.domainReputation(request);
+    CompletableFuture<DomainReputationResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -746,7 +1221,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainReputationResponse> domainReputation(
       DomainReputationRequest request, RequestOptions requestOptions) {
-    return this.rawClient.domainReputation(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainReputationResponse>> rawFuture = this.rawClient.domainReputation(request, requestOptions);
+    CompletableFuture<DomainReputationResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -754,7 +1236,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<AstronomyLookupV2Response> astronomyLookupV2(
       AstronomyLookupV2Request request) {
-    return this.rawClient.astronomyLookupV2(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<AstronomyLookupV2Response>> rawFuture = this.rawClient.astronomyLookupV2(request);
+    CompletableFuture<AstronomyLookupV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -762,7 +1251,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<AstronomyLookupV2Response> astronomyLookupV2(
       AstronomyLookupV2Request request, RequestOptions requestOptions) {
-    return this.rawClient.astronomyLookupV2(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<AstronomyLookupV2Response>> rawFuture = this.rawClient.astronomyLookupV2(request, requestOptions);
+    CompletableFuture<AstronomyLookupV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -770,7 +1266,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<TimezoneLookupV2Response> timezoneLookupV2(
       TimezoneLookupV2Request request) {
-    return this.rawClient.timezoneLookupV2(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<TimezoneLookupV2Response>> rawFuture = this.rawClient.timezoneLookupV2(request);
+    CompletableFuture<TimezoneLookupV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -778,7 +1281,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<TimezoneLookupV2Response> timezoneLookupV2(
       TimezoneLookupV2Request request, RequestOptions requestOptions) {
-    return this.rawClient.timezoneLookupV2(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<TimezoneLookupV2Response>> rawFuture = this.rawClient.timezoneLookupV2(request, requestOptions);
+    CompletableFuture<TimezoneLookupV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -786,7 +1296,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<GeolocationLookupV2Response> geolocationLookupV2(
       GeolocationLookupV2Request request) {
-    return this.rawClient.geolocationLookupV2(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GeolocationLookupV2Response>> rawFuture = this.rawClient.geolocationLookupV2(request);
+    CompletableFuture<GeolocationLookupV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -794,7 +1311,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<GeolocationLookupV2Response> geolocationLookupV2(
       GeolocationLookupV2Request request, RequestOptions requestOptions) {
-    return this.rawClient.geolocationLookupV2(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GeolocationLookupV2Response>> rawFuture = this.rawClient.geolocationLookupV2(request, requestOptions);
+    CompletableFuture<GeolocationLookupV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -802,7 +1326,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<List<BulkGeolocationLookupV2ResponseItem>> bulkGeolocationLookupV2(
       BulkGeolocationLookupV2Request request) {
-    return this.rawClient.bulkGeolocationLookupV2(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<BulkGeolocationLookupV2ResponseItem>>> rawFuture = this.rawClient.bulkGeolocationLookupV2(request);
+    CompletableFuture<List<BulkGeolocationLookupV2ResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -810,7 +1341,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<List<BulkGeolocationLookupV2ResponseItem>> bulkGeolocationLookupV2(
       BulkGeolocationLookupV2Request request, RequestOptions requestOptions) {
-    return this.rawClient.bulkGeolocationLookupV2(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<BulkGeolocationLookupV2ResponseItem>>> rawFuture = this.rawClient.bulkGeolocationLookupV2(request, requestOptions);
+    CompletableFuture<List<BulkGeolocationLookupV2ResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -818,7 +1356,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainWhoisLookupV2Response> domainWhoisLookupV2(
       DomainWhoisLookupV2Request request) {
-    return this.rawClient.domainWhoisLookupV2(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainWhoisLookupV2Response>> rawFuture = this.rawClient.domainWhoisLookupV2(request);
+    CompletableFuture<DomainWhoisLookupV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -826,7 +1371,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<DomainWhoisLookupV2Response> domainWhoisLookupV2(
       DomainWhoisLookupV2Request request, RequestOptions requestOptions) {
-    return this.rawClient.domainWhoisLookupV2(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<DomainWhoisLookupV2Response>> rawFuture = this.rawClient.domainWhoisLookupV2(request, requestOptions);
+    CompletableFuture<DomainWhoisLookupV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -834,7 +1386,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<BulkDomainWhoisLookupV2Response> bulkDomainWhoisLookupV2(
       BulkDomainWhoisLookupV2Request request) {
-    return this.rawClient.bulkDomainWhoisLookupV2(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<BulkDomainWhoisLookupV2Response>> rawFuture = this.rawClient.bulkDomainWhoisLookupV2(request);
+    CompletableFuture<BulkDomainWhoisLookupV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -842,7 +1401,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<BulkDomainWhoisLookupV2Response> bulkDomainWhoisLookupV2(
       BulkDomainWhoisLookupV2Request request, RequestOptions requestOptions) {
-    return this.rawClient.bulkDomainWhoisLookupV2(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<BulkDomainWhoisLookupV2Response>> rawFuture = this.rawClient.bulkDomainWhoisLookupV2(request, requestOptions);
+    CompletableFuture<BulkDomainWhoisLookupV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -850,7 +1416,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommodityLatestRatesV2Response> commodityLatestRatesV2(
       CommodityLatestRatesV2Request request) {
-    return this.rawClient.commodityLatestRatesV2(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityLatestRatesV2Response>> rawFuture = this.rawClient.commodityLatestRatesV2(request);
+    CompletableFuture<CommodityLatestRatesV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -858,7 +1431,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommodityLatestRatesV2Response> commodityLatestRatesV2(
       CommodityLatestRatesV2Request request, RequestOptions requestOptions) {
-    return this.rawClient.commodityLatestRatesV2(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityLatestRatesV2Response>> rawFuture = this.rawClient.commodityLatestRatesV2(request, requestOptions);
+    CompletableFuture<CommodityLatestRatesV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -866,7 +1446,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommodityHistoricalRatesV2Response> commodityHistoricalRatesV2(
       CommodityHistoricalRatesV2Request request) {
-    return this.rawClient.commodityHistoricalRatesV2(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityHistoricalRatesV2Response>> rawFuture = this.rawClient.commodityHistoricalRatesV2(request);
+    CompletableFuture<CommodityHistoricalRatesV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -874,7 +1461,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommodityHistoricalRatesV2Response> commodityHistoricalRatesV2(
       CommodityHistoricalRatesV2Request request, RequestOptions requestOptions) {
-    return this.rawClient.commodityHistoricalRatesV2(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityHistoricalRatesV2Response>> rawFuture = this.rawClient.commodityHistoricalRatesV2(request, requestOptions);
+    CompletableFuture<CommodityHistoricalRatesV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -882,7 +1476,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommodityFluctuationV2Response> commodityFluctuationV2(
       CommodityFluctuationV2Request request) {
-    return this.rawClient.commodityFluctuationV2(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityFluctuationV2Response>> rawFuture = this.rawClient.commodityFluctuationV2(request);
+    CompletableFuture<CommodityFluctuationV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -890,7 +1491,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommodityFluctuationV2Response> commodityFluctuationV2(
       CommodityFluctuationV2Request request, RequestOptions requestOptions) {
-    return this.rawClient.commodityFluctuationV2(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityFluctuationV2Response>> rawFuture = this.rawClient.commodityFluctuationV2(request, requestOptions);
+    CompletableFuture<CommodityFluctuationV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -898,7 +1506,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommodityTimeSeriesV2Response> commodityTimeSeriesV2(
       CommodityTimeSeriesV2Request request) {
-    return this.rawClient.commodityTimeSeriesV2(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityTimeSeriesV2Response>> rawFuture = this.rawClient.commodityTimeSeriesV2(request);
+    CompletableFuture<CommodityTimeSeriesV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -906,7 +1521,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommodityTimeSeriesV2Response> commodityTimeSeriesV2(
       CommodityTimeSeriesV2Request request, RequestOptions requestOptions) {
-    return this.rawClient.commodityTimeSeriesV2(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityTimeSeriesV2Response>> rawFuture = this.rawClient.commodityTimeSeriesV2(request, requestOptions);
+    CompletableFuture<CommodityTimeSeriesV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -914,7 +1536,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommoditySymbolsV2Response> commoditySymbolsV2(
       CommoditySymbolsV2Request request) {
-    return this.rawClient.commoditySymbolsV2(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommoditySymbolsV2Response>> rawFuture = this.rawClient.commoditySymbolsV2(request);
+    CompletableFuture<CommoditySymbolsV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -922,7 +1551,44 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommoditySymbolsV2Response> commoditySymbolsV2(
       CommoditySymbolsV2Request request, RequestOptions requestOptions) {
-    return this.rawClient.commoditySymbolsV2(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommoditySymbolsV2Response>> rawFuture = this.rawClient.commoditySymbolsV2(request, requestOptions);
+    CompletableFuture<CommoditySymbolsV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
+  }
+
+  /**
+   * Returns the prices of one commodity through a UTC day at the requested interval, keyed by UTC timestamp. Each request costs a flat 50 credits however many points it returns.
+   */
+  public CompletableFuture<CommodityIntradayRatesV2Response> commodityIntradayRatesV2(
+      CommodityIntradayRatesV2Request request) {
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityIntradayRatesV2Response>> rawFuture = this.rawClient.commodityIntradayRatesV2(request);
+    CompletableFuture<CommodityIntradayRatesV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
+  }
+
+  /**
+   * Returns the prices of one commodity through a UTC day at the requested interval, keyed by UTC timestamp. Each request costs a flat 50 credits however many points it returns.
+   */
+  public CompletableFuture<CommodityIntradayRatesV2Response> commodityIntradayRatesV2(
+      CommodityIntradayRatesV2Request request, RequestOptions requestOptions) {
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityIntradayRatesV2Response>> rawFuture = this.rawClient.commodityIntradayRatesV2(request, requestOptions);
+    CompletableFuture<CommodityIntradayRatesV2Response> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -930,7 +1596,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfMergeResponse> pdfMerge(Optional<File> file,
       PdfMergeRequest request) {
-    return this.rawClient.pdfMerge(file, request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfMergeResponse>> rawFuture = this.rawClient.pdfMerge(file, request);
+    CompletableFuture<PdfMergeResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -938,7 +1611,46 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfMergeResponse> pdfMerge(Optional<File> file, PdfMergeRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.pdfMerge(file, request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfMergeResponse>> rawFuture = this.rawClient.pdfMerge(file, request, requestOptions);
+    CompletableFuture<PdfMergeResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
+  }
+
+  /**
+   * This API merges multiple PDF files into a single PDF, in the order they are provided
+   * @param files the PDF files to merge, sent as repeated {@code file} parts in this order
+   */
+  public CompletableFuture<PdfMergeResponse> pdfMerge(List<File> files,
+      PdfMergeRequest request) {
+    CompletableFuture<ApifreaksApiHttpResponse<PdfMergeResponse>> rawFuture = this.rawClient.pdfMerge(files, request);
+    CompletableFuture<PdfMergeResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
+  }
+
+  /**
+   * This API merges multiple PDF files into a single PDF, in the order they are provided
+   * @param files the PDF files to merge, sent as repeated {@code file} parts in this order
+   */
+  public CompletableFuture<PdfMergeResponse> pdfMerge(List<File> files, PdfMergeRequest request,
+      RequestOptions requestOptions) {
+    CompletableFuture<ApifreaksApiHttpResponse<PdfMergeResponse>> rawFuture = this.rawClient.pdfMerge(files, request, requestOptions);
+    CompletableFuture<PdfMergeResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -946,7 +1658,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfRemovePagesResponse> pdfRemovePages(Optional<File> file,
       PdfRemovePagesRequest request) {
-    return this.rawClient.pdfRemovePages(file, request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfRemovePagesResponse>> rawFuture = this.rawClient.pdfRemovePages(file, request);
+    CompletableFuture<PdfRemovePagesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -954,7 +1673,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfRemovePagesResponse> pdfRemovePages(Optional<File> file,
       PdfRemovePagesRequest request, RequestOptions requestOptions) {
-    return this.rawClient.pdfRemovePages(file, request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfRemovePagesResponse>> rawFuture = this.rawClient.pdfRemovePages(file, request, requestOptions);
+    CompletableFuture<PdfRemovePagesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -962,7 +1688,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfSplitResponse> pdfSplit(Optional<File> file,
       PdfSplitRequest request) {
-    return this.rawClient.pdfSplit(file, request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfSplitResponse>> rawFuture = this.rawClient.pdfSplit(file, request);
+    CompletableFuture<PdfSplitResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -970,7 +1703,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfSplitResponse> pdfSplit(Optional<File> file, PdfSplitRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.pdfSplit(file, request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfSplitResponse>> rawFuture = this.rawClient.pdfSplit(file, request, requestOptions);
+    CompletableFuture<PdfSplitResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -978,7 +1718,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfRotateResponse> pdfRotate(Optional<File> file,
       PdfRotateRequest request) {
-    return this.rawClient.pdfRotate(file, request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfRotateResponse>> rawFuture = this.rawClient.pdfRotate(file, request);
+    CompletableFuture<PdfRotateResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -986,7 +1733,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfRotateResponse> pdfRotate(Optional<File> file,
       PdfRotateRequest request, RequestOptions requestOptions) {
-    return this.rawClient.pdfRotate(file, request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfRotateResponse>> rawFuture = this.rawClient.pdfRotate(file, request, requestOptions);
+    CompletableFuture<PdfRotateResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -994,7 +1748,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfCompressResponse> pdfCompress(Optional<File> file,
       PdfCompressRequest request) {
-    return this.rawClient.pdfCompress(file, request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfCompressResponse>> rawFuture = this.rawClient.pdfCompress(file, request);
+    CompletableFuture<PdfCompressResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1002,7 +1763,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfCompressResponse> pdfCompress(Optional<File> file,
       PdfCompressRequest request, RequestOptions requestOptions) {
-    return this.rawClient.pdfCompress(file, request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfCompressResponse>> rawFuture = this.rawClient.pdfCompress(file, request, requestOptions);
+    CompletableFuture<PdfCompressResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1010,7 +1778,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfExtractPagesResponse> pdfExtractPages(Optional<File> file,
       PdfExtractPagesRequest request) {
-    return this.rawClient.pdfExtractPages(file, request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfExtractPagesResponse>> rawFuture = this.rawClient.pdfExtractPages(file, request);
+    CompletableFuture<PdfExtractPagesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1018,7 +1793,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfExtractPagesResponse> pdfExtractPages(Optional<File> file,
       PdfExtractPagesRequest request, RequestOptions requestOptions) {
-    return this.rawClient.pdfExtractPages(file, request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfExtractPagesResponse>> rawFuture = this.rawClient.pdfExtractPages(file, request, requestOptions);
+    CompletableFuture<PdfExtractPagesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1026,7 +1808,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfLinearizeResponse> pdfLinearize(Optional<File> file,
       PdfLinearizeRequest request) {
-    return this.rawClient.pdfLinearize(file, request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfLinearizeResponse>> rawFuture = this.rawClient.pdfLinearize(file, request);
+    CompletableFuture<PdfLinearizeResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1034,7 +1823,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfLinearizeResponse> pdfLinearize(Optional<File> file,
       PdfLinearizeRequest request, RequestOptions requestOptions) {
-    return this.rawClient.pdfLinearize(file, request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfLinearizeResponse>> rawFuture = this.rawClient.pdfLinearize(file, request, requestOptions);
+    CompletableFuture<PdfLinearizeResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1042,7 +1838,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfEncryptResponse> pdfEncrypt(Optional<File> file,
       PdfEncryptRequest request) {
-    return this.rawClient.pdfEncrypt(file, request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfEncryptResponse>> rawFuture = this.rawClient.pdfEncrypt(file, request);
+    CompletableFuture<PdfEncryptResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1050,7 +1853,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfEncryptResponse> pdfEncrypt(Optional<File> file,
       PdfEncryptRequest request, RequestOptions requestOptions) {
-    return this.rawClient.pdfEncrypt(file, request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfEncryptResponse>> rawFuture = this.rawClient.pdfEncrypt(file, request, requestOptions);
+    CompletableFuture<PdfEncryptResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1058,7 +1868,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfDecryptResponse> pdfDecrypt(Optional<File> file,
       PdfDecryptRequest request) {
-    return this.rawClient.pdfDecrypt(file, request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfDecryptResponse>> rawFuture = this.rawClient.pdfDecrypt(file, request);
+    CompletableFuture<PdfDecryptResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1066,7 +1883,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfDecryptResponse> pdfDecrypt(Optional<File> file,
       PdfDecryptRequest request, RequestOptions requestOptions) {
-    return this.rawClient.pdfDecrypt(file, request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfDecryptResponse>> rawFuture = this.rawClient.pdfDecrypt(file, request, requestOptions);
+    CompletableFuture<PdfDecryptResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1074,7 +1898,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfRestrictResponse> pdfRestrict(Optional<File> file,
       PdfRestrictRequest request) {
-    return this.rawClient.pdfRestrict(file, request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfRestrictResponse>> rawFuture = this.rawClient.pdfRestrict(file, request);
+    CompletableFuture<PdfRestrictResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1082,7 +1913,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfRestrictResponse> pdfRestrict(Optional<File> file,
       PdfRestrictRequest request, RequestOptions requestOptions) {
-    return this.rawClient.pdfRestrict(file, request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfRestrictResponse>> rawFuture = this.rawClient.pdfRestrict(file, request, requestOptions);
+    CompletableFuture<PdfRestrictResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1090,7 +1928,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfUnrestrictResponse> pdfUnrestrict(Optional<File> file,
       PdfUnrestrictRequest request) {
-    return this.rawClient.pdfUnrestrict(file, request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfUnrestrictResponse>> rawFuture = this.rawClient.pdfUnrestrict(file, request);
+    CompletableFuture<PdfUnrestrictResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1098,7 +1943,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfUnrestrictResponse> pdfUnrestrict(Optional<File> file,
       PdfUnrestrictRequest request, RequestOptions requestOptions) {
-    return this.rawClient.pdfUnrestrict(file, request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfUnrestrictResponse>> rawFuture = this.rawClient.pdfUnrestrict(file, request, requestOptions);
+    CompletableFuture<PdfUnrestrictResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1106,7 +1958,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfConvertToPngResponse> pdfConvertToPng(Optional<File> file,
       PdfConvertToPngRequest request) {
-    return this.rawClient.pdfConvertToPng(file, request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfConvertToPngResponse>> rawFuture = this.rawClient.pdfConvertToPng(file, request);
+    CompletableFuture<PdfConvertToPngResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1114,7 +1973,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfConvertToPngResponse> pdfConvertToPng(Optional<File> file,
       PdfConvertToPngRequest request, RequestOptions requestOptions) {
-    return this.rawClient.pdfConvertToPng(file, request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfConvertToPngResponse>> rawFuture = this.rawClient.pdfConvertToPng(file, request, requestOptions);
+    CompletableFuture<PdfConvertToPngResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1122,7 +1988,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfConvertToJpgResponse> pdfConvertToJpg(Optional<File> file,
       PdfConvertToJpgRequest request) {
-    return this.rawClient.pdfConvertToJpg(file, request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfConvertToJpgResponse>> rawFuture = this.rawClient.pdfConvertToJpg(file, request);
+    CompletableFuture<PdfConvertToJpgResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1130,7 +2003,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfConvertToJpgResponse> pdfConvertToJpg(Optional<File> file,
       PdfConvertToJpgRequest request, RequestOptions requestOptions) {
-    return this.rawClient.pdfConvertToJpg(file, request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfConvertToJpgResponse>> rawFuture = this.rawClient.pdfConvertToJpg(file, request, requestOptions);
+    CompletableFuture<PdfConvertToJpgResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1138,7 +2018,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfConvertToTiffResponse> pdfConvertToTiff(Optional<File> file,
       PdfConvertToTiffRequest request) {
-    return this.rawClient.pdfConvertToTiff(file, request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfConvertToTiffResponse>> rawFuture = this.rawClient.pdfConvertToTiff(file, request);
+    CompletableFuture<PdfConvertToTiffResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1146,7 +2033,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfConvertToTiffResponse> pdfConvertToTiff(Optional<File> file,
       PdfConvertToTiffRequest request, RequestOptions requestOptions) {
-    return this.rawClient.pdfConvertToTiff(file, request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfConvertToTiffResponse>> rawFuture = this.rawClient.pdfConvertToTiff(file, request, requestOptions);
+    CompletableFuture<PdfConvertToTiffResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1154,7 +2048,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfConvertToBmpResponse> pdfConvertToBmp(Optional<File> file,
       PdfConvertToBmpRequest request) {
-    return this.rawClient.pdfConvertToBmp(file, request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfConvertToBmpResponse>> rawFuture = this.rawClient.pdfConvertToBmp(file, request);
+    CompletableFuture<PdfConvertToBmpResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1162,7 +2063,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfConvertToBmpResponse> pdfConvertToBmp(Optional<File> file,
       PdfConvertToBmpRequest request, RequestOptions requestOptions) {
-    return this.rawClient.pdfConvertToBmp(file, request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfConvertToBmpResponse>> rawFuture = this.rawClient.pdfConvertToBmp(file, request, requestOptions);
+    CompletableFuture<PdfConvertToBmpResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1170,7 +2078,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfConvertToGifResponse> pdfConvertToGif(Optional<File> file,
       PdfConvertToGifRequest request) {
-    return this.rawClient.pdfConvertToGif(file, request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfConvertToGifResponse>> rawFuture = this.rawClient.pdfConvertToGif(file, request);
+    CompletableFuture<PdfConvertToGifResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1178,7 +2093,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfConvertToGifResponse> pdfConvertToGif(Optional<File> file,
       PdfConvertToGifRequest request, RequestOptions requestOptions) {
-    return this.rawClient.pdfConvertToGif(file, request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfConvertToGifResponse>> rawFuture = this.rawClient.pdfConvertToGif(file, request, requestOptions);
+    CompletableFuture<PdfConvertToGifResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1186,7 +2108,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfUploadResourcesResponse> pdfUploadResources(Optional<File> file,
       PdfUploadResourcesRequest request) {
-    return this.rawClient.pdfUploadResources(file, request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfUploadResourcesResponse>> rawFuture = this.rawClient.pdfUploadResources(file, request);
+    CompletableFuture<PdfUploadResourcesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1194,7 +2123,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfUploadResourcesResponse> pdfUploadResources(Optional<File> file,
       PdfUploadResourcesRequest request, RequestOptions requestOptions) {
-    return this.rawClient.pdfUploadResources(file, request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfUploadResourcesResponse>> rawFuture = this.rawClient.pdfUploadResources(file, request, requestOptions);
+    CompletableFuture<PdfUploadResourcesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1202,7 +2138,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfUploadBinaryResponse> pdfUploadBinary(
       PdfUploadBinaryRequest request) {
-    return this.rawClient.pdfUploadBinary(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfUploadBinaryResponse>> rawFuture = this.rawClient.pdfUploadBinary(request);
+    CompletableFuture<PdfUploadBinaryResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1210,14 +2153,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfUploadBinaryResponse> pdfUploadBinary(PdfUploadBinaryRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.pdfUploadBinary(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfUploadBinaryResponse>> rawFuture = this.rawClient.pdfUploadBinary(request, requestOptions);
+    CompletableFuture<PdfUploadBinaryResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * This API downloads PDF files or ZIP archives from the server using their unique resource ID.
    */
   public CompletableFuture<InputStream> pdfDownloadResource(PdfDownloadResourceRequest request) {
-    return this.rawClient.pdfDownloadResource(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<InputStream>> rawFuture = this.rawClient.pdfDownloadResource(request);
+    CompletableFuture<InputStream> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1225,7 +2182,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<InputStream> pdfDownloadResource(PdfDownloadResourceRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.pdfDownloadResource(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<InputStream>> rawFuture = this.rawClient.pdfDownloadResource(request, requestOptions);
+    CompletableFuture<InputStream> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1233,7 +2197,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfGetTaskStatusResponse> pdfGetTaskStatus(
       PdfGetTaskStatusRequest request) {
-    return this.rawClient.pdfGetTaskStatus(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfGetTaskStatusResponse>> rawFuture = this.rawClient.pdfGetTaskStatus(request);
+    CompletableFuture<PdfGetTaskStatusResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1241,7 +2212,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfGetTaskStatusResponse> pdfGetTaskStatus(
       PdfGetTaskStatusRequest request, RequestOptions requestOptions) {
-    return this.rawClient.pdfGetTaskStatus(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfGetTaskStatusResponse>> rawFuture = this.rawClient.pdfGetTaskStatus(request, requestOptions);
+    CompletableFuture<PdfGetTaskStatusResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1249,7 +2227,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfGetFileStatusResponse> pdfGetFileStatus(
       PdfGetFileStatusRequest request) {
-    return this.rawClient.pdfGetFileStatus(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfGetFileStatusResponse>> rawFuture = this.rawClient.pdfGetFileStatus(request);
+    CompletableFuture<PdfGetFileStatusResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1257,14 +2242,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfGetFileStatusResponse> pdfGetFileStatus(
       PdfGetFileStatusRequest request, RequestOptions requestOptions) {
-    return this.rawClient.pdfGetFileStatus(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfGetFileStatusResponse>> rawFuture = this.rawClient.pdfGetFileStatus(request, requestOptions);
+    CompletableFuture<PdfGetFileStatusResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * This API retrieves a list of all PDF files uploaded and generated by a specific user. Please note that if the user is part of an organization, only the Organization Administrator can access this endpoint. Organization Members cannot access this endpoint.
    */
   public CompletableFuture<PdfListFilesResponse> pdfListFiles(PdfListFilesRequest request) {
-    return this.rawClient.pdfListFiles(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfListFilesResponse>> rawFuture = this.rawClient.pdfListFiles(request);
+    CompletableFuture<PdfListFilesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1272,14 +2271,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfListFilesResponse> pdfListFiles(PdfListFilesRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.pdfListFiles(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfListFilesResponse>> rawFuture = this.rawClient.pdfListFiles(request, requestOptions);
+    CompletableFuture<PdfListFilesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * This API deletes a PDF file using its unique file ID.
    */
   public CompletableFuture<PdfDeleteFileResponse> pdfDeleteFile(PdfDeleteFileRequest request) {
-    return this.rawClient.pdfDeleteFile(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfDeleteFileResponse>> rawFuture = this.rawClient.pdfDeleteFile(request);
+    CompletableFuture<PdfDeleteFileResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1287,24 +2300,106 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<PdfDeleteFileResponse> pdfDeleteFile(PdfDeleteFileRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.pdfDeleteFile(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<PdfDeleteFileResponse>> rawFuture = this.rawClient.pdfDeleteFile(request, requestOptions);
+    CompletableFuture<PdfDeleteFileResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
+  }
+
+  /**
+   * Renders the template identified by template_id with the JSON data supplied in the request body (or fetched from data_url). Returns a hosted URL for the generated PDF. Provide either a request body or a data_url; one of the two is required. The keys of the data object are the fields you bound when you designed the template in the APIFreaks PDF Template Builder, so the exact shape is up to you. Pin the version parameter to a specific template version (e.g. version=v2) so later design changes never touch what is already live; omit it to use the latest version.
+   */
+  public CompletableFuture<PdfGenerateFromTemplateResponse> pdfGenerateFromTemplate(
+      PdfGenerateFromTemplateRequest request) {
+    CompletableFuture<ApifreaksApiHttpResponse<PdfGenerateFromTemplateResponse>> rawFuture = this.rawClient.pdfGenerateFromTemplate(request);
+    CompletableFuture<PdfGenerateFromTemplateResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
+  }
+
+  /**
+   * Renders the template identified by template_id with the JSON data supplied in the request body (or fetched from data_url). Returns a hosted URL for the generated PDF. Provide either a request body or a data_url; one of the two is required. The keys of the data object are the fields you bound when you designed the template in the APIFreaks PDF Template Builder, so the exact shape is up to you. Pin the version parameter to a specific template version (e.g. version=v2) so later design changes never touch what is already live; omit it to use the latest version.
+   */
+  public CompletableFuture<PdfGenerateFromTemplateResponse> pdfGenerateFromTemplate(
+      PdfGenerateFromTemplateRequest request, RequestOptions requestOptions) {
+    CompletableFuture<ApifreaksApiHttpResponse<PdfGenerateFromTemplateResponse>> rawFuture = this.rawClient.pdfGenerateFromTemplate(request, requestOptions);
+    CompletableFuture<PdfGenerateFromTemplateResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
+  }
+
+  /**
+   * Upload a CSV file where each row is one record. The API generates one PDF per row and returns an array of results, each with its own pdf_url. Rows are processed independently, so a failure in one row does not block the rest of the batch. The response gives a row-by-row breakdown of which PDFs succeeded and which failed.
+   */
+  public CompletableFuture<List<BulkPdfGenerateFromTemplateResponseItem>> bulkPdfGenerateFromTemplate(
+      File file, BulkPdfGenerateFromTemplateRequest request) {
+    CompletableFuture<ApifreaksApiHttpResponse<List<BulkPdfGenerateFromTemplateResponseItem>>> rawFuture = this.rawClient.bulkPdfGenerateFromTemplate(file, request);
+    CompletableFuture<List<BulkPdfGenerateFromTemplateResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
+  }
+
+  /**
+   * Upload a CSV file where each row is one record. The API generates one PDF per row and returns an array of results, each with its own pdf_url. Rows are processed independently, so a failure in one row does not block the rest of the batch. The response gives a row-by-row breakdown of which PDFs succeeded and which failed.
+   */
+  public CompletableFuture<List<BulkPdfGenerateFromTemplateResponseItem>> bulkPdfGenerateFromTemplate(
+      File file, BulkPdfGenerateFromTemplateRequest request, RequestOptions requestOptions) {
+    CompletableFuture<ApifreaksApiHttpResponse<List<BulkPdfGenerateFromTemplateResponseItem>>> rawFuture = this.rawClient.bulkPdfGenerateFromTemplate(file, request, requestOptions);
+    CompletableFuture<List<BulkPdfGenerateFromTemplateResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Capture full-page screenshots and videos of websites with advanced options like device simulation, custom code injection, cookie banner blocking, and scrollable content recording.
    * Supports multiple output formats including JSON, image, GIF, MP4, and WebM.
    */
-  public CompletableFuture<InputStream> screenshotCapture(ScreenshotCaptureRequest request) {
-    return this.rawClient.screenshotCapture(request).thenApply(response -> response.body());
+  public CompletableFuture<ScreenshotCaptureResponse> screenshotCapture(
+      ScreenshotCaptureRequest request) {
+    CompletableFuture<ApifreaksApiHttpResponse<ScreenshotCaptureResponse>> rawFuture = this.rawClient.screenshotCapture(request);
+    CompletableFuture<ScreenshotCaptureResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Capture full-page screenshots and videos of websites with advanced options like device simulation, custom code injection, cookie banner blocking, and scrollable content recording.
    * Supports multiple output formats including JSON, image, GIF, MP4, and WebM.
    */
-  public CompletableFuture<InputStream> screenshotCapture(ScreenshotCaptureRequest request,
-      RequestOptions requestOptions) {
-    return this.rawClient.screenshotCapture(request, requestOptions).thenApply(response -> response.body());
+  public CompletableFuture<ScreenshotCaptureResponse> screenshotCapture(
+      ScreenshotCaptureRequest request, RequestOptions requestOptions) {
+    CompletableFuture<ApifreaksApiHttpResponse<ScreenshotCaptureResponse>> rawFuture = this.rawClient.screenshotCapture(request, requestOptions);
+    CompletableFuture<ScreenshotCaptureResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1313,7 +2408,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<BulkScreenshotCaptureResponse> bulkScreenshotCapture(
       BulkScreenshotCaptureRequest request) {
-    return this.rawClient.bulkScreenshotCapture(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<BulkScreenshotCaptureResponse>> rawFuture = this.rawClient.bulkScreenshotCapture(request);
+    CompletableFuture<BulkScreenshotCaptureResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1322,7 +2424,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<BulkScreenshotCaptureResponse> bulkScreenshotCapture(
       BulkScreenshotCaptureRequest request, RequestOptions requestOptions) {
-    return this.rawClient.bulkScreenshotCapture(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<BulkScreenshotCaptureResponse>> rawFuture = this.rawClient.bulkScreenshotCapture(request, requestOptions);
+    CompletableFuture<BulkScreenshotCaptureResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1330,7 +2439,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencyLatestRatesResponse> currencyLatestRates(
       CurrencyLatestRatesRequest request) {
-    return this.rawClient.currencyLatestRates(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencyLatestRatesResponse>> rawFuture = this.rawClient.currencyLatestRates(request);
+    CompletableFuture<CurrencyLatestRatesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1338,7 +2454,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencyLatestRatesResponse> currencyLatestRates(
       CurrencyLatestRatesRequest request, RequestOptions requestOptions) {
-    return this.rawClient.currencyLatestRates(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencyLatestRatesResponse>> rawFuture = this.rawClient.currencyLatestRates(request, requestOptions);
+    CompletableFuture<CurrencyLatestRatesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1346,7 +2469,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencyHistoricalRatesResponse> currencyHistoricalRates(
       CurrencyHistoricalRatesRequest request) {
-    return this.rawClient.currencyHistoricalRates(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencyHistoricalRatesResponse>> rawFuture = this.rawClient.currencyHistoricalRates(request);
+    CompletableFuture<CurrencyHistoricalRatesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1354,7 +2484,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencyHistoricalRatesResponse> currencyHistoricalRates(
       CurrencyHistoricalRatesRequest request, RequestOptions requestOptions) {
-    return this.rawClient.currencyHistoricalRates(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencyHistoricalRatesResponse>> rawFuture = this.rawClient.currencyHistoricalRates(request, requestOptions);
+    CompletableFuture<CurrencyHistoricalRatesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1362,7 +2499,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencyConvertLatestResponse> currencyConvertLatest(
       CurrencyConvertLatestRequest request) {
-    return this.rawClient.currencyConvertLatest(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencyConvertLatestResponse>> rawFuture = this.rawClient.currencyConvertLatest(request);
+    CompletableFuture<CurrencyConvertLatestResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1370,7 +2514,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencyConvertLatestResponse> currencyConvertLatest(
       CurrencyConvertLatestRequest request, RequestOptions requestOptions) {
-    return this.rawClient.currencyConvertLatest(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencyConvertLatestResponse>> rawFuture = this.rawClient.currencyConvertLatest(request, requestOptions);
+    CompletableFuture<CurrencyConvertLatestResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1378,7 +2529,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencyConvertHistoricalResponse> currencyConvertHistorical(
       CurrencyConvertHistoricalRequest request) {
-    return this.rawClient.currencyConvertHistorical(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencyConvertHistoricalResponse>> rawFuture = this.rawClient.currencyConvertHistorical(request);
+    CompletableFuture<CurrencyConvertHistoricalResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1386,7 +2544,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencyConvertHistoricalResponse> currencyConvertHistorical(
       CurrencyConvertHistoricalRequest request, RequestOptions requestOptions) {
-    return this.rawClient.currencyConvertHistorical(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencyConvertHistoricalResponse>> rawFuture = this.rawClient.currencyConvertHistorical(request, requestOptions);
+    CompletableFuture<CurrencyConvertHistoricalResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1394,7 +2559,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencyTimeSeriesResponse> currencyTimeSeries(
       CurrencyTimeSeriesRequest request) {
-    return this.rawClient.currencyTimeSeries(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencyTimeSeriesResponse>> rawFuture = this.rawClient.currencyTimeSeries(request);
+    CompletableFuture<CurrencyTimeSeriesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1402,7 +2574,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencyTimeSeriesResponse> currencyTimeSeries(
       CurrencyTimeSeriesRequest request, RequestOptions requestOptions) {
-    return this.rawClient.currencyTimeSeries(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencyTimeSeriesResponse>> rawFuture = this.rawClient.currencyTimeSeries(request, requestOptions);
+    CompletableFuture<CurrencyTimeSeriesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1410,7 +2589,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencyFluctuationResponse> currencyFluctuation(
       CurrencyFluctuationRequest request) {
-    return this.rawClient.currencyFluctuation(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencyFluctuationResponse>> rawFuture = this.rawClient.currencyFluctuation(request);
+    CompletableFuture<CurrencyFluctuationResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1418,7 +2604,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencyFluctuationResponse> currencyFluctuation(
       CurrencyFluctuationRequest request, RequestOptions requestOptions) {
-    return this.rawClient.currencyFluctuation(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencyFluctuationResponse>> rawFuture = this.rawClient.currencyFluctuation(request, requestOptions);
+    CompletableFuture<CurrencyFluctuationResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1426,7 +2619,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencyConvertByIpResponse> currencyConvertByIp(
       CurrencyConvertByIpRequest request) {
-    return this.rawClient.currencyConvertByIp(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencyConvertByIpResponse>> rawFuture = this.rawClient.currencyConvertByIp(request);
+    CompletableFuture<CurrencyConvertByIpResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1434,7 +2634,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencyConvertByIpResponse> currencyConvertByIp(
       CurrencyConvertByIpRequest request, RequestOptions requestOptions) {
-    return this.rawClient.currencyConvertByIp(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencyConvertByIpResponse>> rawFuture = this.rawClient.currencyConvertByIp(request, requestOptions);
+    CompletableFuture<CurrencyConvertByIpResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1442,7 +2649,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencySupportedResponse> currencySupported(
       CurrencySupportedRequest request) {
-    return this.rawClient.currencySupported(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencySupportedResponse>> rawFuture = this.rawClient.currencySupported(request);
+    CompletableFuture<CurrencySupportedResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1450,7 +2664,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencySupportedResponse> currencySupported(
       CurrencySupportedRequest request, RequestOptions requestOptions) {
-    return this.rawClient.currencySupported(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencySupportedResponse>> rawFuture = this.rawClient.currencySupported(request, requestOptions);
+    CompletableFuture<CurrencySupportedResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1458,7 +2679,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencySymbolsResponse> currencySymbols(
       CurrencySymbolsRequest request) {
-    return this.rawClient.currencySymbols(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencySymbolsResponse>> rawFuture = this.rawClient.currencySymbols(request);
+    CompletableFuture<CurrencySymbolsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1466,7 +2694,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencySymbolsResponse> currencySymbols(CurrencySymbolsRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.currencySymbols(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencySymbolsResponse>> rawFuture = this.rawClient.currencySymbols(request, requestOptions);
+    CompletableFuture<CurrencySymbolsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1474,7 +2709,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencyHistoricalLimitsResponse> currencyHistoricalLimits(
       CurrencyHistoricalLimitsRequest request) {
-    return this.rawClient.currencyHistoricalLimits(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencyHistoricalLimitsResponse>> rawFuture = this.rawClient.currencyHistoricalLimits(request);
+    CompletableFuture<CurrencyHistoricalLimitsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1482,7 +2724,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrencyHistoricalLimitsResponse> currencyHistoricalLimits(
       CurrencyHistoricalLimitsRequest request, RequestOptions requestOptions) {
-    return this.rawClient.currencyHistoricalLimits(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrencyHistoricalLimitsResponse>> rawFuture = this.rawClient.currencyHistoricalLimits(request, requestOptions);
+    CompletableFuture<CurrencyHistoricalLimitsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1490,7 +2739,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommodityLatestRatesResponse> commodityLatestRates(
       CommodityLatestRatesRequest request) {
-    return this.rawClient.commodityLatestRates(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityLatestRatesResponse>> rawFuture = this.rawClient.commodityLatestRates(request);
+    CompletableFuture<CommodityLatestRatesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1498,7 +2754,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommodityLatestRatesResponse> commodityLatestRates(
       CommodityLatestRatesRequest request, RequestOptions requestOptions) {
-    return this.rawClient.commodityLatestRates(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityLatestRatesResponse>> rawFuture = this.rawClient.commodityLatestRates(request, requestOptions);
+    CompletableFuture<CommodityLatestRatesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1506,7 +2769,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommodityHistoricalRatesResponse> commodityHistoricalRates(
       CommodityHistoricalRatesRequest request) {
-    return this.rawClient.commodityHistoricalRates(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityHistoricalRatesResponse>> rawFuture = this.rawClient.commodityHistoricalRates(request);
+    CompletableFuture<CommodityHistoricalRatesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1514,7 +2784,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommodityHistoricalRatesResponse> commodityHistoricalRates(
       CommodityHistoricalRatesRequest request, RequestOptions requestOptions) {
-    return this.rawClient.commodityHistoricalRates(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityHistoricalRatesResponse>> rawFuture = this.rawClient.commodityHistoricalRates(request, requestOptions);
+    CompletableFuture<CommodityHistoricalRatesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1522,7 +2799,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommodityFluctuationResponse> commodityFluctuation(
       CommodityFluctuationRequest request) {
-    return this.rawClient.commodityFluctuation(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityFluctuationResponse>> rawFuture = this.rawClient.commodityFluctuation(request);
+    CompletableFuture<CommodityFluctuationResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1530,7 +2814,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommodityFluctuationResponse> commodityFluctuation(
       CommodityFluctuationRequest request, RequestOptions requestOptions) {
-    return this.rawClient.commodityFluctuation(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityFluctuationResponse>> rawFuture = this.rawClient.commodityFluctuation(request, requestOptions);
+    CompletableFuture<CommodityFluctuationResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1538,7 +2829,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommodityTimeSeriesResponse> commodityTimeSeries(
       CommodityTimeSeriesRequest request) {
-    return this.rawClient.commodityTimeSeries(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityTimeSeriesResponse>> rawFuture = this.rawClient.commodityTimeSeries(request);
+    CompletableFuture<CommodityTimeSeriesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1546,7 +2844,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommodityTimeSeriesResponse> commodityTimeSeries(
       CommodityTimeSeriesRequest request, RequestOptions requestOptions) {
-    return this.rawClient.commodityTimeSeries(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommodityTimeSeriesResponse>> rawFuture = this.rawClient.commodityTimeSeries(request, requestOptions);
+    CompletableFuture<CommodityTimeSeriesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1554,7 +2859,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommoditySymbolsResponse> commoditySymbols(
       CommoditySymbolsRequest request) {
-    return this.rawClient.commoditySymbols(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommoditySymbolsResponse>> rawFuture = this.rawClient.commoditySymbols(request);
+    CompletableFuture<CommoditySymbolsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1562,7 +2874,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CommoditySymbolsResponse> commoditySymbols(
       CommoditySymbolsRequest request, RequestOptions requestOptions) {
-    return this.rawClient.commoditySymbols(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CommoditySymbolsResponse>> rawFuture = this.rawClient.commoditySymbols(request, requestOptions);
+    CompletableFuture<CommoditySymbolsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1570,7 +2889,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<VatSupportedCountriesResponse> vatSupportedCountries(
       VatSupportedCountriesRequest request) {
-    return this.rawClient.vatSupportedCountries(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<VatSupportedCountriesResponse>> rawFuture = this.rawClient.vatSupportedCountries(request);
+    CompletableFuture<VatSupportedCountriesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1578,14 +2904,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<VatSupportedCountriesResponse> vatSupportedCountries(
       VatSupportedCountriesRequest request, RequestOptions requestOptions) {
-    return this.rawClient.vatSupportedCountries(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<VatSupportedCountriesResponse>> rawFuture = this.rawClient.vatSupportedCountries(request, requestOptions);
+    CompletableFuture<VatSupportedCountriesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Fetches VAT rate based on the specified or originating IP address.
    */
   public CompletableFuture<List<VatRateByIpResponseItem>> vatRateByIp(VatRateByIpRequest request) {
-    return this.rawClient.vatRateByIp(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<VatRateByIpResponseItem>>> rawFuture = this.rawClient.vatRateByIp(request);
+    CompletableFuture<List<VatRateByIpResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1593,7 +2933,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<List<VatRateByIpResponseItem>> vatRateByIp(VatRateByIpRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.vatRateByIp(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<VatRateByIpResponseItem>>> rawFuture = this.rawClient.vatRateByIp(request, requestOptions);
+    CompletableFuture<List<VatRateByIpResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1601,7 +2948,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<List<VatRateByCountryResponseItem>> vatRateByCountry(
       VatRateByCountryRequest request) {
-    return this.rawClient.vatRateByCountry(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<VatRateByCountryResponseItem>>> rawFuture = this.rawClient.vatRateByCountry(request);
+    CompletableFuture<List<VatRateByCountryResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1609,30 +2963,58 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<List<VatRateByCountryResponseItem>> vatRateByCountry(
       VatRateByCountryRequest request, RequestOptions requestOptions) {
-    return this.rawClient.vatRateByCountry(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<VatRateByCountryResponseItem>>> rawFuture = this.rawClient.vatRateByCountry(request, requestOptions);
+    CompletableFuture<List<VatRateByCountryResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Retrieves VAT details for multiple countries or country-state combinations in a single request. Maximum of <code>100</code> entries per request are allowed.
    */
-  public CompletableFuture<BulkVatRateByCountryResponse> bulkVatRateByCountry(
+  public CompletableFuture<List<BulkVatRateByCountryResponseItem>> bulkVatRateByCountry(
       BulkVatRateByCountryRequest request) {
-    return this.rawClient.bulkVatRateByCountry(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<BulkVatRateByCountryResponseItem>>> rawFuture = this.rawClient.bulkVatRateByCountry(request);
+    CompletableFuture<List<BulkVatRateByCountryResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Retrieves VAT details for multiple countries or country-state combinations in a single request. Maximum of <code>100</code> entries per request are allowed.
    */
-  public CompletableFuture<BulkVatRateByCountryResponse> bulkVatRateByCountry(
+  public CompletableFuture<List<BulkVatRateByCountryResponseItem>> bulkVatRateByCountry(
       BulkVatRateByCountryRequest request, RequestOptions requestOptions) {
-    return this.rawClient.bulkVatRateByCountry(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<BulkVatRateByCountryResponseItem>>> rawFuture = this.rawClient.bulkVatRateByCountry(request, requestOptions);
+    CompletableFuture<List<BulkVatRateByCountryResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Validates an EU or UK VAT number and returns registration status details.
    */
   public CompletableFuture<VatValidateResponse> vatValidate(VatValidateRequest request) {
-    return this.rawClient.vatValidate(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<VatValidateResponse>> rawFuture = this.rawClient.vatValidate(request);
+    CompletableFuture<VatValidateResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1640,14 +3022,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<VatValidateResponse> vatValidate(VatValidateRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.vatValidate(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<VatValidateResponse>> rawFuture = this.rawClient.vatValidate(request, requestOptions);
+    CompletableFuture<VatValidateResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Checks an IBAN for structural validity, checksum accuracy, and bank metadata.
    */
   public CompletableFuture<IbanValidateResponse> ibanValidate(IbanValidateRequest request) {
-    return this.rawClient.ibanValidate(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<IbanValidateResponse>> rawFuture = this.rawClient.ibanValidate(request);
+    CompletableFuture<IbanValidateResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1655,14 +3051,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<IbanValidateResponse> ibanValidate(IbanValidateRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.ibanValidate(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<IbanValidateResponse>> rawFuture = this.rawClient.ibanValidate(request, requestOptions);
+    CompletableFuture<IbanValidateResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Fetches SWIFT codes for a given country, bank, and city.
    */
   public CompletableFuture<List<String>> swiftCodeFind(SwiftCodeFindRequest request) {
-    return this.rawClient.swiftCodeFind(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<String>>> rawFuture = this.rawClient.swiftCodeFind(request);
+    CompletableFuture<List<String>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1670,7 +3080,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<List<String>> swiftCodeFind(SwiftCodeFindRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.swiftCodeFind(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<String>>> rawFuture = this.rawClient.swiftCodeFind(request, requestOptions);
+    CompletableFuture<List<String>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1678,7 +3095,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<SwiftCodeLookupResponse> swiftCodeLookup(
       SwiftCodeLookupRequest request) {
-    return this.rawClient.swiftCodeLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<SwiftCodeLookupResponse>> rawFuture = this.rawClient.swiftCodeLookup(request);
+    CompletableFuture<SwiftCodeLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1686,16 +3110,37 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<SwiftCodeLookupResponse> swiftCodeLookup(SwiftCodeLookupRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.swiftCodeLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<SwiftCodeLookupResponse>> rawFuture = this.rawClient.swiftCodeLookup(request, requestOptions);
+    CompletableFuture<SwiftCodeLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   public CompletableFuture<ZipcodeLookupResponse> zipcodeLookup(ZipcodeLookupRequest request) {
-    return this.rawClient.zipcodeLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<ZipcodeLookupResponse>> rawFuture = this.rawClient.zipcodeLookup(request);
+    CompletableFuture<ZipcodeLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   public CompletableFuture<ZipcodeLookupResponse> zipcodeLookup(ZipcodeLookupRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.zipcodeLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<ZipcodeLookupResponse>> rawFuture = this.rawClient.zipcodeLookup(request, requestOptions);
+    CompletableFuture<ZipcodeLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1703,7 +3148,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<BulkZipcodeLookupResponse> bulkZipcodeLookup(
       BulkZipcodeLookupRequest request) {
-    return this.rawClient.bulkZipcodeLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<BulkZipcodeLookupResponse>> rawFuture = this.rawClient.bulkZipcodeLookup(request);
+    CompletableFuture<BulkZipcodeLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1711,37 +3163,86 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<BulkZipcodeLookupResponse> bulkZipcodeLookup(
       BulkZipcodeLookupRequest request, RequestOptions requestOptions) {
-    return this.rawClient.bulkZipcodeLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<BulkZipcodeLookupResponse>> rawFuture = this.rawClient.bulkZipcodeLookup(request, requestOptions);
+    CompletableFuture<BulkZipcodeLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   public CompletableFuture<ZipcodeSearchByCityResponse> zipcodeSearchByCity(
       ZipcodeSearchByCityRequest request) {
-    return this.rawClient.zipcodeSearchByCity(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<ZipcodeSearchByCityResponse>> rawFuture = this.rawClient.zipcodeSearchByCity(request);
+    CompletableFuture<ZipcodeSearchByCityResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   public CompletableFuture<ZipcodeSearchByCityResponse> zipcodeSearchByCity(
       ZipcodeSearchByCityRequest request, RequestOptions requestOptions) {
-    return this.rawClient.zipcodeSearchByCity(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<ZipcodeSearchByCityResponse>> rawFuture = this.rawClient.zipcodeSearchByCity(request, requestOptions);
+    CompletableFuture<ZipcodeSearchByCityResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   public CompletableFuture<ZipcodeSearchByRegionResponse> zipcodeSearchByRegion(
       ZipcodeSearchByRegionRequest request) {
-    return this.rawClient.zipcodeSearchByRegion(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<ZipcodeSearchByRegionResponse>> rawFuture = this.rawClient.zipcodeSearchByRegion(request);
+    CompletableFuture<ZipcodeSearchByRegionResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   public CompletableFuture<ZipcodeSearchByRegionResponse> zipcodeSearchByRegion(
       ZipcodeSearchByRegionRequest request, RequestOptions requestOptions) {
-    return this.rawClient.zipcodeSearchByRegion(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<ZipcodeSearchByRegionResponse>> rawFuture = this.rawClient.zipcodeSearchByRegion(request, requestOptions);
+    CompletableFuture<ZipcodeSearchByRegionResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   public CompletableFuture<ZipcodeSearchByRadiusResponse> zipcodeSearchByRadius(
       ZipcodeSearchByRadiusRequest request) {
-    return this.rawClient.zipcodeSearchByRadius(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<ZipcodeSearchByRadiusResponse>> rawFuture = this.rawClient.zipcodeSearchByRadius(request);
+    CompletableFuture<ZipcodeSearchByRadiusResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   public CompletableFuture<ZipcodeSearchByRadiusResponse> zipcodeSearchByRadius(
       ZipcodeSearchByRadiusRequest request, RequestOptions requestOptions) {
-    return this.rawClient.zipcodeSearchByRadius(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<ZipcodeSearchByRadiusResponse>> rawFuture = this.rawClient.zipcodeSearchByRadius(request, requestOptions);
+    CompletableFuture<ZipcodeSearchByRadiusResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1749,7 +3250,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<ZipcodeDistanceResponse> zipcodeDistance(
       ZipcodeDistanceRequest request) {
-    return this.rawClient.zipcodeDistance(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<ZipcodeDistanceResponse>> rawFuture = this.rawClient.zipcodeDistance(request);
+    CompletableFuture<ZipcodeDistanceResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1757,7 +3265,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<ZipcodeDistanceResponse> zipcodeDistance(ZipcodeDistanceRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.zipcodeDistance(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<ZipcodeDistanceResponse>> rawFuture = this.rawClient.zipcodeDistance(request, requestOptions);
+    CompletableFuture<ZipcodeDistanceResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1765,7 +3280,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<ZipcodeDistanceMatchResponse> zipcodeDistanceMatch(
       ZipcodeDistanceMatchRequest request) {
-    return this.rawClient.zipcodeDistanceMatch(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<ZipcodeDistanceMatchResponse>> rawFuture = this.rawClient.zipcodeDistanceMatch(request);
+    CompletableFuture<ZipcodeDistanceMatchResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1773,14 +3295,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<ZipcodeDistanceMatchResponse> zipcodeDistanceMatch(
       ZipcodeDistanceMatchRequest request, RequestOptions requestOptions) {
-    return this.rawClient.zipcodeDistanceMatch(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<ZipcodeDistanceMatchResponse>> rawFuture = this.rawClient.zipcodeDistanceMatch(request, requestOptions);
+    CompletableFuture<ZipcodeDistanceMatchResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Get current weather data including temperature, humidity, precipitation, wind conditions, atmospheric pressure, and air quality for any location. Accepts city names, coordinates, or IP addresses. Also includes astronomy data and timezone-aware timestamps.
    */
   public CompletableFuture<CurrentWeatherResponse> currentWeather(CurrentWeatherRequest request) {
-    return this.rawClient.currentWeather(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrentWeatherResponse>> rawFuture = this.rawClient.currentWeather(request);
+    CompletableFuture<CurrentWeatherResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1788,7 +3324,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<CurrentWeatherResponse> currentWeather(CurrentWeatherRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.currentWeather(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<CurrentWeatherResponse>> rawFuture = this.rawClient.currentWeather(request, requestOptions);
+    CompletableFuture<CurrentWeatherResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1796,7 +3339,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<BulkCurrentWeatherResponse> bulkCurrentWeather(
       BulkCurrentWeatherRequest request) {
-    return this.rawClient.bulkCurrentWeather(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<BulkCurrentWeatherResponse>> rawFuture = this.rawClient.bulkCurrentWeather(request);
+    CompletableFuture<BulkCurrentWeatherResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1804,7 +3354,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<BulkCurrentWeatherResponse> bulkCurrentWeather(
       BulkCurrentWeatherRequest request, RequestOptions requestOptions) {
-    return this.rawClient.bulkCurrentWeather(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<BulkCurrentWeatherResponse>> rawFuture = this.rawClient.bulkCurrentWeather(request, requestOptions);
+    CompletableFuture<BulkCurrentWeatherResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1812,7 +3369,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<WeatherForecastResponse> weatherForecast(
       WeatherForecastRequest request) {
-    return this.rawClient.weatherForecast(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<WeatherForecastResponse>> rawFuture = this.rawClient.weatherForecast(request);
+    CompletableFuture<WeatherForecastResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1820,7 +3384,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<WeatherForecastResponse> weatherForecast(WeatherForecastRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.weatherForecast(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<WeatherForecastResponse>> rawFuture = this.rawClient.weatherForecast(request, requestOptions);
+    CompletableFuture<WeatherForecastResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1828,7 +3399,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<HistoricalWeatherResponse> historicalWeather(
       HistoricalWeatherRequest request) {
-    return this.rawClient.historicalWeather(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<HistoricalWeatherResponse>> rawFuture = this.rawClient.historicalWeather(request);
+    CompletableFuture<HistoricalWeatherResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1836,7 +3414,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<HistoricalWeatherResponse> historicalWeather(
       HistoricalWeatherRequest request, RequestOptions requestOptions) {
-    return this.rawClient.historicalWeather(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<HistoricalWeatherResponse>> rawFuture = this.rawClient.historicalWeather(request, requestOptions);
+    CompletableFuture<HistoricalWeatherResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1844,7 +3429,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<WeatherTimeSeriesResponse> weatherTimeSeries(
       WeatherTimeSeriesRequest request) {
-    return this.rawClient.weatherTimeSeries(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<WeatherTimeSeriesResponse>> rawFuture = this.rawClient.weatherTimeSeries(request);
+    CompletableFuture<WeatherTimeSeriesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1852,14 +3444,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<WeatherTimeSeriesResponse> weatherTimeSeries(
       WeatherTimeSeriesRequest request, RequestOptions requestOptions) {
-    return this.rawClient.weatherTimeSeries(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<WeatherTimeSeriesResponse>> rawFuture = this.rawClient.weatherTimeSeries(request, requestOptions);
+    CompletableFuture<WeatherTimeSeriesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Provides hourly forecasts of marine conditions including wave heights, wave directions, wave periods, swell info, sea surface temperatures, and ocean currents. Supports multiple geographical points and returns daily max wave statistics for up to 7 days. Ideal for maritime planning, navigation, and coastal activities.
    */
   public CompletableFuture<MarineWeatherResponse> marineWeather(MarineWeatherRequest request) {
-    return this.rawClient.marineWeather(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<MarineWeatherResponse>> rawFuture = this.rawClient.marineWeather(request);
+    CompletableFuture<MarineWeatherResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1867,14 +3473,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<MarineWeatherResponse> marineWeather(MarineWeatherRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.marineWeather(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<MarineWeatherResponse>> rawFuture = this.rawClient.marineWeather(request, requestOptions);
+    CompletableFuture<MarineWeatherResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Monitor and predict air quality conditions using European and US AQI standards. Track pollutant concentrations including PM10, PM2.5, carbon monoxide, nitrogen dioxide, sulfur dioxide, ozone, and dust particles. Get current readings plus hourly forecasts up to 5 days ahead, complete with UV index and aerosol measurements for comprehensive air quality assessment.
    */
   public CompletableFuture<AirQualityResponse> airQuality(AirQualityRequest request) {
-    return this.rawClient.airQuality(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<AirQualityResponse>> rawFuture = this.rawClient.airQuality(request);
+    CompletableFuture<AirQualityResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1882,14 +3502,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<AirQualityResponse> airQuality(AirQualityRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.airQuality(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<AirQualityResponse>> rawFuture = this.rawClient.airQuality(request, requestOptions);
+    CompletableFuture<AirQualityResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Provides flood forecast data for a given location, including river discharge metrics such as mean, median, maximum, minimum, and percentile values (p25, p75). Requires a startDate and endDate, with the date range limited to 16 days. Location can be specified using city name, latitude/longitude, or IP address.
    */
   public CompletableFuture<FloodForecastResponse> floodForecast(FloodForecastRequest request) {
-    return this.rawClient.floodForecast(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<FloodForecastResponse>> rawFuture = this.rawClient.floodForecast(request);
+    CompletableFuture<FloodForecastResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1897,14 +3531,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<FloodForecastResponse> floodForecast(FloodForecastRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.floodForecast(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<FloodForecastResponse>> rawFuture = this.rawClient.floodForecast(request, requestOptions);
+    CompletableFuture<FloodForecastResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Retrieve countries, optionally filtered by region or subregion.
    */
   public CompletableFuture<GetCountriesResponse> getCountries(GetCountriesRequest request) {
-    return this.rawClient.getCountries(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetCountriesResponse>> rawFuture = this.rawClient.getCountries(request);
+    CompletableFuture<GetCountriesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1912,42 +3560,98 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<GetCountriesResponse> getCountries(GetCountriesRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.getCountries(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetCountriesResponse>> rawFuture = this.rawClient.getCountries(request, requestOptions);
+    CompletableFuture<GetCountriesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   public CompletableFuture<GetCountryDetailsResponse> getCountryDetails(
       GetCountryDetailsRequest request) {
-    return this.rawClient.getCountryDetails(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetCountryDetailsResponse>> rawFuture = this.rawClient.getCountryDetails(request);
+    CompletableFuture<GetCountryDetailsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   public CompletableFuture<GetCountryDetailsResponse> getCountryDetails(
       GetCountryDetailsRequest request, RequestOptions requestOptions) {
-    return this.rawClient.getCountryDetails(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetCountryDetailsResponse>> rawFuture = this.rawClient.getCountryDetails(request, requestOptions);
+    CompletableFuture<GetCountryDetailsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   public CompletableFuture<GetRegionsResponse> getRegions(GetRegionsRequest request) {
-    return this.rawClient.getRegions(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetRegionsResponse>> rawFuture = this.rawClient.getRegions(request);
+    CompletableFuture<GetRegionsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   public CompletableFuture<GetRegionsResponse> getRegions(GetRegionsRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.getRegions(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetRegionsResponse>> rawFuture = this.rawClient.getRegions(request, requestOptions);
+    CompletableFuture<GetRegionsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   public CompletableFuture<GetSubregionsResponse> getSubregions(GetSubregionsRequest request) {
-    return this.rawClient.getSubregions(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetSubregionsResponse>> rawFuture = this.rawClient.getSubregions(request);
+    CompletableFuture<GetSubregionsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   public CompletableFuture<GetSubregionsResponse> getSubregions(GetSubregionsRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.getSubregions(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetSubregionsResponse>> rawFuture = this.rawClient.getSubregions(request, requestOptions);
+    CompletableFuture<GetSubregionsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Retrieve administrative units based on ISO 3166-1 alpha-2 country code.
    */
   public CompletableFuture<GetAdminLevelsResponse> getAdminLevels(GetAdminLevelsRequest request) {
-    return this.rawClient.getAdminLevels(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetAdminLevelsResponse>> rawFuture = this.rawClient.getAdminLevels(request);
+    CompletableFuture<GetAdminLevelsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1955,14 +3659,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<GetAdminLevelsResponse> getAdminLevels(GetAdminLevelsRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.getAdminLevels(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetAdminLevelsResponse>> rawFuture = this.rawClient.getAdminLevels(request, requestOptions);
+    CompletableFuture<GetAdminLevelsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Retrieve administrative divisions for a given country using ISO 3166-1 alpha-2 country codes. You can optionally filter by administrative levels.
    */
   public CompletableFuture<GetAdminUnitsResponse> getAdminUnits(GetAdminUnitsRequest request) {
-    return this.rawClient.getAdminUnits(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetAdminUnitsResponse>> rawFuture = this.rawClient.getAdminUnits(request);
+    CompletableFuture<GetAdminUnitsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1970,7 +3688,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<GetAdminUnitsResponse> getAdminUnits(GetAdminUnitsRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.getAdminUnits(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetAdminUnitsResponse>> rawFuture = this.rawClient.getAdminUnits(request, requestOptions);
+    CompletableFuture<GetAdminUnitsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1978,7 +3703,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<GetAdminUnitDetailsResponse> getAdminUnitDetails(
       GetAdminUnitDetailsRequest request) {
-    return this.rawClient.getAdminUnitDetails(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetAdminUnitDetailsResponse>> rawFuture = this.rawClient.getAdminUnitDetails(request);
+    CompletableFuture<GetAdminUnitDetailsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -1986,14 +3718,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<GetAdminUnitDetailsResponse> getAdminUnitDetails(
       GetAdminUnitDetailsRequest request, RequestOptions requestOptions) {
-    return this.rawClient.getAdminUnitDetails(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetAdminUnitDetailsResponse>> rawFuture = this.rawClient.getAdminUnitDetails(request, requestOptions);
+    CompletableFuture<GetAdminUnitDetailsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Retrieve a list of cities within a country, optionally filtered by an administrative unit code.
    */
   public CompletableFuture<GetCitiesResponse> getCities(GetCitiesRequest request) {
-    return this.rawClient.getCities(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetCitiesResponse>> rawFuture = this.rawClient.getCities(request);
+    CompletableFuture<GetCitiesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2001,30 +3747,58 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<GetCitiesResponse> getCities(GetCitiesRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.getCities(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetCitiesResponse>> rawFuture = this.rawClient.getCities(request, requestOptions);
+    CompletableFuture<GetCitiesResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Get list of all supported flags with their metadata
    */
-  public CompletableFuture<List<GetSupportedFlagsResponseItem>> getSupportedFlags(
+  public CompletableFuture<GetSupportedFlagsResponse> getSupportedFlags(
       GetSupportedFlagsRequest request) {
-    return this.rawClient.getSupportedFlags(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetSupportedFlagsResponse>> rawFuture = this.rawClient.getSupportedFlags(request);
+    CompletableFuture<GetSupportedFlagsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Get list of all supported flags with their metadata
    */
-  public CompletableFuture<List<GetSupportedFlagsResponseItem>> getSupportedFlags(
+  public CompletableFuture<GetSupportedFlagsResponse> getSupportedFlags(
       GetSupportedFlagsRequest request, RequestOptions requestOptions) {
-    return this.rawClient.getSupportedFlags(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GetSupportedFlagsResponse>> rawFuture = this.rawClient.getSupportedFlags(request, requestOptions);
+    CompletableFuture<GetSupportedFlagsResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Retrieve the flag for a specific country
    */
   public CompletableFuture<InputStream> getFlags(GetFlagsRequest request) {
-    return this.rawClient.getFlags(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<InputStream>> rawFuture = this.rawClient.getFlags(request);
+    CompletableFuture<InputStream> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2032,14 +3806,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<InputStream> getFlags(GetFlagsRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.getFlags(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<InputStream>> rawFuture = this.rawClient.getFlags(request, requestOptions);
+    CompletableFuture<InputStream> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Retrieve current time, date, and timezone-related information by specifying a timezone name, location address, location coordinates, IP address, or use the client IP address if no parameter is passed.
    */
   public CompletableFuture<TimezoneLookupResponse> timezoneLookup(TimezoneLookupRequest request) {
-    return this.rawClient.timezoneLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<TimezoneLookupResponse>> rawFuture = this.rawClient.timezoneLookup(request);
+    CompletableFuture<TimezoneLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2047,7 +3835,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<TimezoneLookupResponse> timezoneLookup(TimezoneLookupRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.timezoneLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<TimezoneLookupResponse>> rawFuture = this.rawClient.timezoneLookup(request, requestOptions);
+    CompletableFuture<TimezoneLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2055,7 +3850,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<TimezoneConvertResponse> timezoneConvert(
       TimezoneConvertRequest request) {
-    return this.rawClient.timezoneConvert(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<TimezoneConvertResponse>> rawFuture = this.rawClient.timezoneConvert(request);
+    CompletableFuture<TimezoneConvertResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2063,7 +3865,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<TimezoneConvertResponse> timezoneConvert(TimezoneConvertRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.timezoneConvert(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<TimezoneConvertResponse>> rawFuture = this.rawClient.timezoneConvert(request, requestOptions);
+    CompletableFuture<TimezoneConvertResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2071,7 +3880,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<UserAgentLookupResponse> userAgentLookup(
       UserAgentLookupRequest request) {
-    return this.rawClient.userAgentLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<UserAgentLookupResponse>> rawFuture = this.rawClient.userAgentLookup(request);
+    CompletableFuture<UserAgentLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2079,7 +3895,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<UserAgentLookupResponse> userAgentLookup(UserAgentLookupRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.userAgentLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<UserAgentLookupResponse>> rawFuture = this.rawClient.userAgentLookup(request, requestOptions);
+    CompletableFuture<UserAgentLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2087,7 +3910,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<List<BulkUserAgentLookupResponseItem>> bulkUserAgentLookup(
       BulkUserAgentLookupRequest request) {
-    return this.rawClient.bulkUserAgentLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<BulkUserAgentLookupResponseItem>>> rawFuture = this.rawClient.bulkUserAgentLookup(request);
+    CompletableFuture<List<BulkUserAgentLookupResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2095,7 +3925,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<List<BulkUserAgentLookupResponseItem>> bulkUserAgentLookup(
       BulkUserAgentLookupRequest request, RequestOptions requestOptions) {
-    return this.rawClient.bulkUserAgentLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<List<BulkUserAgentLookupResponseItem>>> rawFuture = this.rawClient.bulkUserAgentLookup(request, requestOptions);
+    CompletableFuture<List<BulkUserAgentLookupResponseItem>> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2113,8 +3950,16 @@ public class AsyncApifreaksApiClient {
    * </li>
    * </ul>
    */
-  public CompletableFuture<OcrPredictResponse> ocrPredict(OcrPredictRequest request) {
-    return this.rawClient.ocrPredict(request).thenApply(response -> response.body());
+  public CompletableFuture<OcrPredictResponse> ocrPredict(Optional<File> file,
+      OcrPredictRequest request) {
+    CompletableFuture<ApifreaksApiHttpResponse<OcrPredictResponse>> rawFuture = this.rawClient.ocrPredict(file, request);
+    CompletableFuture<OcrPredictResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2132,16 +3977,30 @@ public class AsyncApifreaksApiClient {
    * </li>
    * </ul>
    */
-  public CompletableFuture<OcrPredictResponse> ocrPredict(OcrPredictRequest request,
-      RequestOptions requestOptions) {
-    return this.rawClient.ocrPredict(request, requestOptions).thenApply(response -> response.body());
+  public CompletableFuture<OcrPredictResponse> ocrPredict(Optional<File> file,
+      OcrPredictRequest request, RequestOptions requestOptions) {
+    CompletableFuture<ApifreaksApiHttpResponse<OcrPredictResponse>> rawFuture = this.rawClient.ocrPredict(file, request, requestOptions);
+    CompletableFuture<OcrPredictResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Analyze text for grammar errors and return the exact words flagged as grammatically incorrect with zero-based word positions.
    */
   public CompletableFuture<GrammarDetectResponse> grammarDetect(GrammarDetectRequest request) {
-    return this.rawClient.grammarDetect(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GrammarDetectResponse>> rawFuture = this.rawClient.grammarDetect(request);
+    CompletableFuture<GrammarDetectResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2149,14 +4008,28 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<GrammarDetectResponse> grammarDetect(GrammarDetectRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.grammarDetect(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GrammarDetectResponse>> rawFuture = this.rawClient.grammarDetect(request, requestOptions);
+    CompletableFuture<GrammarDetectResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
    * Submit text with grammatical issues and receive a clean grammar-corrected result for proofreading and content workflows.
    */
   public CompletableFuture<GrammarCorrectResponse> grammarCorrect(GrammarCorrectRequest request) {
-    return this.rawClient.grammarCorrect(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GrammarCorrectResponse>> rawFuture = this.rawClient.grammarCorrect(request);
+    CompletableFuture<GrammarCorrectResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2164,7 +4037,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<GrammarCorrectResponse> grammarCorrect(GrammarCorrectRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.grammarCorrect(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<GrammarCorrectResponse>> rawFuture = this.rawClient.grammarCorrect(request, requestOptions);
+    CompletableFuture<GrammarCorrectResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2172,7 +4052,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<WeakWordsDetectResponse> weakWordsDetect(
       WeakWordsDetectRequest request) {
-    return this.rawClient.weakWordsDetect(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<WeakWordsDetectResponse>> rawFuture = this.rawClient.weakWordsDetect(request);
+    CompletableFuture<WeakWordsDetectResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2180,7 +4067,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<WeakWordsDetectResponse> weakWordsDetect(WeakWordsDetectRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.weakWordsDetect(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<WeakWordsDetectResponse>> rawFuture = this.rawClient.weakWordsDetect(request, requestOptions);
+    CompletableFuture<WeakWordsDetectResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2188,7 +4082,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<ReadabilityScoreResponse> readabilityScore(
       ReadabilityScoreRequest request) {
-    return this.rawClient.readabilityScore(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<ReadabilityScoreResponse>> rawFuture = this.rawClient.readabilityScore(request);
+    CompletableFuture<ReadabilityScoreResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2196,7 +4097,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<ReadabilityScoreResponse> readabilityScore(
       ReadabilityScoreRequest request, RequestOptions requestOptions) {
-    return this.rawClient.readabilityScore(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<ReadabilityScoreResponse>> rawFuture = this.rawClient.readabilityScore(request, requestOptions);
+    CompletableFuture<ReadabilityScoreResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2204,7 +4112,14 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<AstronomyLookupResponse> astronomyLookup(
       AstronomyLookupRequest request) {
-    return this.rawClient.astronomyLookup(request).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<AstronomyLookupResponse>> rawFuture = this.rawClient.astronomyLookup(request);
+    CompletableFuture<AstronomyLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
   }
 
   /**
@@ -2212,7 +4127,54 @@ public class AsyncApifreaksApiClient {
    */
   public CompletableFuture<AstronomyLookupResponse> astronomyLookup(AstronomyLookupRequest request,
       RequestOptions requestOptions) {
-    return this.rawClient.astronomyLookup(request, requestOptions).thenApply(response -> response.body());
+    CompletableFuture<ApifreaksApiHttpResponse<AstronomyLookupResponse>> rawFuture = this.rawClient.astronomyLookup(request, requestOptions);
+    CompletableFuture<AstronomyLookupResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
+  }
+
+  /**
+   * Returns subscription, subscription-surcharge, and one-off credit balances for the authenticated organization's account.
+   */
+  public CompletableFuture<GetCreditsUsageResponse> getCreditsUsage(
+      GetCreditsUsageRequest request) {
+    CompletableFuture<ApifreaksApiHttpResponse<GetCreditsUsageResponse>> rawFuture = this.rawClient.getCreditsUsage(request);
+    CompletableFuture<GetCreditsUsageResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
+  }
+
+  /**
+   * Returns subscription, subscription-surcharge, and one-off credit balances for the authenticated organization's account.
+   */
+  public CompletableFuture<GetCreditsUsageResponse> getCreditsUsage(GetCreditsUsageRequest request,
+      RequestOptions requestOptions) {
+    CompletableFuture<ApifreaksApiHttpResponse<GetCreditsUsageResponse>> rawFuture = this.rawClient.getCreditsUsage(request, requestOptions);
+    CompletableFuture<GetCreditsUsageResponse> future = rawFuture.thenApply(response -> response.body());
+    future.whenComplete((result_, throwable_) -> {
+      if (future.isCancelled()) {
+        rawFuture.cancel(true);
+      }
+    });
+    return future;
+  }
+
+  /**
+   * Releases resources owned by this client: any WebSocket clients still connected through
+   * it are disconnected first, then the SDK-owned HTTP client is shut down. See
+   * {@code ClientOptions.close()} for what is and is not released.
+   */
+  @Override
+  public void close() {
+    this.clientOptions.close();
   }
 
   public static AsyncApifreaksApiClientBuilder builder() {

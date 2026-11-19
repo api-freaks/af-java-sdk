@@ -184,7 +184,6 @@ public final class CommodityLatestRatesRequest {
 
     private Optional<List<String>> symbols = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -202,7 +201,6 @@ public final class CommodityLatestRatesRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -213,7 +211,6 @@ public final class CommodityLatestRatesRequest {
     }
 
     /**
-     * <p>Exchange rates update period. Possible values are: (1) <code>10m</code> - 10 minute update (2) <code>1m</code> - 1 minute update <strong>Required</strong></p>
      * <p>Exchange rates update period. Possible values are: (1) <code>10m</code> - 10 minute update (2) <code>1m</code> - 1 minute update <strong>Required</strong></p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -302,6 +299,14 @@ public final class CommodityLatestRatesRequest {
     @java.lang.Override
     public CommodityLatestRatesRequest build() {
       return new CommodityLatestRatesRequest(symbols, apiKey, format, updates, quote, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("symbols") || key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("updates") || key.equalsIgnoreCase("quote")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

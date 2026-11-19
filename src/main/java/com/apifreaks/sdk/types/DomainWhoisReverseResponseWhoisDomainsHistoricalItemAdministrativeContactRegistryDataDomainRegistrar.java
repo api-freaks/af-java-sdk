@@ -4,9 +4,12 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.Nullable;
+import com.apifreaks.sdk.core.NullableNonemptyFilter;
 import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -37,11 +40,18 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
 
   private final Optional<String> phoneNumber;
 
+  private final Optional<String> normalizedName;
+
+  private final Optional<String> rdapServer;
+
+  private final Optional<String> status;
+
   private final Map<String, Object> additionalProperties;
 
   private DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministrativeContactRegistryDataDomainRegistrar(
       Optional<String> ianaId, Optional<String> registrarName, Optional<String> whoisServer,
       Optional<String> websiteUrl, Optional<String> emailAddress, Optional<String> phoneNumber,
+      Optional<String> normalizedName, Optional<String> rdapServer, Optional<String> status,
       Map<String, Object> additionalProperties) {
     this.ianaId = ianaId;
     this.registrarName = registrarName;
@@ -49,6 +59,9 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
     this.websiteUrl = websiteUrl;
     this.emailAddress = emailAddress;
     this.phoneNumber = phoneNumber;
+    this.normalizedName = normalizedName;
+    this.rdapServer = rdapServer;
+    this.status = status;
     this.additionalProperties = additionalProperties;
   }
 
@@ -82,6 +95,66 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
     return phoneNumber;
   }
 
+  /**
+   * @return Normalized (lowercase, stripped) registrar name, when published.
+   */
+  @JsonIgnore
+  public Optional<String> getNormalizedName() {
+    if (normalizedName == null) {
+      return Optional.empty();
+    }
+    return normalizedName;
+  }
+
+  /**
+   * @return RDAP (Registration Data Access Protocol) server URL of the registrar, when published.
+   */
+  @JsonIgnore
+  public Optional<String> getRdapServer() {
+    if (rdapServer == null) {
+      return Optional.empty();
+    }
+    return rdapServer;
+  }
+
+  /**
+   * @return Accreditation status of the registrar (e.g., 'accredited'), when published.
+   */
+  @JsonIgnore
+  public Optional<String> getStatus() {
+    if (status == null) {
+      return Optional.empty();
+    }
+    return status;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("normalized_name")
+  private Optional<String> _getNormalizedName() {
+    return normalizedName;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("rdap_server")
+  private Optional<String> _getRdapServer() {
+    return rdapServer;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("status")
+  private Optional<String> _getStatus() {
+    return status;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -95,12 +168,12 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
 
   private boolean equalTo(
       DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministrativeContactRegistryDataDomainRegistrar other) {
-    return ianaId.equals(other.ianaId) && registrarName.equals(other.registrarName) && whoisServer.equals(other.whoisServer) && websiteUrl.equals(other.websiteUrl) && emailAddress.equals(other.emailAddress) && phoneNumber.equals(other.phoneNumber);
+    return ianaId.equals(other.ianaId) && registrarName.equals(other.registrarName) && whoisServer.equals(other.whoisServer) && websiteUrl.equals(other.websiteUrl) && emailAddress.equals(other.emailAddress) && phoneNumber.equals(other.phoneNumber) && normalizedName.equals(other.normalizedName) && rdapServer.equals(other.rdapServer) && status.equals(other.status);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.ianaId, this.registrarName, this.whoisServer, this.websiteUrl, this.emailAddress, this.phoneNumber);
+    return Objects.hash(this.ianaId, this.registrarName, this.whoisServer, this.websiteUrl, this.emailAddress, this.phoneNumber, this.normalizedName, this.rdapServer, this.status);
   }
 
   @java.lang.Override
@@ -128,7 +201,12 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
 
     private Optional<String> phoneNumber = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<String> normalizedName = Optional.empty();
+
+    private Optional<String> rdapServer = Optional.empty();
+
+    private Optional<String> status = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -142,6 +220,9 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
       websiteUrl(other.getWebsiteUrl());
       emailAddress(other.getEmailAddress());
       phoneNumber(other.getPhoneNumber());
+      normalizedName(other.getNormalizedName());
+      rdapServer(other.getRdapServer());
+      status(other.getStatus());
       return this;
     }
 
@@ -229,9 +310,107 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
       return this;
     }
 
+    /**
+     * <p>Normalized (lowercase, stripped) registrar name, when published.</p>
+     */
+    @JsonSetter(
+        value = "normalized_name",
+        nulls = Nulls.SKIP
+    )
+    public Builder normalizedName(Optional<String> normalizedName) {
+      this.normalizedName = normalizedName;
+      return this;
+    }
+
+    public Builder normalizedName(String normalizedName) {
+      this.normalizedName = Optional.ofNullable(normalizedName);
+      return this;
+    }
+
+    public Builder normalizedName(Nullable<String> normalizedName) {
+      if (normalizedName.isNull()) {
+        this.normalizedName = null;
+      }
+      else if (normalizedName.isEmpty()) {
+        this.normalizedName = Optional.empty();
+      }
+      else {
+        this.normalizedName = Optional.of(normalizedName.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>RDAP (Registration Data Access Protocol) server URL of the registrar, when published.</p>
+     */
+    @JsonSetter(
+        value = "rdap_server",
+        nulls = Nulls.SKIP
+    )
+    public Builder rdapServer(Optional<String> rdapServer) {
+      this.rdapServer = rdapServer;
+      return this;
+    }
+
+    public Builder rdapServer(String rdapServer) {
+      this.rdapServer = Optional.ofNullable(rdapServer);
+      return this;
+    }
+
+    public Builder rdapServer(Nullable<String> rdapServer) {
+      if (rdapServer.isNull()) {
+        this.rdapServer = null;
+      }
+      else if (rdapServer.isEmpty()) {
+        this.rdapServer = Optional.empty();
+      }
+      else {
+        this.rdapServer = Optional.of(rdapServer.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Accreditation status of the registrar (e.g., 'accredited'), when published.</p>
+     */
+    @JsonSetter(
+        value = "status",
+        nulls = Nulls.SKIP
+    )
+    public Builder status(Optional<String> status) {
+      this.status = status;
+      return this;
+    }
+
+    public Builder status(String status) {
+      this.status = Optional.ofNullable(status);
+      return this;
+    }
+
+    public Builder status(Nullable<String> status) {
+      if (status.isNull()) {
+        this.status = null;
+      }
+      else if (status.isEmpty()) {
+        this.status = Optional.empty();
+      }
+      else {
+        this.status = Optional.of(status.get());
+      }
+      return this;
+    }
+
     public DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministrativeContactRegistryDataDomainRegistrar build(
         ) {
-      return new DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministrativeContactRegistryDataDomainRegistrar(ianaId, registrarName, whoisServer, websiteUrl, emailAddress, phoneNumber, additionalProperties);
+      return new DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministrativeContactRegistryDataDomainRegistrar(ianaId, registrarName, whoisServer, websiteUrl, emailAddress, phoneNumber, normalizedName, rdapServer, status, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("iana_id") || key.equalsIgnoreCase("registrar_name") || key.equalsIgnoreCase("whois_server") || key.equalsIgnoreCase("website_url") || key.equalsIgnoreCase("email_address") || key.equalsIgnoreCase("phone_number") || key.equalsIgnoreCase("normalized_name") || key.equalsIgnoreCase("rdap_server") || key.equalsIgnoreCase("status")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

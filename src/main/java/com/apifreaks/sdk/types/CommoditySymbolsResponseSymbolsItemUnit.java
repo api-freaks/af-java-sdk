@@ -114,7 +114,6 @@ public final class CommoditySymbolsResponseSymbolsItemUnit {
 
     private String name;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -129,7 +128,6 @@ public final class CommoditySymbolsResponseSymbolsItemUnit {
 
     /**
      * <p>The abbreviated unit symbol (e.g., &quot;T.oz&quot;, &quot;MMBtu&quot;).</p>
-     * <p>The abbreviated unit symbol (e.g., &quot;T.oz&quot;, &quot;MMBtu&quot;).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -140,7 +138,6 @@ public final class CommoditySymbolsResponseSymbolsItemUnit {
     }
 
     /**
-     * <p>The full name of the unit of measurement.</p>
      * <p>The full name of the unit of measurement.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -154,6 +151,14 @@ public final class CommoditySymbolsResponseSymbolsItemUnit {
     @java.lang.Override
     public CommoditySymbolsResponseSymbolsItemUnit build() {
       return new CommoditySymbolsResponseSymbolsItemUnit(symbol, name, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("symbol") || key.equalsIgnoreCase("name")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

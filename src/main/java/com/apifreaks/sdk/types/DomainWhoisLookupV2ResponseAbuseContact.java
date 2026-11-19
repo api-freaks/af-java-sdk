@@ -105,7 +105,6 @@ public final class DomainWhoisLookupV2ResponseAbuseContact {
 
     private Optional<String> phoneNumber = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -171,6 +170,14 @@ public final class DomainWhoisLookupV2ResponseAbuseContact {
 
     public DomainWhoisLookupV2ResponseAbuseContact build() {
       return new DomainWhoisLookupV2ResponseAbuseContact(registrarName, emailAddress, phoneNumber, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("registrar_name") || key.equalsIgnoreCase("email_address") || key.equalsIgnoreCase("phone_number")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

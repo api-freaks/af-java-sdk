@@ -243,7 +243,6 @@ public final class DomainSslLookupResponseSslCertificatesItem {
 
     private Optional<String> pemRaw = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -363,6 +362,14 @@ public final class DomainSslLookupResponseSslCertificatesItem {
     @java.lang.Override
     public DomainSslLookupResponseSslCertificatesItem build() {
       return new DomainSslLookupResponseSslCertificatesItem(chainOrder, authenticationType, validityStartDate, validityEndDate, serialNumber, signatureAlgorithm, subject, issuer, publicKey, extensions, pemRaw, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("chainOrder") || key.equalsIgnoreCase("authenticationType") || key.equalsIgnoreCase("validityStartDate") || key.equalsIgnoreCase("validityEndDate") || key.equalsIgnoreCase("serialNumber") || key.equalsIgnoreCase("signatureAlgorithm") || key.equalsIgnoreCase("subject") || key.equalsIgnoreCase("issuer") || key.equalsIgnoreCase("publicKey") || key.equalsIgnoreCase("extensions") || key.equalsIgnoreCase("pemRaw")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

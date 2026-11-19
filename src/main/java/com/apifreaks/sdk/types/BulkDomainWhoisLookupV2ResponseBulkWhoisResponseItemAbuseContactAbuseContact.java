@@ -106,7 +106,6 @@ public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseCont
 
     private Optional<String> phoneNumber = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -173,6 +172,14 @@ public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseCont
 
     public BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseContactAbuseContact build() {
       return new BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseContactAbuseContact(registrarName, emailAddress, phoneNumber, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("registrar_name") || key.equalsIgnoreCase("email_address") || key.equalsIgnoreCase("phone_number")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

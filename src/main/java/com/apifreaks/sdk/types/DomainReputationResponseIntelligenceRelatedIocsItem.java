@@ -134,7 +134,6 @@ public final class DomainReputationResponseIntelligenceRelatedIocsItem {
 
     private float confidence;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -150,7 +149,6 @@ public final class DomainReputationResponseIntelligenceRelatedIocsItem {
 
     /**
      * <p>Type of the related IOC (e.g. ipv4, ipv6).</p>
-     * <p>Type of the related IOC (e.g. ipv4, ipv6).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -162,7 +160,6 @@ public final class DomainReputationResponseIntelligenceRelatedIocsItem {
 
     /**
      * <p>Value of the related IOC.</p>
-     * <p>Value of the related IOC.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -173,7 +170,6 @@ public final class DomainReputationResponseIntelligenceRelatedIocsItem {
     }
 
     /**
-     * <p>Confidence score for the related IOC (0-1).</p>
      * <p>Confidence score for the related IOC (0-1).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -187,6 +183,14 @@ public final class DomainReputationResponseIntelligenceRelatedIocsItem {
     @java.lang.Override
     public DomainReputationResponseIntelligenceRelatedIocsItem build() {
       return new DomainReputationResponseIntelligenceRelatedIocsItem(type, value, confidence, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("type") || key.equalsIgnoreCase("value") || key.equalsIgnoreCase("confidence")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

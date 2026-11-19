@@ -202,7 +202,6 @@ public final class CurrencyFluctuationRequest {
 
     private Optional<List<String>> symbols = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -221,7 +220,6 @@ public final class CurrencyFluctuationRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -232,7 +230,6 @@ public final class CurrencyFluctuationRequest {
     }
 
     /**
-     * <p>Start date (format YYYY-MM-DD) of the preferred time frame</p>
      * <p>Start date (format YYYY-MM-DD) of the preferred time frame</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -344,6 +341,14 @@ public final class CurrencyFluctuationRequest {
     @java.lang.Override
     public CurrencyFluctuationRequest build() {
       return new CurrencyFluctuationRequest(symbols, apiKey, format, startDate, endDate, base, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("symbols") || key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("startDate") || key.equalsIgnoreCase("endDate") || key.equalsIgnoreCase("base")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

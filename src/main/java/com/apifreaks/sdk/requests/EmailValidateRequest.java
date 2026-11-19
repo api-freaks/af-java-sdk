@@ -179,7 +179,6 @@ public final class EmailValidateRequest {
 
     private Optional<EmailValidateRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -197,7 +196,6 @@ public final class EmailValidateRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -208,7 +206,6 @@ public final class EmailValidateRequest {
     }
 
     /**
-     * <p>Email address to validate</p>
      * <p>Email address to validate</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -291,6 +288,14 @@ public final class EmailValidateRequest {
     @java.lang.Override
     public EmailValidateRequest build() {
       return new EmailValidateRequest(apiKey, format, email, name, ip, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("email") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("ip")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

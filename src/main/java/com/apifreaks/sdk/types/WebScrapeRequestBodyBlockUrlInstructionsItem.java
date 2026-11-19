@@ -5,84 +5,281 @@
 package com.apifreaks.sdk.types;
 
 import com.apifreaks.sdk.core.ObjectMappers;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import java.io.IOException;
-import java.lang.IllegalStateException;
+import java.lang.Boolean;
+import java.lang.Integer;
 import java.lang.Object;
-import java.lang.RuntimeException;
 import java.lang.String;
-import java.lang.SuppressWarnings;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
-    using = WebScrapeRequestBodyBlockUrlInstructionsItem.Deserializer.class
+    builder = WebScrapeRequestBodyBlockUrlInstructionsItem.Builder.class
 )
 public final class WebScrapeRequestBodyBlockUrlInstructionsItem {
-  private final Object value;
+  private final Optional<WebScrapeRequestBodyBlockUrlInstructionsItemFill> fill;
 
-  private final int type;
+  private final Optional<String> click;
 
-  private WebScrapeRequestBodyBlockUrlInstructionsItem(Object value, int type) {
-    this.value = value;
-    this.type = type;
+  private final Optional<String> clickIfExist;
+
+  private final Optional<String> enter;
+
+  private final Optional<Boolean> newTab;
+
+  private final Optional<Integer> moveToRelativeTab;
+
+  private final Optional<Integer> wait;
+
+  private final Optional<String> waitFor;
+
+  private final Optional<WebScrapeRequestBodyBlockUrlInstructionsItemSelect> select;
+
+  private final Optional<String> jsExe;
+
+  private final Optional<List<Map<String, Object>>> conditionalCheck;
+
+  private final Optional<WebScrapeRequestBodyBlockUrlInstructionsItemClickButtonByValue> clickButtonByValue;
+
+  private final Optional<List<WebScrapeRequestBodyBlockUrlInstructionsItemGeneralImageCaptchaItem>> generalImageCaptcha;
+
+  private final Optional<List<String>> blockElement;
+
+  private final Optional<Map<String, String>> extract;
+
+  private final Optional<List<WebScrapeRequestBodyBlockUrlInstructionsItemFillImageCaptchaItem>> fillImageCaptcha;
+
+  private final Optional<String> switchToIframe;
+
+  private final Optional<Boolean> switchToParentFrame;
+
+  private final Optional<WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha> resolveAudioCaptcha;
+
+  private final Optional<String> screenshot;
+
+  private final Optional<String> saveimage;
+
+  private final Map<String, Object> additionalProperties;
+
+  private WebScrapeRequestBodyBlockUrlInstructionsItem(
+      Optional<WebScrapeRequestBodyBlockUrlInstructionsItemFill> fill, Optional<String> click,
+      Optional<String> clickIfExist, Optional<String> enter, Optional<Boolean> newTab,
+      Optional<Integer> moveToRelativeTab, Optional<Integer> wait, Optional<String> waitFor,
+      Optional<WebScrapeRequestBodyBlockUrlInstructionsItemSelect> select, Optional<String> jsExe,
+      Optional<List<Map<String, Object>>> conditionalCheck,
+      Optional<WebScrapeRequestBodyBlockUrlInstructionsItemClickButtonByValue> clickButtonByValue,
+      Optional<List<WebScrapeRequestBodyBlockUrlInstructionsItemGeneralImageCaptchaItem>> generalImageCaptcha,
+      Optional<List<String>> blockElement, Optional<Map<String, String>> extract,
+      Optional<List<WebScrapeRequestBodyBlockUrlInstructionsItemFillImageCaptchaItem>> fillImageCaptcha,
+      Optional<String> switchToIframe, Optional<Boolean> switchToParentFrame,
+      Optional<WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha> resolveAudioCaptcha,
+      Optional<String> screenshot, Optional<String> saveimage,
+      Map<String, Object> additionalProperties) {
+    this.fill = fill;
+    this.click = click;
+    this.clickIfExist = clickIfExist;
+    this.enter = enter;
+    this.newTab = newTab;
+    this.moveToRelativeTab = moveToRelativeTab;
+    this.wait = wait;
+    this.waitFor = waitFor;
+    this.select = select;
+    this.jsExe = jsExe;
+    this.conditionalCheck = conditionalCheck;
+    this.clickButtonByValue = clickButtonByValue;
+    this.generalImageCaptcha = generalImageCaptcha;
+    this.blockElement = blockElement;
+    this.extract = extract;
+    this.fillImageCaptcha = fillImageCaptcha;
+    this.switchToIframe = switchToIframe;
+    this.switchToParentFrame = switchToParentFrame;
+    this.resolveAudioCaptcha = resolveAudioCaptcha;
+    this.screenshot = screenshot;
+    this.saveimage = saveimage;
+    this.additionalProperties = additionalProperties;
   }
 
-  @JsonValue
-  public Object get() {
-    return this.value;
+  /**
+   * @return A selector/value pair used by fill, select, and clickButtonByValue instructions.
+   */
+  @JsonProperty("fill")
+  public Optional<WebScrapeRequestBodyBlockUrlInstructionsItemFill> getFill() {
+    return fill;
   }
 
-  @SuppressWarnings("unchecked")
-  public <T> T visit(Visitor<T> visitor) {
-    if(this.type == 0) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemFill) this.value);
-    } else if(this.type == 1) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemClick) this.value);
-    } else if(this.type == 2) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemClickIfExist) this.value);
-    } else if(this.type == 3) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemEnter) this.value);
-    } else if(this.type == 4) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemNewTab) this.value);
-    } else if(this.type == 5) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemMoveToRelativeTab) this.value);
-    } else if(this.type == 6) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemWait) this.value);
-    } else if(this.type == 7) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemWaitFor) this.value);
-    } else if(this.type == 8) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemSelect) this.value);
-    } else if(this.type == 9) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemJsExe) this.value);
-    } else if(this.type == 10) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemConditionalCheck) this.value);
-    } else if(this.type == 11) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemClickButtonByValue) this.value);
-    } else if(this.type == 12) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemGeneralImageCaptcha) this.value);
-    } else if(this.type == 13) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemBlockElement) this.value);
-    } else if(this.type == 14) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemExtract) this.value);
-    } else if(this.type == 15) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemFillImageCaptcha) this.value);
-    } else if(this.type == 16) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemSwitchToIframe) this.value);
-    } else if(this.type == 17) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemSwitchToParentFrame) this.value);
-    } else if(this.type == 18) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha) this.value);
-    } else if(this.type == 19) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemScreenshot) this.value);
-    } else if(this.type == 20) {
-      return visitor.visit((WebScrapeRequestBodyBlockUrlInstructionsItemSaveimage) this.value);
-    }
-    throw new IllegalStateException("Failed to visit value. This should never happen.");
+  /**
+   * @return Click action: CSS selector or XPath identifying the element to click.
+   */
+  @JsonProperty("click")
+  public Optional<String> getClick() {
+    return click;
+  }
+
+  /**
+   * @return Click if exists action: CSS selector or XPath identifying the element to click, only if it appears on the page within a short timeout.
+   */
+  @JsonProperty("clickIfExist")
+  public Optional<String> getClickIfExist() {
+    return clickIfExist;
+  }
+
+  /**
+   * @return Enter key action: CSS selector or XPath identifying the element to send an Enter keystroke to.
+   */
+  @JsonProperty("enter")
+  public Optional<String> getEnter() {
+    return enter;
+  }
+
+  /**
+   * @return New tab action: set to true to switch focus to a newly opened browser tab.
+   */
+  @JsonProperty("newTab")
+  public Optional<Boolean> getNewTab() {
+    return newTab;
+  }
+
+  /**
+   * @return Move to relative tab action: relative tab index to move to (e.g. 1 for the next tab, -1 for the previous tab).
+   */
+  @JsonProperty("moveToRelativeTab")
+  public Optional<Integer> getMoveToRelativeTab() {
+    return moveToRelativeTab;
+  }
+
+  /**
+   * @return Wait action: pauses execution for this many milliseconds.
+   */
+  @JsonProperty("wait")
+  public Optional<Integer> getWait() {
+    return wait;
+  }
+
+  /**
+   * @return Wait for element action: CSS selector or XPath identifying the element to wait for before continuing.
+   */
+  @JsonProperty("waitFor")
+  public Optional<String> getWaitFor() {
+    return waitFor;
+  }
+
+  /**
+   * @return A selector/value pair used by fill, select, and clickButtonByValue instructions.
+   */
+  @JsonProperty("select")
+  public Optional<WebScrapeRequestBodyBlockUrlInstructionsItemSelect> getSelect() {
+    return select;
+  }
+
+  /**
+   * @return Execute JavaScript action: JavaScript code to execute inside the page context.
+   */
+  @JsonProperty("jsExe")
+  public Optional<String> getJsExe() {
+    return jsExe;
+  }
+
+  /**
+   * @return Conditional check action: list of conditional steps, each supporting if-&lt;method&gt; and else-&lt;method&gt; keys with conditions, executed based on element state.
+   */
+  @JsonProperty("conditionalCheck")
+  public Optional<List<Map<String, Object>>> getConditionalCheck() {
+    return conditionalCheck;
+  }
+
+  /**
+   * @return A selector/value pair used by fill, select, and clickButtonByValue instructions.
+   */
+  @JsonProperty("clickButtonByValue")
+  public Optional<WebScrapeRequestBodyBlockUrlInstructionsItemClickButtonByValue> getClickButtonByValue(
+      ) {
+    return clickButtonByValue;
+  }
+
+  /**
+   * @return Image captcha solver action: instructions for solving image-based captchas using a selected model.
+   */
+  @JsonProperty("generalImageCaptcha")
+  public Optional<List<WebScrapeRequestBodyBlockUrlInstructionsItemGeneralImageCaptchaItem>> getGeneralImageCaptcha(
+      ) {
+    return generalImageCaptcha;
+  }
+
+  /**
+   * @return Block element action: list of CSS selectors or XPaths for elements to block or hide on the page.
+   */
+  @JsonProperty("blockElement")
+  public Optional<List<String>> getBlockElement() {
+    return blockElement;
+  }
+
+  /**
+   * @return Maps arbitrary output field names to CSS or XPath selectors. Each key becomes a field in the response's extractedData object.
+   */
+  @JsonProperty("extract")
+  public Optional<Map<String, String>> getExtract() {
+    return extract;
+  }
+
+  /**
+   * @return Fill image captcha action: captures and fills image-based captcha values automatically.
+   */
+  @JsonProperty("fillImageCaptcha")
+  public Optional<List<WebScrapeRequestBodyBlockUrlInstructionsItemFillImageCaptchaItem>> getFillImageCaptcha(
+      ) {
+    return fillImageCaptcha;
+  }
+
+  /**
+   * @return Switch to iframe action: switches the browser context into an iframe identified by name or ID.
+   */
+  @JsonProperty("switchToIframe")
+  public Optional<String> getSwitchToIframe() {
+    return switchToIframe;
+  }
+
+  /**
+   * @return Switch to parent frame action: returns the browser context from an iframe back to its parent frame.
+   */
+  @JsonProperty("switchToParentFrame")
+  public Optional<Boolean> getSwitchToParentFrame() {
+    return switchToParentFrame;
+  }
+
+  /**
+   * @return Selectors for locating and solving a single audio CAPTCHA challenge.
+   */
+  @JsonProperty("resolveAudioCaptcha")
+  public Optional<WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha> getResolveAudioCaptcha(
+      ) {
+    return resolveAudioCaptcha;
+  }
+
+  /**
+   * @return Screenshot action: captures a screenshot of the current page state. Can be a boolean-like value or a selector.
+   */
+  @JsonProperty("screenshot")
+  public Optional<String> getScreenshot() {
+    return screenshot;
+  }
+
+  /**
+   * @return Save image action: saves an image from the page by CSS selector or element ID.
+   */
+  @JsonProperty("saveimage")
+  public Optional<String> getSaveimage() {
+    return saveimage;
   }
 
   @java.lang.Override
@@ -91,263 +288,490 @@ public final class WebScrapeRequestBodyBlockUrlInstructionsItem {
     return other instanceof WebScrapeRequestBodyBlockUrlInstructionsItem && equalTo((WebScrapeRequestBodyBlockUrlInstructionsItem) other);
   }
 
+  @JsonAnyGetter
+  public Map<String, Object> getAdditionalProperties() {
+    return this.additionalProperties;
+  }
+
   private boolean equalTo(WebScrapeRequestBodyBlockUrlInstructionsItem other) {
-    return value.equals(other.value);
+    return fill.equals(other.fill) && click.equals(other.click) && clickIfExist.equals(other.clickIfExist) && enter.equals(other.enter) && newTab.equals(other.newTab) && moveToRelativeTab.equals(other.moveToRelativeTab) && wait.equals(other.wait) && waitFor.equals(other.waitFor) && select.equals(other.select) && jsExe.equals(other.jsExe) && conditionalCheck.equals(other.conditionalCheck) && clickButtonByValue.equals(other.clickButtonByValue) && generalImageCaptcha.equals(other.generalImageCaptcha) && blockElement.equals(other.blockElement) && extract.equals(other.extract) && fillImageCaptcha.equals(other.fillImageCaptcha) && switchToIframe.equals(other.switchToIframe) && switchToParentFrame.equals(other.switchToParentFrame) && resolveAudioCaptcha.equals(other.resolveAudioCaptcha) && screenshot.equals(other.screenshot) && saveimage.equals(other.saveimage);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.value);
+    return Objects.hash(this.fill, this.click, this.clickIfExist, this.enter, this.newTab, this.moveToRelativeTab, this.wait, this.waitFor, this.select, this.jsExe, this.conditionalCheck, this.clickButtonByValue, this.generalImageCaptcha, this.blockElement, this.extract, this.fillImageCaptcha, this.switchToIframe, this.switchToParentFrame, this.resolveAudioCaptcha, this.screenshot, this.saveimage);
   }
 
   @java.lang.Override
   public String toString() {
-    return this.value.toString();
+    return ObjectMappers.stringify(this);
   }
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemFill value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 0);
+  public static Builder builder() {
+    return new Builder();
   }
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemClick value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 1);
-  }
+  @JsonIgnoreProperties(
+      ignoreUnknown = true
+  )
+  public static final class Builder {
+    private Optional<WebScrapeRequestBodyBlockUrlInstructionsItemFill> fill = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemClickIfExist value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 2);
-  }
+    private Optional<String> click = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemEnter value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 3);
-  }
+    private Optional<String> clickIfExist = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemNewTab value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 4);
-  }
+    private Optional<String> enter = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemMoveToRelativeTab value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 5);
-  }
+    private Optional<Boolean> newTab = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemWait value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 6);
-  }
+    private Optional<Integer> moveToRelativeTab = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemWaitFor value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 7);
-  }
+    private Optional<Integer> wait = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemSelect value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 8);
-  }
+    private Optional<String> waitFor = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemJsExe value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 9);
-  }
+    private Optional<WebScrapeRequestBodyBlockUrlInstructionsItemSelect> select = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemConditionalCheck value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 10);
-  }
+    private Optional<String> jsExe = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemClickButtonByValue value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 11);
-  }
+    private Optional<List<Map<String, Object>>> conditionalCheck = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemGeneralImageCaptcha value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 12);
-  }
+    private Optional<WebScrapeRequestBodyBlockUrlInstructionsItemClickButtonByValue> clickButtonByValue = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemBlockElement value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 13);
-  }
+    private Optional<List<WebScrapeRequestBodyBlockUrlInstructionsItemGeneralImageCaptchaItem>> generalImageCaptcha = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemExtract value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 14);
-  }
+    private Optional<List<String>> blockElement = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemFillImageCaptcha value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 15);
-  }
+    private Optional<Map<String, String>> extract = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemSwitchToIframe value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 16);
-  }
+    private Optional<List<WebScrapeRequestBodyBlockUrlInstructionsItemFillImageCaptchaItem>> fillImageCaptcha = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemSwitchToParentFrame value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 17);
-  }
+    private Optional<String> switchToIframe = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 18);
-  }
+    private Optional<Boolean> switchToParentFrame = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemScreenshot value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 19);
-  }
+    private Optional<WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha> resolveAudioCaptcha = Optional.empty();
 
-  public static WebScrapeRequestBodyBlockUrlInstructionsItem of(
-      WebScrapeRequestBodyBlockUrlInstructionsItemSaveimage value) {
-    return new WebScrapeRequestBodyBlockUrlInstructionsItem(value, 20);
-  }
+    private Optional<String> screenshot = Optional.empty();
 
-  public interface Visitor<T> {
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemFill value);
+    private Optional<String> saveimage = Optional.empty();
 
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemClick value);
+    private Map<String, Object> additionalProperties = new HashMap<>();
 
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemClickIfExist value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemEnter value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemNewTab value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemMoveToRelativeTab value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemWait value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemWaitFor value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemSelect value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemJsExe value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemConditionalCheck value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemClickButtonByValue value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemGeneralImageCaptcha value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemBlockElement value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemExtract value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemFillImageCaptcha value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemSwitchToIframe value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemSwitchToParentFrame value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemScreenshot value);
-
-    T visit(WebScrapeRequestBodyBlockUrlInstructionsItemSaveimage value);
-  }
-
-  static final class Deserializer extends StdDeserializer<WebScrapeRequestBodyBlockUrlInstructionsItem> {
-    Deserializer() {
-      super(WebScrapeRequestBodyBlockUrlInstructionsItem.class);
+    private Builder() {
     }
 
-    @java.lang.Override
-    public WebScrapeRequestBodyBlockUrlInstructionsItem deserialize(JsonParser p,
-        DeserializationContext context) throws IOException {
-      Object value = p.readValueAs(Object.class);
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemFill.class));
-      } catch(RuntimeException e) {
+    public Builder from(WebScrapeRequestBodyBlockUrlInstructionsItem other) {
+      fill(other.getFill());
+      click(other.getClick());
+      clickIfExist(other.getClickIfExist());
+      enter(other.getEnter());
+      newTab(other.getNewTab());
+      moveToRelativeTab(other.getMoveToRelativeTab());
+      wait(other.getWait());
+      waitFor(other.getWaitFor());
+      select(other.getSelect());
+      jsExe(other.getJsExe());
+      conditionalCheck(other.getConditionalCheck());
+      clickButtonByValue(other.getClickButtonByValue());
+      generalImageCaptcha(other.getGeneralImageCaptcha());
+      blockElement(other.getBlockElement());
+      extract(other.getExtract());
+      fillImageCaptcha(other.getFillImageCaptcha());
+      switchToIframe(other.getSwitchToIframe());
+      switchToParentFrame(other.getSwitchToParentFrame());
+      resolveAudioCaptcha(other.getResolveAudioCaptcha());
+      screenshot(other.getScreenshot());
+      saveimage(other.getSaveimage());
+      return this;
+    }
+
+    /**
+     * <p>A selector/value pair used by fill, select, and clickButtonByValue instructions.</p>
+     */
+    @JsonSetter(
+        value = "fill",
+        nulls = Nulls.SKIP
+    )
+    public Builder fill(Optional<WebScrapeRequestBodyBlockUrlInstructionsItemFill> fill) {
+      this.fill = fill;
+      return this;
+    }
+
+    public Builder fill(WebScrapeRequestBodyBlockUrlInstructionsItemFill fill) {
+      this.fill = Optional.ofNullable(fill);
+      return this;
+    }
+
+    /**
+     * <p>Click action: CSS selector or XPath identifying the element to click.</p>
+     */
+    @JsonSetter(
+        value = "click",
+        nulls = Nulls.SKIP
+    )
+    public Builder click(Optional<String> click) {
+      this.click = click;
+      return this;
+    }
+
+    public Builder click(String click) {
+      this.click = Optional.ofNullable(click);
+      return this;
+    }
+
+    /**
+     * <p>Click if exists action: CSS selector or XPath identifying the element to click, only if it appears on the page within a short timeout.</p>
+     */
+    @JsonSetter(
+        value = "clickIfExist",
+        nulls = Nulls.SKIP
+    )
+    public Builder clickIfExist(Optional<String> clickIfExist) {
+      this.clickIfExist = clickIfExist;
+      return this;
+    }
+
+    public Builder clickIfExist(String clickIfExist) {
+      this.clickIfExist = Optional.ofNullable(clickIfExist);
+      return this;
+    }
+
+    /**
+     * <p>Enter key action: CSS selector or XPath identifying the element to send an Enter keystroke to.</p>
+     */
+    @JsonSetter(
+        value = "enter",
+        nulls = Nulls.SKIP
+    )
+    public Builder enter(Optional<String> enter) {
+      this.enter = enter;
+      return this;
+    }
+
+    public Builder enter(String enter) {
+      this.enter = Optional.ofNullable(enter);
+      return this;
+    }
+
+    /**
+     * <p>New tab action: set to true to switch focus to a newly opened browser tab.</p>
+     */
+    @JsonSetter(
+        value = "newTab",
+        nulls = Nulls.SKIP
+    )
+    public Builder newTab(Optional<Boolean> newTab) {
+      this.newTab = newTab;
+      return this;
+    }
+
+    public Builder newTab(Boolean newTab) {
+      this.newTab = Optional.ofNullable(newTab);
+      return this;
+    }
+
+    /**
+     * <p>Move to relative tab action: relative tab index to move to (e.g. 1 for the next tab, -1 for the previous tab).</p>
+     */
+    @JsonSetter(
+        value = "moveToRelativeTab",
+        nulls = Nulls.SKIP
+    )
+    public Builder moveToRelativeTab(Optional<Integer> moveToRelativeTab) {
+      this.moveToRelativeTab = moveToRelativeTab;
+      return this;
+    }
+
+    public Builder moveToRelativeTab(Integer moveToRelativeTab) {
+      this.moveToRelativeTab = Optional.ofNullable(moveToRelativeTab);
+      return this;
+    }
+
+    /**
+     * <p>Wait action: pauses execution for this many milliseconds.</p>
+     */
+    @JsonSetter(
+        value = "wait",
+        nulls = Nulls.SKIP
+    )
+    public Builder wait(Optional<Integer> wait) {
+      this.wait = wait;
+      return this;
+    }
+
+    public Builder wait(Integer wait) {
+      this.wait = Optional.ofNullable(wait);
+      return this;
+    }
+
+    /**
+     * <p>Wait for element action: CSS selector or XPath identifying the element to wait for before continuing.</p>
+     */
+    @JsonSetter(
+        value = "waitFor",
+        nulls = Nulls.SKIP
+    )
+    public Builder waitFor(Optional<String> waitFor) {
+      this.waitFor = waitFor;
+      return this;
+    }
+
+    public Builder waitFor(String waitFor) {
+      this.waitFor = Optional.ofNullable(waitFor);
+      return this;
+    }
+
+    /**
+     * <p>A selector/value pair used by fill, select, and clickButtonByValue instructions.</p>
+     */
+    @JsonSetter(
+        value = "select",
+        nulls = Nulls.SKIP
+    )
+    public Builder select(Optional<WebScrapeRequestBodyBlockUrlInstructionsItemSelect> select) {
+      this.select = select;
+      return this;
+    }
+
+    public Builder select(WebScrapeRequestBodyBlockUrlInstructionsItemSelect select) {
+      this.select = Optional.ofNullable(select);
+      return this;
+    }
+
+    /**
+     * <p>Execute JavaScript action: JavaScript code to execute inside the page context.</p>
+     */
+    @JsonSetter(
+        value = "jsExe",
+        nulls = Nulls.SKIP
+    )
+    public Builder jsExe(Optional<String> jsExe) {
+      this.jsExe = jsExe;
+      return this;
+    }
+
+    public Builder jsExe(String jsExe) {
+      this.jsExe = Optional.ofNullable(jsExe);
+      return this;
+    }
+
+    /**
+     * <p>Conditional check action: list of conditional steps, each supporting if-&lt;method&gt; and else-&lt;method&gt; keys with conditions, executed based on element state.</p>
+     */
+    @JsonSetter(
+        value = "conditionalCheck",
+        nulls = Nulls.SKIP
+    )
+    public Builder conditionalCheck(Optional<List<Map<String, Object>>> conditionalCheck) {
+      this.conditionalCheck = conditionalCheck;
+      return this;
+    }
+
+    public Builder conditionalCheck(List<Map<String, Object>> conditionalCheck) {
+      this.conditionalCheck = Optional.ofNullable(conditionalCheck);
+      return this;
+    }
+
+    /**
+     * <p>A selector/value pair used by fill, select, and clickButtonByValue instructions.</p>
+     */
+    @JsonSetter(
+        value = "clickButtonByValue",
+        nulls = Nulls.SKIP
+    )
+    public Builder clickButtonByValue(
+        Optional<WebScrapeRequestBodyBlockUrlInstructionsItemClickButtonByValue> clickButtonByValue) {
+      this.clickButtonByValue = clickButtonByValue;
+      return this;
+    }
+
+    public Builder clickButtonByValue(
+        WebScrapeRequestBodyBlockUrlInstructionsItemClickButtonByValue clickButtonByValue) {
+      this.clickButtonByValue = Optional.ofNullable(clickButtonByValue);
+      return this;
+    }
+
+    /**
+     * <p>Image captcha solver action: instructions for solving image-based captchas using a selected model.</p>
+     */
+    @JsonSetter(
+        value = "generalImageCaptcha",
+        nulls = Nulls.SKIP
+    )
+    public Builder generalImageCaptcha(
+        Optional<List<WebScrapeRequestBodyBlockUrlInstructionsItemGeneralImageCaptchaItem>> generalImageCaptcha) {
+      this.generalImageCaptcha = generalImageCaptcha;
+      return this;
+    }
+
+    public Builder generalImageCaptcha(
+        List<WebScrapeRequestBodyBlockUrlInstructionsItemGeneralImageCaptchaItem> generalImageCaptcha) {
+      this.generalImageCaptcha = Optional.ofNullable(generalImageCaptcha);
+      return this;
+    }
+
+    /**
+     * <p>Block element action: list of CSS selectors or XPaths for elements to block or hide on the page.</p>
+     */
+    @JsonSetter(
+        value = "blockElement",
+        nulls = Nulls.SKIP
+    )
+    public Builder blockElement(Optional<List<String>> blockElement) {
+      this.blockElement = blockElement;
+      return this;
+    }
+
+    public Builder blockElement(List<String> blockElement) {
+      this.blockElement = Optional.ofNullable(blockElement);
+      return this;
+    }
+
+    /**
+     * <p>Maps arbitrary output field names to CSS or XPath selectors. Each key becomes a field in the response's extractedData object.</p>
+     */
+    @JsonSetter(
+        value = "extract",
+        nulls = Nulls.SKIP
+    )
+    public Builder extract(Optional<Map<String, String>> extract) {
+      this.extract = extract;
+      return this;
+    }
+
+    public Builder extract(Map<String, String> extract) {
+      this.extract = Optional.ofNullable(extract);
+      return this;
+    }
+
+    /**
+     * <p>Fill image captcha action: captures and fills image-based captcha values automatically.</p>
+     */
+    @JsonSetter(
+        value = "fillImageCaptcha",
+        nulls = Nulls.SKIP
+    )
+    public Builder fillImageCaptcha(
+        Optional<List<WebScrapeRequestBodyBlockUrlInstructionsItemFillImageCaptchaItem>> fillImageCaptcha) {
+      this.fillImageCaptcha = fillImageCaptcha;
+      return this;
+    }
+
+    public Builder fillImageCaptcha(
+        List<WebScrapeRequestBodyBlockUrlInstructionsItemFillImageCaptchaItem> fillImageCaptcha) {
+      this.fillImageCaptcha = Optional.ofNullable(fillImageCaptcha);
+      return this;
+    }
+
+    /**
+     * <p>Switch to iframe action: switches the browser context into an iframe identified by name or ID.</p>
+     */
+    @JsonSetter(
+        value = "switchToIframe",
+        nulls = Nulls.SKIP
+    )
+    public Builder switchToIframe(Optional<String> switchToIframe) {
+      this.switchToIframe = switchToIframe;
+      return this;
+    }
+
+    public Builder switchToIframe(String switchToIframe) {
+      this.switchToIframe = Optional.ofNullable(switchToIframe);
+      return this;
+    }
+
+    /**
+     * <p>Switch to parent frame action: returns the browser context from an iframe back to its parent frame.</p>
+     */
+    @JsonSetter(
+        value = "switchToParentFrame",
+        nulls = Nulls.SKIP
+    )
+    public Builder switchToParentFrame(Optional<Boolean> switchToParentFrame) {
+      this.switchToParentFrame = switchToParentFrame;
+      return this;
+    }
+
+    public Builder switchToParentFrame(Boolean switchToParentFrame) {
+      this.switchToParentFrame = Optional.ofNullable(switchToParentFrame);
+      return this;
+    }
+
+    /**
+     * <p>Selectors for locating and solving a single audio CAPTCHA challenge.</p>
+     */
+    @JsonSetter(
+        value = "resolveAudioCaptcha",
+        nulls = Nulls.SKIP
+    )
+    public Builder resolveAudioCaptcha(
+        Optional<WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha> resolveAudioCaptcha) {
+      this.resolveAudioCaptcha = resolveAudioCaptcha;
+      return this;
+    }
+
+    public Builder resolveAudioCaptcha(
+        WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha resolveAudioCaptcha) {
+      this.resolveAudioCaptcha = Optional.ofNullable(resolveAudioCaptcha);
+      return this;
+    }
+
+    /**
+     * <p>Screenshot action: captures a screenshot of the current page state. Can be a boolean-like value or a selector.</p>
+     */
+    @JsonSetter(
+        value = "screenshot",
+        nulls = Nulls.SKIP
+    )
+    public Builder screenshot(Optional<String> screenshot) {
+      this.screenshot = screenshot;
+      return this;
+    }
+
+    public Builder screenshot(String screenshot) {
+      this.screenshot = Optional.ofNullable(screenshot);
+      return this;
+    }
+
+    /**
+     * <p>Save image action: saves an image from the page by CSS selector or element ID.</p>
+     */
+    @JsonSetter(
+        value = "saveimage",
+        nulls = Nulls.SKIP
+    )
+    public Builder saveimage(Optional<String> saveimage) {
+      this.saveimage = saveimage;
+      return this;
+    }
+
+    public Builder saveimage(String saveimage) {
+      this.saveimage = Optional.ofNullable(saveimage);
+      return this;
+    }
+
+    public WebScrapeRequestBodyBlockUrlInstructionsItem build() {
+      return new WebScrapeRequestBodyBlockUrlInstructionsItem(fill, click, clickIfExist, enter, newTab, moveToRelativeTab, wait, waitFor, select, jsExe, conditionalCheck, clickButtonByValue, generalImageCaptcha, blockElement, extract, fillImageCaptcha, switchToIframe, switchToParentFrame, resolveAudioCaptcha, screenshot, saveimage, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("fill") || key.equalsIgnoreCase("click") || key.equalsIgnoreCase("clickIfExist") || key.equalsIgnoreCase("enter") || key.equalsIgnoreCase("newTab") || key.equalsIgnoreCase("moveToRelativeTab") || key.equalsIgnoreCase("wait") || key.equalsIgnoreCase("waitFor") || key.equalsIgnoreCase("select") || key.equalsIgnoreCase("jsExe") || key.equalsIgnoreCase("conditionalCheck") || key.equalsIgnoreCase("clickButtonByValue") || key.equalsIgnoreCase("generalImageCaptcha") || key.equalsIgnoreCase("blockElement") || key.equalsIgnoreCase("extract") || key.equalsIgnoreCase("fillImageCaptcha") || key.equalsIgnoreCase("switchToIframe") || key.equalsIgnoreCase("switchToParentFrame") || key.equalsIgnoreCase("resolveAudioCaptcha") || key.equalsIgnoreCase("screenshot") || key.equalsIgnoreCase("saveimage")) {
+        return;
       }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemClick.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemClickIfExist.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemEnter.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemNewTab.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemMoveToRelativeTab.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemWait.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemWaitFor.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemSelect.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemJsExe.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemConditionalCheck.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemClickButtonByValue.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemGeneralImageCaptcha.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemBlockElement.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemExtract.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemFillImageCaptcha.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemSwitchToIframe.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemSwitchToParentFrame.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemScreenshot.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyBlockUrlInstructionsItemSaveimage.class));
-      } catch(RuntimeException e) {
-      }
-      throw new JsonParseException(p, "Failed to deserialize");
+      this.additionalProperties.put(key, value);
+    }
+
+    public Builder additionalProperty(String key, Object value) {
+      this.additionalProperties.put(key, value);
+      return this;
+    }
+
+    public Builder additionalProperties(Map<String, Object> additionalProperties) {
+      this.additionalProperties.putAll(additionalProperties);
+      return this;
     }
   }
 }

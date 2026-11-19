@@ -158,7 +158,6 @@ public final class GeolocationLookupV2ResponseAsn {
 
     private Optional<String> rir = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -296,6 +295,14 @@ public final class GeolocationLookupV2ResponseAsn {
 
     public GeolocationLookupV2ResponseAsn build() {
       return new GeolocationLookupV2ResponseAsn(asNumber, organization, country, type, domain, dateAllocated, rir, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("as_number") || key.equalsIgnoreCase("organization") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("domain") || key.equalsIgnoreCase("date_allocated") || key.equalsIgnoreCase("rir")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

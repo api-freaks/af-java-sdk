@@ -137,7 +137,6 @@ public final class DomainReputationRequest {
 
     private Optional<DomainReputationRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -153,7 +152,6 @@ public final class DomainReputationRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -164,7 +162,6 @@ public final class DomainReputationRequest {
     }
 
     /**
-     * <p>The domain name to assess (e.g. example.com). Must contain at least one dot and be at most 253 characters. Automatically lowercased.</p>
      * <p>The domain name to assess (e.g. example.com). Must contain at least one dot and be at most 253 characters. Automatically lowercased.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -201,6 +198,14 @@ public final class DomainReputationRequest {
     @java.lang.Override
     public DomainReputationRequest build() {
       return new DomainReputationRequest(apiKey, format, domainName, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("domainName")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -115,7 +115,6 @@ public final class WeakWordsDetectRequest {
 
     private String text;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -130,7 +129,6 @@ public final class WeakWordsDetectRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -141,7 +139,6 @@ public final class WeakWordsDetectRequest {
     }
 
     /**
-     * <p>Text to analyze for weak words</p>
      * <p>Text to analyze for weak words</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -155,6 +152,14 @@ public final class WeakWordsDetectRequest {
     @java.lang.Override
     public WeakWordsDetectRequest build() {
       return new WeakWordsDetectRequest(apiKey, text, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("text")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

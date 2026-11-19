@@ -196,7 +196,6 @@ public final class IbanValidateResponseValidation {
 
     private Optional<String> bban = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -215,7 +214,6 @@ public final class IbanValidateResponseValidation {
 
     /**
      * <p>Checks if provided IBAN contains only alpha numeric characters</p>
-     * <p>Checks if provided IBAN contains only alpha numeric characters</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -226,7 +224,6 @@ public final class IbanValidateResponseValidation {
     }
 
     /**
-     * <p>Checks whether given IBAN country supports IBAN standards</p>
      * <p>Checks whether given IBAN country supports IBAN standards</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -239,7 +236,6 @@ public final class IbanValidateResponseValidation {
 
     /**
      * <p>Indicates whether IBAN length is according to respective country standard or not.</p>
-     * <p>Indicates whether IBAN length is according to respective country standard or not.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -251,7 +247,6 @@ public final class IbanValidateResponseValidation {
 
     /**
      * <p>Indicates whether IBAN structure is valid as per structure pattern for respective country.</p>
-     * <p>Indicates whether IBAN structure is valid as per structure pattern for respective country.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -262,7 +257,6 @@ public final class IbanValidateResponseValidation {
     }
 
     /**
-     * <p>Indicates whether IBAN check digit is valid.</p>
      * <p>Indicates whether IBAN check digit is valid.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -299,6 +293,14 @@ public final class IbanValidateResponseValidation {
     @java.lang.Override
     public IbanValidateResponseValidation build() {
       return new IbanValidateResponseValidation(isAlphaNumeric, isIbanSupportedCountry, isValidLength, isValidStructure, isIbanCheckDigitValid, bban, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("is_alpha_numeric") || key.equalsIgnoreCase("is_iban_supported_country") || key.equalsIgnoreCase("is_valid_length") || key.equalsIgnoreCase("is_valid_structure") || key.equalsIgnoreCase("is_iban_check_digit_valid") || key.equalsIgnoreCase("bban")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

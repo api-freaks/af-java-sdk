@@ -153,7 +153,6 @@ public final class PdfUploadBinaryRequest {
 
     private Optional<PdfUploadBinaryRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -170,7 +169,6 @@ public final class PdfUploadBinaryRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -181,8 +179,6 @@ public final class PdfUploadBinaryRequest {
     }
 
     /**
-     * <p>The desired name for the uploaded PDF file. This name will be used for storage on the server.</p>
-     * <p><strong>NOTE</strong>: Please ensure file_name has extension <code>.pdf</code>.</p>
      * <p>The desired name for the uploaded PDF file. This name will be used for storage on the server.</p>
      * <p><strong>NOTE</strong>: Please ensure file_name has extension <code>.pdf</code>.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
@@ -227,6 +223,14 @@ public final class PdfUploadBinaryRequest {
     @java.lang.Override
     public PdfUploadBinaryRequest build() {
       return new PdfUploadBinaryRequest(apiKey, format, fileName, body, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("file_name") || key.equalsIgnoreCase("body")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

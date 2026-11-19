@@ -5,21 +5,21 @@
 package com.apifreaks.sdk.errors;
 
 import com.apifreaks.sdk.core.ApifreaksApiApiException;
-import java.lang.Object;
+import com.apifreaks.sdk.types.ForbiddenErrorBody;
 import okhttp3.Response;
 
 public final class ForbiddenError extends ApifreaksApiApiException {
   /**
    * The body of the response that triggered the exception.
    */
-  private final Object body;
+  private final ForbiddenErrorBody body;
 
-  public ForbiddenError(Object body) {
+  public ForbiddenError(ForbiddenErrorBody body) {
     super("ForbiddenError", 403, body);
     this.body = body;
   }
 
-  public ForbiddenError(Object body, Response rawResponse) {
+  public ForbiddenError(ForbiddenErrorBody body, Response rawResponse) {
     super("ForbiddenError", 403, body, rawResponse);
     this.body = body;
   }
@@ -28,7 +28,7 @@ public final class ForbiddenError extends ApifreaksApiApiException {
    * @return the body
    */
   @java.lang.Override
-  public Object body() {
+  public ForbiddenErrorBody body() {
     return this.body;
   }
 }

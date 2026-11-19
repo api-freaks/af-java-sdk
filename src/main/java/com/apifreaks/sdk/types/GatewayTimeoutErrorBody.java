@@ -117,7 +117,6 @@ public final class GatewayTimeoutErrorBody {
 
     private Optional<String> path = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -204,6 +203,14 @@ public final class GatewayTimeoutErrorBody {
 
     public GatewayTimeoutErrorBody build() {
       return new GatewayTimeoutErrorBody(timestamp, status, error, message, path, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("timestamp") || key.equalsIgnoreCase("status") || key.equalsIgnoreCase("error") || key.equalsIgnoreCase("message") || key.equalsIgnoreCase("path")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

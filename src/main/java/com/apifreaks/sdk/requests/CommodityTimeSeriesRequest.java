@@ -182,7 +182,6 @@ public final class CommodityTimeSeriesRequest {
 
     private Optional<List<String>> symbols = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -200,7 +199,6 @@ public final class CommodityTimeSeriesRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -212,7 +210,6 @@ public final class CommodityTimeSeriesRequest {
 
     /**
      * <p>Start date (YYYY-MM-DD)</p>
-     * <p>Start date (YYYY-MM-DD)</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -223,7 +220,6 @@ public final class CommodityTimeSeriesRequest {
     }
 
     /**
-     * <p>End date (YYYY-MM-DD)</p>
      * <p>End date (YYYY-MM-DD)</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -289,6 +285,14 @@ public final class CommodityTimeSeriesRequest {
     @java.lang.Override
     public CommodityTimeSeriesRequest build() {
       return new CommodityTimeSeriesRequest(symbols, apiKey, format, startDate, endDate, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("symbols") || key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("startDate") || key.equalsIgnoreCase("endDate")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

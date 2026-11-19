@@ -34,7 +34,7 @@ public final class GeolocationLookupV2ResponseTimeZone {
 
   private final String currentTime;
 
-  private final float currentTimeUnix;
+  private final double currentTimeUnix;
 
   private final Optional<String> currentTzAbbreviation;
 
@@ -61,7 +61,7 @@ public final class GeolocationLookupV2ResponseTimeZone {
   private final Map<String, Object> additionalProperties;
 
   private GeolocationLookupV2ResponseTimeZone(String name, float offset, float offsetWithDst,
-      String currentTime, float currentTimeUnix, Optional<String> currentTzAbbreviation,
+      String currentTime, double currentTimeUnix, Optional<String> currentTzAbbreviation,
       Optional<String> currentTzFullName, Optional<String> standardTzAbbreviation,
       Optional<String> standardTzFullName, boolean isDst, float dstSavings, boolean dstExists,
       Optional<String> dstTzAbbreviation, Optional<String> dstTzFullName,
@@ -123,7 +123,7 @@ public final class GeolocationLookupV2ResponseTimeZone {
    * @return Local time as Unix epoch seconds.
    */
   @JsonProperty("current_time_unix")
-  public float getCurrentTimeUnix() {
+  public double getCurrentTimeUnix() {
     return currentTimeUnix;
   }
 
@@ -278,7 +278,7 @@ public final class GeolocationLookupV2ResponseTimeZone {
     /**
      * <p>Local time as Unix epoch seconds.</p>
      */
-    IsDstStage currentTimeUnix(float currentTimeUnix);
+    IsDstStage currentTimeUnix(double currentTimeUnix);
   }
 
   public interface IsDstStage {
@@ -378,7 +378,7 @@ public final class GeolocationLookupV2ResponseTimeZone {
 
     private String currentTime;
 
-    private float currentTimeUnix;
+    private double currentTimeUnix;
 
     private boolean isDst;
 
@@ -402,7 +402,6 @@ public final class GeolocationLookupV2ResponseTimeZone {
 
     private Optional<String> currentTzAbbreviation = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -431,7 +430,6 @@ public final class GeolocationLookupV2ResponseTimeZone {
 
     /**
      * <p>Time zone in IANA TZDB format.</p>
-     * <p>Time zone in IANA TZDB format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -442,7 +440,6 @@ public final class GeolocationLookupV2ResponseTimeZone {
     }
 
     /**
-     * <p>Standard time UTC offset in hours.</p>
      * <p>Standard time UTC offset in hours.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -455,7 +452,6 @@ public final class GeolocationLookupV2ResponseTimeZone {
 
     /**
      * <p>Current effective UTC offset in hours, including DST.</p>
-     * <p>Current effective UTC offset in hours, including DST.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -466,7 +462,6 @@ public final class GeolocationLookupV2ResponseTimeZone {
     }
 
     /**
-     * <p>Local date/time in YYYY-MM-DD HH:mm:ss.SSS±ZZZZ format.</p>
      * <p>Local date/time in YYYY-MM-DD HH:mm:ss.SSS±ZZZZ format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -479,18 +474,16 @@ public final class GeolocationLookupV2ResponseTimeZone {
 
     /**
      * <p>Local time as Unix epoch seconds.</p>
-     * <p>Local time as Unix epoch seconds.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("current_time_unix")
-    public IsDstStage currentTimeUnix(float currentTimeUnix) {
+    public IsDstStage currentTimeUnix(double currentTimeUnix) {
       this.currentTimeUnix = currentTimeUnix;
       return this;
     }
 
     /**
-     * <p>true if DST is active.</p>
      * <p>true if DST is active.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -503,7 +496,6 @@ public final class GeolocationLookupV2ResponseTimeZone {
 
     /**
      * <p>DST shift amount in hours.</p>
-     * <p>DST shift amount in hours.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -514,7 +506,6 @@ public final class GeolocationLookupV2ResponseTimeZone {
     }
 
     /**
-     * <p>true if the time zone observes DST.</p>
      * <p>true if the time zone observes DST.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -712,6 +703,14 @@ public final class GeolocationLookupV2ResponseTimeZone {
     @java.lang.Override
     public GeolocationLookupV2ResponseTimeZone build() {
       return new GeolocationLookupV2ResponseTimeZone(name, offset, offsetWithDst, currentTime, currentTimeUnix, currentTzAbbreviation, currentTzFullName, standardTzAbbreviation, standardTzFullName, isDst, dstSavings, dstExists, dstTzAbbreviation, dstTzFullName, dstStart, dstEnd, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("offset") || key.equalsIgnoreCase("offset_with_dst") || key.equalsIgnoreCase("current_time") || key.equalsIgnoreCase("current_time_unix") || key.equalsIgnoreCase("current_tz_abbreviation") || key.equalsIgnoreCase("current_tz_full_name") || key.equalsIgnoreCase("standard_tz_abbreviation") || key.equalsIgnoreCase("standard_tz_full_name") || key.equalsIgnoreCase("is_dst") || key.equalsIgnoreCase("dst_savings") || key.equalsIgnoreCase("dst_exists") || key.equalsIgnoreCase("dst_tz_abbreviation") || key.equalsIgnoreCase("dst_tz_full_name") || key.equalsIgnoreCase("dst_start") || key.equalsIgnoreCase("dst_end")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

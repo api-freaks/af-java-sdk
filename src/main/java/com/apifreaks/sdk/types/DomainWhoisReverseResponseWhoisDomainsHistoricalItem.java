@@ -43,7 +43,7 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItem {
     if(this.type == 0) {
       return visitor.visit((DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministrativeContact) this.value);
     } else if(this.type == 1) {
-      return visitor.visit((DomainWhoisReverseResponseWhoisDomainsHistoricalItemCompanyname) this.value);
+      return visitor.visit((DomainWhoisReverseResponseWhoisDomainsHistoricalItemCompanyName) this.value);
     }
     throw new IllegalStateException("Failed to visit value. This should never happen.");
   }
@@ -74,14 +74,14 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItem {
   }
 
   public static DomainWhoisReverseResponseWhoisDomainsHistoricalItem of(
-      DomainWhoisReverseResponseWhoisDomainsHistoricalItemCompanyname value) {
+      DomainWhoisReverseResponseWhoisDomainsHistoricalItemCompanyName value) {
     return new DomainWhoisReverseResponseWhoisDomainsHistoricalItem(value, 1);
   }
 
   public interface Visitor<T> {
     T visit(DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministrativeContact value);
 
-    T visit(DomainWhoisReverseResponseWhoisDomainsHistoricalItemCompanyname value);
+    T visit(DomainWhoisReverseResponseWhoisDomainsHistoricalItemCompanyName value);
   }
 
   static final class Deserializer extends StdDeserializer<DomainWhoisReverseResponseWhoisDomainsHistoricalItem> {
@@ -93,7 +93,7 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItem {
     public DomainWhoisReverseResponseWhoisDomainsHistoricalItem deserialize(JsonParser p,
         DeserializationContext context) throws IOException {
       Object value = p.readValueAs(Object.class);
-      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("num") && ((Map<?, ?>) value).containsKey("status") && ((Map<?, ?>) value).containsKey("domain_name") && ((Map<?, ?>) value).containsKey("query_time") && ((Map<?, ?>) value).containsKey("whois_server") && ((Map<?, ?>) value).containsKey("domain_registered")) {
+      if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("num") && ((Map<?, ?>) value).containsKey("status") && ((Map<?, ?>) value).containsKey("domain_name")) {
         try {
           return of(ObjectMappers.JSON_MAPPER.convertValue(value, DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministrativeContact.class));
         } catch(RuntimeException e) {
@@ -101,7 +101,7 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItem {
       }
       if (value instanceof Map<?, ?> && ((Map<?, ?>) value).containsKey("num") && ((Map<?, ?>) value).containsKey("domain_name")) {
         try {
-          return of(ObjectMappers.JSON_MAPPER.convertValue(value, DomainWhoisReverseResponseWhoisDomainsHistoricalItemCompanyname.class));
+          return of(ObjectMappers.JSON_MAPPER.convertValue(value, DomainWhoisReverseResponseWhoisDomainsHistoricalItemCompanyName.class));
         } catch(RuntimeException e) {
         }
       }

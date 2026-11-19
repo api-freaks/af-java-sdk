@@ -218,7 +218,6 @@ public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseCont
 
     private Optional<BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseContactRegistryDataDomainRegistrar> domainRegistrar = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -433,6 +432,14 @@ public final class BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseCont
 
     public BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseContactRegistryData build() {
       return new BulkDomainWhoisLookupV2ResponseBulkWhoisResponseItemAbuseContactRegistryData(domainName, queryTime, whoisServer, domainRegistered, createDate, updateDate, expiryDate, nameServers, domainStatus, whoisRawRegistery, domainRegistrar, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("domain_name") || key.equalsIgnoreCase("query_time") || key.equalsIgnoreCase("whois_server") || key.equalsIgnoreCase("domain_registered") || key.equalsIgnoreCase("create_date") || key.equalsIgnoreCase("update_date") || key.equalsIgnoreCase("expiry_date") || key.equalsIgnoreCase("name_servers") || key.equalsIgnoreCase("domain_status") || key.equalsIgnoreCase("whois_raw_registery") || key.equalsIgnoreCase("domain_registrar")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

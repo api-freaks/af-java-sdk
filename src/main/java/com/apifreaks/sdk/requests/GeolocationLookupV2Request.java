@@ -221,7 +221,6 @@ public final class GeolocationLookupV2Request {
 
     private Optional<GeolocationLookupV2RequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -240,7 +239,6 @@ public final class GeolocationLookupV2Request {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -392,6 +390,14 @@ public final class GeolocationLookupV2Request {
     @java.lang.Override
     public GeolocationLookupV2Request build() {
       return new GeolocationLookupV2Request(apiKey, format, ip, lang, fields, excludes, include, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("ip") || key.equalsIgnoreCase("lang") || key.equalsIgnoreCase("fields") || key.equalsIgnoreCase("excludes") || key.equalsIgnoreCase("include")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

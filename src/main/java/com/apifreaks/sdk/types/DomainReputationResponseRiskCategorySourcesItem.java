@@ -195,7 +195,6 @@ public final class DomainReputationResponseRiskCategorySourcesItem {
 
     private String lastSeen;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -214,7 +213,6 @@ public final class DomainReputationResponseRiskCategorySourcesItem {
 
     /**
      * <p>Name of the threat intelligence source (e.g. Spamhaus).</p>
-     * <p>Name of the threat intelligence source (e.g. Spamhaus).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -225,7 +223,6 @@ public final class DomainReputationResponseRiskCategorySourcesItem {
     }
 
     /**
-     * <p>Indicator matched by this source.</p>
      * <p>Indicator matched by this source.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -238,7 +235,6 @@ public final class DomainReputationResponseRiskCategorySourcesItem {
 
     /**
      * <p>Threat type reported by this source.</p>
-     * <p>Threat type reported by this source.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -249,7 +245,6 @@ public final class DomainReputationResponseRiskCategorySourcesItem {
     }
 
     /**
-     * <p>Confidence score from this source (0-1).</p>
      * <p>Confidence score from this source (0-1).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -262,7 +257,6 @@ public final class DomainReputationResponseRiskCategorySourcesItem {
 
     /**
      * <p>First time this indicator was seen by the source (YYYY-MM-DDTHH:mm:ssZ).</p>
-     * <p>First time this indicator was seen by the source (YYYY-MM-DDTHH:mm:ssZ).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -273,7 +267,6 @@ public final class DomainReputationResponseRiskCategorySourcesItem {
     }
 
     /**
-     * <p>Last time this indicator was seen by the source (YYYY-MM-DDTHH:mm:ssZ).</p>
      * <p>Last time this indicator was seen by the source (YYYY-MM-DDTHH:mm:ssZ).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -287,6 +280,14 @@ public final class DomainReputationResponseRiskCategorySourcesItem {
     @java.lang.Override
     public DomainReputationResponseRiskCategorySourcesItem build() {
       return new DomainReputationResponseRiskCategorySourcesItem(source, indicator, threatType, confidence, firstSeen, lastSeen, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("source") || key.equalsIgnoreCase("indicator") || key.equalsIgnoreCase("threat_type") || key.equalsIgnoreCase("confidence") || key.equalsIgnoreCase("first_seen") || key.equalsIgnoreCase("last_seen")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

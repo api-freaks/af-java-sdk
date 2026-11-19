@@ -199,7 +199,6 @@ public final class CurrencyConvertHistoricalRequest {
 
     private Optional<CurrencyConvertHistoricalRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -218,7 +217,6 @@ public final class CurrencyConvertHistoricalRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -229,7 +227,6 @@ public final class CurrencyConvertHistoricalRequest {
     }
 
     /**
-     * <p>From currency symbol</p>
      * <p>From currency symbol</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -242,7 +239,6 @@ public final class CurrencyConvertHistoricalRequest {
 
     /**
      * <p>To currency symbol</p>
-     * <p>To currency symbol</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -253,7 +249,6 @@ public final class CurrencyConvertHistoricalRequest {
     }
 
     /**
-     * <p>specific date (format YYYY-MM-DD) of which exchange rates is used.</p>
      * <p>specific date (format YYYY-MM-DD) of which exchange rates is used.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -313,6 +308,14 @@ public final class CurrencyConvertHistoricalRequest {
     @java.lang.Override
     public CurrencyConvertHistoricalRequest build() {
       return new CurrencyConvertHistoricalRequest(apiKey, format, from, to, amount, date, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("from") || key.equalsIgnoreCase("to") || key.equalsIgnoreCase("amount") || key.equalsIgnoreCase("date")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

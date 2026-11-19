@@ -154,7 +154,6 @@ public final class TimezoneConvertResponse {
 
     private float diffMin;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -171,7 +170,6 @@ public final class TimezoneConvertResponse {
 
     /**
      * <p>Original time before conversion (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
-     * <p>Original time before conversion (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -182,7 +180,6 @@ public final class TimezoneConvertResponse {
     }
 
     /**
-     * <p>Time after conversion (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
      * <p>Time after conversion (format YYYY-MM-DD HH:mm:ss, not ISO 8601).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -195,7 +192,6 @@ public final class TimezoneConvertResponse {
 
     /**
      * <p>Difference in hours</p>
-     * <p>Difference in hours</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -206,7 +202,6 @@ public final class TimezoneConvertResponse {
     }
 
     /**
-     * <p>Difference in minutes</p>
      * <p>Difference in minutes</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -220,6 +215,14 @@ public final class TimezoneConvertResponse {
     @java.lang.Override
     public TimezoneConvertResponse build() {
       return new TimezoneConvertResponse(originalTime, convertedTime, diffHour, diffMin, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("original_time") || key.equalsIgnoreCase("converted_time") || key.equalsIgnoreCase("diff_hour") || key.equalsIgnoreCase("diff_min")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

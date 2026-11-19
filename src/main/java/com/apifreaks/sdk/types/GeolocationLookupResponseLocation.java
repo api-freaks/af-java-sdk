@@ -293,7 +293,6 @@ public final class GeolocationLookupResponseLocation {
 
     private Optional<String> countryEmoji = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -635,6 +634,14 @@ public final class GeolocationLookupResponseLocation {
 
     public GeolocationLookupResponseLocation build() {
       return new GeolocationLookupResponseLocation(continentCode, continentName, countryCode2, countryCode3, countryName, countryNameOfficial, countryCapital, stateProv, stateCode, district, city, locality, accuracyRadius, confidence, dmaCode, zipcode, latitude, longitude, isEu, countryFlag, geonameId, countryEmoji, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("continent_code") || key.equalsIgnoreCase("continent_name") || key.equalsIgnoreCase("country_code2") || key.equalsIgnoreCase("country_code3") || key.equalsIgnoreCase("country_name") || key.equalsIgnoreCase("country_name_official") || key.equalsIgnoreCase("country_capital") || key.equalsIgnoreCase("state_prov") || key.equalsIgnoreCase("state_code") || key.equalsIgnoreCase("district") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("locality") || key.equalsIgnoreCase("accuracy_radius") || key.equalsIgnoreCase("confidence") || key.equalsIgnoreCase("dma_code") || key.equalsIgnoreCase("zipcode") || key.equalsIgnoreCase("latitude") || key.equalsIgnoreCase("longitude") || key.equalsIgnoreCase("is_eu") || key.equalsIgnoreCase("country_flag") || key.equalsIgnoreCase("geoname_id") || key.equalsIgnoreCase("country_emoji")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -263,7 +263,6 @@ public final class ZipcodeSearchByRadiusRequest {
 
     private Optional<ZipcodeSearchByRadiusRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -285,7 +284,6 @@ public final class ZipcodeSearchByRadiusRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -296,7 +294,6 @@ public final class ZipcodeSearchByRadiusRequest {
     }
 
     /**
-     * <p>Search radius for the query. The maximum allowed values are: - 100 km - 100 mi - 109361 yd - 100000 m - 328084 ft - 3937007.75 in</p>
      * <p>Search radius for the query. The maximum allowed values are: - 100 km - 100 mi - 109361 yd - 100000 m - 328084 ft - 3937007.75 in</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -471,6 +468,14 @@ public final class ZipcodeSearchByRadiusRequest {
     @java.lang.Override
     public ZipcodeSearchByRadiusRequest build() {
       return new ZipcodeSearchByRadiusRequest(apiKey, format, code, lat, long_, country, radius, unit, page, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("code") || key.equalsIgnoreCase("lat") || key.equalsIgnoreCase("long") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("radius") || key.equalsIgnoreCase("unit") || key.equalsIgnoreCase("page")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

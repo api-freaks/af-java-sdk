@@ -26,21 +26,47 @@ import java.util.Optional;
     builder = VatSupportedCountriesResponse.Builder.class
 )
 public final class VatSupportedCountriesResponse {
-  private final Optional<List<VatSupportedCountriesResponseVatSupportedCountriesAndStatesItem>> vatSupportedCountriesAndStates;
+  private final Optional<List<Map<String, VatSupportedCountriesResponseVatSupportedCountriesAndStatesItemValue>>> vatSupportedCountriesAndStates;
+
+  private final Optional<List<VatSupportedCountriesResponseIbanSupportedCountriesItem>> ibanSupportedCountries;
+
+  private final Optional<List<VatSupportedCountriesResponseSwiftSupportedCountriesItem>> swiftSupportedCountries;
 
   private final Map<String, Object> additionalProperties;
 
   private VatSupportedCountriesResponse(
-      Optional<List<VatSupportedCountriesResponseVatSupportedCountriesAndStatesItem>> vatSupportedCountriesAndStates,
+      Optional<List<Map<String, VatSupportedCountriesResponseVatSupportedCountriesAndStatesItemValue>>> vatSupportedCountriesAndStates,
+      Optional<List<VatSupportedCountriesResponseIbanSupportedCountriesItem>> ibanSupportedCountries,
+      Optional<List<VatSupportedCountriesResponseSwiftSupportedCountriesItem>> swiftSupportedCountries,
       Map<String, Object> additionalProperties) {
     this.vatSupportedCountriesAndStates = vatSupportedCountriesAndStates;
+    this.ibanSupportedCountries = ibanSupportedCountries;
+    this.swiftSupportedCountries = swiftSupportedCountries;
     this.additionalProperties = additionalProperties;
   }
 
   @JsonProperty("VAT_Supported_Countries_And_States")
-  public Optional<List<VatSupportedCountriesResponseVatSupportedCountriesAndStatesItem>> getVatSupportedCountriesAndStates(
+  public Optional<List<Map<String, VatSupportedCountriesResponseVatSupportedCountriesAndStatesItemValue>>> getVatSupportedCountriesAndStates(
       ) {
     return vatSupportedCountriesAndStates;
+  }
+
+  /**
+   * @return Array of countries supported by the IBAN Validation API.
+   */
+  @JsonProperty("IBAN_Supported_Countries")
+  public Optional<List<VatSupportedCountriesResponseIbanSupportedCountriesItem>> getIbanSupportedCountries(
+      ) {
+    return ibanSupportedCountries;
+  }
+
+  /**
+   * @return Array of countries supported by the SWIFT/BIC Code Lookup and Finder APIs.
+   */
+  @JsonProperty("SWIFT_Supported_Countries")
+  public Optional<List<VatSupportedCountriesResponseSwiftSupportedCountriesItem>> getSwiftSupportedCountries(
+      ) {
+    return swiftSupportedCountries;
   }
 
   @java.lang.Override
@@ -55,12 +81,12 @@ public final class VatSupportedCountriesResponse {
   }
 
   private boolean equalTo(VatSupportedCountriesResponse other) {
-    return vatSupportedCountriesAndStates.equals(other.vatSupportedCountriesAndStates);
+    return vatSupportedCountriesAndStates.equals(other.vatSupportedCountriesAndStates) && ibanSupportedCountries.equals(other.ibanSupportedCountries) && swiftSupportedCountries.equals(other.swiftSupportedCountries);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.vatSupportedCountriesAndStates);
+    return Objects.hash(this.vatSupportedCountriesAndStates, this.ibanSupportedCountries, this.swiftSupportedCountries);
   }
 
   @java.lang.Override
@@ -76,9 +102,12 @@ public final class VatSupportedCountriesResponse {
       ignoreUnknown = true
   )
   public static final class Builder {
-    private Optional<List<VatSupportedCountriesResponseVatSupportedCountriesAndStatesItem>> vatSupportedCountriesAndStates = Optional.empty();
+    private Optional<List<Map<String, VatSupportedCountriesResponseVatSupportedCountriesAndStatesItemValue>>> vatSupportedCountriesAndStates = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<List<VatSupportedCountriesResponseIbanSupportedCountriesItem>> ibanSupportedCountries = Optional.empty();
+
+    private Optional<List<VatSupportedCountriesResponseSwiftSupportedCountriesItem>> swiftSupportedCountries = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -86,6 +115,8 @@ public final class VatSupportedCountriesResponse {
 
     public Builder from(VatSupportedCountriesResponse other) {
       vatSupportedCountriesAndStates(other.getVatSupportedCountriesAndStates());
+      ibanSupportedCountries(other.getIbanSupportedCountries());
+      swiftSupportedCountries(other.getSwiftSupportedCountries());
       return this;
     }
 
@@ -94,19 +125,65 @@ public final class VatSupportedCountriesResponse {
         nulls = Nulls.SKIP
     )
     public Builder vatSupportedCountriesAndStates(
-        Optional<List<VatSupportedCountriesResponseVatSupportedCountriesAndStatesItem>> vatSupportedCountriesAndStates) {
+        Optional<List<Map<String, VatSupportedCountriesResponseVatSupportedCountriesAndStatesItemValue>>> vatSupportedCountriesAndStates) {
       this.vatSupportedCountriesAndStates = vatSupportedCountriesAndStates;
       return this;
     }
 
     public Builder vatSupportedCountriesAndStates(
-        List<VatSupportedCountriesResponseVatSupportedCountriesAndStatesItem> vatSupportedCountriesAndStates) {
+        List<Map<String, VatSupportedCountriesResponseVatSupportedCountriesAndStatesItemValue>> vatSupportedCountriesAndStates) {
       this.vatSupportedCountriesAndStates = Optional.ofNullable(vatSupportedCountriesAndStates);
       return this;
     }
 
+    /**
+     * <p>Array of countries supported by the IBAN Validation API.</p>
+     */
+    @JsonSetter(
+        value = "IBAN_Supported_Countries",
+        nulls = Nulls.SKIP
+    )
+    public Builder ibanSupportedCountries(
+        Optional<List<VatSupportedCountriesResponseIbanSupportedCountriesItem>> ibanSupportedCountries) {
+      this.ibanSupportedCountries = ibanSupportedCountries;
+      return this;
+    }
+
+    public Builder ibanSupportedCountries(
+        List<VatSupportedCountriesResponseIbanSupportedCountriesItem> ibanSupportedCountries) {
+      this.ibanSupportedCountries = Optional.ofNullable(ibanSupportedCountries);
+      return this;
+    }
+
+    /**
+     * <p>Array of countries supported by the SWIFT/BIC Code Lookup and Finder APIs.</p>
+     */
+    @JsonSetter(
+        value = "SWIFT_Supported_Countries",
+        nulls = Nulls.SKIP
+    )
+    public Builder swiftSupportedCountries(
+        Optional<List<VatSupportedCountriesResponseSwiftSupportedCountriesItem>> swiftSupportedCountries) {
+      this.swiftSupportedCountries = swiftSupportedCountries;
+      return this;
+    }
+
+    public Builder swiftSupportedCountries(
+        List<VatSupportedCountriesResponseSwiftSupportedCountriesItem> swiftSupportedCountries) {
+      this.swiftSupportedCountries = Optional.ofNullable(swiftSupportedCountries);
+      return this;
+    }
+
     public VatSupportedCountriesResponse build() {
-      return new VatSupportedCountriesResponse(vatSupportedCountriesAndStates, additionalProperties);
+      return new VatSupportedCountriesResponse(vatSupportedCountriesAndStates, ibanSupportedCountries, swiftSupportedCountries, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("VAT_Supported_Countries_And_States") || key.equalsIgnoreCase("IBAN_Supported_Countries") || key.equalsIgnoreCase("SWIFT_Supported_Countries")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

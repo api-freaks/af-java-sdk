@@ -137,7 +137,6 @@ public final class GetAdminLevelsRequest {
 
     private Optional<GetAdminLevelsRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -153,7 +152,6 @@ public final class GetAdminLevelsRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -164,7 +162,6 @@ public final class GetAdminLevelsRequest {
     }
 
     /**
-     * <p>Country code in ISO 3166-1 alpha-2 format</p>
      * <p>Country code in ISO 3166-1 alpha-2 format</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -201,6 +198,14 @@ public final class GetAdminLevelsRequest {
     @java.lang.Override
     public GetAdminLevelsRequest build() {
       return new GetAdminLevelsRequest(apiKey, format, country, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("country")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -5,50 +5,78 @@
 package com.apifreaks.sdk.types;
 
 import com.apifreaks.sdk.core.ObjectMappers;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import java.io.IOException;
-import java.lang.IllegalStateException;
 import java.lang.Object;
-import java.lang.RuntimeException;
 import java.lang.String;
-import java.lang.SuppressWarnings;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
-    using = WebScrapeRequestBodyOneInstructionsItem.Deserializer.class
+    builder = WebScrapeRequestBodyOneInstructionsItem.Builder.class
 )
 public final class WebScrapeRequestBodyOneInstructionsItem {
-  private final Object value;
+  private final Optional<WebScrapeRequestBodyOneInstructionsItemPostForm> postForm;
 
-  private final int type;
+  private final Optional<WebScrapeRequestBodyOneInstructionsItemGetForm> getForm;
 
-  private WebScrapeRequestBodyOneInstructionsItem(Object value, int type) {
-    this.value = value;
-    this.type = type;
+  private final Optional<Map<String, String>> extract;
+
+  private final Optional<String> getPage;
+
+  private final Map<String, Object> additionalProperties;
+
+  private WebScrapeRequestBodyOneInstructionsItem(
+      Optional<WebScrapeRequestBodyOneInstructionsItemPostForm> postForm,
+      Optional<WebScrapeRequestBodyOneInstructionsItemGetForm> getForm,
+      Optional<Map<String, String>> extract, Optional<String> getPage,
+      Map<String, Object> additionalProperties) {
+    this.postForm = postForm;
+    this.getForm = getForm;
+    this.extract = extract;
+    this.getPage = getPage;
+    this.additionalProperties = additionalProperties;
   }
 
-  @JsonValue
-  public Object get() {
-    return this.value;
+  /**
+   * @return Form selector and field values to submit via postForm or getForm.
+   */
+  @JsonProperty("postForm")
+  public Optional<WebScrapeRequestBodyOneInstructionsItemPostForm> getPostForm() {
+    return postForm;
   }
 
-  @SuppressWarnings("unchecked")
-  public <T> T visit(Visitor<T> visitor) {
-    if(this.type == 0) {
-      return visitor.visit((WebScrapeRequestBodyOneInstructionsItemPostForm) this.value);
-    } else if(this.type == 1) {
-      return visitor.visit((WebScrapeRequestBodyOneInstructionsItemGetForm) this.value);
-    } else if(this.type == 2) {
-      return visitor.visit((WebScrapeRequestBodyOneInstructionsItemExtract) this.value);
-    } else if(this.type == 3) {
-      return visitor.visit((WebScrapeRequestBodyOneInstructionsItemGetPage) this.value);
-    }
-    throw new IllegalStateException("Failed to visit value. This should never happen.");
+  /**
+   * @return Form selector and field values to submit via postForm or getForm.
+   */
+  @JsonProperty("getForm")
+  public Optional<WebScrapeRequestBodyOneInstructionsItemGetForm> getGetForm() {
+    return getForm;
+  }
+
+  /**
+   * @return Maps arbitrary output field names to CSS or XPath selectors. Each key becomes a field in the response's extractedData object.
+   */
+  @JsonProperty("extract")
+  public Optional<Map<String, String>> getExtract() {
+    return extract;
+  }
+
+  /**
+   * @return Get page action: retrieves the full page content. Optionally provide a URL or selector to target a specific page.
+   */
+  @JsonProperty("getPage")
+  public Optional<String> getGetPage() {
+    return getPage;
   }
 
   @java.lang.Override
@@ -57,76 +85,142 @@ public final class WebScrapeRequestBodyOneInstructionsItem {
     return other instanceof WebScrapeRequestBodyOneInstructionsItem && equalTo((WebScrapeRequestBodyOneInstructionsItem) other);
   }
 
+  @JsonAnyGetter
+  public Map<String, Object> getAdditionalProperties() {
+    return this.additionalProperties;
+  }
+
   private boolean equalTo(WebScrapeRequestBodyOneInstructionsItem other) {
-    return value.equals(other.value);
+    return postForm.equals(other.postForm) && getForm.equals(other.getForm) && extract.equals(other.extract) && getPage.equals(other.getPage);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.value);
+    return Objects.hash(this.postForm, this.getForm, this.extract, this.getPage);
   }
 
   @java.lang.Override
   public String toString() {
-    return this.value.toString();
+    return ObjectMappers.stringify(this);
   }
 
-  public static WebScrapeRequestBodyOneInstructionsItem of(
-      WebScrapeRequestBodyOneInstructionsItemPostForm value) {
-    return new WebScrapeRequestBodyOneInstructionsItem(value, 0);
+  public static Builder builder() {
+    return new Builder();
   }
 
-  public static WebScrapeRequestBodyOneInstructionsItem of(
-      WebScrapeRequestBodyOneInstructionsItemGetForm value) {
-    return new WebScrapeRequestBodyOneInstructionsItem(value, 1);
-  }
+  @JsonIgnoreProperties(
+      ignoreUnknown = true
+  )
+  public static final class Builder {
+    private Optional<WebScrapeRequestBodyOneInstructionsItemPostForm> postForm = Optional.empty();
 
-  public static WebScrapeRequestBodyOneInstructionsItem of(
-      WebScrapeRequestBodyOneInstructionsItemExtract value) {
-    return new WebScrapeRequestBodyOneInstructionsItem(value, 2);
-  }
+    private Optional<WebScrapeRequestBodyOneInstructionsItemGetForm> getForm = Optional.empty();
 
-  public static WebScrapeRequestBodyOneInstructionsItem of(
-      WebScrapeRequestBodyOneInstructionsItemGetPage value) {
-    return new WebScrapeRequestBodyOneInstructionsItem(value, 3);
-  }
+    private Optional<Map<String, String>> extract = Optional.empty();
 
-  public interface Visitor<T> {
-    T visit(WebScrapeRequestBodyOneInstructionsItemPostForm value);
+    private Optional<String> getPage = Optional.empty();
 
-    T visit(WebScrapeRequestBodyOneInstructionsItemGetForm value);
+    private Map<String, Object> additionalProperties = new HashMap<>();
 
-    T visit(WebScrapeRequestBodyOneInstructionsItemExtract value);
-
-    T visit(WebScrapeRequestBodyOneInstructionsItemGetPage value);
-  }
-
-  static final class Deserializer extends StdDeserializer<WebScrapeRequestBodyOneInstructionsItem> {
-    Deserializer() {
-      super(WebScrapeRequestBodyOneInstructionsItem.class);
+    private Builder() {
     }
 
-    @java.lang.Override
-    public WebScrapeRequestBodyOneInstructionsItem deserialize(JsonParser p,
-        DeserializationContext context) throws IOException {
-      Object value = p.readValueAs(Object.class);
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyOneInstructionsItemPostForm.class));
-      } catch(RuntimeException e) {
+    public Builder from(WebScrapeRequestBodyOneInstructionsItem other) {
+      postForm(other.getPostForm());
+      getForm(other.getGetForm());
+      extract(other.getExtract());
+      getPage(other.getGetPage());
+      return this;
+    }
+
+    /**
+     * <p>Form selector and field values to submit via postForm or getForm.</p>
+     */
+    @JsonSetter(
+        value = "postForm",
+        nulls = Nulls.SKIP
+    )
+    public Builder postForm(Optional<WebScrapeRequestBodyOneInstructionsItemPostForm> postForm) {
+      this.postForm = postForm;
+      return this;
+    }
+
+    public Builder postForm(WebScrapeRequestBodyOneInstructionsItemPostForm postForm) {
+      this.postForm = Optional.ofNullable(postForm);
+      return this;
+    }
+
+    /**
+     * <p>Form selector and field values to submit via postForm or getForm.</p>
+     */
+    @JsonSetter(
+        value = "getForm",
+        nulls = Nulls.SKIP
+    )
+    public Builder getForm(Optional<WebScrapeRequestBodyOneInstructionsItemGetForm> getForm) {
+      this.getForm = getForm;
+      return this;
+    }
+
+    public Builder getForm(WebScrapeRequestBodyOneInstructionsItemGetForm getForm) {
+      this.getForm = Optional.ofNullable(getForm);
+      return this;
+    }
+
+    /**
+     * <p>Maps arbitrary output field names to CSS or XPath selectors. Each key becomes a field in the response's extractedData object.</p>
+     */
+    @JsonSetter(
+        value = "extract",
+        nulls = Nulls.SKIP
+    )
+    public Builder extract(Optional<Map<String, String>> extract) {
+      this.extract = extract;
+      return this;
+    }
+
+    public Builder extract(Map<String, String> extract) {
+      this.extract = Optional.ofNullable(extract);
+      return this;
+    }
+
+    /**
+     * <p>Get page action: retrieves the full page content. Optionally provide a URL or selector to target a specific page.</p>
+     */
+    @JsonSetter(
+        value = "getPage",
+        nulls = Nulls.SKIP
+    )
+    public Builder getPage(Optional<String> getPage) {
+      this.getPage = getPage;
+      return this;
+    }
+
+    public Builder getPage(String getPage) {
+      this.getPage = Optional.ofNullable(getPage);
+      return this;
+    }
+
+    public WebScrapeRequestBodyOneInstructionsItem build() {
+      return new WebScrapeRequestBodyOneInstructionsItem(postForm, getForm, extract, getPage, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("postForm") || key.equalsIgnoreCase("getForm") || key.equalsIgnoreCase("extract") || key.equalsIgnoreCase("getPage")) {
+        return;
       }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyOneInstructionsItemGetForm.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyOneInstructionsItemExtract.class));
-      } catch(RuntimeException e) {
-      }
-      try {
-        return of(ObjectMappers.JSON_MAPPER.convertValue(value, WebScrapeRequestBodyOneInstructionsItemGetPage.class));
-      } catch(RuntimeException e) {
-      }
-      throw new JsonParseException(p, "Failed to deserialize");
+      this.additionalProperties.put(key, value);
+    }
+
+    public Builder additionalProperty(String key, Object value) {
+      this.additionalProperties.put(key, value);
+      return this;
+    }
+
+    public Builder additionalProperties(Map<String, Object> additionalProperties) {
+      this.additionalProperties.putAll(additionalProperties);
+      return this;
     }
   }
 }

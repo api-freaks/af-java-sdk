@@ -92,7 +92,6 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertifica
 
     private Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNoticeNoticeRef> noticeRef = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -141,6 +140,14 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertifica
     public DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNotice build(
         ) {
       return new DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifierUserNotice(explicitText, noticeRef, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("explicitText") || key.equalsIgnoreCase("noticeRef")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

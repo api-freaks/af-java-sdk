@@ -244,7 +244,6 @@ public final class UserAgentLookupResponse {
 
     private UserAgentLookupResponseOperatingSystem operatingSystem;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -265,7 +264,6 @@ public final class UserAgentLookupResponse {
 
     /**
      * <p>User-agent string that is parsed for browser, device and operating system details.</p>
-     * <p>User-agent string that is parsed for browser, device and operating system details.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -276,7 +274,6 @@ public final class UserAgentLookupResponse {
     }
 
     /**
-     * <p>Agent name or the actual browser name that was used.</p>
      * <p>Agent name or the actual browser name that was used.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -302,20 +299,6 @@ public final class UserAgentLookupResponse {
      * <li>Hacker</li>
      * <li>Unknown</li>
      * </ol>
-     * <p>Agent type or the browser type that was used. Possible values:</p>
-     * <ol>
-     * <li>Browser</li>
-     * <li>Browser Webview</li>
-     * <li>Mobile App</li>
-     * <li>Robot Mobile</li>
-     * <li>Cloud Application</li>
-     * <li>Email Client</li>
-     * <li>Voice</li>
-     * <li>Special</li>
-     * <li>Testclient</li>
-     * <li>Hacker</li>
-     * <li>Unknown</li>
-     * </ol>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -327,7 +310,6 @@ public final class UserAgentLookupResponse {
 
     /**
      * <p>Agent version or the browser version</p>
-     * <p>Agent version or the browser version</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -338,7 +320,6 @@ public final class UserAgentLookupResponse {
     }
 
     /**
-     * <p>Agent version major or the browser version major</p>
      * <p>Agent version major or the browser version major</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -374,6 +355,14 @@ public final class UserAgentLookupResponse {
     @java.lang.Override
     public UserAgentLookupResponse build() {
       return new UserAgentLookupResponse(userAgentString, name, type, version, versionMajor, device, engine, operatingSystem, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("user_agent_string") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("version") || key.equalsIgnoreCase("version_major") || key.equalsIgnoreCase("device") || key.equalsIgnoreCase("engine") || key.equalsIgnoreCase("operating_system")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

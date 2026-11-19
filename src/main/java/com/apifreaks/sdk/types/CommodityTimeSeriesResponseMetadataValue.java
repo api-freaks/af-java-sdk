@@ -114,7 +114,6 @@ public final class CommodityTimeSeriesResponseMetadataValue {
 
     private String quote;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -129,7 +128,6 @@ public final class CommodityTimeSeriesResponseMetadataValue {
 
     /**
      * <p>Unit of the respective commodity.</p>
-     * <p>Unit of the respective commodity.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -140,7 +138,6 @@ public final class CommodityTimeSeriesResponseMetadataValue {
     }
 
     /**
-     * <p>Quote currency of the respective commodity.</p>
      * <p>Quote currency of the respective commodity.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -154,6 +151,14 @@ public final class CommodityTimeSeriesResponseMetadataValue {
     @java.lang.Override
     public CommodityTimeSeriesResponseMetadataValue build() {
       return new CommodityTimeSeriesResponseMetadataValue(unit, quote, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("unit") || key.equalsIgnoreCase("quote")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

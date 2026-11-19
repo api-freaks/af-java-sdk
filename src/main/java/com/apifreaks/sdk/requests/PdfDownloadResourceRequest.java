@@ -132,7 +132,6 @@ public final class PdfDownloadResourceRequest {
 
     private Optional<PdfDownloadResourceRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -148,7 +147,6 @@ public final class PdfDownloadResourceRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -159,7 +157,6 @@ public final class PdfDownloadResourceRequest {
     }
 
     /**
-     * <p>The unique identifier of the file or ZIP archive to download.</p>
      * <p>The unique identifier of the file or ZIP archive to download.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -189,6 +186,14 @@ public final class PdfDownloadResourceRequest {
     @java.lang.Override
     public PdfDownloadResourceRequest build() {
       return new PdfDownloadResourceRequest(apiKey, format, resourceId, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("resource_id")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

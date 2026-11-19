@@ -174,7 +174,6 @@ public final class CommodityHistoricalRatesV2ResponseRatesValue {
 
     private float close;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -192,7 +191,6 @@ public final class CommodityHistoricalRatesV2ResponseRatesValue {
 
     /**
      * <p>Date for which prices were fetched (YYYY-MM-DD). May differ from the requested date when the API falls back to the last available rate before it, or snaps to the first day of the month for monthly-updated commodities.</p>
-     * <p>Date for which prices were fetched (YYYY-MM-DD). May differ from the requested date when the API falls back to the last available rate before it, or snaps to the first day of the month for monthly-updated commodities.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -203,7 +201,6 @@ public final class CommodityHistoricalRatesV2ResponseRatesValue {
     }
 
     /**
-     * <p>Opening price on the given date. 0 for monthly-updated commodities.</p>
      * <p>Opening price on the given date. 0 for monthly-updated commodities.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -216,7 +213,6 @@ public final class CommodityHistoricalRatesV2ResponseRatesValue {
 
     /**
      * <p>Highest price recorded on the given date. 0 for monthly-updated commodities.</p>
-     * <p>Highest price recorded on the given date. 0 for monthly-updated commodities.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -228,7 +224,6 @@ public final class CommodityHistoricalRatesV2ResponseRatesValue {
 
     /**
      * <p>Lowest price recorded on the given date. 0 for monthly-updated commodities.</p>
-     * <p>Lowest price recorded on the given date. 0 for monthly-updated commodities.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -239,7 +234,6 @@ public final class CommodityHistoricalRatesV2ResponseRatesValue {
     }
 
     /**
-     * <p>Closing price on the given date.</p>
      * <p>Closing price on the given date.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -253,6 +247,14 @@ public final class CommodityHistoricalRatesV2ResponseRatesValue {
     @java.lang.Override
     public CommodityHistoricalRatesV2ResponseRatesValue build() {
       return new CommodityHistoricalRatesV2ResponseRatesValue(date, open, high, low, close, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("date") || key.equalsIgnoreCase("open") || key.equalsIgnoreCase("high") || key.equalsIgnoreCase("low") || key.equalsIgnoreCase("close")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

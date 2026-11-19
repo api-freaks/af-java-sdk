@@ -120,7 +120,6 @@ public final class MarineWeatherResponseForecastValueMinutelyItem {
 
     private Optional<Double> seaLevelHeightMsl = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -204,6 +203,14 @@ public final class MarineWeatherResponseForecastValueMinutelyItem {
 
     public MarineWeatherResponseForecastValueMinutelyItem build() {
       return new MarineWeatherResponseForecastValueMinutelyItem(timestamp, oceanCurrentVelocity, oceanCurrentDirection, seaLevelHeightMsl, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("timestamp") || key.equalsIgnoreCase("ocean_current_velocity") || key.equalsIgnoreCase("ocean_current_direction") || key.equalsIgnoreCase("sea_level_height_msl")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

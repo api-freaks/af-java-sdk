@@ -16,9 +16,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Float;
 import java.lang.Object;
 import java.lang.String;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -40,20 +38,20 @@ public final class VatRateByCountryResponseItem {
 
   private final float standardRate;
 
-  private final List<Float> reducedRate;
+  private final Optional<List<Float>> reducedRate;
 
   private final Optional<List<Float>> superReducedRate;
 
   private final Optional<Float> parkingRate;
 
-  private final Map<String, Float> categories;
+  private final Optional<Map<String, Float>> categories;
 
   private final Map<String, Object> additionalProperties;
 
   private VatRateByCountryResponseItem(String country, Optional<String> state, String type,
-      String currency, float standardRate, List<Float> reducedRate,
+      String currency, float standardRate, Optional<List<Float>> reducedRate,
       Optional<List<Float>> superReducedRate, Optional<Float> parkingRate,
-      Map<String, Float> categories, Map<String, Object> additionalProperties) {
+      Optional<Map<String, Float>> categories, Map<String, Object> additionalProperties) {
     this.country = country;
     this.state = state;
     this.type = type;
@@ -92,7 +90,7 @@ public final class VatRateByCountryResponseItem {
   }
 
   @JsonProperty("reduced_rate")
-  public List<Float> getReducedRate() {
+  public Optional<List<Float>> getReducedRate() {
     return reducedRate;
   }
 
@@ -110,7 +108,7 @@ public final class VatRateByCountryResponseItem {
   }
 
   @JsonProperty("categories")
-  public Map<String, Float> getCategories() {
+  public Optional<Map<String, Float>> getCategories() {
     return categories;
   }
 
@@ -172,11 +170,9 @@ public final class VatRateByCountryResponseItem {
 
     _FinalStage state(String state);
 
+    _FinalStage reducedRate(Optional<List<Float>> reducedRate);
+
     _FinalStage reducedRate(List<Float> reducedRate);
-
-    _FinalStage addReducedRate(Float reducedRate);
-
-    _FinalStage addAllReducedRate(List<Float> reducedRate);
 
     /**
      * <p>Optional super-reduced VAT rates applicable in specific categories.</p>
@@ -189,11 +185,9 @@ public final class VatRateByCountryResponseItem {
 
     _FinalStage parkingRate(Float parkingRate);
 
+    _FinalStage categories(Optional<Map<String, Float>> categories);
+
     _FinalStage categories(Map<String, Float> categories);
-
-    _FinalStage putAllCategories(Map<String, Float> categories);
-
-    _FinalStage categories(String key, Float value);
   }
 
   @JsonIgnoreProperties(
@@ -208,17 +202,16 @@ public final class VatRateByCountryResponseItem {
 
     private float standardRate;
 
-    private Map<String, Float> categories = new LinkedHashMap<>();
+    private Optional<Map<String, Float>> categories = Optional.empty();
 
     private Optional<Float> parkingRate = Optional.empty();
 
     private Optional<List<Float>> superReducedRate = Optional.empty();
 
-    private List<Float> reducedRate = new ArrayList<>();
+    private Optional<List<Float>> reducedRate = Optional.empty();
 
     private Optional<String> state = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -267,16 +260,8 @@ public final class VatRateByCountryResponseItem {
     }
 
     @java.lang.Override
-    public _FinalStage categories(String key, Float value) {
-      this.categories.put(key, value);
-      return this;
-    }
-
-    @java.lang.Override
-    public _FinalStage putAllCategories(Map<String, Float> categories) {
-      if (categories != null) {
-        this.categories.putAll(categories);
-      }
+    public _FinalStage categories(Map<String, Float> categories) {
+      this.categories = Optional.ofNullable(categories);
       return this;
     }
 
@@ -285,11 +270,8 @@ public final class VatRateByCountryResponseItem {
         value = "categories",
         nulls = Nulls.SKIP
     )
-    public _FinalStage categories(Map<String, Float> categories) {
-      this.categories.clear();
-      if (categories != null) {
-        this.categories.putAll(categories);
-      }
+    public _FinalStage categories(Optional<Map<String, Float>> categories) {
+      this.categories = categories;
       return this;
     }
 
@@ -333,16 +315,8 @@ public final class VatRateByCountryResponseItem {
     }
 
     @java.lang.Override
-    public _FinalStage addAllReducedRate(List<Float> reducedRate) {
-      if (reducedRate != null) {
-        this.reducedRate.addAll(reducedRate);
-      }
-      return this;
-    }
-
-    @java.lang.Override
-    public _FinalStage addReducedRate(Float reducedRate) {
-      this.reducedRate.add(reducedRate);
+    public _FinalStage reducedRate(List<Float> reducedRate) {
+      this.reducedRate = Optional.ofNullable(reducedRate);
       return this;
     }
 
@@ -351,11 +325,8 @@ public final class VatRateByCountryResponseItem {
         value = "reduced_rate",
         nulls = Nulls.SKIP
     )
-    public _FinalStage reducedRate(List<Float> reducedRate) {
-      this.reducedRate.clear();
-      if (reducedRate != null) {
-        this.reducedRate.addAll(reducedRate);
-      }
+    public _FinalStage reducedRate(Optional<List<Float>> reducedRate) {
+      this.reducedRate = reducedRate;
       return this;
     }
 
@@ -378,6 +349,14 @@ public final class VatRateByCountryResponseItem {
     @java.lang.Override
     public VatRateByCountryResponseItem build() {
       return new VatRateByCountryResponseItem(country, state, type, currency, standardRate, reducedRate, superReducedRate, parkingRate, categories, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("country") || key.equalsIgnoreCase("state") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("currency") || key.equalsIgnoreCase("standard_rate") || key.equalsIgnoreCase("reduced_rate") || key.equalsIgnoreCase("super_reduced_rate") || key.equalsIgnoreCase("parking_rate") || key.equalsIgnoreCase("categories")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

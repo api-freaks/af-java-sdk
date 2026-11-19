@@ -78,7 +78,6 @@ public final class CurrencyHistoricalLimitsResponse {
   public static final class Builder {
     private Map<String, String> availabilityPeriod = new LinkedHashMap<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -118,6 +117,14 @@ public final class CurrencyHistoricalLimitsResponse {
 
     public CurrencyHistoricalLimitsResponse build() {
       return new CurrencyHistoricalLimitsResponse(availabilityPeriod, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("availabilityPeriod")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

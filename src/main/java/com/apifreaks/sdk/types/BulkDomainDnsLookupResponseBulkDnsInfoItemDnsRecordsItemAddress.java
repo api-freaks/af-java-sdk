@@ -180,7 +180,6 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemAddre
 
     private String address;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -243,7 +242,6 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemAddre
 
     /**
      * <p>IPv4 or IPv6 address</p>
-     * <p>IPv4 or IPv6 address</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -256,6 +254,14 @@ public final class BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemAddre
     @java.lang.Override
     public BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemAddress build() {
       return new BulkDomainDnsLookupResponseBulkDnsInfoItemDnsRecordsItemAddress(name, type, dnsType, ttl, rawText, rRsetType, address, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("dnsType") || key.equalsIgnoreCase("ttl") || key.equalsIgnoreCase("rawText") || key.equalsIgnoreCase("rRsetType") || key.equalsIgnoreCase("address")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

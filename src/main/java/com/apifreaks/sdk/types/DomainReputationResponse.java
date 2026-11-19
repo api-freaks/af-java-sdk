@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
@@ -49,6 +50,10 @@ public final class DomainReputationResponse {
 
   private final List<String> errors;
 
+  private final Optional<DomainReputationResponseBacklinks> backlinks;
+
+  private final Optional<DomainReputationResponseRegistration> registration;
+
   private final Map<String, Object> additionalProperties;
 
   private DomainReputationResponse(DomainReputationResponseInput input, String assessedAt,
@@ -57,6 +62,8 @@ public final class DomainReputationResponse {
       DomainReputationResponseEmailDeliverability emailDeliverability,
       DomainReputationResponseIntelligence intelligence,
       DomainReputationResponseEvidenceSummary evidenceSummary, List<String> errors,
+      Optional<DomainReputationResponseBacklinks> backlinks,
+      Optional<DomainReputationResponseRegistration> registration,
       Map<String, Object> additionalProperties) {
     this.input = input;
     this.assessedAt = assessedAt;
@@ -69,6 +76,8 @@ public final class DomainReputationResponse {
     this.intelligence = intelligence;
     this.evidenceSummary = evidenceSummary;
     this.errors = errors;
+    this.backlinks = backlinks;
+    this.registration = registration;
     this.additionalProperties = additionalProperties;
   }
 
@@ -160,6 +169,22 @@ public final class DomainReputationResponse {
     return errors;
   }
 
+  /**
+   * @return Backlink profile of the domain.
+   */
+  @JsonProperty("backlinks")
+  public Optional<DomainReputationResponseBacklinks> getBacklinks() {
+    return backlinks;
+  }
+
+  /**
+   * @return Current registration status of the domain.
+   */
+  @JsonProperty("registration")
+  public Optional<DomainReputationResponseRegistration> getRegistration() {
+    return registration;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -172,12 +197,12 @@ public final class DomainReputationResponse {
   }
 
   private boolean equalTo(DomainReputationResponse other) {
-    return input.equals(other.input) && assessedAt.equals(other.assessedAt) && version.equals(other.version) && processingTimeMs == other.processingTimeMs && riskCategory.equals(other.riskCategory) && dgaScore.equals(other.dgaScore) && trustSignals.equals(other.trustSignals) && emailDeliverability.equals(other.emailDeliverability) && intelligence.equals(other.intelligence) && evidenceSummary.equals(other.evidenceSummary) && errors.equals(other.errors);
+    return input.equals(other.input) && assessedAt.equals(other.assessedAt) && version.equals(other.version) && processingTimeMs == other.processingTimeMs && riskCategory.equals(other.riskCategory) && dgaScore.equals(other.dgaScore) && trustSignals.equals(other.trustSignals) && emailDeliverability.equals(other.emailDeliverability) && intelligence.equals(other.intelligence) && evidenceSummary.equals(other.evidenceSummary) && errors.equals(other.errors) && backlinks.equals(other.backlinks) && registration.equals(other.registration);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.input, this.assessedAt, this.version, this.processingTimeMs, this.riskCategory, this.dgaScore, this.trustSignals, this.emailDeliverability, this.intelligence, this.evidenceSummary, this.errors);
+    return Objects.hash(this.input, this.assessedAt, this.version, this.processingTimeMs, this.riskCategory, this.dgaScore, this.trustSignals, this.emailDeliverability, this.intelligence, this.evidenceSummary, this.errors, this.backlinks, this.registration);
   }
 
   @java.lang.Override
@@ -278,6 +303,20 @@ public final class DomainReputationResponse {
     _FinalStage addErrors(String errors);
 
     _FinalStage addAllErrors(List<String> errors);
+
+    /**
+     * <p>Backlink profile of the domain.</p>
+     */
+    _FinalStage backlinks(Optional<DomainReputationResponseBacklinks> backlinks);
+
+    _FinalStage backlinks(DomainReputationResponseBacklinks backlinks);
+
+    /**
+     * <p>Current registration status of the domain.</p>
+     */
+    _FinalStage registration(Optional<DomainReputationResponseRegistration> registration);
+
+    _FinalStage registration(DomainReputationResponseRegistration registration);
   }
 
   @JsonIgnoreProperties(
@@ -304,9 +343,12 @@ public final class DomainReputationResponse {
 
     private DomainReputationResponseEvidenceSummary evidenceSummary;
 
+    private Optional<DomainReputationResponseRegistration> registration = Optional.empty();
+
+    private Optional<DomainReputationResponseBacklinks> backlinks = Optional.empty();
+
     private List<String> errors = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -325,11 +367,12 @@ public final class DomainReputationResponse {
       intelligence(other.getIntelligence());
       evidenceSummary(other.getEvidenceSummary());
       errors(other.getErrors());
+      backlinks(other.getBacklinks());
+      registration(other.getRegistration());
       return this;
     }
 
     /**
-     * <p>Input object containing the analyzed domain.</p>
      * <p>Input object containing the analyzed domain.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -342,7 +385,6 @@ public final class DomainReputationResponse {
 
     /**
      * <p>Timestamp when the assessment was performed (YYYY-MM-DDTHH:mm:ssZ).</p>
-     * <p>Timestamp when the assessment was performed (YYYY-MM-DDTHH:mm:ssZ).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -353,7 +395,6 @@ public final class DomainReputationResponse {
     }
 
     /**
-     * <p>API / response schema version.</p>
      * <p>API / response schema version.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -366,7 +407,6 @@ public final class DomainReputationResponse {
 
     /**
      * <p>Time taken to process the request, in milliseconds.</p>
-     * <p>Time taken to process the request, in milliseconds.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -377,7 +417,6 @@ public final class DomainReputationResponse {
     }
 
     /**
-     * <p>Overall risk assessment for the domain.</p>
      * <p>Overall risk assessment for the domain.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -390,7 +429,6 @@ public final class DomainReputationResponse {
 
     /**
      * <p>Domain Generation Algorithm (DGA) detection results.</p>
-     * <p>Domain Generation Algorithm (DGA) detection results.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -401,7 +439,6 @@ public final class DomainReputationResponse {
     }
 
     /**
-     * <p>Trust scoring and supporting signals for the domain.</p>
      * <p>Trust scoring and supporting signals for the domain.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -415,7 +452,6 @@ public final class DomainReputationResponse {
 
     /**
      * <p>Assessment of the domain's ability to send and receive email reliably.</p>
-     * <p>Assessment of the domain's ability to send and receive email reliably.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -427,7 +463,6 @@ public final class DomainReputationResponse {
     }
 
     /**
-     * <p>Threat intelligence details for the indicator of compromise (IOC).</p>
      * <p>Threat intelligence details for the indicator of compromise (IOC).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -441,7 +476,6 @@ public final class DomainReputationResponse {
 
     /**
      * <p>Summary of reasons behind the risk assessment.</p>
-     * <p>Summary of reasons behind the risk assessment.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -449,6 +483,52 @@ public final class DomainReputationResponse {
     public _FinalStage evidenceSummary(
         @NotNull DomainReputationResponseEvidenceSummary evidenceSummary) {
       this.evidenceSummary = Objects.requireNonNull(evidenceSummary, "evidenceSummary must not be null");
+      return this;
+    }
+
+    /**
+     * <p>Current registration status of the domain.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage registration(DomainReputationResponseRegistration registration) {
+      this.registration = Optional.ofNullable(registration);
+      return this;
+    }
+
+    /**
+     * <p>Current registration status of the domain.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "registration",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage registration(Optional<DomainReputationResponseRegistration> registration) {
+      this.registration = registration;
+      return this;
+    }
+
+    /**
+     * <p>Backlink profile of the domain.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage backlinks(DomainReputationResponseBacklinks backlinks) {
+      this.backlinks = Optional.ofNullable(backlinks);
+      return this;
+    }
+
+    /**
+     * <p>Backlink profile of the domain.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "backlinks",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage backlinks(Optional<DomainReputationResponseBacklinks> backlinks) {
+      this.backlinks = backlinks;
       return this;
     }
 
@@ -492,7 +572,15 @@ public final class DomainReputationResponse {
 
     @java.lang.Override
     public DomainReputationResponse build() {
-      return new DomainReputationResponse(input, assessedAt, version, processingTimeMs, riskCategory, dgaScore, trustSignals, emailDeliverability, intelligence, evidenceSummary, errors, additionalProperties);
+      return new DomainReputationResponse(input, assessedAt, version, processingTimeMs, riskCategory, dgaScore, trustSignals, emailDeliverability, intelligence, evidenceSummary, errors, backlinks, registration, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("input") || key.equalsIgnoreCase("assessed_at") || key.equalsIgnoreCase("version") || key.equalsIgnoreCase("processing_time_ms") || key.equalsIgnoreCase("risk_category") || key.equalsIgnoreCase("dga_score") || key.equalsIgnoreCase("trust_signals") || key.equalsIgnoreCase("email_deliverability") || key.equalsIgnoreCase("intelligence") || key.equalsIgnoreCase("evidence_summary") || key.equalsIgnoreCase("errors") || key.equalsIgnoreCase("backlinks") || key.equalsIgnoreCase("registration")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

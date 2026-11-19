@@ -83,25 +83,25 @@ public final class CurrencyConvertByIpRequestUpdates {
   }
 
   public enum Value {
-    ONE_D,
-
-    ONE_H,
+    ONE_M,
 
     TEN_M,
 
-    ONE_M,
+    ONE_H,
+
+    ONE_D,
 
     UNKNOWN
   }
 
   public interface Visitor<T> {
-    T visitOneD();
-
-    T visitOneH();
+    T visitOneM();
 
     T visitTenM();
 
-    T visitOneM();
+    T visitOneH();
+
+    T visitOneD();
 
     T visitUnknown(String unknownType);
   }

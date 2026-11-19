@@ -257,7 +257,6 @@ public final class PhoneValidateResponse {
 
     private Optional<Boolean> canBeInternationallyDialled = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -521,6 +520,14 @@ public final class PhoneValidateResponse {
 
     public PhoneValidateResponse build() {
       return new PhoneValidateResponse(rawInput, possible, valid, countryPrefix, nationalNumber, countryCode, carrier, location, timeZones, lineType, formats, areaCodeLength, ndcLength, canBeInternationallyDialled, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("raw_input") || key.equalsIgnoreCase("possible") || key.equalsIgnoreCase("valid") || key.equalsIgnoreCase("country_prefix") || key.equalsIgnoreCase("national_number") || key.equalsIgnoreCase("country_code") || key.equalsIgnoreCase("carrier") || key.equalsIgnoreCase("location") || key.equalsIgnoreCase("time_zones") || key.equalsIgnoreCase("line_type") || key.equalsIgnoreCase("formats") || key.equalsIgnoreCase("area_code_length") || key.equalsIgnoreCase("ndc_length") || key.equalsIgnoreCase("can_be_internationally_dialled")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -215,7 +215,6 @@ public final class CurrencyConvertByIpResponse {
 
     private String convertedAmount;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -235,7 +234,6 @@ public final class CurrencyConvertByIpResponse {
 
     /**
      * <p>Date and time with timezone (UTC) representing the exact time at which the conversion rate was recorded.</p>
-     * <p>Date and time with timezone (UTC) representing the exact time at which the conversion rate was recorded.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -246,7 +244,6 @@ public final class CurrencyConvertByIpResponse {
     }
 
     /**
-     * <p>Base currency code whose amount will be converted.</p>
      * <p>Base currency code whose amount will be converted.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -259,7 +256,6 @@ public final class CurrencyConvertByIpResponse {
 
     /**
      * <p>Desired currency code for the converted amount.</p>
-     * <p>Desired currency code for the converted amount.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -270,7 +266,6 @@ public final class CurrencyConvertByIpResponse {
     }
 
     /**
-     * <p>Current conversion rate with the base currency as the desired converted currency and the quote currency as the 'from' currency code.</p>
      * <p>Current conversion rate with the base currency as the desired converted currency and the quote currency as the 'from' currency code.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -283,7 +278,6 @@ public final class CurrencyConvertByIpResponse {
 
     /**
      * <p>IP Address whose country's currency will be extracted and used as 'to'. Defaults to the request IP if not provided.</p>
-     * <p>IP Address whose country's currency will be extracted and used as 'to'. Defaults to the request IP if not provided.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -295,7 +289,6 @@ public final class CurrencyConvertByIpResponse {
 
     /**
      * <p>The amount to be converted.</p>
-     * <p>The amount to be converted.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -306,7 +299,6 @@ public final class CurrencyConvertByIpResponse {
     }
 
     /**
-     * <p>Converted amount in the desired currency.</p>
      * <p>Converted amount in the desired currency.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -320,6 +312,14 @@ public final class CurrencyConvertByIpResponse {
     @java.lang.Override
     public CurrencyConvertByIpResponse build() {
       return new CurrencyConvertByIpResponse(date, from, to, rate, ipAddress, givenAmount, convertedAmount, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("date") || key.equalsIgnoreCase("from") || key.equalsIgnoreCase("to") || key.equalsIgnoreCase("rate") || key.equalsIgnoreCase("ipAddress") || key.equalsIgnoreCase("givenAmount") || key.equalsIgnoreCase("convertedAmount")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -449,7 +449,6 @@ public final class AsnWhoisLookupResponse {
 
     private Optional<String> description = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -828,6 +827,14 @@ public final class AsnWhoisLookupResponse {
     @java.lang.Override
     public AsnWhoisLookupResponse build() {
       return new AsnWhoisLookupResponse(asNumber, asName, orgName, description, orgHandle, country, domain, website, allocationStatus, numOfIPv4Routes, numOfIPv6Routes, whoisHost, dateAllocated, type, routeObjects, whoisResponse, downstreams, parsedWhoisResponse, upstreams, peers, contacts, legacyRoutes, whoisRawResponse, rWhoisRawResponse, queryTime, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("asNumber") || key.equalsIgnoreCase("asName") || key.equalsIgnoreCase("orgName") || key.equalsIgnoreCase("description") || key.equalsIgnoreCase("orgHandle") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("domain") || key.equalsIgnoreCase("website") || key.equalsIgnoreCase("allocationStatus") || key.equalsIgnoreCase("numOfIPv4Routes") || key.equalsIgnoreCase("numOfIPv6Routes") || key.equalsIgnoreCase("whoisHost") || key.equalsIgnoreCase("dateAllocated") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("routeObjects") || key.equalsIgnoreCase("whoisResponse") || key.equalsIgnoreCase("downstreams") || key.equalsIgnoreCase("parsedWhoisResponse") || key.equalsIgnoreCase("upstreams") || key.equalsIgnoreCase("peers") || key.equalsIgnoreCase("contacts") || key.equalsIgnoreCase("legacyRoutes") || key.equalsIgnoreCase("whois_raw_response") || key.equalsIgnoreCase("r_whois_raw_response") || key.equalsIgnoreCase("query_time")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

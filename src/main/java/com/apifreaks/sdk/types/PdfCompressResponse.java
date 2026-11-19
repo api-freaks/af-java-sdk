@@ -117,7 +117,6 @@ public final class PdfCompressResponse {
 
     private Optional<List<String>> inputIds = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -131,7 +130,6 @@ public final class PdfCompressResponse {
     }
 
     /**
-     * <p>Task id of the requested task which can be used to check the task status</p>
      * <p>Task id of the requested task which can be used to check the task status</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -168,6 +166,14 @@ public final class PdfCompressResponse {
     @java.lang.Override
     public PdfCompressResponse build() {
       return new PdfCompressResponse(taskId, inputIds, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("taskId") || key.equalsIgnoreCase("inputIds")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

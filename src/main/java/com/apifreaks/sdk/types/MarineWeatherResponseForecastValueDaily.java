@@ -228,7 +228,6 @@ public final class MarineWeatherResponseForecastValueDaily {
 
     private Optional<Double> swellWavePeakPeriodMax = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -456,6 +455,14 @@ public final class MarineWeatherResponseForecastValueDaily {
 
     public MarineWeatherResponseForecastValueDaily build() {
       return new MarineWeatherResponseForecastValueDaily(timestamp, waveHeightMax, waveDirectionDominant, wavePeriodMax, windWaveHeightMax, windWaveDirectionDominant, windWavePeriodMax, windWavePeakPeriodMax, swellWaveHeightMax, swellWaveDirectionDominant, swellWavePeriodMax, swellWavePeakPeriodMax, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("timestamp") || key.equalsIgnoreCase("wave_height_max") || key.equalsIgnoreCase("wave_direction_dominant") || key.equalsIgnoreCase("wave_period_max") || key.equalsIgnoreCase("wind_wave_height_max") || key.equalsIgnoreCase("wind_wave_direction_dominant") || key.equalsIgnoreCase("wind_wave_period_max") || key.equalsIgnoreCase("wind_wave_peak_period_max") || key.equalsIgnoreCase("swell_wave_height_max") || key.equalsIgnoreCase("swell_wave_direction_dominant") || key.equalsIgnoreCase("swell_wave_period_max") || key.equalsIgnoreCase("swell_wave_peak_period_max")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

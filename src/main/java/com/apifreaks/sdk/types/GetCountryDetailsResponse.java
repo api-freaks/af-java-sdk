@@ -286,7 +286,6 @@ public final class GetCountryDetailsResponse {
 
     private String currencySymbol;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -420,6 +419,14 @@ public final class GetCountryDetailsResponse {
     @java.lang.Override
     public GetCountryDetailsResponse build() {
       return new GetCountryDetailsResponse(name, isoAlpha2, isoAlpha3, isoNumeric, phoneCode, capital, topLevelDomain, nativeName, region, subregion, nationality, flagEmoji, currencyCode, currencyName, currencySymbol, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("iso_alpha_2") || key.equalsIgnoreCase("iso_alpha_3") || key.equalsIgnoreCase("iso_numeric") || key.equalsIgnoreCase("phone_code") || key.equalsIgnoreCase("capital") || key.equalsIgnoreCase("top_level_domain") || key.equalsIgnoreCase("native_name") || key.equalsIgnoreCase("region") || key.equalsIgnoreCase("subregion") || key.equalsIgnoreCase("nationality") || key.equalsIgnoreCase("flag_emoji") || key.equalsIgnoreCase("currency_code") || key.equalsIgnoreCase("currency_name") || key.equalsIgnoreCase("currency_symbol")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

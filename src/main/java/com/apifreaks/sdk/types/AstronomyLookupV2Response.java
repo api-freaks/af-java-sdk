@@ -137,7 +137,6 @@ public final class AstronomyLookupV2Response {
 
     private Optional<String> ip = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -152,7 +151,6 @@ public final class AstronomyLookupV2Response {
     }
 
     /**
-     * <p>Complete astronomical data for the specified location and date.</p>
      * <p>Complete astronomical data for the specified location and date.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -212,6 +210,14 @@ public final class AstronomyLookupV2Response {
     @java.lang.Override
     public AstronomyLookupV2Response build() {
       return new AstronomyLookupV2Response(ip, location, astronomy, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("ip") || key.equalsIgnoreCase("location") || key.equalsIgnoreCase("astronomy")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -278,7 +278,6 @@ public final class WeatherForecastResponseLocationCity {
 
     private Optional<String> locality = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -301,7 +300,6 @@ public final class WeatherForecastResponseLocationCity {
 
     /**
      * <p>Original location query string as submitted, including full address or place name.</p>
-     * <p>Original location query string as submitted, including full address or place name.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -312,7 +310,6 @@ public final class WeatherForecastResponseLocationCity {
     }
 
     /**
-     * <p>Resolved country name derived from the geocoded location query.</p>
      * <p>Resolved country name derived from the geocoded location query.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -325,7 +322,6 @@ public final class WeatherForecastResponseLocationCity {
 
     /**
      * <p>State, province, or primary administrative division identified from the location.</p>
-     * <p>State, province, or primary administrative division identified from the location.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -336,7 +332,6 @@ public final class WeatherForecastResponseLocationCity {
     }
 
     /**
-     * <p>City or municipal area name extracted from the geocoded location.</p>
      * <p>City or municipal area name extracted from the geocoded location.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -349,7 +344,6 @@ public final class WeatherForecastResponseLocationCity {
 
     /**
      * <p>Geocoded latitude coordinate in decimal degrees, ranging from -90 to +90.</p>
-     * <p>Geocoded latitude coordinate in decimal degrees, ranging from -90 to +90.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -360,7 +354,6 @@ public final class WeatherForecastResponseLocationCity {
     }
 
     /**
-     * <p>Geocoded longitude coordinate in decimal degrees, ranging from -180 to +180.</p>
      * <p>Geocoded longitude coordinate in decimal degrees, ranging from -180 to +180.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -373,7 +366,6 @@ public final class WeatherForecastResponseLocationCity {
 
     /**
      * <p>IANA timezone database identifier for the geocoded location (e.g., America/Los_Angeles).</p>
-     * <p>IANA timezone database identifier for the geocoded location (e.g., America/Los_Angeles).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -384,7 +376,6 @@ public final class WeatherForecastResponseLocationCity {
     }
 
     /**
-     * <p>Current timezone abbreviation for the location based on local offset (e.g., PDT, CET).</p>
      * <p>Current timezone abbreviation for the location based on local offset (e.g., PDT, CET).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -444,6 +435,14 @@ public final class WeatherForecastResponseLocationCity {
     @java.lang.Override
     public WeatherForecastResponseLocationCity build() {
       return new WeatherForecastResponseLocationCity(locationString, countryName, stateProv, city, locality, latitude, longitude, elevation, timezone, timezoneAbbreviation, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("location_string") || key.equalsIgnoreCase("country_name") || key.equalsIgnoreCase("state_prov") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("locality") || key.equalsIgnoreCase("latitude") || key.equalsIgnoreCase("longitude") || key.equalsIgnoreCase("elevation") || key.equalsIgnoreCase("timezone") || key.equalsIgnoreCase("timezone_abbreviation")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

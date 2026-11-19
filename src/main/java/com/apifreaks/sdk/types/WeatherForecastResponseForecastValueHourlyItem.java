@@ -416,7 +416,6 @@ public final class WeatherForecastResponseForecastValueHourlyItem {
 
     private Optional<Double> globalTiltedIrradiance = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -896,6 +895,14 @@ public final class WeatherForecastResponseForecastValueHourlyItem {
 
     public WeatherForecastResponseForecastValueHourlyItem build() {
       return new WeatherForecastResponseForecastValueHourlyItem(timestamp, temperature2M, relativeHumidity2M, dewPoint2M, apparentTemperature, precipitation, precipitationProbability, rain, showers, snowfall, weatherCode, pressureMsl, surfacePressure, cloudCover, visibility, et0FaoEvapotranspiration, windSpeed10M, windDirection10M, windGusts10M, uvIndex, uvIndexClearSky, shortwaveRadiation, directRadiation, diffuseRadiation, directNormalIrradiance, globalTiltedIrradiance, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("timestamp") || key.equalsIgnoreCase("temperature_2m") || key.equalsIgnoreCase("relative_humidity_2m") || key.equalsIgnoreCase("dew_point_2m") || key.equalsIgnoreCase("apparent_temperature") || key.equalsIgnoreCase("precipitation") || key.equalsIgnoreCase("precipitation_probability") || key.equalsIgnoreCase("rain") || key.equalsIgnoreCase("showers") || key.equalsIgnoreCase("snowfall") || key.equalsIgnoreCase("weather_code") || key.equalsIgnoreCase("pressure_msl") || key.equalsIgnoreCase("surface_pressure") || key.equalsIgnoreCase("cloud_cover") || key.equalsIgnoreCase("visibility") || key.equalsIgnoreCase("et0_fao_evapotranspiration") || key.equalsIgnoreCase("wind_speed_10m") || key.equalsIgnoreCase("wind_direction_10m") || key.equalsIgnoreCase("wind_gusts_10m") || key.equalsIgnoreCase("uv_index") || key.equalsIgnoreCase("uv_index_clear_sky") || key.equalsIgnoreCase("shortwave_radiation") || key.equalsIgnoreCase("direct_radiation") || key.equalsIgnoreCase("diffuse_radiation") || key.equalsIgnoreCase("direct_normal_irradiance") || key.equalsIgnoreCase("global_tilted_irradiance")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -118,7 +118,6 @@ public final class PhoneValidateResponseFormats {
 
     private Optional<String> rfc3966 = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -202,6 +201,14 @@ public final class PhoneValidateResponseFormats {
 
     public PhoneValidateResponseFormats build() {
       return new PhoneValidateResponseFormats(e164, international, national, rfc3966, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("E164") || key.equalsIgnoreCase("International") || key.equalsIgnoreCase("National") || key.equalsIgnoreCase("RFC3966")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

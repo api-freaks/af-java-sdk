@@ -137,7 +137,6 @@ public final class SwiftCodeLookupRequest {
 
     private Optional<SwiftCodeLookupRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -153,7 +152,6 @@ public final class SwiftCodeLookupRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -164,7 +162,6 @@ public final class SwiftCodeLookupRequest {
     }
 
     /**
-     * <p>SWIFT/BIC code to lookup (must be 8 or 11 characters).</p>
      * <p>SWIFT/BIC code to lookup (must be 8 or 11 characters).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -201,6 +198,14 @@ public final class SwiftCodeLookupRequest {
     @java.lang.Override
     public SwiftCodeLookupRequest build() {
       return new SwiftCodeLookupRequest(apiKey, format, swiftCode, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("swiftCode")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

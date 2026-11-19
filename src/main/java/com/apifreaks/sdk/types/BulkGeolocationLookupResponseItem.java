@@ -180,7 +180,6 @@ public final class BulkGeolocationLookupResponseItem {
 
     private Optional<BulkGeolocationLookupResponseItemUserAgent> userAgent = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -350,6 +349,14 @@ public final class BulkGeolocationLookupResponseItem {
 
     public BulkGeolocationLookupResponseItem build() {
       return new BulkGeolocationLookupResponseItem(ip, hostname, location, countryMetadata, network, currency, security, abuse, timeZone, userAgent, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("ip") || key.equalsIgnoreCase("hostname") || key.equalsIgnoreCase("location") || key.equalsIgnoreCase("country_metadata") || key.equalsIgnoreCase("network") || key.equalsIgnoreCase("currency") || key.equalsIgnoreCase("security") || key.equalsIgnoreCase("abuse") || key.equalsIgnoreCase("time_zone") || key.equalsIgnoreCase("user_agent")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

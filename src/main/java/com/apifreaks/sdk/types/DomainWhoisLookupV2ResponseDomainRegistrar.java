@@ -279,7 +279,6 @@ public final class DomainWhoisLookupV2ResponseDomainRegistrar {
 
     private Optional<String> phoneNumber = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -579,6 +578,14 @@ public final class DomainWhoisLookupV2ResponseDomainRegistrar {
 
     public DomainWhoisLookupV2ResponseDomainRegistrar build() {
       return new DomainWhoisLookupV2ResponseDomainRegistrar(ianaId, id, idType, handle, registryId, authoritativeRegistryName, organizationNumber, isSponsor, status, registrarName, normalizedName, whoisServer, rdapServer, websiteUrl, emailAddress, phoneNumber, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("iana_id") || key.equalsIgnoreCase("id") || key.equalsIgnoreCase("id_type") || key.equalsIgnoreCase("handle") || key.equalsIgnoreCase("registry_id") || key.equalsIgnoreCase("authoritative_registry_name") || key.equalsIgnoreCase("organization_number") || key.equalsIgnoreCase("is_sponsor") || key.equalsIgnoreCase("status") || key.equalsIgnoreCase("registrar_name") || key.equalsIgnoreCase("normalized_name") || key.equalsIgnoreCase("whois_server") || key.equalsIgnoreCase("rdap_server") || key.equalsIgnoreCase("website_url") || key.equalsIgnoreCase("email_address") || key.equalsIgnoreCase("phone_number")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

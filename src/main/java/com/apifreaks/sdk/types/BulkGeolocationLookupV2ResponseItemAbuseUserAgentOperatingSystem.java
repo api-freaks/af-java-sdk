@@ -131,7 +131,6 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseUserAgentOperatingSys
 
     private Optional<String> build = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -233,6 +232,14 @@ public final class BulkGeolocationLookupV2ResponseItemAbuseUserAgentOperatingSys
 
     public BulkGeolocationLookupV2ResponseItemAbuseUserAgentOperatingSystem build() {
       return new BulkGeolocationLookupV2ResponseItemAbuseUserAgentOperatingSystem(name, type, version, versionMajor, build, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("version") || key.equalsIgnoreCase("version_major") || key.equalsIgnoreCase("build")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

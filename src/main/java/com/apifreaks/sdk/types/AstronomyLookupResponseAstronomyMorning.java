@@ -169,7 +169,6 @@ public final class AstronomyLookupResponseAstronomyMorning {
 
     private Optional<String> goldenHourEnd = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -331,6 +330,14 @@ public final class AstronomyLookupResponseAstronomyMorning {
 
     public AstronomyLookupResponseAstronomyMorning build() {
       return new AstronomyLookupResponseAstronomyMorning(astronomicalTwilightBegin, astronomicalTwilightEnd, nauticalTwilightBegin, nauticalTwilightEnd, civilTwilightBegin, civilTwilightEnd, blueHourBegin, blueHourEnd, goldenHourBegin, goldenHourEnd, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("astronomical_twilight_begin") || key.equalsIgnoreCase("astronomical_twilight_end") || key.equalsIgnoreCase("nautical_twilight_begin") || key.equalsIgnoreCase("nautical_twilight_end") || key.equalsIgnoreCase("civil_twilight_begin") || key.equalsIgnoreCase("civil_twilight_end") || key.equalsIgnoreCase("blue_hour_begin") || key.equalsIgnoreCase("blue_hour_end") || key.equalsIgnoreCase("golden_hour_begin") || key.equalsIgnoreCase("golden_hour_end")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

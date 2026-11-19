@@ -118,7 +118,6 @@ public final class GeolocationLookupV2ResponseUserAgentEngine {
 
     private Optional<String> versionMajor = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -202,6 +201,14 @@ public final class GeolocationLookupV2ResponseUserAgentEngine {
 
     public GeolocationLookupV2ResponseUserAgentEngine build() {
       return new GeolocationLookupV2ResponseUserAgentEngine(name, type, version, versionMajor, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("version") || key.equalsIgnoreCase("version_major")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -60,7 +60,7 @@ public final class BulkCurrentWeatherRequest {
   }
 
   /**
-   * @return Response format returned by the API.
+   * @return Response format returned by the API. Only JSON is supported.
    */
   @JsonIgnore
   public Optional<BulkCurrentWeatherRequestFormat> getFormat() {
@@ -129,7 +129,7 @@ public final class BulkCurrentWeatherRequest {
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
 
     /**
-     * <p>Response format returned by the API.</p>
+     * <p>Response format returned by the API. Only JSON is supported.</p>
      */
     _FinalStage format(Optional<BulkCurrentWeatherRequestFormat> format);
 
@@ -164,7 +164,6 @@ public final class BulkCurrentWeatherRequest {
 
     private Optional<BulkCurrentWeatherRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -180,7 +179,6 @@ public final class BulkCurrentWeatherRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -253,7 +251,7 @@ public final class BulkCurrentWeatherRequest {
     }
 
     /**
-     * <p>Response format returned by the API.</p>
+     * <p>Response format returned by the API. Only JSON is supported.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -263,7 +261,7 @@ public final class BulkCurrentWeatherRequest {
     }
 
     /**
-     * <p>Response format returned by the API.</p>
+     * <p>Response format returned by the API. Only JSON is supported.</p>
      */
     @java.lang.Override
     @JsonSetter(
@@ -278,6 +276,14 @@ public final class BulkCurrentWeatherRequest {
     @java.lang.Override
     public BulkCurrentWeatherRequest build() {
       return new BulkCurrentWeatherRequest(apiKey, format, timezone, locations, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("locations")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

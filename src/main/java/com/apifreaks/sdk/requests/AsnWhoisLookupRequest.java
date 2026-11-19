@@ -137,7 +137,6 @@ public final class AsnWhoisLookupRequest {
 
     private Optional<AsnWhoisLookupRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -153,7 +152,6 @@ public final class AsnWhoisLookupRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -164,7 +162,6 @@ public final class AsnWhoisLookupRequest {
     }
 
     /**
-     * <p>The Autonomous System Number (ASN) to retrieve WHOIS data for. Can be prefixed with 'as' or not.</p>
      * <p>The Autonomous System Number (ASN) to retrieve WHOIS data for. Can be prefixed with 'as' or not.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -201,6 +198,14 @@ public final class AsnWhoisLookupRequest {
     @java.lang.Override
     public AsnWhoisLookupRequest build() {
       return new AsnWhoisLookupRequest(apiKey, format, asn, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("asn")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

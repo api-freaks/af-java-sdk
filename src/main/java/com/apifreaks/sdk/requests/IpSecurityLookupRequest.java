@@ -178,7 +178,6 @@ public final class IpSecurityLookupRequest {
 
     private Optional<IpSecurityLookupRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -195,7 +194,6 @@ public final class IpSecurityLookupRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -301,6 +299,14 @@ public final class IpSecurityLookupRequest {
     @java.lang.Override
     public IpSecurityLookupRequest build() {
       return new IpSecurityLookupRequest(apiKey, format, ip, fields, excludes, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("ip") || key.equalsIgnoreCase("fields") || key.equalsIgnoreCase("excludes")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

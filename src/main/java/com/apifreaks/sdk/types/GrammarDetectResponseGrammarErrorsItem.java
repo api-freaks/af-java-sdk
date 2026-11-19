@@ -114,7 +114,6 @@ public final class GrammarDetectResponseGrammarErrorsItem {
 
     private int offset;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -129,7 +128,6 @@ public final class GrammarDetectResponseGrammarErrorsItem {
 
     /**
      * <p>The flagged word</p>
-     * <p>The flagged word</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -140,7 +138,6 @@ public final class GrammarDetectResponseGrammarErrorsItem {
     }
 
     /**
-     * <p>Zero-based word position in the input text</p>
      * <p>Zero-based word position in the input text</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -154,6 +151,14 @@ public final class GrammarDetectResponseGrammarErrorsItem {
     @java.lang.Override
     public GrammarDetectResponseGrammarErrorsItem build() {
       return new GrammarDetectResponseGrammarErrorsItem(word, offset, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("word") || key.equalsIgnoreCase("offset")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -348,7 +348,6 @@ public final class PdfRestrictRequest {
 
     private Optional<List<PdfRestrictRequestRestrictionsItem>> restrictions = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -373,7 +372,6 @@ public final class PdfRestrictRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -384,7 +382,6 @@ public final class PdfRestrictRequest {
     }
 
     /**
-     * <p>Sets the password users will use to open the PDF. If this is not set, only the owner password will be configured, and anyone can open the PDF file with the provided restrictions enabled. Password Length should be between 6 and 128 characters.</p>
      * <p>Sets the password users will use to open the PDF. If this is not set, only the owner password will be configured, and anyone can open the PDF file with the provided restrictions enabled. Password Length should be between 6 and 128 characters.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -651,6 +648,14 @@ public final class PdfRestrictRequest {
     @java.lang.Override
     public PdfRestrictRequest build() {
       return new PdfRestrictRequest(restrictions, webhookAuthorization, apiKey, format, fileId, destroy, output, filePassword, userPassword, ownerPassword, webhookUrl, webhookFailureNotification, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("restrictions") || key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("file_id") || key.equalsIgnoreCase("destroy") || key.equalsIgnoreCase("output") || key.equalsIgnoreCase("file_password") || key.equalsIgnoreCase("user_password") || key.equalsIgnoreCase("owner_password") || key.equalsIgnoreCase("webhook_url") || key.equalsIgnoreCase("webhook_failure_notification")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -179,7 +179,6 @@ public final class DomainTyposquattingRequest {
 
     private Optional<DomainTyposquattingRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -196,7 +195,6 @@ public final class DomainTyposquattingRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -302,6 +300,14 @@ public final class DomainTyposquattingRequest {
     @java.lang.Override
     public DomainTyposquattingRequest build() {
       return new DomainTyposquattingRequest(apiKey, format, keyword, pattern, pageToken, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("keyword") || key.equalsIgnoreCase("pattern") || key.equalsIgnoreCase("pageToken")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

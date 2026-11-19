@@ -425,7 +425,6 @@ public final class GeocoderReverseResponse {
 
     private Optional<String> name = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -455,7 +454,6 @@ public final class GeocoderReverseResponse {
 
     /**
      * <p>WGS84 latitude value for the location.</p>
-     * <p>WGS84 latitude value for the location.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -466,7 +464,6 @@ public final class GeocoderReverseResponse {
     }
 
     /**
-     * <p>WGS84 longitude value for the location.</p>
      * <p>WGS84 longitude value for the location.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -479,7 +476,6 @@ public final class GeocoderReverseResponse {
 
     /**
      * <p>Two-letter country code in upper case, ISO-3166-1 alpha-2.</p>
-     * <p>Two-letter country code in upper case, ISO-3166-1 alpha-2.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -491,7 +487,6 @@ public final class GeocoderReverseResponse {
 
     /**
      * <p>Country name of the searched place.</p>
-     * <p>Country name of the searched place.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -502,7 +497,6 @@ public final class GeocoderReverseResponse {
     }
 
     /**
-     * <p>Single-line, human-readable address of the location.</p>
      * <p>Single-line, human-readable address of the location.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -807,6 +801,14 @@ public final class GeocoderReverseResponse {
     @java.lang.Override
     public GeocoderReverseResponse build() {
       return new GeocoderReverseResponse(lat, lon, name, category, type, poi, street, area, postcode, city, county, stateCode, state, countryCode, country, fullAddress, boundingBox, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("lat") || key.equalsIgnoreCase("lon") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("category") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("poi") || key.equalsIgnoreCase("street") || key.equalsIgnoreCase("area") || key.equalsIgnoreCase("postcode") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("county") || key.equalsIgnoreCase("state_code") || key.equalsIgnoreCase("state") || key.equalsIgnoreCase("country_code") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("full_address") || key.equalsIgnoreCase("bounding_box")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

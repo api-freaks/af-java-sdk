@@ -31,12 +31,12 @@ public final class GetSubregionsRequest {
 
   private final Optional<GetSubregionsRequestFormat> format;
 
-  private final String region;
+  private final Optional<String> region;
 
   private final Map<String, Object> additionalProperties;
 
   private GetSubregionsRequest(String apiKey, Optional<GetSubregionsRequestFormat> format,
-      String region, Map<String, Object> additionalProperties) {
+      Optional<String> region, Map<String, Object> additionalProperties) {
     this.apiKey = apiKey;
     this.format = format;
     this.region = region;
@@ -60,10 +60,10 @@ public final class GetSubregionsRequest {
   }
 
   /**
-   * @return Name of the region.
+   * @return Name of the region. If omitted, all subregions are returned.
    */
   @JsonProperty("region")
-  public String getRegion() {
+  public Optional<String> getRegion() {
     return region;
   }
 
@@ -100,16 +100,9 @@ public final class GetSubregionsRequest {
     /**
      * <p>Your API key</p>
      */
-    RegionStage apiKey(@NotNull String apiKey);
+    _FinalStage apiKey(@NotNull String apiKey);
 
     Builder from(GetSubregionsRequest other);
-  }
-
-  public interface RegionStage {
-    /**
-     * <p>Name of the region.</p>
-     */
-    _FinalStage region(@NotNull String region);
   }
 
   public interface _FinalStage {
@@ -125,19 +118,25 @@ public final class GetSubregionsRequest {
     _FinalStage format(Optional<GetSubregionsRequestFormat> format);
 
     _FinalStage format(GetSubregionsRequestFormat format);
+
+    /**
+     * <p>Name of the region. If omitted, all subregions are returned.</p>
+     */
+    _FinalStage region(Optional<String> region);
+
+    _FinalStage region(String region);
   }
 
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements ApiKeyStage, RegionStage, _FinalStage {
+  public static final class Builder implements ApiKeyStage, _FinalStage {
     private String apiKey;
 
-    private String region;
+    private Optional<String> region = Optional.empty();
 
     private Optional<GetSubregionsRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -153,25 +152,35 @@ public final class GetSubregionsRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("apiKey")
-    public RegionStage apiKey(@NotNull String apiKey) {
+    public _FinalStage apiKey(@NotNull String apiKey) {
       this.apiKey = Objects.requireNonNull(apiKey, "apiKey must not be null");
       return this;
     }
 
     /**
-     * <p>Name of the region.</p>
-     * <p>Name of the region.</p>
+     * <p>Name of the region. If omitted, all subregions are returned.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    @JsonSetter("region")
-    public _FinalStage region(@NotNull String region) {
-      this.region = Objects.requireNonNull(region, "region must not be null");
+    public _FinalStage region(String region) {
+      this.region = Optional.ofNullable(region);
+      return this;
+    }
+
+    /**
+     * <p>Name of the region. If omitted, all subregions are returned.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "region",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage region(Optional<String> region) {
+      this.region = region;
       return this;
     }
 
@@ -201,6 +210,14 @@ public final class GetSubregionsRequest {
     @java.lang.Override
     public GetSubregionsRequest build() {
       return new GetSubregionsRequest(apiKey, format, region, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("region")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

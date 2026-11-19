@@ -116,7 +116,6 @@ public final class GetCitiesResponseCitiesItemAdminUnit {
 
     private String adminLevel;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -154,6 +153,14 @@ public final class GetCitiesResponseCitiesItemAdminUnit {
     @java.lang.Override
     public GetCitiesResponseCitiesItemAdminUnit build() {
       return new GetCitiesResponseCitiesItemAdminUnit(name, adminCode, adminLevel, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("admin_code") || key.equalsIgnoreCase("admin_level")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

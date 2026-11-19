@@ -116,7 +116,6 @@ public final class PdfUploadBinaryResponse {
 
     private Optional<String> fileName = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -130,7 +129,6 @@ public final class PdfUploadBinaryResponse {
     }
 
     /**
-     * <p>The unique identifier assigned to the uploaded file.</p>
      * <p>The unique identifier assigned to the uploaded file.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -167,6 +165,14 @@ public final class PdfUploadBinaryResponse {
     @java.lang.Override
     public PdfUploadBinaryResponse build() {
       return new PdfUploadBinaryResponse(fileName, fileId, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("fileName") || key.equalsIgnoreCase("fileId")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

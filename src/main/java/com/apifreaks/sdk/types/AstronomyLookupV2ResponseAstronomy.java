@@ -603,7 +603,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
 
     private Optional<String> timeZone = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -642,7 +641,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
 
     /**
      * <p>The date astronomy data was calculated for. Defaults to today's date; reflects the date query parameter's value when that parameter is supplied.</p>
-     * <p>The date astronomy data was calculated for. Defaults to today's date; reflects the date query parameter's value when that parameter is supplied.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -653,7 +651,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
     }
 
     /**
-     * <p>The current time</p>
      * <p>The current time</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -666,7 +663,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
 
     /**
      * <p>The time of midnight (solar-based)</p>
-     * <p>The time of midnight (solar-based)</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -677,7 +673,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
     }
 
     /**
-     * <p>The time when night ends (start of astronomical twilight)</p>
      * <p>The time when night ends (start of astronomical twilight)</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -690,7 +685,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
 
     /**
      * <p>Morning astronomical data including twilight, blue hour, and golden hour times.</p>
-     * <p>Morning astronomical data including twilight, blue hour, and golden hour times.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -701,7 +695,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
     }
 
     /**
-     * <p>The time of sunrise</p>
      * <p>The time of sunrise</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -714,7 +707,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
 
     /**
      * <p>The time of sunset</p>
-     * <p>The time of sunset</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -725,7 +717,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
     }
 
     /**
-     * <p>Evening astronomical data including golden hour, blue hour, and twilight times.</p>
      * <p>Evening astronomical data including golden hour, blue hour, and twilight times.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -738,7 +729,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
 
     /**
      * <p>The time when night begins (end of astronomical twilight)</p>
-     * <p>The time when night begins (end of astronomical twilight)</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -749,7 +739,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
     }
 
     /**
-     * <p>The current status of the sun (e.g., &quot;rising&quot;, &quot;setting&quot;, &quot;-&quot;)</p>
      * <p>The current status of the sun (e.g., &quot;rising&quot;, &quot;setting&quot;, &quot;-&quot;)</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -762,7 +751,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
 
     /**
      * <p>The time when the sun reaches its highest point in the sky</p>
-     * <p>The time when the sun reaches its highest point in the sky</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -773,7 +761,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
     }
 
     /**
-     * <p>The total duration of daylight</p>
      * <p>The total duration of daylight</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -786,7 +773,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
 
     /**
      * <p>The altitude angle of the sun above the horizon in degrees</p>
-     * <p>The altitude angle of the sun above the horizon in degrees</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -797,7 +783,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
     }
 
     /**
-     * <p>The distance from the Earth to the sun in kilometers</p>
      * <p>The distance from the Earth to the sun in kilometers</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -810,7 +795,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
 
     /**
      * <p>The azimuth angle of the sun in degrees from true north</p>
-     * <p>The azimuth angle of the sun in degrees from true north</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -821,7 +805,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
     }
 
     /**
-     * <p>The current phase of the moon (e.g., &quot;WAXING_GIBBOUS&quot;)</p>
      * <p>The current phase of the moon (e.g., &quot;WAXING_GIBBOUS&quot;)</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -834,7 +817,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
 
     /**
      * <p>The time of moonrise</p>
-     * <p>The time of moonrise</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -845,7 +827,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
     }
 
     /**
-     * <p>The time of moonset</p>
      * <p>The time of moonset</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -858,7 +839,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
 
     /**
      * <p>The current status of the moon (e.g., &quot;rising&quot;, &quot;setting&quot;, &quot;-&quot;)</p>
-     * <p>The current status of the moon (e.g., &quot;rising&quot;, &quot;setting&quot;, &quot;-&quot;)</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -869,7 +849,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
     }
 
     /**
-     * <p>The altitude angle of the moon above the horizon in degrees</p>
      * <p>The altitude angle of the moon above the horizon in degrees</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -882,7 +861,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
 
     /**
      * <p>The distance from the Earth to the moon in kilometers</p>
-     * <p>The distance from the Earth to the moon in kilometers</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -893,7 +871,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
     }
 
     /**
-     * <p>The azimuth angle of the moon in degrees from true north</p>
      * <p>The azimuth angle of the moon in degrees from true north</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -906,7 +883,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
 
     /**
      * <p>The parallactic angle of the moon in degrees</p>
-     * <p>The parallactic angle of the moon in degrees</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -918,7 +894,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
 
     /**
      * <p>The percentage of the moon illuminated by sunlight. A negative value indicates the moon is in a waning phase.</p>
-     * <p>The percentage of the moon illuminated by sunlight. A negative value indicates the moon is in a waning phase.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -929,7 +904,6 @@ public final class AstronomyLookupV2ResponseAstronomy {
     }
 
     /**
-     * <p>The geometric angle of the moon relative to the observer</p>
      * <p>The geometric angle of the moon relative to the observer</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -966,6 +940,14 @@ public final class AstronomyLookupV2ResponseAstronomy {
     @java.lang.Override
     public AstronomyLookupV2ResponseAstronomy build() {
       return new AstronomyLookupV2ResponseAstronomy(timeZone, date, currentTime, midNight, nightEnd, morning, sunrise, sunset, evening, nightBegin, sunStatus, solarNoon, dayLength, sunAltitude, sunDistance, sunAzimuth, moonPhase, moonrise, moonset, moonStatus, moonAltitude, moonDistance, moonAzimuth, moonParallacticAngle, moonIlluminationPercentage, moonAngle, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("time_zone") || key.equalsIgnoreCase("date") || key.equalsIgnoreCase("current_time") || key.equalsIgnoreCase("mid_night") || key.equalsIgnoreCase("night_end") || key.equalsIgnoreCase("morning") || key.equalsIgnoreCase("sunrise") || key.equalsIgnoreCase("sunset") || key.equalsIgnoreCase("evening") || key.equalsIgnoreCase("night_begin") || key.equalsIgnoreCase("sun_status") || key.equalsIgnoreCase("solar_noon") || key.equalsIgnoreCase("day_length") || key.equalsIgnoreCase("sun_altitude") || key.equalsIgnoreCase("sun_distance") || key.equalsIgnoreCase("sun_azimuth") || key.equalsIgnoreCase("moon_phase") || key.equalsIgnoreCase("moonrise") || key.equalsIgnoreCase("moonset") || key.equalsIgnoreCase("moon_status") || key.equalsIgnoreCase("moon_altitude") || key.equalsIgnoreCase("moon_distance") || key.equalsIgnoreCase("moon_azimuth") || key.equalsIgnoreCase("moon_parallactic_angle") || key.equalsIgnoreCase("moon_illumination_percentage") || key.equalsIgnoreCase("moon_angle")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

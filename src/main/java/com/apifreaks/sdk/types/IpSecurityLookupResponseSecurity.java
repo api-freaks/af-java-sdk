@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Boolean;
 import java.lang.Double;
+import java.lang.Integer;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
@@ -66,6 +67,28 @@ public final class IpSecurityLookupResponseSecurity {
 
   private final Optional<String> cloudProviderName;
 
+  private final Optional<Double> botConfidenceScore;
+
+  private final Optional<String> botLastSeen;
+
+  private final Optional<String> botOperatorName;
+
+  private final Optional<String> botType;
+
+  private final Optional<String> corporateGatewayProviderName;
+
+  private final Optional<String> corporateGatewayType;
+
+  private final Optional<Boolean> isCorporateGateway;
+
+  private final Optional<Boolean> isKnownGoodBot;
+
+  private final Optional<Integer> proxyDaysSeen30D;
+
+  private final Optional<Integer> proxyDaysSeen7D;
+
+  private final Optional<Integer> proxyProviderCount30D;
+
   private final Map<String, Object> additionalProperties;
 
   private IpSecurityLookupResponseSecurity(Optional<Double> threatScore, Optional<Boolean> isTor,
@@ -76,7 +99,12 @@ public final class IpSecurityLookupResponseSecurity {
       Optional<String> vpnLastSeen, Optional<Boolean> isRelay, Optional<String> relayProviderName,
       Optional<Boolean> isAnonymous, Optional<Boolean> isKnownAttacker, Optional<Boolean> isBot,
       Optional<Boolean> isSpam, Optional<Boolean> isCloudProvider,
-      Optional<String> cloudProviderName, Map<String, Object> additionalProperties) {
+      Optional<String> cloudProviderName, Optional<Double> botConfidenceScore,
+      Optional<String> botLastSeen, Optional<String> botOperatorName, Optional<String> botType,
+      Optional<String> corporateGatewayProviderName, Optional<String> corporateGatewayType,
+      Optional<Boolean> isCorporateGateway, Optional<Boolean> isKnownGoodBot,
+      Optional<Integer> proxyDaysSeen30D, Optional<Integer> proxyDaysSeen7D,
+      Optional<Integer> proxyProviderCount30D, Map<String, Object> additionalProperties) {
     this.threatScore = threatScore;
     this.isTor = isTor;
     this.isProxy = isProxy;
@@ -96,6 +124,17 @@ public final class IpSecurityLookupResponseSecurity {
     this.isSpam = isSpam;
     this.isCloudProvider = isCloudProvider;
     this.cloudProviderName = cloudProviderName;
+    this.botConfidenceScore = botConfidenceScore;
+    this.botLastSeen = botLastSeen;
+    this.botOperatorName = botOperatorName;
+    this.botType = botType;
+    this.corporateGatewayProviderName = corporateGatewayProviderName;
+    this.corporateGatewayType = corporateGatewayType;
+    this.isCorporateGateway = isCorporateGateway;
+    this.isKnownGoodBot = isKnownGoodBot;
+    this.proxyDaysSeen30D = proxyDaysSeen30D;
+    this.proxyDaysSeen7D = proxyDaysSeen7D;
+    this.proxyProviderCount30D = proxyProviderCount30D;
     this.additionalProperties = additionalProperties;
   }
 
@@ -194,6 +233,94 @@ public final class IpSecurityLookupResponseSecurity {
     return cloudProviderName;
   }
 
+  /**
+   * @return Bot detection confidence from 0 to 100. 0 unless is_bot is true.
+   */
+  @JsonProperty("bot_confidence_score")
+  public Optional<Double> getBotConfidenceScore() {
+    return botConfidenceScore;
+  }
+
+  /**
+   * @return Last observed bot activity date in YYYY-MM-DD, when available.
+   */
+  @JsonProperty("bot_last_seen")
+  public Optional<String> getBotLastSeen() {
+    return botLastSeen;
+  }
+
+  /**
+   * @return Organization running the bot, when known (mostly declared bots).
+   */
+  @JsonProperty("bot_operator_name")
+  public Optional<String> getBotOperatorName() {
+    return botOperatorName;
+  }
+
+  /**
+   * @return Kind of bot activity, when known. Declared bots (is_known_good_bot true): search_engine, ai_crawler, ai_assistant, seo_crawler, site_monitor, link_preview, feed_fetcher, archiver, ad_verification, scanner. Undeclared bots (is_known_good_bot false): scanner, scraper, exploit, credential_stuffing, brute_force, worm. New values can be added over time, so treat it as a plain string.
+   */
+  @JsonProperty("bot_type")
+  public Optional<String> getBotType() {
+    return botType;
+  }
+
+  /**
+   * @return Corporate gateway provider name, when known.
+   */
+  @JsonProperty("corporate_gateway_provider_name")
+  public Optional<String> getCorporateGatewayProviderName() {
+    return corporateGatewayProviderName;
+  }
+
+  /**
+   * @return Kind of corporate gateway, when known. Known values: secure_web_gateway, browser_isolation.
+   */
+  @JsonProperty("corporate_gateway_type")
+  public Optional<String> getCorporateGatewayType() {
+    return corporateGatewayType;
+  }
+
+  /**
+   * @return true if the IP is an outbound address of a corporate security gateway (SWG, SSE, or SASE).
+   */
+  @JsonProperty("is_corporate_gateway")
+  public Optional<Boolean> getIsCorporateGateway() {
+    return isCorporateGateway;
+  }
+
+  /**
+   * @return true if the bot is a declared bot with a verifiable operator (e.g. a search engine crawler or uptime monitor).
+   */
+  @JsonProperty("is_known_good_bot")
+  public Optional<Boolean> getIsKnownGoodBot() {
+    return isKnownGoodBot;
+  }
+
+  /**
+   * @return Number of days in the last 30 days on which the IP was seen acting as a proxy. <code>0</code> when no proxy activity was observed.
+   */
+  @JsonProperty("proxy_days_seen_30d")
+  public Optional<Integer> getProxyDaysSeen30D() {
+    return proxyDaysSeen30D;
+  }
+
+  /**
+   * @return Number of days in the last 7 days on which the IP was seen acting as a proxy. <code>0</code> when no proxy activity was observed.
+   */
+  @JsonProperty("proxy_days_seen_7d")
+  public Optional<Integer> getProxyDaysSeen7D() {
+    return proxyDaysSeen7D;
+  }
+
+  /**
+   * @return Number of distinct proxy providers that offered the IP in the last 30 days. <code>0</code> when no proxy activity was observed.
+   */
+  @JsonProperty("proxy_provider_count_30d")
+  public Optional<Integer> getProxyProviderCount30D() {
+    return proxyProviderCount30D;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -206,12 +333,12 @@ public final class IpSecurityLookupResponseSecurity {
   }
 
   private boolean equalTo(IpSecurityLookupResponseSecurity other) {
-    return threatScore.equals(other.threatScore) && isTor.equals(other.isTor) && isProxy.equals(other.isProxy) && proxyProviderNames.equals(other.proxyProviderNames) && proxyConfidenceScore.equals(other.proxyConfidenceScore) && proxyLastSeen.equals(other.proxyLastSeen) && isResidentialProxy.equals(other.isResidentialProxy) && isVpn.equals(other.isVpn) && vpnProviderNames.equals(other.vpnProviderNames) && vpnConfidenceScore.equals(other.vpnConfidenceScore) && vpnLastSeen.equals(other.vpnLastSeen) && isRelay.equals(other.isRelay) && relayProviderName.equals(other.relayProviderName) && isAnonymous.equals(other.isAnonymous) && isKnownAttacker.equals(other.isKnownAttacker) && isBot.equals(other.isBot) && isSpam.equals(other.isSpam) && isCloudProvider.equals(other.isCloudProvider) && cloudProviderName.equals(other.cloudProviderName);
+    return threatScore.equals(other.threatScore) && isTor.equals(other.isTor) && isProxy.equals(other.isProxy) && proxyProviderNames.equals(other.proxyProviderNames) && proxyConfidenceScore.equals(other.proxyConfidenceScore) && proxyLastSeen.equals(other.proxyLastSeen) && isResidentialProxy.equals(other.isResidentialProxy) && isVpn.equals(other.isVpn) && vpnProviderNames.equals(other.vpnProviderNames) && vpnConfidenceScore.equals(other.vpnConfidenceScore) && vpnLastSeen.equals(other.vpnLastSeen) && isRelay.equals(other.isRelay) && relayProviderName.equals(other.relayProviderName) && isAnonymous.equals(other.isAnonymous) && isKnownAttacker.equals(other.isKnownAttacker) && isBot.equals(other.isBot) && isSpam.equals(other.isSpam) && isCloudProvider.equals(other.isCloudProvider) && cloudProviderName.equals(other.cloudProviderName) && botConfidenceScore.equals(other.botConfidenceScore) && botLastSeen.equals(other.botLastSeen) && botOperatorName.equals(other.botOperatorName) && botType.equals(other.botType) && corporateGatewayProviderName.equals(other.corporateGatewayProviderName) && corporateGatewayType.equals(other.corporateGatewayType) && isCorporateGateway.equals(other.isCorporateGateway) && isKnownGoodBot.equals(other.isKnownGoodBot) && proxyDaysSeen30D.equals(other.proxyDaysSeen30D) && proxyDaysSeen7D.equals(other.proxyDaysSeen7D) && proxyProviderCount30D.equals(other.proxyProviderCount30D);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.threatScore, this.isTor, this.isProxy, this.proxyProviderNames, this.proxyConfidenceScore, this.proxyLastSeen, this.isResidentialProxy, this.isVpn, this.vpnProviderNames, this.vpnConfidenceScore, this.vpnLastSeen, this.isRelay, this.relayProviderName, this.isAnonymous, this.isKnownAttacker, this.isBot, this.isSpam, this.isCloudProvider, this.cloudProviderName);
+    return Objects.hash(this.threatScore, this.isTor, this.isProxy, this.proxyProviderNames, this.proxyConfidenceScore, this.proxyLastSeen, this.isResidentialProxy, this.isVpn, this.vpnProviderNames, this.vpnConfidenceScore, this.vpnLastSeen, this.isRelay, this.relayProviderName, this.isAnonymous, this.isKnownAttacker, this.isBot, this.isSpam, this.isCloudProvider, this.cloudProviderName, this.botConfidenceScore, this.botLastSeen, this.botOperatorName, this.botType, this.corporateGatewayProviderName, this.corporateGatewayType, this.isCorporateGateway, this.isKnownGoodBot, this.proxyDaysSeen30D, this.proxyDaysSeen7D, this.proxyProviderCount30D);
   }
 
   @java.lang.Override
@@ -265,7 +392,28 @@ public final class IpSecurityLookupResponseSecurity {
 
     private Optional<String> cloudProviderName = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<Double> botConfidenceScore = Optional.empty();
+
+    private Optional<String> botLastSeen = Optional.empty();
+
+    private Optional<String> botOperatorName = Optional.empty();
+
+    private Optional<String> botType = Optional.empty();
+
+    private Optional<String> corporateGatewayProviderName = Optional.empty();
+
+    private Optional<String> corporateGatewayType = Optional.empty();
+
+    private Optional<Boolean> isCorporateGateway = Optional.empty();
+
+    private Optional<Boolean> isKnownGoodBot = Optional.empty();
+
+    private Optional<Integer> proxyDaysSeen30D = Optional.empty();
+
+    private Optional<Integer> proxyDaysSeen7D = Optional.empty();
+
+    private Optional<Integer> proxyProviderCount30D = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -291,6 +439,17 @@ public final class IpSecurityLookupResponseSecurity {
       isSpam(other.getIsSpam());
       isCloudProvider(other.getIsCloudProvider());
       cloudProviderName(other.getCloudProviderName());
+      botConfidenceScore(other.getBotConfidenceScore());
+      botLastSeen(other.getBotLastSeen());
+      botOperatorName(other.getBotOperatorName());
+      botType(other.getBotType());
+      corporateGatewayProviderName(other.getCorporateGatewayProviderName());
+      corporateGatewayType(other.getCorporateGatewayType());
+      isCorporateGateway(other.getIsCorporateGateway());
+      isKnownGoodBot(other.getIsKnownGoodBot());
+      proxyDaysSeen30D(other.getProxyDaysSeen30D());
+      proxyDaysSeen7D(other.getProxyDaysSeen7D());
+      proxyProviderCount30D(other.getProxyProviderCount30D());
       return this;
     }
 
@@ -560,8 +719,203 @@ public final class IpSecurityLookupResponseSecurity {
       return this;
     }
 
+    /**
+     * <p>Bot detection confidence from 0 to 100. 0 unless is_bot is true.</p>
+     */
+    @JsonSetter(
+        value = "bot_confidence_score",
+        nulls = Nulls.SKIP
+    )
+    public Builder botConfidenceScore(Optional<Double> botConfidenceScore) {
+      this.botConfidenceScore = botConfidenceScore;
+      return this;
+    }
+
+    public Builder botConfidenceScore(Double botConfidenceScore) {
+      this.botConfidenceScore = Optional.ofNullable(botConfidenceScore);
+      return this;
+    }
+
+    /**
+     * <p>Last observed bot activity date in YYYY-MM-DD, when available.</p>
+     */
+    @JsonSetter(
+        value = "bot_last_seen",
+        nulls = Nulls.SKIP
+    )
+    public Builder botLastSeen(Optional<String> botLastSeen) {
+      this.botLastSeen = botLastSeen;
+      return this;
+    }
+
+    public Builder botLastSeen(String botLastSeen) {
+      this.botLastSeen = Optional.ofNullable(botLastSeen);
+      return this;
+    }
+
+    /**
+     * <p>Organization running the bot, when known (mostly declared bots).</p>
+     */
+    @JsonSetter(
+        value = "bot_operator_name",
+        nulls = Nulls.SKIP
+    )
+    public Builder botOperatorName(Optional<String> botOperatorName) {
+      this.botOperatorName = botOperatorName;
+      return this;
+    }
+
+    public Builder botOperatorName(String botOperatorName) {
+      this.botOperatorName = Optional.ofNullable(botOperatorName);
+      return this;
+    }
+
+    /**
+     * <p>Kind of bot activity, when known. Declared bots (is_known_good_bot true): search_engine, ai_crawler, ai_assistant, seo_crawler, site_monitor, link_preview, feed_fetcher, archiver, ad_verification, scanner. Undeclared bots (is_known_good_bot false): scanner, scraper, exploit, credential_stuffing, brute_force, worm. New values can be added over time, so treat it as a plain string.</p>
+     */
+    @JsonSetter(
+        value = "bot_type",
+        nulls = Nulls.SKIP
+    )
+    public Builder botType(Optional<String> botType) {
+      this.botType = botType;
+      return this;
+    }
+
+    public Builder botType(String botType) {
+      this.botType = Optional.ofNullable(botType);
+      return this;
+    }
+
+    /**
+     * <p>Corporate gateway provider name, when known.</p>
+     */
+    @JsonSetter(
+        value = "corporate_gateway_provider_name",
+        nulls = Nulls.SKIP
+    )
+    public Builder corporateGatewayProviderName(Optional<String> corporateGatewayProviderName) {
+      this.corporateGatewayProviderName = corporateGatewayProviderName;
+      return this;
+    }
+
+    public Builder corporateGatewayProviderName(String corporateGatewayProviderName) {
+      this.corporateGatewayProviderName = Optional.ofNullable(corporateGatewayProviderName);
+      return this;
+    }
+
+    /**
+     * <p>Kind of corporate gateway, when known. Known values: secure_web_gateway, browser_isolation.</p>
+     */
+    @JsonSetter(
+        value = "corporate_gateway_type",
+        nulls = Nulls.SKIP
+    )
+    public Builder corporateGatewayType(Optional<String> corporateGatewayType) {
+      this.corporateGatewayType = corporateGatewayType;
+      return this;
+    }
+
+    public Builder corporateGatewayType(String corporateGatewayType) {
+      this.corporateGatewayType = Optional.ofNullable(corporateGatewayType);
+      return this;
+    }
+
+    /**
+     * <p>true if the IP is an outbound address of a corporate security gateway (SWG, SSE, or SASE).</p>
+     */
+    @JsonSetter(
+        value = "is_corporate_gateway",
+        nulls = Nulls.SKIP
+    )
+    public Builder isCorporateGateway(Optional<Boolean> isCorporateGateway) {
+      this.isCorporateGateway = isCorporateGateway;
+      return this;
+    }
+
+    public Builder isCorporateGateway(Boolean isCorporateGateway) {
+      this.isCorporateGateway = Optional.ofNullable(isCorporateGateway);
+      return this;
+    }
+
+    /**
+     * <p>true if the bot is a declared bot with a verifiable operator (e.g. a search engine crawler or uptime monitor).</p>
+     */
+    @JsonSetter(
+        value = "is_known_good_bot",
+        nulls = Nulls.SKIP
+    )
+    public Builder isKnownGoodBot(Optional<Boolean> isKnownGoodBot) {
+      this.isKnownGoodBot = isKnownGoodBot;
+      return this;
+    }
+
+    public Builder isKnownGoodBot(Boolean isKnownGoodBot) {
+      this.isKnownGoodBot = Optional.ofNullable(isKnownGoodBot);
+      return this;
+    }
+
+    /**
+     * <p>Number of days in the last 30 days on which the IP was seen acting as a proxy. <code>0</code> when no proxy activity was observed.</p>
+     */
+    @JsonSetter(
+        value = "proxy_days_seen_30d",
+        nulls = Nulls.SKIP
+    )
+    public Builder proxyDaysSeen30D(Optional<Integer> proxyDaysSeen30D) {
+      this.proxyDaysSeen30D = proxyDaysSeen30D;
+      return this;
+    }
+
+    public Builder proxyDaysSeen30D(Integer proxyDaysSeen30D) {
+      this.proxyDaysSeen30D = Optional.ofNullable(proxyDaysSeen30D);
+      return this;
+    }
+
+    /**
+     * <p>Number of days in the last 7 days on which the IP was seen acting as a proxy. <code>0</code> when no proxy activity was observed.</p>
+     */
+    @JsonSetter(
+        value = "proxy_days_seen_7d",
+        nulls = Nulls.SKIP
+    )
+    public Builder proxyDaysSeen7D(Optional<Integer> proxyDaysSeen7D) {
+      this.proxyDaysSeen7D = proxyDaysSeen7D;
+      return this;
+    }
+
+    public Builder proxyDaysSeen7D(Integer proxyDaysSeen7D) {
+      this.proxyDaysSeen7D = Optional.ofNullable(proxyDaysSeen7D);
+      return this;
+    }
+
+    /**
+     * <p>Number of distinct proxy providers that offered the IP in the last 30 days. <code>0</code> when no proxy activity was observed.</p>
+     */
+    @JsonSetter(
+        value = "proxy_provider_count_30d",
+        nulls = Nulls.SKIP
+    )
+    public Builder proxyProviderCount30D(Optional<Integer> proxyProviderCount30D) {
+      this.proxyProviderCount30D = proxyProviderCount30D;
+      return this;
+    }
+
+    public Builder proxyProviderCount30D(Integer proxyProviderCount30D) {
+      this.proxyProviderCount30D = Optional.ofNullable(proxyProviderCount30D);
+      return this;
+    }
+
     public IpSecurityLookupResponseSecurity build() {
-      return new IpSecurityLookupResponseSecurity(threatScore, isTor, isProxy, proxyProviderNames, proxyConfidenceScore, proxyLastSeen, isResidentialProxy, isVpn, vpnProviderNames, vpnConfidenceScore, vpnLastSeen, isRelay, relayProviderName, isAnonymous, isKnownAttacker, isBot, isSpam, isCloudProvider, cloudProviderName, additionalProperties);
+      return new IpSecurityLookupResponseSecurity(threatScore, isTor, isProxy, proxyProviderNames, proxyConfidenceScore, proxyLastSeen, isResidentialProxy, isVpn, vpnProviderNames, vpnConfidenceScore, vpnLastSeen, isRelay, relayProviderName, isAnonymous, isKnownAttacker, isBot, isSpam, isCloudProvider, cloudProviderName, botConfidenceScore, botLastSeen, botOperatorName, botType, corporateGatewayProviderName, corporateGatewayType, isCorporateGateway, isKnownGoodBot, proxyDaysSeen30D, proxyDaysSeen7D, proxyProviderCount30D, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("threat_score") || key.equalsIgnoreCase("is_tor") || key.equalsIgnoreCase("is_proxy") || key.equalsIgnoreCase("proxy_provider_names") || key.equalsIgnoreCase("proxy_confidence_score") || key.equalsIgnoreCase("proxy_last_seen") || key.equalsIgnoreCase("is_residential_proxy") || key.equalsIgnoreCase("is_vpn") || key.equalsIgnoreCase("vpn_provider_names") || key.equalsIgnoreCase("vpn_confidence_score") || key.equalsIgnoreCase("vpn_last_seen") || key.equalsIgnoreCase("is_relay") || key.equalsIgnoreCase("relay_provider_name") || key.equalsIgnoreCase("is_anonymous") || key.equalsIgnoreCase("is_known_attacker") || key.equalsIgnoreCase("is_bot") || key.equalsIgnoreCase("is_spam") || key.equalsIgnoreCase("is_cloud_provider") || key.equalsIgnoreCase("cloud_provider_name") || key.equalsIgnoreCase("bot_confidence_score") || key.equalsIgnoreCase("bot_last_seen") || key.equalsIgnoreCase("bot_operator_name") || key.equalsIgnoreCase("bot_type") || key.equalsIgnoreCase("corporate_gateway_provider_name") || key.equalsIgnoreCase("corporate_gateway_type") || key.equalsIgnoreCase("is_corporate_gateway") || key.equalsIgnoreCase("is_known_good_bot") || key.equalsIgnoreCase("proxy_days_seen_30d") || key.equalsIgnoreCase("proxy_days_seen_7d") || key.equalsIgnoreCase("proxy_provider_count_30d")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -173,7 +173,6 @@ public final class FloodForecastResponseForecastValueDaily {
 
     private Optional<Double> riverDischargeP75 = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -329,6 +328,14 @@ public final class FloodForecastResponseForecastValueDaily {
 
     public FloodForecastResponseForecastValueDaily build() {
       return new FloodForecastResponseForecastValueDaily(timestamp, riverDischarge, riverDischargeMean, riverDischargeMedian, riverDischargeMax, riverDischargeMin, riverDischargeP25, riverDischargeP75, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("timestamp") || key.equalsIgnoreCase("river_discharge") || key.equalsIgnoreCase("river_discharge_mean") || key.equalsIgnoreCase("river_discharge_median") || key.equalsIgnoreCase("river_discharge_max") || key.equalsIgnoreCase("river_discharge_min") || key.equalsIgnoreCase("river_discharge_p25") || key.equalsIgnoreCase("river_discharge_p75")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

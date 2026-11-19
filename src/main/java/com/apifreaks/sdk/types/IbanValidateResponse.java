@@ -155,7 +155,6 @@ public final class IbanValidateResponse {
 
     private IbanValidateResponseBankData bankData;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -172,7 +171,6 @@ public final class IbanValidateResponse {
 
     /**
      * <p>Determines whether IBAN passes all validation checks</p>
-     * <p>Determines whether IBAN passes all validation checks</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -183,7 +181,6 @@ public final class IbanValidateResponse {
     }
 
     /**
-     * <p>The IBAN number provided by the user.</p>
      * <p>The IBAN number provided by the user.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -196,7 +193,6 @@ public final class IbanValidateResponse {
 
     /**
      * <p>Object contains IBAN validation details.</p>
-     * <p>Object contains IBAN validation details.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -207,7 +203,6 @@ public final class IbanValidateResponse {
     }
 
     /**
-     * <p>Object contains Bank and BIC details.</p>
      * <p>Object contains Bank and BIC details.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -221,6 +216,14 @@ public final class IbanValidateResponse {
     @java.lang.Override
     public IbanValidateResponse build() {
       return new IbanValidateResponse(valid, iban, validation, bankData, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("valid") || key.equalsIgnoreCase("iban") || key.equalsIgnoreCase("validation") || key.equalsIgnoreCase("bank_data")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

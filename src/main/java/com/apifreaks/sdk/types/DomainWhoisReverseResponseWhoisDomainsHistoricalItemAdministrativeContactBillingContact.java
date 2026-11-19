@@ -4,9 +4,12 @@
 
 package com.apifreaks.sdk.types;
 
+import com.apifreaks.sdk.core.Nullable;
+import com.apifreaks.sdk.core.NullableNonemptyFilter;
 import com.apifreaks.sdk.core.ObjectMappers;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -49,6 +52,10 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
 
   private final Optional<String> mailingAddress;
 
+  private final Optional<String> handle;
+
+  private final Optional<String> id;
+
   private final Map<String, Object> additionalProperties;
 
   private DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministrativeContactBillingContact(
@@ -56,7 +63,7 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
       Optional<String> city, Optional<String> state, Optional<String> zipCode,
       Optional<String> countryName, Optional<String> countryCode, Optional<String> emailAddress,
       Optional<String> phone, Optional<String> fax, Optional<String> mailingAddress,
-      Map<String, Object> additionalProperties) {
+      Optional<String> handle, Optional<String> id, Map<String, Object> additionalProperties) {
     this.name = name;
     this.company = company;
     this.street = street;
@@ -69,6 +76,8 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
     this.phone = phone;
     this.fax = fax;
     this.mailingAddress = mailingAddress;
+    this.handle = handle;
+    this.id = id;
     this.additionalProperties = additionalProperties;
   }
 
@@ -132,6 +141,46 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
     return mailingAddress;
   }
 
+  /**
+   * @return Registry handle for the contact, when published.
+   */
+  @JsonIgnore
+  public Optional<String> getHandle() {
+    if (handle == null) {
+      return Optional.empty();
+    }
+    return handle;
+  }
+
+  /**
+   * @return Contact identifier.
+   */
+  @JsonIgnore
+  public Optional<String> getId() {
+    if (id == null) {
+      return Optional.empty();
+    }
+    return id;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("handle")
+  private Optional<String> _getHandle() {
+    return handle;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("id")
+  private Optional<String> _getId() {
+    return id;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -145,12 +194,12 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
 
   private boolean equalTo(
       DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministrativeContactBillingContact other) {
-    return name.equals(other.name) && company.equals(other.company) && street.equals(other.street) && city.equals(other.city) && state.equals(other.state) && zipCode.equals(other.zipCode) && countryName.equals(other.countryName) && countryCode.equals(other.countryCode) && emailAddress.equals(other.emailAddress) && phone.equals(other.phone) && fax.equals(other.fax) && mailingAddress.equals(other.mailingAddress);
+    return name.equals(other.name) && company.equals(other.company) && street.equals(other.street) && city.equals(other.city) && state.equals(other.state) && zipCode.equals(other.zipCode) && countryName.equals(other.countryName) && countryCode.equals(other.countryCode) && emailAddress.equals(other.emailAddress) && phone.equals(other.phone) && fax.equals(other.fax) && mailingAddress.equals(other.mailingAddress) && handle.equals(other.handle) && id.equals(other.id);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.name, this.company, this.street, this.city, this.state, this.zipCode, this.countryName, this.countryCode, this.emailAddress, this.phone, this.fax, this.mailingAddress);
+    return Objects.hash(this.name, this.company, this.street, this.city, this.state, this.zipCode, this.countryName, this.countryCode, this.emailAddress, this.phone, this.fax, this.mailingAddress, this.handle, this.id);
   }
 
   @java.lang.Override
@@ -190,7 +239,10 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
 
     private Optional<String> mailingAddress = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<String> handle = Optional.empty();
+
+    private Optional<String> id = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -210,6 +262,8 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
       phone(other.getPhone());
       fax(other.getFax());
       mailingAddress(other.getMailingAddress());
+      handle(other.getHandle());
+      id(other.getId());
       return this;
     }
 
@@ -381,9 +435,77 @@ public final class DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministr
       return this;
     }
 
+    /**
+     * <p>Registry handle for the contact, when published.</p>
+     */
+    @JsonSetter(
+        value = "handle",
+        nulls = Nulls.SKIP
+    )
+    public Builder handle(Optional<String> handle) {
+      this.handle = handle;
+      return this;
+    }
+
+    public Builder handle(String handle) {
+      this.handle = Optional.ofNullable(handle);
+      return this;
+    }
+
+    public Builder handle(Nullable<String> handle) {
+      if (handle.isNull()) {
+        this.handle = null;
+      }
+      else if (handle.isEmpty()) {
+        this.handle = Optional.empty();
+      }
+      else {
+        this.handle = Optional.of(handle.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Contact identifier.</p>
+     */
+    @JsonSetter(
+        value = "id",
+        nulls = Nulls.SKIP
+    )
+    public Builder id(Optional<String> id) {
+      this.id = id;
+      return this;
+    }
+
+    public Builder id(String id) {
+      this.id = Optional.ofNullable(id);
+      return this;
+    }
+
+    public Builder id(Nullable<String> id) {
+      if (id.isNull()) {
+        this.id = null;
+      }
+      else if (id.isEmpty()) {
+        this.id = Optional.empty();
+      }
+      else {
+        this.id = Optional.of(id.get());
+      }
+      return this;
+    }
+
     public DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministrativeContactBillingContact build(
         ) {
-      return new DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministrativeContactBillingContact(name, company, street, city, state, zipCode, countryName, countryCode, emailAddress, phone, fax, mailingAddress, additionalProperties);
+      return new DomainWhoisReverseResponseWhoisDomainsHistoricalItemAdministrativeContactBillingContact(name, company, street, city, state, zipCode, countryName, countryCode, emailAddress, phone, fax, mailingAddress, handle, id, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("company") || key.equalsIgnoreCase("street") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("state") || key.equalsIgnoreCase("zip_code") || key.equalsIgnoreCase("country_name") || key.equalsIgnoreCase("country_code") || key.equalsIgnoreCase("email_address") || key.equalsIgnoreCase("phone") || key.equalsIgnoreCase("fax") || key.equalsIgnoreCase("mailing_address") || key.equalsIgnoreCase("handle") || key.equalsIgnoreCase("id")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

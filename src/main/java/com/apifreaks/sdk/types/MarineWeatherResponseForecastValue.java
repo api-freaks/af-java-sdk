@@ -108,7 +108,6 @@ public final class MarineWeatherResponseForecastValue {
 
     private Optional<List<MarineWeatherResponseForecastValueMinutelyItem>> minutely = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -175,6 +174,14 @@ public final class MarineWeatherResponseForecastValue {
 
     public MarineWeatherResponseForecastValue build() {
       return new MarineWeatherResponseForecastValue(daily, hourly, minutely, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("daily") || key.equalsIgnoreCase("hourly") || key.equalsIgnoreCase("minutely")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

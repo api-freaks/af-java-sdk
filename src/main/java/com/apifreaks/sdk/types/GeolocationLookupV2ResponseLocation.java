@@ -539,7 +539,6 @@ public final class GeolocationLookupV2ResponseLocation {
 
     private Optional<String> stateProv = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -574,7 +573,6 @@ public final class GeolocationLookupV2ResponseLocation {
 
     /**
      * <p>2-letter code of the continent.</p>
-     * <p>2-letter code of the continent.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -585,7 +583,6 @@ public final class GeolocationLookupV2ResponseLocation {
     }
 
     /**
-     * <p>Name of the continent.</p>
      * <p>Name of the continent.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -598,7 +595,6 @@ public final class GeolocationLookupV2ResponseLocation {
 
     /**
      * <p>Country code (ISO 3166-1 alpha-2) of the country.</p>
-     * <p>Country code (ISO 3166-1 alpha-2) of the country.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -609,7 +605,6 @@ public final class GeolocationLookupV2ResponseLocation {
     }
 
     /**
-     * <p>Country code (ISO 3166-1 alpha-3) of the country.</p>
      * <p>Country code (ISO 3166-1 alpha-3) of the country.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -622,7 +617,6 @@ public final class GeolocationLookupV2ResponseLocation {
 
     /**
      * <p>Name of the country.</p>
-     * <p>Name of the country.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -633,7 +627,6 @@ public final class GeolocationLookupV2ResponseLocation {
     }
 
     /**
-     * <p>Official name (ISO 3166) of the country.</p>
      * <p>Official name (ISO 3166) of the country.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -646,7 +639,6 @@ public final class GeolocationLookupV2ResponseLocation {
 
     /**
      * <p>Name of the country's capital.</p>
-     * <p>Name of the country's capital.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -657,7 +649,6 @@ public final class GeolocationLookupV2ResponseLocation {
     }
 
     /**
-     * <p>Latitude of the place.</p>
      * <p>Latitude of the place.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -670,7 +661,6 @@ public final class GeolocationLookupV2ResponseLocation {
 
     /**
      * <p>Longitude of the place.</p>
-     * <p>Longitude of the place.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -682,7 +672,6 @@ public final class GeolocationLookupV2ResponseLocation {
 
     /**
      * <p>Is the country belong to European Union?</p>
-     * <p>Is the country belong to European Union?</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -693,7 +682,6 @@ public final class GeolocationLookupV2ResponseLocation {
     }
 
     /**
-     * <p>URL to get the country flag.</p>
      * <p>URL to get the country flag.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -978,6 +966,14 @@ public final class GeolocationLookupV2ResponseLocation {
     @java.lang.Override
     public GeolocationLookupV2ResponseLocation build() {
       return new GeolocationLookupV2ResponseLocation(continentCode, continentName, countryCode2, countryCode3, countryName, countryNameOfficial, countryCapital, stateProv, stateCode, district, city, locality, accuracyRadius, confidence, dmaCode, zipcode, latitude, longitude, isEu, countryFlag, geonameId, countryEmoji, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("continent_code") || key.equalsIgnoreCase("continent_name") || key.equalsIgnoreCase("country_code2") || key.equalsIgnoreCase("country_code3") || key.equalsIgnoreCase("country_name") || key.equalsIgnoreCase("country_name_official") || key.equalsIgnoreCase("country_capital") || key.equalsIgnoreCase("state_prov") || key.equalsIgnoreCase("state_code") || key.equalsIgnoreCase("district") || key.equalsIgnoreCase("city") || key.equalsIgnoreCase("locality") || key.equalsIgnoreCase("accuracy_radius") || key.equalsIgnoreCase("confidence") || key.equalsIgnoreCase("dma_code") || key.equalsIgnoreCase("zipcode") || key.equalsIgnoreCase("latitude") || key.equalsIgnoreCase("longitude") || key.equalsIgnoreCase("is_eu") || key.equalsIgnoreCase("country_flag") || key.equalsIgnoreCase("geoname_id") || key.equalsIgnoreCase("country_emoji")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

@@ -108,7 +108,6 @@ public final class ReadabilityScoreResponseSentenceReadabilityItem {
 
     private Optional<ReadabilityScoreResponseSentenceReadabilityItemReadabilityLevel> readabilityLevel = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -176,6 +175,14 @@ public final class ReadabilityScoreResponseSentenceReadabilityItem {
 
     public ReadabilityScoreResponseSentenceReadabilityItem build() {
       return new ReadabilityScoreResponseSentenceReadabilityItem(sentence, readabilityGrade, readabilityLevel, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("sentence") || key.equalsIgnoreCase("readability_grade") || key.equalsIgnoreCase("readability_level")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

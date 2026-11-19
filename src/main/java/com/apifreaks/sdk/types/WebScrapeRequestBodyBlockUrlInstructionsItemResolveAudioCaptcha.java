@@ -25,22 +25,34 @@ import java.util.Optional;
     builder = WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha.Builder.class
 )
 public final class WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha {
-  private final Optional<Map<String, Object>> resolveAudioCaptcha;
+  private final Optional<String> audioPath;
+
+  private final Optional<String> textField;
 
   private final Map<String, Object> additionalProperties;
 
   private WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha(
-      Optional<Map<String, Object>> resolveAudioCaptcha, Map<String, Object> additionalProperties) {
-    this.resolveAudioCaptcha = resolveAudioCaptcha;
+      Optional<String> audioPath, Optional<String> textField,
+      Map<String, Object> additionalProperties) {
+    this.audioPath = audioPath;
+    this.textField = textField;
     this.additionalProperties = additionalProperties;
   }
 
   /**
-   * @return Solves audio CAPTCHA challenges.
+   * @return Selector for the audio CAPTCHA element.
    */
-  @JsonProperty("resolveAudioCaptcha")
-  public Optional<Map<String, Object>> getResolveAudioCaptcha() {
-    return resolveAudioCaptcha;
+  @JsonProperty("audioPath")
+  public Optional<String> getAudioPath() {
+    return audioPath;
+  }
+
+  /**
+   * @return Selector for the field where the resolved audio CAPTCHA text is entered.
+   */
+  @JsonProperty("textField")
+  public Optional<String> getTextField() {
+    return textField;
   }
 
   @java.lang.Override
@@ -55,12 +67,12 @@ public final class WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptc
   }
 
   private boolean equalTo(WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha other) {
-    return resolveAudioCaptcha.equals(other.resolveAudioCaptcha);
+    return audioPath.equals(other.audioPath) && textField.equals(other.textField);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.resolveAudioCaptcha);
+    return Objects.hash(this.audioPath, this.textField);
   }
 
   @java.lang.Override
@@ -76,38 +88,65 @@ public final class WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptc
       ignoreUnknown = true
   )
   public static final class Builder {
-    private Optional<Map<String, Object>> resolveAudioCaptcha = Optional.empty();
+    private Optional<String> audioPath = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<String> textField = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
     }
 
     public Builder from(WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha other) {
-      resolveAudioCaptcha(other.getResolveAudioCaptcha());
+      audioPath(other.getAudioPath());
+      textField(other.getTextField());
       return this;
     }
 
     /**
-     * <p>Solves audio CAPTCHA challenges.</p>
+     * <p>Selector for the audio CAPTCHA element.</p>
      */
     @JsonSetter(
-        value = "resolveAudioCaptcha",
+        value = "audioPath",
         nulls = Nulls.SKIP
     )
-    public Builder resolveAudioCaptcha(Optional<Map<String, Object>> resolveAudioCaptcha) {
-      this.resolveAudioCaptcha = resolveAudioCaptcha;
+    public Builder audioPath(Optional<String> audioPath) {
+      this.audioPath = audioPath;
       return this;
     }
 
-    public Builder resolveAudioCaptcha(Map<String, Object> resolveAudioCaptcha) {
-      this.resolveAudioCaptcha = Optional.ofNullable(resolveAudioCaptcha);
+    public Builder audioPath(String audioPath) {
+      this.audioPath = Optional.ofNullable(audioPath);
+      return this;
+    }
+
+    /**
+     * <p>Selector for the field where the resolved audio CAPTCHA text is entered.</p>
+     */
+    @JsonSetter(
+        value = "textField",
+        nulls = Nulls.SKIP
+    )
+    public Builder textField(Optional<String> textField) {
+      this.textField = textField;
+      return this;
+    }
+
+    public Builder textField(String textField) {
+      this.textField = Optional.ofNullable(textField);
       return this;
     }
 
     public WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha build() {
-      return new WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha(resolveAudioCaptcha, additionalProperties);
+      return new WebScrapeRequestBodyBlockUrlInstructionsItemResolveAudioCaptcha(audioPath, textField, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("audioPath") || key.equalsIgnoreCase("textField")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

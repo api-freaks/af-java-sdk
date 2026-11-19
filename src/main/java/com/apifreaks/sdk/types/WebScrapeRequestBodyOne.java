@@ -37,7 +37,7 @@ public final class WebScrapeRequestBodyOne {
   }
 
   /**
-   * @return A list of sequential instructions to execute after receiving the static HTML response. Supported methods include <code>postForm</code>, <code>getForm</code>, and <code>extract</code>.
+   * @return A list of sequential instructions to execute against the static HTML response. Each item is one StaticInstruction object, with exactly one action field set.
    */
   @JsonProperty("instructions")
   public List<WebScrapeRequestBodyOneInstructionsItem> getInstructions() {
@@ -79,7 +79,6 @@ public final class WebScrapeRequestBodyOne {
   public static final class Builder {
     private List<WebScrapeRequestBodyOneInstructionsItem> instructions = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -91,7 +90,7 @@ public final class WebScrapeRequestBodyOne {
     }
 
     /**
-     * <p>A list of sequential instructions to execute after receiving the static HTML response. Supported methods include <code>postForm</code>, <code>getForm</code>, and <code>extract</code>.</p>
+     * <p>A list of sequential instructions to execute against the static HTML response. Each item is one StaticInstruction object, with exactly one action field set.</p>
      */
     @JsonSetter(
         value = "instructions",
@@ -119,6 +118,14 @@ public final class WebScrapeRequestBodyOne {
 
     public WebScrapeRequestBodyOne build() {
       return new WebScrapeRequestBodyOne(instructions, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("instructions")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

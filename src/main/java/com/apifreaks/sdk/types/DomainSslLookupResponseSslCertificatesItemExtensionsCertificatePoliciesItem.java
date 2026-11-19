@@ -122,7 +122,6 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertifica
 
     private Optional<DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItemPolicyQualifier> policyQualifier = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -137,7 +136,6 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertifica
     }
 
     /**
-     * <p>Policy identifier</p>
      * <p>Policy identifier</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -176,6 +174,14 @@ public final class DomainSslLookupResponseSslCertificatesItemExtensionsCertifica
     @java.lang.Override
     public DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem build() {
       return new DomainSslLookupResponseSslCertificatesItemExtensionsCertificatePoliciesItem(policyId, policyQualifier, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("policyId") || key.equalsIgnoreCase("policyQualifier")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

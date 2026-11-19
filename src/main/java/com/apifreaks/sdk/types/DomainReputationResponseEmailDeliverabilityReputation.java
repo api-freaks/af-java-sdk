@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.Object;
 import java.lang.String;
@@ -31,14 +32,14 @@ import java.util.Optional;
 public final class DomainReputationResponseEmailDeliverabilityReputation {
   private final boolean spamBlacklisted;
 
-  private final boolean newlyRegistered;
+  private final Optional<Boolean> newlyRegistered;
 
   private final Optional<Integer> domainAgeDays;
 
   private final Map<String, Object> additionalProperties;
 
   private DomainReputationResponseEmailDeliverabilityReputation(boolean spamBlacklisted,
-      boolean newlyRegistered, Optional<Integer> domainAgeDays,
+      Optional<Boolean> newlyRegistered, Optional<Integer> domainAgeDays,
       Map<String, Object> additionalProperties) {
     this.spamBlacklisted = spamBlacklisted;
     this.newlyRegistered = newlyRegistered;
@@ -57,8 +58,11 @@ public final class DomainReputationResponseEmailDeliverabilityReputation {
   /**
    * @return Indicates whether the domain was registered recently.
    */
-  @JsonProperty("newly_registered")
-  public boolean getNewlyRegistered() {
+  @JsonIgnore
+  public Optional<Boolean> getNewlyRegistered() {
+    if (newlyRegistered == null) {
+      return Optional.empty();
+    }
     return newlyRegistered;
   }
 
@@ -71,6 +75,15 @@ public final class DomainReputationResponseEmailDeliverabilityReputation {
       return Optional.empty();
     }
     return domainAgeDays;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("newly_registered")
+  private Optional<Boolean> _getNewlyRegistered() {
+    return newlyRegistered;
   }
 
   @JsonInclude(
@@ -94,7 +107,7 @@ public final class DomainReputationResponseEmailDeliverabilityReputation {
   }
 
   private boolean equalTo(DomainReputationResponseEmailDeliverabilityReputation other) {
-    return spamBlacklisted == other.spamBlacklisted && newlyRegistered == other.newlyRegistered && domainAgeDays.equals(other.domainAgeDays);
+    return spamBlacklisted == other.spamBlacklisted && newlyRegistered.equals(other.newlyRegistered) && domainAgeDays.equals(other.domainAgeDays);
   }
 
   @java.lang.Override
@@ -115,16 +128,9 @@ public final class DomainReputationResponseEmailDeliverabilityReputation {
     /**
      * <p>Indicates whether the domain appears on known spam blacklists.</p>
      */
-    NewlyRegisteredStage spamBlacklisted(boolean spamBlacklisted);
+    _FinalStage spamBlacklisted(boolean spamBlacklisted);
 
     Builder from(DomainReputationResponseEmailDeliverabilityReputation other);
-  }
-
-  public interface NewlyRegisteredStage {
-    /**
-     * <p>Indicates whether the domain was registered recently.</p>
-     */
-    _FinalStage newlyRegistered(boolean newlyRegistered);
   }
 
   public interface _FinalStage {
@@ -133,6 +139,15 @@ public final class DomainReputationResponseEmailDeliverabilityReputation {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
+
+    /**
+     * <p>Indicates whether the domain was registered recently.</p>
+     */
+    _FinalStage newlyRegistered(Optional<Boolean> newlyRegistered);
+
+    _FinalStage newlyRegistered(Boolean newlyRegistered);
+
+    _FinalStage newlyRegistered(Nullable<Boolean> newlyRegistered);
 
     /**
      * <p>Age of the domain in days since registration.</p>
@@ -147,14 +162,13 @@ public final class DomainReputationResponseEmailDeliverabilityReputation {
   @JsonIgnoreProperties(
       ignoreUnknown = true
   )
-  public static final class Builder implements SpamBlacklistedStage, NewlyRegisteredStage, _FinalStage {
+  public static final class Builder implements SpamBlacklistedStage, _FinalStage {
     private boolean spamBlacklisted;
-
-    private boolean newlyRegistered;
 
     private Optional<Integer> domainAgeDays = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<Boolean> newlyRegistered = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -170,25 +184,12 @@ public final class DomainReputationResponseEmailDeliverabilityReputation {
 
     /**
      * <p>Indicates whether the domain appears on known spam blacklists.</p>
-     * <p>Indicates whether the domain appears on known spam blacklists.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
     @JsonSetter("spam_blacklisted")
-    public NewlyRegisteredStage spamBlacklisted(boolean spamBlacklisted) {
+    public _FinalStage spamBlacklisted(boolean spamBlacklisted) {
       this.spamBlacklisted = spamBlacklisted;
-      return this;
-    }
-
-    /**
-     * <p>Indicates whether the domain was registered recently.</p>
-     * <p>Indicates whether the domain was registered recently.</p>
-     * @return Reference to {@code this} so that method calls can be chained together.
-     */
-    @java.lang.Override
-    @JsonSetter("newly_registered")
-    public _FinalStage newlyRegistered(boolean newlyRegistered) {
-      this.newlyRegistered = newlyRegistered;
       return this;
     }
 
@@ -233,9 +234,58 @@ public final class DomainReputationResponseEmailDeliverabilityReputation {
       return this;
     }
 
+    /**
+     * <p>Indicates whether the domain was registered recently.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage newlyRegistered(Nullable<Boolean> newlyRegistered) {
+      if (newlyRegistered.isNull()) {
+        this.newlyRegistered = null;
+      }
+      else if (newlyRegistered.isEmpty()) {
+        this.newlyRegistered = Optional.empty();
+      }
+      else {
+        this.newlyRegistered = Optional.of(newlyRegistered.get());
+      }
+      return this;
+    }
+
+    /**
+     * <p>Indicates whether the domain was registered recently.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage newlyRegistered(Boolean newlyRegistered) {
+      this.newlyRegistered = Optional.ofNullable(newlyRegistered);
+      return this;
+    }
+
+    /**
+     * <p>Indicates whether the domain was registered recently.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "newly_registered",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage newlyRegistered(Optional<Boolean> newlyRegistered) {
+      this.newlyRegistered = newlyRegistered;
+      return this;
+    }
+
     @java.lang.Override
     public DomainReputationResponseEmailDeliverabilityReputation build() {
       return new DomainReputationResponseEmailDeliverabilityReputation(spamBlacklisted, newlyRegistered, domainAgeDays, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("spam_blacklisted") || key.equalsIgnoreCase("newly_registered") || key.equalsIgnoreCase("domain_age_days")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

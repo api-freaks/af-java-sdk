@@ -104,7 +104,6 @@ public final class GeocoderSearchResponseItemPoiItem {
 
     private Optional<String> type = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -170,6 +169,14 @@ public final class GeocoderSearchResponseItemPoiItem {
 
     public GeocoderSearchResponseItemPoiItem build() {
       return new GeocoderSearchResponseItemPoiItem(name, category, type, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("category") || key.equalsIgnoreCase("type")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

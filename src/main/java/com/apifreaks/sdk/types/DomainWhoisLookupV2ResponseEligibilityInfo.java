@@ -104,7 +104,6 @@ public final class DomainWhoisLookupV2ResponseEligibilityInfo {
 
     private Optional<String> type = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -170,6 +169,14 @@ public final class DomainWhoisLookupV2ResponseEligibilityInfo {
 
     public DomainWhoisLookupV2ResponseEligibilityInfo build() {
       return new DomainWhoisLookupV2ResponseEligibilityInfo(id, name, type, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("id") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

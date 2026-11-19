@@ -182,7 +182,6 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsIte
 
     private List<String> strings = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -274,6 +273,14 @@ public final class DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsIte
     @java.lang.Override
     public DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemStrings build() {
       return new DomainDnsHistoryResponseHistoricalDnsRecordsItemDnsRecordsItemStrings(name, type, dnsType, ttl, rawText, rRsetType, strings, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("dnsType") || key.equalsIgnoreCase("ttl") || key.equalsIgnoreCase("rawText") || key.equalsIgnoreCase("rRsetType") || key.equalsIgnoreCase("strings")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

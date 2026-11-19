@@ -15,30 +15,30 @@ import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(
     builder = DomainAvailabilitySuggestionsResponseDomainAvailableResponse.Builder.class
 )
 public final class DomainAvailabilitySuggestionsResponseDomainAvailableResponse {
-  private final Optional<List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem>> domainAvailableResponse;
+  private final List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem> domainAvailableResponse;
 
   private final Map<String, Object> additionalProperties;
 
   private DomainAvailabilitySuggestionsResponseDomainAvailableResponse(
-      Optional<List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem>> domainAvailableResponse,
+      List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem> domainAvailableResponse,
       Map<String, Object> additionalProperties) {
     this.domainAvailableResponse = domainAvailableResponse;
     this.additionalProperties = additionalProperties;
   }
 
   @JsonProperty("domain_available_response")
-  public Optional<List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem>> getDomainAvailableResponse(
+  public List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem> getDomainAvailableResponse(
       ) {
     return domainAvailableResponse;
   }
@@ -76,9 +76,8 @@ public final class DomainAvailabilitySuggestionsResponseDomainAvailableResponse 
       ignoreUnknown = true
   )
   public static final class Builder {
-    private Optional<List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem>> domainAvailableResponse = Optional.empty();
+    private List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem> domainAvailableResponse = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -94,19 +93,38 @@ public final class DomainAvailabilitySuggestionsResponseDomainAvailableResponse 
         nulls = Nulls.SKIP
     )
     public Builder domainAvailableResponse(
-        Optional<List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem>> domainAvailableResponse) {
-      this.domainAvailableResponse = domainAvailableResponse;
+        List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem> domainAvailableResponse) {
+      this.domainAvailableResponse.clear();
+      if (domainAvailableResponse != null) {
+        this.domainAvailableResponse.addAll(domainAvailableResponse);
+      }
       return this;
     }
 
-    public Builder domainAvailableResponse(
+    public Builder addDomainAvailableResponse(
+        DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem domainAvailableResponse) {
+      this.domainAvailableResponse.add(domainAvailableResponse);
+      return this;
+    }
+
+    public Builder addAllDomainAvailableResponse(
         List<DomainAvailabilitySuggestionsResponseDomainAvailableResponseDomainAvailableResponseItem> domainAvailableResponse) {
-      this.domainAvailableResponse = Optional.ofNullable(domainAvailableResponse);
+      if (domainAvailableResponse != null) {
+        this.domainAvailableResponse.addAll(domainAvailableResponse);
+      }
       return this;
     }
 
     public DomainAvailabilitySuggestionsResponseDomainAvailableResponse build() {
       return new DomainAvailabilitySuggestionsResponseDomainAvailableResponse(domainAvailableResponse, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("domain_available_response")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

@@ -76,7 +76,6 @@ public final class GetRegionsResponse {
   public static final class Builder {
     private Optional<List<String>> regions = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -103,6 +102,14 @@ public final class GetRegionsResponse {
 
     public GetRegionsResponse build() {
       return new GetRegionsResponse(regions, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("regions")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

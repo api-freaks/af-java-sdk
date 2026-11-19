@@ -168,7 +168,6 @@ public final class BulkUserAgentLookupResponseItemEngine {
 
     private String versionMajor;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -184,7 +183,6 @@ public final class BulkUserAgentLookupResponseItemEngine {
     }
 
     /**
-     * <p>Layout engine name or the underlying core that converts the HTML into visual</p>
      * <p>Layout engine name or the underlying core that converts the HTML into visual</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -204,14 +202,6 @@ public final class BulkUserAgentLookupResponseItemEngine {
      * <li>Robot</li>
      * <li>Unknown</li>
      * </ol>
-     * <p>Layout engine type. Possible values:</p>
-     * <ol>
-     * <li>Browser</li>
-     * <li>Mobile App</li>
-     * <li>Hacker</li>
-     * <li>Robot</li>
-     * <li>Unknown</li>
-     * </ol>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -223,7 +213,6 @@ public final class BulkUserAgentLookupResponseItemEngine {
 
     /**
      * <p>Layout engine version</p>
-     * <p>Layout engine version</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -234,7 +223,6 @@ public final class BulkUserAgentLookupResponseItemEngine {
     }
 
     /**
-     * <p>Layout engine version major</p>
      * <p>Layout engine version major</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -248,6 +236,14 @@ public final class BulkUserAgentLookupResponseItemEngine {
     @java.lang.Override
     public BulkUserAgentLookupResponseItemEngine build() {
       return new BulkUserAgentLookupResponseItemEngine(name, type, version, versionMajor, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("name") || key.equalsIgnoreCase("type") || key.equalsIgnoreCase("version") || key.equalsIgnoreCase("version_major")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

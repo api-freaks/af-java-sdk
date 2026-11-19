@@ -203,7 +203,6 @@ public final class CommodityTimeSeriesResponse {
 
     private Optional<Double> timestamp = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -222,7 +221,6 @@ public final class CommodityTimeSeriesResponse {
 
     /**
      * <p>API request success indicator. &quot;true&quot; for successful requests.</p>
-     * <p>API request success indicator. &quot;true&quot; for successful requests.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -234,7 +232,6 @@ public final class CommodityTimeSeriesResponse {
 
     /**
      * <p>The start date of the time series data in YYYY-MM-DD format.</p>
-     * <p>The start date of the time series data in YYYY-MM-DD format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -245,7 +242,6 @@ public final class CommodityTimeSeriesResponse {
     }
 
     /**
-     * <p>The end date of the time series data in YYYY-MM-DD format.</p>
      * <p>The end date of the time series data in YYYY-MM-DD format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -347,6 +343,14 @@ public final class CommodityTimeSeriesResponse {
     @java.lang.Override
     public CommodityTimeSeriesResponse build() {
       return new CommodityTimeSeriesResponse(success, timestamp, metadata, startDate, endDate, rates, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("success") || key.equalsIgnoreCase("timestamp") || key.equalsIgnoreCase("metadata") || key.equalsIgnoreCase("startDate") || key.equalsIgnoreCase("endDate") || key.equalsIgnoreCase("rates")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

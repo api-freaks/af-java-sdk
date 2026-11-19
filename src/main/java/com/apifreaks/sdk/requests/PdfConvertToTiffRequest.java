@@ -325,7 +325,6 @@ public final class PdfConvertToTiffRequest {
 
     private Optional<String> webhookAuthorization = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -349,7 +348,6 @@ public final class PdfConvertToTiffRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -612,6 +610,14 @@ public final class PdfConvertToTiffRequest {
     @java.lang.Override
     public PdfConvertToTiffRequest build() {
       return new PdfConvertToTiffRequest(webhookAuthorization, apiKey, format, fileId, destroy, output, pages, resolution, imageSmoothing, profile, webhookUrl, webhookFailureNotification, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("file_id") || key.equalsIgnoreCase("destroy") || key.equalsIgnoreCase("output") || key.equalsIgnoreCase("pages") || key.equalsIgnoreCase("resolution") || key.equalsIgnoreCase("image_smoothing") || key.equalsIgnoreCase("profile") || key.equalsIgnoreCase("webhook_url") || key.equalsIgnoreCase("webhook_failure_notification")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

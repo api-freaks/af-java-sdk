@@ -76,7 +76,6 @@ public final class PdfUploadResourcesResponse {
   public static final class Builder {
     private List<PdfUploadResourcesResponseFilesItem> files = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -113,6 +112,14 @@ public final class PdfUploadResourcesResponse {
 
     public PdfUploadResourcesResponse build() {
       return new PdfUploadResourcesResponse(files, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("files")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

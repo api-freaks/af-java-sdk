@@ -37,18 +37,21 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryD
 
   private final Optional<String> phoneNumber;
 
+  private final Optional<String> handle;
+
   private final Map<String, Object> additionalProperties;
 
   private DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryDataDomainRegistrar(
       Optional<String> ianaId, Optional<String> registrarName, Optional<String> whoisServer,
       Optional<String> websiteUrl, Optional<String> emailAddress, Optional<String> phoneNumber,
-      Map<String, Object> additionalProperties) {
+      Optional<String> handle, Map<String, Object> additionalProperties) {
     this.ianaId = ianaId;
     this.registrarName = registrarName;
     this.whoisServer = whoisServer;
     this.websiteUrl = websiteUrl;
     this.emailAddress = emailAddress;
     this.phoneNumber = phoneNumber;
+    this.handle = handle;
     this.additionalProperties = additionalProperties;
   }
 
@@ -82,6 +85,14 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryD
     return phoneNumber;
   }
 
+  /**
+   * @return Registrar handle as published in the snapshot, when present (for example <code>292</code>, usually the same as <code>iana_id</code>).
+   */
+  @JsonProperty("handle")
+  public Optional<String> getHandle() {
+    return handle;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -95,12 +106,12 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryD
 
   private boolean equalTo(
       DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryDataDomainRegistrar other) {
-    return ianaId.equals(other.ianaId) && registrarName.equals(other.registrarName) && whoisServer.equals(other.whoisServer) && websiteUrl.equals(other.websiteUrl) && emailAddress.equals(other.emailAddress) && phoneNumber.equals(other.phoneNumber);
+    return ianaId.equals(other.ianaId) && registrarName.equals(other.registrarName) && whoisServer.equals(other.whoisServer) && websiteUrl.equals(other.websiteUrl) && emailAddress.equals(other.emailAddress) && phoneNumber.equals(other.phoneNumber) && handle.equals(other.handle);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.ianaId, this.registrarName, this.whoisServer, this.websiteUrl, this.emailAddress, this.phoneNumber);
+    return Objects.hash(this.ianaId, this.registrarName, this.whoisServer, this.websiteUrl, this.emailAddress, this.phoneNumber, this.handle);
   }
 
   @java.lang.Override
@@ -128,7 +139,8 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryD
 
     private Optional<String> phoneNumber = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<String> handle = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -142,6 +154,7 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryD
       websiteUrl(other.getWebsiteUrl());
       emailAddress(other.getEmailAddress());
       phoneNumber(other.getPhoneNumber());
+      handle(other.getHandle());
       return this;
     }
 
@@ -229,8 +242,33 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryD
       return this;
     }
 
+    /**
+     * <p>Registrar handle as published in the snapshot, when present (for example <code>292</code>, usually the same as <code>iana_id</code>).</p>
+     */
+    @JsonSetter(
+        value = "handle",
+        nulls = Nulls.SKIP
+    )
+    public Builder handle(Optional<String> handle) {
+      this.handle = handle;
+      return this;
+    }
+
+    public Builder handle(String handle) {
+      this.handle = Optional.ofNullable(handle);
+      return this;
+    }
+
     public DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryDataDomainRegistrar build() {
-      return new DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryDataDomainRegistrar(ianaId, registrarName, whoisServer, websiteUrl, emailAddress, phoneNumber, additionalProperties);
+      return new DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryDataDomainRegistrar(ianaId, registrarName, whoisServer, websiteUrl, emailAddress, phoneNumber, handle, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("iana_id") || key.equalsIgnoreCase("registrar_name") || key.equalsIgnoreCase("whois_server") || key.equalsIgnoreCase("website_url") || key.equalsIgnoreCase("email_address") || key.equalsIgnoreCase("phone_number") || key.equalsIgnoreCase("handle")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

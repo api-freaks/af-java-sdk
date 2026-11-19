@@ -199,7 +199,6 @@ public final class BulkGeolocationLookupResponseItemAbuseItem {
 
     private Optional<List<String>> phoneNumbers = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -391,6 +390,14 @@ public final class BulkGeolocationLookupResponseItemAbuseItem {
 
     public BulkGeolocationLookupResponseItemAbuseItem build() {
       return new BulkGeolocationLookupResponseItemAbuseItem(route, country, handle, name, organization, role, kind, address, emails, phoneNumbers, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("route") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("handle") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("organization") || key.equalsIgnoreCase("role") || key.equalsIgnoreCase("kind") || key.equalsIgnoreCase("address") || key.equalsIgnoreCase("emails") || key.equalsIgnoreCase("phone_numbers")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

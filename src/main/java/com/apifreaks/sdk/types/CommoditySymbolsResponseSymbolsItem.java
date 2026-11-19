@@ -11,12 +11,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.lang.Object;
 import java.lang.String;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
@@ -38,12 +40,29 @@ public final class CommoditySymbolsResponseSymbolsItem {
 
   private final CommoditySymbolsResponseSymbolsItemUnit unit;
 
+  private final Optional<String> description;
+
+  private final Optional<String> exchange;
+
+  private final Optional<String> deprecationDate;
+
+  private final Optional<String> contract;
+
+  private final Optional<String> deliveryMonth;
+
+  private final Optional<String> expiresAt;
+
+  private final Optional<String> underlying;
+
   private final Map<String, Object> additionalProperties;
 
   private CommoditySymbolsResponseSymbolsItem(String symbol, String name, String category,
       String status, CommoditySymbolsResponseSymbolsItemUpdateInterval updateInterval,
       CommoditySymbolsResponseSymbolsItemCurrency currency,
-      CommoditySymbolsResponseSymbolsItemUnit unit, Map<String, Object> additionalProperties) {
+      CommoditySymbolsResponseSymbolsItemUnit unit, Optional<String> description,
+      Optional<String> exchange, Optional<String> deprecationDate, Optional<String> contract,
+      Optional<String> deliveryMonth, Optional<String> expiresAt, Optional<String> underlying,
+      Map<String, Object> additionalProperties) {
     this.symbol = symbol;
     this.name = name;
     this.category = category;
@@ -51,6 +70,13 @@ public final class CommoditySymbolsResponseSymbolsItem {
     this.updateInterval = updateInterval;
     this.currency = currency;
     this.unit = unit;
+    this.description = description;
+    this.exchange = exchange;
+    this.deprecationDate = deprecationDate;
+    this.contract = contract;
+    this.deliveryMonth = deliveryMonth;
+    this.expiresAt = expiresAt;
+    this.underlying = underlying;
     this.additionalProperties = additionalProperties;
   }
 
@@ -87,7 +113,7 @@ public final class CommoditySymbolsResponseSymbolsItem {
   }
 
   /**
-   * @return The rate at which this commodity's price is updated.
+   * @return The rate at which this commodity's price is updated. New values may be added over time.
    */
   @JsonProperty("updateInterval")
   public CommoditySymbolsResponseSymbolsItemUpdateInterval getUpdateInterval() {
@@ -104,6 +130,62 @@ public final class CommoditySymbolsResponseSymbolsItem {
     return unit;
   }
 
+  /**
+   * @return Short description of the commodity. May be an empty string for some symbols.
+   */
+  @JsonProperty("description")
+  public Optional<String> getDescription() {
+    return description;
+  }
+
+  /**
+   * @return Data source for the symbol (e.g., World Bank). Present only for some symbols.
+   */
+  @JsonProperty("exchange")
+  public Optional<String> getExchange() {
+    return exchange;
+  }
+
+  /**
+   * @return Present only when status is &quot;inactive&quot;. Date the symbol was deprecated (YYYY-MM-DD).
+   */
+  @JsonProperty("deprecationDate")
+  public Optional<String> getDeprecationDate() {
+    return deprecationDate;
+  }
+
+  /**
+   * @return Optional. Present only for dated futures contracts (for example <code>WTIOIL-FUT-DEC26</code>). Contract type, currently always <code>futures</code>.
+   */
+  @JsonProperty("contract")
+  public Optional<String> getContract() {
+    return contract;
+  }
+
+  /**
+   * @return Optional. Present only for dated futures contracts. Delivery month of the contract (YYYY-MM), for example <code>2026-12</code>.
+   */
+  @JsonProperty("deliveryMonth")
+  public Optional<String> getDeliveryMonth() {
+    return deliveryMonth;
+  }
+
+  /**
+   * @return Optional. Present for most dated futures contracts. Last trading date of the contract (YYYY-MM-DD), for example <code>2026-11-20</code>.
+   */
+  @JsonProperty("expiresAt")
+  public Optional<String> getExpiresAt() {
+    return expiresAt;
+  }
+
+  /**
+   * @return Optional. Present only for dated futures contracts. Symbol of the continuous futures series this contract belongs to (for example <code>WTIOIL-FUT</code>).
+   */
+  @JsonProperty("underlying")
+  public Optional<String> getUnderlying() {
+    return underlying;
+  }
+
   @java.lang.Override
   public boolean equals(Object other) {
     if (this == other) return true;
@@ -116,12 +198,12 @@ public final class CommoditySymbolsResponseSymbolsItem {
   }
 
   private boolean equalTo(CommoditySymbolsResponseSymbolsItem other) {
-    return symbol.equals(other.symbol) && name.equals(other.name) && category.equals(other.category) && status.equals(other.status) && updateInterval.equals(other.updateInterval) && currency.equals(other.currency) && unit.equals(other.unit);
+    return symbol.equals(other.symbol) && name.equals(other.name) && category.equals(other.category) && status.equals(other.status) && updateInterval.equals(other.updateInterval) && currency.equals(other.currency) && unit.equals(other.unit) && description.equals(other.description) && exchange.equals(other.exchange) && deprecationDate.equals(other.deprecationDate) && contract.equals(other.contract) && deliveryMonth.equals(other.deliveryMonth) && expiresAt.equals(other.expiresAt) && underlying.equals(other.underlying);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.symbol, this.name, this.category, this.status, this.updateInterval, this.currency, this.unit);
+    return Objects.hash(this.symbol, this.name, this.category, this.status, this.updateInterval, this.currency, this.unit, this.description, this.exchange, this.deprecationDate, this.contract, this.deliveryMonth, this.expiresAt, this.underlying);
   }
 
   @java.lang.Override
@@ -165,7 +247,7 @@ public final class CommoditySymbolsResponseSymbolsItem {
 
   public interface UpdateIntervalStage {
     /**
-     * <p>The rate at which this commodity's price is updated.</p>
+     * <p>The rate at which this commodity's price is updated. New values may be added over time.</p>
      */
     CurrencyStage updateInterval(
         @NotNull CommoditySymbolsResponseSymbolsItemUpdateInterval updateInterval);
@@ -185,6 +267,55 @@ public final class CommoditySymbolsResponseSymbolsItem {
     _FinalStage additionalProperty(String key, Object value);
 
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
+
+    /**
+     * <p>Short description of the commodity. May be an empty string for some symbols.</p>
+     */
+    _FinalStage description(Optional<String> description);
+
+    _FinalStage description(String description);
+
+    /**
+     * <p>Data source for the symbol (e.g., World Bank). Present only for some symbols.</p>
+     */
+    _FinalStage exchange(Optional<String> exchange);
+
+    _FinalStage exchange(String exchange);
+
+    /**
+     * <p>Present only when status is &quot;inactive&quot;. Date the symbol was deprecated (YYYY-MM-DD).</p>
+     */
+    _FinalStage deprecationDate(Optional<String> deprecationDate);
+
+    _FinalStage deprecationDate(String deprecationDate);
+
+    /**
+     * <p>Optional. Present only for dated futures contracts (for example <code>WTIOIL-FUT-DEC26</code>). Contract type, currently always <code>futures</code>.</p>
+     */
+    _FinalStage contract(Optional<String> contract);
+
+    _FinalStage contract(String contract);
+
+    /**
+     * <p>Optional. Present only for dated futures contracts. Delivery month of the contract (YYYY-MM), for example <code>2026-12</code>.</p>
+     */
+    _FinalStage deliveryMonth(Optional<String> deliveryMonth);
+
+    _FinalStage deliveryMonth(String deliveryMonth);
+
+    /**
+     * <p>Optional. Present for most dated futures contracts. Last trading date of the contract (YYYY-MM-DD), for example <code>2026-11-20</code>.</p>
+     */
+    _FinalStage expiresAt(Optional<String> expiresAt);
+
+    _FinalStage expiresAt(String expiresAt);
+
+    /**
+     * <p>Optional. Present only for dated futures contracts. Symbol of the continuous futures series this contract belongs to (for example <code>WTIOIL-FUT</code>).</p>
+     */
+    _FinalStage underlying(Optional<String> underlying);
+
+    _FinalStage underlying(String underlying);
   }
 
   @JsonIgnoreProperties(
@@ -205,7 +336,20 @@ public final class CommoditySymbolsResponseSymbolsItem {
 
     private CommoditySymbolsResponseSymbolsItemUnit unit;
 
-    @JsonAnySetter
+    private Optional<String> underlying = Optional.empty();
+
+    private Optional<String> expiresAt = Optional.empty();
+
+    private Optional<String> deliveryMonth = Optional.empty();
+
+    private Optional<String> contract = Optional.empty();
+
+    private Optional<String> deprecationDate = Optional.empty();
+
+    private Optional<String> exchange = Optional.empty();
+
+    private Optional<String> description = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -220,11 +364,17 @@ public final class CommoditySymbolsResponseSymbolsItem {
       updateInterval(other.getUpdateInterval());
       currency(other.getCurrency());
       unit(other.getUnit());
+      description(other.getDescription());
+      exchange(other.getExchange());
+      deprecationDate(other.getDeprecationDate());
+      contract(other.getContract());
+      deliveryMonth(other.getDeliveryMonth());
+      expiresAt(other.getExpiresAt());
+      underlying(other.getUnderlying());
       return this;
     }
 
     /**
-     * <p>The unique ticker symbol for the commodity (e.g., &quot;XAU&quot;, &quot;NG-FUT&quot;).</p>
      * <p>The unique ticker symbol for the commodity (e.g., &quot;XAU&quot;, &quot;NG-FUT&quot;).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -237,7 +387,6 @@ public final class CommoditySymbolsResponseSymbolsItem {
 
     /**
      * <p>The full name of the commodity (e.g., &quot;Gold&quot;, &quot;Natural Gas Futures&quot;).</p>
-     * <p>The full name of the commodity (e.g., &quot;Gold&quot;, &quot;Natural Gas Futures&quot;).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -248,7 +397,6 @@ public final class CommoditySymbolsResponseSymbolsItem {
     }
 
     /**
-     * <p>The category the commodity belongs to (e.g., &quot;Metals&quot;, &quot;Energy&quot;).</p>
      * <p>The category the commodity belongs to (e.g., &quot;Metals&quot;, &quot;Energy&quot;).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -261,7 +409,6 @@ public final class CommoditySymbolsResponseSymbolsItem {
 
     /**
      * <p>The current status of the commodity. Possible value: &quot;active&quot;.</p>
-     * <p>The current status of the commodity. Possible value: &quot;active&quot;.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -272,8 +419,7 @@ public final class CommoditySymbolsResponseSymbolsItem {
     }
 
     /**
-     * <p>The rate at which this commodity's price is updated.</p>
-     * <p>The rate at which this commodity's price is updated.</p>
+     * <p>The rate at which this commodity's price is updated. New values may be added over time.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -298,9 +444,178 @@ public final class CommoditySymbolsResponseSymbolsItem {
       return this;
     }
 
+    /**
+     * <p>Optional. Present only for dated futures contracts. Symbol of the continuous futures series this contract belongs to (for example <code>WTIOIL-FUT</code>).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage underlying(String underlying) {
+      this.underlying = Optional.ofNullable(underlying);
+      return this;
+    }
+
+    /**
+     * <p>Optional. Present only for dated futures contracts. Symbol of the continuous futures series this contract belongs to (for example <code>WTIOIL-FUT</code>).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "underlying",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage underlying(Optional<String> underlying) {
+      this.underlying = underlying;
+      return this;
+    }
+
+    /**
+     * <p>Optional. Present for most dated futures contracts. Last trading date of the contract (YYYY-MM-DD), for example <code>2026-11-20</code>.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage expiresAt(String expiresAt) {
+      this.expiresAt = Optional.ofNullable(expiresAt);
+      return this;
+    }
+
+    /**
+     * <p>Optional. Present for most dated futures contracts. Last trading date of the contract (YYYY-MM-DD), for example <code>2026-11-20</code>.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "expiresAt",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage expiresAt(Optional<String> expiresAt) {
+      this.expiresAt = expiresAt;
+      return this;
+    }
+
+    /**
+     * <p>Optional. Present only for dated futures contracts. Delivery month of the contract (YYYY-MM), for example <code>2026-12</code>.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage deliveryMonth(String deliveryMonth) {
+      this.deliveryMonth = Optional.ofNullable(deliveryMonth);
+      return this;
+    }
+
+    /**
+     * <p>Optional. Present only for dated futures contracts. Delivery month of the contract (YYYY-MM), for example <code>2026-12</code>.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "deliveryMonth",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage deliveryMonth(Optional<String> deliveryMonth) {
+      this.deliveryMonth = deliveryMonth;
+      return this;
+    }
+
+    /**
+     * <p>Optional. Present only for dated futures contracts (for example <code>WTIOIL-FUT-DEC26</code>). Contract type, currently always <code>futures</code>.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage contract(String contract) {
+      this.contract = Optional.ofNullable(contract);
+      return this;
+    }
+
+    /**
+     * <p>Optional. Present only for dated futures contracts (for example <code>WTIOIL-FUT-DEC26</code>). Contract type, currently always <code>futures</code>.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "contract",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage contract(Optional<String> contract) {
+      this.contract = contract;
+      return this;
+    }
+
+    /**
+     * <p>Present only when status is &quot;inactive&quot;. Date the symbol was deprecated (YYYY-MM-DD).</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage deprecationDate(String deprecationDate) {
+      this.deprecationDate = Optional.ofNullable(deprecationDate);
+      return this;
+    }
+
+    /**
+     * <p>Present only when status is &quot;inactive&quot;. Date the symbol was deprecated (YYYY-MM-DD).</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "deprecationDate",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage deprecationDate(Optional<String> deprecationDate) {
+      this.deprecationDate = deprecationDate;
+      return this;
+    }
+
+    /**
+     * <p>Data source for the symbol (e.g., World Bank). Present only for some symbols.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage exchange(String exchange) {
+      this.exchange = Optional.ofNullable(exchange);
+      return this;
+    }
+
+    /**
+     * <p>Data source for the symbol (e.g., World Bank). Present only for some symbols.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "exchange",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage exchange(Optional<String> exchange) {
+      this.exchange = exchange;
+      return this;
+    }
+
+    /**
+     * <p>Short description of the commodity. May be an empty string for some symbols.</p>
+     * @return Reference to {@code this} so that method calls can be chained together.
+     */
+    @java.lang.Override
+    public _FinalStage description(String description) {
+      this.description = Optional.ofNullable(description);
+      return this;
+    }
+
+    /**
+     * <p>Short description of the commodity. May be an empty string for some symbols.</p>
+     */
+    @java.lang.Override
+    @JsonSetter(
+        value = "description",
+        nulls = Nulls.SKIP
+    )
+    public _FinalStage description(Optional<String> description) {
+      this.description = description;
+      return this;
+    }
+
     @java.lang.Override
     public CommoditySymbolsResponseSymbolsItem build() {
-      return new CommoditySymbolsResponseSymbolsItem(symbol, name, category, status, updateInterval, currency, unit, additionalProperties);
+      return new CommoditySymbolsResponseSymbolsItem(symbol, name, category, status, updateInterval, currency, unit, description, exchange, deprecationDate, contract, deliveryMonth, expiresAt, underlying, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("symbol") || key.equalsIgnoreCase("name") || key.equalsIgnoreCase("category") || key.equalsIgnoreCase("status") || key.equalsIgnoreCase("updateInterval") || key.equalsIgnoreCase("currency") || key.equalsIgnoreCase("unit") || key.equalsIgnoreCase("description") || key.equalsIgnoreCase("exchange") || key.equalsIgnoreCase("deprecationDate") || key.equalsIgnoreCase("contract") || key.equalsIgnoreCase("deliveryMonth") || key.equalsIgnoreCase("expiresAt") || key.equalsIgnoreCase("underlying")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

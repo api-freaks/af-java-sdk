@@ -160,7 +160,6 @@ public final class DomainAvailabilityCheckRequest {
 
     private Optional<DomainAvailabilityCheckRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -177,7 +176,6 @@ public final class DomainAvailabilityCheckRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -188,7 +186,6 @@ public final class DomainAvailabilityCheckRequest {
     }
 
     /**
-     * <p>Domain name whose availability is to be checked.</p>
      * <p>Domain name whose availability is to be checked.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -248,6 +245,14 @@ public final class DomainAvailabilityCheckRequest {
     @java.lang.Override
     public DomainAvailabilityCheckRequest build() {
       return new DomainAvailabilityCheckRequest(apiKey, format, domain, source, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("domain") || key.equalsIgnoreCase("source")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

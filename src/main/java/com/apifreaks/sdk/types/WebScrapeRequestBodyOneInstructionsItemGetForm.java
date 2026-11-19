@@ -25,23 +25,33 @@ import java.util.Optional;
     builder = WebScrapeRequestBodyOneInstructionsItemGetForm.Builder.class
 )
 public final class WebScrapeRequestBodyOneInstructionsItemGetForm {
-  private final Optional<WebScrapeRequestBodyOneInstructionsItemGetFormGetForm> getForm;
+  private final Optional<String> selector;
+
+  private final Optional<Map<String, String>> data;
 
   private final Map<String, Object> additionalProperties;
 
-  private WebScrapeRequestBodyOneInstructionsItemGetForm(
-      Optional<WebScrapeRequestBodyOneInstructionsItemGetFormGetForm> getForm,
-      Map<String, Object> additionalProperties) {
-    this.getForm = getForm;
+  private WebScrapeRequestBodyOneInstructionsItemGetForm(Optional<String> selector,
+      Optional<Map<String, String>> data, Map<String, Object> additionalProperties) {
+    this.selector = selector;
+    this.data = data;
     this.additionalProperties = additionalProperties;
   }
 
   /**
-   * @return Submits a form using GET method. Provide the form's XPath/CSS selector and input values.
+   * @return CSS or XPath selector identifying the form element.
    */
-  @JsonProperty("getForm")
-  public Optional<WebScrapeRequestBodyOneInstructionsItemGetFormGetForm> getGetForm() {
-    return getForm;
+  @JsonProperty("selector")
+  public Optional<String> getSelector() {
+    return selector;
+  }
+
+  /**
+   * @return Form field name/value pairs to submit.
+   */
+  @JsonProperty("data")
+  public Optional<Map<String, String>> getData() {
+    return data;
   }
 
   @java.lang.Override
@@ -56,12 +66,12 @@ public final class WebScrapeRequestBodyOneInstructionsItemGetForm {
   }
 
   private boolean equalTo(WebScrapeRequestBodyOneInstructionsItemGetForm other) {
-    return getForm.equals(other.getForm);
+    return selector.equals(other.selector) && data.equals(other.data);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.getForm);
+    return Objects.hash(this.selector, this.data);
   }
 
   @java.lang.Override
@@ -77,39 +87,65 @@ public final class WebScrapeRequestBodyOneInstructionsItemGetForm {
       ignoreUnknown = true
   )
   public static final class Builder {
-    private Optional<WebScrapeRequestBodyOneInstructionsItemGetFormGetForm> getForm = Optional.empty();
+    private Optional<String> selector = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<Map<String, String>> data = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
     }
 
     public Builder from(WebScrapeRequestBodyOneInstructionsItemGetForm other) {
-      getForm(other.getGetForm());
+      selector(other.getSelector());
+      data(other.getData());
       return this;
     }
 
     /**
-     * <p>Submits a form using GET method. Provide the form's XPath/CSS selector and input values.</p>
+     * <p>CSS or XPath selector identifying the form element.</p>
      */
     @JsonSetter(
-        value = "getForm",
+        value = "selector",
         nulls = Nulls.SKIP
     )
-    public Builder getForm(
-        Optional<WebScrapeRequestBodyOneInstructionsItemGetFormGetForm> getForm) {
-      this.getForm = getForm;
+    public Builder selector(Optional<String> selector) {
+      this.selector = selector;
       return this;
     }
 
-    public Builder getForm(WebScrapeRequestBodyOneInstructionsItemGetFormGetForm getForm) {
-      this.getForm = Optional.ofNullable(getForm);
+    public Builder selector(String selector) {
+      this.selector = Optional.ofNullable(selector);
+      return this;
+    }
+
+    /**
+     * <p>Form field name/value pairs to submit.</p>
+     */
+    @JsonSetter(
+        value = "data",
+        nulls = Nulls.SKIP
+    )
+    public Builder data(Optional<Map<String, String>> data) {
+      this.data = data;
+      return this;
+    }
+
+    public Builder data(Map<String, String> data) {
+      this.data = Optional.ofNullable(data);
       return this;
     }
 
     public WebScrapeRequestBodyOneInstructionsItemGetForm build() {
-      return new WebScrapeRequestBodyOneInstructionsItemGetForm(getForm, additionalProperties);
+      return new WebScrapeRequestBodyOneInstructionsItemGetForm(selector, data, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("selector") || key.equalsIgnoreCase("data")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

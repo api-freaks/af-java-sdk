@@ -162,7 +162,6 @@ public final class BulkZipcodeLookupRequest {
 
     private Optional<BulkZipcodeLookupRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -178,7 +177,6 @@ public final class BulkZipcodeLookupRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -276,6 +274,14 @@ public final class BulkZipcodeLookupRequest {
     @java.lang.Override
     public BulkZipcodeLookupRequest build() {
       return new BulkZipcodeLookupRequest(apiKey, format, codes, country, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("codes") || key.equalsIgnoreCase("country")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

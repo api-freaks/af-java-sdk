@@ -102,7 +102,6 @@ public final class PdfUploadResourcesResponseFilesItem {
 
     private String fileId;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -132,6 +131,14 @@ public final class PdfUploadResourcesResponseFilesItem {
     @java.lang.Override
     public PdfUploadResourcesResponseFilesItem build() {
       return new PdfUploadResourcesResponseFilesItem(fileName, fileId, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("fileName") || key.equalsIgnoreCase("fileId")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

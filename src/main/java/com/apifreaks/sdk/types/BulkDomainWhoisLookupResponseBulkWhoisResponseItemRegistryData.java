@@ -46,6 +46,8 @@ public final class BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDat
 
   private final Optional<String> whoisRawRegistry;
 
+  private final Optional<String> whoisRawRegistery;
+
   private final Optional<BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDataDomainRegistrar> domainRegistrar;
 
   private final Map<String, Object> additionalProperties;
@@ -55,7 +57,7 @@ public final class BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDat
       Optional<BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDataDomainRegistered> domainRegistered,
       Optional<String> createDate, Optional<String> updateDate, Optional<String> expiryDate,
       Optional<List<String>> nameServers, Optional<List<String>> domainStatus,
-      Optional<String> whoisRawRegistry,
+      Optional<String> whoisRawRegistry, Optional<String> whoisRawRegistery,
       Optional<BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDataDomainRegistrar> domainRegistrar,
       Map<String, Object> additionalProperties) {
     this.domainName = domainName;
@@ -68,6 +70,7 @@ public final class BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDat
     this.nameServers = nameServers;
     this.domainStatus = domainStatus;
     this.whoisRawRegistry = whoisRawRegistry;
+    this.whoisRawRegistery = whoisRawRegistery;
     this.domainRegistrar = domainRegistrar;
     this.additionalProperties = additionalProperties;
   }
@@ -121,9 +124,20 @@ public final class BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDat
     return domainStatus;
   }
 
+  /**
+   * @return Deprecated: the API never returns this key; the raw registry WHOIS text is in <code>whois_raw_registery</code>.
+   */
   @JsonProperty("whois_raw_registry")
   public Optional<String> getWhoisRawRegistry() {
     return whoisRawRegistry;
+  }
+
+  /**
+   * @return Raw WHOIS text returned by the registry's WHOIS server (the key is spelled <code>whois_raw_registery</code> by the API).
+   */
+  @JsonProperty("whois_raw_registery")
+  public Optional<String> getWhoisRawRegistery() {
+    return whoisRawRegistery;
   }
 
   @JsonProperty("domain_registrar")
@@ -144,12 +158,12 @@ public final class BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDat
   }
 
   private boolean equalTo(BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryData other) {
-    return domainName.equals(other.domainName) && queryTime.equals(other.queryTime) && whoisServer.equals(other.whoisServer) && domainRegistered.equals(other.domainRegistered) && createDate.equals(other.createDate) && updateDate.equals(other.updateDate) && expiryDate.equals(other.expiryDate) && nameServers.equals(other.nameServers) && domainStatus.equals(other.domainStatus) && whoisRawRegistry.equals(other.whoisRawRegistry) && domainRegistrar.equals(other.domainRegistrar);
+    return domainName.equals(other.domainName) && queryTime.equals(other.queryTime) && whoisServer.equals(other.whoisServer) && domainRegistered.equals(other.domainRegistered) && createDate.equals(other.createDate) && updateDate.equals(other.updateDate) && expiryDate.equals(other.expiryDate) && nameServers.equals(other.nameServers) && domainStatus.equals(other.domainStatus) && whoisRawRegistry.equals(other.whoisRawRegistry) && whoisRawRegistery.equals(other.whoisRawRegistery) && domainRegistrar.equals(other.domainRegistrar);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.domainName, this.queryTime, this.whoisServer, this.domainRegistered, this.createDate, this.updateDate, this.expiryDate, this.nameServers, this.domainStatus, this.whoisRawRegistry, this.domainRegistrar);
+    return Objects.hash(this.domainName, this.queryTime, this.whoisServer, this.domainRegistered, this.createDate, this.updateDate, this.expiryDate, this.nameServers, this.domainStatus, this.whoisRawRegistry, this.whoisRawRegistery, this.domainRegistrar);
   }
 
   @java.lang.Override
@@ -185,9 +199,10 @@ public final class BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDat
 
     private Optional<String> whoisRawRegistry = Optional.empty();
 
+    private Optional<String> whoisRawRegistery = Optional.empty();
+
     private Optional<BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDataDomainRegistrar> domainRegistrar = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -204,6 +219,7 @@ public final class BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDat
       nameServers(other.getNameServers());
       domainStatus(other.getDomainStatus());
       whoisRawRegistry(other.getWhoisRawRegistry());
+      whoisRawRegistery(other.getWhoisRawRegistery());
       domainRegistrar(other.getDomainRegistrar());
       return this;
     }
@@ -339,6 +355,9 @@ public final class BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDat
       return this;
     }
 
+    /**
+     * <p>Deprecated: the API never returns this key; the raw registry WHOIS text is in <code>whois_raw_registery</code>.</p>
+     */
     @JsonSetter(
         value = "whois_raw_registry",
         nulls = Nulls.SKIP
@@ -350,6 +369,23 @@ public final class BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDat
 
     public Builder whoisRawRegistry(String whoisRawRegistry) {
       this.whoisRawRegistry = Optional.ofNullable(whoisRawRegistry);
+      return this;
+    }
+
+    /**
+     * <p>Raw WHOIS text returned by the registry's WHOIS server (the key is spelled <code>whois_raw_registery</code> by the API).</p>
+     */
+    @JsonSetter(
+        value = "whois_raw_registery",
+        nulls = Nulls.SKIP
+    )
+    public Builder whoisRawRegistery(Optional<String> whoisRawRegistery) {
+      this.whoisRawRegistery = whoisRawRegistery;
+      return this;
+    }
+
+    public Builder whoisRawRegistery(String whoisRawRegistery) {
+      this.whoisRawRegistery = Optional.ofNullable(whoisRawRegistery);
       return this;
     }
 
@@ -370,7 +406,15 @@ public final class BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryDat
     }
 
     public BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryData build() {
-      return new BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryData(domainName, queryTime, whoisServer, domainRegistered, createDate, updateDate, expiryDate, nameServers, domainStatus, whoisRawRegistry, domainRegistrar, additionalProperties);
+      return new BulkDomainWhoisLookupResponseBulkWhoisResponseItemRegistryData(domainName, queryTime, whoisServer, domainRegistered, createDate, updateDate, expiryDate, nameServers, domainStatus, whoisRawRegistry, whoisRawRegistery, domainRegistrar, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("domain_name") || key.equalsIgnoreCase("query_time") || key.equalsIgnoreCase("whois_server") || key.equalsIgnoreCase("domain_registered") || key.equalsIgnoreCase("create_date") || key.equalsIgnoreCase("update_date") || key.equalsIgnoreCase("expiry_date") || key.equalsIgnoreCase("name_servers") || key.equalsIgnoreCase("domain_status") || key.equalsIgnoreCase("whois_raw_registry") || key.equalsIgnoreCase("whois_raw_registery") || key.equalsIgnoreCase("domain_registrar")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

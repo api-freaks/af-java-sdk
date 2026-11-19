@@ -220,7 +220,6 @@ public final class SubdomainsLookupRequest {
 
     private Optional<SubdomainsLookupRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -240,7 +239,6 @@ public final class SubdomainsLookupRequest {
 
     /**
      * <p>Your API key</p>
-     * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -251,7 +249,6 @@ public final class SubdomainsLookupRequest {
     }
 
     /**
-     * <p>Domain name for availability and suggestions.</p>
      * <p>Domain name for availability and suggestions.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -380,6 +377,14 @@ public final class SubdomainsLookupRequest {
     @java.lang.Override
     public SubdomainsLookupRequest build() {
       return new SubdomainsLookupRequest(apiKey, format, domain, after, before, status, page, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("domain") || key.equalsIgnoreCase("after") || key.equalsIgnoreCase("before") || key.equalsIgnoreCase("status") || key.equalsIgnoreCase("page")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

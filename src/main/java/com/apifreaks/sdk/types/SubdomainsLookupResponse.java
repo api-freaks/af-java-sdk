@@ -178,7 +178,6 @@ public final class SubdomainsLookupResponse {
 
     private List<SubdomainsLookupResponseSubdomainsItem> subdomains = new ArrayList<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -268,6 +267,14 @@ public final class SubdomainsLookupResponse {
     @java.lang.Override
     public SubdomainsLookupResponse build() {
       return new SubdomainsLookupResponse(domain, status, queryTime, currentPage, totalPages, totalRecords, subdomains, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("domain") || key.equalsIgnoreCase("status") || key.equalsIgnoreCase("query_time") || key.equalsIgnoreCase("current_page") || key.equalsIgnoreCase("total_pages") || key.equalsIgnoreCase("total_records") || key.equalsIgnoreCase("subdomains")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

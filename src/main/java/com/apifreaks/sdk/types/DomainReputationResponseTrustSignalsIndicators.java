@@ -96,8 +96,11 @@ public final class DomainReputationResponseTrustSignalsIndicators {
   /**
    * @return Indicates whether the domain uses a free SSL certificate.
    */
-  @JsonProperty("uses_free_ssl")
+  @JsonIgnore
   public Optional<Boolean> getUsesFreeSsl() {
+    if (usesFreeSsl == null) {
+      return Optional.empty();
+    }
     return usesFreeSsl;
   }
 
@@ -126,16 +129,22 @@ public final class DomainReputationResponseTrustSignalsIndicators {
   /**
    * @return Indicates whether a DMARC record exists.
    */
-  @JsonProperty("has_dmarc")
+  @JsonIgnore
   public Optional<Boolean> getHasDmarc() {
+    if (hasDmarc == null) {
+      return Optional.empty();
+    }
     return hasDmarc;
   }
 
   /**
    * @return Indicates whether an SPF record exists.
    */
-  @JsonProperty("has_spf")
+  @JsonIgnore
   public Optional<Boolean> getHasSpf() {
+    if (hasSpf == null) {
+      return Optional.empty();
+    }
     return hasSpf;
   }
 
@@ -190,6 +199,15 @@ public final class DomainReputationResponseTrustSignalsIndicators {
       value = JsonInclude.Include.CUSTOM,
       valueFilter = NullableNonemptyFilter.class
   )
+  @JsonProperty("uses_free_ssl")
+  private Optional<Boolean> _getUsesFreeSsl() {
+    return usesFreeSsl;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
   @JsonProperty("has_privacy_whois")
   private Optional<Boolean> _getHasPrivacyWhois() {
     return hasPrivacyWhois;
@@ -202,6 +220,24 @@ public final class DomainReputationResponseTrustSignalsIndicators {
   @JsonProperty("ssl_age_days")
   private Optional<Integer> _getSslAgeDays() {
     return sslAgeDays;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("has_dmarc")
+  private Optional<Boolean> _getHasDmarc() {
+    return hasDmarc;
+  }
+
+  @JsonInclude(
+      value = JsonInclude.Include.CUSTOM,
+      valueFilter = NullableNonemptyFilter.class
+  )
+  @JsonProperty("has_spf")
+  private Optional<Boolean> _getHasSpf() {
+    return hasSpf;
   }
 
   @JsonInclude(
@@ -277,7 +313,6 @@ public final class DomainReputationResponseTrustSignalsIndicators {
 
     private Optional<String> registrar = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -362,6 +397,19 @@ public final class DomainReputationResponseTrustSignalsIndicators {
       return this;
     }
 
+    public Builder usesFreeSsl(Nullable<Boolean> usesFreeSsl) {
+      if (usesFreeSsl.isNull()) {
+        this.usesFreeSsl = null;
+      }
+      else if (usesFreeSsl.isEmpty()) {
+        this.usesFreeSsl = Optional.empty();
+      }
+      else {
+        this.usesFreeSsl = Optional.of(usesFreeSsl.get());
+      }
+      return this;
+    }
+
     /**
      * <p>Indicates whether WHOIS privacy protection is enabled. null when WHOIS data is unavailable.</p>
      */
@@ -439,6 +487,19 @@ public final class DomainReputationResponseTrustSignalsIndicators {
       return this;
     }
 
+    public Builder hasDmarc(Nullable<Boolean> hasDmarc) {
+      if (hasDmarc.isNull()) {
+        this.hasDmarc = null;
+      }
+      else if (hasDmarc.isEmpty()) {
+        this.hasDmarc = Optional.empty();
+      }
+      else {
+        this.hasDmarc = Optional.of(hasDmarc.get());
+      }
+      return this;
+    }
+
     /**
      * <p>Indicates whether an SPF record exists.</p>
      */
@@ -453,6 +514,19 @@ public final class DomainReputationResponseTrustSignalsIndicators {
 
     public Builder hasSpf(Boolean hasSpf) {
       this.hasSpf = Optional.ofNullable(hasSpf);
+      return this;
+    }
+
+    public Builder hasSpf(Nullable<Boolean> hasSpf) {
+      if (hasSpf.isNull()) {
+        this.hasSpf = null;
+      }
+      else if (hasSpf.isEmpty()) {
+        this.hasSpf = Optional.empty();
+      }
+      else {
+        this.hasSpf = Optional.of(hasSpf.get());
+      }
       return this;
     }
 
@@ -552,6 +626,14 @@ public final class DomainReputationResponseTrustSignalsIndicators {
 
     public DomainReputationResponseTrustSignalsIndicators build() {
       return new DomainReputationResponseTrustSignalsIndicators(isNewlyRegistered, usesFreeExtension, usesFreeSsl, hasPrivacyWhois, sslAgeDays, hasDmarc, hasSpf, redirectsExternally, javascriptObfuscated, domainAgeDays, registrar, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("is_newly_registered") || key.equalsIgnoreCase("uses_free_extension") || key.equalsIgnoreCase("uses_free_ssl") || key.equalsIgnoreCase("has_privacy_whois") || key.equalsIgnoreCase("ssl_age_days") || key.equalsIgnoreCase("has_dmarc") || key.equalsIgnoreCase("has_spf") || key.equalsIgnoreCase("redirects_externally") || key.equalsIgnoreCase("javascript_obfuscated") || key.equalsIgnoreCase("domain_age_days") || key.equalsIgnoreCase("registrar")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

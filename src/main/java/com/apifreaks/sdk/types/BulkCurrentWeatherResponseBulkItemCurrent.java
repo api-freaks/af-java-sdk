@@ -420,7 +420,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
 
     private BulkCurrentWeatherResponseBulkItemCurrentAirQuality airQuality;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -450,7 +449,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
 
     /**
      * <p>Local timestamp of the current weather observation (format YYYY-MM-DDTHH:mm, not ISO 8601).</p>
-     * <p>Local timestamp of the current weather observation (format YYYY-MM-DDTHH:mm, not ISO 8601).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -461,7 +459,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
     }
 
     /**
-     * <p>Current air temperature (°C) measured at 2 meters above ground.</p>
      * <p>Current air temperature (°C) measured at 2 meters above ground.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -474,7 +471,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
 
     /**
      * <p>Current relative humidity percentage at 2 meters above ground.</p>
-     * <p>Current relative humidity percentage at 2 meters above ground.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -485,7 +481,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
     }
 
     /**
-     * <p>Current apparent temperature (°C) accounting for wind chill and humidity.</p>
      * <p>Current apparent temperature (°C) accounting for wind chill and humidity.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -498,7 +493,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
 
     /**
      * <p>Current snowfall accumulation in centimeters.</p>
-     * <p>Current snowfall accumulation in centimeters.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -509,7 +503,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
     }
 
     /**
-     * <p>Current rainfall accumulation in millimeters.</p>
      * <p>Current rainfall accumulation in millimeters.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -522,7 +515,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
 
     /**
      * <p>Current shower precipitation in millimeters.</p>
-     * <p>Current shower precipitation in millimeters.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -533,7 +525,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
     }
 
     /**
-     * <p>Total precipitation (mm) including rain, showers, and snowfall.</p>
      * <p>Total precipitation (mm) including rain, showers, and snowfall.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -546,7 +537,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
 
     /**
      * <p>WMO weather condition code representing current conditions. Supported codes: 0 clear sky; 1, 2, 3 varying cloud cover; 45, 48 fog; 51, 53, 55 drizzle; 56, 57 freezing drizzle; 61, 63, 65 rain; 66, 67 freezing rain; 71, 73, 75 snowfall; 77 snow grains; 80, 81, 82 rain showers; 85, 86 snow showers; 95 thunderstorm; 96, 99 thunderstorm with hail.</p>
-     * <p>WMO weather condition code representing current conditions. Supported codes: 0 clear sky; 1, 2, 3 varying cloud cover; 45, 48 fog; 51, 53, 55 drizzle; 56, 57 freezing drizzle; 61, 63, 65 rain; 66, 67 freezing rain; 71, 73, 75 snowfall; 77 snow grains; 80, 81, 82 rain showers; 85, 86 snow showers; 95 thunderstorm; 96, 99 thunderstorm with hail.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -557,7 +547,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
     }
 
     /**
-     * <p>Current percentage of sky covered by clouds.</p>
      * <p>Current percentage of sky covered by clouds.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -570,7 +559,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
 
     /**
      * <p>Current atmospheric pressure (hPa) adjusted to mean sea level.</p>
-     * <p>Current atmospheric pressure (hPa) adjusted to mean sea level.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -581,7 +569,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
     }
 
     /**
-     * <p>Current atmospheric pressure (hPa) at surface level.</p>
      * <p>Current atmospheric pressure (hPa) at surface level.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -594,7 +581,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
 
     /**
      * <p>Current wind speed (km/h) at 10 meters above ground.</p>
-     * <p>Current wind speed (km/h) at 10 meters above ground.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -605,7 +591,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
     }
 
     /**
-     * <p>Current wind direction in degrees at 10 meters above ground.</p>
      * <p>Current wind direction in degrees at 10 meters above ground.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -618,7 +603,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
 
     /**
      * <p>Current wind gust speed (km/h) at 10 meters above ground.</p>
-     * <p>Current wind gust speed (km/h) at 10 meters above ground.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -629,7 +613,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
     }
 
     /**
-     * <p>Astronomical information including sunrise, sunset, and moon phases for the current date.</p>
      * <p>Astronomical information including sunrise, sunset, and moon phases for the current date.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -642,7 +625,6 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
     }
 
     /**
-     * <p>Air quality metrics including pollutant concentrations and AQI values.</p>
      * <p>Air quality metrics including pollutant concentrations and AQI values.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -657,6 +639,14 @@ public final class BulkCurrentWeatherResponseBulkItemCurrent {
     @java.lang.Override
     public BulkCurrentWeatherResponseBulkItemCurrent build() {
       return new BulkCurrentWeatherResponseBulkItemCurrent(timestamp, temperature2M, relativeHumidity2M, apparentTemperature, snowfall, rain, showers, precipitation, weatherCode, cloudCover, pressureMsl, surfacePressure, windSpeed10M, windDirection10M, windGusts10M, astronomy, airQuality, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("timestamp") || key.equalsIgnoreCase("temperature_2m") || key.equalsIgnoreCase("relative_humidity_2m") || key.equalsIgnoreCase("apparent_temperature") || key.equalsIgnoreCase("snowfall") || key.equalsIgnoreCase("rain") || key.equalsIgnoreCase("showers") || key.equalsIgnoreCase("precipitation") || key.equalsIgnoreCase("weather_code") || key.equalsIgnoreCase("cloud_cover") || key.equalsIgnoreCase("pressure_msl") || key.equalsIgnoreCase("surface_pressure") || key.equalsIgnoreCase("wind_speed_10m") || key.equalsIgnoreCase("wind_direction_10m") || key.equalsIgnoreCase("wind_gusts_10m") || key.equalsIgnoreCase("astronomy") || key.equalsIgnoreCase("air_quality")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

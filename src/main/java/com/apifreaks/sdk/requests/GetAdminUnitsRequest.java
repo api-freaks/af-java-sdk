@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
     builder = GetAdminUnitsRequest.Builder.class
 )
 public final class GetAdminUnitsRequest {
-  private final Optional<List<String>> adminLevels;
+  private final Optional<List<String>> adminLevel;
 
   private final String apiKey;
 
@@ -39,10 +39,10 @@ public final class GetAdminUnitsRequest {
 
   private final Map<String, Object> additionalProperties;
 
-  private GetAdminUnitsRequest(Optional<List<String>> adminLevels, String apiKey,
+  private GetAdminUnitsRequest(Optional<List<String>> adminLevel, String apiKey,
       Optional<GetAdminUnitsRequestFormat> format, String country,
       Map<String, Object> additionalProperties) {
-    this.adminLevels = adminLevels;
+    this.adminLevel = adminLevel;
     this.apiKey = apiKey;
     this.format = format;
     this.country = country;
@@ -50,11 +50,11 @@ public final class GetAdminUnitsRequest {
   }
 
   /**
-   * @return Comma-separated list to filter results by one or more administrative levels.
+   * @return Filter results by one or more administrative level names (e.g. <code>land</code>, <code>state</code>, <code>province</code>), sent as a comma-separated list. Use the admin levels endpoint to list the levels a country has.
    */
-  @JsonProperty("adminLevels")
-  public Optional<List<String>> getAdminLevels() {
-    return adminLevels;
+  @JsonProperty("admin_level")
+  public Optional<List<String>> getAdminLevel() {
+    return adminLevel;
   }
 
   /**
@@ -93,12 +93,12 @@ public final class GetAdminUnitsRequest {
   }
 
   private boolean equalTo(GetAdminUnitsRequest other) {
-    return adminLevels.equals(other.adminLevels) && apiKey.equals(other.apiKey) && format.equals(other.format) && country.equals(other.country);
+    return adminLevel.equals(other.adminLevel) && apiKey.equals(other.apiKey) && format.equals(other.format) && country.equals(other.country);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.adminLevels, this.apiKey, this.format, this.country);
+    return Objects.hash(this.adminLevel, this.apiKey, this.format, this.country);
   }
 
   @java.lang.Override
@@ -134,13 +134,13 @@ public final class GetAdminUnitsRequest {
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
 
     /**
-     * <p>Comma-separated list to filter results by one or more administrative levels.</p>
+     * <p>Filter results by one or more administrative level names (e.g. <code>land</code>, <code>state</code>, <code>province</code>), sent as a comma-separated list. Use the admin levels endpoint to list the levels a country has.</p>
      */
-    _FinalStage adminLevels(Optional<List<String>> adminLevels);
+    _FinalStage adminLevel(Optional<List<String>> adminLevel);
 
-    _FinalStage adminLevels(List<String> adminLevels);
+    _FinalStage adminLevel(List<String> adminLevel);
 
-    _FinalStage adminLevels(String adminLevels);
+    _FinalStage adminLevel(String adminLevel);
 
     /**
      * <p>Format of the response.</p>
@@ -160,9 +160,8 @@ public final class GetAdminUnitsRequest {
 
     private Optional<GetAdminUnitsRequestFormat> format = Optional.empty();
 
-    private Optional<List<String>> adminLevels = Optional.empty();
+    private Optional<List<String>> adminLevel = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -170,7 +169,7 @@ public final class GetAdminUnitsRequest {
 
     @java.lang.Override
     public Builder from(GetAdminUnitsRequest other) {
-      adminLevels(other.getAdminLevels());
+      adminLevel(other.getAdminLevel());
       apiKey(other.getApiKey());
       format(other.getFormat());
       country(other.getCountry());
@@ -178,7 +177,6 @@ public final class GetAdminUnitsRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -190,7 +188,6 @@ public final class GetAdminUnitsRequest {
     }
 
     /**
-     * <p>Country code in ISO 3166-1 alpha-2 format.</p>
      * <p>Country code in ISO 3166-1 alpha-2 format.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -225,37 +222,45 @@ public final class GetAdminUnitsRequest {
     }
 
     @java.lang.Override
-    public _FinalStage adminLevels(String adminLevels) {
-      this.adminLevels = Optional.of(Collections.singletonList(adminLevels));
+    public _FinalStage adminLevel(String adminLevel) {
+      this.adminLevel = Optional.of(Collections.singletonList(adminLevel));
       return this;
     }
 
     /**
-     * <p>Comma-separated list to filter results by one or more administrative levels.</p>
+     * <p>Filter results by one or more administrative level names (e.g. <code>land</code>, <code>state</code>, <code>province</code>), sent as a comma-separated list. Use the admin levels endpoint to list the levels a country has.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
-    public _FinalStage adminLevels(List<String> adminLevels) {
-      this.adminLevels = Optional.ofNullable(adminLevels);
+    public _FinalStage adminLevel(List<String> adminLevel) {
+      this.adminLevel = Optional.ofNullable(adminLevel);
       return this;
     }
 
     /**
-     * <p>Comma-separated list to filter results by one or more administrative levels.</p>
+     * <p>Filter results by one or more administrative level names (e.g. <code>land</code>, <code>state</code>, <code>province</code>), sent as a comma-separated list. Use the admin levels endpoint to list the levels a country has.</p>
      */
     @java.lang.Override
     @JsonSetter(
-        value = "adminLevels",
+        value = "admin_level",
         nulls = Nulls.SKIP
     )
-    public _FinalStage adminLevels(Optional<List<String>> adminLevels) {
-      this.adminLevels = adminLevels;
+    public _FinalStage adminLevel(Optional<List<String>> adminLevel) {
+      this.adminLevel = adminLevel;
       return this;
     }
 
     @java.lang.Override
     public GetAdminUnitsRequest build() {
-      return new GetAdminUnitsRequest(adminLevels, apiKey, format, country, additionalProperties);
+      return new GetAdminUnitsRequest(adminLevel, apiKey, format, country, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("admin_level") || key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("country")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

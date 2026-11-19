@@ -78,7 +78,6 @@ public final class CurrencySymbolsResponse {
   public static final class Builder {
     private Map<String, String> currencySymbols = new LinkedHashMap<>();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -118,6 +117,14 @@ public final class CurrencySymbolsResponse {
 
     public CurrencySymbolsResponse build() {
       return new CurrencySymbolsResponse(currencySymbols, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("currencySymbols")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

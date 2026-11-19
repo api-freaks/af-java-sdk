@@ -48,6 +48,8 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryD
 
   private final Optional<DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryDataDomainRegistrar> domainRegistrar;
 
+  private final Optional<String> whoisRawRegistery;
+
   private final Map<String, Object> additionalProperties;
 
   private DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryData(
@@ -57,7 +59,7 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryD
       Optional<List<String>> nameServers, Optional<List<String>> domainStatus,
       Optional<String> whoisRawRegistry,
       Optional<DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryDataDomainRegistrar> domainRegistrar,
-      Map<String, Object> additionalProperties) {
+      Optional<String> whoisRawRegistery, Map<String, Object> additionalProperties) {
     this.domainName = domainName;
     this.queryTime = queryTime;
     this.whoisServer = whoisServer;
@@ -69,6 +71,7 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryD
     this.domainStatus = domainStatus;
     this.whoisRawRegistry = whoisRawRegistry;
     this.domainRegistrar = domainRegistrar;
+    this.whoisRawRegistery = whoisRawRegistery;
     this.additionalProperties = additionalProperties;
   }
 
@@ -121,6 +124,9 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryD
     return domainStatus;
   }
 
+  /**
+   * @return Deprecated: the API returns this field as <code>whois_raw_registery</code>; read <code>whois_raw_registery</code> instead.
+   */
   @JsonProperty("whois_raw_registry")
   public Optional<String> getWhoisRawRegistry() {
     return whoisRawRegistry;
@@ -130,6 +136,11 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryD
   public Optional<DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryDataDomainRegistrar> getDomainRegistrar(
       ) {
     return domainRegistrar;
+  }
+
+  @JsonProperty("whois_raw_registery")
+  public Optional<String> getWhoisRawRegistery() {
+    return whoisRawRegistery;
   }
 
   @java.lang.Override
@@ -144,12 +155,12 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryD
   }
 
   private boolean equalTo(DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryData other) {
-    return domainName.equals(other.domainName) && queryTime.equals(other.queryTime) && whoisServer.equals(other.whoisServer) && domainRegistered.equals(other.domainRegistered) && createDate.equals(other.createDate) && updateDate.equals(other.updateDate) && expiryDate.equals(other.expiryDate) && nameServers.equals(other.nameServers) && domainStatus.equals(other.domainStatus) && whoisRawRegistry.equals(other.whoisRawRegistry) && domainRegistrar.equals(other.domainRegistrar);
+    return domainName.equals(other.domainName) && queryTime.equals(other.queryTime) && whoisServer.equals(other.whoisServer) && domainRegistered.equals(other.domainRegistered) && createDate.equals(other.createDate) && updateDate.equals(other.updateDate) && expiryDate.equals(other.expiryDate) && nameServers.equals(other.nameServers) && domainStatus.equals(other.domainStatus) && whoisRawRegistry.equals(other.whoisRawRegistry) && domainRegistrar.equals(other.domainRegistrar) && whoisRawRegistery.equals(other.whoisRawRegistery);
   }
 
   @java.lang.Override
   public int hashCode() {
-    return Objects.hash(this.domainName, this.queryTime, this.whoisServer, this.domainRegistered, this.createDate, this.updateDate, this.expiryDate, this.nameServers, this.domainStatus, this.whoisRawRegistry, this.domainRegistrar);
+    return Objects.hash(this.domainName, this.queryTime, this.whoisServer, this.domainRegistered, this.createDate, this.updateDate, this.expiryDate, this.nameServers, this.domainStatus, this.whoisRawRegistry, this.domainRegistrar, this.whoisRawRegistery);
   }
 
   @java.lang.Override
@@ -187,7 +198,8 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryD
 
     private Optional<DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryDataDomainRegistrar> domainRegistrar = Optional.empty();
 
-    @JsonAnySetter
+    private Optional<String> whoisRawRegistery = Optional.empty();
+
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -205,6 +217,7 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryD
       domainStatus(other.getDomainStatus());
       whoisRawRegistry(other.getWhoisRawRegistry());
       domainRegistrar(other.getDomainRegistrar());
+      whoisRawRegistery(other.getWhoisRawRegistery());
       return this;
     }
 
@@ -339,6 +352,9 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryD
       return this;
     }
 
+    /**
+     * <p>Deprecated: the API returns this field as <code>whois_raw_registery</code>; read <code>whois_raw_registery</code> instead.</p>
+     */
     @JsonSetter(
         value = "whois_raw_registry",
         nulls = Nulls.SKIP
@@ -369,8 +385,30 @@ public final class DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryD
       return this;
     }
 
+    @JsonSetter(
+        value = "whois_raw_registery",
+        nulls = Nulls.SKIP
+    )
+    public Builder whoisRawRegistery(Optional<String> whoisRawRegistery) {
+      this.whoisRawRegistery = whoisRawRegistery;
+      return this;
+    }
+
+    public Builder whoisRawRegistery(String whoisRawRegistery) {
+      this.whoisRawRegistery = Optional.ofNullable(whoisRawRegistery);
+      return this;
+    }
+
     public DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryData build() {
-      return new DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryData(domainName, queryTime, whoisServer, domainRegistered, createDate, updateDate, expiryDate, nameServers, domainStatus, whoisRawRegistry, domainRegistrar, additionalProperties);
+      return new DomainWhoisHistoryResponseWhoisDomainsHistoricalItemRegistryData(domainName, queryTime, whoisServer, domainRegistered, createDate, updateDate, expiryDate, nameServers, domainStatus, whoisRawRegistry, domainRegistrar, whoisRawRegistery, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("domain_name") || key.equalsIgnoreCase("query_time") || key.equalsIgnoreCase("whois_server") || key.equalsIgnoreCase("domain_registered") || key.equalsIgnoreCase("create_date") || key.equalsIgnoreCase("update_date") || key.equalsIgnoreCase("expiry_date") || key.equalsIgnoreCase("name_servers") || key.equalsIgnoreCase("domain_status") || key.equalsIgnoreCase("whois_raw_registry") || key.equalsIgnoreCase("domain_registrar") || key.equalsIgnoreCase("whois_raw_registery")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     public Builder additionalProperty(String key, Object value) {

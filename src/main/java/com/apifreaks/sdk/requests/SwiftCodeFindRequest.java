@@ -178,7 +178,6 @@ public final class SwiftCodeFindRequest {
 
     private Optional<SwiftCodeFindRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -195,7 +194,6 @@ public final class SwiftCodeFindRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -301,6 +299,14 @@ public final class SwiftCodeFindRequest {
     @java.lang.Override
     public SwiftCodeFindRequest build() {
       return new SwiftCodeFindRequest(apiKey, format, country, bank, city, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("country") || key.equalsIgnoreCase("bank") || key.equalsIgnoreCase("city")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

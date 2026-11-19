@@ -78,7 +78,7 @@ public final class AirQualityRequest {
   }
 
   /**
-   * @return Response format returned by the API.
+   * @return Response format returned by the API. Only JSON is supported.
    */
   @JsonProperty("format")
   public Optional<AirQualityRequestFormat> getFormat() {
@@ -195,7 +195,7 @@ public final class AirQualityRequest {
     _FinalStage additionalProperties(Map<String, Object> additionalProperties);
 
     /**
-     * <p>Response format returned by the API.</p>
+     * <p>Response format returned by the API. Only JSON is supported.</p>
      */
     _FinalStage format(Optional<AirQualityRequestFormat> format);
 
@@ -282,7 +282,6 @@ public final class AirQualityRequest {
 
     private Optional<AirQualityRequestFormat> format = Optional.empty();
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -304,7 +303,6 @@ public final class AirQualityRequest {
     }
 
     /**
-     * <p>Your API key</p>
      * <p>Your API key</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -500,7 +498,7 @@ public final class AirQualityRequest {
     }
 
     /**
-     * <p>Response format returned by the API.</p>
+     * <p>Response format returned by the API. Only JSON is supported.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -510,7 +508,7 @@ public final class AirQualityRequest {
     }
 
     /**
-     * <p>Response format returned by the API.</p>
+     * <p>Response format returned by the API. Only JSON is supported.</p>
      */
     @java.lang.Override
     @JsonSetter(
@@ -525,6 +523,14 @@ public final class AirQualityRequest {
     @java.lang.Override
     public AirQualityRequest build() {
       return new AirQualityRequest(apiKey, format, startDate, endDate, location, lat, long_, ip, precision, timezone, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("apiKey") || key.equalsIgnoreCase("format") || key.equalsIgnoreCase("startDate") || key.equalsIgnoreCase("endDate") || key.equalsIgnoreCase("location") || key.equalsIgnoreCase("lat") || key.equalsIgnoreCase("long") || key.equalsIgnoreCase("ip") || key.equalsIgnoreCase("precision") || key.equalsIgnoreCase("timezone")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override

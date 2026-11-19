@@ -156,7 +156,6 @@ public final class DomainReputationResponseTrustSignals {
 
     private DomainReputationResponseTrustSignalsIndicators indicators;
 
-    @JsonAnySetter
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     private Builder() {
@@ -173,7 +172,6 @@ public final class DomainReputationResponseTrustSignals {
 
     /**
      * <p>Overall trust score (0-100).</p>
-     * <p>Overall trust score (0-100).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -184,7 +182,6 @@ public final class DomainReputationResponseTrustSignals {
     }
 
     /**
-     * <p>Trust score band / category (e.g. low, medium, high).</p>
      * <p>Trust score band / category (e.g. low, medium, high).</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -197,7 +194,6 @@ public final class DomainReputationResponseTrustSignals {
 
     /**
      * <p>Signals contributing to the trust score.</p>
-     * <p>Signals contributing to the trust score.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
     @java.lang.Override
@@ -208,7 +204,6 @@ public final class DomainReputationResponseTrustSignals {
     }
 
     /**
-     * <p>Individual trust / risk indicators for the domain.</p>
      * <p>Individual trust / risk indicators for the domain.</p>
      * @return Reference to {@code this} so that method calls can be chained together.
      */
@@ -223,6 +218,14 @@ public final class DomainReputationResponseTrustSignals {
     @java.lang.Override
     public DomainReputationResponseTrustSignals build() {
       return new DomainReputationResponseTrustSignals(trustScore, trustBand, signals, indicators, additionalProperties);
+    }
+
+    @JsonAnySetter
+    private void putAdditionalPropertyFromJson(String key, Object value) {
+      if (key.equalsIgnoreCase("trust_score") || key.equalsIgnoreCase("trust_band") || key.equalsIgnoreCase("signals") || key.equalsIgnoreCase("indicators")) {
+        return;
+      }
+      this.additionalProperties.put(key, value);
     }
 
     @java.lang.Override
