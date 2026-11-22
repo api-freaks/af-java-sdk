@@ -31,20 +31,20 @@ Add this dependency to your `pom.xml`:
 <dependency>
     <groupId>com.apifreaks</groupId>
     <artifactId>sdk</artifactId>
-    <version>1.2.0</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```gradle
-implementation "com.apifreaks:sdk:1.2.0"
+implementation "com.apifreaks:sdk:2.0.0"
 ```
 
 For Kotlin DSL:
 
 ```kotlin
-implementation("com.apifreaks:sdk:1.2.0")
+implementation("com.apifreaks:sdk:2.0.0")
 ```
 
 ## Reference

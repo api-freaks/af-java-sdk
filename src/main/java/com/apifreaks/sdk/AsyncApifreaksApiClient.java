@@ -87,7 +87,6 @@ import com.apifreaks.sdk.requests.IbanValidateRequest;
 import com.apifreaks.sdk.requests.IpSecurityLookupRequest;
 import com.apifreaks.sdk.requests.IpWhoisLookupRequest;
 import com.apifreaks.sdk.requests.MarineWeatherRequest;
-import com.apifreaks.sdk.requests.OcrPredictRequest;
 import com.apifreaks.sdk.requests.PdfCompressRequest;
 import com.apifreaks.sdk.requests.PdfConvertToBmpRequest;
 import com.apifreaks.sdk.requests.PdfConvertToGifRequest;
@@ -215,7 +214,6 @@ import com.apifreaks.sdk.types.IbanValidateResponse;
 import com.apifreaks.sdk.types.IpSecurityLookupResponse;
 import com.apifreaks.sdk.types.IpWhoisLookupResponse;
 import com.apifreaks.sdk.types.MarineWeatherResponse;
-import com.apifreaks.sdk.types.OcrPredictResponse;
 import com.apifreaks.sdk.types.PdfCompressResponse;
 import com.apifreaks.sdk.types.PdfConvertToBmpResponse;
 import com.apifreaks.sdk.types.PdfConvertToGifResponse;
@@ -3927,60 +3925,6 @@ public class AsyncApifreaksApiClient implements AutoCloseable {
       BulkUserAgentLookupRequest request, RequestOptions requestOptions) {
     CompletableFuture<ApifreaksApiHttpResponse<List<BulkUserAgentLookupResponseItem>>> rawFuture = this.rawClient.bulkUserAgentLookup(request, requestOptions);
     CompletableFuture<List<BulkUserAgentLookupResponseItem>> future = rawFuture.thenApply(response -> response.body());
-    future.whenComplete((result_, throwable_) -> {
-      if (future.isCancelled()) {
-        rawFuture.cancel(true);
-      }
-    });
-    return future;
-  }
-
-  /**
-   * Perform Optical Character Recognition (OCR) on images, PDFs, or ZIP archives. Supports two models: <code>mini-ocr-v1</code> for CAPTCHA-optimized OCR and <code>ocr-v1</code> for general-purpose document text extraction. Supports zonal OCR to extract text from specific regions of an image.
-   * <p><strong>Notes:</strong></p>
-   * <ul>
-   * <li>The <code>zone</code> query parameter cannot be given with .pdf and .zip types as it can only be applied to single image query.</li>
-   * <li>The <code>page_range</code> query parameter cannot be given in any other type except .pdf types.</li>
-   * <li>PDFs containing images in them are allowed only for processing.</li>
-   * <li>The <code>mini-ocr-v1</code> model doesn’t support the following query parameters:
-   * <ul>
-   * <li><code>page_range</code> (.pdf types)</li>
-   * <li><code>zone</code></li>
-   * </ul>
-   * </li>
-   * </ul>
-   */
-  public CompletableFuture<OcrPredictResponse> ocrPredict(Optional<File> file,
-      OcrPredictRequest request) {
-    CompletableFuture<ApifreaksApiHttpResponse<OcrPredictResponse>> rawFuture = this.rawClient.ocrPredict(file, request);
-    CompletableFuture<OcrPredictResponse> future = rawFuture.thenApply(response -> response.body());
-    future.whenComplete((result_, throwable_) -> {
-      if (future.isCancelled()) {
-        rawFuture.cancel(true);
-      }
-    });
-    return future;
-  }
-
-  /**
-   * Perform Optical Character Recognition (OCR) on images, PDFs, or ZIP archives. Supports two models: <code>mini-ocr-v1</code> for CAPTCHA-optimized OCR and <code>ocr-v1</code> for general-purpose document text extraction. Supports zonal OCR to extract text from specific regions of an image.
-   * <p><strong>Notes:</strong></p>
-   * <ul>
-   * <li>The <code>zone</code> query parameter cannot be given with .pdf and .zip types as it can only be applied to single image query.</li>
-   * <li>The <code>page_range</code> query parameter cannot be given in any other type except .pdf types.</li>
-   * <li>PDFs containing images in them are allowed only for processing.</li>
-   * <li>The <code>mini-ocr-v1</code> model doesn’t support the following query parameters:
-   * <ul>
-   * <li><code>page_range</code> (.pdf types)</li>
-   * <li><code>zone</code></li>
-   * </ul>
-   * </li>
-   * </ul>
-   */
-  public CompletableFuture<OcrPredictResponse> ocrPredict(Optional<File> file,
-      OcrPredictRequest request, RequestOptions requestOptions) {
-    CompletableFuture<ApifreaksApiHttpResponse<OcrPredictResponse>> rawFuture = this.rawClient.ocrPredict(file, request, requestOptions);
-    CompletableFuture<OcrPredictResponse> future = rawFuture.thenApply(response -> response.body());
     future.whenComplete((result_, throwable_) -> {
       if (future.isCancelled()) {
         rawFuture.cancel(true);
